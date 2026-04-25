@@ -1653,20 +1653,45 @@ function renderTrajectoryCaptions(c) {
     } else {
       pastHeadline = `Broadly steady since ${baseYr}`;
     }
-    // Find historical peak — only mention if it's clearly historical (≥3yrs ago) and clearly above today
+    // Find historical peak — used for "peaked at X in Y" framing
     let peakVal = -Infinity, peakYr = baseYr;
     for (let y = baseYr; y <= 2024; y++) {
       const v = get(y);
       if (v != null && v > peakVal) { peakVal = v; peakYr = y; }
     }
-    if (peakYr <= 2020 && peakVal > s2024 + 1.5) {
-      pastDetail = `Peaked at ${peakVal.toFixed(1)} in ${peakYr}, then eased back.`;
+    const peakDrop = peakVal - s2024;          // points lost from historical peak
+    const yearsSincePeak = 2024 - peakYr;
+    // Pick a verb whose intensity matches the actual magnitude of the drop
+    function dropVerb(p) {
+      if (p >= 40) return 'collapsed';
+      if (p >= 20) return 'fallen sharply';
+      if (p >= 10) return 'declined steadily';
+      if (p >= 4)  return 'softened';
+      return       'eased back';
+    }
+    function gainVerb(d) {
+      if (d >= 30) return 'climbed dramatically';
+      if (d >= 15) return 'risen sharply';
+      if (d >= 5)  return 'risen steadily';
+      return       'edged up';
+    }
+    function declineVerb(d) {
+      if (d >= 40) return 'collapsed';
+      if (d >= 20) return 'fallen sharply';
+      if (d >= 10) return 'declined steadily';
+      if (d >= 4)  return 'softened';
+      return       'eased lower';
+    }
+    if (peakYr <= 2020 && peakDrop > 1.5) {
+      // Has a clear historical peak it has fallen back from
+      pastDetail = `Peaked at ${peakVal.toFixed(1)} in ${peakYr}; ${dropVerb(peakDrop)} by ${peakDrop.toFixed(1)} points in the ${yearsSincePeak} years since.`;
     } else if (delta >= 1) {
-      pastDetail = `Steady gains over six decades of historical data.`;
+      pastDetail = `Score has ${gainVerb(delta)} — ${delta.toFixed(1)} points over ${2024 - baseYr} years of data.`;
     } else if (delta <= -1) {
-      pastDetail = `A long-running structural decline.`;
+      const ad = Math.abs(delta);
+      pastDetail = `Score has ${declineVerb(ad)} — ${ad.toFixed(1)} points over ${2024 - baseYr} years of data.`;
     } else {
-      pastDetail = `Limited net change over the historical record.`;
+      pastDetail = `Limited net change over the ${2024 - baseYr}-year historical record.`;
     }
   }
 
@@ -1684,11 +1709,16 @@ function renderTrajectoryCaptions(c) {
     const dirCol = d50 >= 1 ? 'tcap-delta-up' : d50 <= -1 ? 'tcap-delta-down' : '';
     const sign   = d50 >= 0 ? '+' : '−';
     futureHeadline = `<span class="tcap-num">${s2050.toFixed(1)}</span> by 2050 <span class="${dirCol}" style="font-size:0.78rem;font-weight:500">(${sign}${Math.abs(d50).toFixed(1)})</span>`;
-    if (d50 <= -3)      futureDetail = 'A meaningful projected deterioration over the next 26 years.';
-    else if (d50 <= -1) futureDetail = 'A modest projected softening through 2050.';
-    else if (d50 >= 3)  futureDetail = 'A meaningful projected improvement over the next 26 years.';
-    else if (d50 >= 1)  futureDetail = 'A modest projected improvement through 2050.';
-    else                futureDetail = 'Projected to remain broadly at today\'s level.';
+    const ad50 = Math.abs(d50);
+    if      (d50 <= -15) futureDetail = `A severe projected deterioration — ${ad50.toFixed(1)} points lost over the next 26 years.`;
+    else if (d50 <= -7)  futureDetail = `A meaningful projected deterioration — ${ad50.toFixed(1)} points lost over the next 26 years.`;
+    else if (d50 <= -3)  futureDetail = `A material projected softening — ${ad50.toFixed(1)} points over the next 26 years.`;
+    else if (d50 <= -1)  futureDetail = `A modest projected softening through 2050.`;
+    else if (d50 >= 15)  futureDetail = `A dramatic projected improvement — ${ad50.toFixed(1)} points gained over the next 26 years.`;
+    else if (d50 >= 7)   futureDetail = `A meaningful projected improvement — ${ad50.toFixed(1)} points gained over the next 26 years.`;
+    else if (d50 >= 3)   futureDetail = `A material projected improvement — ${ad50.toFixed(1)} points over the next 26 years.`;
+    else if (d50 >= 1)   futureDetail = `A modest projected improvement through 2050.`;
+    else                 futureDetail = `Projected to remain broadly at today's level.`;
   }
 
   wrap.innerHTML = `
