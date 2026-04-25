@@ -489,6 +489,75 @@ header {
 .cat-legend-dot.cl-good { background: #22c55e; }
 .cat-legend-dot.cl-mid  { background: #eab308; }
 .cat-legend-dot.cl-poor { background: #ef4444; }
+
+/* ── Risks section (Section 4) ───────────────────────────────────────────── */
+.risks-section {
+  background: var(--surface);
+  border-radius: var(--r);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  padding: 22px 26px 22px;
+  margin-bottom: 22px;
+}
+.risks-list {
+  list-style: none;
+  padding: 0;
+  margin: 6px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.risk-item {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 12px 16px;
+  border-left: 3px solid;
+  border-radius: 0 4px 4px 0;
+  background: rgba(15,17,23,0.025);
+}
+.risk-item.risk-high { border-color: #dc2626; background: rgba(220,38,38,0.05); }
+.risk-item.risk-mid  { border-color: #ca8a04; background: rgba(202,138,4,0.05); }
+.risk-item.risk-low  { border-color: #94a3b8; background: rgba(148,163,184,0.05); }
+.risk-item.risk-none { border-color: #16a34a; background: rgba(22,163,74,0.05); }
+.risk-marker {
+  flex-shrink: 0;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  margin-top: 7px;
+}
+.risk-item.risk-high .risk-marker { background: #dc2626; }
+.risk-item.risk-mid  .risk-marker { background: #ca8a04; }
+.risk-item.risk-low  .risk-marker { background: #94a3b8; }
+.risk-item.risk-none .risk-marker { background: #16a34a; }
+.risk-body { flex: 1; min-width: 0; }
+.risk-label {
+  font-family: 'Georgia', serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--ink);
+  line-height: 1.35;
+  margin-bottom: 3px;
+}
+.risk-detail {
+  font-size: 0.83rem;
+  color: var(--ink2);
+  line-height: 1.5;
+}
+.risk-detail .risk-num {
+  font-family: var(--font-mono);
+  font-weight: 500;
+}
+.risks-note {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  color: var(--ink4);
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--surface3);
+  text-align: right;
+}
 @media (max-width: 720px) {
   .cat-row { grid-template-columns: 1fr; row-gap: 8px; }
   .cat-row-name, .cat-row-bar, .cat-row-meta { grid-column: 1; grid-row: auto; text-align: left; }
@@ -904,17 +973,6 @@ header {
           <div class="trajectory-note" id="trajectory-note"></div>
         </section>
 
-        <div class="card section-gap" id="pop-mig-panel">
-          <div class="card-head">Population &amp; Migration</div>
-          <div style="padding:14px 16px 10px">
-            <!-- Pop stat boxes -->
-            <div class="pop-stat-row" id="pop-stat-boxes"></div>
-            <!-- Migration regime -->
-            <div class="mig-row" id="mig-regime-content"></div>
-          </div>
-        </div>
-
-
         <!-- Section 3: Category breakdown ──────────────────────────── -->
         <section class="cat-breakdown section-gap">
           <div class="section-eyebrow">Category breakdown · 2024</div>
@@ -926,6 +984,24 @@ header {
             <span class="cat-legend-dot cl-poor"></span> Bottom 30% globally
           </div>
         </section>
+
+        <!-- Section 4: Risks ─────────────────────────────────────────── -->
+        <section class="risks-section section-gap">
+          <div class="section-eyebrow">Risks · Auto-flagged</div>
+          <div class="section-heading">Where the headwinds are</div>
+          <ul class="risks-list" id="risks-list"></ul>
+          <div class="risks-note" id="risks-note"></div>
+        </section>
+
+        <div class="card section-gap" id="pop-mig-panel">
+          <div class="card-head">Population &amp; Migration</div>
+          <div style="padding:14px 16px 10px">
+            <!-- Pop stat boxes -->
+            <div class="pop-stat-row" id="pop-stat-boxes"></div>
+            <!-- Migration regime -->
+            <div class="mig-row" id="mig-regime-content"></div>
+          </div>
+        </div>
 
         <!-- Raw metrics -->
         <div class="card">
@@ -1266,6 +1342,126 @@ function renderCategoryBreakdown(c) {
   }).join('');
 }
 
+// ── Risks (Section 4) ───────────────────────────────────────────────────────
+// Auto-flagged headwinds, generated from three signal types:
+//   1. Bottom-third global percentile per category (high if <10, mid if <30)
+//   2. 5-year category sub-score deterioration (mid if drop >=1.5, high if >=3)
+//   3. Raw indicator below (or, where higher = worse, above) the peer-region median
+const RISK_INDICATORS = [
+  // dir = which direction is BAD; helper-text describes the dimension
+  { key: 'TFR',                         label: 'Total fertility rate',         dir: 'low',  unit: '',     decimals: 2 },
+  { key: 'NatChange_per_1000',          label: 'Natural population change',    dir: 'low',  unit: '/1k',  decimals: 1 },
+  { key: 'Pop_5yr%change',              label: 'Population growth (5yr)',      dir: 'low',  unit: '%',    decimals: 1 },
+  { key: 'WRR (20-29/60-69)',           label: 'Working-age ratio (20–29 / 60–69)', dir: 'low',  unit: '',     decimals: 2 },
+  { key: 'OADR',                        label: 'Old-age dependency ratio',     dir: 'high', unit: '',     decimals: 2 },
+  { key: 'Labour_Force_Growth_%5yrs',   label: 'Labour-force growth (5yr)',    dir: 'low',  unit: '%',    decimals: 1 }
+];
+
+function renderRisks(c, iso) {
+  const ul   = document.getElementById('risks-list');
+  const note = document.getElementById('risks-note');
+  if (!ul) return;
+  const risks = [];
+  const cats = ['TFS','Momentum','WSS','FQS','MDS'];
+
+  // Signal 1: bottom-third percentile per category
+  cats.forEach(k => {
+    const p = c.percentiles?.[k];
+    if (p == null || p >= 30) return;
+    risks.push({
+      severity: p < 10 ? 'high' : 'mid',
+      label: `${CAT_FULL_NAMES[k]} ranks in the bottom third globally`,
+      detail: `In the <span class="risk-num">bottom ${Math.max(1, Math.round(p))}%</span> of countries — structurally below most peers worldwide.`,
+      _sortKey: p
+    });
+  });
+
+  // Signal 2: 5-year category sub-score deterioration (2019 -> 2024)
+  cats.forEach(k => {
+    const s2024 = c.scores?.['2024']?.[k];
+    const s2019 = c.scores?.['2019']?.[k];
+    if (s2024 == null || s2019 == null) return;
+    const drop = s2019 - s2024;
+    if (drop < 1.5) return;
+    const sev = drop >= 3 ? 'high' : 'mid';
+    risks.push({
+      severity: sev,
+      label: `${CAT_FULL_NAMES[k]} has weakened over the last five years`,
+      detail: `Score fell <span class="risk-num">${drop.toFixed(1)} points</span> (${s2019.toFixed(1)} → ${s2024.toFixed(1)}) between 2019 and 2024.`,
+      _sortKey: 100 - drop * 5
+    });
+  });
+
+  // Signal 3: raw indicators below peer-region median
+  const peers = (DATA.country_list || []).filter(p => p.region === c.region && p.iso !== iso);
+  if (peers.length >= 3) {
+    RISK_INDICATORS.forEach(ind => {
+      const myVal = c.raw?.[ind.key]?.value;
+      if (myVal == null || isNaN(myVal)) return;
+      const peerVals = peers
+        .map(p => DATA.countries[p.iso]?.raw?.[ind.key]?.value)
+        .filter(v => v != null && !isNaN(v));
+      if (peerVals.length < 3) return;
+      const sorted = peerVals.slice().sort((a, b) => a - b);
+      const m = sorted.length;
+      const median = m % 2 === 0 ? (sorted[m/2 - 1] + sorted[m/2]) / 2 : sorted[(m-1)/2];
+      const isWorse = ind.dir === 'low' ? myVal < median : myVal > median;
+      if (!isWorse) return;
+      // Don't flag trivial differences (within ~5% of median magnitude)
+      const denom = Math.max(0.0001, Math.abs(median));
+      if (Math.abs(myVal - median) / denom < 0.05) return;
+      const dirWord  = ind.dir === 'low' ? 'below' : 'above';
+      const myFmt    = Number(myVal).toFixed(ind.decimals) + ind.unit;
+      const medFmt   = Number(median).toFixed(ind.decimals) + ind.unit;
+      // Severity: "low" by default, "mid" if more than ~25% off median
+      const offFrac = Math.abs(myVal - median) / denom;
+      const sev = offFrac > 0.5 ? 'mid' : 'low';
+      risks.push({
+        severity: sev,
+        label: `${ind.label} ${dirWord} regional median`,
+        detail: `<span class="risk-num">${myFmt}</span> versus <span class="risk-num">${medFmt}</span> for ${c.region} peers (${peers.length} countries).`,
+        _sortKey: 200 - Math.min(100, offFrac * 100)
+      });
+    });
+  }
+
+  // Empty state
+  if (risks.length === 0) {
+    ul.innerHTML = `
+      <li class="risk-item risk-none">
+        <span class="risk-marker"></span>
+        <div class="risk-body">
+          <div class="risk-label">No material risks flagged</div>
+          <div class="risk-detail">No category is in the bottom third globally, no sub-score has deteriorated &gt; 1.5 points over the last five years, and no monitored indicator falls meaningfully outside the regional norm.</div>
+        </div>
+      </li>`;
+    if (note) note.textContent = `Region peer set: ${peers.length} countries · ${c.region}`;
+    return;
+  }
+
+  // Sort: severity (high → mid → low), then by signal strength
+  const sevRank = { high: 0, mid: 1, low: 2 };
+  risks.sort((a, b) => {
+    const r = sevRank[a.severity] - sevRank[b.severity];
+    return r !== 0 ? r : (a._sortKey - b._sortKey);
+  });
+
+  ul.innerHTML = risks.map(r => `
+    <li class="risk-item risk-${r.severity}">
+      <span class="risk-marker"></span>
+      <div class="risk-body">
+        <div class="risk-label">${r.label}</div>
+        <div class="risk-detail">${r.detail}</div>
+      </div>
+    </li>`).join('');
+
+  if (note) {
+    const counts = { high: 0, mid: 0, low: 0 };
+    risks.forEach(r => counts[r.severity]++);
+    note.textContent = `${risks.length} flagged · ${counts.high} acute, ${counts.mid} moderate, ${counts.low} minor · region peer set: ${peers.length} countries (${c.region})`;
+  }
+}
+
 function init() {
   buildContinentFilters();
   renderCountryList();
@@ -1489,6 +1685,9 @@ function renderCountryProfile(iso) {
 
   // ── Section 3: Category breakdown ─────────────────────────────────────
   renderCategoryBreakdown(c);
+
+  // ── Section 4: Risks ──────────────────────────────────────────────────
+  renderRisks(c, iso);
 
   // Trend chart
   const trendYears = YEARS;
