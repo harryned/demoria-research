@@ -739,12 +739,14 @@ header {
   width: 6px; height: 6px;
   border-radius: 50%;
 }
-.peer-traj.traj-Improving { color: #16a34a; }
-.peer-traj.traj-Improving::before { background: #16a34a; }
-.peer-traj.traj-Declining { color: #dc2626; }
-.peer-traj.traj-Declining::before { background: #dc2626; }
-.peer-traj.traj-Stable    { color: #ca8a04; }
-.peer-traj.traj-Stable::before    { background: #ca8a04; }
+/* Scoped to the peer-traj pill — avoids clashing with .traj-Improving etc.
+   used for the sidebar country-list dots (which set BACKGROUND, not colour). */
+.peer-traj.peer-traj-Improving { color: #15803d; background: transparent; }
+.peer-traj.peer-traj-Improving::before { background: #16a34a; }
+.peer-traj.peer-traj-Declining { color: #b91c1c; background: transparent; }
+.peer-traj.peer-traj-Declining::before { background: #dc2626; }
+.peer-traj.peer-traj-Stable    { color: #92660b; background: transparent; }
+.peer-traj.peer-traj-Stable::before    { background: #ca8a04; }
 .peer-regime {
   font-family: var(--font-mono);
   font-size: 0.7rem;
@@ -1610,24 +1612,42 @@ function renderPeerComparison(c, iso) {
     return 'score-poor';
   }
 
-  // Compute regional rank for each peer (1 = highest score in region)
-  tbody.innerHTML = peers.map((p, i) => {
+  // Sliding-window of up to 5 peers, centered on the current country.
+  // Slides flush to the top of the list if the country is in the top 3,
+  // and flush to the bottom if it's in the bottom 3.
+  const WINDOW = 5;
+  const selfIdx = peers.findIndex(p => p.iso === iso);
+  let start, end;
+  if (peers.length <= WINDOW) {
+    start = 0;
+    end   = peers.length;
+  } else {
+    start = Math.max(0, Math.min(peers.length - WINDOW, selfIdx - 2));
+    end   = start + WINDOW;
+  }
+  const visible = peers.slice(start, end);
+
+  tbody.innerHTML = visible.map((p, i) => {
+    const regionalRank = start + i + 1; // 1-indexed within the full sorted region
     const isSelf = p.iso === iso;
     const regime = (typeof MIG_REGIMES !== 'undefined' ? MIG_REGIMES[p.iso] : null) || null;
     const regimeLabel = regime ? (REGIME_SHORT[regime] || regime) : '—';
     const regimeCls   = regime ? '' : 'regime-na';
     return `<tr class="${isSelf ? 'peer-self' : ''}">
-      <td class="peer-rank">#${i + 1} regional</td>
+      <td class="peer-rank">#${regionalRank} regional</td>
       <td class="peer-name">${p.name}${isSelf ? '<span class="peer-self-tag">This country</span>' : ''}</td>
       <td class="peer-score ${scoreClass(p.score)}">${p.score.toFixed(1)}</td>
-      <td><span class="peer-traj traj-${p.traj}">${p.traj || '—'}</span></td>
+      <td><span class="peer-traj peer-traj-${p.traj}">${p.traj || '—'}</span></td>
       <td class="peer-regime ${regimeCls}">${regimeLabel}</td>
     </tr>`;
   }).join('');
 
   if (noteEl) {
-    const selfRegRank = peers.findIndex(p => p.iso === iso) + 1;
-    noteEl.textContent = `${peers.length} countries in ${c.region} · ${c.name} ranks ${selfRegRank} of ${peers.length} regionally`;
+    const selfRegRank = selfIdx + 1;
+    const windowDesc = peers.length <= WINDOW
+      ? `Showing all ${peers.length}`
+      : `Showing #${start + 1}–${end} of ${peers.length}`;
+    noteEl.textContent = `${peers.length} countries in ${c.region} · ${c.name} ranks ${selfRegRank} of ${peers.length} regionally · ${windowDesc}`;
   }
 }
 
