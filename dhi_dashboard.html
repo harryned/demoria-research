@@ -879,6 +879,107 @@ header {
   border-top: 1px solid var(--surface3);
   text-align: right;
 }
+
+/* ── Profile footer (Section 8) ──────────────────────────────────────────── */
+.profile-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  padding: 18px 22px;
+  margin-top: 28px;
+  margin-bottom: 8px;
+  border-top: 1px solid var(--surface3);
+  border-bottom: 1px solid var(--surface3);
+  background: var(--surface);
+  border-radius: var(--r);
+}
+.pf-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  flex: 1;
+}
+.pf-vintage {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.06em;
+  color: var(--ink2);
+  line-height: 1.5;
+}
+.pf-version {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink4);
+  font-weight: 500;
+}
+.pf-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.pf-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  font-weight: 500;
+  color: var(--ink2);
+  cursor: pointer;
+  transition: background .12s, border-color .12s, color .12s;
+}
+.pf-btn:hover {
+  background: var(--surface);
+  border-color: var(--accent2);
+  color: var(--accent);
+}
+.pf-btn-icon {
+  font-size: 0.85rem;
+  line-height: 1;
+  color: var(--gold);
+}
+.pf-btn-link {
+  background: none;
+}
+
+/* Toast (cite confirmation) */
+#dhi-toast {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: rgba(15,17,23,0.94);
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .18s ease, transform .18s ease;
+  z-index: 1000;
+}
+#dhi-toast.visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+@media (max-width: 720px) {
+  .profile-footer { flex-direction: column; align-items: flex-start; gap: 14px; }
+  .pf-actions { width: 100%; }
+}
 @media (max-width: 720px) {
   .cat-row { grid-template-columns: 1fr; row-gap: 8px; }
   .cat-row-name, .cat-row-bar, .cat-row-meta { grid-column: 1; grid-row: auto; text-align: left; }
@@ -1351,6 +1452,25 @@ header {
           <div class="raw-groups" id="raw-groups"></div>
           <div class="raw-note" id="raw-note"></div>
         </section>
+
+        <!-- Section 8: Profile footer ────────────────────────────────── -->
+        <footer class="profile-footer">
+          <div class="pf-meta">
+            <div class="pf-vintage" id="pf-vintage">Data: UN WPP 2024 · UN DESA Migration Stock 2024 · ILO LFPR · World Bank Open Data</div>
+            <div class="pf-version">DHI v1.0</div>
+          </div>
+          <div class="pf-actions">
+            <button type="button" class="pf-btn pf-btn-link" onclick="openMethodologyTab()">
+              <span class="pf-btn-icon">&#x2197;</span> Methodology
+            </button>
+            <button type="button" class="pf-btn" onclick="downloadCountryCSV()">
+              <span class="pf-btn-icon">&#x21E3;</span> CSV
+            </button>
+            <button type="button" class="pf-btn" onclick="copyCitation()">
+              <span class="pf-btn-icon">&#x21AA;</span> Cite this page
+            </button>
+          </div>
+        </footer>
         <!-- Population & Migration Panel -->
         </div><!-- end ctab-panel overview -->
 
@@ -2264,6 +2384,127 @@ function renderCountryProfile(iso) {
 
   // ── Section 7: Raw indicators ─────────────────────────────────────────
   renderRawIndicators(c);
+}
+
+// ── Profile footer actions (Section 8) ──────────────────────────────────────
+// Methodology link: when running inside the combined-file iframe, ask the
+// parent shell to switch to the methodology tab. Standalone fallback opens
+// the methodology document in a new tab.
+function openMethodologyTab() {
+  try {
+    if (window.parent && window.parent !== window) {
+      window.parent.postMessage({ openTab: 'methodology' }, '*');
+      return;
+    }
+  } catch (e) { /* cross-origin guard */ }
+  window.open('dhi_methodology.html', '_blank');
+}
+
+// CSV download: builds a flat per-country dump including scores, percentiles,
+// raw indicators, and the population/births trajectory.
+function downloadCountryCSV() {
+  const iso = window._currentISO;
+  if (!iso || !DATA?.countries?.[iso]) { showToast('Pick a country first'); return; }
+  const c = DATA.countries[iso];
+  const total = c.total || (DATA.country_list ? DATA.country_list.length : 236);
+
+  const rows = [];
+  rows.push(['Demographic Health Index — Country Profile']);
+  rows.push(['Country', c.name]);
+  rows.push(['ISO3', iso]);
+  rows.push(['Region', c.region]);
+  rows.push(['Continent', c.continent]);
+  rows.push(['DHI Rank (2024)', `${c.rank} of ${total}`]);
+  rows.push(['DHI Score (2024)', (c.scores?.['2024']?.Overall ?? '').toString()]);
+  rows.push(['Classification', (typeof classifyScore === 'function' ? classifyScore(c.scores?.['2024']?.Overall ?? 0).label : '')]);
+  rows.push(['Trajectory (2020-24)', c.trajectory || '']);
+  rows.push(['Projected (2025-50)', c.projected || '']);
+  rows.push([]);
+
+  // Scores by year
+  rows.push(['## Scores by year ##']);
+  rows.push(['Year','TFS','Momentum','WSS','FQS','MDS','Overall']);
+  Object.keys(c.scores || {}).sort().forEach(yr => {
+    const s = c.scores[yr] || {};
+    rows.push([yr, s.TFS ?? '', s.Momentum ?? '', s.WSS ?? '', s.FQS ?? '', s.MDS ?? '', s.Overall ?? '']);
+  });
+  rows.push([]);
+
+  // Percentiles
+  rows.push(['## Global percentile (2024) ##']);
+  rows.push(['Category','Percentile']);
+  Object.entries(c.percentiles || {}).forEach(([k, v]) => rows.push([k, v]));
+  rows.push([]);
+
+  // Raw indicators
+  rows.push(['## Raw indicators (2024) ##']);
+  rows.push(['Indicator','Value','Unit']);
+  Object.values(c.raw || {}).forEach(m => rows.push([m.label, m.value, m.unit || '']));
+  rows.push([]);
+
+  // Population trajectory
+  rows.push(['## Population trajectory ##']);
+  rows.push(['Year','Population (thousands)','Annual births (thousands)']);
+  ['1965','1990','2024','2035','2050','2100'].forEach(y => {
+    const bd = (typeof BIRTH_DATA !== 'undefined' ? BIRTH_DATA[iso] : null) || {};
+    const cell = bd[y] || {};
+    const pop = cell.pop != null ? cell.pop
+              : (typeof POP_DATA !== 'undefined' ? (POP_DATA[iso] || {})[y] : null);
+    rows.push([y, pop ?? '', cell.births != null ? cell.births : '']);
+  });
+  rows.push([]);
+  rows.push(['Source: UN WPP 2024 · UN DESA Migration Stock 2024 · ILO LFPR · World Bank Open Data']);
+  rows.push(['Generated by Demographic Health Index v1.0 on ' + new Date().toISOString().slice(0, 10)]);
+
+  const csv = rows.map(r => r.map(cell => {
+    const s = cell == null ? '' : String(cell);
+    return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
+  }).join(',')).join('\n');
+
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href = url;
+  a.download = `dhi_${iso}_profile_${new Date().toISOString().slice(0,10)}.csv`;
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(() => { document.body.removeChild(a); URL.revokeObjectURL(url); }, 1000);
+  showToast(`CSV downloaded — dhi_${iso}_profile.csv`);
+}
+
+// Cite: copy a one-line citation to clipboard
+function copyCitation() {
+  const iso = window._currentISO;
+  if (!iso || !DATA?.countries?.[iso]) { showToast('Pick a country first'); return; }
+  const c = DATA.countries[iso];
+  const total = c.total || (DATA.country_list ? DATA.country_list.length : 236);
+  const score = c.scores?.['2024']?.Overall;
+  const today = new Date().toISOString().slice(0, 10);
+  const cite  = `Demographic Health Index v1.0 (2024). ${c.name} country profile — DHI score ${score != null ? score.toFixed(1) : 'n/a'}, rank ${c.rank} of ${total}. Retrieved ${today}.`;
+  const fallback = () => window.prompt('Copy citation:', cite);
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(cite).then(
+      () => showToast('Citation copied'),
+      () => fallback()
+    );
+  } else {
+    fallback();
+  }
+}
+
+function showToast(msg) {
+  let t = document.getElementById('dhi-toast');
+  if (!t) {
+    t = document.createElement('div');
+    t.id = 'dhi-toast';
+    document.body.appendChild(t);
+  }
+  t.textContent = msg;
+  // Force a reflow before adding the class so the transition fires every time
+  void t.offsetWidth;
+  t.classList.add('visible');
+  clearTimeout(showToast._timer);
+  showToast._timer = setTimeout(() => t.classList.remove('visible'), 2200);
 }
 
 // ── Raw indicators (Section 7) ──────────────────────────────────────────────
