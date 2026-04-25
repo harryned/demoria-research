@@ -179,26 +179,96 @@ header {
 #panel-country, #panel-region, #panel-rankings { display: none; }
 #panel-country.active, #panel-region.active, #panel-rankings.active { display: block; }
 
-/* ── Score hero ──────────────────────────────────────────────────────────── */
+/* ── Score hero (narrative layout) ───────────────────────────────────── */
 .score-hero {
-  background: var(--accent);
+  background: linear-gradient(135deg, var(--accent) 0%, #14305c 100%);
   color: #fff;
-  padding: 24px 28px;
+  padding: 28px 32px 30px;
   border-radius: var(--r);
-  margin-bottom: 16px;
+  margin-bottom: 22px;
   display: grid;
-  grid-template-columns: 1fr auto auto;
-  gap: 16px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 36px;
   align-items: center;
+  box-shadow: 0 4px 18px rgba(15,17,23,0.12);
 }
-.hero-name { font-size: 1.5rem; font-weight: bold; }
-.hero-sub { font-size: 0.83rem; color: rgba(255,255,255,0.65); margin-top: 3px; }
-.hero-rank { text-align: center; }
-.hero-rank-num { font-size: 2rem; font-weight: bold; color: var(--gold2); line-height: 1; }
-.hero-rank-label { font-size: 0.72rem; color: rgba(255,255,255,0.6); }
-.hero-score { text-align: center; }
-.hero-score-num { font-size: 2.8rem; font-weight: bold; line-height: 1; }
-.hero-score-label { font-size: 0.72rem; color: rgba(255,255,255,0.6); }
+.hero-main { min-width: 0; }
+.hero-class-badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 999px;
+  border: 1px solid currentColor;
+  background: rgba(255,255,255,0.04);
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+.hero-name {
+  font-family: 'Georgia', serif;
+  font-size: 2.1rem;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  margin: 0 0 8px;
+  color: #fff;
+}
+.hero-meta {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.62);
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.hero-meta-sep { color: rgba(255,255,255,0.28); }
+.hero-summary {
+  font-family: 'Georgia', serif;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: rgba(255,255,255,0.84);
+  max-width: 640px;
+  margin: 0;
+}
+.hero-summary em { color: var(--gold2); font-style: italic; }
+.hero-score-block {
+  text-align: right;
+  flex-shrink: 0;
+  padding-left: 28px;
+  border-left: 1px solid rgba(255,255,255,0.14);
+}
+.hero-score-num {
+  font-family: 'Georgia', serif;
+  font-size: 3.4rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: #fff;
+}
+.hero-score-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  margin-top: 6px;
+}
+.hero-percentile {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  margin-top: 10px;
+  font-weight: 500;
+}
+@media (max-width: 720px) {
+  .score-hero { grid-template-columns: 1fr; gap: 18px; }
+  .hero-score-block { text-align: left; padding-left: 0; padding-top: 18px; border-left: none; border-top: 1px solid rgba(255,255,255,0.14); }
+}
 
 /* ── Stat row ─────────────────────────────────────────────────────────────── */
 .stat-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin-bottom: 16px; }
@@ -621,20 +691,24 @@ header {
         </div>
         <!-- Overview panel -->
         <div class="ctab-panel active" id="ctab-overview">
-        <!-- Hero -->
+        <!-- Hero (narrative layout) -->
         <div class="score-hero" id="hero">
-          <div>
-            <div class="hero-name" id="h-name"></div>
-            <div class="hero-sub" id="h-sub"></div>
-          <div id="h-percentile" style="font-size:0.78rem;color:rgba(255,255,255,0.6);margin-top:4px"></div>
+          <div class="hero-main">
+            <span id="h-class" class="hero-class-badge"></span>
+            <h1 class="hero-name" id="h-name"></h1>
+            <div class="hero-meta">
+              <span id="h-region"></span>
+              <span class="hero-meta-sep" aria-hidden="true">&middot;</span>
+              <span id="h-pop"></span>
+              <span class="hero-meta-sep" aria-hidden="true">&middot;</span>
+              <span id="h-rank-inline"></span>
+            </div>
+            <p class="hero-summary" id="h-summary"></p>
           </div>
-          <div class="hero-rank">
-            <div class="hero-rank-num" id="h-rank"></div>
-            <div class="hero-rank-label">Global rank</div>
-          </div>
-          <div class="hero-score">
+          <div class="hero-score-block">
             <div class="hero-score-num" id="h-score"></div>
-            <div class="hero-rank-label">DHI score</div>
+            <div class="hero-score-label">DHI 2024</div>
+            <div class="hero-percentile" id="h-percentile"></div>
           </div>
         </div>
 
@@ -786,6 +860,58 @@ function classifyScore(score) {
   return             { label: 'Complete Crisis',              color: '#7f1d1d', bg: '#fecaca' };
 }
 
+// ── Hero narrative summary ───────────────────────────────────────────────────
+// Builds a single sentence describing why the country sits where it does,
+// based on its strongest and weakest category percentiles plus trajectory.
+function buildHeroSummary(c) {
+  const pct = c.percentiles || {};
+  const cats = ['TFS','Momentum','WSS','FQS','MDS'];
+  const fullNames = {
+    TFS:      'fertility',
+    Momentum: 'population momentum',
+    WSS:      'workforce sustainability',
+    FQS:      'fertility quality',
+    MDS:      'migration independence'
+  };
+  // Sort categories by percentile (best -> worst). Treat missing as 50.
+  const ranked = cats
+    .map(k => ({ k, p: pct[k] != null ? pct[k] : 50 }))
+    .sort((a, b) => b.p - a.p);
+  const best  = ranked[0];
+  const worst = ranked[ranked.length - 1];
+  const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
+
+  const traj = c.trajectory || c.traj || '';
+  const trajPhrase =
+    traj === 'Improving' ? ' the score has been <em>improving</em>' :
+    traj === 'Declining' ? ' the score has been <em>declining</em>' :
+    traj === 'Stable'    ? ' the score has been broadly <em>stable</em>' : '';
+
+  const projPhrase = c.projected === 'Declining'
+    ? ' and is projected to deteriorate further by 2050'
+    : c.projected === 'Improving'
+    ? ' and is projected to improve further by 2050'
+    : '';
+
+  // Build core sentence based on the spread between best and worst
+  let core;
+  if (best.p >= 80 && worst.p >= 60) {
+    core = `Strong across the board — <em>${fullNames[best.k]}</em> (top ${Math.max(1, 100 - Math.round(best.p))}%) is the standout`;
+  } else if (best.p >= 70 && worst.p <= 30) {
+    core = `${cap(fullNames[best.k])} is a relative strength (top ${Math.max(1, 100 - Math.round(best.p))}%), but <em>${fullNames[worst.k]}</em> is a structural weakness (bottom ${Math.max(1, Math.round(worst.p))}%)`;
+  } else if (worst.p <= 25) {
+    core = `Demographic pressure is broad-based, with <em>${fullNames[worst.k]}</em> the most acute weakness (bottom ${Math.max(1, Math.round(worst.p))}%)`;
+  } else {
+    core = `${cap(fullNames[best.k])} (top ${Math.max(1, 100 - Math.round(best.p))}%) leads the profile; <em>${fullNames[worst.k]}</em> (bottom ${Math.max(1, Math.round(worst.p))}%) trails`;
+  }
+
+  // Stitch together
+  let sentence = core;
+  if (trajPhrase) sentence += ';' + trajPhrase;
+  if (projPhrase) sentence += projPhrase;
+  return sentence + '.';
+}
+
 function init() {
   buildContinentFilters();
   renderCountryList();
@@ -870,7 +996,25 @@ function renderCountryProfile(iso) {
   document.querySelectorAll('.ctab').forEach((b,i)=>b.classList.toggle('active',i===0));
   document.querySelectorAll('.ctab-panel').forEach((p,i)=>p.classList.toggle('active',i===0));
   document.getElementById('h-name').textContent = c.name;
-  document.getElementById('h-sub').textContent = `${c.region} · ${c.continent}`;
+  // Region line
+  const regionEl = document.getElementById('h-region');
+  if (regionEl) regionEl.textContent = `${c.region.toUpperCase()} · ${c.continent.toUpperCase()}`;
+  // Population (from POP_DATA, in thousands)
+  const popThousands = (POP_DATA[iso] || {})['2024'];
+  function fmtPopHero(thou) {
+    if (!thou) return 'Population n/a';
+    const m = thou / 1000;
+    if (m >= 1000) return (m/1000).toFixed(2) + ' bn people';
+    if (m >= 100)  return Math.round(m) + ' m people';
+    if (m >= 10)   return m.toFixed(1) + ' m people';
+    if (m >= 1)    return m.toFixed(2) + ' m people';
+    return Math.round(thou) + ' k people';
+  }
+  const popEl = document.getElementById('h-pop');
+  if (popEl) popEl.textContent = fmtPopHero(popThousands);
+  // Inline rank
+  const rankInlineEl = document.getElementById('h-rank-inline');
+  if (rankInlineEl) rankInlineEl.textContent = `RANK ${c.rank} OF ${c.total || DATA.country_list.length}`;
   // Population & Migration Regime panel
   const popD = POP_DATA[iso] || {};
   const regime = MIG_REGIMES[iso] || null;
@@ -952,45 +1096,39 @@ function renderCountryProfile(iso) {
   // Classification badge
   const heroScore = c.scores['2024']?.Overall ?? 0;
   const clsBadge = classifyScore(heroScore);
-  let clsEl = document.getElementById('h-class');
-  if (!clsEl) {
-    clsEl = document.createElement('span');
-    clsEl.id = 'h-class';
-    clsEl.className = 'class-badge';
-    clsEl.style.marginTop = '6px';
-    clsEl.style.display = 'inline-block';
-    document.getElementById('h-sub').after(clsEl);
+  const clsEl = document.getElementById('h-class');
+  if (clsEl) {
+    clsEl.textContent = clsBadge.label;
+    clsEl.style.color = clsBadge.color;
+    clsEl.style.background = clsBadge.bg;
+    clsEl.style.borderColor = clsBadge.color;
   }
-  clsEl.textContent = clsBadge.label;
-  clsEl.style.color = clsBadge.color;
-  clsEl.style.background = clsBadge.bg;
-  clsEl.style.borderColor = clsBadge.color;
-  document.getElementById('h-rank').textContent = `${c.rank}/${c.total || DATA.country_list.length}`;
   const score24 = c.scores['2024']?.Overall;
+  document.getElementById('h-score').textContent = score24?.toFixed(1) ?? '—';
   // Show projection badge if country has projected data
   const pb = document.getElementById('proj-badge');
   if (pb) pb.style.display = c.scores['2050']?.Overall ? 'inline' : 'none';
-  document.getElementById('h-score').textContent = score24?.toFixed(1) ?? '—';
-  // Global percentile context
+  // Global percentile context (under the score)
   const autoSum = GLOBAL_STATS.summaries[iso];
   const pctEl = document.getElementById('h-percentile');
-  if (pctEl && autoSum) {
-    const pct    = autoSum.percentile;  // % of countries scoring BELOW this one
-    const isTop  = pct >= 50;
-    const dispPct = isTop ? (100 - pct) : pct;
-    const label   = isTop
-      ? `Top ${Math.max(1,Math.round(dispPct))}% globally`
-      : `Bottom ${Math.max(1,Math.round(dispPct))}% globally`;
-    const pctColor = pct >= 75 ? '#16a34a' : pct >= 50 ? '#ca8a04' : pct >= 25 ? '#ea580c' : '#dc2626';
-    // One-line auto-summary
-    const autoTxt = (() => {
-    const s = GLOBAL_STATS.auto_text[iso] || '';
-    // Replace old country count with correct total
-    return s.replace(/\d+ of \d+ countries/, c.rank + ' of ' + (c.total||236) + ' countries');
-  })();
-    const summaryLine = autoTxt ? `<div style="font-size:0.75rem;color:rgba(255,255,255,0.55);margin-top:3px;max-width:320px;line-height:1.4">${autoTxt.split('.')[0]}.</div>` : '';
-    pctEl.innerHTML = `<span style="color:${pctColor};font-weight:bold">${label}</span>${summaryLine}`;
+  if (pctEl) {
+    const pct    = autoSum?.percentile ?? null;
+    if (pct != null) {
+      const isTop  = pct >= 50;
+      const dispPct = isTop ? (100 - pct) : pct;
+      const label   = isTop
+        ? `Top ${Math.max(1, Math.round(dispPct))}% globally`
+        : `Bottom ${Math.max(1, Math.round(dispPct))}% globally`;
+      const pctColor = pct >= 75 ? '#7ce0a3' : pct >= 50 ? '#ffd56a' : pct >= 25 ? '#ffa066' : '#ff7a7a';
+      pctEl.style.color = pctColor;
+      pctEl.textContent = label;
+    } else {
+      pctEl.textContent = '';
+    }
   }
+  // Narrative summary — generated from category percentiles + trajectory
+  const sumEl = document.getElementById('h-summary');
+  if (sumEl) sumEl.innerHTML = buildHeroSummary(c);
 
   // Stats
   const delta = c.delta;
