@@ -366,33 +366,134 @@ header {
   .trajectory-chart-wrap { height: 240px; }
 }
 
-/* ── Category grid ───────────────────────────────────────────────────────── */
-.cat-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 10px; margin-bottom: 16px; }
-.cat-card {
+/* ── Category breakdown (narrative rows, traffic-light by percentile) ───── */
+.cat-breakdown {
+  background: var(--surface);
   border-radius: var(--r);
-  padding: 12px 14px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  padding: 22px 26px 20px;
+  margin-bottom: 22px;
+}
+.cat-rows { display: flex; flex-direction: column; }
+.cat-row {
+  display: grid;
+  grid-template-columns: 220px 1fr auto;
+  grid-template-rows: auto auto;
+  column-gap: 22px;
+  row-gap: 6px;
+  align-items: center;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--surface3);
+}
+.cat-row:last-child { border-bottom: none; }
+.cat-row-name {
+  font-family: 'Georgia', serif;
+  font-size: 1.0rem;
+  font-weight: 600;
+  color: var(--ink);
+  grid-column: 1;
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.cat-row-name .cat-row-weight {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  font-weight: 500;
+  color: var(--ink3);
+  text-transform: uppercase;
+}
+.cat-row-bar {
   position: relative;
+  height: 8px;
+  background: var(--surface3);
+  border-radius: 4px;
   overflow: hidden;
-  color: #fff;
+  grid-column: 2;
+  grid-row: 1;
 }
-.cat-card::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.15);
-  opacity: 0;
-  transition: opacity 0.15s;
+.cat-row-bar-fill {
+  position: absolute; inset: 0 auto 0 0;
+  border-radius: 4px;
+  transition: width 0.3s;
 }
-.cat-card:hover::after { opacity: 1; }
-.cat-card-score { font-size: 1.6rem; font-weight: bold; line-height: 1; }
-.cat-card-label { font-size: 0.68rem; opacity: 0.85; margin-top: 4px; text-transform: uppercase; letter-spacing: 0.04em; }
-.cat-card-weight { font-size: 0.68rem; opacity: 0.6; margin-top: 2px; }
-.cat-card-pct { font-size: 0.72rem; opacity: 0.75; margin-top: 6px; }
-.cc-tfs { background: var(--cat-tfs); }
-.cc-mom { background: var(--cat-mom); }
-.cc-wss { background: var(--cat-wss); }
-.cc-fqs { background: var(--cat-fqs); }
-.cc-mds { background: var(--cat-mds); }
+.cat-row-bar-fill.cl-good { background: linear-gradient(90deg, #16a34a, #22c55e); }
+.cat-row-bar-fill.cl-mid  { background: linear-gradient(90deg, #ca8a04, #eab308); }
+.cat-row-bar-fill.cl-poor { background: linear-gradient(90deg, #b91c1c, #ef4444); }
+.cat-row-meta {
+  grid-column: 3;
+  grid-row: 1;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 130px;
+}
+.cat-row-score {
+  font-family: 'Georgia', serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1;
+}
+.cat-row-score .cat-row-max {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--ink4);
+  margin-left: 2px;
+}
+.cat-row-pct {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.10em;
+  font-weight: 500;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.cat-row-pct.cl-good { color: #16a34a; }
+.cat-row-pct.cl-mid  { color: #ca8a04; }
+.cat-row-pct.cl-poor { color: #dc2626; }
+.cat-row-interp {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  font-size: 0.86rem;
+  color: var(--ink2);
+  line-height: 1.5;
+  padding-top: 2px;
+}
+.cat-legend {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--ink3);
+  margin-top: 10px;
+  padding-top: 14px;
+  border-top: 1px solid var(--surface3);
+  flex-wrap: wrap;
+}
+.cat-legend-dot {
+  display: inline-block;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+.cat-legend-dot.cl-good { background: #22c55e; }
+.cat-legend-dot.cl-mid  { background: #eab308; }
+.cat-legend-dot.cl-poor { background: #ef4444; }
+@media (max-width: 720px) {
+  .cat-row { grid-template-columns: 1fr; row-gap: 8px; }
+  .cat-row-name, .cat-row-bar, .cat-row-meta { grid-column: 1; grid-row: auto; text-align: left; }
+  .cat-row-meta { flex-direction: row; align-items: center; gap: 12px; }
+}
 
 /* ── Charts ──────────────────────────────────────────────────────────────── */
 .chart-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
@@ -814,8 +915,17 @@ header {
         </div>
 
 
-        <!-- Category cards -->
-        <div class="cat-grid section-gap" id="cat-cards"></div>
+        <!-- Section 3: Category breakdown ──────────────────────────── -->
+        <section class="cat-breakdown section-gap">
+          <div class="section-eyebrow">Category breakdown · 2024</div>
+          <div class="section-heading">How the score breaks down</div>
+          <div class="cat-rows" id="cat-rows"></div>
+          <div class="cat-legend">
+            <span class="cat-legend-dot cl-good"></span> Top 30% globally
+            <span class="cat-legend-dot cl-mid"></span> Middle band
+            <span class="cat-legend-dot cl-poor"></span> Bottom 30% globally
+          </div>
+        </section>
 
         <!-- Raw metrics -->
         <div class="card">
@@ -1064,6 +1174,98 @@ function renderTrajectoryCaptions(c) {
   }
 }
 
+// ── Category breakdown (Section 3) ──────────────────────────────────────────
+// Five rows on a neutral background, sorted by score-of-max descending. Bar
+// colour is traffic-light by GLOBAL PERCENTILE, not raw score.
+const CAT_FULL_NAMES = {
+  TFS:      'Total Fertility Score',
+  Momentum: 'Population Momentum',
+  WSS:      'Workforce Sustainability',
+  FQS:      'Fertility Quality',
+  MDS:      'Migration Independence'
+};
+const CAT_MAX = { TFS: 32, Momentum: 21, WSS: 22, FQS: 8, MDS: 17 };
+
+const CAT_INTERPRETATIONS = {
+  TFS: {
+    good: 'Fertility well above replacement, supporting natural population renewal.',
+    mid:  'Fertility close to replacement, but not securely above it.',
+    poor: 'Sub-replacement fertility entrenched; limited natural renewal.'
+  },
+  Momentum: {
+    good: 'Strong demographic momentum; a young age structure supports future growth.',
+    mid:  'Modest momentum; growth is slowing but still positive.',
+    poor: 'Negative momentum; decline is largely baked-in regardless of any fertility recovery.'
+  },
+  WSS: {
+    good: 'Workforce structure remains favourable; ample workers per retiree.',
+    mid:  'A manageable dependency burden, though ageing is underway.',
+    poor: 'Workforce contraction visible; growing pressure on the tax base.'
+  },
+  FQS: {
+    good: 'Reproductive structure is healthy: completed family formation, low teen births.',
+    mid:  'Fertility quality is moderate; some structural mismatches in age and reproduction.',
+    poor: 'Reproduction efficiency is weak; fertility patterns diverge from healthy norms.'
+  },
+  MDS: {
+    good: 'The population sustains itself with minimal reliance on inward migration.',
+    mid:  'A meaningful migration role, but not yet structurally dependent on inflows.',
+    poor: 'Population stability is contingent on continued high net migration.'
+  }
+};
+
+function pctBand(p) {
+  if (p == null) return 'mid';
+  if (p >= 70) return 'good';
+  if (p >= 30) return 'mid';
+  return 'poor';
+}
+function pctLabel(p) {
+  if (p == null) return '';
+  if (p >= 50) return `Top ${Math.max(1, 100 - Math.round(p))}% globally`;
+  return `Bottom ${Math.max(1, Math.round(p))}% globally`;
+}
+
+function renderCategoryBreakdown(c) {
+  const wrap = document.getElementById('cat-rows');
+  if (!wrap) return;
+  const cats = ['TFS','Momentum','WSS','FQS','MDS'];
+  const weights = (DATA && DATA.cat_weights) || { TFS:32, Momentum:21, WSS:22, FQS:8, MDS:17 };
+  const rows = cats.map(k => ({
+    key:    k,
+    name:   CAT_FULL_NAMES[k],
+    score:  c.scores?.['2024']?.[k] ?? null,
+    max:    CAT_MAX[k] || 1,
+    pct:    c.percentiles?.[k] ?? null,
+    weight: weights[k]
+  }));
+  // Sort by score-of-max descending so the country's strongest dimension reads first
+  rows.sort((a, b) => {
+    const av = a.score == null ? -Infinity : (a.score / a.max);
+    const bv = b.score == null ? -Infinity : (b.score / b.max);
+    return bv - av;
+  });
+  wrap.innerHTML = rows.map(r => {
+    const fillPct = r.score != null ? Math.max(0, Math.min(100, (r.score / r.max) * 100)) : 0;
+    const band    = pctBand(r.pct);
+    const cls     = 'cl-' + band;
+    const interp  = CAT_INTERPRETATIONS[r.key]?.[band] || '';
+    return `
+      <div class="cat-row">
+        <div class="cat-row-name">
+          ${r.name}
+          <span class="cat-row-weight">${r.weight}% of index</span>
+        </div>
+        <div class="cat-row-bar"><div class="cat-row-bar-fill ${cls}" style="width:${fillPct.toFixed(1)}%"></div></div>
+        <div class="cat-row-meta">
+          <div class="cat-row-score">${r.score != null ? r.score.toFixed(1) : '—'}<span class="cat-row-max"> / ${r.max}</span></div>
+          <div class="cat-row-pct ${cls}">${pctLabel(r.pct)}</div>
+        </div>
+        <div class="cat-row-interp">${interp}</div>
+      </div>`;
+  }).join('');
+}
+
 function init() {
   buildContinentFilters();
   renderCountryList();
@@ -1285,37 +1487,8 @@ function renderCountryProfile(iso) {
   // ── Section 2: Trajectory captions (past / present / future) ──────────
   renderTrajectoryCaptions(c);
 
-  // Category cards
-  const cats = ['TFS','Momentum','WSS','FQS','MDS'];
-  const catWrap = document.getElementById('cat-cards');
-  catWrap.innerHTML = '';
-  // Pre-compute relative performance vs global for each cat
-  const catVsGlobal = {};
-  ['TFS','Momentum','WSS','FQS','MDS'].forEach(cat => {
-    const globalMean = GLOBAL_STATS.stats[cat]?.mean || 0;
-    catVsGlobal[cat] = (DATA.countries[iso]?.scores?.['2024']?.[cat] || 0) - globalMean;
-  });
-  cats.forEach(cat => {
-    const val = c.scores['2024']?.[cat];
-    const pct = c.percentiles?.[cat];
-    const shortNames = { TFS:'TFS', Momentum:'Momentum', WSS:'WSS', FQS:'FQS', MDS:'MDS' };
-    const weights = DATA.cat_weights;
-    const cvg = catVsGlobal[cat];
-    const cvgStr = cvg !== undefined ? (cvg>=0?'+':'')+cvg.toFixed(1)+' vs avg' : '';
-    const cvgCol = cvg >= 0 ? 'rgba(255,255,255,0.7)' : 'rgba(255,180,180,0.9)';
-    catWrap.innerHTML += `
-      <div class="cat-card ${CAT_CLASS[cat]}">
-        <div class="cat-card-score">${val?.toFixed(1) ?? '—'}</div>
-        <div class="cat-card-label" title="${{"TFS": "Total Fertility Score \u2014 fertility rate, trend & years below replacement (32%)", "Momentum": "Momentum Score \u2014 natural change, growth rate & structural trajectory (21%)", "WSS": "Workforce Sustainability Score \u2014 working-age ratio, labour force growth & dependency (22%)", "FQS": "Fertility Quality Score \u2014 net reproduction rate, mean age at childbearing & teen births (8%)", "MDS": "Migration Independence Score \u2014 reliance on migration vs natural change (17%)"}[cat] || cat}">
-          <span class="cat-tooltip-wrap">${shortNames[cat]}
-            <span class="cat-tooltip"><strong>${CAT_TOOLTIPS[cat]?.name || cat}</strong>${CAT_TOOLTIPS[cat]?.tip || ''}</span>
-          </span>
-        </div>
-        <div class="cat-card-weight">${weights[cat]}% weight</div>
-        ${pct !== undefined ? `<div class="cat-card-pct">p${pct} globally</div>` : ''}
-        ${cvgStr ? `<div style="font-size:0.62rem;margin-top:2px;color:${cvgCol}">${cvgStr}</div>` : ''}
-      </div>`;
-  });
+  // ── Section 3: Category breakdown ─────────────────────────────────────
+  renderCategoryBreakdown(c);
 
   // Trend chart
   const trendYears = YEARS;
