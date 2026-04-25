@@ -791,6 +791,94 @@ header {
   .peers-col-regime { display: none; }
   .peer-regime { display: none; }
 }
+
+/* ── Raw indicators (Section 7) ──────────────────────────────────────────── */
+.raw-section {
+  background: var(--surface);
+  border-radius: var(--r);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  padding: 22px 26px 22px;
+  margin-bottom: 22px;
+}
+.raw-groups {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 18px;
+  margin-top: 14px;
+}
+.raw-group {
+  background: var(--surface2);
+  border: 1px solid var(--surface3);
+  border-radius: 6px;
+  padding: 14px 16px 12px;
+  display: flex;
+  flex-direction: column;
+}
+.raw-group-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid var(--surface3);
+}
+.raw-group-name {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink2);
+  font-weight: 500;
+}
+.raw-group-weight {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.10em;
+  color: var(--ink4);
+}
+.raw-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 5px 0;
+  border-bottom: 1px dotted var(--surface3);
+}
+.raw-row:last-child { border-bottom: none; }
+.raw-row-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--ink2);
+  letter-spacing: 0.02em;
+  flex: 1;
+  min-width: 0;
+}
+.raw-row-val {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--ink);
+  white-space: nowrap;
+}
+.raw-row-val .raw-row-unit {
+  font-size: 0.66rem;
+  font-weight: 400;
+  color: var(--ink3);
+  margin-left: 2px;
+}
+.raw-row-val.raw-na { color: var(--ink4); font-style: italic; font-weight: 400; }
+.raw-note {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  color: var(--ink4);
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--surface3);
+  text-align: right;
+}
 @media (max-width: 720px) {
   .cat-row { grid-template-columns: 1fr; row-gap: 8px; }
   .cat-row-name, .cat-row-bar, .cat-row-meta { grid-column: 1; grid-row: auto; text-align: left; }
@@ -1256,13 +1344,13 @@ header {
           <div class="peers-note" id="peers-note"></div>
         </section>
 
-        <!-- Raw metrics -->
-        <div class="card">
-          <div class="card-head">Key indicators — 2024</div>
-          <div style="padding:14px">
-            <div class="raw-grid" id="raw-grid"></div>
-          </div>
-        </div>
+        <!-- Section 7: Raw indicators (grouped by category, mono) ────── -->
+        <section class="raw-section section-gap">
+          <div class="section-eyebrow">Raw indicators · 2024</div>
+          <div class="section-heading">Underlying data</div>
+          <div class="raw-groups" id="raw-groups"></div>
+          <div class="raw-note" id="raw-note"></div>
+        </section>
         <!-- Population & Migration Panel -->
         </div><!-- end ctab-panel overview -->
 
@@ -2174,17 +2262,105 @@ function renderCountryProfile(iso) {
   // (built in Section 3). Guard the destroy to avoid stale instances.
   if (chartRadar) { try { chartRadar.destroy(); } catch (e) {} chartRadar = null; }
 
-  // Raw metrics
-  const rawWrap = document.getElementById('raw-grid');
-  rawWrap.innerHTML = '';
-  if (c.raw) {
-    Object.values(c.raw).forEach(m => {
-      rawWrap.innerHTML += `
-        <div class="raw-item">
-          <div class="raw-label">${m.label}</div>
-          <div class="raw-val">${typeof m.value === 'number' ? parseFloat(m.value).toFixed(2) : parseFloat(m.value).toFixed(2)}${m.unit ? ' <span style="font-size:0.75rem;font-weight:normal;color:var(--ink3)">' + m.unit + '</span>' : ''}</div>
-        </div>`;
-    });
+  // ── Section 7: Raw indicators ─────────────────────────────────────────
+  renderRawIndicators(c);
+}
+
+// ── Raw indicators (Section 7) ──────────────────────────────────────────────
+// Indicators grouped by the category they feed into. The mapping below mirrors
+// the category composition in the methodology.
+const RAW_BY_CATEGORY = [
+  {
+    key: 'TFS', name: 'Total Fertility Score',
+    indicators: ['TFR']
+  },
+  {
+    key: 'Momentum', name: 'Population Momentum',
+    indicators: ['NatChange_per_1000', 'Pop_5yr%change']
+  },
+  {
+    key: 'WSS', name: 'Workforce Sustainability',
+    indicators: ['WRR (20-29/60-69)', 'OADR', 'Labour_Force_Growth_%5yrs']
+  },
+  {
+    key: 'FQS', name: 'Fertility Quality',
+    indicators: ['Mean_Age_Childbearing']
+  },
+  {
+    key: 'MDS', name: 'Migration Independence',
+    indicators: ['Net_Mig_per_1000_5y_avg']
+  }
+];
+
+function renderRawIndicators(c) {
+  const wrap = document.getElementById('raw-groups');
+  const note = document.getElementById('raw-note');
+  if (!wrap) return;
+  if (!c.raw) {
+    wrap.innerHTML = '<div style="padding:14px;color:var(--ink3);font-style:italic">No raw indicators available.</div>';
+    return;
+  }
+  const weights = (DATA && DATA.cat_weights) || { TFS:32, Momentum:21, WSS:22, FQS:8, MDS:17 };
+  // Track which indicator keys we use, so any "extras" land in an "Other" group
+  const used = new Set();
+
+  function fmtVal(v, unit) {
+    if (v == null || isNaN(v)) {
+      return '<span class="raw-row-val raw-na">n/a</span>';
+    }
+    let n;
+    const a = Math.abs(v);
+    if (a >= 1000)     n = v.toFixed(0);
+    else if (a >= 100) n = v.toFixed(1);
+    else if (a >= 10)  n = v.toFixed(2);
+    else               n = v.toFixed(3);
+    const unitHtml = unit ? `<span class="raw-row-unit">${unit}</span>` : '';
+    return `<span class="raw-row-val">${n}${unitHtml}</span>`;
+  }
+
+  const groupHtml = RAW_BY_CATEGORY.map(grp => {
+    const rowsHtml = grp.indicators.map(k => {
+      used.add(k);
+      const ind = c.raw[k];
+      if (!ind) return '';
+      return `<div class="raw-row">
+        <div class="raw-row-label">${ind.label}</div>
+        ${fmtVal(ind.value, ind.unit)}
+      </div>`;
+    }).filter(Boolean).join('');
+    if (!rowsHtml) return '';
+    return `<div class="raw-group">
+      <div class="raw-group-head">
+        <div class="raw-group-name">${grp.name}</div>
+        <div class="raw-group-weight">${weights[grp.key]}% of index</div>
+      </div>
+      ${rowsHtml}
+    </div>`;
+  }).join('');
+
+  // Catch-all for indicators not in any defined category
+  const extras = Object.keys(c.raw).filter(k => !used.has(k));
+  let extraHtml = '';
+  if (extras.length > 0) {
+    const extraRows = extras.map(k => {
+      const ind = c.raw[k];
+      return `<div class="raw-row">
+        <div class="raw-row-label">${ind.label}</div>
+        ${fmtVal(ind.value, ind.unit)}
+      </div>`;
+    }).join('');
+    extraHtml = `<div class="raw-group">
+      <div class="raw-group-head">
+        <div class="raw-group-name">Other</div>
+        <div class="raw-group-weight">—</div>
+      </div>
+      ${extraRows}
+    </div>`;
+  }
+
+  wrap.innerHTML = groupHtml + extraHtml;
+  if (note) {
+    note.textContent = 'Source: UN WPP 2024, UN DESA Migration Stock, ILO LFPR. Values shown for 2024.';
   }
 }
 
