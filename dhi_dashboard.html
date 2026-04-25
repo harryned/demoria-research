@@ -270,21 +270,101 @@ header {
   .hero-score-block { text-align: left; padding-left: 0; padding-top: 18px; border-left: none; border-top: 1px solid rgba(255,255,255,0.14); }
 }
 
-/* ── Stat row ─────────────────────────────────────────────────────────────── */
-.stat-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin-bottom: 16px; }
-.stat-card {
+/* ── Trajectory section (narrative chart) ────────────────────────────────── */
+.trajectory-section {
   background: var(--surface);
   border-radius: var(--r);
-  padding: 14px 16px;
-  box-shadow: var(--shadow);
   border: 1px solid var(--border);
-  text-align: center;
+  box-shadow: var(--shadow);
+  padding: 22px 26px 24px;
+  margin-bottom: 22px;
 }
-.stat-val { font-size: 1.4rem; font-weight: bold; }
-.stat-label { font-size: 0.72rem; color: var(--ink3); margin-top: 2px; }
-.stat-up { color: var(--success); }
-.stat-down { color: var(--danger); }
-.stat-neutral { color: var(--warn); }
+.section-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink3);
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+.section-heading {
+  font-family: 'Georgia', serif;
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 16px;
+  letter-spacing: -0.005em;
+}
+.trajectory-chart-wrap {
+  position: relative;
+  height: 280px;
+  margin-bottom: 20px;
+}
+.trajectory-captions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  padding-top: 18px;
+  border-top: 1px solid var(--surface3);
+}
+.tcap {
+  display: flex;
+  flex-direction: column;
+}
+.tcap-label {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink3);
+  margin-bottom: 8px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.tcap-label::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--surface3);
+}
+.tcap.tcap-past .tcap-label::before    { background: var(--accent2); }
+.tcap.tcap-present .tcap-label::before { background: var(--gold2); }
+.tcap.tcap-future .tcap-label::before  { background: var(--ink4); }
+.tcap-headline {
+  font-family: 'Georgia', serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.3;
+  margin-bottom: 4px;
+}
+.tcap-headline .tcap-num {
+  font-family: 'Georgia', serif;
+  font-weight: 700;
+}
+.tcap-headline .tcap-delta-up   { color: #16a34a; }
+.tcap-headline .tcap-delta-down { color: #dc2626; }
+.tcap-detail {
+  font-size: 0.85rem;
+  color: var(--ink2);
+  line-height: 1.45;
+}
+.trajectory-note {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  color: var(--ink4);
+  margin-top: 14px;
+  text-align: right;
+}
+@media (max-width: 720px) {
+  .trajectory-captions { grid-template-columns: 1fr; gap: 16px; }
+  .trajectory-chart-wrap { height: 240px; }
+}
 
 /* ── Category grid ───────────────────────────────────────────────────────── */
 .cat-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 10px; margin-bottom: 16px; }
@@ -712,25 +792,16 @@ header {
           </div>
         </div>
 
-        <!-- Stat row -->
-        <div class="stat-row section-gap">
-          <div class="stat-card">
-            <div class="stat-val" id="st-delta"></div>
-            <div class="stat-label">Change since 1999</div>
+        <!-- Section 2: Trajectory ─────────────────────────────────── -->
+        <section class="trajectory-section section-gap">
+          <div class="section-eyebrow">Trajectory · 1965 – 2050</div>
+          <div class="section-heading">Score over time</div>
+          <div class="trajectory-chart-wrap">
+            <canvas id="chart-trend" role="img" aria-label="Overall DHI score trend over time"></canvas>
           </div>
-          <div class="stat-card">
-            <div class="stat-val" id="st-traj"></div>
-            <div class="stat-label">2020–24 trajectory</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-val" id="st-proj"></div>
-            <div class="stat-label">Projected to 2050</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-val" id="st-delta2050"></div>
-            <div class="stat-label">Change 2024 &rarr; 2050</div>
-          </div>
-        </div>
+          <div class="trajectory-captions" id="trajectory-captions"></div>
+          <div class="trajectory-note" id="trajectory-note"></div>
+        </section>
 
         <div class="card section-gap" id="pop-mig-panel">
           <div class="card-head">Population &amp; Migration</div>
@@ -745,18 +816,6 @@ header {
 
         <!-- Category cards -->
         <div class="cat-grid section-gap" id="cat-cards"></div>
-
-        <!-- Charts -->
-        <div class="chart-grid section-gap">
-          <div class="chart-card">
-            <div class="chart-title">Overall score over time <span id="proj-badge" style="display:none;font-size:0.65rem;font-weight:normal;color:#e8943a;margin-left:6px">⚠ includes projections</span></div>
-            <div class="chart-wrap" style="height:200px"><canvas id="chart-trend" role="img" aria-label="Overall DHI score trend over time"></canvas></div>
-          </div>
-          <div class="chart-card">
-            <div class="chart-title">Category breakdown — 2024</div>
-            <div class="chart-wrap" style="height:200px"><canvas id="chart-radar" role="img" aria-label="Radar chart of category scores for 2024"></canvas></div>
-          </div>
-        </div>
 
         <!-- Raw metrics -->
         <div class="card">
@@ -861,8 +920,8 @@ function classifyScore(score) {
 }
 
 // ── Hero narrative summary ───────────────────────────────────────────────────
-// Builds a single sentence describing why the country sits where it does,
-// based on its strongest and weakest category percentiles plus trajectory.
+// Two-sentence narrative: one about category profile (strengths/weaknesses),
+// one about historical trajectory and projection direction.
 function buildHeroSummary(c) {
   const pct = c.percentiles || {};
   const cats = ['TFS','Momentum','WSS','FQS','MDS'];
@@ -873,43 +932,136 @@ function buildHeroSummary(c) {
     FQS:      'fertility quality',
     MDS:      'migration independence'
   };
-  // Sort categories by percentile (best -> worst). Treat missing as 50.
   const ranked = cats
     .map(k => ({ k, p: pct[k] != null ? pct[k] : 50 }))
     .sort((a, b) => b.p - a.p);
-  const best  = ranked[0];
-  const worst = ranked[ranked.length - 1];
+  const best   = ranked[0];
+  const second = ranked[1];
+  const worst  = ranked[ranked.length - 1];
   const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
+  const topPct = p => Math.max(1, 100 - Math.round(p));
+  const botPct = p => Math.max(1, Math.round(p));
 
-  const traj = c.trajectory || c.traj || '';
-  const trajPhrase =
-    traj === 'Improving' ? ' the score has been <em>improving</em>' :
-    traj === 'Declining' ? ' the score has been <em>declining</em>' :
-    traj === 'Stable'    ? ' the score has been broadly <em>stable</em>' : '';
-
-  const projPhrase = c.projected === 'Declining'
-    ? ' and is projected to deteriorate further by 2050'
-    : c.projected === 'Improving'
-    ? ' and is projected to improve further by 2050'
-    : '';
-
-  // Build core sentence based on the spread between best and worst
+  // Sentence 1: category profile
   let core;
   if (best.p >= 80 && worst.p >= 60) {
-    core = `Strong across the board — <em>${fullNames[best.k]}</em> (top ${Math.max(1, 100 - Math.round(best.p))}%) is the standout`;
+    core = `Strong across all five categories, anchored by <em>${fullNames[best.k]}</em> (top ${topPct(best.p)}%) and <em>${fullNames[second.k]}</em> (top ${topPct(second.p)}%).`;
   } else if (best.p >= 70 && worst.p <= 30) {
-    core = `${cap(fullNames[best.k])} is a relative strength (top ${Math.max(1, 100 - Math.round(best.p))}%), but <em>${fullNames[worst.k]}</em> is a structural weakness (bottom ${Math.max(1, Math.round(worst.p))}%)`;
+    core = `${cap(fullNames[best.k])} stands out as a relative strength (top ${topPct(best.p)}%), but <em>${fullNames[worst.k]}</em> is a structural weakness (bottom ${botPct(worst.p)}%).`;
   } else if (worst.p <= 25) {
-    core = `Demographic pressure is broad-based, with <em>${fullNames[worst.k]}</em> the most acute weakness (bottom ${Math.max(1, Math.round(worst.p))}%)`;
+    core = `Demographic pressure is broad-based, with <em>${fullNames[worst.k]}</em> the most acute weakness (bottom ${botPct(worst.p)}%).`;
+  } else if (best.p >= 60) {
+    core = `${cap(fullNames[best.k])} (top ${topPct(best.p)}%) is the strongest dimension, while <em>${fullNames[worst.k]}</em> (bottom ${botPct(worst.p)}%) is the weakest.`;
   } else {
-    core = `${cap(fullNames[best.k])} (top ${Math.max(1, 100 - Math.round(best.p))}%) leads the profile; <em>${fullNames[worst.k]}</em> (bottom ${Math.max(1, Math.round(worst.p))}%) trails`;
+    core = `A mid-table profile — ${fullNames[best.k]} is the most favourable dimension (top ${topPct(best.p)}%); ${fullNames[worst.k]} the weakest (bottom ${botPct(worst.p)}%).`;
   }
 
-  // Stitch together
-  let sentence = core;
-  if (trajPhrase) sentence += ';' + trajPhrase;
-  if (projPhrase) sentence += projPhrase;
-  return sentence + '.';
+  // Sentence 2: trajectory + projection (combined into one coherent line)
+  const traj = c.trajectory || c.traj || '';
+  const proj = c.projected || '';
+  const TRAJ_PROJ = {
+    'Improving|Improving': 'Recent gains are projected to continue through 2050.',
+    'Improving|Declining': 'Recent gains are projected to peak before reversing toward 2050.',
+    'Improving|Stable':    'Recent gains are projected to plateau through 2050.',
+    'Declining|Declining': 'Decline is projected to continue through 2050.',
+    'Declining|Improving': 'Recent decline is projected to reverse before 2050.',
+    'Declining|Stable':    'Decline is projected to stabilise — but at a depressed level.',
+    'Stable|Declining':    'Broadly stable today, but projected to deteriorate by 2050.',
+    'Stable|Improving':    'Broadly stable today, with modest improvement projected by 2050.',
+    'Stable|Stable':       'Trajectory has been broadly stable, with little change projected through 2050.'
+  };
+  const trajClause = TRAJ_PROJ[(traj || 'Stable') + '|' + (proj || 'Stable')] || '';
+
+  return trajClause ? `${core} ${trajClause}` : core;
+}
+
+// ── Trajectory captions (past / present / future) ───────────────────────────
+// Generates three plain-English caption blocks beneath the score-over-time chart.
+function renderTrajectoryCaptions(c) {
+  const wrap = document.getElementById('trajectory-captions');
+  const noteEl = document.getElementById('trajectory-note');
+  if (!wrap) return;
+
+  const get = y => c.scores?.[String(y)]?.Overall ?? null;
+  const s1965 = get(1965);
+  const s1999 = get(1999);
+  const s2024 = get(2024);
+  const s2050 = get(2050);
+  const total = c.total || (DATA.country_list ? DATA.country_list.length : 236);
+
+  // Past: anchor on 1965 (or 1999 if missing)
+  const baseYr  = s1965 != null ? 1965 : 1999;
+  const baseVal = s1965 != null ? s1965 : s1999;
+  let pastHeadline = '—';
+  let pastDetail   = '';
+  if (baseVal != null && s2024 != null) {
+    const delta = s2024 - baseVal;
+    const dirWord = delta >= 1 ? 'risen'  : delta <= -1 ? 'fallen' : 'held steady';
+    const dirCol  = delta >= 1 ? 'tcap-delta-up' : delta <= -1 ? 'tcap-delta-down' : '';
+    const absD    = Math.abs(delta).toFixed(1);
+    if (Math.abs(delta) >= 0.5) {
+      pastHeadline = `${dirWord === 'risen' ? '+' : dirWord === 'fallen' ? '−' : '±'}<span class="tcap-num ${dirCol}">${absD}</span> since ${baseYr}`;
+    } else {
+      pastHeadline = `Broadly steady since ${baseYr}`;
+    }
+    // Find historical peak — only mention if it's clearly historical (≥3yrs ago) and clearly above today
+    let peakVal = -Infinity, peakYr = baseYr;
+    for (let y = baseYr; y <= 2024; y++) {
+      const v = get(y);
+      if (v != null && v > peakVal) { peakVal = v; peakYr = y; }
+    }
+    if (peakYr <= 2020 && peakVal > s2024 + 1.5) {
+      pastDetail = `Peaked at ${peakVal.toFixed(1)} in ${peakYr}, then eased back.`;
+    } else if (delta >= 1) {
+      pastDetail = `Steady gains over six decades of historical data.`;
+    } else if (delta <= -1) {
+      pastDetail = `A long-running structural decline.`;
+    } else {
+      pastDetail = `Limited net change over the historical record.`;
+    }
+  }
+
+  // Present
+  const presentHeadline = s2024 != null
+    ? `<span class="tcap-num">${s2024.toFixed(1)}</span> in 2024`
+    : '—';
+  const presentDetail = `Rank ${c.rank} of ${total} globally.`;
+
+  // Future
+  let futureHeadline = '—';
+  let futureDetail   = 'Projection unavailable.';
+  if (s2024 != null && s2050 != null) {
+    const d50 = s2050 - s2024;
+    const dirCol = d50 >= 1 ? 'tcap-delta-up' : d50 <= -1 ? 'tcap-delta-down' : '';
+    const sign   = d50 >= 0 ? '+' : '−';
+    futureHeadline = `<span class="tcap-num">${s2050.toFixed(1)}</span> by 2050 <span class="${dirCol}" style="font-size:0.78rem;font-weight:500">(${sign}${Math.abs(d50).toFixed(1)})</span>`;
+    if (d50 <= -3)      futureDetail = 'A meaningful projected deterioration over the next 26 years.';
+    else if (d50 <= -1) futureDetail = 'A modest projected softening through 2050.';
+    else if (d50 >= 3)  futureDetail = 'A meaningful projected improvement over the next 26 years.';
+    else if (d50 >= 1)  futureDetail = 'A modest projected improvement through 2050.';
+    else                futureDetail = 'Projected to remain broadly at today\'s level.';
+  }
+
+  wrap.innerHTML = `
+    <div class="tcap tcap-past">
+      <div class="tcap-label">Past · 1965 – 2024</div>
+      <div class="tcap-headline">${pastHeadline}</div>
+      <div class="tcap-detail">${pastDetail}</div>
+    </div>
+    <div class="tcap tcap-present">
+      <div class="tcap-label">Today · 2024</div>
+      <div class="tcap-headline">${presentHeadline}</div>
+      <div class="tcap-detail">${presentDetail}</div>
+    </div>
+    <div class="tcap tcap-future">
+      <div class="tcap-label">Projected · 2025 – 2050</div>
+      <div class="tcap-headline">${futureHeadline}</div>
+      <div class="tcap-detail">${futureDetail}</div>
+    </div>`;
+
+  if (noteEl) {
+    noteEl.textContent = 'Projection uses the UN WPP 2024 Median variant. Low/High variants are not yet plumbed through the index pipeline.';
+  }
 }
 
 function init() {
@@ -1130,31 +1282,8 @@ function renderCountryProfile(iso) {
   const sumEl = document.getElementById('h-summary');
   if (sumEl) sumEl.innerHTML = buildHeroSummary(c);
 
-  // Stats
-  const delta = c.delta;
-  const dEl = document.getElementById('st-delta');
-  dEl.textContent = delta !== null ? (delta >= 0 ? '+' : '') + delta.toFixed(1) : '—';
-  dEl.className = `stat-val ${delta > 0 ? 'stat-up' : delta < -2 ? 'stat-down' : 'stat-neutral'}`;
-
-  const tEl = document.getElementById('st-traj');
-  tEl.textContent = c.trajectory ?? '—';
-  tEl.className = `stat-val ${c.trajectory === 'Improving' ? 'stat-up' : c.trajectory === 'Declining' ? 'stat-down' : 'stat-neutral'}`;
-
-  const pEl = document.getElementById('st-proj');
-  pEl.textContent = c.projected ?? '—';
-  pEl.className = `stat-val ${c.projected === 'Improving' ? 'stat-up' : c.projected === 'Declining' ? 'stat-down' : 'stat-neutral'}`;
-
-  const d2050El = document.getElementById('st-delta2050');
-  const score2024 = c.scores['2024']?.Overall;
-  const score2050 = c.scores['2050']?.Overall;
-  if (score2024 != null && score2050 != null) {
-    const d50 = score2050 - score2024;
-    d2050El.textContent = (d50 >= 0 ? '+' : '') + d50.toFixed(1);
-    d2050El.className = `stat-val ${d50 > 1 ? 'stat-up' : d50 < -1 ? 'stat-down' : 'stat-neutral'}`;
-  } else {
-    d2050El.textContent = '—';
-    d2050El.className = 'stat-val';
-  }
+  // ── Section 2: Trajectory captions (past / present / future) ──────────
+  renderTrajectoryCaptions(c);
 
   // Category cards
   const cats = ['TFS','Momentum','WSS','FQS','MDS'];
@@ -1233,41 +1362,75 @@ function renderCountryProfile(iso) {
     }
   };
 
+  // Vertical "today" marker line at 2024
+  const todayLinePlugin = {
+    id: 'todayLine',
+    afterDatasetsDraw(chart) {
+      const { ctx, chartArea: { top, bottom }, scales: { x } } = chart;
+      const px = x.getPixelForValue(2024);
+      if (px == null) return;
+      ctx.save();
+      ctx.setLineDash([3, 3]);
+      ctx.strokeStyle = 'rgba(15,17,23,0.28)';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(px, top);
+      ctx.lineTo(px, bottom);
+      ctx.stroke();
+      // Small "today" label
+      ctx.setLineDash([]);
+      ctx.fillStyle = 'rgba(15,17,23,0.55)';
+      ctx.font = '500 9px JetBrains Mono, Menlo, monospace';
+      ctx.textAlign = 'center';
+      ctx.fillText('TODAY', px, top + 9);
+      ctx.restore();
+    }
+  };
+
   chartTrend = new Chart(document.getElementById('chart-trend'), {
     type: 'scatter',
     data: {
       datasets: [
-        { label: c.name + ' (observed)', data: obsCountry,
-          borderColor: '#3B82F6', borderWidth: 2.5, pointBackgroundColor: '#3B82F6',
-          pointRadius: (ctx) => ctx.raw?.x >= 2020 ? 3 : 2,
-          showLine: true, tension: 0.3, fill: false },
-        { label: c.name + ' (projected)', data: projCountry,
-          borderColor: 'rgba(59,130,246,0.5)', borderWidth: 1.5,
-          pointBackgroundColor: 'rgba(59,130,246,0.5)', pointRadius: 2.5,
-          showLine: true, tension: 0.3, borderDash: [5,3], fill: false },
-        { label: 'Global avg', data: scatterGlobal,
-          borderColor: '#aab0c0', borderWidth: 1.5, borderDash: [4,3],
-          pointRadius: 0, showLine: true, tension: 0.3, fill: false }
+        { label: c.name + ' — observed', data: obsCountry,
+          borderColor: '#1a3a6e', borderWidth: 2.5, pointBackgroundColor: '#1a3a6e',
+          pointRadius: (ctx) => ctx.raw?.x >= 2020 ? 3 : 0,
+          pointHoverRadius: 5,
+          showLine: true, tension: 0.25, fill: false },
+        { label: c.name + ' — projected', data: projCountry,
+          borderColor: 'rgba(26,58,110,0.55)', borderWidth: 1.8,
+          pointBackgroundColor: 'rgba(26,58,110,0.55)', pointRadius: 3,
+          pointHoverRadius: 5,
+          showLine: true, tension: 0.25, borderDash: [5,4], fill: false },
+        { label: 'Global average', data: scatterGlobal,
+          borderColor: '#9aa0b0', borderWidth: 1.4, borderDash: [3,3],
+          pointRadius: 0, showLine: true, tension: 0.25, fill: false }
       ]
     },
-    plugins: [bandPlugin],
+    plugins: [bandPlugin, todayLinePlugin],
     options: {
       responsive: true, maintainAspectRatio: false,
+      layout: { padding: { top: 14, right: 8, bottom: 4, left: 4 } },
       plugins: {
-        legend: { display: true, position: 'bottom',
-          labels: { font: { size: 11 }, boxWidth: 14, padding: 10,
-            filter: (item) => item.text !== (c.name + ' (projected)') || projCountry.length > 1 } },
-        tooltip: { callbacks: {
-          title: (items) => items[0]?.raw?.x != null ? String(Math.round(items[0].raw.x)) : '',
-          label: (item) => item.dataset.label + ': ' + (item.raw?.y?.toFixed(1) ?? '—')
-        }}
+        legend: { display: true, position: 'bottom', align: 'start',
+          labels: { font: { size: 11, family: 'Georgia, serif' }, boxWidth: 16, boxHeight: 2, padding: 14,
+            filter: (item) => item.text !== (c.name + ' — projected') || projCountry.length > 1 } },
+        tooltip: {
+          backgroundColor: 'rgba(15,17,23,0.92)',
+          titleFont: { family: 'JetBrains Mono, monospace', size: 11 },
+          bodyFont: { family: 'Georgia, serif', size: 12 },
+          padding: 10, cornerRadius: 4,
+          callbacks: {
+            title: (items) => items[0]?.raw?.x != null ? String(Math.round(items[0].raw.x)) : '',
+            label: (item) => item.dataset.label + ': ' + (item.raw?.y?.toFixed(1) ?? '—')
+          }
+        }
       },
       scales: {
         x: {
           type: 'linear', min: 1963, max: 2053,
           grid: { color: 'rgba(0,0,0,0.04)', drawBorder: false },
           ticks: {
-            font: { size: 10 }, color: '#6b7280',
+            font: { size: 10, family: 'JetBrains Mono, monospace' }, color: '#6b7280',
             callback: (v) => { const yr=Math.round(v); return [1965,1975,1985,1995,2005,2015,2024,2035,2050].includes(yr) ? String(yr) : ''; },
             maxTicksLimit: 20
           },
@@ -1276,48 +1439,16 @@ function renderCountryProfile(iso) {
         y: {
           min: 0, max: 100,
           grid: { color: 'rgba(0,0,0,0.05)' },
-          ticks: { font: { size: 10 }, color: '#6b7280', stepSize: 20 },
+          ticks: { font: { size: 10, family: 'JetBrains Mono, monospace' }, color: '#6b7280', stepSize: 20 },
           border: { display: false }
         }
       }
     }
   });
 
-  // Radar chart
-  const cats5 = ['TFS','Momentum','WSS','FQS','MDS'];
-  // Radar: show % of category max so all axes fill proportionally
-  const CAT_MAX_R = { TFS:32, Momentum:21, WSS:22, FQS:8, MDS:17 };
-  const radarVals = cats5.map(cat => {
-    const v = c.scores['2024']?.[cat];
-    const max = CAT_MAX_R[cat] || 1;
-    return v != null ? Math.round((v / max) * 100) : 0;
-  });
-  const globalRadar = cats5.map(cat => {
-    const v = DATA.global['2024']?.[cat];
-    const max = CAT_MAX_R[cat] || 1;
-    return v != null ? Math.round((v / max) * 100) : 0;
-  });
-  if (chartRadar) chartRadar.destroy();
-  chartRadar = new Chart(document.getElementById('chart-radar'), {
-    type: 'radar',
-    data: {
-      labels: cats5,
-      datasets: [
-        { label: c.name, data: radarVals, borderColor: '#3B82F6', borderWidth: 2,
-          backgroundColor: 'rgba(26,58,110,0.12)', pointBackgroundColor: '#3B82F6', pointRadius: 3 },
-        { label: 'Global avg', data: globalRadar, borderColor: '#aab0c0', borderWidth: 1.5,
-          borderDash: [4,3], backgroundColor: 'rgba(170,176,192,0.08)', pointRadius: 0 }
-      ]
-    },
-    options: {
-      responsive: true, maintainAspectRatio: false,
-      plugins: { legend: { display: true, position: 'bottom',
-        labels: { font: { size: 11 }, boxWidth: 14, padding: 10 } } },
-      scales: { r: { min: 0, max: 100, ticks: { font: { size: 9 }, stepSize: 25, callback: v => v+'%' },
-        grid: { color: 'rgba(0,0,0,0.07)' },
-        pointLabels: { font: { size: 11 } } } }
-    }
-  });
+  // Radar chart removed in Section 2 refactor — replaced by category breakdown
+  // (built in Section 3). Guard the destroy to avoid stale instances.
+  if (chartRadar) { try { chartRadar.destroy(); } catch (e) {} chartRadar = null; }
 
   // Raw metrics
   const rawWrap = document.getElementById('raw-grid');
