@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DHI — Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --accent:      #1a3a6e;
+  --accent-deep: #0f2347;
+  --gold2:       #c49a28;
+  --gold3:       #e0b54a;
+  --c-healthy:   #22c55e;
+  --c-pressure:  #eab308;
+  --c-serious:   #f97316;
+  --c-critical:  #ef4444;
+  --c-crisis:    #7f1d1d;
+  --font-display:'EB Garamond', Georgia, serif;
+  --font-mono:   'JetBrains Mono', monospace;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-display);
+  background: var(--accent);
+  color: #fff;
+  font-size: 16px;
+  line-height: 1.7;
+  position: relative;
+  overflow-x: hidden;
+}
+body::after {
+  content: 'DHI';
+  position: fixed;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 38vw;
+  color: rgba(255,255,255,0.022);
+  letter-spacing: -0.04em;
+  bottom: -8vw; right: -2vw;
+  line-height: 1;
+  pointer-events: none; user-select: none;
+  z-index: 0;
+}
+section { position: relative; z-index: 1; }
+
+/* ─── Shared section frame ─────────────────────────── */
+.r-section { padding: 80px 40px; scroll-margin-top: 0; }
+.r-section + .r-section { border-top: 1px solid rgba(255,255,255,0.10); }
+.r-inner { max-width: 1100px; margin: 0 auto; }
+.r-narrow { max-width: 820px; margin: 0 auto; }
+
+.r-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold2);
+  margin-bottom: 18px;
+}
+.r-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  margin-bottom: 22px;
+  color: #fff;
+  max-width: 820px;
+}
+.r-title em { font-style: italic; color: var(--gold2); font-weight: 600; }
+.r-section-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3.4vw, 2.6rem);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  margin-bottom: 18px;
+  color: #fff;
+  max-width: 820px;
+}
+.r-section-title em { font-style: italic; color: var(--gold2); font-weight: 600; }
+.r-lead {
+  font-size: 1.1rem;
+  color: rgba(255,255,255,0.78);
+  max-width: 720px;
+  line-height: 1.7;
+  margin-bottom: 28px;
+}
+.r-body {
+  font-size: 1rem;
+  color: rgba(255,255,255,0.78);
+  max-width: 760px;
+  line-height: 1.75;
+  margin-bottom: 18px;
+}
+.r-body:last-child { margin-bottom: 0; }
+
+/* ─── Intro stats ──────────────────────────────────── */
+.r-stats {
+  display: flex; gap: 40px; flex-wrap: wrap;
+  margin-top: 48px; padding-top: 36px;
+  border-top: 1px solid rgba(255,255,255,0.12);
+}
+.r-stat-val {
+  font-family: var(--font-display);
+  font-size: 2.2rem; font-weight: 600;
+  color: var(--gold2); line-height: 1;
+}
+.r-stat-label {
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.7);
+  margin-top: 6px; letter-spacing: 0.04em;
+}
+
+/* ─── Pull-quote ───────────────────────────────────── */
+.r-pullquote {
+  background: rgba(255,255,255,0.05);
+  border-left: 3px solid var(--gold2);
+  padding: 22px 28px;
+  margin: 28px 0;
+  border-radius: 0 6px 6px 0;
+  max-width: 780px;
+}
+.r-pullquote p {
+  font-size: 1.05rem;
+  font-style: italic;
+  color: rgba(255,255,255,0.85);
+  line-height: 1.7;
+}
+
+/* ─── Cards (So What? six) ─────────────────────────── */
+.r-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-top: 28px;
+}
+.r-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 8px;
+  padding: 28px 26px;
+  transition: background .18s, border-color .18s, transform .18s;
+}
+.r-card:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(224,181,74,0.35);
+  transform: translateY(-2px);
+}
+.r-card-title {
+  font-family: var(--font-display);
+  font-size: 1.18rem; font-weight: 600;
+  color: var(--gold3);
+  margin-bottom: 12px; line-height: 1.3;
+}
+.r-card-body {
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.78);
+  line-height: 1.7;
+}
+
+/* ─── Category cards (5 categories) ────────────────── */
+.r-cat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 28px;
+}
+.r-cat-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 8px;
+  padding: 22px 24px;
+  position: relative; overflow: hidden;
+  transition: background .18s, border-color .18s, transform .18s;
+}
+.r-cat-card:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(224,181,74,0.35);
+  transform: translateY(-2px);
+}
+.r-cat-card::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 3px;
+}
+.r-cat-tfs::before { background: #3B82F6; }
+.r-cat-mom::before { background: #F59E0B; }
+.r-cat-wss::before { background: #10B981; }
+.r-cat-fqs::before { background: #8B5CF6; }
+.r-cat-mds::before { background: #EF4444; }
+.r-cat-name {
+  font-family: var(--font-display);
+  font-size: 1.08rem; font-weight: 600;
+  margin-bottom: 4px; color: var(--gold3);
+}
+.r-cat-weight {
+  font-family: var(--font-mono);
+  font-size: 0.7rem; letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.5); margin-bottom: 12px;
+}
+.r-cat-desc {
+  font-size: 0.93rem;
+  color: rgba(255,255,255,0.78);
+  line-height: 1.65;
+}
+.r-cat-metrics { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 5px; }
+.r-cat-metric-tag {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 3px;
+  padding: 2px 8px;
+  color: rgba(255,255,255,0.7);
+}
+
+/* ─── Numbered principles ──────────────────────────── */
+.r-principle {
+  display: flex; gap: 22px; align-items: flex-start;
+  padding: 22px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.r-principle:last-child { border-bottom: none; }
+.r-principle-num {
+  font-family: var(--font-display);
+  font-size: 2rem; font-weight: 600;
+  color: rgba(255,255,255,0.18);
+  line-height: 1; flex-shrink: 0; width: 50px; text-align: right;
+}
+.r-principle h4 {
+  font-family: var(--font-display);
+  font-size: 1.08rem; font-weight: 600;
+  color: var(--gold3); margin-bottom: 6px;
+}
+.r-principle p {
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.78);
+  line-height: 1.7; margin: 0;
+}
+
+/* ─── Bands table ──────────────────────────────────── */
+.r-bands {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 28px 0;
+  font-size: 0.95rem;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.r-bands th {
+  text-align: left;
+  font-family: var(--font-mono);
+  font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+  background: rgba(0,0,0,0.15);
+  font-weight: 500;
+}
+.r-bands td {
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  vertical-align: middle;
+  color: rgba(255,255,255,0.82);
+}
+.r-bands tr:last-child td { border-bottom: none; }
+.r-band-swatch {
+  width: 12px; height: 12px;
+  border-radius: 50%; display: inline-block;
+  margin-right: 10px; vertical-align: middle;
+}
+.r-band-label { font-family: var(--font-display); font-weight: 600; font-size: 0.98rem; }
+.r-band-range, .r-band-count {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.7);
+}
+
+/* ─── Sources cards ────────────────────────────────── */
+.r-sources {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 24px;
+}
+.r-source {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 8px;
+  padding: 22px 24px;
+  transition: background .18s, border-color .18s;
+}
+.r-source:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(224,181,74,0.35);
+}
+.r-source-name {
+  font-family: var(--font-display);
+  font-size: 1rem; font-weight: 600;
+  color: var(--gold3); margin-bottom: 8px;
+}
+.r-source-detail {
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.72);
+  line-height: 1.6;
+}
+
+/* ─── Limits list ──────────────────────────────────── */
+.r-limits {
+  list-style: none; padding: 0;
+  margin: 24px 0 0; max-width: 820px;
+}
+.r-limits li {
+  position: relative;
+  padding: 14px 0 14px 32px;
+  font-size: 0.97rem;
+  color: rgba(255,255,255,0.78);
+  line-height: 1.7;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.r-limits li:last-child { border-bottom: none; }
+.r-limits li::before {
+  content: ''; position: absolute;
+  left: 6px; top: 22px;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--gold2);
+}
+
+/* ─── Closing strip ────────────────────────────────── */
+.r-closing {
+  text-align: center;
+  font-style: italic;
+  color: rgba(255,255,255,0.62);
+  font-size: 1rem;
+  line-height: 1.8;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+@media (max-width: 900px) {
+  .r-cards { grid-template-columns: 1fr 1fr; }
+  .r-cat-grid { grid-template-columns: 1fr; }
+  .r-sources { grid-template-columns: 1fr; }
+  .r-section { padding: 56px 24px; }
+}
+@media (max-width: 600px) {
+  .r-cards { grid-template-columns: 1fr; }
+  .r-stats { gap: 24px; }
+}
+
+/* ── Methodology sub-section nav (sticky inside reading flow) ── */
+.m-subnav {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  margin: 32px -40px 8px;
+  padding: 12px 40px;
+  background: rgba(15, 35, 71, 0.85);
+  backdrop-filter: blur(12px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+  border-top: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 1px solid rgba(255,255,255,0.10);
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.m-subnav a {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  text-decoration: none;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  transition: color .15s, border-color .15s, background .15s;
+  white-space: nowrap;
+}
+.m-subnav a:hover {
+  color: #fff;
+  border-color: rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.05);
+}
+.m-subnav a.active {
+  color: var(--gold3);
+  border-color: rgba(224,181,74,0.45);
+  background: rgba(224,181,74,0.10);
+}
+@media (max-width: 700px) {
+  .m-subnav { margin: 24px -24px 8px; padding: 10px 16px; gap: 4px; }
+  .m-subnav a { padding: 5px 10px; font-size: 0.6rem; letter-spacing: 0.08em; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ Introduction ═══════════════════════════════════════ -->
+<section class="r-section" id="r-intro">
+  <div class="r-inner">
+    <div class="r-eyebrow">Methodology &middot; Version 1.0</div>
+    <h1 class="r-title">Measuring the <em>demographic health</em> of nations</h1>
+    <p class="r-lead">The Demographic Health Index is a composite measure of a country's capacity to sustain its population across generations, incorporating fertility, workforce dynamics, migration dependence, and population momentum into a single comparable score.</p>
+    <div class="r-stats">
+      <div><div class="r-stat-val">236</div><div class="r-stat-label">Countries &amp; territories</div></div>
+      <div><div class="r-stat-val">5</div><div class="r-stat-label">Index categories</div></div>
+      <div><div class="r-stat-val">1965&ndash;2050</div><div class="r-stat-label">Time coverage</div></div>
+      <div><div class="r-stat-val">UN WPP 2024</div><div class="r-stat-label">Primary data source</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ So What? ════════════════════════════════════════════ -->
+<section class="r-section" id="r-sowhat">
+  <div class="r-inner">
+    <div class="r-eyebrow">Why it matters</div>
+    <h2 class="r-section-title">So <em>What?</em></h2>
+    <p class="r-lead">Why the index exists &mdash; and why it matters for your country.</p>
+    <p class="r-body">Demography is not the only force that shapes a society, but it is one of the few that touches almost everything: public finance, healthcare, schools, housing and the long-term stability of the state itself. When demographic strength weakens, the consequences tend to build slowly before arriving with full force. The DHI brings that trajectory into view in a single comparable score.</p>
+
+    <div class="r-cards">
+      <div class="r-card">
+        <div class="r-card-title">Pensions &amp; Fiscal Sustainability</div>
+        <div class="r-card-body">When the share of the working-age population declines, a smaller tax base may be asked to support a larger retired population. Countries in the Critical or Complete Crisis bands are therefore more likely to face sustained fiscal strain, particularly where higher productivity, stronger labour-force participation or migration are insufficient to offset the shift.</div>
+      </div>
+      <div class="r-card">
+        <div class="r-card-title">Healthcare &amp; Social Care</div>
+        <div class="r-card-body">Older populations tend to require more healthcare and long-term support. If the working-age cohort contracts relative to the number of elderly dependants, pressure on care systems, public finances and families is likely to increase, regardless of national income.</div>
+      </div>
+      <div class="r-card">
+        <div class="r-card-title">Economic Growth &amp; Innovation</div>
+        <div class="r-card-body">Younger and expanding workforces can support consumption, entrepreneurship and the adoption of new technologies. By contrast, demographic decline is often associated with slower growth, softer housing demand and reduced room for public investment, although the scale of these effects differs from one country to another.</div>
+      </div>
+      <div class="r-card">
+        <div class="r-card-title">Geopolitical Weight</div>
+        <div class="r-card-body">Over the long term, population size and age structure play outsized roles in shaping the military capacity, economic influence and diplomatic reach of countries. A country with weakening demographic fundamentals may find its international position constrained over time, even if that change is not immediately visible. The world's balance of power is constantly shifting, with the huge demographic changes of the 21st century already largely &lsquo;baked-in&rsquo;.</div>
+      </div>
+      <div class="r-card">
+        <div class="r-card-title">Communities &amp; Culture</div>
+        <div class="r-card-body">Fertility collapse and population decline change almost everything at the community level. It hollows out towns, closes schools, weakens congregations, erodes civic life and leaves local institutions without the scale needed to endure. What disappears is more than numbers: it is continuity, confidence and the human infrastructure on which communal life depends.</div>
+      </div>
+      <div class="r-card">
+        <div class="r-card-title">The Window for Response</div>
+        <div class="r-card-body">Demographic momentum means that birth rates today help determine the size of the workforce decades from now. For countries with a falling DHI score, delay makes adjustment more difficult, because the effects of demographic change unfold over long timescales and are not easily reversed.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ Methodology ═══════════════════════════════════════ -->
+<section class="r-section" id="r-methodology">
+  <div class="r-inner">
+    <div class="r-eyebrow">Methodology</div>
+    <h2 class="r-section-title">How the index is <em>built</em></h2>
+    <p class="r-lead">A composite measure of demographic sustainability across 236 countries and territories, calibrated against UN data and grounded in the real-world consequences of population change.</p>
+
+    <nav class="m-subnav" aria-label="Methodology subsections">
+      <a href="#m-overview"        data-target="m-overview">Overview</a>
+      <a href="#m-structure"       data-target="m-structure">Structure</a>
+      <a href="#m-scoring"         data-target="m-scoring">Scoring</a>
+      <a href="#m-classifications" data-target="m-classifications">Classifications</a>
+      <a href="#m-data"            data-target="m-data">Data</a>
+      <a href="#m-limitations"     data-target="m-limitations">Limitations</a>
+    </nav>
+
+    <h3 id="m-overview" class="r-section-title m-subhead" style="font-size:clamp(1.3rem,2.2vw,1.7rem);margin-top:48px;scroll-margin-top:64px">01 &mdash; Overview</h3>
+    <p class="r-body">Conventional demographic indicators such as total fertility rate, old-age dependency ratio and net migration each describe one aspect of population change. The DHI brings these elements together in a single framework intended to answer a broader question: how strong or fragile are a society's demographic foundations?</p>
+    <div class="r-pullquote"><p>Demographic health is not the same thing as simple population growth. A country may record relatively high fertility and still face structural weaknesses in workforce formation, dependency burdens or human capital. Another may have below-replacement fertility but compensate to some extent through migration, labour-force participation or productivity. The DHI is intended to reflect that complexity rather than reduce it to a single variable.</p></div>
+    <p class="r-body">The index primarily draws on data from the United Nations World Population Prospects 2024, using observed data from 1950 to 2024 and median-variant projections to 2050. Scores are calculated for 236 countries and territories from 1965&ndash;2050.</p>
+    <p class="r-body">Each country receives an overall score between 0 and 100, built from five weighted categories. In 2024, no country scores above 91 and none scores below 22.</p>
+
+    <h3 id="m-structure" class="r-section-title m-subhead" style="font-size:clamp(1.3rem,2.2vw,1.7rem);margin-top:48px;scroll-margin-top:64px">02 &mdash; Index Structure</h3>
+    <p class="r-body">The index is organised into five categories, each capturing a distinct dimension of demographic health.</p>
+    <div class="r-cat-grid">
+      <div class="r-cat-card r-cat-tfs">
+        <div class="r-cat-name">Total Fertility Score</div>
+        <div class="r-cat-weight">26% WEIGHT &middot; MAX 26 PTS</div>
+        <div class="r-cat-desc">Measures the level and trajectory of fertility, including whether a society is approaching, at, or retreating from replacement-level fertility. Penalises both very low fertility and sharp declines.</div>
+        <div class="r-cat-metrics">
+          <span class="r-cat-metric-tag">Total fertility rate</span>
+          <span class="r-cat-metric-tag">5-year TFR average</span>
+          <span class="r-cat-metric-tag">1yr / 5yr / 25yr trend</span>
+          <span class="r-cat-metric-tag">Years sub-2.1</span>
+        </div>
+      </div>
+      <div class="r-cat-card r-cat-mom">
+        <div class="r-cat-name">Momentum Score</div>
+        <div class="r-cat-weight">21% WEIGHT &middot; MAX 21 PTS</div>
+        <div class="r-cat-desc">Captures whether population dynamics are self-reinforcing or self-correcting. High momentum means today's young population will sustain future growth; low momentum signals demographic inertia toward decline even if fertility recovers.</div>
+        <div class="r-cat-metrics">
+          <span class="r-cat-metric-tag">Natural change rate</span>
+          <span class="r-cat-metric-tag">5yr population growth</span>
+          <span class="r-cat-metric-tag">Under-20 population trend</span>
+        </div>
+      </div>
+      <div class="r-cat-card r-cat-wss">
+        <div class="r-cat-name">Workforce Sustainability Score</div>
+        <div class="r-cat-weight">22% WEIGHT &middot; MAX 22 PTS</div>
+        <div class="r-cat-desc">Assesses the structural relationship between working-age and retired populations. A high score reflects a society that can fund its elderly without excessive burden on its workers.</div>
+        <div class="r-cat-metrics">
+          <span class="r-cat-metric-tag">Working-age ratio (20&ndash;29 / 60&ndash;69)</span>
+          <span class="r-cat-metric-tag">Old-age dependency ratio</span>
+          <span class="r-cat-metric-tag">Labour force participation rate</span>
+          <span class="r-cat-metric-tag">5yr labour force growth</span>
+        </div>
+      </div>
+      <div class="r-cat-card r-cat-fqs">
+        <div class="r-cat-name">Fertility Quality Score</div>
+        <div class="r-cat-weight">14% WEIGHT &middot; MAX 14 PTS</div>
+        <div class="r-cat-desc">Examines the structure and sustainability of fertility, not just its level. Rewards societies where childbearing occurs at ages associated with completed family formation.</div>
+        <div class="r-cat-metrics">
+          <span class="r-cat-metric-tag">Net reproduction rate</span>
+          <span class="r-cat-metric-tag">Mean age at childbearing</span>
+          <span class="r-cat-metric-tag">Teen birth share (%)</span>
+        </div>
+      </div>
+      <div class="r-cat-card r-cat-mds" style="grid-column:1/-1">
+        <div class="r-cat-name">Migration Independence Score</div>
+        <div class="r-cat-weight">17% WEIGHT &middot; MAX 17 PTS</div>
+        <div class="r-cat-desc">Measures the degree to which a country's demographic sustainability depends on sustained inward migration rather than organic population renewal. A high score reflects low dependence; a low score indicates that population stability is contingent on continued high net migration.</div>
+        <div class="r-cat-metrics">
+          <span class="r-cat-metric-tag">Net migration rate (5yr avg)</span>
+          <span class="r-cat-metric-tag">Immigrant stock (%)</span>
+          <span class="r-cat-metric-tag">Migration regime classification</span>
+        </div>
+      </div>
+    </div>
+
+    <h3 id="m-scoring" class="r-section-title m-subhead" style="font-size:clamp(1.3rem,2.2vw,1.7rem);margin-top:48px;scroll-margin-top:64px">03 &mdash; Scoring</h3>
+    <p class="r-body">Each indicator is transformed into a 0&ndash;100 sub-score using purpose-built functions that reflect demographic reality rather than mathematical convenience.</p>
+    <div class="r-principle"><div class="r-principle-num">01</div><div><h4>Asymmetric scoring curves</h4><p>Demographic problems do not behave linearly. A TFR of 1.0 represents a structural emergency; a TFR of 2.5 represents modest above-replacement fertility. Scoring curves are calibrated to reflect empirical consequences rather than arithmetic distance from a midpoint.</p></div></div>
+    <div class="r-principle"><div class="r-principle-num">02</div><div><h4>Sweet spots, not simple maxima</h4><p>Many metrics have an optimal range rather than a simple "higher is better" rule. Net reproduction rate, for example, scores 100 anywhere between 1.0 and 1.8.</p></div></div>
+    <div class="r-principle"><div class="r-principle-num">03</div><div><h4>Floor anchoring for visualisation</h4><p>The overall index has an empirical floor of approximately 22 and ceiling of approximately 91. Colour scales are anchored at 20 rather than 0, ensuring the gradient maps across real variation.</p></div></div>
+    <div class="r-principle"><div class="r-principle-num">04</div><div><h4>Context-adjusted migration penalty</h4><p>The migration dependence penalty is adjusted by each country's migration regime classification: birth-led, migration-sustained, migration-dominated, or in accelerated decline.</p></div></div>
+    <div class="r-principle"><div class="r-principle-num">05</div><div><h4>Projection scenarios</h4><p>Scores for 2025, 2035, and 2050 use the UN WPP 2024 Median fertility variant. The projection years indicate structural direction rather than precise outcomes.</p></div></div>
+
+    <h3 id="m-classifications" class="r-section-title m-subhead" style="font-size:clamp(1.3rem,2.2vw,1.7rem);margin-top:48px;scroll-margin-top:64px">04 &mdash; Classifications</h3>
+    <p class="r-body">Overall scores are grouped into five classifications reflecting the severity of a country's demographic situation.</p>
+    <table class="r-bands">
+      <thead><tr><th>Classification</th><th>Score range</th><th>Countries (2024)</th><th>Interpretation</th></tr></thead>
+      <tbody>
+        <tr><td><span class="r-band-swatch" style="background:var(--c-healthy)"></span><span class="r-band-label" style="color:var(--c-healthy)">Demographically Healthy</span></td><td><span class="r-band-range">80&ndash;100</span></td><td><span class="r-band-count">57 (25%)</span></td><td>Broadly self-sustaining fertility, young workforce, low migration dependence.</td></tr>
+        <tr><td><span class="r-band-swatch" style="background:var(--c-pressure)"></span><span class="r-band-label" style="color:var(--c-pressure)">Under Pressure</span></td><td><span class="r-band-range">65&ndash;79</span></td><td><span class="r-band-count">57 (25%)</span></td><td>Fertility declining but manageable. Workforce ageing beginning.</td></tr>
+        <tr><td><span class="r-band-swatch" style="background:var(--c-serious)"></span><span class="r-band-label" style="color:var(--c-serious)">Serious Decline</span></td><td><span class="r-band-range">50&ndash;64</span></td><td><span class="r-band-count">52 (23%)</span></td><td>Sub-replacement fertility established. Migration increasingly compensating.</td></tr>
+        <tr><td><span class="r-band-swatch" style="background:var(--c-critical)"></span><span class="r-band-label" style="color:var(--c-critical)">Critical</span></td><td><span class="r-band-range">35&ndash;49</span></td><td><span class="r-band-count">51 (22%)</span></td><td>Cannot replace population without substantial migration. Most of Europe, North America, East Asia.</td></tr>
+        <tr><td><span class="r-band-swatch" style="background:var(--c-crisis)"></span><span class="r-band-label" style="color:#f87171">Complete Crisis</span></td><td><span class="r-band-range">0&ndash;34</span></td><td><span class="r-band-count">11 (5%)</span></td><td>Structural demographic collapse. Italy, South Korea, Japan, much of Southern and Eastern Europe.</td></tr>
+      </tbody>
+    </table>
+
+    <h3 id="m-data" class="r-section-title m-subhead" style="font-size:clamp(1.3rem,2.2vw,1.7rem);margin-top:48px;scroll-margin-top:64px">05 &mdash; Data Sources</h3>
+    <p class="r-body">All data is sourced from internationally comparable official datasets. No modelled or imputed values are used where official data is available.</p>
+    <div class="r-sources">
+      <div class="r-source"><div class="r-source-name">UN WPP 2024</div><div class="r-source-detail">World Population Prospects 2024: primary source for fertility, mortality, population structure, net reproduction rate, and all projection-year values.</div></div>
+      <div class="r-source"><div class="r-source-name">UN DESA Migration Stock</div><div class="r-source-detail">International migrant stock as a percentage of total population, 1990&ndash;2024, with projections to 2035 and 2050.</div></div>
+      <div class="r-source"><div class="r-source-name">World Bank GDP per capita</div><div class="r-source-detail">Log GDP per capita (PPP, constant 2017 international $) used as a contextual control variable in migration regime classification.</div></div>
+    </div>
+
+    <h3 id="m-limitations" class="r-section-title m-subhead" style="font-size:clamp(1.3rem,2.2vw,1.7rem);margin-top:48px;scroll-margin-top:64px">06 &mdash; Limitations &amp; Caveats</h3>
+    <p class="r-body">Any composite index involves simplification.</p>
+    <ul class="r-limits">
+      <li>The index measures demographic sustainability, not demographic desirability. The index is descriptive, not normative.</li>
+      <li>Regional aggregations are currently unweighted arithmetic means &mdash; Luxembourg and Germany count equally.</li>
+      <li>Projection-year scores (2025, 2035, 2050) use the UN Median variant only and should be read as directional signals rather than forecasts.</li>
+      <li>Migration data quality is uneven across countries; small island territories and conflict-affected states carry higher uncertainty.</li>
+      <li>The index does not capture policy effectiveness, cultural attitudes toward family formation, housing costs, childcare provision, or any of the structural factors that drive fertility decisions.</li>
+    </ul>
+
+    <p class="r-closing" style="margin-top:64px">The DHI does not prescribe a particular policy response. Its purpose is simply to measure the underlying demographic condition of a society and to make that condition visible, comparable and trackable over time.</p>
+  </div>
+</section>
+
+<script>
+window.addEventListener('message', function (e) {
+  if (!e.data || !e.data.scrollTo) return;
+  var el = document.getElementById(e.data.scrollTo);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+});
+// Methodology sub-nav: smooth scroll + scroll-spy
+(function () {
+  var subLinks = document.querySelectorAll('.m-subnav a');
+  subLinks.forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var id = a.getAttribute('data-target');
+      var el = document.getElementById(id);
+      if (!el) return;
+      e.preventDefault();
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+  var subIds = ['m-overview','m-structure','m-scoring','m-classifications','m-data','m-limitations'];
+  var subSecs = subIds.map(function (id) { return document.getElementById(id); }).filter(Boolean);
+  var subMap = {};
+  subLinks.forEach(function (a) { subMap[a.getAttribute('data-target')] = a; });
+  var subIo = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      if (en.isIntersecting) {
+        Object.values(subMap).forEach(function (l) { l.classList.remove('active'); });
+        var l = subMap[en.target.id];
+        if (l) l.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+  subSecs.forEach(function (s) { subIo.observe(s); });
+})();
+
+var ids = ['r-intro','r-sowhat','r-methodology'];
+var sections = ids.map(function (id) { return document.getElementById(id); }).filter(Boolean);
+var io = new IntersectionObserver(function (entries) {
+  entries.forEach(function (en) {
+    if (en.isIntersecting) {
+      window.parent.postMessage({ activeSection: en.target.id.replace('r-','') }, '*');
+    }
+  });
+}, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
+sections.forEach(function (s) { io.observe(s); });
+</script>
+</body>
+</html>

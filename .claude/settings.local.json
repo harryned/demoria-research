@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -)",
+      "mcp__Claude_in_Chrome__tabs_context_mcp",
+      "Bash(grep -n \"overflow\\\\|html,\\\\|html {\\\\|body {\\\\|body{\" \"/Users/harrynedeljkovic/Library/Mobile Documents/com~apple~CloudDocs/Demographic Health Index \\(PRI\\)/files/dhi_dashboard.html\")",
+      "Bash(python3 rebuild_sowhat.py)",
+      "Bash(python3 rebuild_methodology.py)",
+      "Bash(grep -n \"^html\\\\|^body\\\\|html,\\\\|html {\" \"/Users/harrynedeljkovic/Library/Mobile Documents/com~apple~CloudDocs/Demographic Health Index \\(PRI\\)/files/dhi_dashboard.html\")",
+      "Bash(python3 -c ' *)",
+      "Bash(python3)",
+      "Bash(awk '/^const|^let|^var|^function|^document/' dhi_world_map.html)",
+      "Bash(awk 'NR>=20 && NR<=30' dhi_dashboard.html)",
+      "Bash(git init *)",
+      "Bash(git add *)",
+      "Bash(git commit *)"
+    ]
+  }
+}
