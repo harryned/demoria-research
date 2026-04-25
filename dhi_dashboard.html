@@ -635,6 +635,136 @@ header {
 @media (max-width: 600px) {
   .pop-track { grid-template-columns: repeat(2, 1fr); }
 }
+
+/* ── Peer comparison (Section 6) ─────────────────────────────────────────── */
+.peers-section {
+  background: var(--surface);
+  border-radius: var(--r);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  padding: 22px 26px 22px;
+  margin-bottom: 22px;
+}
+.peers-table-wrap {
+  margin-top: 14px;
+  overflow-x: auto;
+  border: 1px solid var(--surface3);
+  border-radius: 4px;
+}
+.peers-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+.peers-table thead th {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--ink3);
+  background: var(--surface2);
+  padding: 10px 14px;
+  text-align: left;
+  border-bottom: 1px solid var(--surface3);
+  white-space: nowrap;
+}
+.peers-table thead th.peers-col-score { text-align: right; }
+.peers-table tbody td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--surface3);
+  vertical-align: middle;
+  color: var(--ink2);
+}
+.peers-table tbody tr:last-child td { border-bottom: none; }
+.peers-table tbody tr.peer-self td {
+  background: linear-gradient(90deg, rgba(196,154,40,0.08) 0%, rgba(26,58,110,0.04) 100%);
+  border-bottom-color: var(--gold2);
+}
+.peers-table tbody tr.peer-self td.peer-name {
+  font-weight: 700;
+  color: var(--ink);
+}
+.peers-table tbody tr.peer-self td.peer-rank {
+  color: var(--gold);
+  font-weight: 700;
+}
+.peer-rank {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--ink3);
+  width: 56px;
+}
+.peer-name {
+  font-family: 'Georgia', serif;
+  color: var(--ink);
+  font-weight: 500;
+}
+.peer-name .peer-self-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  background: rgba(196,154,40,0.12);
+  padding: 2px 6px;
+  border-radius: 3px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+.peer-score {
+  font-family: 'Georgia', serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-align: right;
+  white-space: nowrap;
+}
+.peer-score.score-good { color: #16a34a; }
+.peer-score.score-mid  { color: #ca8a04; }
+.peer-score.score-poor { color: #dc2626; }
+.peer-traj {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.peer-traj::before {
+  content: '';
+  display: inline-block;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+}
+.peer-traj.traj-Improving { color: #16a34a; }
+.peer-traj.traj-Improving::before { background: #16a34a; }
+.peer-traj.traj-Declining { color: #dc2626; }
+.peer-traj.traj-Declining::before { background: #dc2626; }
+.peer-traj.traj-Stable    { color: #ca8a04; }
+.peer-traj.traj-Stable::before    { background: #ca8a04; }
+.peer-regime {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  color: var(--ink2);
+  white-space: nowrap;
+}
+.peer-regime.regime-na { color: var(--ink4); font-style: italic; }
+.peers-note {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  color: var(--ink4);
+  margin-top: 12px;
+  text-align: right;
+}
+@media (max-width: 720px) {
+  .peers-col-regime { display: none; }
+  .peer-regime { display: none; }
+}
 @media (max-width: 720px) {
   .cat-row { grid-template-columns: 1fr; row-gap: 8px; }
   .cat-row-name, .cat-row-bar, .cat-row-meta { grid-column: 1; grid-row: auto; text-align: left; }
@@ -1079,6 +1209,27 @@ header {
           <div class="pop-track" id="pop-track"></div>
         </section>
 
+        <!-- Section 6: Peer comparison ───────────────────────────────── -->
+        <section class="peers-section section-gap">
+          <div class="section-eyebrow">Peer comparison · same region</div>
+          <div class="section-heading" id="peers-heading">How this country compares</div>
+          <div class="peers-table-wrap">
+            <table class="peers-table">
+              <thead>
+                <tr>
+                  <th class="peers-col-rank">Rank</th>
+                  <th class="peers-col-name">Country</th>
+                  <th class="peers-col-score">Score</th>
+                  <th class="peers-col-traj">Trajectory</th>
+                  <th class="peers-col-regime">Migration regime</th>
+                </tr>
+              </thead>
+              <tbody id="peers-tbody"></tbody>
+            </table>
+          </div>
+          <div class="peers-note" id="peers-note"></div>
+        </section>
+
         <!-- Raw metrics -->
         <div class="card">
           <div class="card-head">Key indicators — 2024</div>
@@ -1418,6 +1569,68 @@ function renderCategoryBreakdown(c) {
   }).join('');
 }
 
+// ── Peer comparison (Section 6) ─────────────────────────────────────────────
+// Table of countries in the same Region (not Continent), sorted by score
+// descending, with the current country highlighted.
+function renderPeerComparison(c, iso) {
+  const tbody   = document.getElementById('peers-tbody');
+  const heading = document.getElementById('peers-heading');
+  const noteEl  = document.getElementById('peers-note');
+  if (!tbody) return;
+
+  const peers = (DATA.country_list || [])
+    .filter(p => p.region === c.region)
+    .slice()
+    .sort((a, b) => b.score - a.score);
+
+  if (heading) {
+    heading.innerHTML = `${c.name} versus the <em style="color:var(--accent);font-style:normal">${c.region}</em> peer set`;
+  }
+
+  if (peers.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="5" style="padding:16px;text-align:center;color:var(--ink3);font-style:italic">No peer data available</td></tr>';
+    return;
+  }
+
+  // Compact migration regime label (the full names are mouthfuls in a table)
+  const REGIME_SHORT = {
+    'Birth-Led Growth':              'Birth-led growth',
+    'Migration-Dependent Growth':    'Migration-dependent',
+    'Migration-Dominated Growth':    'Migration-dominated',
+    'Migration-Sustained Stability': 'Migration-sustained',
+    'Migration-Offset Decline':      'Migration-offset decline',
+    'Outflow Growth':                'Outflow growth',
+    'Accelerated Decline':           'Accelerated decline',
+    'Stable':                        'Stable'
+  };
+
+  function scoreClass(s) {
+    if (s >= 70) return 'score-good';
+    if (s >= 45) return 'score-mid';
+    return 'score-poor';
+  }
+
+  // Compute regional rank for each peer (1 = highest score in region)
+  tbody.innerHTML = peers.map((p, i) => {
+    const isSelf = p.iso === iso;
+    const regime = (typeof MIG_REGIMES !== 'undefined' ? MIG_REGIMES[p.iso] : null) || null;
+    const regimeLabel = regime ? (REGIME_SHORT[regime] || regime) : '—';
+    const regimeCls   = regime ? '' : 'regime-na';
+    return `<tr class="${isSelf ? 'peer-self' : ''}">
+      <td class="peer-rank">#${i + 1} regional</td>
+      <td class="peer-name">${p.name}${isSelf ? '<span class="peer-self-tag">This country</span>' : ''}</td>
+      <td class="peer-score ${scoreClass(p.score)}">${p.score.toFixed(1)}</td>
+      <td><span class="peer-traj traj-${p.traj}">${p.traj || '—'}</span></td>
+      <td class="peer-regime ${regimeCls}">${regimeLabel}</td>
+    </tr>`;
+  }).join('');
+
+  if (noteEl) {
+    const selfRegRank = peers.findIndex(p => p.iso === iso) + 1;
+    noteEl.textContent = `${peers.length} countries in ${c.region} · ${c.name} ranks ${selfRegRank} of ${peers.length} regionally`;
+  }
+}
+
 // ── Population trajectory (Section 5) ───────────────────────────────────────
 // Compact four-cell strip: Today / 2035 / 2050 / 2100, with % delta vs today.
 function renderPopulationTrajectory(iso) {
@@ -1693,6 +1906,9 @@ function renderCountryProfile(iso) {
   if (rankInlineEl) rankInlineEl.textContent = `RANK ${c.rank} OF ${c.total || DATA.country_list.length}`;
   // ── Section 5: Population trajectory (compact) ────────────────────────
   renderPopulationTrajectory(iso);
+
+  // ── Section 6: Peer comparison ────────────────────────────────────────
+  renderPeerComparison(c, iso);
 
   // Classification badge
   const heroScore = c.scores['2024']?.Overall ?? 0;
