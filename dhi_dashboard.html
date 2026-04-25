@@ -558,6 +558,83 @@ header {
   border-top: 1px solid var(--surface3);
   text-align: right;
 }
+
+/* ── Population trajectory (Section 5 — compact, demoted) ────────────────── */
+.pop-section {
+  background: var(--surface);
+  border-radius: var(--r);
+  border: 1px solid var(--border);
+  padding: 14px 20px 16px;
+  margin-bottom: 22px;
+  /* Note: NO box-shadow — visually subordinate to hero/trajectory/category */
+}
+.pop-section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--surface3);
+}
+.section-eyebrow-sm {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink3);
+  font-weight: 500;
+}
+.pop-section-meta {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  color: var(--ink4);
+}
+.pop-track {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--surface3);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.pop-cell {
+  background: var(--surface);
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.pop-cell-year {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink3);
+}
+.pop-cell-val {
+  font-family: 'Georgia', serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.1;
+}
+.pop-cell-tag {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.04em;
+  color: var(--ink3);
+}
+.pop-cell-tag.pop-up   { color: #16a34a; }
+.pop-cell-tag.pop-down { color: #dc2626; }
+.pop-cell.is-current {
+  background: linear-gradient(135deg, rgba(26,58,110,0.04) 0%, rgba(196,154,40,0.04) 100%);
+}
+.pop-cell.is-current .pop-cell-tag { color: var(--gold); font-weight: 500; }
+@media (max-width: 600px) {
+  .pop-track { grid-template-columns: repeat(2, 1fr); }
+}
 @media (max-width: 720px) {
   .cat-row { grid-template-columns: 1fr; row-gap: 8px; }
   .cat-row-name, .cat-row-bar, .cat-row-meta { grid-column: 1; grid-row: auto; text-align: left; }
@@ -993,15 +1070,14 @@ header {
           <div class="risks-note" id="risks-note"></div>
         </section>
 
-        <div class="card section-gap" id="pop-mig-panel">
-          <div class="card-head">Population &amp; Migration</div>
-          <div style="padding:14px 16px 10px">
-            <!-- Pop stat boxes -->
-            <div class="pop-stat-row" id="pop-stat-boxes"></div>
-            <!-- Migration regime -->
-            <div class="mig-row" id="mig-regime-content"></div>
+        <!-- Section 5: Population trajectory (compact, lower priority) ── -->
+        <section class="pop-section section-gap">
+          <div class="pop-section-head">
+            <div class="section-eyebrow-sm">Population trajectory</div>
+            <div class="pop-section-meta" id="pop-section-meta"></div>
           </div>
-        </div>
+          <div class="pop-track" id="pop-track"></div>
+        </section>
 
         <!-- Raw metrics -->
         <div class="card">
@@ -1342,6 +1418,56 @@ function renderCategoryBreakdown(c) {
   }).join('');
 }
 
+// ── Population trajectory (Section 5) ───────────────────────────────────────
+// Compact four-cell strip: Today / 2035 / 2050 / 2100, with % delta vs today.
+function renderPopulationTrajectory(iso) {
+  const trackEl = document.getElementById('pop-track');
+  const metaEl  = document.getElementById('pop-section-meta');
+  if (!trackEl) return;
+  const popD = (typeof POP_DATA !== 'undefined' ? POP_DATA[iso] : null) || {};
+  const pop2024 = popD['2024'] || null;
+
+  function fmt(thou) {
+    if (thou == null) return '—';
+    const m = thou / 1000;
+    if (m >= 1000) return (m/1000).toFixed(2) + ' bn';
+    if (m >= 100)  return Math.round(m) + ' m';
+    if (m >= 10)   return m.toFixed(1) + ' m';
+    if (m >= 1)    return m.toFixed(2) + ' m';
+    return Math.round(thou) + ' k';
+  }
+
+  const cells = [
+    { yr: '2024', val: pop2024,         current: true  },
+    { yr: '2035', val: popD['2035'] || null },
+    { yr: '2050', val: popD['2050'] || null },
+    { yr: '2100', val: popD['2100'] || null }
+  ];
+
+  trackEl.innerHTML = cells.map(cell => {
+    let tagHtml = '';
+    if (cell.current) {
+      tagHtml = '<div class="pop-cell-tag">Today</div>';
+    } else if (cell.val != null && pop2024) {
+      const pct = (cell.val - pop2024) / pop2024 * 100;
+      const cls = pct >= 1 ? 'pop-up' : pct <= -1 ? 'pop-down' : '';
+      const sign = pct >= 0 ? '+' : '−';
+      tagHtml = `<div class="pop-cell-tag ${cls}">${sign}${Math.abs(Math.round(pct))}% vs today</div>`;
+    } else {
+      tagHtml = '<div class="pop-cell-tag">—</div>';
+    }
+    return `<div class="pop-cell ${cell.current ? 'is-current' : ''}">
+      <div class="pop-cell-year">${cell.yr}</div>
+      <div class="pop-cell-val">${fmt(cell.val)}</div>
+      ${tagHtml}
+    </div>`;
+  }).join('');
+
+  if (metaEl) {
+    metaEl.textContent = 'UN WPP 2024 · Median variant';
+  }
+}
+
 // ── Risks (Section 4) ───────────────────────────────────────────────────────
 // Auto-flagged headwinds, generated from three signal types:
 //   1. Bottom-third global percentile per category (high if <10, mid if <30)
@@ -1565,83 +1691,8 @@ function renderCountryProfile(iso) {
   // Inline rank
   const rankInlineEl = document.getElementById('h-rank-inline');
   if (rankInlineEl) rankInlineEl.textContent = `RANK ${c.rank} OF ${c.total || DATA.country_list.length}`;
-  // Population & Migration Regime panel
-  const popD = POP_DATA[iso] || {};
-  const regime = MIG_REGIMES[iso] || null;
-
-  function fmtPop(thousands) {
-    if (!thousands) return '—';
-    const m = thousands / 1000;
-    if (m >= 1000) return (m/1000).toFixed(2) + 'bn';
-    if (m >= 100)  return Math.round(m) + 'm';
-    if (m >= 10)   return m.toFixed(1) + 'm';
-    return m.toFixed(2) + 'm';
-  }
-
-  // Population stat boxes
-  const pop2024 = popD['2024'] || null;
-  const popBoxes = [
-    { year: '2024', val: pop2024, current: true  },
-    { year: '2035', val: popD['2035'] },
-    { year: '2050', val: popD['2050'] },
-    { year: '2100', val: popD['2100'] },
-  ];
-  const boxesEl = document.getElementById('pop-stat-boxes');
-  if (boxesEl) {
-    boxesEl.innerHTML = popBoxes.map(b => {
-      const delta = (b.val && pop2024 && !b.current) ? b.val - pop2024 : null;
-      const pct   = (delta && pop2024) ? (delta / pop2024 * 100) : null;
-      // colour coding: decline = orange/red, growth = neutral/blue
-      let boxClass = b.current ? 'current' : 'proj';
-      if (!b.current && pct !== null) {
-        if (pct < -20) boxClass += ' strong-decline';
-        else if (pct < -5) boxClass += ' decline';
-      }
-      const deltaCol = delta === null ? '' : delta < 0 ? '#dc2626' : '#16a34a';
-      const deltaHtml = pct !== null
-        ? `<div class="pop-stat-delta" style="color:${deltaCol}">${pct >= 0 ? '+' : ''}${pct.toFixed(0)}% vs 2024</div>`
-        : '';
-      return `<div class="pop-stat-box ${boxClass}">
-        <div class="pop-stat-year">${b.current ? 'Current' : b.year}</div>
-        <div class="pop-stat-val">${fmtPop(b.val)}</div>
-        ${deltaHtml}
-      </div>`;
-    }).join('');
-  }
-
-  // Migration regime
-  const regimeClasses = {
-    'Outflow Growth':              'regime-outflow',
-    'Birth-Led Growth':            'regime-birth-led',
-    'Migration-Dependent Growth':  'regime-dep',
-    'Migration-Dominated Growth':  'regime-dom',
-    'Migration-Sustained Stability':'regime-sustained',
-    'Migration-Offset Decline':    'regime-offset',
-    'Accelerated Decline':         'regime-accelerated',
-    'Stable':                      'regime-stable',
-  };
-  const regimeDescriptions = {
-    'Outflow Growth':              'Grows naturally; net emigration occurring.',
-    'Birth-Led Growth':            'Growth driven by natural increase; migration minor.',
-    'Migration-Dependent Growth':  'Natural increase positive; migration contributes significantly.',
-    'Migration-Dominated Growth':  'Growth relies primarily on inward migration.',
-    'Migration-Sustained Stability':'Migration offsets natural decrease to maintain stability.',
-    'Migration-Offset Decline':    'Migration slows but cannot prevent population decline.',
-    'Accelerated Decline':         'Both natural decrease and net emigration driving decline.',
-    'Stable':                      'Broadly stable; negligible natural change and migration.',
-  };
-  const migEl = document.getElementById('mig-regime-content');
-  if (migEl) {
-    if (regime) {
-      const cls  = regimeClasses[regime] || 'regime-stable';
-      const desc = regimeDescriptions[regime] || '';
-      migEl.innerHTML = `<span class="mig-row-label">Migration regime</span>
-        <span class="mig-regime-badge ${cls}">${regime}</span>
-        <span class="mig-regime-desc">${desc}</span>`;
-    } else {
-      migEl.innerHTML = '<span class="mig-row-label">Migration regime</span><span class="mig-regime-desc" style="font-style:italic">Data not available</span>';
-    }
-  }
+  // ── Section 5: Population trajectory (compact) ────────────────────────
+  renderPopulationTrajectory(iso);
 
   // Classification badge
   const heroScore = c.scores['2024']?.Overall ?? 0;
