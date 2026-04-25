@@ -1331,8 +1331,14 @@ function renderCountryProfile(iso) {
     .filter(([yr,s]) => s && s.Overall != null)
     .map(([yr,s]) => ({x: parseInt(yr), y: s.Overall}))
     .sort((a,b) => a.x - b.x);
+  // Observed = up to and including 2024.
+  // Projected = strictly > 2024, but we prepend the 2024 anchor so the line
+  // visually joins the observed series. We tag that anchor with a flag and
+  // filter it out of the tooltip so 2024 doesn't appear twice on hover.
   const obsCountry  = scatterCountry.filter(d => d.x <= 2024);
-  const projCountry = scatterCountry.filter(d => d.x >= 2024);
+  const lastObs     = obsCountry[obsCountry.length - 1];
+  const projCountry = (lastObs ? [{ ...lastObs, _bridge: true }] : [])
+    .concat(scatterCountry.filter(d => d.x > 2024));
 
   // Classification band plugin (horizontal coloured zones)
   const bandPlugin = {
@@ -1393,13 +1399,19 @@ function renderCountryProfile(iso) {
       datasets: [
         { label: c.name + ' — observed', data: obsCountry,
           borderColor: '#1a3a6e', borderWidth: 2.5, pointBackgroundColor: '#1a3a6e',
-          pointRadius: (ctx) => ctx.raw?.x >= 2020 ? 3 : 0,
+          pointRadius: (ctx) => {
+            const yr = ctx.raw?.x;
+            if (yr == null) return 0;
+            // Sparse markers: every 10 yrs + 2024
+            return (yr % 10 === 0 || yr === 2024) ? 2.8 : 0;
+          },
           pointHoverRadius: 5,
           showLine: true, tension: 0.25, fill: false },
         { label: c.name + ' — projected', data: projCountry,
           borderColor: 'rgba(26,58,110,0.55)', borderWidth: 1.8,
-          pointBackgroundColor: 'rgba(26,58,110,0.55)', pointRadius: 3,
-          pointHoverRadius: 5,
+          pointBackgroundColor: 'rgba(26,58,110,0.55)',
+          pointRadius: (ctx) => ctx.raw?._bridge ? 0 : 3.2, // hide the duplicate 2024 anchor
+          pointHoverRadius: (ctx) => ctx.raw?._bridge ? 0 : 5,
           showLine: true, tension: 0.25, borderDash: [5,4], fill: false },
         { label: 'Global average', data: scatterGlobal,
           borderColor: '#9aa0b0', borderWidth: 1.4, borderDash: [3,3],
@@ -1410,15 +1422,19 @@ function renderCountryProfile(iso) {
     options: {
       responsive: true, maintainAspectRatio: false,
       layout: { padding: { top: 14, right: 8, bottom: 4, left: 4 } },
+      // One nearest point per hover (prevents 2023+2024 stacking in the tooltip)
+      interaction: { mode: 'nearest', intersect: false, axis: 'x' },
       plugins: {
         legend: { display: true, position: 'bottom', align: 'start',
           labels: { font: { size: 11, family: 'Georgia, serif' }, boxWidth: 16, boxHeight: 2, padding: 14,
-            filter: (item) => item.text !== (c.name + ' — projected') || projCountry.length > 1 } },
+            filter: (item) => item.text !== (c.name + ' — projected') || projCountry.length > 2 } },
         tooltip: {
           backgroundColor: 'rgba(15,17,23,0.92)',
           titleFont: { family: 'JetBrains Mono, monospace', size: 11 },
           bodyFont: { family: 'Georgia, serif', size: 12 },
           padding: 10, cornerRadius: 4,
+          // Skip the synthetic bridge point at 2024 in the projected dataset
+          filter: (item) => !item.raw?._bridge,
           callbacks: {
             title: (items) => items[0]?.raw?.x != null ? String(Math.round(items[0].raw.x)) : '',
             label: (item) => item.dataset.label + ': ' + (item.raw?.y?.toFixed(1) ?? '—')
