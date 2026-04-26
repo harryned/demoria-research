@@ -1651,24 +1651,6 @@ header {
           <div class="risks-note" id="risks-note"></div>
         </section>
 
-        <!-- Economic & Fiscal Context (between Risks and Population) ──── -->
-        <section class="efc-section section-gap">
-          <div class="efc-head">
-            <div class="section-eyebrow">Economic &amp; Fiscal Context</div>
-            <div class="efc-source">IMF WEO · OECD · World Bank · 2023</div>
-          </div>
-          <div class="section-heading">Fiscal capacity to absorb demographic pressure</div>
-
-          <!-- Three derived headlines -->
-          <div class="efc-headlines" id="efc-headlines"></div>
-
-          <!-- 3x3 grid of raw indicators -->
-          <div class="efc-grid-label">Underlying indicators</div>
-          <div class="efc-grid" id="efc-grid"></div>
-
-          <div class="efc-foot" id="efc-foot"></div>
-        </section>
-
         <!-- Section 5: Population trajectory (compact, lower priority) ── -->
         <section class="pop-section section-gap">
           <div class="pop-section-head">
@@ -2712,8 +2694,6 @@ function renderCountryProfile(iso) {
 
   // ── Section 4: Risks ──────────────────────────────────────────────────
   renderRisks(c, iso);
-  // ── Economic & Fiscal Context (between Risks and Population) ─────────
-  renderEconomicFiscalContext(c);
 
   // Trend chart
   const trendYears = YEARS;
