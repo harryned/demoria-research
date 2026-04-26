@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DHI · Font preview</title>
+
+<!-- All free, all Google Fonts (or hosted equivalents) ─────────────── -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500;1,6..72,600&family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,500;1,8..60,600&family=Source+Sans+3:wght@400;500;600;700&family=Source+Code+Pro:wght@400;500;600&family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Manrope:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Crimson+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --gold:        #c49a28;
+  --gold2:       #e0b54a;
+  --accent:      #1a3a6e;
+  --ink:         #0f1117;
+  --ink2:        #3a3d4a;
+  --ink3:        #7a7e8e;
+  --ink4:        #aab0b8;
+  --surface:     #ffffff;
+  --surface2:    #f4f5f7;
+  --surface3:    #e7e9ee;
+  --border:      rgba(15,17,23,0.08);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--surface2);
+  color: var(--ink);
+  padding: 40px 24px 80px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Page header */
+.page-header {
+  max-width: 980px;
+  margin: 0 auto 32px;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+.page-header h1 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: var(--ink);
+}
+.page-header p {
+  color: var(--ink2);
+  font-size: 0.92rem;
+  line-height: 1.55;
+  max-width: 720px;
+}
+.page-header code {
+  background: var(--surface3);
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.82rem;
+}
+
+/* ── Sample card ─────────────────────────────────────────────────── */
+.sample {
+  max-width: 980px;
+  margin: 0 auto 28px;
+  background: var(--surface);
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.06);
+  overflow: hidden;
+}
+.sample-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 24px;
+  background: linear-gradient(180deg, #060e1c 0%, #050a14 100%);
+  color: #fff;
+  font-family: 'Inter', system-ui, sans-serif;
+  border-bottom: 1px solid rgba(196,154,40,0.35);
+}
+.sample-meta-name {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--gold2);
+}
+.sample-meta-info {
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.7);
+  text-align: right;
+}
+.sample-body {
+  padding: 28px 32px 32px;
+}
+
+/* ── Bits we render in each candidate font ──────────────────────── */
+.demo-masthead {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: linear-gradient(180deg, #060e1c 0%, #050a14 100%);
+  padding: 14px 24px;
+  margin: -28px -32px 26px;
+  border-bottom: 1px solid rgba(196,154,40,0.35);
+}
+.demo-mark {
+  font-weight: 700;
+  font-size: 1.4rem;
+  letter-spacing: 0.04em;
+  color: var(--gold);
+  line-height: 1;
+}
+.demo-rule { width: 1px; height: 30px; background: rgba(196,154,40,0.45); }
+.demo-tagline {
+  font-size: 1.5rem;
+  font-style: italic;
+  font-weight: 600;
+  color: rgba(255,255,255,0.92);
+  line-height: 1;
+  letter-spacing: 0.005em;
+}
+.demo-eyebrow {
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink3);
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+.demo-h2 {
+  font-size: 1.6rem;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  color: var(--ink);
+  line-height: 1.2;
+  margin-bottom: 10px;
+}
+.demo-h2 em {
+  font-style: italic;
+  color: var(--accent);
+}
+.demo-lead {
+  font-size: 1.02rem;
+  line-height: 1.65;
+  color: var(--ink2);
+  max-width: 680px;
+  margin-bottom: 18px;
+}
+.demo-body {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--ink2);
+  max-width: 680px;
+  margin-bottom: 22px;
+}
+.demo-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 22px;
+}
+.demo-stat {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 12px 14px;
+}
+.demo-stat-label {
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink3);
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+.demo-stat-val {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+.demo-stat-val .gold { color: var(--gold); }
+.demo-stat-sub {
+  font-size: 0.7rem;
+  color: var(--ink3);
+  margin-top: 4px;
+}
+.demo-table-row {
+  display: grid;
+  grid-template-columns: 130px 1fr auto auto;
+  align-items: center;
+  gap: 14px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--surface3);
+}
+.demo-table-row:last-child { border-bottom: none; }
+.demo-cat-name { font-size: 0.95rem; font-weight: 500; color: var(--ink); }
+.demo-bar { height: 6px; background: var(--surface3); border-radius: 3px; overflow: hidden; }
+.demo-bar-fill { height: 100%; background: linear-gradient(90deg, #16a34a, #22c55e); border-radius: 3px; }
+.demo-cat-score {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--ink);
+  white-space: nowrap;
+}
+.demo-cat-score-max {
+  font-size: 0.74rem;
+  font-weight: 400;
+  color: var(--ink4);
+  margin-left: 1px;
+}
+.demo-cat-pct {
+  font-size: 0.66rem;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: #16a34a;
+  white-space: nowrap;
+}
+.demo-quote {
+  background: rgba(255,255,255,0.5);
+  border-left: 3px solid var(--gold);
+  padding: 14px 20px;
+  margin: 18px 0;
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--ink2);
+  line-height: 1.65;
+  max-width: 720px;
+}
+
+/* ── Per-candidate font assignments ──────────────────────────────── */
+/* 1 — CURRENT: EB Garamond + JetBrains Mono */
+.f-current { font-family: 'Georgia', serif; }
+.f-current .demo-masthead, .f-current .demo-mark, .f-current .demo-tagline,
+.f-current .demo-h2, .f-current .demo-lead, .f-current .demo-body, .f-current .demo-quote,
+.f-current .demo-stat-val, .f-current .demo-cat-name, .f-current .demo-cat-score
+  { font-family: 'EB Garamond', Georgia, serif; }
+.f-current .demo-eyebrow, .f-current .demo-stat-label, .f-current .demo-stat-sub,
+.f-current .demo-cat-pct, .f-current .demo-cat-score-max
+  { font-family: 'JetBrains Mono', monospace; }
+
+/* 2 — Newsreader + Inter + JetBrains Mono */
+.f-news { font-family: 'Inter', system-ui, sans-serif; }
+.f-news .demo-mark, .f-news .demo-tagline, .f-news .demo-h2, .f-news .demo-lead,
+.f-news .demo-body, .f-news .demo-quote, .f-news .demo-stat-val,
+.f-news .demo-cat-name, .f-news .demo-cat-score
+  { font-family: 'Newsreader', Georgia, serif; }
+.f-news .demo-eyebrow, .f-news .demo-stat-label, .f-news .demo-stat-sub,
+.f-news .demo-cat-pct, .f-news .demo-cat-score-max
+  { font-family: 'JetBrains Mono', monospace; }
+
+/* 3 — Source Serif 4 + Source Sans 3 + Source Code Pro */
+.f-source { font-family: 'Source Sans 3', system-ui, sans-serif; }
+.f-source .demo-mark, .f-source .demo-tagline, .f-source .demo-h2, .f-source .demo-lead,
+.f-source .demo-body, .f-source .demo-quote, .f-source .demo-stat-val,
+.f-source .demo-cat-name, .f-source .demo-cat-score
+  { font-family: 'Source Serif 4', Georgia, serif; }
+.f-source .demo-eyebrow, .f-source .demo-stat-label, .f-source .demo-stat-sub,
+.f-source .demo-cat-pct, .f-source .demo-cat-score-max
+  { font-family: 'Source Code Pro', monospace; }
+
+/* 4 — Spectral + Inter + JetBrains Mono */
+.f-spectral { font-family: 'Inter', system-ui, sans-serif; }
+.f-spectral .demo-mark, .f-spectral .demo-tagline, .f-spectral .demo-h2, .f-spectral .demo-lead,
+.f-spectral .demo-body, .f-spectral .demo-quote, .f-spectral .demo-stat-val,
+.f-spectral .demo-cat-name, .f-spectral .demo-cat-score
+  { font-family: 'Spectral', Georgia, serif; }
+.f-spectral .demo-eyebrow, .f-spectral .demo-stat-label, .f-spectral .demo-stat-sub,
+.f-spectral .demo-cat-pct, .f-spectral .demo-cat-score-max
+  { font-family: 'JetBrains Mono', monospace; }
+
+/* 5 — IBM Plex Serif + Sans + Mono */
+.f-plex { font-family: 'IBM Plex Sans', system-ui, sans-serif; }
+.f-plex .demo-mark, .f-plex .demo-tagline, .f-plex .demo-h2, .f-plex .demo-lead,
+.f-plex .demo-body, .f-plex .demo-quote, .f-plex .demo-stat-val,
+.f-plex .demo-cat-name, .f-plex .demo-cat-score
+  { font-family: 'IBM Plex Serif', Georgia, serif; }
+.f-plex .demo-eyebrow, .f-plex .demo-stat-label, .f-plex .demo-stat-sub,
+.f-plex .demo-cat-pct, .f-plex .demo-cat-score-max
+  { font-family: 'IBM Plex Mono', monospace; }
+
+/* 6 — All Inter (sans-only direction) + JetBrains Mono */
+.f-inter { font-family: 'Inter', system-ui, sans-serif; }
+.f-inter .demo-h2 em { font-style: normal; font-weight: 700; }
+.f-inter .demo-eyebrow, .f-inter .demo-stat-label, .f-inter .demo-stat-sub,
+.f-inter .demo-cat-pct, .f-inter .demo-cat-score-max
+  { font-family: 'JetBrains Mono', monospace; }
+
+/* 7 — Plex Sans only (modern technical) + Plex Mono */
+.f-plexsans { font-family: 'IBM Plex Sans', system-ui, sans-serif; }
+.f-plexsans .demo-h2 em { font-style: italic; font-weight: 600; }
+.f-plexsans .demo-eyebrow, .f-plexsans .demo-stat-label, .f-plexsans .demo-stat-sub,
+.f-plexsans .demo-cat-pct, .f-plexsans .demo-cat-score-max
+  { font-family: 'IBM Plex Mono', monospace; }
+
+/* ── Round 2: additional candidates ─────────────────────────────────── */
+/* 8 — Fraunces (variable axis serif) + Inter + JetBrains Mono */
+.f-fraunces { font-family: 'Inter', system-ui, sans-serif; }
+.f-fraunces .demo-mark, .f-fraunces .demo-tagline, .f-fraunces .demo-h2, .f-fraunces .demo-lead,
+.f-fraunces .demo-body, .f-fraunces .demo-quote, .f-fraunces .demo-stat-val,
+.f-fraunces .demo-cat-name, .f-fraunces .demo-cat-score
+  { font-family: 'Fraunces', Georgia, serif; }
+.f-fraunces .demo-eyebrow, .f-fraunces .demo-stat-label, .f-fraunces .demo-stat-sub,
+.f-fraunces .demo-cat-pct, .f-fraunces .demo-cat-score-max
+  { font-family: 'JetBrains Mono', monospace; }
+
+/* 9 — Lora + Inter + JetBrains Mono */
+.f-lora { font-family: 'Inter', system-ui, sans-serif; }
+.f-lora .demo-mark, .f-lora .demo-tagline, .f-lora .demo-h2, .f-lora .demo-lead,
+.f-lora .demo-body, .f-lora .demo-quote, .f-lora .demo-stat-val,
+.f-lora .demo-cat-name, .f-lora .demo-cat-score
+  { font-family: 'Lora', Georgia, serif; }
+.f-lora .demo-eyebrow, .f-lora .demo-stat-label, .f-lora .demo-stat-sub,
+.f-lora .demo-cat-pct, .f-lora .demo-cat-score-max
+  { font-family: 'JetBrains Mono', monospace; }
+
+/* 10 — Cormorant Garamond + Inter + JetBrains Mono */
+.f-cormorant { font-family: 'Inter', system-ui, sans-serif; }
+.f-cormorant .demo-mark, .f-cormorant .demo-tagline, .f-cormorant .demo-h2, .f-cormorant .demo-lead,
+.f-cormorant .demo-body, .f-cormorant .demo-quote, .f-cormorant .demo-stat-val,
+.f-cormorant .demo-cat-name, .f-cormorant .demo-cat-score
+  { font-family: 'Cormorant Garamond', Georgia, serif; }
+.f-cormorant .demo-eyebrow, .f-cormorant .demo-stat-label, .f-cormorant .demo-stat-sub,
+.f-cormorant .demo-cat-pct, .f-cormorant .demo-cat-score-max
+  { font-family: 'JetBrains Mono', monospace; }
+
+/* 11 — Manrope (everywhere) + JetBrains Mono */
+.f-manrope { font-family: 'Manrope', system-ui, sans-serif; }
+.f-manrope .demo-h2 em { font-style: normal; font-weight: 700; color: var(--accent); }
+.f-manrope .demo-eyebrow, .f-manrope .demo-stat-label, .f-manrope .demo-stat-sub,
+.f-manrope .demo-cat-pct, .f-manrope .demo-cat-score-max
+  { font-family: 'JetBrains Mono', monospace; }
+
+/* 12 — Space Grotesk + Space Mono (geometric pair) */
+.f-space { font-family: 'Space Grotesk', system-ui, sans-serif; }
+.f-space .demo-h2 em { font-style: normal; font-weight: 700; color: var(--accent); }
+.f-space .demo-eyebrow, .f-space .demo-stat-label, .f-space .demo-stat-sub,
+.f-space .demo-cat-pct, .f-space .demo-cat-score-max
+  { font-family: 'Space Mono', monospace; }
+
+/* 13 — Playfair Display (titles) + Source Sans 3 + JetBrains Mono */
+.f-playfair { font-family: 'Source Sans 3', system-ui, sans-serif; }
+.f-playfair .demo-mark, .f-playfair .demo-tagline, .f-playfair .demo-h2
+  { font-family: 'Playfair Display', Georgia, serif; }
+.f-playfair .demo-lead, .f-playfair .demo-body, .f-playfair .demo-quote
+  { font-family: 'Source Sans 3', system-ui, sans-serif; }
+.f-playfair .demo-stat-val, .f-playfair .demo-cat-name, .f-playfair .demo-cat-score
+  { font-family: 'Playfair Display', Georgia, serif; }
+.f-playfair .demo-eyebrow, .f-playfair .demo-stat-label, .f-playfair .demo-stat-sub,
+.f-playfair .demo-cat-pct, .f-playfair .demo-cat-score-max
+  { font-family: 'JetBrains Mono', monospace; }
+
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>Font preview · DHI</h1>
+  <p>The same content rendered in seven candidate font setups (all free).
+     Look for: how the title <em>Demographic Health Index</em> reads, how the data table feels,
+     whether the eyebrows + numbers feel like they belong together. Active default is
+     <code>EB Garamond + JetBrains Mono</code>.</p>
+</div>
+
+<!-- ═══ 1: CURRENT (EB Garamond + JetBrains Mono) ═══ -->
+<div class="sample">
+  <div class="sample-meta">
+    <span class="sample-meta-name">1 · Current</span>
+    <span class="sample-meta-info">EB Garamond + JetBrains Mono · Google Fonts (free)</span>
+  </div>
+  <div class="sample-body f-current">
+    <div class="demo-masthead">
+      <span class="demo-mark">DHI</span>
+      <span class="demo-rule"></span>
+      <span class="demo-tagline">Demographic Health Index</span>
+    </div>
+    <div class="demo-eyebrow">Fiscal Health · 2024</div>
+    <h2 class="demo-h2">Economic capacity to absorb <em>demographic pressure</em></h2>
+    <p class="demo-lead">A snapshot of the macroeconomic and fiscal conditions surrounding each country's demographic trajectory. Strong growth, low debt, and a well-funded pension system give a country room to manoeuvre as its population ages.</p>
+    <div class="demo-stats">
+      <div class="demo-stat"><div class="demo-stat-label">DHI Score</div><div class="demo-stat-val">90.9</div><div class="demo-stat-sub">rank 1 of 236</div></div>
+      <div class="demo-stat"><div class="demo-stat-label">GDP per cap</div><div class="demo-stat-val">$11,107</div><div class="demo-stat-sub">PPP, 2023</div></div>
+      <div class="demo-stat"><div class="demo-stat-label">Population</div><div class="demo-stat-val">36.4 m</div><div class="demo-stat-sub">+44% by 2050</div></div>
+      <div class="demo-stat"><div class="demo-stat-label">Trajectory</div><div class="demo-stat-val"><span class="gold">Improving</span></div><div class="demo-stat-sub">since 1965</div></div>
+    </div>
+    <p class="demo-body">Conventional demographic indicators each describe one aspect of population change. The DHI brings them together to answer a broader question: how strong are a society's demographic foundations?</p>
+    <div class="demo-quote">"Demographic health is not the same thing as simple population growth. A country may record relatively high fertility and still face structural weaknesses in workforce formation."</div>
+    <div class="demo-table-row"><div class="demo-cat-name">Total Fertility</div><div class="demo-bar"><div class="demo-bar-fill" style="width:92%"></div></div><div class="demo-cat-score">29.7<span class="demo-cat-score-max"> / 32</span></div><div class="demo-cat-pct">Top 1% globally</div></div>
+    <div class="demo-table-row"><div class="demo-cat-name">Population Momentum</div><div class="demo-bar"><div class="demo-bar-fill" style="width:94%"></div></div><div class="demo-cat-score">19.8<span class="demo-cat-score-max"> / 21</span></div><div class="demo-cat-pct">Top 1% globally</div></div>
+    <div class="demo-table-row"><div class="demo-cat-name">Workforce Sustainability</div><div class="demo-bar"><div class="demo-bar-fill" style="width:81%"></div></div><div class="demo-cat-score">18.0<span class="demo-cat-score-max"> / 22</span></div><div class="demo-cat-pct">Top 36% globally</div></div>
+  </div>
+</div>
+
+<!-- ═══ 2: Newsreader ═══ -->
+<div class="sample">
+  <div class="sample-meta">
+    <span class="sample-meta-name">2 · Modern editorial · Newsreader</span>
+    <span class="sample-meta-info">Newsreader + Inter + JetBrains Mono · Google Fonts (free)</span>
+  </div>
+  <div class="sample-body f-news">
+    <div class="demo-masthead">
+      <span class="demo-mark">DHI</span>
+      <span class="demo-rule"></span>
+      <span class="demo-tagline">Demographic Health Index</span>
+    </div>
+    <div class="demo-eyebrow">Fiscal Health · 2024</div>
+    <h2 class="demo-h2">Economic capacity to absorb <em>demographic pressure</em></h2>
+    <p class="demo-lead">A snapshot of the macroeconomic and fiscal conditions surrounding each country's demographic trajectory. Strong growth, low debt, and a well-funded pension system give a country room to manoeuvre as its population ages.</p>
+    <div class="demo-stats">
+      <div class="demo-stat"><div class="demo-stat-label">DHI Score</div><div class="demo-stat-val">90.9</div><div class="demo-stat-sub">rank 1 of 236</div></div>
+      <div class="demo-stat"><div class="demo-stat-label">GDP per cap</div><div class="demo-stat-val">$11,107</div><div class="demo-stat-sub">PPP, 2023</div></div>
+      <div class="demo-stat"><div class="demo-stat-label">Population</div><div class="demo-stat-val">36.4 m</div><div class="demo-stat-sub">+44% by 2050</div></div>
+      <div class="demo-stat"><div class="demo-stat-label">Trajectory</div><div class="demo-stat-val"><span class="gold">Improving</span></div><div class="demo-stat-sub">since 1965</div></div>
+    </div>
+    <p class="demo-body">Conventional demographic indicators each describe one aspect of population change. The DHI brings them together to answer a broader question: how strong are a society's demographic foundations?</p>
+    <div class="demo-quote">"Demographic health is not the same thing as simple population growth. A country may record relatively high fertility and still face structural weaknesses in workforce formation."</div>
+    <div class="demo-table-row"><div class="demo-cat-name">Total Fertility</div><div class="demo-bar"><div class="demo-bar-fill" style="width:92%"></div></div><div class="demo-cat-score">29.7<span class="demo-cat-score-max"> / 32</span></div><div class="demo-cat-pct">Top 1% globally</div></div>
+    <div class="demo-table-row"><div class="demo-cat-name">Population Momentum</div><div class="demo-bar"><div class="demo-bar-fill" style="width:94%"></div></div><div class="demo-cat-score">19.8<span class="demo-cat-score-max"> / 21</span></div><div class="demo-cat-pct">Top 1% globally</div></div>
+    <div class="demo-table-row"><div class="demo-cat-name">Workforce Sustainability</div><div class="demo-bar"><div class="demo-bar-fill" style="width:81%"></div></div><div class="demo-cat-score">18.0<span class="demo-cat-score-max"> / 22</span></div><div class="demo-cat-pct">Top 36% globally</div></div>
+  </div>
+</div>
+
+<!-- ═══ 3: Source Serif 4 ═══ -->
+<div class="sample">
+  <div class="sample-meta">
+    <span class="sample-meta-name">3 · Adobe modern serif · Source Serif 4</span>
+    <span class="sample-meta-info">Source Serif 4 + Source Sans 3 + Source Code Pro · Google Fonts (free)</span>
+  </div>
+  <div class="sample-body f-source">
+    <div class="demo-masthead">
+      <span class="demo-mark">DHI</span>
+      <span class="demo-rule"></span>
+      <span class="demo-tagline">Demographic Health Index</span>
+    </div>
+    <div class="demo-eyebrow">Fiscal Health · 2024</div>
+    <h2 class="demo-h2">Economic capacity to absorb <em>demographic pressure</em></h2>
+    <p class="demo-lead">A snapshot of the macroeconomic and fiscal conditions surrounding each country's demographic trajectory. Strong growth, low debt, and a well-funded pension system give a country room to manoeuvre as its population ages.</p>
+    <div class="demo-stats">
+      <div class="demo-stat"><div class="demo-stat-label">DHI Score</div><div class="demo-stat-val">90.9</div><div class="demo-stat-sub">rank 1 of 236</div></div>
+      <div class="demo-stat"><div class="demo-stat-label">GDP per cap</div><div class="demo-stat-val">$11,107</div><div class="demo-stat-sub">PPP, 2023</div></div>
+      <div class="demo-stat"><div class="demo-stat-label">Population</div><div class="demo-stat-val">36.4 m</div><div class="demo-stat-sub">+44% by 2050</div></div>
+      <div class="demo-stat"><div class="demo-stat-label">Trajectory</div><div class="demo-stat-val"><span class="gold">Improving</span></div><div class="demo-stat-sub">since 1965</div></div>
+    </div>
+    <p class="demo-body">Conventional demographic indicators each describe one aspect of population change. The DHI brings them together to answer a broader question: how strong are a society's demographic foundations?</p>
+    <div class="demo-quote">"Demographic health is not the same thing as simple population growth. A country may record relatively high fertility and still face structural weaknesses in workforce formation."</div>
+    <div class="demo-table-row"><div class="demo-cat-name">Total Fertility</div><div class="demo-bar"><div class="demo-bar-fill" style="width:92%"></div></div><div class="demo-cat-score">29.7<span class="demo-cat-score-max"> / 32</span></div><div class="demo-cat-pct">Top 1% globally</div></div>
+    <div class="demo-table-row"><div class="demo-cat-name">Population Momentum</div><div class="demo-bar"><div class="demo-bar-fill" style="width:94%"></div></div><div class="demo-cat-score">19.8<span class="demo-cat-score-max"> / 21</span></div><div class="demo-cat-pct">Top 1% globally</div></div>
+    <div class="demo-table-row"><div class="demo-cat-name">Workforce Sustainability</div><div class="demo-bar"><div class="demo-bar-fill" style="width:81%"></div></div><div class="demo-cat-score">18.0<span class="demo-cat-score-max"> / 22</span></div><div class="demo-cat-pct">Top 36% globally</div></div>
+  </div>
+</div>
+
+<!-- ═══ 4: Spectral ═══ -->
+<div class="sample">
+  <div class="sample-meta">
+    <span class="sample-meta-name">4 · Screen-first serif · Spectral</span>
+    <span class="sample-meta-info">Spectral + Inter + JetBrains Mono · Google Fonts (free)</span>
+  </div>
+  <div class="sample-body f-spectral">
+    <div class="demo-masthead">
+      <span class="demo-mark">DHI</span>
+      <span class="demo-rule"></span>
+      <span class="demo-tagline">Demographic Health Index</span>
+    </div>
+    <div class="demo-eyebrow">Fiscal Health · 2024</div>
+    <h2 class="demo-h2">Economic capacity to absorb <em>demographic pressure</em></h2>
+    <p class="demo-lead">A snapshot of the macroeconomic and fiscal conditions surrounding each country's demographic trajectory. Strong growth, low debt, and a well-funded pension system give a country room to manoeuvre as its population ages.</p>
+    <div class="demo-stats">
+      <div class="demo-stat"><div class="demo-stat-label">DHI Score</div><div class="demo-stat-val">90.9</div><div class="demo-stat-sub">rank 1 of 236</div></div>
+      <div class="demo-stat"><div class="demo-stat-label">GDP per cap</div><div class="demo-stat-val">$11,107</div><div class="demo-stat-sub">PPP, 2023</div></div>
+      <div class="demo-stat"><div class="demo-stat-label">Population</div><div class="demo-stat-val">36.4 m</div><div class="demo-stat-sub">+44% by 2050</div></div>
+      <div class="demo-stat"><div class="demo-stat-label">Trajectory</div><div class="demo-stat-val"><span class="gold">Improving</span></div><div class="demo-stat-sub">since 1965</div></div>
+    </div>
+    <p class="demo-body">Conventional demographic indicators each describe one aspect of population change. The DHI brings them together to answer a broader question: how strong are a society's demographic foundations?</p>
+    <div class="demo-quote">"Demographic health is not the same thing as simple population growth. A country may record relatively high fertility and still face structural weaknesses in workforce formation."</div>
+    <div class="demo-table-row"><div class="demo-cat-name">Total Fertility</div><div class="demo-bar"><div class="demo-bar-fill" style="width:92%"></div></div><div class="demo-cat-score">29.7<span class="demo-cat-score-max"> / 32</span></div><div class="demo-cat-pct">Top 1% globally</div></div>
+    <div class="demo-table-row"><div class="demo-cat-name">Population Momentum</div><div class="demo-bar"><div class="demo-bar-fill" style="width:94%"></div></div><div class="demo-cat-score">19.8<span class="demo-cat-score-max"> / 21</span></div><div class="demo-cat-pct">Top 1% globally</div></div>
+    <div class="demo-table-row"><div class="demo-cat-name">Workforce Sustainability</div><div class="demo-bar"><div class="demo-bar-fill" style="width:81%"></div></div><div class="demo-cat-score">18.0<span class="demo-cat-score-max"> / 22</span></div><div class="demo-cat-pct">Top 36% globally</div></div>
+  </div>
+</div>
+
+<!-- ═══ 5: IBM Plex (full family) ═══ -->
+<div class="sample">
+  <div class="sample-meta">
+    <span class="sample-meta-name">5 · Tech-publication · IBM Plex (recommended)</span>
+    <span class="sample-meta-info">IBM Plex Serif + IBM Plex Sans + IBM Plex Mono · Google Fonts (free)</span>
+  </div>
+  <div class="sample-body f-plex">
+    <div class="demo-masthead">
+      <span class="demo-mark">DHI</span>
+      <span class="demo-rule"></span>
+      <span class="demo-tagline">Demographic Health Index</span>
+    </div>
+    <div class="demo-eyebrow">Fiscal Health · 2024</div>
+    <h2 class="demo-h2">Economic capacity to absorb <em>demographic pressure</em></h2>
+    <p class="demo-lead">A snapshot of the macroeconomic and fiscal conditions surrounding each country's demographic trajectory. Strong growth, low debt, and a well-funded pension system give a country room to manoeuvre as its population ages.</p>
+    <div class="demo-stats">
+      <div class="demo-stat"><div class="demo-stat-label">DHI Score</div><div class="demo-stat-val">90.9</div><div class="demo-stat-sub">rank 1 of 236</div></div>
+      <div class="demo-stat"><div class="demo-stat-label">GDP per cap</div><div class="demo-stat-val">$11,107</div><div class="demo-stat-sub">PPP, 2023</div></div>
+      <div class="demo-stat"><div class="demo-stat-label">Population</div><div class="demo-stat-val">36.4 m</div><div class="demo-stat-sub">+44% by 2050</div></div>
+      <div class="demo-stat"><div class="demo-stat-label">Trajectory</div><div class="demo-stat-val"><span class="gold">Improving</span></div><div class="demo-stat-sub">since 1965</div></div>
+    </div>
+    <p class="demo-body">Conventional demographic indicators each describe one aspect of population change. The DHI brings them together to answer a broader question: how strong are a society's demographic foundations?</p>
+    <div class="demo-quote">"Demographic health is not the same thing as simple population growth. A country may record relatively high fertility and still face structural weaknesses in workforce formation."</div>
+    <div class="demo-table-row"><div class="demo-cat-name">Total Fertility</div><div class="demo-bar"><div class="demo-bar-fill" style="width:92%"></div></div><div class="demo-cat-score">29.7<span class="demo-cat-score-max"> / 32</span></div><div class="demo-cat-pct">Top 1% globally</div></div>
+    <div class="demo-table-row"><div class="demo-cat-name">Population Momentum</div><div class="demo-bar"><div class="demo-bar-fill" style="width:94%"></div></div><div class="demo-cat-score">19.8<span class="demo-cat-score-max"> / 21</span></div><div class="demo-cat-pct">Top 1% globally</div></div>
+    <div class="demo-table-row"><div class="demo-cat-name">Workforce Sustainability</div><div class="demo-bar"><div class="demo-bar-fill" style="width:81%"></div></div><div class="demo-cat-score">18.0<span class="demo-cat-score-max"> / 22</span></div><div class="demo-cat-pct">Top 36% globally</div></div>
+  </div>
+</div>
+
+<!-- ═══ 6: All Inter (sans-only) ═══ -->
+<div class="sample">
+  <div class="sample-meta">
+    <span class="sample-meta-name">6 · Modern UI · Inter only</span>
+    <span class="sample-meta-info">Inter (everything) + JetBrains Mono · Google Fonts (free)</span>
+  </div>
+  <div class="sample-body f-inter">
+    <div class="demo-masthead">
+      <span class="demo-mark">DHI</span>
+      <span class="demo-rule"></span>
+      <span class="demo-tagline">Demographic Health Index</span>
+    </div>
+    <div class="demo-eyebrow">Fiscal Health · 2024</div>
+    <h2 class="demo-h2">Economic capacity to absorb <em>demographic pressure</em></h2>
+    <p class="demo-lead">A snapshot of the macroeconomic and fiscal conditions surrounding each country's demographic trajectory. Strong growth, low debt, and a well-funded pension system give a country room to manoeuvre as its population ages.</p>
+    <div class="demo-stats">
+      <div class="demo-stat"><div class="demo-stat-label">DHI Score</div><div class="demo-stat-val">90.9</div><div class="demo-stat-sub">rank 1 of 236</div></div>
+      <div class="demo-stat"><div class="demo-stat-label">GDP per cap</div><div class="demo-stat-val">$11,107</div><div class="demo-stat-sub">PPP, 2023</div></div>
+      <div class="demo-stat"><div class="demo-stat-label">Population</div><div class="demo-stat-val">36.4 m</div><div class="demo-stat-sub">+44% by 2050</div></div>
+      <div class="demo-stat"><div class="demo-stat-label">Trajectory</div><div class="demo-stat-val"><span class="gold">Improving</span></div><div class="demo-stat-sub">since 1965</div></div>
+    </div>
+    <p class="demo-body">Conventional demographic indicators each describe one aspect of population change. The DHI brings them together to answer a broader question: how strong are a society's demographic foundations?</p>
+    <div class="demo-quote">"Demographic health is not the same thing as simple population growth. A country may record relatively high fertility and still face structural weaknesses in workforce formation."</div>
+    <div class="demo-table-row"><div class="demo-cat-name">Total Fertility</div><div class="demo-bar"><div class="demo-bar-fill" style="width:92%"></div></div><div class="demo-cat-score">29.7<span class="demo-cat-score-max"> / 32</span></div><div class="demo-cat-pct">Top 1% globally</div></div>
+    <div class="demo-table-row"><div class="demo-cat-name">Population Momentum</div><div class="demo-bar"><div class="demo-bar-fill" style="width:94%"></div></div><div class="demo-cat-score">19.8<span class="demo-cat-score-max"> / 21</span></div><div class="demo-cat-pct">Top 1% globally</div></div>
+    <div class="demo-table-row"><div class="demo-cat-name">Workforce Sustainability</div><div class="demo-bar"><div class="demo-bar-fill" style="width:81%"></div></div><div class="demo-cat-score">18.0<span class="demo-cat-score-max"> / 22</span></div><div class="demo-cat-pct">Top 36% globally</div></div>
+  </div>
+</div>
+
+<!-- ═══ 7: Plex Sans only ═══ -->
+<div class="sample">
+  <div class="sample-meta">
+    <span class="sample-meta-name">7 · Sans technical · Plex Sans only</span>
+    <span class="sample-meta-info">IBM Plex Sans + IBM Plex Mono · Google Fonts (free)</span>
+  </div>
+  <div class="sample-body f-plexsans">
+    <div class="demo-masthead">
+      <span class="demo-mark">DHI</span>
+      <span class="demo-rule"></span>
+      <span class="demo-tagline">Demographic Health Index</span>
+    </div>
+    <div class="demo-eyebrow">Fiscal Health · 2024</div>
+    <h2 class="demo-h2">Economic capacity to absorb <em>demographic pressure</em></h2>
+    <p class="demo-lead">A snapshot of the macroeconomic and fiscal conditions surrounding each country's demographic trajectory. Strong growth, low debt, and a well-funded pension system give a country room to manoeuvre as its population ages.</p>
+    <div class="demo-stats">
+      <div class="demo-stat"><div class="demo-stat-label">DHI Score</div><div class="demo-stat-val">90.9</div><div class="demo-stat-sub">rank 1 of 236</div></div>
+      <div class="demo-stat"><div class="demo-stat-label">GDP per cap</div><div class="demo-stat-val">$11,107</div><div class="demo-stat-sub">PPP, 2023</div></div>
+      <div class="demo-stat"><div class="demo-stat-label">Population</div><div class="demo-stat-val">36.4 m</div><div class="demo-stat-sub">+44% by 2050</div></div>
+      <div class="demo-stat"><div class="demo-stat-label">Trajectory</div><div class="demo-stat-val"><span class="gold">Improving</span></div><div class="demo-stat-sub">since 1965</div></div>
+    </div>
+    <p class="demo-body">Conventional demographic indicators each describe one aspect of population change. The DHI brings them together to answer a broader question: how strong are a society's demographic foundations?</p>
+    <div class="demo-quote">"Demographic health is not the same thing as simple population growth. A country may record relatively high fertility and still face structural weaknesses in workforce formation."</div>
+    <div class="demo-table-row"><div class="demo-cat-name">Total Fertility</div><div class="demo-bar"><div class="demo-bar-fill" style="width:92%"></div></div><div class="demo-cat-score">29.7<span class="demo-cat-score-max"> / 32</span></div><div class="demo-cat-pct">Top 1% globally</div></div>
+    <div class="demo-table-row"><div class="demo-cat-name">Population Momentum</div><div class="demo-bar"><div class="demo-bar-fill" style="width:94%"></div></div><div class="demo-cat-score">19.8<span class="demo-cat-score-max"> / 21</span></div><div class="demo-cat-pct">Top 1% globally</div></div>
+    <div class="demo-table-row"><div class="demo-cat-name">Workforce Sustainability</div><div class="demo-bar"><div class="demo-bar-fill" style="width:81%"></div></div><div class="demo-cat-score">18.0<span class="demo-cat-score-max"> / 22</span></div><div class="demo-cat-pct">Top 36% globally</div></div>
+  </div>
+</div>
+
+
+<!-- ═══ 8: Variable serif · Fraunces ═══ -->
+<div class="sample">
+  <div class="sample-meta">
+    <span class="sample-meta-name">8 · Variable serif · Fraunces</span>
+    <span class="sample-meta-info">Fraunces + Inter + JetBrains Mono · Google Fonts (free) · variable axis, very contemporary feel</span>
+  </div>
+  <div class="sample-body f-fraunces">
+    <div class="demo-masthead">
+      <span class="demo-mark">DHI</span>
+      <span class="demo-rule"></span>
+      <span class="demo-tagline">Demographic Health Index</span>
+    </div>
+    <div class="demo-eyebrow">Fiscal Health · 2024</div>
+    <h2 class="demo-h2">Economic capacity to absorb <em>demographic pressure</em></h2>
+    <p class="demo-lead">A snapshot of the macroeconomic and fiscal conditions surrounding each country's demographic trajectory. Strong growth, low debt, and a well-funded pension system give a country room to manoeuvre as its population ages.</p>
+    <div class="demo-stats">
+      <div class="demo-stat"><div class="demo-stat-label">DHI Score</div><div class="demo-stat-val">90.9</div><div class="demo-stat-sub">rank 1 of 236</div></div>
+      <div class="demo-stat"><div class="demo-stat-label">GDP per cap</div><div class="demo-stat-val">$11,107</div><div class="demo-stat-sub">PPP, 2023</div></div>
+      <div class="demo-stat"><div class="demo-stat-label">Population</div><div class="demo-stat-val">36.4 m</div><div class="demo-stat-sub">+44% by 2050</div></div>
+      <div class="demo-stat"><div class="demo-stat-label">Trajectory</div><div class="demo-stat-val"><span class="gold">Improving</span></div><div class="demo-stat-sub">since 1965</div></div>
+    </div>
+    <p class="demo-body">Conventional demographic indicators each describe one aspect of population change. The DHI brings them together to answer a broader question: how strong are a society's demographic foundations?</p>
+    <div class="demo-quote">"Demographic health is not the same thing as simple population growth. A country may record relatively high fertility and still face structural weaknesses in workforce formation."</div>
+    <div class="demo-table-row"><div class="demo-cat-name">Total Fertility</div><div class="demo-bar"><div class="demo-bar-fill" style="width:92%"></div></div><div class="demo-cat-score">29.7<span class="demo-cat-score-max"> / 32</span></div><div class="demo-cat-pct">Top 1% globally</div></div>
+    <div class="demo-table-row"><div class="demo-cat-name">Population Momentum</div><div class="demo-bar"><div class="demo-bar-fill" style="width:94%"></div></div><div class="demo-cat-score">19.8<span class="demo-cat-score-max"> / 21</span></div><div class="demo-cat-pct">Top 1% globally</div></div>
+    <div class="demo-table-row"><div class="demo-cat-name">Workforce Sustainability</div><div class="demo-bar"><div class="demo-bar-fill" style="width:81%"></div></div><div class="demo-cat-score">18.0<span class="demo-cat-score-max"> / 22</span></div><div class="demo-cat-pct">Top 36% globally</div></div>
+  </div>
+</div>
+<!-- ═══ 9: Editorial serif · Lora ═══ -->
+<div class="sample">
+  <div class="sample-meta">
+    <span class="sample-meta-name">9 · Editorial serif · Lora</span>
+    <span class="sample-meta-info">Lora + Inter + JetBrains Mono · Google Fonts (free) · clean newspaper feel, very legible</span>
+  </div>
+  <div class="sample-body f-lora">
+    <div class="demo-masthead">
+      <span class="demo-mark">DHI</span>
+      <span class="demo-rule"></span>
+      <span class="demo-tagline">Demographic Health Index</span>
+    </div>
+    <div class="demo-eyebrow">Fiscal Health · 2024</div>
+    <h2 class="demo-h2">Economic capacity to absorb <em>demographic pressure</em></h2>
+    <p class="demo-lead">A snapshot of the macroeconomic and fiscal conditions surrounding each country's demographic trajectory. Strong growth, low debt, and a well-funded pension system give a country room to manoeuvre as its population ages.</p>
+    <div class="demo-stats">
+      <div class="demo-stat"><div class="demo-stat-label">DHI Score</div><div class="demo-stat-val">90.9</div><div class="demo-stat-sub">rank 1 of 236</div></div>
+      <div class="demo-stat"><div class="demo-stat-label">GDP per cap</div><div class="demo-stat-val">$11,107</div><div class="demo-stat-sub">PPP, 2023</div></div>
+      <div class="demo-stat"><div class="demo-stat-label">Population</div><div class="demo-stat-val">36.4 m</div><div class="demo-stat-sub">+44% by 2050</div></div>
+      <div class="demo-stat"><div class="demo-stat-label">Trajectory</div><div class="demo-stat-val"><span class="gold">Improving</span></div><div class="demo-stat-sub">since 1965</div></div>
+    </div>
+    <p class="demo-body">Conventional demographic indicators each describe one aspect of population change. The DHI brings them together to answer a broader question: how strong are a society's demographic foundations?</p>
+    <div class="demo-quote">"Demographic health is not the same thing as simple population growth. A country may record relatively high fertility and still face structural weaknesses in workforce formation."</div>
+    <div class="demo-table-row"><div class="demo-cat-name">Total Fertility</div><div class="demo-bar"><div class="demo-bar-fill" style="width:92%"></div></div><div class="demo-cat-score">29.7<span class="demo-cat-score-max"> / 32</span></div><div class="demo-cat-pct">Top 1% globally</div></div>
+    <div class="demo-table-row"><div class="demo-cat-name">Population Momentum</div><div class="demo-bar"><div class="demo-bar-fill" style="width:94%"></div></div><div class="demo-cat-score">19.8<span class="demo-cat-score-max"> / 21</span></div><div class="demo-cat-pct">Top 1% globally</div></div>
+    <div class="demo-table-row"><div class="demo-cat-name">Workforce Sustainability</div><div class="demo-bar"><div class="demo-bar-fill" style="width:81%"></div></div><div class="demo-cat-score">18.0<span class="demo-cat-score-max"> / 22</span></div><div class="demo-cat-pct">Top 36% globally</div></div>
+  </div>
+</div>
+<!-- ═══ 10: Refined classical · Cormorant Garamond ═══ -->
+<div class="sample">
+  <div class="sample-meta">
+    <span class="sample-meta-name">10 · Refined classical · Cormorant Garamond</span>
+    <span class="sample-meta-info">Cormorant Garamond + Inter + JetBrains Mono · Google Fonts (free) · more dramatic than EB Garamond</span>
+  </div>
+  <div class="sample-body f-cormorant">
+    <div class="demo-masthead">
+      <span class="demo-mark">DHI</span>
+      <span class="demo-rule"></span>
+      <span class="demo-tagline">Demographic Health Index</span>
+    </div>
+    <div class="demo-eyebrow">Fiscal Health · 2024</div>
+    <h2 class="demo-h2">Economic capacity to absorb <em>demographic pressure</em></h2>
+    <p class="demo-lead">A snapshot of the macroeconomic and fiscal conditions surrounding each country's demographic trajectory. Strong growth, low debt, and a well-funded pension system give a country room to manoeuvre as its population ages.</p>
+    <div class="demo-stats">
+      <div class="demo-stat"><div class="demo-stat-label">DHI Score</div><div class="demo-stat-val">90.9</div><div class="demo-stat-sub">rank 1 of 236</div></div>
+      <div class="demo-stat"><div class="demo-stat-label">GDP per cap</div><div class="demo-stat-val">$11,107</div><div class="demo-stat-sub">PPP, 2023</div></div>
+      <div class="demo-stat"><div class="demo-stat-label">Population</div><div class="demo-stat-val">36.4 m</div><div class="demo-stat-sub">+44% by 2050</div></div>
+      <div class="demo-stat"><div class="demo-stat-label">Trajectory</div><div class="demo-stat-val"><span class="gold">Improving</span></div><div class="demo-stat-sub">since 1965</div></div>
+    </div>
+    <p class="demo-body">Conventional demographic indicators each describe one aspect of population change. The DHI brings them together to answer a broader question: how strong are a society's demographic foundations?</p>
+    <div class="demo-quote">"Demographic health is not the same thing as simple population growth. A country may record relatively high fertility and still face structural weaknesses in workforce formation."</div>
+    <div class="demo-table-row"><div class="demo-cat-name">Total Fertility</div><div class="demo-bar"><div class="demo-bar-fill" style="width:92%"></div></div><div class="demo-cat-score">29.7<span class="demo-cat-score-max"> / 32</span></div><div class="demo-cat-pct">Top 1% globally</div></div>
+    <div class="demo-table-row"><div class="demo-cat-name">Population Momentum</div><div class="demo-bar"><div class="demo-bar-fill" style="width:94%"></div></div><div class="demo-cat-score">19.8<span class="demo-cat-score-max"> / 21</span></div><div class="demo-cat-pct">Top 1% globally</div></div>
+    <div class="demo-table-row"><div class="demo-cat-name">Workforce Sustainability</div><div class="demo-bar"><div class="demo-bar-fill" style="width:81%"></div></div><div class="demo-cat-score">18.0<span class="demo-cat-score-max"> / 22</span></div><div class="demo-cat-pct">Top 36% globally</div></div>
+  </div>
+</div>
+<!-- ═══ 11: Modern UI · Manrope ═══ -->
+<div class="sample">
+  <div class="sample-meta">
+    <span class="sample-meta-name">11 · Modern UI · Manrope</span>
+    <span class="sample-meta-info">Manrope + JetBrains Mono · Google Fonts (free) · rounder and warmer than Inter</span>
+  </div>
+  <div class="sample-body f-manrope">
+    <div class="demo-masthead">
+      <span class="demo-mark">DHI</span>
+      <span class="demo-rule"></span>
+      <span class="demo-tagline">Demographic Health Index</span>
+    </div>
+    <div class="demo-eyebrow">Fiscal Health · 2024</div>
+    <h2 class="demo-h2">Economic capacity to absorb <em>demographic pressure</em></h2>
+    <p class="demo-lead">A snapshot of the macroeconomic and fiscal conditions surrounding each country's demographic trajectory. Strong growth, low debt, and a well-funded pension system give a country room to manoeuvre as its population ages.</p>
+    <div class="demo-stats">
+      <div class="demo-stat"><div class="demo-stat-label">DHI Score</div><div class="demo-stat-val">90.9</div><div class="demo-stat-sub">rank 1 of 236</div></div>
+      <div class="demo-stat"><div class="demo-stat-label">GDP per cap</div><div class="demo-stat-val">$11,107</div><div class="demo-stat-sub">PPP, 2023</div></div>
+      <div class="demo-stat"><div class="demo-stat-label">Population</div><div class="demo-stat-val">36.4 m</div><div class="demo-stat-sub">+44% by 2050</div></div>
+      <div class="demo-stat"><div class="demo-stat-label">Trajectory</div><div class="demo-stat-val"><span class="gold">Improving</span></div><div class="demo-stat-sub">since 1965</div></div>
+    </div>
+    <p class="demo-body">Conventional demographic indicators each describe one aspect of population change. The DHI brings them together to answer a broader question: how strong are a society's demographic foundations?</p>
+    <div class="demo-quote">"Demographic health is not the same thing as simple population growth. A country may record relatively high fertility and still face structural weaknesses in workforce formation."</div>
+    <div class="demo-table-row"><div class="demo-cat-name">Total Fertility</div><div class="demo-bar"><div class="demo-bar-fill" style="width:92%"></div></div><div class="demo-cat-score">29.7<span class="demo-cat-score-max"> / 32</span></div><div class="demo-cat-pct">Top 1% globally</div></div>
+    <div class="demo-table-row"><div class="demo-cat-name">Population Momentum</div><div class="demo-bar"><div class="demo-bar-fill" style="width:94%"></div></div><div class="demo-cat-score">19.8<span class="demo-cat-score-max"> / 21</span></div><div class="demo-cat-pct">Top 1% globally</div></div>
+    <div class="demo-table-row"><div class="demo-cat-name">Workforce Sustainability</div><div class="demo-bar"><div class="demo-bar-fill" style="width:81%"></div></div><div class="demo-cat-score">18.0<span class="demo-cat-score-max"> / 22</span></div><div class="demo-cat-pct">Top 36% globally</div></div>
+  </div>
+</div>
+<!-- ═══ 12: Geometric pair · Space Grotesk ═══ -->
+<div class="sample">
+  <div class="sample-meta">
+    <span class="sample-meta-name">12 · Geometric pair · Space Grotesk</span>
+    <span class="sample-meta-info">Space Grotesk + Space Mono · Google Fonts (free) · contemporary, "Linear-style" feel</span>
+  </div>
+  <div class="sample-body f-space">
+    <div class="demo-masthead">
+      <span class="demo-mark">DHI</span>
+      <span class="demo-rule"></span>
+      <span class="demo-tagline">Demographic Health Index</span>
+    </div>
+    <div class="demo-eyebrow">Fiscal Health · 2024</div>
+    <h2 class="demo-h2">Economic capacity to absorb <em>demographic pressure</em></h2>
+    <p class="demo-lead">A snapshot of the macroeconomic and fiscal conditions surrounding each country's demographic trajectory. Strong growth, low debt, and a well-funded pension system give a country room to manoeuvre as its population ages.</p>
+    <div class="demo-stats">
+      <div class="demo-stat"><div class="demo-stat-label">DHI Score</div><div class="demo-stat-val">90.9</div><div class="demo-stat-sub">rank 1 of 236</div></div>
+      <div class="demo-stat"><div class="demo-stat-label">GDP per cap</div><div class="demo-stat-val">$11,107</div><div class="demo-stat-sub">PPP, 2023</div></div>
+      <div class="demo-stat"><div class="demo-stat-label">Population</div><div class="demo-stat-val">36.4 m</div><div class="demo-stat-sub">+44% by 2050</div></div>
+      <div class="demo-stat"><div class="demo-stat-label">Trajectory</div><div class="demo-stat-val"><span class="gold">Improving</span></div><div class="demo-stat-sub">since 1965</div></div>
+    </div>
+    <p class="demo-body">Conventional demographic indicators each describe one aspect of population change. The DHI brings them together to answer a broader question: how strong are a society's demographic foundations?</p>
+    <div class="demo-quote">"Demographic health is not the same thing as simple population growth. A country may record relatively high fertility and still face structural weaknesses in workforce formation."</div>
+    <div class="demo-table-row"><div class="demo-cat-name">Total Fertility</div><div class="demo-bar"><div class="demo-bar-fill" style="width:92%"></div></div><div class="demo-cat-score">29.7<span class="demo-cat-score-max"> / 32</span></div><div class="demo-cat-pct">Top 1% globally</div></div>
+    <div class="demo-table-row"><div class="demo-cat-name">Population Momentum</div><div class="demo-bar"><div class="demo-bar-fill" style="width:94%"></div></div><div class="demo-cat-score">19.8<span class="demo-cat-score-max"> / 21</span></div><div class="demo-cat-pct">Top 1% globally</div></div>
+    <div class="demo-table-row"><div class="demo-cat-name">Workforce Sustainability</div><div class="demo-bar"><div class="demo-bar-fill" style="width:81%"></div></div><div class="demo-cat-score">18.0<span class="demo-cat-score-max"> / 22</span></div><div class="demo-cat-pct">Top 36% globally</div></div>
+  </div>
+</div>
+<!-- ═══ 13: Dramatic display · Playfair Display ═══ -->
+<div class="sample">
+  <div class="sample-meta">
+    <span class="sample-meta-name">13 · Dramatic display · Playfair Display</span>
+    <span class="sample-meta-info">Playfair Display + Source Sans 3 + JetBrains Mono · Google Fonts (free) · luxury magazine feel</span>
+  </div>
+  <div class="sample-body f-playfair">
+    <div class="demo-masthead">
+      <span class="demo-mark">DHI</span>
+      <span class="demo-rule"></span>
+      <span class="demo-tagline">Demographic Health Index</span>
+    </div>
+    <div class="demo-eyebrow">Fiscal Health · 2024</div>
+    <h2 class="demo-h2">Economic capacity to absorb <em>demographic pressure</em></h2>
+    <p class="demo-lead">A snapshot of the macroeconomic and fiscal conditions surrounding each country's demographic trajectory. Strong growth, low debt, and a well-funded pension system give a country room to manoeuvre as its population ages.</p>
+    <div class="demo-stats">
+      <div class="demo-stat"><div class="demo-stat-label">DHI Score</div><div class="demo-stat-val">90.9</div><div class="demo-stat-sub">rank 1 of 236</div></div>
+      <div class="demo-stat"><div class="demo-stat-label">GDP per cap</div><div class="demo-stat-val">$11,107</div><div class="demo-stat-sub">PPP, 2023</div></div>
+      <div class="demo-stat"><div class="demo-stat-label">Population</div><div class="demo-stat-val">36.4 m</div><div class="demo-stat-sub">+44% by 2050</div></div>
+      <div class="demo-stat"><div class="demo-stat-label">Trajectory</div><div class="demo-stat-val"><span class="gold">Improving</span></div><div class="demo-stat-sub">since 1965</div></div>
+    </div>
+    <p class="demo-body">Conventional demographic indicators each describe one aspect of population change. The DHI brings them together to answer a broader question: how strong are a society's demographic foundations?</p>
+    <div class="demo-quote">"Demographic health is not the same thing as simple population growth. A country may record relatively high fertility and still face structural weaknesses in workforce formation."</div>
+    <div class="demo-table-row"><div class="demo-cat-name">Total Fertility</div><div class="demo-bar"><div class="demo-bar-fill" style="width:92%"></div></div><div class="demo-cat-score">29.7<span class="demo-cat-score-max"> / 32</span></div><div class="demo-cat-pct">Top 1% globally</div></div>
+    <div class="demo-table-row"><div class="demo-cat-name">Population Momentum</div><div class="demo-bar"><div class="demo-bar-fill" style="width:94%"></div></div><div class="demo-cat-score">19.8<span class="demo-cat-score-max"> / 21</span></div><div class="demo-cat-pct">Top 1% globally</div></div>
+    <div class="demo-table-row"><div class="demo-cat-name">Workforce Sustainability</div><div class="demo-bar"><div class="demo-bar-fill" style="width:81%"></div></div><div class="demo-cat-score">18.0<span class="demo-cat-score-max"> / 22</span></div><div class="demo-cat-pct">Top 36% globally</div></div>
+  </div>
+</div>
+
+</body>
+</html>
