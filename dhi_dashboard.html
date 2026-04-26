@@ -559,12 +559,13 @@ header {
   text-align: right;
 }
 
-/* ── Economic context strip (overlay) ────────────────────────────────────── */
-.econ-section {
+/* ── Economic context (own tab) ──────────────────────────────────────────── */
+.econ-tab-section {
   background: var(--surface);
   border-radius: var(--r);
   border: 1px solid var(--border);
-  padding: 14px 20px 16px;
+  box-shadow: var(--shadow);
+  padding: 24px 28px 26px;
   margin-bottom: 22px;
 }
 .econ-section-head {
@@ -572,58 +573,76 @@ header {
   align-items: baseline;
   justify-content: space-between;
   gap: 14px;
-  margin-bottom: 10px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid var(--surface3);
+  margin-bottom: 6px;
 }
 .econ-section-meta {
   font-family: var(--font-mono);
-  font-size: 0.6rem;
-  letter-spacing: 0.08em;
+  font-size: 0.62rem;
+  letter-spacing: 0.10em;
   color: var(--ink4);
+  text-transform: uppercase;
+}
+.econ-tab-lead {
+  font-family: 'Georgia', serif;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--ink2);
+  margin: 8px 0 22px;
+  max-width: 720px;
 }
 .econ-track {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1px;
   background: var(--surface3);
-  border-radius: 4px;
+  border-radius: 6px;
   overflow: hidden;
 }
 .econ-cell {
   background: var(--surface);
-  padding: 10px 14px 11px;
+  padding: 22px 24px 20px;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 6px;
   min-width: 0;
 }
 .econ-cell-label {
   font-family: var(--font-mono);
-  font-size: 0.58rem;
-  letter-spacing: 0.14em;
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--ink3);
+  font-weight: 500;
 }
 .econ-cell-val {
   font-family: 'Georgia', serif;
-  font-size: 1.05rem;
-  font-weight: 600;
+  font-size: 1.85rem;
+  font-weight: 700;
   color: var(--ink);
   line-height: 1.1;
+  letter-spacing: -0.01em;
 }
 .econ-cell-val.econ-up   { color: #16a34a; }
 .econ-cell-val.econ-down { color: #dc2626; }
-.econ-cell-val.econ-na   { color: var(--ink4); font-style: italic; font-weight: 400; font-size: 0.95rem; }
+.econ-cell-val.econ-na   { color: var(--ink4); font-style: italic; font-weight: 400; font-size: 1.4rem; }
 .econ-cell-note {
   font-family: var(--font-mono);
-  font-size: 0.6rem;
-  letter-spacing: 0.04em;
+  font-size: 0.66rem;
+  letter-spacing: 0.06em;
   color: var(--ink3);
 }
-@media (max-width: 600px) {
-  .econ-track { grid-template-columns: repeat(2, 1fr); }
+.econ-tab-note {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  color: var(--ink4);
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid var(--surface3);
+  text-align: right;
 }
+@media (max-width: 900px) { .econ-track { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .econ-track { grid-template-columns: 1fr; } }
 
 /* ── Population trajectory (Section 5 — compact, demoted) ────────────────── */
 .pop-section {
@@ -1423,6 +1442,7 @@ header {
         <div class="country-tabs" style="justify-content:space-between;align-items:center">
           <div style="display:flex;gap:1px">
             <button class="ctab active" onclick="switchCountryTab('overview',this)">Overview</button>
+            <button class="ctab" onclick="switchCountryTab('economic',this)">Economic</button>
             <button class="ctab" onclick="switchCountryTab('report',this)">Report</button>
             <button class="ctab" onclick="switchCountryTab('compare',this)">Compare</button>
           </div>
@@ -1479,15 +1499,6 @@ header {
           <div class="section-heading">Where the headwinds are</div>
           <ul class="risks-list" id="risks-list"></ul>
           <div class="risks-note" id="risks-note"></div>
-        </section>
-
-        <!-- Economic context (World Bank overlay) ────────────────────── -->
-        <section class="econ-section section-gap">
-          <div class="econ-section-head">
-            <div class="section-eyebrow-sm">Economic context</div>
-            <div class="econ-section-meta">World Bank Open Data · 2023</div>
-          </div>
-          <div class="econ-track" id="econ-track"></div>
         </section>
 
         <!-- Section 5: Population trajectory (compact, lower priority) ── -->
@@ -1548,6 +1559,20 @@ header {
         </footer>
         <!-- Population & Migration Panel -->
         </div><!-- end ctab-panel overview -->
+
+        <!-- Economic panel ────────────────────────────────────────────── -->
+        <div class="ctab-panel" id="ctab-economic">
+          <section class="econ-tab-section">
+            <div class="econ-section-head">
+              <div class="section-eyebrow">Economic context · 2023</div>
+              <div class="econ-section-meta">World Bank Open Data</div>
+            </div>
+            <div class="section-heading">Economic backdrop</div>
+            <p class="econ-tab-lead">A snapshot of the macroeconomic conditions surrounding this country's demographic trajectory. Economic strength shapes the resources available to respond to demographic pressure; debt burdens and ageing constrain fiscal flexibility.</p>
+            <div class="econ-track" id="econ-track"></div>
+            <div class="econ-tab-note" id="econ-tab-note"></div>
+          </section>
+        </div>
 
         <!-- Report panel -->
         <div class="ctab-panel" id="ctab-report">
@@ -2051,6 +2076,20 @@ function renderEconomicContext(c) {
       <div class="econ-cell-note">${cell.note}</div>
     </div>`;
   }).join('');
+
+  // Footer attribution + missing-data flag (gov debt is sparse in the WB dataset)
+  const noteEl = document.getElementById('econ-tab-note');
+  if (noteEl) {
+    const missing = [];
+    if (e.gdp_pc_ppp   == null) missing.push('GDP per capita');
+    if (e.gov_debt_pct == null) missing.push('government debt');
+    if (e.oadr_fiscal  == null) missing.push('OADR');
+    if (e.gdp_growth   == null) missing.push('GDP growth');
+    const missingTxt = missing.length
+      ? ` · ${missing.join(', ')} not reported by World Bank for this country`
+      : '';
+    noteEl.textContent = `Source: World Bank Open Data (latest available ≤ 2023)${missingTxt}`;
+  }
 }
 
 // ── Population trajectory (Section 5) ───────────────────────────────────────
@@ -2400,9 +2439,10 @@ function renderCountryProfile(iso) {
 
   // ── Section 4: Risks ──────────────────────────────────────────────────
   renderRisks(c, iso);
-
-  // ── Economic context (overlay) ────────────────────────────────────────
-  renderEconomicContext(c);
+  // Economic context is rendered lazily when its tab is switched to
+  // (see switchCountryTab → 'economic'). Pre-render once so it's ready
+  // if the user opens that tab without re-selecting the country.
+  if (typeof renderEconomicContext === 'function') renderEconomicContext(c);
 
   // Trend chart
   const trendYears = YEARS;
@@ -3209,8 +3249,10 @@ function switchCountryTab(tab, btn) {
   if (btn) btn.classList.add('active');
   const panel = document.getElementById('ctab-' + tab);
   if (panel) panel.classList.add('active');
-  if (tab === 'report'  && window._currentISO) renderReport(window._currentISO);
-  if (tab === 'compare' && window._currentISO) renderCompare(window._currentISO);
+  const iso = window._currentISO;
+  if (tab === 'report'   && iso) renderReport(iso);
+  if (tab === 'compare'  && iso) renderCompare(iso);
+  if (tab === 'economic' && iso && DATA?.countries?.[iso]) renderEconomicContext(DATA.countries[iso]);
 }
 
 function renderCompare(iso) {
