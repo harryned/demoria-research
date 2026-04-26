@@ -93,6 +93,90 @@ body {
   color: var(--ink3);
   font-weight: 500;
 }
+.fh-search-wrap {
+  position: relative;
+  flex: 1;
+  min-width: 240px;
+  max-width: 460px;
+}
+.fh-search-input {
+  width: 100%;
+  padding: 9px 36px 9px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  background: var(--surface2);
+  font-family: 'Georgia', serif;
+  font-size: 0.96rem;
+  color: var(--ink);
+}
+.fh-search-input:focus { outline: none; border-color: var(--accent); background: #fff; }
+.fh-search-clear {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 22px;
+  height: 22px;
+  border: none;
+  background: none;
+  color: var(--ink3);
+  cursor: pointer;
+  font-size: 1.1rem;
+  line-height: 1;
+  display: none;
+  border-radius: 50%;
+}
+.fh-search-clear:hover { background: var(--surface3); color: var(--ink); }
+.fh-search-wrap.has-value .fh-search-clear { display: block; }
+.fh-results {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  max-height: 320px;
+  overflow-y: auto;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.10);
+  z-index: 20;
+  display: none;
+}
+.fh-results.open { display: block; }
+.fh-result {
+  padding: 9px 14px;
+  font-family: 'Georgia', serif;
+  font-size: 0.92rem;
+  color: var(--ink2);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  border-bottom: 1px solid var(--surface3);
+}
+.fh-result:last-child { border-bottom: none; }
+.fh-result.is-active,
+.fh-result:hover { background: var(--surface2); color: var(--ink); }
+.fh-result-name { font-weight: 500; flex: 1; min-width: 0; }
+.fh-result-name mark { background: rgba(196,154,40,0.20); color: inherit; padding: 0 1px; border-radius: 2px; }
+.fh-result-score {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  color: var(--ink3);
+  white-space: nowrap;
+}
+.fh-result-empty {
+  padding: 14px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--ink3);
+  text-align: center;
+  font-style: italic;
+}
+
+/* (kept for backwards compat — no longer used) */
 .fh-picker-select {
   flex: 1;
   min-width: 220px;
@@ -336,7 +420,14 @@ body {
 <div class="fh-picker">
   <div class="fh-picker-inner">
     <span class="fh-picker-label">Country</span>
-    <select class="fh-picker-select" id="fh-country-select"></select>
+    <div class="fh-search-wrap" id="fh-search-wrap">
+      <input type="text" class="fh-search-input" id="fh-search-input"
+             placeholder="Type a country name…"
+             autocomplete="off" spellcheck="false"
+             aria-label="Search for a country" aria-autocomplete="list" aria-controls="fh-results">
+      <button type="button" class="fh-search-clear" id="fh-search-clear" aria-label="Clear">&times;</button>
+      <div class="fh-results" id="fh-results" role="listbox"></div>
+    </div>
     <div class="fh-meta" id="fh-meta"></div>
   </div>
 </div>
@@ -374,18 +465,123 @@ function fmtYears(v) {
   return v.toFixed(0) + ' yrs';
 }
 
-// ── Country picker ──
-function buildPicker() {
-  const sel = document.getElementById('fh-country-select');
-  const sorted = Object.values(DATA.countries).slice().sort((a, b) => a.name.localeCompare(b.name));
-  sorted.forEach(c => {
-    const o = document.createElement('option');
-    o.value = c.iso;
-    const scoreTxt = c.score != null ? c.score.toFixed(1) : '—';
-    o.textContent = c.name + '  ·  DHI ' + scoreTxt;
-    sel.appendChild(o);
+// ── Country search-as-you-type picker ──
+const SORTED_COUNTRIES = Object.values(DATA.countries)
+  .slice().sort((a, b) => a.name.localeCompare(b.name));
+
+const PICKER = {
+  input:    null,
+  results:  null,
+  wrap:     null,
+  clearBtn: null,
+  active:   -1,
+  matches:  []
+};
+
+function escapeReg(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+
+function highlight(name, query) {
+  if (!query) return name;
+  const re = new RegExp('(' + escapeReg(query) + ')', 'i');
+  return name.replace(re, '<mark>$1</mark>');
+}
+
+function filterCountries(q) {
+  q = (q || '').trim().toLowerCase();
+  if (!q) return SORTED_COUNTRIES.slice(0, 12); // initial empty-state: top 12 alpha
+  // Prefer prefix matches first, then substring matches
+  const prefix = [], substr = [];
+  SORTED_COUNTRIES.forEach(c => {
+    const n = c.name.toLowerCase();
+    if (n.startsWith(q))       prefix.push(c);
+    else if (n.includes(q))    substr.push(c);
   });
-  sel.addEventListener('change', () => render(sel.value));
+  return prefix.concat(substr).slice(0, 12);
+}
+
+function renderResults(query) {
+  PICKER.matches = filterCountries(query);
+  if (PICKER.matches.length === 0) {
+    PICKER.results.innerHTML = '<div class="fh-result-empty">No country matches “' + (query || '') + '”</div>';
+  } else {
+    PICKER.results.innerHTML = PICKER.matches.map((c, i) => {
+      const score = c.score != null ? c.score.toFixed(1) : '—';
+      return '<div class="fh-result' + (i === PICKER.active ? ' is-active' : '') + '" data-iso="' + c.iso + '" role="option">' +
+        '<div class="fh-result-name">' + highlight(c.name, query) + '</div>' +
+        '<div class="fh-result-score">DHI ' + score + '</div>' +
+      '</div>';
+    }).join('');
+    // Wire click handlers
+    PICKER.results.querySelectorAll('.fh-result').forEach(el => {
+      el.addEventListener('mousedown', (ev) => {
+        ev.preventDefault();   // keep input focus
+        selectCountry(el.dataset.iso);
+      });
+    });
+  }
+  PICKER.results.classList.add('open');
+}
+
+function selectCountry(iso) {
+  const c = DATA.countries[iso];
+  if (!c) return;
+  PICKER.input.value = c.name;
+  PICKER.wrap.classList.add('has-value');
+  PICKER.results.classList.remove('open');
+  PICKER.active = -1;
+  render(iso);
+}
+
+function buildPicker() {
+  PICKER.input    = document.getElementById('fh-search-input');
+  PICKER.results  = document.getElementById('fh-results');
+  PICKER.wrap     = document.getElementById('fh-search-wrap');
+  PICKER.clearBtn = document.getElementById('fh-search-clear');
+
+  PICKER.input.addEventListener('input', () => {
+    PICKER.wrap.classList.toggle('has-value', !!PICKER.input.value);
+    PICKER.active = 0;
+    renderResults(PICKER.input.value);
+  });
+  PICKER.input.addEventListener('focus', () => {
+    renderResults(PICKER.input.value);
+  });
+  PICKER.input.addEventListener('blur', () => {
+    // Close on blur, with a tiny delay so mousedown on a result still fires
+    setTimeout(() => PICKER.results.classList.remove('open'), 120);
+  });
+  PICKER.input.addEventListener('keydown', (ev) => {
+    if (!PICKER.results.classList.contains('open')) {
+      if (ev.key === 'ArrowDown') { renderResults(PICKER.input.value); ev.preventDefault(); }
+      return;
+    }
+    if (ev.key === 'ArrowDown') {
+      PICKER.active = Math.min(PICKER.matches.length - 1, PICKER.active + 1);
+      renderResults(PICKER.input.value);
+      ev.preventDefault();
+    } else if (ev.key === 'ArrowUp') {
+      PICKER.active = Math.max(0, PICKER.active - 1);
+      renderResults(PICKER.input.value);
+      ev.preventDefault();
+    } else if (ev.key === 'Enter') {
+      if (PICKER.matches[PICKER.active]) {
+        selectCountry(PICKER.matches[PICKER.active].iso);
+      } else if (PICKER.matches[0]) {
+        selectCountry(PICKER.matches[0].iso);
+      }
+      ev.preventDefault();
+    } else if (ev.key === 'Escape') {
+      PICKER.results.classList.remove('open');
+      PICKER.input.blur();
+    }
+  });
+  PICKER.clearBtn.addEventListener('click', () => {
+    PICKER.input.value = '';
+    PICKER.wrap.classList.remove('has-value');
+    PICKER.input.focus();
+    PICKER.active = -1;
+    renderResults('');
+  });
 }
 
 // ── Renderer ──
@@ -479,9 +675,7 @@ function render(iso) {
 buildPicker();
 // Default to a country with full data so the page lands on a meaningful state
 const DEFAULT_ISO = 'GBR';
-const sel = document.getElementById('fh-country-select');
-sel.value = DEFAULT_ISO;
-render(DEFAULT_ISO);
+selectCountry(DEFAULT_ISO);
 </script>
 
 </body>
