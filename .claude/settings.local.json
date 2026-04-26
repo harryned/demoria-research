@@ -22,7 +22,8 @@
       "Bash(/tmp/dhi_env/bin/python -c ' *)",
       "Bash(/tmp/dhi_env/bin/python -m pip install pandas openpyxl --quiet)",
       "Bash(/tmp/dhi_env/bin/python)",
-      "Bash(python3 fetch_economic_overlays.py)"
+      "Bash(python3 fetch_economic_overlays.py)",
+      "Read(//Users/harrynedeljkovic/Downloads/**)"
     ]
   }
 }
