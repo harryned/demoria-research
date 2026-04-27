@@ -1304,6 +1304,94 @@ header {
 .section-gap { margin-bottom: 16px; }
 .hidden { display: none !important; }
 .placeholder { padding: 48px; text-align: center; color: var(--ink3); font-style: italic; }
+
+/* ── Index & Rankings landing (when no country selected) ────────────── */
+#country-placeholder .hl-hero {
+  background: linear-gradient(135deg, var(--accent) 0%, #14305c 100%);
+  color: #fff;
+  padding: 28px 32px 26px;
+  border-radius: var(--r);
+  margin-bottom: 22px;
+  box-shadow: 0 4px 18px rgba(15,17,23,0.12);
+}
+#country-placeholder .hl-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.66rem; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--gold2);
+  margin-bottom: 10px;
+}
+#country-placeholder .hl-title {
+  font-family: 'Lora', Georgia, serif;
+  font-size: 2rem; font-weight: 600; line-height: 1.15;
+  letter-spacing: -0.01em; margin-bottom: 10px; color: #fff;
+}
+#country-placeholder .hl-lede {
+  font-family: 'Lora', Georgia, serif;
+  font-size: 0.98rem; line-height: 1.55;
+  color: rgba(255,255,255,0.78); max-width: 640px; margin: 0;
+}
+#country-placeholder .hl-lede b { color: #fff; font-weight: 600; }
+#country-placeholder .hl-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px;
+}
+@media (max-width: 760px) {
+  #country-placeholder .hl-grid { grid-template-columns: 1fr; }
+}
+.hl-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--r); box-shadow: var(--shadow);
+  padding: 18px 20px 16px;
+}
+.hl-card-head {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding-bottom: 10px; margin-bottom: 6px;
+  border-bottom: 1px solid var(--surface3);
+}
+.hl-card-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.66rem; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--ink3); font-weight: 500;
+}
+.hl-card-sub {
+  font-family: 'Lora', Georgia, serif; font-size: 0.74rem;
+  font-style: italic; color: var(--ink4);
+}
+.hl-row {
+  display: grid; grid-template-columns: auto 1fr auto auto;
+  align-items: center; gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--surface3);
+  cursor: pointer; transition: background 0.12s;
+}
+.hl-row:last-child { border-bottom: none; }
+.hl-row:hover { background: #eef3ff; }
+.hl-row-rank {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem; color: var(--ink3); min-width: 18px;
+}
+.hl-row-name {
+  font-family: 'Lora', Georgia, serif;
+  font-size: 0.9rem; font-weight: 600; color: var(--ink);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.hl-row-region {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem; letter-spacing: 0.05em; color: var(--ink4);
+  text-transform: uppercase;
+}
+.hl-row-val {
+  font-family: 'Lora', Georgia, serif;
+  font-size: 0.95rem; font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  text-align: right; min-width: 48px;
+}
+.hl-foot {
+  margin-top: 14px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem; letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink4); text-align: right;
+}
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: var(--surface2); }
 ::-webkit-scrollbar-thumb { background: var(--surface3); border-radius: 3px; }
@@ -1724,8 +1812,14 @@ header {
 
     <!-- Country panel -->
     <div id="panel-country" class="active">
-      <div id="country-placeholder" class="card">
-        <div class="placeholder">Select a country from the list to view its profile</div>
+      <div id="country-placeholder">
+        <div class="hl-hero">
+          <div class="hl-eyebrow">Index &amp; Rankings &middot; 2024</div>
+          <h2 class="hl-title">236 countries &amp; territories, scored.</h2>
+          <p class="hl-lede">Pick a country from the list, or browse the highlights below. Switch the side tabs to see <b>Regions</b>, the global <b>Rankings</b> table, or the <b>Cross-Section</b> scatter view.</p>
+        </div>
+        <div class="hl-grid" id="hl-grid"></div>
+        <div class="hl-foot">Click any country card to open its profile.</div>
       </div>
       <div id="country-content" class="hidden">
         <!-- Tab bar -->
@@ -2736,6 +2830,70 @@ function init() {
   const firstReg = document.querySelector('.reg-item');
   if (firstReg) firstReg.click();
   renderRankings();
+  renderHighlights();
+}
+
+// ── Index & Rankings landing: highlight cards (shown until a country is picked) ──
+function renderHighlights() {
+  const wrap = document.getElementById('hl-grid');
+  if (!wrap) return;
+  const list = DATA.country_list.filter(c => c.score != null && !isNaN(c.score));
+
+  function go(iso) { return `onclick="selectCountry('${iso}',null)"`; }
+  function row(c, valStr, valColor) {
+    const cls = (typeof classifyScore === 'function') ? classifyScore(c.score) : { color: 'var(--ink)' };
+    const colour = valColor || cls.color || 'var(--ink)';
+    return `<div class="hl-row" ${go(c.iso)}>
+      <div class="hl-row-rank">${c._rk || ''}</div>
+      <div>
+        <div class="hl-row-name">${c.name}</div>
+        <div class="hl-row-region">${c.region || ''}</div>
+      </div>
+      <div class="hl-row-val" style="color:${colour}">${valStr}</div>
+    </div>`;
+  }
+
+  // Top 5 by 2024 score
+  const top = [...list].sort((a,b) => b.score - a.score).slice(0,5)
+    .map((c,i) => ({...c, _rk: i+1}));
+  // Bottom 5 by 2024 score
+  const bot = [...list].sort((a,b) => a.score - b.score).slice(0,5)
+    .map((c,i) => ({...c, _rk: i+1}));
+  // Biggest improvers since 1999 (top by delta)
+  const improvers = [...list].filter(c => c.delta != null).sort((a,b) => b.delta - a.delta).slice(0,5)
+    .map((c,i) => ({...c, _rk: i+1}));
+  // Steepest projected decline 2024 → 2050 (most negative delta2050)
+  const decliners = [...list].map(c => {
+    const co = DATA.countries[c.iso];
+    const s50 = co?.scores?.['2050']?.Overall;
+    const d50 = (s50 != null) ? s50 - c.score : null;
+    return { ...c, _d50: d50 };
+  }).filter(c => c._d50 != null).sort((a,b) => a._d50 - b._d50).slice(0,5)
+    .map((c,i) => ({...c, _rk: i+1}));
+
+  const card = (title, sub, rows) => `
+    <div class="hl-card">
+      <div class="hl-card-head">
+        <div class="hl-card-title">${title}</div>
+        <div class="hl-card-sub">${sub}</div>
+      </div>
+      ${rows}
+    </div>`;
+
+  wrap.innerHTML = [
+    card('Top of the index', '2024 score', top.map(c => row(c, c.score.toFixed(1))).join('')),
+    card('Bottom of the index', '2024 score', bot.map(c => row(c, c.score.toFixed(1))).join('')),
+    card('Biggest improvers', 'Δ score, 1999 → 2024', improvers.map(c => {
+      const d = c.delta;
+      const v = (d >= 0 ? '+' : '') + d.toFixed(1);
+      return row(c, v, '#16a34a');
+    }).join('')),
+    card('Projected to fall most', 'Δ score, 2024 → 2050', decliners.map(c => {
+      const d = c._d50;
+      const v = (d >= 0 ? '+' : '') + d.toFixed(1);
+      return row(c, v, '#dc2626');
+    }).join('')),
+  ].join('');
 }
 
 function buildContinentFilters() {
