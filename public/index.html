@@ -10,9 +10,9 @@
 <style>
   :root {
     --accent: #1a3a6e;
+    --accent-deep: #0f2347;
     --gold: #c49a28;
     --gold2: #e0b54a;
-    --ink: #0f2347;
     --ink2: rgba(255,255,255,0.78);
     --ink3: rgba(255,255,255,0.55);
   }
@@ -20,21 +20,98 @@
   html, body { height: 100%; }
   body {
     font-family: 'Lora', Georgia, serif;
-    background: var(--accent);
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-deep) 100%);
     color: #fff;
     line-height: 1.6;
     display: flex; align-items: center; justify-content: center;
     padding: 32px;
     position: relative; overflow: hidden;
+    min-height: 100vh;
   }
-  body::after {
-    content: 'DR'; position: fixed;
-    font-weight: 700; font-size: 48vw;
-    color: rgba(255,255,255,0.025);
-    letter-spacing: -0.04em;
-    bottom: -10vw; right: -4vw;
-    line-height: 1; pointer-events: none; user-select: none;
+
+  /* ─── Animated background layers ───────────────────────────────── */
+  .bg-layer {
+    position: fixed; inset: 0;
+    pointer-events: none; user-select: none;
+    z-index: 0;
   }
+  /* World map: borders draw on, then fill fades in */
+  #bg-map { opacity: 1; }
+  #bg-map .country {
+    fill: rgba(255,255,255,0);
+    stroke: rgba(255,255,255,0.32);
+    stroke-width: 0.45;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+    --len: 100;
+    stroke-dasharray: var(--len);
+    stroke-dashoffset: var(--len);
+    animation: countryDraw 6s ease-out forwards, countryFill 4s ease-out forwards;
+    animation-delay: var(--d, 0s), calc(var(--d, 0s) + 4s);
+  }
+  @keyframes countryDraw {
+    to { stroke-dashoffset: 0; }
+  }
+  @keyframes countryFill {
+    to { fill: rgba(255,255,255,0.045); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #bg-map .country {
+      animation: none;
+      stroke-dashoffset: 0;
+      fill: rgba(255,255,255,0.045);
+    }
+  }
+  /* Trend line */
+  #bg-trend { opacity: 0.32; }
+  #bg-trend .axis-line { stroke: rgba(255,255,255,0.08); stroke-width: 1; }
+  #bg-trend .axis-tick { fill: rgba(255,255,255,0.22); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.06em; }
+  #bg-trend .trend-line {
+    fill: none; stroke: var(--gold2); stroke-width: 1.2;
+    stroke-linecap: round; stroke-linejoin: round;
+    filter: drop-shadow(0 0 3px rgba(224,181,74,0.18));
+  }
+  #bg-trend .trend-area { fill: url(#area-grad); }
+  #bg-trend .trend-head { fill: var(--gold2); filter: drop-shadow(0 0 4px rgba(224,181,74,0.35)); }
+  #bg-trend.is-drawing .trend-line {
+    stroke-dasharray: var(--len);
+    stroke-dashoffset: var(--len);
+    animation: draw 28s ease-in-out infinite;
+  }
+  #bg-trend.is-drawing .trend-area {
+    opacity: 0;
+    animation: areaFade 28s ease-in-out infinite;
+  }
+  #bg-trend.is-drawing .trend-head {
+    opacity: 0;
+    animation: headFade 28s ease-in-out infinite;
+  }
+  @keyframes draw {
+    0%   { stroke-dashoffset: var(--len); }
+    65%  { stroke-dashoffset: 0; }
+    85%  { stroke-dashoffset: 0; opacity: 1; }
+    100% { stroke-dashoffset: 0; opacity: 0; }
+  }
+  @keyframes areaFade {
+    0%, 10%  { opacity: 0; }
+    65%      { opacity: 0.20; }
+    85%      { opacity: 0.20; }
+    100%     { opacity: 0; }
+  }
+  @keyframes headFade {
+    0%, 5%   { opacity: 0; }
+    65%      { opacity: 1; }
+    85%      { opacity: 1; }
+    100%     { opacity: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #bg-trend.is-drawing .trend-line,
+    #bg-trend.is-drawing .trend-area,
+    #bg-trend.is-drawing .trend-head { animation: none; opacity: 1; }
+    #bg-trend.is-drawing .trend-line { stroke-dashoffset: 0; }
+  }
+
+  /* ─── Foreground content ───────────────────────────────────────── */
   .wrap { max-width: 640px; position: relative; z-index: 1; }
   .eyebrow {
     font-family: 'JetBrains Mono', monospace;
@@ -58,20 +135,20 @@
   .link {
     display: flex; align-items: center; justify-content: space-between;
     padding: 18px 22px;
-    background: rgba(255,255,255,0.05);
+    background: rgba(15,35,71,0.55);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
     border: 1px solid rgba(255,255,255,0.14);
     border-radius: 8px;
     color: #fff; text-decoration: none;
     transition: background 0.16s, border-color 0.16s, transform 0.16s;
   }
   .link:hover {
-    background: rgba(255,255,255,0.09);
+    background: rgba(15,35,71,0.75);
     border-color: var(--gold2);
     transform: translateY(-1px);
   }
-  .link-text {
-    display: flex; flex-direction: column; gap: 3px;
-  }
+  .link-text { display: flex; flex-direction: column; gap: 3px; }
   .link-name {
     font-family: 'Lora', Georgia, serif;
     font-size: 1.05rem; font-weight: 600;
@@ -90,10 +167,26 @@
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.62rem; letter-spacing: 0.18em;
     text-transform: uppercase; color: rgba(255,255,255,0.35);
+    z-index: 1;
   }
 </style>
 </head>
 <body>
+
+<!-- Background: world-map borders (drawn-on, then filled) -->
+<svg id="bg-map" class="bg-layer" preserveAspectRatio="xMidYMid slice"></svg>
+
+<!-- Background: slow-drawing global population trend line -->
+<svg id="bg-trend" class="bg-layer" preserveAspectRatio="none">
+  <defs>
+    <linearGradient id="area-grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#e0b54a" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#e0b54a" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+</svg>
+
+<!-- Foreground content -->
 <div class="wrap">
   <div class="eyebrow">Demoria Research</div>
   <h1>Long-run <em>demographic</em> intelligence.</h1>
@@ -109,5 +202,153 @@
   </div>
 </div>
 <footer>&copy; Demoria Research</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
+<script>
+(function () {
+  // ───── World map: borders draw on, then countries quietly fill ─────
+  const NS = 'http://www.w3.org/2000/svg';
+  let mapCountries = null;
+
+  async function loadMap() {
+    if (mapCountries) return mapCountries;
+    try {
+      const res = await fetch('https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-110m.json');
+      const world = await res.json();
+      mapCountries = topojson.feature(world, world.objects.countries);
+      return mapCountries;
+    } catch (e) { return null; }
+  }
+
+  async function renderMap() {
+    const countries = await loadMap();
+    if (!countries) return;
+    const svg = document.getElementById('bg-map');
+    const w = window.innerWidth, h = window.innerHeight;
+    svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
+    const projection = d3.geoNaturalEarth1()
+      .fitSize([w * 1.05, h * 1.1], countries)
+      .translate([w / 2, h / 2 + h * 0.04]);
+    const path = d3.geoPath(projection);
+
+    // Stagger over ~22 seconds (more countries → tighter spacing)
+    const totalStagger = 22;
+    const n = countries.features.length;
+
+    const g = document.createElementNS(NS, 'g');
+    countries.features.forEach((f, i) => {
+      const dStr = path(f);
+      if (!dStr) return;
+      const p = document.createElementNS(NS, 'path');
+      p.setAttribute('d', dStr);
+      p.setAttribute('class', 'country');
+      // Approximate path length using a temporary element so CSS knows the dasharray
+      g.appendChild(p);
+    });
+    svg.innerHTML = '';
+    svg.appendChild(g);
+
+    // Now measure each path length and apply per-country CSS vars
+    requestAnimationFrame(() => {
+      const paths = g.querySelectorAll('.country');
+      // Sort by area (size) so larger countries draw earlier — feels more natural
+      const lengths = [];
+      paths.forEach((p, i) => {
+        let len;
+        try { len = p.getTotalLength(); } catch { len = 200; }
+        lengths.push({ p, len, i });
+      });
+      // Sort largest path-length first
+      lengths.sort((a, b) => b.len - a.len);
+      lengths.forEach((entry, rank) => {
+        const delay = (rank / Math.max(1, lengths.length - 1)) * totalStagger;
+        entry.p.style.setProperty('--len', entry.len);
+        entry.p.style.setProperty('--d', delay.toFixed(2) + 's');
+      });
+    });
+  }
+
+  // ───── Trend line: world population, 1965 → 2100 (UN WPP 2024 low variant, billions) ─────
+  function renderTrend() {
+    const data = [
+      [1965, 3.34], [1970, 3.70], [1975, 4.08], [1980, 4.46], [1985, 4.87],
+      [1990, 5.33], [1995, 5.76], [2000, 6.17], [2005, 6.59], [2010, 7.02],
+      [2015, 7.47], [2020, 7.84], [2024, 8.16], [2030, 8.42], [2040, 8.79],
+      [2050, 8.93], [2055, 8.95], [2060, 8.87], [2070, 8.62], [2080, 8.22],
+      [2090, 7.69], [2100, 7.10]
+    ];
+    const svg = document.getElementById('bg-trend');
+    const w = window.innerWidth, h = window.innerHeight;
+    svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
+
+    // Plot area: shift upward so the crest sits noticeably above the text
+    const padX = Math.max(40, w * 0.05);
+    const padTop = Math.max(40, h * 0.05);
+    const padBottom = Math.max(140, h * 0.30);
+    const plotTop = padTop;
+    const plotH = h - padTop - padBottom;
+    const baseY = plotTop + plotH;
+
+    const xMin = 1965, xMax = 2100;
+    const yMin = 3, yMax = 9.5;
+    const xScale = yr => padX + (yr - xMin) / (xMax - xMin) * (w - padX * 2);
+    const yScale = v  => plotTop + (1 - (v - yMin) / (yMax - yMin)) * plotH;
+
+    // Smooth curve via cubic Bézier between consecutive points
+    const pts = data.map(([x, y]) => [xScale(x), yScale(y)]);
+    let d = `M ${pts[0][0]} ${pts[0][1]}`;
+    for (let i = 0; i < pts.length - 1; i++) {
+      const [x0, y0] = pts[Math.max(0, i - 1)];
+      const [x1, y1] = pts[i];
+      const [x2, y2] = pts[i + 1];
+      const [x3, y3] = pts[Math.min(pts.length - 1, i + 2)];
+      const cp1x = x1 + (x2 - x0) / 6;
+      const cp1y = y1 + (y2 - y0) / 6;
+      const cp2x = x2 - (x3 - x1) / 6;
+      const cp2y = y2 - (y3 - y1) / 6;
+      d += ` C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${x2} ${y2}`;
+    }
+    const areaD = d + ` L ${pts[pts.length - 1][0]} ${baseY} L ${pts[0][0]} ${baseY} Z`;
+
+    // Axis ticks
+    const tickYears = [1965, 1995, 2024, 2050, 2075, 2100];
+    let axisHtml = `<line class="axis-line" x1="${padX}" y1="${baseY}" x2="${w - padX}" y2="${baseY}"/>`;
+    tickYears.forEach(yr => {
+      const x = xScale(yr);
+      axisHtml += `<line class="axis-line" x1="${x}" y1="${baseY}" x2="${x}" y2="${baseY + 4}"/>`;
+      axisHtml += `<text class="axis-tick" x="${x}" y="${baseY + 18}" text-anchor="middle">${yr}</text>`;
+    });
+
+    const defs = svg.querySelector('defs').outerHTML;
+    svg.innerHTML = defs + `
+      <g id="bg-trend-axis">${axisHtml}</g>
+      <path class="trend-area" d="${areaD}"/>
+      <path class="trend-line" id="trend-line-path" d="${d}"/>
+      <circle class="trend-head" cx="${pts[pts.length - 1][0]}" cy="${pts[pts.length - 1][1]}" r="3.8"/>
+    `;
+
+    const pathEl = svg.querySelector('#trend-line-path');
+    const len = pathEl.getTotalLength();
+    svg.style.setProperty('--len', len);
+    svg.classList.add('is-drawing');
+  }
+
+  // Init
+  renderTrend();
+  renderMap();
+
+  // Resize handling (debounced)
+  let rt;
+  window.addEventListener('resize', () => {
+    clearTimeout(rt);
+    rt = setTimeout(() => {
+      renderTrend();
+      renderMap();
+    }, 250);
+  });
+})();
+</script>
+
 </body>
 </html>
