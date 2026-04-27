@@ -1392,6 +1392,86 @@ header {
   text-transform: uppercase;
   color: var(--ink4); text-align: right;
 }
+
+/* "How the score is built" — 5 categories with weights */
+.hl-structure {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  box-shadow: var(--shadow);
+  padding: 18px 22px 18px;
+  margin-bottom: 22px;
+}
+.hl-cats {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  margin-top: 12px;
+}
+@media (max-width: 760px) {
+  .hl-cats { grid-template-columns: repeat(2, 1fr); }
+}
+.hl-cat {
+  position: relative;
+  padding: 14px 12px 12px;
+  border-radius: 8px;
+  background: linear-gradient(180deg, var(--surface2) 0%, var(--surface) 100%);
+  border: 1px solid var(--surface3);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  cursor: pointer;
+  transition: border-color 0.15s, transform 0.15s, box-shadow 0.15s;
+}
+.hl-cat:hover {
+  border-color: var(--accent2);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(26,58,110,0.10);
+}
+.hl-cat-key {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem; letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink3);
+  font-weight: 600;
+}
+.hl-cat-name {
+  font-family: 'Lora', Georgia, serif;
+  font-size: 0.95rem; font-weight: 600;
+  color: var(--ink); line-height: 1.2;
+}
+.hl-cat-desc {
+  font-family: 'Lora', Georgia, serif;
+  font-size: 0.78rem; line-height: 1.4;
+  color: var(--ink2);
+  flex: 1;
+}
+.hl-cat-weight-row {
+  display: flex; align-items: center; gap: 8px; margin-top: 4px;
+}
+.hl-cat-bar {
+  flex: 1; height: 6px; background: var(--surface3); border-radius: 3px; overflow: hidden;
+}
+.hl-cat-bar-fill {
+  height: 100%; border-radius: 3px;
+  background: linear-gradient(90deg, var(--gold), var(--gold2));
+}
+.hl-cat-w {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem; font-weight: 600;
+  color: var(--accent); font-variant-numeric: tabular-nums; min-width: 32px;
+  text-align: right;
+}
+.hl-cats-foot {
+  margin-top: 14px;
+  font-family: 'Lora', Georgia, serif;
+  font-size: 0.82rem; line-height: 1.5;
+  color: var(--ink2); font-style: italic;
+}
+.hl-cats-foot a {
+  color: var(--accent); text-decoration: none; font-weight: 500; font-style: normal;
+}
+.hl-cats-foot a:hover { text-decoration: underline; }
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: var(--surface2); }
 ::-webkit-scrollbar-thumb { background: var(--surface3); border-radius: 3px; }
@@ -1817,6 +1897,14 @@ header {
           <div class="hl-eyebrow">Index &amp; Rankings &middot; 2024</div>
           <h2 class="hl-title">236 countries &amp; territories, scored.</h2>
           <p class="hl-lede">Pick a country from the list, or browse the highlights below. Switch the side tabs to see <b>Regions</b>, the global <b>Rankings</b> table, or the <b>Cross-Section</b> scatter view.</p>
+        </div>
+        <div class="hl-structure">
+          <div class="hl-card-head" style="border-bottom-color:var(--surface3)">
+            <div class="hl-card-title">How the score is built</div>
+            <div class="hl-card-sub">5 dimensions &middot; weighted to 100</div>
+          </div>
+          <div class="hl-cats" id="hl-cats"></div>
+          <div class="hl-cats-foot">A country's overall DHI is a weighted composite of these five dimensions, scored on 0&ndash;100. <a href="#" onclick="parent.postMessage({switchTab:'methodology'},'*');return false;">Read the methodology &rarr;</a></div>
         </div>
         <div class="hl-grid" id="hl-grid"></div>
         <div class="hl-foot">Click any country card to open its profile.</div>
@@ -2831,6 +2919,36 @@ function init() {
   if (firstReg) firstReg.click();
   renderRankings();
   renderHighlights();
+  renderIndexStructure();
+}
+
+// ── Index Structure card (5 categories + weights, on the Index landing) ──
+function renderIndexStructure() {
+  const wrap = document.getElementById('hl-cats');
+  if (!wrap) return;
+  const weights = (DATA && DATA.cat_weights) || { TFS:32, Momentum:21, WSS:22, FQS:8, MDS:17 };
+  const cats = [
+    { key: 'TFS',      name: 'Total Fertility',         desc: 'How far below replacement a country sits.' },
+    { key: 'Momentum', name: 'Population Momentum',     desc: 'Built-in growth or decline from current age structure.' },
+    { key: 'WSS',      name: 'Workforce Sustainability', desc: 'Ability to maintain a productive labour force.' },
+    { key: 'FQS',      name: 'Fertility Quality',       desc: 'Timing, spacing and conditions surrounding births.' },
+    { key: 'MDS',      name: 'Migration Independence',  desc: 'Reliance on inward migration to sustain population.' }
+  ];
+  const maxW = 32; // TFS is the heaviest — bar widths scale relative to this
+  wrap.innerHTML = cats.map(c => {
+    const w = weights[c.key] || 0;
+    const fillPct = (w / maxW) * 100;
+    return `
+      <div class="hl-cat" onclick="document.getElementById('rank-sort').value='${c.key}';showPanel('rankings');renderRankings();" title="Sort the global rankings by ${c.name}">
+        <div class="hl-cat-key">${c.key}</div>
+        <div class="hl-cat-name">${c.name}</div>
+        <div class="hl-cat-desc">${c.desc}</div>
+        <div class="hl-cat-weight-row">
+          <div class="hl-cat-bar"><div class="hl-cat-bar-fill" style="width:${fillPct}%"></div></div>
+          <div class="hl-cat-w">${w}%</div>
+        </div>
+      </div>`;
+  }).join('');
 }
 
 // ── Index & Rankings landing: highlight cards (shown until a country is picked) ──
