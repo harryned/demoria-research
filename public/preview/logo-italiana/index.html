@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Demoria Logo · Variant A · Italiana</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Italiana&family=JetBrains+Mono:wght@400;500&family=Lora:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --accent: #1a3a6e;
+    --accent-deep: #0f2347;
+    --gold: #c49a28;
+    --gold2: #e0b54a;
+    --ink2: rgba(255,255,255,0.78);
+    --ink3: rgba(255,255,255,0.55);
+    --ink4: rgba(255,255,255,0.35);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    font-family: 'Lora', Georgia, serif;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-deep) 100%);
+    color: #fff;
+    min-height: 100vh;
+    overflow-x: hidden;
+    padding: 60px 32px 80px;
+  }
+  body::after {
+    content: 'DR'; position: fixed;
+    font-weight: 700; font-size: 44vw;
+    color: rgba(255,255,255,0.022);
+    letter-spacing: -0.04em;
+    bottom: -10vw; right: -4vw;
+    line-height: 1; pointer-events: none; user-select: none; z-index: 0;
+  }
+  .wrap { max-width: 980px; margin: 0 auto; position: relative; z-index: 1; }
+
+  /* Top utility nav between variants */
+  nav.preview-nav {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-bottom: 28px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    margin-bottom: 80px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.66rem; letter-spacing: 0.16em; text-transform: uppercase;
+  }
+  nav.preview-nav .label { color: var(--ink3); }
+  nav.preview-nav .links { display: flex; gap: 22px; }
+  nav.preview-nav a {
+    color: var(--ink3); text-decoration: none;
+    transition: color .15s;
+  }
+  nav.preview-nav a:hover { color: var(--gold2); }
+  nav.preview-nav a.active { color: #fff; }
+  nav.preview-nav a.active::before { content: '› '; color: var(--gold2); }
+
+  /* Hero stage */
+  .stage {
+    text-align: center;
+    padding: 72px 24px;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    background: rgba(0,0,0,0.10);
+    margin-bottom: 28px;
+  }
+  .stage-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.66rem; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--gold2);
+    margin-bottom: 56px;
+  }
+
+  /* ── The wordmark ── */
+  .mark {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    color: #fff;
+  }
+  .mark-line {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.04em;
+  }
+  .mark-d {
+    /* Reserved space for the arched-D SVG; sized to match the cap height of the wordmark */
+    display: inline-block;
+    width: 0.78em; height: 1em;
+    color: var(--gold2);
+    margin-right: 0.04em;
+    transform: translateY(-0.04em);
+  }
+  .mark-d svg { width: 100%; height: 100%; display: block; overflow: visible; }
+  .mark-rest {
+    /* Variant-specific font set on .stage */
+    font-family: 'Italiana', 'Cormorant Garamond', serif;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    line-height: 1;
+  }
+  .mark-sub {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--ink2);
+    line-height: 1;
+  }
+  .mark-sub::before, .mark-sub::after {
+    content: ''; display: inline-block;
+    width: 1.1em; height: 1px;
+    background: var(--gold2);
+    vertical-align: middle;
+    margin: 0 0.7em;
+    opacity: 0.55;
+  }
+
+  /* Three sizes */
+  .stage.large .mark-line { font-size: clamp(3rem, 11vw, 7rem); }
+  .stage.large .mark-sub  { font-size: 0.86rem; letter-spacing: 0.36em; padding-top: 4px; }
+
+  .stage.medium .mark-line { font-size: clamp(1.6rem, 4.4vw, 2.6rem); }
+  .stage.medium .mark-sub  { font-size: 0.6rem; letter-spacing: 0.32em; padding-top: 2px; }
+  .stage.medium { padding: 32px 24px; }
+
+  .stage.small .mark-line { font-size: 1.05rem; }
+  .stage.small .mark-sub  { font-size: 0.5rem; letter-spacing: 0.28em; padding-top: 1px; }
+  .stage.small { padding: 18px 22px; text-align: left; display: flex; align-items: center; justify-content: space-between; }
+  .stage.small .stage-eyebrow { margin-bottom: 0; }
+
+  /* Mockup label below each stage */
+  .stage-cap {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--ink4);
+    margin-bottom: 56px;
+    text-align: center;
+  }
+
+  /* Variant info card */
+  .info {
+    margin-top: 56px;
+    padding: 28px 32px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: 8px;
+  }
+  .info-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.66rem; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--gold2);
+    margin-bottom: 8px;
+  }
+  .info-title {
+    font-family: 'Italiana', serif;
+    font-size: 1.6rem; font-weight: 400;
+    letter-spacing: 0.04em;
+    margin-bottom: 10px; color: #fff;
+  }
+  .info-body {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 0.95rem; color: var(--ink2);
+    line-height: 1.65; margin-bottom: 18px;
+    max-width: 700px; font-style: italic;
+  }
+  .info-meta {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 14px; margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  .info-meta-item {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.66rem; line-height: 1.5;
+    color: var(--ink3);
+  }
+  .info-meta-item strong {
+    display: block;
+    font-size: 0.56rem; letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink4); font-weight: 500;
+    margin-bottom: 4px;
+  }
+
+  footer.page-foot {
+    margin-top: 64px; padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--ink4);
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <nav class="preview-nav">
+    <span class="label">Logo Preview · Variant A</span>
+    <span class="links">
+      <a href="/preview/logo-italiana/" class="active">Italiana</a>
+      <a href="/preview/logo-bodoni/">Bodoni Moda</a>
+      <a href="/preview/logo-cormorant/">Cormorant</a>
+    </span>
+  </nav>
+
+  <!-- Hero stage — full size -->
+  <div class="stage large">
+    <div class="stage-eyebrow">Hero · 7rem cap height</div>
+    <span class="mark">
+      <span class="mark-line">
+        <span class="mark-d" aria-hidden="true">
+          <svg viewBox="0 -2 70 92" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="6" fill="none" stroke-linecap="square" stroke-linejoin="miter">
+            <path d="M 6 30 A 29 29 0 0 1 64 30"/>
+            <line x1="6" y1="30" x2="6" y2="88"/>
+            <line x1="64" y1="30" x2="64" y2="88"/>
+          </svg>
+        </span><span class="mark-rest">EMORIA</span>
+      </span>
+      <span class="mark-sub">RESEARCH</span>
+    </span>
+  </div>
+  <div class="stage-cap">Logo at masthead size</div>
+
+  <!-- Medium stage — header use -->
+  <div class="stage medium">
+    <div class="stage-eyebrow">In context · header bar</div>
+    <span class="mark">
+      <span class="mark-line">
+        <span class="mark-d" aria-hidden="true">
+          <svg viewBox="0 -2 70 92" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="6" fill="none" stroke-linecap="square" stroke-linejoin="miter">
+            <path d="M 6 30 A 29 29 0 0 1 64 30"/>
+            <line x1="6" y1="30" x2="6" y2="88"/>
+            <line x1="64" y1="30" x2="64" y2="88"/>
+          </svg>
+        </span><span class="mark-rest">EMORIA</span>
+      </span>
+      <span class="mark-sub">RESEARCH</span>
+    </span>
+  </div>
+  <div class="stage-cap">Logo at site-nav size</div>
+
+  <!-- Small stage — inline use -->
+  <div class="stage small">
+    <span class="stage-eyebrow">Inline · footer / one-liner</span>
+    <span class="mark" style="flex-direction: row; gap: 16px; align-items: center">
+      <span class="mark-line">
+        <span class="mark-d" aria-hidden="true">
+          <svg viewBox="0 -2 70 92" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="6" fill="none" stroke-linecap="square" stroke-linejoin="miter">
+            <path d="M 6 30 A 29 29 0 0 1 64 30"/>
+            <line x1="6" y1="30" x2="6" y2="88"/>
+            <line x1="64" y1="30" x2="64" y2="88"/>
+          </svg>
+        </span><span class="mark-rest">EMORIA</span>
+      </span>
+      <span class="mark-sub" style="font-size:0.5rem">RESEARCH</span>
+    </span>
+  </div>
+
+  <div class="info">
+    <div class="info-eyebrow">Variant A</div>
+    <div class="info-title">Italiana</div>
+    <p class="info-body">A monumental Italian display serif with engraved-stone proportions and unbracketed thin serifs. Reads as architectural inscription &mdash; the lettering you'd find above the entrance of a Milan banking palazzo or a Roman museum. Pairs naturally with the arched gateway because both speak the same vocabulary of vertical column, capital, and lintel.</p>
+    <div class="info-meta">
+      <div class="info-meta-item"><strong>Wordmark</strong>Italiana, Google Fonts (free)</div>
+      <div class="info-meta-item"><strong>Subline</strong>JetBrains Mono, tracked caps</div>
+      <div class="info-meta-item"><strong>Mark</strong>Hand-drawn arched D · gold</div>
+    </div>
+  </div>
+
+  <footer class="page-foot">Demoria Research · logo preview</footer>
+
+</div>
+</body>
+</html>
