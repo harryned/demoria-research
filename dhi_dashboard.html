@@ -2099,7 +2099,7 @@ header {
               <tr>
                 <th>Rank</th><th>Country</th><th>Region</th>
                 <th>TFS</th><th>Mom.</th><th>WSS</th><th>FQS</th><th>MDS</th>
-                <th>Overall</th><th>Score</th><th>Classification</th><th>Δ 1999–2024</th><th>Δ 2024–2050</th><th>Trend</th>
+                <th style="min-width:110px">Overall</th><th>Classification</th><th>Δ 1999–2024</th><th>Δ 2024–2050</th>
               </tr>
             </thead>
             <tbody id="rank-tbody"></tbody>
@@ -3765,14 +3765,47 @@ function selectRegion(key, el) {
   // canvas is fully laid out before Chart.js measures its container size.
   if (chartRegTrend) { chartRegTrend.destroy(); chartRegTrend = null; }
   if (chartRegCats)  { chartRegCats.destroy();  chartRegCats  = null; }
-  const histYears = DATA.years.filter(y => Number(y) <= 2024);
-  const years = [...histYears, '2050'];
-  const overallVals = histYears.map(y => regData.years[y]?.Overall ?? null);
-  overallVals.push(regData.years['2050']?.Overall ?? null);
-  const globalVals  = histYears.map(y => DATA.global[y]?.Overall  ?? null);
-  globalVals.push(DATA.global?.['2050']?.Overall ?? null);
-  // Projected segment (dashed) — only the 2024→2050 link
-  const projVals = years.map(y => (Number(y) === 2024 || Number(y) === 2050) ? (regData.years[y]?.Overall ?? null) : null);
+
+  // Build a continuous yearly x-axis from 1965 to 2050. Historical values fill
+  // 1965-2024; the projection segment uses linearly interpolated values between
+  // known projection anchors (2024 → 2025 → 2035 → 2050) so the dashed line
+  // sits at the correct horizontal position for every intermediate year.
+  const X_MIN = 1965, X_MAX = 2050;
+  const years = [];
+  for (let y = X_MIN; y <= X_MAX; y++) years.push(String(y));
+
+  function interpAcross(getVal) {
+    // anchors = projection points we actually have (2024, 2025, 2035, 2050)
+    const anchorYears = [2024, 2025, 2035, 2050]
+      .filter(y => getVal(String(y)) != null);
+    return years.map(y => {
+      const yi = Number(y);
+      if (yi <= 2024) return getVal(y) ?? null;          // historical: only real values, no fill
+      // projection: linear interpolate between bracketing anchors
+      let lo = null, hi = null;
+      for (const a of anchorYears) {
+        if (a <= yi) lo = a;
+        if (a >= yi && hi == null) hi = a;
+      }
+      if (lo == null || hi == null) return null;
+      const vLo = getVal(String(lo)), vHi = getVal(String(hi));
+      if (vLo == null || vHi == null) return null;
+      if (lo === hi) return vLo;
+      const t = (yi - lo) / (hi - lo);
+      return vLo + (vHi - vLo) * t;
+    });
+  }
+
+  // Historical (1965-2024) for region + global
+  const histRegion = years.map(y => Number(y) <= 2024 ? (regData.years[y]?.Overall ?? null) : null);
+  const histGlobal = years.map(y => Number(y) <= 2024 ? (DATA.global[y]?.Overall   ?? null) : null);
+
+  // Projection (2024-2050) — interpolate across anchor years so the dashed line is continuous
+  const projRegion = interpAcross(y => regData.years[y]?.Overall);
+  const projGlobal = interpAcross(y => DATA.global[y]?.Overall);
+  // Mask projection arrays to start at 2024 (so historical and projection share that point and the line is continuous)
+  const maskProj = arr => arr.map((v,i) => Number(years[i]) >= 2024 ? v : null);
+
   requestAnimationFrame(() => {
     const canvas = document.getElementById('chart-reg-trend');
     if (!canvas) return;
@@ -3781,26 +3814,41 @@ function selectRegion(key, el) {
       data: {
         labels: years,
         datasets: [
-          { label: regData.region, data: overallVals.map((v,i) => Number(years[i]) <= 2024 ? v : null),
+          { label: regData.region, data: histRegion,
             borderColor: '#1a3a6e', borderWidth: 2.5,
-            pointBackgroundColor: '#1a3a6e', pointRadius: 2, tension: 0.3, fill: false, spanGaps: true },
-          { label: 'Projected 2050', data: projVals,
-            borderColor: '#1a3a6e', borderWidth: 2, borderDash: [4,4],
-            pointBackgroundColor: '#c49a28', pointRadius: 3, tension: 0, fill: false, spanGaps: true },
-          { label: 'Global avg', data: globalVals, borderColor: '#aab0c0', borderWidth: 1.5,
-            borderDash: [5,3], pointRadius: 0, tension: 0.3, fill: false, spanGaps: true }
+            pointBackgroundColor: '#1a3a6e', pointRadius: 0, tension: 0.3, fill: false, spanGaps: true },
+          { label: regData.region + ' (projected)', data: maskProj(projRegion),
+            borderColor: '#1a3a6e', borderWidth: 2, borderDash: [5,4],
+            pointBackgroundColor: '#c49a28', pointRadius: ctx => {
+              const yr = Number(years[ctx.dataIndex]);
+              return [2025, 2035, 2050].includes(yr) ? 3 : 0;
+            },
+            tension: 0.3, fill: false, spanGaps: true },
+          { label: 'Global avg', data: histGlobal,
+            borderColor: '#aab0c0', borderWidth: 1.5, borderDash: [5,3],
+            pointRadius: 0, tension: 0.3, fill: false, spanGaps: true },
+          { label: 'Global avg (projected)', data: maskProj(projGlobal),
+            borderColor: '#aab0c0', borderWidth: 1.2, borderDash: [3,3],
+            pointRadius: 0, tension: 0.3, fill: false, spanGaps: true }
         ]
       },
       options: {
         responsive: true, maintainAspectRatio: false,
-        plugins: { legend: { display: true, position: 'bottom',
-          labels: { font: { size: 11 }, boxWidth: 14, padding: 10 } } },
+        plugins: {
+          legend: { display: true, position: 'bottom',
+            labels: { font: { size: 11 }, boxWidth: 14, padding: 10,
+              filter: item => !/projected/i.test(item.text) } },
+          tooltip: {
+            filter: item => item.parsed.y != null,
+            callbacks: { title: items => items[0].label }
+          }
+        },
         scales: {
           x: { type: 'category', grid: { display: false },
-            ticks: { font: { size: 9 }, maxRotation: 0,
+            ticks: { font: { size: 9 }, maxRotation: 0, autoSkip: false,
               callback: (val, i) => {
                 const yr = Number(years[i]);
-                return [1965,1975,1985,1995,2005,2015,2024,2050].includes(yr) ? yr : '';
+                return [1965,1980,1995,2010,2024,2035,2050].includes(yr) ? yr : '';
               }
             } },
           y: { min: 20, max: 100, grid: { color: 'rgba(0,0,0,0.05)' },
@@ -3845,12 +3893,15 @@ function renderRankings() {
       <td>${(s.WSS||0).toFixed(1)}</td>
       <td>${(s.FQS||0).toFixed(1)}</td>
       <td>${(s.MDS||0).toFixed(1)}</td>
-      <td><strong>${(s.Overall||0).toFixed(1)}</strong></td>
-      <td style="min-width:80px"><div class="score-bar-wrap"><div class="score-bar" style="width:${barPct}%"></div></div></td>
+      <td style="min-width:110px">
+        <div style="display:flex;align-items:center;gap:8px">
+          <strong style="min-width:32px">${(s.Overall||0).toFixed(1)}</strong>
+          <div class="score-bar-wrap" style="flex:1"><div class="score-bar" style="width:${barPct}%;background:${cls.color}"></div></div>
+        </div>
+      </td>
       <td style="white-space:nowrap"><span class="class-badge" style="color:${cls.color};background:${cls.bg};border-color:${cls.color}">${cls.label}</span></td>
       <td style="color:${dColor};font-size:0.82rem">${dStr}</td>
-      <td style="color:${d50Color};font-size:0.82rem">${d50Str}</td>
-      <td><span class="traj-badge tb-${c.traj}">${c.traj||'—'}</span></td>`;
+      <td style="color:${d50Color};font-size:0.82rem">${d50Str}</td>`;
     tr.onclick = () => { selectCountry(c.iso, null); };
     tbody.appendChild(tr);
   });
