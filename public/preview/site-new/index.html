@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Demoria Research — Preview</title>
+<meta name="description" content="Preview · Demoria Research firm landing on warm-black ground with the new arch + star lockup.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Cinzel:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:    #0e0d0c;
+    --bg2:   #15130f;
+    --gold:  #c8a850;
+    --gold-bright: #e0c170;
+    --ink:   #f0ebe0;
+    --ink2:  #b9b1a1;
+    --ink3:  #6e685c;
+    --ink4:  #3a352d;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    background: var(--bg);
+    color: var(--ink);
+    font-size: 17px;
+    line-height: 1.6;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+  }
+  /* Faint diagonal radial wash so the warm-black has depth */
+  body::before {
+    content: ''; position: fixed; inset: 0;
+    background: radial-gradient(ellipse at 30% 20%, rgba(200,168,80,0.06) 0%, transparent 55%);
+    pointer-events: none; z-index: 0;
+  }
+
+  /* ── Background animations: animated map silhouette + slow trend line, gold-tinted ── */
+  .bg-layer { position: fixed; inset: 0; pointer-events: none; user-select: none; z-index: 0; }
+  #bg-map { opacity: 1; }
+  #bg-map .country {
+    fill: rgba(200,168,80,0);
+    stroke: rgba(200,168,80,0.30);
+    stroke-width: 0.45; stroke-linejoin: round; stroke-linecap: round;
+    --len: 100;
+    stroke-dasharray: var(--len);
+    stroke-dashoffset: var(--len);
+    animation: countryDraw 6s ease-out forwards, countryFill 4s ease-out forwards;
+    animation-delay: var(--d, 0s), calc(var(--d, 0s) + 4s);
+  }
+  @keyframes countryDraw { to { stroke-dashoffset: 0; } }
+  @keyframes countryFill { to { fill: rgba(200,168,80,0.045); } }
+  @media (prefers-reduced-motion: reduce) {
+    #bg-map .country { animation: none; stroke-dashoffset: 0; fill: rgba(200,168,80,0.045); }
+  }
+  /* Trend line */
+  #bg-trend { opacity: 0.32; }
+  #bg-trend .axis-line { stroke: rgba(255,255,255,0.08); stroke-width: 1; }
+  #bg-trend .axis-tick { fill: rgba(255,255,255,0.22); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.06em; }
+  #bg-trend .trend-line {
+    fill: none; stroke: var(--gold); stroke-width: 1.2;
+    stroke-linecap: round; stroke-linejoin: round;
+    filter: drop-shadow(0 0 3px rgba(200,168,80,0.18));
+  }
+  #bg-trend .trend-area { fill: url(#area-grad); }
+  #bg-trend .trend-head { fill: var(--gold-bright); filter: drop-shadow(0 0 4px rgba(200,168,80,0.35)); }
+  #bg-trend.is-drawing .trend-line {
+    stroke-dasharray: var(--len); stroke-dashoffset: var(--len);
+    animation: draw 28s ease-in-out infinite;
+  }
+  #bg-trend.is-drawing .trend-area { opacity: 0; animation: areaFade 28s ease-in-out infinite; }
+  #bg-trend.is-drawing .trend-head { opacity: 0; animation: headFade 28s ease-in-out infinite; }
+  @keyframes draw { 0%{stroke-dashoffset:var(--len);} 65%{stroke-dashoffset:0;} 85%{stroke-dashoffset:0;opacity:1;} 100%{stroke-dashoffset:0;opacity:0;} }
+  @keyframes areaFade { 0%,10%{opacity:0;} 65%{opacity:0.20;} 85%{opacity:0.20;} 100%{opacity:0;} }
+  @keyframes headFade { 0%,5%{opacity:0;} 65%{opacity:1;} 85%{opacity:1;} 100%{opacity:0;} }
+
+  .wrap { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; padding: 32px; }
+
+  /* ── Top masthead lockup ── */
+  header.masthead {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 22px 0;
+    margin-bottom: 80px;
+    border-bottom: 1px solid var(--ink4);
+  }
+  .lockup {
+    display: inline-flex; align-items: center; gap: 14px;
+    text-decoration: none; color: inherit;
+  }
+  .lockup .mark-svg { width: 36px; height: auto; color: var(--gold); flex-shrink: 0; }
+  .lockup .wm-text {
+    display: flex; flex-direction: column; line-height: 0.95;
+  }
+  .lockup .wm-d {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem; font-weight: 600; color: var(--ink);
+    letter-spacing: -0.005em;
+  }
+  .lockup .wm-r {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.0rem; font-weight: 400; color: var(--ink2);
+    letter-spacing: 0.005em;
+    margin-top: 0.05em;
+  }
+
+  /* Navigation links in masthead */
+  .nav-links { display: flex; gap: 22px; flex-wrap: wrap; }
+  .nav-links a {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem; letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink3); text-decoration: none;
+    transition: color .15s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+
+  /* Preview banner */
+  .preview-banner {
+    background: rgba(200,168,80,0.08);
+    border: 1px solid rgba(200,168,80,0.30);
+    border-radius: 4px;
+    padding: 10px 16px;
+    margin-bottom: 56px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.66rem; letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  /* ── Hero ── */
+  .hero { margin-bottom: 80px; max-width: 760px; }
+  .hero-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 24px;
+  }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.8rem, 6.4vw, 5rem);
+    font-weight: 500; line-height: 1.05;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+    margin-bottom: 20px;
+  }
+  .hero h1 em { color: var(--gold); font-style: italic; font-weight: 500; }
+  .hero p.lede {
+    font-size: 1.18rem; font-style: italic;
+    color: var(--ink2); line-height: 1.55;
+    max-width: 600px;
+  }
+
+  /* ── Three tiles ── */
+  .tiles {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
+    margin-bottom: 80px;
+  }
+  @media (max-width: 760px) { .tiles { grid-template-columns: 1fr; } }
+  .tile {
+    display: flex; flex-direction: column;
+    padding: 28px 26px;
+    background: rgba(255,255,255,0.025);
+    border: 1px solid var(--ink4);
+    border-radius: 4px;
+    text-decoration: none; color: inherit;
+    transition: background .18s, border-color .18s, transform .18s;
+    min-height: 220px;
+  }
+  .tile:hover {
+    background: rgba(200,168,80,0.06);
+    border-color: rgba(200,168,80,0.40);
+    transform: translateY(-1px);
+  }
+  .tile-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem; letter-spacing: 0.14em;
+    color: var(--gold); margin-bottom: 16px;
+  }
+  .tile-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; font-weight: 600;
+    color: var(--ink);
+    line-height: 1.2; margin-bottom: 10px;
+  }
+  .tile-desc {
+    font-size: 0.95rem; color: var(--ink2);
+    line-height: 1.5; flex: 1;
+  }
+  .tile-arrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem; letter-spacing: 0.14em;
+    color: var(--gold);
+    margin-top: 18px;
+    text-transform: uppercase;
+  }
+  .tile-arrow .arrow-glyph { font-family: serif; }
+
+  /* ── Closing band ── */
+  footer.page-foot {
+    margin-top: 120px; padding-top: 28px;
+    border-top: 1px solid var(--ink4);
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--ink3);
+    flex-wrap: wrap; gap: 12px;
+  }
+  footer .lockup .mark-svg { width: 18px; }
+  footer .lockup .wm-d { font-size: 0.78rem; }
+  footer .lockup .wm-r { display: none; }
+</style>
+</head>
+<body>
+
+<!-- Reusable mark -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="dr-mark" viewBox="0 0 100 200">
+      <path d="M 10 192 L 10 60 A 40 40 0 0 1 90 60 L 90 192 Z" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linejoin="miter"/>
+      <g transform="translate(50 78)" stroke="currentColor" fill="currentColor">
+        <line x1="0" y1="0" x2="0"   y2="-15" stroke-width="1.4"/>
+        <line x1="0" y1="0" x2="15"  y2="0"   stroke-width="1.4"/>
+        <line x1="0" y1="0" x2="0"   y2="15"  stroke-width="1.4"/>
+        <line x1="0" y1="0" x2="-15" y2="0"   stroke-width="1.4"/>
+        <line x1="0" y1="0" x2="9"   y2="-9"  stroke-width="1.2"/>
+        <line x1="0" y1="0" x2="9"   y2="9"   stroke-width="1.2"/>
+        <line x1="0" y1="0" x2="-9"  y2="9"   stroke-width="1.2"/>
+        <line x1="0" y1="0" x2="-9"  y2="-9"  stroke-width="1.2"/>
+        <circle cx="0"   cy="-15" r="1.8"/>
+        <circle cx="15"  cy="0"   r="1.8"/>
+        <circle cx="0"   cy="15"  r="1.8"/>
+        <circle cx="-15" cy="0"   r="1.8"/>
+        <circle cx="9"   cy="-9"  r="1.4"/>
+        <circle cx="9"   cy="9"   r="1.4"/>
+        <circle cx="-9"  cy="9"   r="1.4"/>
+        <circle cx="-9"  cy="-9"  r="1.4"/>
+        <circle cx="0"   cy="0"   r="2.0"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<svg id="bg-map" class="bg-layer" preserveAspectRatio="xMidYMid slice"></svg>
+<svg id="bg-trend" class="bg-layer" preserveAspectRatio="none">
+  <defs>
+    <linearGradient id="area-grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#c8a850" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#c8a850" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+</svg>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <a class="lockup" href="/preview/site-new/">
+      <svg class="mark-svg" viewBox="0 0 100 200"><use href="#dr-mark"/></svg>
+      <span class="wm-text">
+        <span class="wm-d">Demoria</span>
+        <span class="wm-r">Research</span>
+      </span>
+    </a>
+    <nav class="nav-links">
+      <a href="/preview/site-new/dhi/">DHI</a>
+      <a href="/preview/site-new/#research">Research</a>
+      <a href="/preview/site-new/#tracker">Tracker</a>
+    </nav>
+  </header>
+
+  <div class="preview-banner">› Preview · Brand integration mock · not on production</div>
+
+  <section class="hero">
+    <div class="hero-eyebrow">Demographic intelligence</div>
+    <h1>Long-run demographic <em>intelligence</em>.</h1>
+    <p class="lede">Independent research on the demographic health of nations &mdash; building visible, comparable measures of the trends that shape public finance, geopolitics and the long-term stability of states.</p>
+  </section>
+
+  <section class="tiles">
+    <a class="tile" href="/preview/site-new/dhi/">
+      <div class="tile-num">— 01</div>
+      <div class="tile-title">Demographic Health Index</div>
+      <div class="tile-desc">A unified score for 236 countries &amp; territories from 1965 to 2100, with low/median/high projection variants. Five-dimension structure across fertility, momentum, workforce, fertility quality and migration.</div>
+      <div class="tile-arrow">Open the index <span class="arrow-glyph">→</span></div>
+    </a>
+    <a class="tile" href="/preview/research/">
+      <div class="tile-num">— 02</div>
+      <div class="tile-title">Research</div>
+      <div class="tile-desc">Briefings and analysis on demographic ageing, fertility collapse, and the macroeconomic consequences that follow. Free monthly outlook plus Pro-tier deep-dives, published on Substack.</div>
+      <div class="tile-arrow">Read the briefings <span class="arrow-glyph">→</span></div>
+    </a>
+    <a class="tile" href="/preview/tracker/">
+      <div class="tile-num">— 03</div>
+      <div class="tile-title">Live Tracker</div>
+      <div class="tile-desc">Curated log of the most recent fertility and birth releases from national statistical offices. Sorted by recency &mdash; always current. Free preview, full table available to Pro subscribers.</div>
+      <div class="tile-arrow">See the latest releases <span class="arrow-glyph">→</span></div>
+    </a>
+  </section>
+
+  <footer class="page-foot">
+    <a class="lockup" href="/preview/site-new/">
+      <svg class="mark-svg" viewBox="0 0 100 200"><use href="#dr-mark"/></svg>
+      <span class="wm-text"><span class="wm-d">Demoria Research</span></span>
+    </a>
+    <span>© Demoria Research · Demographic intelligence</span>
+  </footer>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
+<script>
+(function () {
+  const NS = 'http://www.w3.org/2000/svg';
+  let mapCountries = null;
+
+  async function loadMap() {
+    if (mapCountries) return mapCountries;
+    try {
+      const res = await fetch('https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-110m.json');
+      const world = await res.json();
+      mapCountries = topojson.feature(world, world.objects.countries);
+      return mapCountries;
+    } catch (e) { return null; }
+  }
+  async function renderMap() {
+    const countries = await loadMap();
+    if (!countries) return;
+    const svg = document.getElementById('bg-map');
+    const w = window.innerWidth, h = window.innerHeight;
+    svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
+    const projection = d3.geoNaturalEarth1().fitSize([w*1.05, h*1.1], countries).translate([w/2, h/2 + h*0.04]);
+    const path = d3.geoPath(projection);
+    const g = document.createElementNS(NS, 'g');
+    countries.features.forEach(f => {
+      const dStr = path(f); if (!dStr) return;
+      const p = document.createElementNS(NS, 'path');
+      p.setAttribute('d', dStr); p.setAttribute('class', 'country');
+      g.appendChild(p);
+    });
+    svg.innerHTML = ''; svg.appendChild(g);
+    requestAnimationFrame(() => {
+      const paths = g.querySelectorAll('.country');
+      const lengths = [];
+      paths.forEach((p) => { let len; try { len = p.getTotalLength(); } catch { len = 200; } lengths.push({p, len}); });
+      lengths.sort((a, b) => b.len - a.len);
+      lengths.forEach((entry, rank) => {
+        const delay = (rank / Math.max(1, lengths.length - 1)) * 22;
+        entry.p.style.setProperty('--len', entry.len);
+        entry.p.style.setProperty('--d', delay.toFixed(2) + 's');
+      });
+    });
+  }
+
+  function renderTrend() {
+    const data = [
+      [1965, 3.34], [1970, 3.70], [1975, 4.08], [1980, 4.46], [1985, 4.87],
+      [1990, 5.33], [1995, 5.76], [2000, 6.17], [2005, 6.59], [2010, 7.02],
+      [2015, 7.47], [2020, 7.84], [2024, 8.16], [2030, 8.42], [2040, 8.79],
+      [2050, 8.93], [2055, 8.95], [2060, 8.87], [2070, 8.62], [2080, 8.22],
+      [2090, 7.69], [2100, 7.10]
+    ];
+    const svg = document.getElementById('bg-trend');
+    const w = window.innerWidth, h = window.innerHeight;
+    svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
+    const padX = Math.max(40, w * 0.05);
+    const padTop = Math.max(40, h * 0.05);
+    const padBottom = Math.max(140, h * 0.30);
+    const plotTop = padTop;
+    const plotH = h - padTop - padBottom;
+    const baseY = plotTop + plotH;
+    const xMin = 1965, xMax = 2100, yMin = 3, yMax = 9.5;
+    const xScale = yr => padX + (yr - xMin) / (xMax - xMin) * (w - padX*2);
+    const yScale = v  => plotTop + (1 - (v - yMin) / (yMax - yMin)) * plotH;
+    const pts = data.map(([x, y]) => [xScale(x), yScale(y)]);
+    let d = `M ${pts[0][0]} ${pts[0][1]}`;
+    for (let i = 0; i < pts.length - 1; i++) {
+      const [x0, y0] = pts[Math.max(0, i - 1)];
+      const [x1, y1] = pts[i];
+      const [x2, y2] = pts[i + 1];
+      const [x3, y3] = pts[Math.min(pts.length - 1, i + 2)];
+      const cp1x = x1 + (x2 - x0) / 6;
+      const cp1y = y1 + (y2 - y0) / 6;
+      const cp2x = x2 - (x3 - x1) / 6;
+      const cp2y = y2 - (y3 - y1) / 6;
+      d += ` C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${x2} ${y2}`;
+    }
+    const areaD = d + ` L ${pts[pts.length-1][0]} ${baseY} L ${pts[0][0]} ${baseY} Z`;
+    const tickYears = [1965, 1995, 2024, 2050, 2075, 2100];
+    let axisHtml = `<line class="axis-line" x1="${padX}" y1="${baseY}" x2="${w-padX}" y2="${baseY}"/>`;
+    tickYears.forEach(yr => {
+      const x = xScale(yr);
+      axisHtml += `<line class="axis-line" x1="${x}" y1="${baseY}" x2="${x}" y2="${baseY+4}"/>`;
+      axisHtml += `<text class="axis-tick" x="${x}" y="${baseY+18}" text-anchor="middle">${yr}</text>`;
+    });
+    const defs = svg.querySelector('defs').outerHTML;
+    svg.innerHTML = defs + `
+      <g>${axisHtml}</g>
+      <path class="trend-area" d="${areaD}"/>
+      <path class="trend-line" id="trend-line-path" d="${d}"/>
+      <circle class="trend-head" cx="${pts[pts.length-1][0]}" cy="${pts[pts.length-1][1]}" r="3.8"/>
+    `;
+    const pathEl = svg.querySelector('#trend-line-path');
+    const len = pathEl.getTotalLength();
+    svg.style.setProperty('--len', len);
+    svg.classList.add('is-drawing');
+  }
+  renderMap(); renderTrend();
+  let rt;
+  window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { renderMap(); renderTrend(); }, 250); });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Demographic Health Index — Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Cinzel:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --accent: #1a3a6e;
+    --accent-deep: #0f2347;
+    --accent2: #2d5fb3;
+    --gold: #c49a28;
+    --gold2: #e0b54a;
+    --gold-mark: #c8a850;     /* matches the firm-side warm gold for visual continuity */
+    --ink: #f0ebe0;
+    --ink2: rgba(240,235,224,0.78);
+    --ink3: rgba(240,235,224,0.55);
+    --ink4: rgba(240,235,224,0.20);
+    --c-healthy: #22c55e;
+    --c-pressure: #eab308;
+    --c-serious: #f97316;
+    --c-critical: #ef4444;
+    --c-crisis: #7f1d1d;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-deep) 100%);
+    color: var(--ink);
+    font-size: 17px; line-height: 1.6;
+    min-height: 100vh; overflow-x: hidden;
+  }
+  body::after {
+    content: 'DR'; position: fixed;
+    font-weight: 700; font-size: 44vw;
+    color: rgba(255,255,255,0.022);
+    letter-spacing: -0.04em;
+    bottom: -10vw; right: -4vw;
+    line-height: 1; pointer-events: none; user-select: none; z-index: 0;
+  }
+  .wrap { position: relative; z-index: 1; }
+
+  /* ── Masthead — IDENTICAL lockup to firm side, just in navy context ── */
+  header.masthead {
+    background: linear-gradient(180deg, #060e1c 0%, #050a14 100%);
+    border-bottom: 1px solid rgba(196,154,40,0.35);
+    box-shadow: 0 6px 22px rgba(0,0,0,0.45);
+    position: relative;
+  }
+  header.masthead::after {
+    content: ''; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px;
+    background: linear-gradient(90deg, transparent 0%, rgba(196,154,40,0.5) 18%, rgba(232,184,75,0.85) 50%, rgba(196,154,40,0.5) 82%, transparent 100%);
+    pointer-events: none;
+  }
+  .masthead-inner {
+    max-width: 1300px; margin: 0 auto;
+    display: flex; align-items: center;
+    padding: 16px 32px; gap: 24px;
+  }
+  .lockup {
+    display: inline-flex; align-items: center; gap: 14px;
+    text-decoration: none; color: inherit; flex-shrink: 0;
+  }
+  .lockup .mark-svg {
+    width: 36px; height: auto;
+    color: var(--gold-mark);
+    flex-shrink: 0;
+  }
+  .lockup .wm-text { display: flex; flex-direction: column; line-height: 0.95; }
+  .lockup .wm-d {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem; font-weight: 600; color: var(--ink);
+    letter-spacing: -0.005em;
+  }
+  .lockup .wm-r {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem; font-weight: 400; color: var(--ink2);
+    letter-spacing: 0.005em; margin-top: 0.05em;
+  }
+
+  /* Tabs */
+  .tabs {
+    display: flex; align-items: stretch; gap: 4px;
+    margin-left: auto;
+  }
+  .tab {
+    position: relative;
+    padding: 0 16px; min-height: 56px;
+    border: none; background: none;
+    color: rgba(240,235,224,0.55);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.94rem; font-weight: 500;
+    cursor: pointer; white-space: nowrap;
+    display: inline-flex; align-items: center;
+    transition: color .18s ease;
+    text-decoration: none;
+  }
+  .tab::after {
+    content: ''; position: absolute;
+    left: 16px; right: 16px; bottom: 0; height: 2px;
+    background: transparent;
+    transform: scaleX(0); transform-origin: center;
+    transition: transform .22s ease, background-color .22s ease;
+  }
+  .tab:hover { color: #fff; }
+  .tab:hover::after { background: rgba(255,255,255,0.35); transform: scaleX(0.55); }
+  .tab.active { color: #fff; }
+  .tab.active::after {
+    background: linear-gradient(90deg, #c49a28, #e8b84b, #c49a28);
+    transform: scaleX(1);
+    box-shadow: 0 0 6px rgba(232,184,75,0.45);
+  }
+  .tab.tab-data::after {
+    background: rgba(232,184,75,0.45);
+    transform: scaleX(0.85); height: 1.5px;
+  }
+  .tab.tab-data:hover::after {
+    background: linear-gradient(90deg, #c49a28, #f5cd66, #c49a28);
+    transform: scaleX(1);
+  }
+  .tab.tab-data.active::after {
+    background: linear-gradient(90deg, #c49a28, #e8b84b, #c49a28);
+    transform: scaleX(1); height: 2px;
+    box-shadow: 0 0 6px rgba(232,184,75,0.45);
+  }
+  .tab-divider {
+    display: inline-block; align-self: center;
+    width: 1px; height: 20px;
+    margin: 0 14px;
+    background: rgba(255,255,255,0.14);
+  }
+
+  /* Sub-bar — projection band like the real DHI */
+  .sub-bar {
+    background: rgba(8,12,22,0.96);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    padding: 8px 32px;
+    display: flex; align-items: center; gap: 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+    flex-wrap: wrap;
+  }
+  .sub-bar .now-showing {
+    background: rgba(255,255,255,0.04);
+    border-radius: 4px;
+    padding: 4px 10px 5px;
+    border-right: 1px solid rgba(255,255,255,0.10);
+    padding-right: 14px;
+    margin-right: 6px;
+    color: rgba(255,255,255,0.78);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.82rem; letter-spacing: 0.01em;
+    text-transform: none;
+  }
+  .sub-bar .now-showing strong { color: #fff; font-weight: 700; }
+  .sub-bar .now-showing em { color: rgba(255,255,255,0.55); font-style: italic; }
+  .sub-bar .gold-em { color: var(--gold2); }
+
+  /* ── Body content area (mock) ── */
+  .content {
+    max-width: 1300px; margin: 0 auto;
+    padding: 56px 32px 80px;
+  }
+
+  /* Stage that shows what the World Map would feel like with new branding */
+  .map-stage {
+    background: rgba(0,0,0,0.18);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 6px;
+    padding: 28px;
+    margin-bottom: 28px;
+    min-height: 480px;
+    position: relative;
+    overflow: hidden;
+  }
+  .map-stage-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.66rem; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--gold2);
+    margin-bottom: 12px;
+  }
+  .map-stage-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; font-weight: 600; color: #fff;
+    margin-bottom: 24px;
+  }
+  .map-placeholder {
+    height: 360px;
+    background:
+      radial-gradient(ellipse at 30% 35%, rgba(34,197,94,0.18) 0%, transparent 35%),
+      radial-gradient(ellipse at 65% 55%, rgba(239,68,68,0.18) 0%, transparent 35%),
+      radial-gradient(ellipse at 80% 35%, rgba(202,138,4,0.18) 0%, transparent 35%),
+      linear-gradient(135deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.02) 100%);
+    border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    border: 1px dashed rgba(255,255,255,0.12);
+  }
+  .map-placeholder-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem; letter-spacing: 0.18em;
+    text-transform: uppercase; color: rgba(255,255,255,0.32);
+    text-align: center; line-height: 1.8;
+  }
+  .map-placeholder-text strong { color: rgba(255,255,255,0.55); display: block; margin-top: 6px; font-size: 0.9rem; letter-spacing: 0.04em; text-transform: none; font-family: 'Cormorant Garamond', serif; font-style: italic; }
+
+  /* Two-column info row — mimics country panel + side stats */
+  .info-row {
+    display: grid; grid-template-columns: 1fr 320px; gap: 24px;
+  }
+  @media (max-width: 920px) { .info-row { grid-template-columns: 1fr; } }
+
+  .info-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: 6px;
+    padding: 22px 24px;
+  }
+  .info-card-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--gold2);
+    margin-bottom: 8px;
+  }
+  .info-card-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem; font-weight: 600; color: #fff;
+    margin-bottom: 6px;
+  }
+  .info-card-classification {
+    display: inline-block;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.78rem; font-weight: 600;
+    color: var(--c-pressure);
+    border: 1px solid var(--c-pressure);
+    background: rgba(202,138,4,0.12);
+    padding: 2px 10px; border-radius: 10px;
+    margin-bottom: 14px;
+  }
+  .info-card-score {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.6rem; font-weight: 700; color: #fff;
+    line-height: 1; margin-bottom: 4px;
+  }
+  .info-card-rank {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem; color: var(--ink3);
+    letter-spacing: 0.04em;
+    margin-bottom: 18px;
+  }
+  .info-card-bars {
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .cat-bar-row {
+    display: grid; grid-template-columns: 110px 1fr 50px;
+    align-items: center; gap: 12px;
+  }
+  .cat-bar-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.86rem; color: var(--ink2);
+  }
+  .cat-bar-track {
+    height: 6px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden;
+  }
+  .cat-bar-fill {
+    height: 100%; border-radius: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--gold2));
+  }
+  .cat-bar-val {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.86rem; font-weight: 700; color: #fff;
+    text-align: right; font-variant-numeric: tabular-nums;
+  }
+
+  /* Side metrics */
+  .side-stats { display: flex; flex-direction: column; gap: 10px; }
+  .stat {
+    background: rgba(255,255,255,0.04);
+    border-left: 2px solid rgba(255,255,255,0.20);
+    padding: 14px 16px; border-radius: 0 4px 4px 0;
+  }
+  .stat.is-up { border-left-color: var(--c-healthy); }
+  .stat.is-down { border-left-color: var(--c-critical); }
+  .stat.is-flat { border-left-color: var(--c-pressure); }
+  .stat-val {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; font-weight: 700; line-height: 1;
+    color: #fff; font-variant-numeric: tabular-nums;
+    margin-bottom: 4px;
+  }
+  .stat.is-up .stat-val { color: var(--c-healthy); }
+  .stat.is-down .stat-val { color: var(--c-critical); }
+  .stat.is-flat .stat-val { color: var(--c-pressure); }
+  .stat-lbl {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.58rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--ink3);
+  }
+
+  /* Preview banner */
+  .preview-banner {
+    max-width: 1300px; margin: 18px auto 0;
+    background: rgba(232,184,75,0.10);
+    border: 1px solid rgba(232,184,75,0.40);
+    border-radius: 4px;
+    padding: 8px 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem; letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold2);
+    width: calc(100% - 64px);
+  }
+
+  footer.page-foot {
+    max-width: 1300px; margin: 0 auto;
+    padding: 48px 32px 32px;
+    border-top: 1px solid rgba(255,255,255,0.10);
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem; letter-spacing: 0.18em;
+    text-transform: uppercase; color: rgba(255,255,255,0.32);
+    flex-wrap: wrap; gap: 12px;
+  }
+  footer .lockup .mark-svg { width: 18px; }
+  footer .lockup .wm-d { font-size: 0.78rem; }
+  footer .lockup .wm-r { display: none; }
+</style>
+</head>
+<body>
+
+<!-- Reusable mark — same SVG as firm side -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="dr-mark" viewBox="0 0 100 200">
+      <path d="M 10 192 L 10 60 A 40 40 0 0 1 90 60 L 90 192 Z" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linejoin="miter"/>
+      <g transform="translate(50 78)" stroke="currentColor" fill="currentColor">
+        <line x1="0" y1="0" x2="0"   y2="-15" stroke-width="1.4"/>
+        <line x1="0" y1="0" x2="15"  y2="0"   stroke-width="1.4"/>
+        <line x1="0" y1="0" x2="0"   y2="15"  stroke-width="1.4"/>
+        <line x1="0" y1="0" x2="-15" y2="0"   stroke-width="1.4"/>
+        <line x1="0" y1="0" x2="9"   y2="-9"  stroke-width="1.2"/>
+        <line x1="0" y1="0" x2="9"   y2="9"   stroke-width="1.2"/>
+        <line x1="0" y1="0" x2="-9"  y2="9"   stroke-width="1.2"/>
+        <line x1="0" y1="0" x2="-9"  y2="-9"  stroke-width="1.2"/>
+        <circle cx="0"   cy="-15" r="1.8"/>
+        <circle cx="15"  cy="0"   r="1.8"/>
+        <circle cx="0"   cy="15"  r="1.8"/>
+        <circle cx="-15" cy="0"   r="1.8"/>
+        <circle cx="9"   cy="-9"  r="1.4"/>
+        <circle cx="9"   cy="9"   r="1.4"/>
+        <circle cx="-9"  cy="9"   r="1.4"/>
+        <circle cx="-9"  cy="-9"  r="1.4"/>
+        <circle cx="0"   cy="0"   r="2.0"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="masthead-inner">
+      <a class="lockup" href="/preview/site-new/">
+        <svg class="mark-svg" viewBox="0 0 100 200"><use href="#dr-mark"/></svg>
+        <span class="wm-text">
+          <span class="wm-d">Demoria</span>
+          <span class="wm-r">Research</span>
+        </span>
+      </a>
+      <nav class="tabs">
+        <a class="tab tab-data active" href="#">World Map</a>
+        <a class="tab tab-data" href="#">Index &amp; Rankings</a>
+        <a class="tab tab-data" href="#">Fiscal Health</a>
+        <span class="tab-divider" aria-hidden="true"></span>
+        <a class="tab" href="#">About</a>
+        <a class="tab" href="#">So What?</a>
+        <a class="tab" href="#">Methodology</a>
+        <a class="tab" href="#">Author</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="sub-bar">
+    <span class="now-showing"><strong>2024</strong> &middot; <em>historical</em></span>
+    <span>Index Structure ·</span>
+    <span class="gold-em">Overall</span>
+    <span>· Fertility · Momentum · Workforce · Fertility Quality · Migration</span>
+  </div>
+
+  <div class="preview-banner">› Preview · The masthead bridges to the firm side. Tabs and content stay in the navy/data palette.</div>
+
+  <main class="content">
+
+    <div class="map-stage">
+      <div class="map-stage-eyebrow">World Map · DHI 2024</div>
+      <div class="map-stage-heading">Demographic Health, by country</div>
+      <div class="map-placeholder">
+        <div class="map-placeholder-text">
+          [ Choropleth map sits here ]<br>
+          <strong>Same world map as the live DHI — only the masthead changes.</strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-row">
+
+      <div class="info-card">
+        <div class="info-card-eyebrow">Country profile · sample</div>
+        <div class="info-card-name">Italy</div>
+        <span class="info-card-classification">Under Pressure</span>
+        <div class="info-card-score">62.4</div>
+        <div class="info-card-rank">Global rank 168 / 236 · Δ 1999 → 2024 −18.7</div>
+        <div class="info-card-bars">
+          <div class="cat-bar-row">
+            <div class="cat-bar-name">Fertility</div>
+            <div class="cat-bar-track"><div class="cat-bar-fill" style="width:42%"></div></div>
+            <div class="cat-bar-val">13.4</div>
+          </div>
+          <div class="cat-bar-row">
+            <div class="cat-bar-name">Momentum</div>
+            <div class="cat-bar-track"><div class="cat-bar-fill" style="width:38%"></div></div>
+            <div class="cat-bar-val">8.0</div>
+          </div>
+          <div class="cat-bar-row">
+            <div class="cat-bar-name">Workforce</div>
+            <div class="cat-bar-track"><div class="cat-bar-fill" style="width:62%"></div></div>
+            <div class="cat-bar-val">13.6</div>
+          </div>
+          <div class="cat-bar-row">
+            <div class="cat-bar-name">Fertility Quality</div>
+            <div class="cat-bar-track"><div class="cat-bar-fill" style="width:78%"></div></div>
+            <div class="cat-bar-val">6.2</div>
+          </div>
+          <div class="cat-bar-row">
+            <div class="cat-bar-name">Migration</div>
+            <div class="cat-bar-track"><div class="cat-bar-fill" style="width:62%"></div></div>
+            <div class="cat-bar-val">10.5</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="side-stats">
+        <div class="stat is-down">
+          <div class="stat-val">−18.7</div>
+          <div class="stat-lbl">Δ since 1999</div>
+        </div>
+        <div class="stat is-down">
+          <div class="stat-val">Declining</div>
+          <div class="stat-lbl">Trend</div>
+        </div>
+        <div class="stat">
+          <div class="stat-val">168<span style="font-size:0.7em;color:var(--ink3);font-weight:400">/236</span></div>
+          <div class="stat-lbl">Global rank</div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <footer class="page-foot">
+    <a class="lockup" href="/preview/site-new/">
+      <svg class="mark-svg" viewBox="0 0 100 200"><use href="#dr-mark"/></svg>
+      <span class="wm-text"><span class="wm-d">Demoria Research</span></span>
+    </a>
+    <span>© Demoria Research · Demographic intelligence</span>
+  </footer>
+
+</div>
+
+</body>
+</html>
