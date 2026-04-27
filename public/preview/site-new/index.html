@@ -86,23 +86,25 @@
     border-bottom: 1px solid var(--ink4);
   }
   .lockup {
-    display: inline-flex; align-items: center; gap: 14px;
+    display: inline-flex; align-items: center; gap: 20px;
     text-decoration: none; color: inherit;
   }
-  .lockup .mark-svg { width: 36px; height: auto; color: var(--gold); flex-shrink: 0; }
+  .lockup .mark-svg { width: 64px; height: auto; color: var(--gold); flex-shrink: 0; }
   .lockup .wm-text {
     display: flex; flex-direction: column; line-height: 0.95;
   }
   .lockup .wm-d {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1.35rem; font-weight: 600; color: var(--ink);
-    letter-spacing: -0.005em;
+    font-size: 2.2rem; font-weight: 600; color: var(--ink);
+    letter-spacing: -0.01em;
+    line-height: 1;
   }
   .lockup .wm-r {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1.0rem; font-weight: 400; color: var(--ink2);
-    letter-spacing: 0.005em;
-    margin-top: 0.05em;
+    font-size: 1.4rem; font-weight: 400; color: var(--ink2);
+    letter-spacing: 0.01em;
+    margin-top: 0.08em;
+    line-height: 1;
   }
 
   /* Navigation links in masthead */
@@ -217,9 +219,9 @@
 <!-- Reusable mark -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
-    <symbol id="dr-mark" viewBox="0 0 100 200">
-      <path d="M 10 192 L 10 60 A 40 40 0 0 1 90 60 L 90 192 Z" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linejoin="miter"/>
-      <g transform="translate(50 78)" stroke="currentColor" fill="currentColor">
+    <symbol id="dr-mark" viewBox="0 0 100 130">
+      <path d="M 10 122 L 10 50 A 40 40 0 0 1 90 50 L 90 122 Z" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linejoin="miter"/>
+      <g transform="translate(50 65)" stroke="currentColor" fill="currentColor">
         <line x1="0" y1="0" x2="0"   y2="-15" stroke-width="1.4"/>
         <line x1="0" y1="0" x2="15"  y2="0"   stroke-width="1.4"/>
         <line x1="0" y1="0" x2="0"   y2="15"  stroke-width="1.4"/>
@@ -256,7 +258,7 @@
 
   <header class="masthead">
     <a class="lockup" href="/preview/site-new/">
-      <svg class="mark-svg" viewBox="0 0 100 200"><use href="#dr-mark"/></svg>
+      <svg class="mark-svg" viewBox="0 0 100 130"><use href="#dr-mark"/></svg>
       <span class="wm-text">
         <span class="wm-d">Demoria</span>
         <span class="wm-r">Research</span>
@@ -300,7 +302,7 @@
 
   <footer class="page-foot">
     <a class="lockup" href="/preview/site-new/">
-      <svg class="mark-svg" viewBox="0 0 100 200"><use href="#dr-mark"/></svg>
+      <svg class="mark-svg" viewBox="0 0 100 130"><use href="#dr-mark"/></svg>
       <span class="wm-text"><span class="wm-d">Demoria Research</span></span>
     </a>
     <span>© Demoria Research · Demographic intelligence</span>
