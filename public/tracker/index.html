@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Live Tracker — Demoria Research</title>
+<meta name="description" content="Live tracker of monthly birth and fertility releases from national statistical offices, curated by Demoria Research.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --accent: #1a3a6e;
+    --accent-deep: #0f2347;
+    --gold: #c49a28;
+    --gold2: #e0b54a;
+    --ink2: rgba(255,255,255,0.78);
+    --ink3: rgba(255,255,255,0.55);
+    --ink4: rgba(255,255,255,0.35);
+    --good: #16a34a;
+    --bad:  #dc2626;
+    --warn: #ca8a04;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Lora', Georgia, serif;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-deep) 100%);
+    color: #fff;
+    line-height: 1.6;
+    min-height: 100vh;
+    padding: 0 32px 80px;
+  }
+  body::after {
+    content: 'DR'; position: fixed;
+    font-weight: 700; font-size: 48vw;
+    color: rgba(255,255,255,0.025);
+    letter-spacing: -0.04em;
+    bottom: -10vw; right: -4vw;
+    line-height: 1; pointer-events: none; user-select: none; z-index: 0;
+  }
+  .wrap { max-width: 1180px; margin: 0 auto; position: relative; z-index: 1; }
+
+  nav.topnav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 28px 0 24px;
+    border-bottom: 1px solid rgba(255,255,255,0.10);
+    margin-bottom: 56px;
+  }
+  .brand {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 0.95rem; font-weight: 600;
+    color: #fff; text-decoration: none;
+  }
+  .brand span { color: var(--gold2); }
+  .nav-links { display: flex; gap: 24px; }
+  .nav-links a {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem; letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink3); text-decoration: none;
+    transition: color .15s;
+  }
+  .nav-links a:hover { color: var(--gold2); }
+  .nav-links a.active { color: #fff; }
+
+  /* Header */
+  header.page-head { margin-bottom: 32px; max-width: 800px; }
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--gold2);
+    margin-bottom: 16px;
+  }
+  h1.page-title {
+    font-family: 'Lora', Georgia, serif;
+    font-size: clamp(2.4rem, 5vw, 3.6rem);
+    font-weight: 600; line-height: 1.1;
+    letter-spacing: -0.015em;
+    margin-bottom: 16px;
+  }
+  h1.page-title em { color: var(--gold2); font-style: italic; font-weight: 600; }
+  p.page-lede {
+    font-size: 1.05rem; font-style: italic;
+    color: var(--ink2); line-height: 1.6;
+    max-width: 720px;
+  }
+
+  /* Stats strip */
+  .stats-strip {
+    display: flex; gap: 36px; flex-wrap: wrap;
+    padding: 18px 0;
+    margin-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.10);
+    border-bottom: 1px solid rgba(255,255,255,0.10);
+  }
+  .stat-block {
+    display: flex; flex-direction: column; gap: 2px;
+  }
+  .stat-val {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 1.4rem; font-weight: 600;
+    color: var(--gold2); line-height: 1;
+  }
+  .stat-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem; letter-spacing: 0.10em;
+    text-transform: uppercase; color: var(--ink3);
+  }
+
+  /* Filter bar */
+  .filter-bar {
+    display: flex; justify-content: space-between; align-items: center;
+    margin: 36px 0 14px;
+    flex-wrap: wrap; gap: 14px;
+  }
+  .filter-left {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.66rem; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--ink3);
+  }
+  .filter-right {
+    display: flex; gap: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+  }
+  .fbtn {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: var(--ink2);
+    padding: 5px 11px; border-radius: 4px;
+    cursor: pointer; transition: all .12s;
+    font-family: inherit; font-size: inherit;
+  }
+  .fbtn:hover { color: #fff; border-color: rgba(232,184,75,0.40); }
+  .fbtn.active {
+    color: #fff; background: rgba(232,184,75,0.16);
+    border-color: rgba(232,184,75,0.55);
+  }
+
+  /* Table */
+  .tracker-wrap {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  table.tracker {
+    width: 100%; border-collapse: collapse;
+    font-family: 'Lora', Georgia, serif;
+  }
+  table.tracker thead th {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem; letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink3); font-weight: 500;
+    text-align: left;
+    padding: 14px 16px;
+    background: rgba(0,0,0,0.20);
+    border-bottom: 1px solid rgba(255,255,255,0.10);
+    white-space: nowrap;
+  }
+  table.tracker thead th.num { text-align: right; }
+  table.tracker tbody tr {
+    transition: background .12s;
+  }
+  table.tracker tbody tr:hover { background: rgba(255,255,255,0.04); }
+  table.tracker tbody td {
+    padding: 14px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    font-size: 0.9rem; color: var(--ink2);
+  }
+  table.tracker tbody tr:last-child td { border-bottom: none; }
+  table.tracker tbody tr.locked { opacity: 0.55; }
+
+  td.country { font-weight: 600; color: #fff; }
+  td.country .flag { font-size: 1.1rem; margin-right: 8px; }
+  td.indicator { font-size: 0.86rem; color: var(--ink2); }
+  td.value-num {
+    text-align: right;
+    font-family: 'Lora', Georgia, serif;
+    font-weight: 600; color: #fff;
+    font-variant-numeric: tabular-nums;
+  }
+  td.delta {
+    text-align: right;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.82rem;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  td.delta.up   { color: var(--good); }
+  td.delta.down { color: var(--bad); }
+  td.delta.flat { color: var(--warn); }
+  td.period, td.released {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--ink2);
+    white-space: nowrap;
+  }
+  td.released { color: var(--ink3); }
+  td.tier {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.58rem; letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-align: center;
+  }
+  td.tier .badge {
+    display: inline-block; padding: 1px 7px;
+    border-radius: 999px; border: 1px solid currentColor;
+  }
+  td.tier .badge.t-free { color: rgba(255,255,255,0.55); }
+  td.tier .badge.t-pro  { color: var(--gold2); }
+  td.source a {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem; color: var(--gold2);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(232,184,75,0.30);
+    transition: border-color .15s;
+  }
+  td.source a:hover { border-bottom-color: var(--gold2); }
+  @media (max-width: 900px) {
+    table.tracker thead th.col-period,
+    table.tracker tbody td.period,
+    table.tracker thead th.col-source,
+    table.tracker tbody td.source { display: none; }
+  }
+  @media (max-width: 720px) {
+    table.tracker thead th.col-released,
+    table.tracker tbody td.released { display: none; }
+  }
+
+  /* Pro lock band */
+  .pro-band {
+    margin-top: 36px; padding: 24px 28px;
+    background: rgba(232,184,75,0.08);
+    border: 1px solid rgba(232,184,75,0.28);
+    border-radius: 8px;
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 24px; flex-wrap: wrap;
+  }
+  .pro-band-text { flex: 1; min-width: 260px; }
+  .pro-band-title {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 1.1rem; font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .pro-band-sub {
+    font-size: 0.88rem; color: var(--ink2); font-style: italic;
+  }
+  .pro-cta {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--gold2); color: var(--accent-deep);
+    font-family: 'Lora', Georgia, serif;
+    font-size: 0.95rem; font-weight: 600;
+    padding: 10px 20px; border-radius: 5px;
+    text-decoration: none; white-space: nowrap;
+    transition: background .15s, transform .15s;
+  }
+  .pro-cta:hover { background: #f5cd66; transform: translateY(-1px); }
+
+  /* Methodology note */
+  .method-note {
+    margin-top: 32px; padding: 18px 22px;
+    background: rgba(255,255,255,0.03);
+    border-left: 3px solid var(--gold2);
+    border-radius: 0 6px 6px 0;
+    font-size: 0.86rem; line-height: 1.65;
+    color: var(--ink2); font-style: italic;
+    max-width: 880px;
+  }
+  .method-note b { color: #fff; font-style: normal; font-weight: 600; }
+
+  footer.page-foot {
+    margin-top: 56px; padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.10);
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--ink4);
+    flex-wrap: wrap; gap: 12px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <nav class="topnav">
+    <a class="brand" href="/"><span>D</span>emoria Research</a>
+    <div class="nav-links">
+      <a href="/dhi/">DHI</a>
+      <a href="/research/">Research</a>
+      <a href="/tracker/" class="active">Tracker</a>
+    </div>
+  </nav>
+
+  <header class="page-head">
+    <div class="eyebrow">Live Tracker &middot; sample</div>
+    <h1 class="page-title">Latest <em>fertility</em> &amp; <em>birth</em> releases.</h1>
+    <p class="page-lede">A curated, manually-maintained log of the most recent vital-statistics releases from national statistical offices &mdash; sorted by recency. Free preview of the top tracked economies; the full table (15+ countries, real-time releases, downloadable CSV) is part of the Pro tier.</p>
+  </header>
+
+  <div class="stats-strip">
+    <div class="stat-block"><div class="stat-val">15+</div><div class="stat-label">Countries tracked</div></div>
+    <div class="stat-block"><div class="stat-val">Monthly</div><div class="stat-label">Update cadence</div></div>
+    <div class="stat-block"><div class="stat-val" id="last-update">— —</div><div class="stat-label">Last refreshed</div></div>
+    <div class="stat-block"><div class="stat-val">Pro</div><div class="stat-label">Full table tier</div></div>
+  </div>
+
+  <div class="filter-bar">
+    <div class="filter-left">Sort: most recently released &darr;</div>
+    <div class="filter-right">
+      <button class="fbtn active" onclick="filterRows('all',this)">All</button>
+      <button class="fbtn" onclick="filterRows('Europe',this)">Europe</button>
+      <button class="fbtn" onclick="filterRows('Asia',this)">Asia</button>
+      <button class="fbtn" onclick="filterRows('Americas',this)">Americas</button>
+    </div>
+  </div>
+
+  <div class="tracker-wrap">
+    <table class="tracker" id="tracker">
+      <thead>
+        <tr>
+          <th>Country</th>
+          <th>Indicator</th>
+          <th class="num">Value</th>
+          <th class="num">Δ YoY</th>
+          <th class="col-period">Period</th>
+          <th class="col-released">Released</th>
+          <th class="col-source">Source</th>
+          <th>Tier</th>
+        </tr>
+      </thead>
+      <tbody id="tracker-body">
+        <!-- Rows injected from JS so we can sort/filter -->
+      </tbody>
+    </table>
+  </div>
+
+  <div class="pro-band">
+    <div class="pro-band-text">
+      <div class="pro-band-title">Want the full tracker?</div>
+      <div class="pro-band-sub">15+ countries, real-time releases, downloadable CSV, embeddable charts &mdash; included with Demoria Pro.</div>
+    </div>
+    <a class="pro-cta" href="https://demoriaresearch.substack.com/subscribe" target="_blank" rel="noopener">Subscribe on Substack →</a>
+  </div>
+
+  <div class="method-note">
+    <b>How this is built.</b> The tracker is compiled by hand from national statistical office releases (ONS UK, Insee France, Destatis Germany, Korea KOSIS, Japan e-Stat, Istat Italy, INE Spain, US CDC Wonder, etc.). YoY deltas use comparable prior-period releases where available. Figures are provisional unless marked final by the issuing agency. Last refresh date reflects the most recent national release ingested, not a Demoria publication date.
+  </div>
+
+  <footer class="page-foot">
+    <span>&copy; Demoria Research</span>
+    <span>Demographic intelligence &middot; <a href="/" style="color:inherit;text-decoration:none">demoriaresearch.com</a></span>
+  </footer>
+
+</div>
+
+<script>
+/* ── Sample tracker rows (placeholder data — replace each month) ──────────
+   Format: { country, flag, region, indicator, value, deltaPct, period, released, source, sourceUrl, tier }
+   tier 'free' = visible to all; tier 'pro' = locked overlay (still visible but dimmed)
+*/
+const ROWS = [
+  { country: 'South Korea', flag: '🇰🇷', region: 'Asia',     indicator: 'Total fertility rate (provisional)', value: '0.78', deltaPct: -0.03, deltaUnit: 'pp', period: 'Q1 2026',   released: '23 Jun 2026', source: 'KOSIS',    sourceUrl: 'https://kosis.kr/eng/', tier: 'free' },
+  { country: 'United States', flag: '🇺🇸', region: 'Americas', indicator: 'Provisional monthly births',         value: '280,500', deltaPct: -1.2, deltaUnit: '%', period: 'Apr 2026',  released: '18 Jun 2026', source: 'CDC Wonder', sourceUrl: 'https://wonder.cdc.gov/', tier: 'free' },
+  { country: 'Japan',       flag: '🇯🇵', region: 'Asia',     indicator: 'Monthly live births',                value: '52,142', deltaPct: -8.4, deltaUnit: '%', period: 'May 2026',  released: '12 Jul 2026', source: 'e-Stat',   sourceUrl: 'https://www.e-stat.go.jp/en', tier: 'free' },
+  { country: 'France',      flag: '🇫🇷', region: 'Europe',   indicator: 'Monthly live births',                value: '50,123', deltaPct: -3.1, deltaUnit: '%', period: 'May 2026',  released: '11 Jul 2026', source: 'Insee',    sourceUrl: 'https://www.insee.fr/en/', tier: 'free' },
+  { country: 'Spain',       flag: '🇪🇸', region: 'Europe',   indicator: 'Monthly live births',                value: '26,500', deltaPct: -3.5, deltaUnit: '%', period: 'Apr 2026',  released: '8 Jun 2026',  source: 'INE',      sourceUrl: 'https://www.ine.es/en/', tier: 'free' },
+  { country: 'Italy',       flag: '🇮🇹', region: 'Europe',   indicator: 'Monthly live births (provisional)', value: '28,300', deltaPct: -7.1, deltaUnit: '%', period: 'Apr 2026',  released: '9 Jun 2026',  source: 'Istat',    sourceUrl: 'https://www.istat.it/en/', tier: 'free' },
+  { country: 'Germany',     flag: '🇩🇪', region: 'Europe',   indicator: 'Monthly live births',                value: '60,200', deltaPct: -1.8, deltaUnit: '%', period: 'Apr 2026',  released: '6 Jun 2026',  source: 'Destatis', sourceUrl: 'https://www.destatis.de/EN/', tier: 'free' },
+  { country: 'United Kingdom', flag: '🇬🇧', region: 'Europe', indicator: 'Quarterly birth registrations',     value: '162,310', deltaPct: -2.4, deltaUnit: '%', period: 'Q1 2026', released: '14 May 2026', source: 'ONS',      sourceUrl: 'https://www.ons.gov.uk/', tier: 'free' },
+  { country: 'Sweden',      flag: '🇸🇪', region: 'Europe',   indicator: 'Monthly live births',                value: '8,210',  deltaPct: -2.0, deltaUnit: '%', period: 'May 2026',  released: '14 Jun 2026', source: 'SCB',      sourceUrl: 'https://www.scb.se/en/', tier: 'free' },
+  { country: 'Norway',      flag: '🇳🇴', region: 'Europe',   indicator: 'Monthly live births',                value: '4,420',  deltaPct: 1.1,  deltaUnit: '%', period: 'May 2026',  released: '13 Jun 2026', source: 'SSB',      sourceUrl: 'https://www.ssb.no/en/', tier: 'free' },
+  // Pro-only rows (visible but dimmed)
+  { country: 'Netherlands', flag: '🇳🇱', region: 'Europe',   indicator: 'Monthly live births',                value: 'Pro',  deltaPct: null, deltaUnit: '',  period: 'Pro',       released: 'Pro',         source: 'CBS',      sourceUrl: '#', tier: 'pro' },
+  { country: 'Australia',   flag: '🇦🇺', region: 'Oceania',  indicator: 'Quarterly births registered',         value: 'Pro',  deltaPct: null, deltaUnit: '',  period: 'Pro',       released: 'Pro',         source: 'ABS',      sourceUrl: '#', tier: 'pro' },
+  { country: 'Canada',      flag: '🇨🇦', region: 'Americas', indicator: 'Monthly live births',                value: 'Pro',  deltaPct: null, deltaUnit: '',  period: 'Pro',       released: 'Pro',         source: 'StatCan',  sourceUrl: '#', tier: 'pro' },
+  { country: 'China',       flag: '🇨🇳', region: 'Asia',     indicator: 'Annual births (NBS)',                value: 'Pro',  deltaPct: null, deltaUnit: '',  period: 'Pro',       released: 'Pro',         source: 'NBS',      sourceUrl: '#', tier: 'pro' },
+  { country: 'Brazil',      flag: '🇧🇷', region: 'Americas', indicator: 'Monthly live births',                value: 'Pro',  deltaPct: null, deltaUnit: '',  period: 'Pro',       released: 'Pro',         source: 'IBGE',     sourceUrl: '#', tier: 'pro' }
+];
+
+function deltaCell(d, unit) {
+  if (d == null) return '<td class="delta">—</td>';
+  const cls = d > 0.1 ? 'up' : d < -0.1 ? 'down' : 'flat';
+  const sign = d >= 0 ? '+' : '';
+  const arrow = d > 0.1 ? '↗' : d < -0.1 ? '↘' : '·';
+  return `<td class="delta ${cls}">${arrow} ${sign}${d.toFixed(1)}${unit}</td>`;
+}
+
+function tierBadge(t) {
+  return t === 'pro'
+    ? '<span class="badge t-pro">Pro</span>'
+    : '<span class="badge t-free">Free</span>';
+}
+
+function renderRows(filterRegion = 'all') {
+  const tbody = document.getElementById('tracker-body');
+  const filtered = filterRegion === 'all'
+    ? ROWS
+    : ROWS.filter(r => r.region === filterRegion);
+  tbody.innerHTML = filtered.map(r => {
+    const lockedClass = r.tier === 'pro' ? 'locked' : '';
+    return `
+      <tr class="${lockedClass}">
+        <td class="country"><span class="flag">${r.flag}</span>${r.country}</td>
+        <td class="indicator">${r.indicator}</td>
+        <td class="value-num">${r.value}</td>
+        ${deltaCell(r.deltaPct, r.deltaUnit)}
+        <td class="period col-period">${r.period}</td>
+        <td class="released col-released">${r.released}</td>
+        <td class="source col-source">${r.tier === 'pro' ? '<span style="color:var(--ink4);font-family:JetBrains Mono;font-size:0.7rem">—</span>' : `<a href="${r.sourceUrl}" target="_blank" rel="noopener">${r.source} ↗</a>`}</td>
+        <td class="tier">${tierBadge(r.tier)}</td>
+      </tr>`;
+  }).join('');
+}
+
+function filterRows(region, btn) {
+  document.querySelectorAll('.fbtn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  renderRows(region);
+}
+
+// Set the "last refreshed" stat to the latest release date among free rows
+function setLastUpdate() {
+  const dates = ROWS
+    .filter(r => r.tier === 'free')
+    .map(r => Date.parse(r.released))
+    .filter(t => !isNaN(t));
+  if (!dates.length) return;
+  const max = new Date(Math.max(...dates));
+  const dd = max.getDate();
+  const mm = max.toLocaleString('en-GB', { month: 'short' });
+  const yy = max.getFullYear();
+  document.getElementById('last-update').textContent = `${dd} ${mm} ${yy}`;
+}
+
+renderRows();
+setLastUpdate();
+</script>
+</body>
+</html>
