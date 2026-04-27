@@ -2085,12 +2085,12 @@ header {
         <div class="card-head">
           Global rankings — 2024 &nbsp;
           <select id="rank-sort" onchange="renderRankings()" style="font-size:0.78rem;border:1px solid var(--border);border-radius:4px;padding:2px 6px;font-family:inherit;">
-            <option value="Overall">Overall</option>
-            <option value="TFS">TFS</option>
-            <option value="Momentum">Momentum</option>
-            <option value="WSS">WSS</option>
-            <option value="FQS">FQS</option>
-            <option value="MDS">MDS</option>
+            <option value="Overall">Overall DHI Score</option>
+            <option value="TFS">Total Fertility Score (TFS)</option>
+            <option value="Momentum">Population Momentum Score (PMS)</option>
+            <option value="WSS">Workforce Sustainability Score (WSS)</option>
+            <option value="FQS">Fertility Quality Score (FQS)</option>
+            <option value="MDS">Migration Independence Score (MDS)</option>
           </select>
         </div>
         <div style="overflow-x:auto">
@@ -2098,7 +2098,7 @@ header {
             <thead>
               <tr>
                 <th>Rank</th><th>Country</th><th>Region</th>
-                <th>TFS</th><th>Mom.</th><th>WSS</th><th>FQS</th><th>MDS</th>
+                <th title="Total Fertility Score">TFS</th><th title="Population Momentum Score">PMS</th><th title="Workforce Sustainability Score">WSS</th><th title="Fertility Quality Score">FQS</th><th title="Migration Independence Score">MDS</th>
                 <th style="min-width:110px">Overall</th><th>Classification</th><th>Δ 1999–2024</th><th>Δ 2024–2050</th>
               </tr>
             </thead>
