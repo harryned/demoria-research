@@ -1,0 +1,7 @@
+/*
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: interest-cohort=()
+
+/dhi/*
+  Cache-Control: public, max-age=300, s-maxage=600

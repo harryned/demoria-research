@@ -176,8 +176,52 @@ header {
 .traj-Stable { background: var(--warn); }
 
 /* ── Panels ──────────────────────────────────────────────────────────────── */
-#panel-country, #panel-region, #panel-rankings { display: none; }
-#panel-country.active, #panel-region.active, #panel-rankings.active { display: block; }
+#panel-country, #panel-region, #panel-rankings, #panel-scatter { display: none; }
+#panel-country.active, #panel-region.active, #panel-rankings.active, #panel-scatter.active { display: block; }
+
+/* ── Cross-Section Scatter ─────────────────────────────────────── */
+.scatter-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--r); box-shadow: var(--shadow);
+  padding: 22px 26px;
+}
+.scatter-head {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  flex-wrap: wrap; gap: 14px; margin-bottom: 14px;
+  padding-bottom: 14px; border-bottom: 1px solid var(--surface3);
+}
+.scatter-head-left { flex: 1; min-width: 0; }
+.scatter-eyebrow {
+  font-family: var(--font-mono); font-size: 0.66rem;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--ink3); font-weight: 500; margin-bottom: 4px;
+}
+.scatter-title {
+  font-family: 'Lora', Georgia, serif; font-size: 1.35rem;
+  font-weight: 600; color: var(--ink);
+}
+.scatter-controls {
+  display: flex; align-items: center; gap: 10px;
+  font-family: var(--font-mono); font-size: 0.78rem;
+}
+.scatter-controls label { color: var(--ink3); letter-spacing: 0.05em; }
+.scatter-controls select {
+  border: 1px solid var(--border); border-radius: 4px;
+  padding: 5px 9px; font-family: inherit; font-size: 0.82rem;
+  background: #fff; color: var(--ink);
+}
+.scatter-canvas-wrap { position: relative; height: 560px; }
+.scatter-legend {
+  display: flex; gap: 20px; margin-top: 14px; flex-wrap: wrap;
+  font-family: var(--font-mono); font-size: 0.72rem; color: var(--ink2);
+}
+.scatter-legend-item { display: flex; align-items: center; gap: 6px; }
+.scatter-legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+.scatter-note {
+  font-family: var(--font-mono); font-size: 0.62rem;
+  letter-spacing: 0.08em; color: var(--ink4);
+  margin-top: 10px; text-align: right;
+}
 
 /* ── Score hero (narrative layout) ───────────────────────────────────── */
 .score-hero {
@@ -1273,69 +1317,163 @@ header {
 }
 
 /* ── Regions panel ── */
-.reg-shell { display: grid; grid-template-columns: 220px 1fr; gap: 20px; align-items: start; }
-.reg-list { display: flex; flex-direction: column; gap: 3px; }
+.reg-shell { display: grid; grid-template-columns: 240px 1fr; gap: 20px; align-items: start; }
+.reg-list { display: flex; flex-direction: column; gap: 4px; }
 .reg-item {
   display: flex; align-items: center; gap: 10px;
   padding: 10px 12px; border-radius: var(--r);
-  cursor: pointer; border: 1px solid transparent;
+  cursor: pointer; border: 1px solid var(--border);
   transition: all 0.13s; background: var(--surface);
-  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
 }
-.reg-item:hover { border-color: var(--border); background: var(--surface); box-shadow: var(--shadow); }
-.reg-item.active { border-color: var(--accent2); background: #eef3ff; box-shadow: 0 0 0 2px rgba(45,95,179,0.1); }
-.reg-rank { font-size: 0.7rem; color: var(--ink3); min-width: 18px; }
+.reg-item:hover { border-color: var(--accent2); }
+.reg-item.active { border-color: var(--accent); background: #eef3ff; box-shadow: 0 0 0 2px rgba(26,58,110,0.1); }
+.reg-rank { font-family: var(--font-mono); font-size: 0.66rem; color: var(--ink3); min-width: 18px; letter-spacing: 0.05em; }
 .reg-item-info { flex: 1; min-width: 0; }
-.reg-item-name { font-size: 0.82rem; font-weight: bold; color: var(--ink); line-height: 1.2; }
-.reg-item-cont { font-size: 0.68rem; color: var(--ink3); text-transform: uppercase; letter-spacing: 0.05em; }
-.reg-item-score { font-size: 0.95rem; font-weight: bold; min-width: 36px; text-align: right; }
-.reg-item-bar { width: 3px; height: 28px; border-radius: 2px; flex-shrink: 0; }
+.reg-item-name { font-family: 'Lora', Georgia, serif; font-size: 0.92rem; font-weight: 600; color: var(--ink); line-height: 1.2; }
+.reg-item-cont { font-family: var(--font-mono); font-size: 0.62rem; color: var(--ink3); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 2px; }
+.reg-item-score { font-family: 'Lora', Georgia, serif; font-size: 1.05rem; font-weight: 700; min-width: 38px; text-align: right; color: var(--accent); }
+.reg-item-bar { width: 3px; height: 32px; border-radius: 2px; flex-shrink: 0; }
 
-/* Detail panel */
-.reg-detail { background: var(--surface); border-radius: var(--r); box-shadow: var(--shadow); border: 1px solid var(--border); min-height: 500px; }
-.reg-detail-placeholder { display: flex; align-items: center; justify-content: center; height: 500px; color: var(--ink3); font-style: italic; font-size: 0.9rem; }
-.reg-hero { padding: 20px 24px 16px; border-bottom: 1px solid var(--surface3); display: flex; align-items: flex-start; gap: 20px; }
-.reg-hero-left { flex: 1; }
-.reg-hero-continent { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.07em; color: var(--ink3); margin-bottom: 3px; }
-.reg-hero-name { font-size: 1.5rem; font-weight: bold; color: var(--ink); }
-.reg-hero-n { font-size: 0.78rem; color: var(--ink3); margin-top: 3px; }
-.reg-hero-score { text-align: right; }
-.reg-hero-score-num { font-size: 2.8rem; font-weight: bold; color: var(--accent); line-height: 1; }
-.reg-hero-score-label { font-size: 0.72rem; color: var(--ink3); }
-
-.reg-deltas { display: flex; gap: 10px; padding: 12px 24px; border-bottom: 1px solid var(--surface3); flex-wrap: wrap; }
-.reg-delta-chip {
-  display: flex; flex-direction: column; align-items: center;
-  padding: 8px 16px; border-radius: var(--r); min-width: 90px;
-  background: var(--surface2);
+/* Detail panel — harmonised with country profile */
+.reg-detail { display: flex; flex-direction: column; gap: 22px; min-height: 500px; }
+.reg-detail-placeholder {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--r);
+  box-shadow: var(--shadow);
+  display: flex; align-items: center; justify-content: center; height: 500px;
+  color: var(--ink3); font-style: italic; font-size: 0.95rem; font-family: 'Lora', Georgia, serif;
 }
-.reg-delta-val { font-size: 1.1rem; font-weight: bold; }
-.reg-delta-label { font-size: 0.65rem; color: var(--ink3); margin-top: 2px; text-align: center; }
 
-.reg-body { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
-.reg-section { padding: 16px 24px; }
-.reg-section + .reg-section { border-left: 1px solid var(--surface3); }
-.reg-section-title { font-size: 0.72rem; font-weight: bold; text-transform: uppercase; letter-spacing: 0.07em; color: var(--ink3); margin-bottom: 12px; }
+/* Region hero — navy gradient like country score-hero */
+.reg-hero {
+  background: linear-gradient(135deg, var(--accent) 0%, #14305c 100%);
+  color: #fff;
+  padding: 28px 32px 30px;
+  border-radius: var(--r);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 36px;
+  align-items: center;
+  box-shadow: 0 4px 18px rgba(15,17,23,0.12);
+}
+.reg-hero-left { min-width: 0; }
+.reg-hero-continent {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.4);
+  background: rgba(255,255,255,0.04);
+  margin-bottom: 14px;
+  color: rgba(255,255,255,0.85);
+  font-weight: 500;
+}
+.reg-hero-name {
+  font-family: 'Lora', Georgia, serif;
+  font-size: 2.1rem; font-weight: 600;
+  line-height: 1.1; letter-spacing: -0.01em;
+  margin: 0 0 8px; color: #fff;
+}
+.reg-hero-meta {
+  font-family: var(--font-mono); font-size: 0.74rem;
+  letter-spacing: 0.08em; color: rgba(255,255,255,0.62);
+  display: flex; align-items: center; flex-wrap: wrap; gap: 10px;
+}
+.reg-hero-meta-sep { color: rgba(255,255,255,0.28); }
+.reg-hero-score {
+  text-align: right; flex-shrink: 0;
+  padding-left: 28px; border-left: 1px solid rgba(255,255,255,0.14);
+}
+.reg-hero-score-num {
+  font-family: 'Lora', Georgia, serif;
+  font-size: 3.4rem; font-weight: 700;
+  line-height: 1; letter-spacing: -0.02em; color: #fff;
+}
+.reg-hero-score-label {
+  font-family: var(--font-mono); font-size: 0.68rem;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: rgba(255,255,255,0.55); margin-top: 6px;
+}
+@media (max-width: 720px) {
+  .reg-hero { grid-template-columns: 1fr; gap: 18px; }
+  .reg-hero-score { text-align: left; padding-left: 0; padding-top: 18px; border-left: none; border-top: 1px solid rgba(255,255,255,0.14); }
+}
 
-/* Category bars in detail */
-.reg-cat-row { display: flex; align-items: center; gap: 10px; margin-bottom: 9px; }
-.reg-cat-name { font-size: 0.78rem; font-weight: bold; width: 90px; flex-shrink: 0; }
-.reg-cat-bar-wrap { flex: 1; background: var(--surface3); border-radius: 3px; height: 8px; overflow: hidden; }
-.reg-cat-bar-fill { height: 8px; border-radius: 3px; }
-.reg-cat-vals { display: flex; flex-direction: column; align-items: flex-end; min-width: 42px; }
-.reg-cat-score { font-size: 0.78rem; font-weight: bold; }
-.reg-cat-max { font-size: 0.62rem; color: var(--ink3); }
+/* Section card shared with country profile */
+.reg-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  box-shadow: var(--shadow);
+  padding: 22px 26px 24px;
+}
+.reg-card-eyebrow {
+  font-family: var(--font-mono); font-size: 0.66rem;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--ink3); margin-bottom: 6px; font-weight: 500;
+}
+.reg-card-heading {
+  font-family: 'Lora', Georgia, serif; font-size: 1.35rem;
+  font-weight: 600; color: var(--ink); margin-bottom: 16px;
+  letter-spacing: -0.005em;
+}
 
-/* Top countries list */
-.reg-country-row { display: flex; align-items: center; gap: 8px; padding: 6px 0; border-bottom: 1px solid var(--surface3); }
-.reg-country-row:last-child { border-bottom: none; }
-.reg-country-rank { font-size: 0.7rem; color: var(--ink3); min-width: 20px; }
-.reg-country-name { flex: 1; font-size: 0.82rem; font-weight: bold; }
-.reg-country-score { font-size: 0.82rem; font-weight: bold; }
-.reg-country-delta { font-size: 0.72rem; margin-left: 4px; }
+/* Trajectory captions — same as country */
+.reg-tcap-row {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 22px; padding-top: 18px; border-top: 1px solid var(--surface3);
+}
+.reg-tcap { display: flex; flex-direction: column; }
+.reg-tcap-label {
+  font-family: var(--font-mono); font-size: 0.62rem;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--ink3); margin-bottom: 8px; font-weight: 500;
+  display: flex; align-items: center; gap: 8px;
+}
+.reg-tcap-label::before {
+  content: ''; width: 8px; height: 8px; border-radius: 50%;
+  background: var(--surface3);
+}
+.reg-tcap.tcap-past .reg-tcap-label::before    { background: var(--accent2); }
+.reg-tcap.tcap-present .reg-tcap-label::before { background: var(--gold2); }
+.reg-tcap.tcap-future .reg-tcap-label::before  { background: var(--ink4); }
+.reg-tcap-headline {
+  font-family: 'Lora', Georgia, serif; font-size: 1.05rem;
+  font-weight: 600; color: var(--ink); line-height: 1.3; margin-bottom: 4px;
+}
+.reg-tcap-headline .tcap-delta-up   { color: #16a34a; }
+.reg-tcap-headline .tcap-delta-down { color: #dc2626; }
+.reg-tcap-detail { font-size: 0.85rem; color: var(--ink2); line-height: 1.45; }
+@media (max-width: 720px) { .reg-tcap-row { grid-template-columns: 1fr; } }
 
-/* Trend chart in detail */
-.reg-trend-section { padding: 0 24px 16px; }
+/* Region trend chart wrap */
+.reg-trend-wrap { position: relative; height: 220px; margin-bottom: 6px; }
+
+/* Two-column grid for cats + countries */
+.reg-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 22px; }
+@media (max-width: 900px) { .reg-grid { grid-template-columns: 1fr; } }
+
+/* Region peers table — same look as country peers */
+.reg-peers-table { width: 100%; border-collapse: collapse; }
+.reg-peers-table th {
+  font-family: var(--font-mono); font-size: 0.62rem;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--ink3); font-weight: 500;
+  padding: 8px 10px 10px; text-align: left;
+  border-bottom: 1px solid var(--surface3);
+}
+.reg-peers-table td {
+  padding: 10px; font-size: 0.88rem; color: var(--ink);
+  border-bottom: 1px solid var(--surface3); font-family: 'Lora', Georgia, serif;
+}
+.reg-peers-table td.num { text-align: right; font-variant-numeric: tabular-nums; font-weight: 600; }
+.reg-peers-table tr:last-child td { border-bottom: none; }
+.reg-peers-table tr.is-clickable { cursor: pointer; transition: background 0.12s; }
+.reg-peers-table tr.is-clickable:hover { background: #eef3ff; }
+.reg-peers-rank { font-family: var(--font-mono); font-size: 0.78rem; color: var(--ink3); }
 
 
 .class-badge {
@@ -1561,6 +1699,7 @@ header {
       <button class="nav-tab active" onclick="showPanel('country')">Country</button>
       <button class="nav-tab" onclick="showPanel('region')">Regions</button>
       <button class="nav-tab" onclick="showPanel('rankings')">Rankings</button>
+      <button class="nav-tab" onclick="showPanel('scatter')">Cross-Section</button>
     </nav>
   </div>
 </header>
@@ -1728,6 +1867,35 @@ header {
     </div>
   </div>
 </div>
+
+    <!-- Cross-Section Scatter panel -->
+    <div id="panel-scatter">
+      <div class="scatter-card">
+        <div class="scatter-head">
+          <div class="scatter-head-left">
+            <div class="scatter-eyebrow">Cross-section · 2024</div>
+            <div class="scatter-title" id="scatter-title">DHI score vs government debt</div>
+          </div>
+          <div class="scatter-controls">
+            <label for="scatter-x">X-axis:</label>
+            <select id="scatter-x" onchange="renderScatter()">
+              <option value="gov_debt_pct">Government debt (% GDP)</option>
+              <option value="gdp_pc_ppp">GDP per capita (PPP, USD)</option>
+              <option value="pension_assets_pct">Pension assets (% GDP)</option>
+              <option value="fiscal_stress_score">Fiscal stress score</option>
+            </select>
+          </div>
+        </div>
+        <div class="scatter-canvas-wrap"><canvas id="chart-scatter"></canvas></div>
+        <div class="scatter-legend">
+          <div class="scatter-legend-item"><span class="scatter-legend-dot" style="background:#16a34a"></span> Improving</div>
+          <div class="scatter-legend-item"><span class="scatter-legend-dot" style="background:#ca8a04"></span> Stable</div>
+          <div class="scatter-legend-item"><span class="scatter-legend-dot" style="background:#dc2626"></span> Declining</div>
+          <div class="scatter-legend-item" style="margin-left:auto"><em>Bubble size = population (2024). Click any country to open its profile.</em></div>
+        </div>
+        <div class="scatter-note">236 countries · y-axis: DHI 2024 score · click bubble to navigate</div>
+      </div>
+    </div>
 
     <!-- Rankings panel -->
     <div id="panel-rankings">
@@ -3166,8 +3334,7 @@ function selectRegion(key, el) {
   if (!regData) return;
 
   const catMax    = { TFS:32, Momentum:21, WSS:22, FQS:8, MDS:17 };
-  const catColors = { TFS:'#3B82F6', Momentum:'#F59E0B', WSS:'#10B981', FQS:'#8B5CF6', MDS:'#EF4444' };
-  const catNames  = { TFS:'Total Fertility', Momentum:'Momentum', WSS:'Workforce Sust.', FQS:'Fertility Quality', MDS:'Migration Indep.' };
+  const catNames  = { TFS:'Total Fertility', Momentum:'Momentum', WSS:'Workforce Sustainability', FQS:'Fertility Quality', MDS:'Migration Independence' };
   const cats = ['TFS','Momentum','WSS','FQS','MDS'];
 
   const s24 = regData.years['2024']?.Overall ?? 0;
@@ -3177,47 +3344,81 @@ function selectRegion(key, el) {
   const d50 = s50 - s24;
 
   // Count countries in region
-  const nCountries = DATA.country_list.filter(c => (DATA.regions[key]?.region) && c.region === regData.region).length;
-
-  // Top 5 countries in region by 2024 score
   const regionCountries = DATA.country_list
     .filter(c => c.region === regData.region)
-    .sort((a,b) => b.score - a.score)
-    .slice(0, 6);
+    .sort((a,b) => b.score - a.score);
+  const nCountries = regionCountries.length;
+  const topCountries = regionCountries.slice(0, 8);
 
-  const deltaColor = d => d > 1 ? '#059669' : d < -1 ? '#DC2626' : '#D97706';
   const deltaSign  = d => (d >= 0 ? '+' : '') + d.toFixed(1);
-  const scoreColor = s => s >= 75 ? '#10B981' : s >= 55 ? '#F59E0B' : s >= 40 ? '#EF4444' : '#991b1b';
+  const deltaCls   = d => d > 1 ? 'tcap-delta-up' : d < -1 ? 'tcap-delta-down' : '';
 
-  // Category bars HTML
-  const catBarsHtml = cats.map(cat => {
+  // Hero classification badge based on score
+  const cls = classifyScore(s24);
+
+  // Compute regional percentile bands per category — rank this region against all regions for each category
+  const allRegions = Object.values(DATA.regions);
+  function pctBandRegion(cat) {
+    const myVal = regData.years['2024']?.[cat] ?? null;
+    if (myVal == null) return 'mid';
+    const vals = allRegions.map(r => r.years['2024']?.[cat]).filter(v => v != null);
+    if (!vals.length) return 'mid';
+    const below = vals.filter(v => v < myVal).length;
+    const p = (below / vals.length) * 100;
+    return pctBand(p);
+  }
+
+  // Sort categories by score-of-max desc (strongest first)
+  const catRows = cats.map(cat => {
     const val = regData.years['2024']?.[cat] ?? 0;
-    const max = catMax[cat];
-    const pct = Math.round((val / max) * 100);
     const val99 = regData.years['1999']?.[cat] ?? 0;
-    const catDelta = val - val99;
-    return `<div class="reg-cat-row">
-      <div class="reg-cat-name" style="color:${catColors[cat]}">${catNames[cat]}</div>
-      <div class="reg-cat-bar-wrap">
-        <div class="reg-cat-bar-fill" style="width:${pct}%;background:${catColors[cat]}"></div>
-      </div>
-      <div class="reg-cat-vals">
-        <div class="reg-cat-score">${val.toFixed(1)}<span style="font-size:0.65rem;color:var(--ink3)">/${max}</span></div>
-        <div class="reg-cat-max" style="color:${deltaColor(catDelta)}">${deltaSign(catDelta)}</div>
-      </div>
-    </div>`;
+    return { cat, val, val99, max: catMax[cat], delta: val - val99 };
+  }).sort((a, b) => (b.val / b.max) - (a.val / a.max));
+
+  // Category bars — traffic-light style matching country profile
+  const catBarsHtml = catRows.map(r => {
+    const fillPct = Math.max(0, Math.min(100, (r.val / r.max) * 100));
+    const band = pctBandRegion(r.cat);
+    const cls = 'cl-' + band;
+    const dCls = deltaCls(r.delta);
+    const bandLabel = band === 'good' ? 'Strong vs other regions' : band === 'poor' ? 'Weak vs other regions' : 'Mid vs other regions';
+    return `
+      <div class="cat-row">
+        <div class="cat-row-name">
+          ${catNames[r.cat]}
+          <span class="cat-row-weight">${r.max} pts max</span>
+        </div>
+        <div class="cat-row-bar"><div class="cat-row-bar-fill ${cls}" style="width:${fillPct.toFixed(1)}%"></div></div>
+        <div class="cat-row-meta">
+          <div class="cat-row-score">${r.val.toFixed(1)}<span class="cat-row-max"> / ${r.max}</span></div>
+          <div class="cat-row-pct ${cls}">${bandLabel}</div>
+        </div>
+        <div class="cat-row-interp" style="font-size:0.78rem;color:var(--ink3)">Δ since 1999: <span class="${dCls}" style="font-weight:600">${deltaSign(r.delta)}</span></div>
+      </div>`;
   }).join('');
 
-  // Top countries HTML
-  const countriesHtml = regionCountries.map((c, i) => {
+  // Top countries — peer-table style
+  const countriesHtml = topCountries.map((c, i) => {
     const fullC = DATA.countries[c.iso];
-    const delta50 = fullC ? ((fullC.scores?.['2050']?.Overall ?? c.score) - c.score) : null;
-    return `<div class="reg-country-row">
-      <div class="reg-country-rank">${i+1}</div>
-      <div class="reg-country-name">${c.name}</div>
-      <div class="reg-country-score" style="color:${scoreColor(c.score)}">${c.score.toFixed(1)}</div>
-    </div>`;
+    const s2050 = fullC?.scores?.['2050']?.Overall;
+    const d50c = (s2050 != null) ? s2050 - c.score : null;
+    const trajCls = c.traj === 'Improving' ? 'tcap-delta-up' : c.traj === 'Declining' ? 'tcap-delta-down' : '';
+    return `
+      <tr class="is-clickable" onclick="showPanel('country');selectCountry('${c.iso}',null)">
+        <td class="reg-peers-rank">${i+1}</td>
+        <td><strong>${c.name}</strong></td>
+        <td class="num">${c.score.toFixed(1)}</td>
+        <td class="num"><span class="${trajCls}">${c.traj || '—'}</span></td>
+      </tr>`;
   }).join('');
+
+  // Trajectory captions
+  const yrs = DATA.years.filter(y => Number(y) <= 2024);
+  const earliestYr = yrs[0];
+  const earliestScore = regData.years[earliestYr]?.Overall ?? null;
+  const pastDelta = earliestScore != null ? s24 - earliestScore : null;
+  const pastDir = pastDelta > 1 ? 'tcap-delta-up' : pastDelta < -1 ? 'tcap-delta-down' : '';
+  const futureDir = d50 > 1 ? 'tcap-delta-up' : d50 < -1 ? 'tcap-delta-down' : '';
 
   // Render detail panel
   document.getElementById('reg-detail').innerHTML = `
@@ -3225,46 +3426,62 @@ function selectRegion(key, el) {
       <div class="reg-hero-left">
         <div class="reg-hero-continent">${regData.continent}</div>
         <div class="reg-hero-name">${regData.region}</div>
-        <div class="reg-hero-n">${nCountries} countries</div>
+        <div class="reg-hero-meta">
+          <span>${nCountries} countries</span>
+          <span class="reg-hero-meta-sep" aria-hidden="true">&middot;</span>
+          <span>Classification — ${cls.label}</span>
+        </div>
       </div>
       <div class="reg-hero-score">
-        <div class="reg-hero-score-num" style="color:${scoreColor(s24)}">${s24.toFixed(1)}</div>
-        <div class="reg-hero-score-label">2024 DHI score</div>
+        <div class="reg-hero-score-num">${s24.toFixed(1)}</div>
+        <div class="reg-hero-score-label">DHI 2024</div>
       </div>
     </div>
 
-    <div class="reg-deltas">
-      <div class="reg-delta-chip">
-        <div class="reg-delta-val" style="color:${deltaColor(d99)}">${deltaSign(d99)}</div>
-        <div class="reg-delta-label">Since 1999</div>
-      </div>
-      <div class="reg-delta-chip">
-        <div class="reg-delta-val" style="color:${scoreColor(s99)}">${s99.toFixed(1)}</div>
-        <div class="reg-delta-label">Score in 1999</div>
-      </div>
-      <div class="reg-delta-chip">
-        <div class="reg-delta-val" style="color:${scoreColor(s50)}">${s50.toFixed(1)}</div>
-        <div class="reg-delta-label">Projected 2050</div>
-      </div>
-      <div class="reg-delta-chip">
-        <div class="reg-delta-val" style="color:${deltaColor(d50)}">${deltaSign(d50)}</div>
-        <div class="reg-delta-label">2024 → 2050</div>
+    <div class="reg-card">
+      <div class="reg-card-eyebrow">Trajectory · 1965 – 2050</div>
+      <div class="reg-card-heading">Score over time</div>
+      <div class="reg-trend-wrap"><canvas id="chart-reg-trend" role="img" aria-label="Regional score trend"></canvas></div>
+      <div class="reg-tcap-row">
+        <div class="reg-tcap tcap-past">
+          <div class="reg-tcap-label">Past · ${earliestYr} → 2024</div>
+          <div class="reg-tcap-headline">${earliestScore != null ? earliestScore.toFixed(1) : '—'} <span class="${pastDir}">(${pastDelta != null ? deltaSign(pastDelta) : '—'})</span></div>
+          <div class="reg-tcap-detail">Region averaged <strong>${earliestScore != null ? earliestScore.toFixed(1) : '—'}</strong> in ${earliestYr}.</div>
+        </div>
+        <div class="reg-tcap tcap-present">
+          <div class="reg-tcap-label">Today · 2024</div>
+          <div class="reg-tcap-headline">${s24.toFixed(1)}</div>
+          <div class="reg-tcap-detail">Classified as <strong>${cls.label}</strong> based on the regional average.</div>
+        </div>
+        <div class="reg-tcap tcap-future">
+          <div class="reg-tcap-label">Projected · 2050</div>
+          <div class="reg-tcap-headline">${s50.toFixed(1)} <span class="${futureDir}">(${deltaSign(d50)})</span></div>
+          <div class="reg-tcap-detail">Median variant projection for the region in 2050.</div>
+        </div>
       </div>
     </div>
 
-    <div class="reg-trend-section">
-      <div class="reg-section-title" style="padding-top:14px">Overall score trend</div>
-      <div style="height:160px;position:relative"><canvas id="chart-reg-trend" role="img" aria-label="Regional score trend"></canvas></div>
-    </div>
-
-    <div class="reg-body">
-      <div class="reg-section">
-        <div class="reg-section-title">Category scores — 2024</div>
-        ${catBarsHtml}
+    <div class="reg-grid">
+      <div class="reg-card">
+        <div class="reg-card-eyebrow">Category breakdown · 2024</div>
+        <div class="reg-card-heading">How the region scores</div>
+        <div class="cat-rows">${catBarsHtml}</div>
+        <div class="cat-legend" style="margin-top:6px">
+          <span class="cat-legend-dot cl-good"></span> Top 30% of regions
+          <span class="cat-legend-dot cl-mid"></span> Middle band
+          <span class="cat-legend-dot cl-poor"></span> Bottom 30% of regions
+        </div>
       </div>
-      <div class="reg-section">
-        <div class="reg-section-title">Top countries by score</div>
-        ${countriesHtml}
+
+      <div class="reg-card">
+        <div class="reg-card-eyebrow">Top countries · same region</div>
+        <div class="reg-card-heading">Leaders in ${regData.region}</div>
+        <table class="reg-peers-table">
+          <thead>
+            <tr><th>Rank</th><th>Country</th><th style="text-align:right">Score</th><th style="text-align:right">Trajectory</th></tr>
+          </thead>
+          <tbody>${countriesHtml}</tbody>
+        </table>
       </div>
     </div>`;
 
@@ -3272,9 +3489,14 @@ function selectRegion(key, el) {
   // canvas is fully laid out before Chart.js measures its container size.
   if (chartRegTrend) { chartRegTrend.destroy(); chartRegTrend = null; }
   if (chartRegCats)  { chartRegCats.destroy();  chartRegCats  = null; }
-  const years = DATA.years.filter(y => Number(y) <= 2024);
-  const overallVals = years.map(y => regData.years[y]?.Overall ?? null);
-  const globalVals  = years.map(y => DATA.global[y]?.Overall  ?? null);
+  const histYears = DATA.years.filter(y => Number(y) <= 2024);
+  const years = [...histYears, '2050'];
+  const overallVals = histYears.map(y => regData.years[y]?.Overall ?? null);
+  overallVals.push(regData.years['2050']?.Overall ?? null);
+  const globalVals  = histYears.map(y => DATA.global[y]?.Overall  ?? null);
+  globalVals.push(DATA.global?.['2050']?.Overall ?? null);
+  // Projected segment (dashed) — only the 2024→2050 link
+  const projVals = years.map(y => (Number(y) === 2024 || Number(y) === 2050) ? (regData.years[y]?.Overall ?? null) : null);
   requestAnimationFrame(() => {
     const canvas = document.getElementById('chart-reg-trend');
     if (!canvas) return;
@@ -3283,12 +3505,14 @@ function selectRegion(key, el) {
       data: {
         labels: years,
         datasets: [
-          { label: regData.region, data: overallVals, borderColor: '#1a3a6e', borderWidth: 2.5,
-            pointBackgroundColor: '#1a3a6e', pointRadius: 2, tension: 0.3, fill: false,
-            spanGaps: true },
+          { label: regData.region, data: overallVals.map((v,i) => Number(years[i]) <= 2024 ? v : null),
+            borderColor: '#1a3a6e', borderWidth: 2.5,
+            pointBackgroundColor: '#1a3a6e', pointRadius: 2, tension: 0.3, fill: false, spanGaps: true },
+          { label: 'Projected 2050', data: projVals,
+            borderColor: '#1a3a6e', borderWidth: 2, borderDash: [4,4],
+            pointBackgroundColor: '#c49a28', pointRadius: 3, tension: 0, fill: false, spanGaps: true },
           { label: 'Global avg', data: globalVals, borderColor: '#aab0c0', borderWidth: 1.5,
-            borderDash: [5,3], pointRadius: 0, tension: 0.3, fill: false,
-            spanGaps: true }
+            borderDash: [5,3], pointRadius: 0, tension: 0.3, fill: false, spanGaps: true }
         ]
       },
       options: {
@@ -3300,7 +3524,7 @@ function selectRegion(key, el) {
             ticks: { font: { size: 9 }, maxRotation: 0,
               callback: (val, i) => {
                 const yr = Number(years[i]);
-                return [1965,1970,1975,1980,1985,1990,1995,2000,2005,2010,2015,2020,2024].includes(yr) ? yr : '';
+                return [1965,1975,1985,1995,2005,2015,2024,2050].includes(yr) ? yr : '';
               }
             } },
           y: { min: 20, max: 100, grid: { color: 'rgba(0,0,0,0.05)' },
@@ -3356,15 +3580,119 @@ function renderRankings() {
   });
 }
 
+// ── Cross-Section Scatter ─────────────────────────────────────────────────────
+let chartScatter = null;
+const SCATTER_X_META = {
+  gov_debt_pct:       { label: 'Government debt (% of GDP)',       fmt: v => v.toFixed(0) + '%',     title: 'DHI score vs government debt',       suggestedMin: 0, suggestedMax: 250 },
+  gdp_pc_ppp:         { label: 'GDP per capita (PPP, USD)',        fmt: v => '$' + Math.round(v).toLocaleString('en-US'), title: 'DHI score vs GDP per capita', logScale: true },
+  pension_assets_pct: { label: 'Pension assets (% of GDP)',        fmt: v => v.toFixed(0) + '%',     title: 'DHI score vs pension assets',       suggestedMin: 0 },
+  fiscal_stress_score:{ label: 'Fiscal stress score (0–100)',      fmt: v => v.toFixed(0),           title: 'DHI score vs fiscal stress',         suggestedMin: 0, suggestedMax: 100 }
+};
+const TRAJ_COLOR = { Improving: '#16a34a', Stable: '#ca8a04', Declining: '#dc2626' };
+
+function renderScatter() {
+  const xKey = document.getElementById('scatter-x').value;
+  const meta = SCATTER_X_META[xKey];
+  document.getElementById('scatter-title').textContent = meta.title;
+
+  const points = [];
+  DATA.country_list.forEach(c => {
+    const co = DATA.countries[c.iso];
+    if (!co) return;
+    const xv = co.economic?.[xKey];
+    const yv = co.scores?.['2024']?.Overall;
+    if (xv == null || isNaN(xv) || yv == null || isNaN(yv)) return;
+    const pop = (typeof POP_DATA !== 'undefined' ? POP_DATA[c.iso]?.['2024'] : null) || 0;
+    // Bubble radius — sqrt scale, capped, so giants don't dominate
+    const r = Math.max(3, Math.min(40, Math.sqrt(pop / 1000) * 1.6));
+    points.push({
+      x: xv, y: yv, r,
+      iso: c.iso, name: c.name,
+      pop, traj: c.traj || 'Stable'
+    });
+  });
+
+  const byTraj = { Improving: [], Stable: [], Declining: [] };
+  points.forEach(p => { (byTraj[p.traj] || byTraj.Stable).push(p); });
+
+  const datasets = ['Improving','Stable','Declining'].map(t => ({
+    label: t,
+    data: byTraj[t],
+    backgroundColor: TRAJ_COLOR[t] + 'cc',
+    borderColor: TRAJ_COLOR[t],
+    borderWidth: 1,
+    hoverBorderWidth: 2,
+    hoverBorderColor: '#0f2347'
+  }));
+
+  if (chartScatter) { chartScatter.destroy(); chartScatter = null; }
+  const canvas = document.getElementById('chart-scatter');
+  if (!canvas) return;
+
+  const xScale = meta.logScale
+    ? { type: 'logarithmic', title: { display: true, text: meta.label, font: { size: 12, family: 'JetBrains Mono' }, color: '#6b7280' },
+        grid: { color: 'rgba(0,0,0,0.05)' },
+        ticks: { font: { size: 10, family: 'JetBrains Mono' }, color: '#6b7280',
+          callback: v => { const allowed = [500,1000,2000,5000,10000,20000,50000,100000]; return allowed.includes(v) ? '$' + (v >= 1000 ? (v/1000)+'k' : v) : ''; } } }
+    : { type: 'linear', title: { display: true, text: meta.label, font: { size: 12, family: 'JetBrains Mono' }, color: '#6b7280' },
+        suggestedMin: meta.suggestedMin, suggestedMax: meta.suggestedMax,
+        grid: { color: 'rgba(0,0,0,0.05)' },
+        ticks: { font: { size: 10, family: 'JetBrains Mono' }, color: '#6b7280' } };
+
+  chartScatter = new Chart(canvas, {
+    type: 'bubble',
+    data: { datasets },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      onClick: (evt, els) => {
+        if (!els.length) return;
+        const el = els[0];
+        const ds = chartScatter.data.datasets[el.datasetIndex];
+        const p = ds.data[el.index];
+        if (p && p.iso) {
+          showPanel('country');
+          selectCountry(p.iso, null);
+        }
+      },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: (ctx) => {
+              const p = ctx.raw;
+              const popStr = p.pop >= 1000 ? (p.pop/1000).toFixed(1) + 'm people' : Math.round(p.pop) + 'k people';
+              return [
+                `${p.name} (${p.iso})`,
+                `DHI: ${p.y.toFixed(1)}  ·  ${meta.label.split(' (')[0]}: ${meta.fmt(p.x)}`,
+                `${popStr}  ·  ${p.traj}`
+              ];
+            }
+          }
+        }
+      },
+      scales: {
+        x: xScale,
+        y: {
+          title: { display: true, text: 'DHI 2024 score', font: { size: 12, family: 'JetBrains Mono' }, color: '#6b7280' },
+          min: 0, max: 100,
+          grid: { color: 'rgba(0,0,0,0.05)' },
+          ticks: { font: { size: 10, family: 'JetBrains Mono' }, color: '#6b7280' }
+        }
+      }
+    }
+  });
+}
+
 // ── Panel switching ───────────────────────────────────────────────────────────
 function showPanel(name) {
-  ['country','region','rankings'].forEach(p => {
+  ['country','region','rankings','scatter'].forEach(p => {
     document.getElementById(`panel-${p}`).classList.remove('active');
   });
   document.getElementById(`panel-${name}`).classList.add('active');
   document.querySelectorAll('.nav-tab').forEach((t,i) => {
-    t.classList.toggle('active', ['country','region','rankings'][i] === name);
+    t.classList.toggle('active', ['country','region','rankings','scatter'][i] === name);
   });
+  if (name === 'scatter') renderScatter();
 }
 
 init();

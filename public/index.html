@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Demoria Research</title>
+<meta name="description" content="Demoria Research — independent research on demographic health and long-run population dynamics.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --accent: #1a3a6e;
+    --gold: #c49a28;
+    --gold2: #e0b54a;
+    --ink: #0f2347;
+    --ink2: rgba(255,255,255,0.78);
+    --ink3: rgba(255,255,255,0.55);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    font-family: 'Lora', Georgia, serif;
+    background: var(--accent);
+    color: #fff;
+    line-height: 1.6;
+    display: flex; align-items: center; justify-content: center;
+    padding: 32px;
+    position: relative; overflow: hidden;
+  }
+  body::after {
+    content: 'DR'; position: fixed;
+    font-weight: 700; font-size: 48vw;
+    color: rgba(255,255,255,0.025);
+    letter-spacing: -0.04em;
+    bottom: -10vw; right: -4vw;
+    line-height: 1; pointer-events: none; user-select: none;
+  }
+  .wrap { max-width: 640px; position: relative; z-index: 1; }
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--gold2);
+    margin-bottom: 24px;
+  }
+  h1 {
+    font-family: 'Lora', Georgia, serif;
+    font-size: clamp(2.8rem, 6vw, 4.4rem);
+    font-weight: 600; line-height: 1.05;
+    letter-spacing: -0.015em; margin-bottom: 18px;
+  }
+  h1 em { color: var(--gold2); font-style: italic; font-weight: 600; }
+  .lede {
+    font-size: 1.15rem; font-style: italic;
+    color: var(--ink2); margin-bottom: 40px;
+    max-width: 560px;
+  }
+  .links { display: flex; flex-direction: column; gap: 14px; max-width: 460px; }
+  .link {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 22px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 8px;
+    color: #fff; text-decoration: none;
+    transition: background 0.16s, border-color 0.16s, transform 0.16s;
+  }
+  .link:hover {
+    background: rgba(255,255,255,0.09);
+    border-color: var(--gold2);
+    transform: translateY(-1px);
+  }
+  .link-text {
+    display: flex; flex-direction: column; gap: 3px;
+  }
+  .link-name {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 1.05rem; font-weight: 600;
+  }
+  .link-desc {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem; letter-spacing: 0.08em;
+    color: var(--ink3);
+  }
+  .link-arrow {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--gold2); font-size: 1.1rem;
+  }
+  footer {
+    position: fixed; bottom: 24px; left: 32px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem; letter-spacing: 0.18em;
+    text-transform: uppercase; color: rgba(255,255,255,0.35);
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">Demoria Research</div>
+  <h1>Long-run <em>demographic</em> intelligence.</h1>
+  <p class="lede">Independent research on the demographic health of nations &mdash; building visible, comparable measures of the trends that shape public finance, geopolitics and the long-term stability of states.</p>
+  <div class="links">
+    <a class="link" href="/dhi/">
+      <span class="link-text">
+        <span class="link-name">Demographic Health Index</span>
+        <span class="link-desc">236 countries &middot; 1965 &ndash; 2100</span>
+      </span>
+      <span class="link-arrow">&rarr;</span>
+    </a>
+  </div>
+</div>
+<footer>&copy; Demoria Research</footer>
+</body>
+</html>

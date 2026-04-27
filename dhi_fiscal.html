@@ -330,6 +330,25 @@ body {
   color: var(--ink3);
 }
 
+
+.efc-beta-pill {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 1px 7px;
+  font-family: var(--font-mono);
+  font-size: 0.52rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold);
+  background: rgba(196,154,40,0.10);
+  border: 1px solid rgba(196,154,40,0.40);
+  border-radius: 999px;
+  font-weight: 500;
+  vertical-align: middle;
+  cursor: help;
+  white-space: nowrap;
+}
+
 /* ── 3x3 grid ─────────────────────────────────────────────────────── */
 .fh-grid-section {
   background: var(--surface);
@@ -608,24 +627,51 @@ function render(iso) {
   // ── Headlines ──
   const stress = e.fiscal_stress_score;
   const stressBand = stress == null ? '' : (stress < 35 ? 'efc-good' : stress > 65 ? 'efc-poor' : 'efc-mid');
+
+  // Fiscal Headroom — special-case when debt is already > 100%
   const headroom = e.fiscal_headroom_years;
-  const headBand = headroom == null ? '' :
-    (headroom >= 99 ? 'efc-good' : headroom >= 30 ? 'efc-good' : headroom >= 10 ? 'efc-mid' : 'efc-poor');
+  const debtPct  = e.gov_debt_pct;
+  const debtAbove100 = debtPct != null && debtPct > 100;
+  let headVal, headBand;
+  if (debtAbove100) {
+    headVal  = 'Above 100% debt threshold';
+    headBand = 'efc-poor';
+  } else if (headroom == null) {
+    headVal  = null;
+    headBand = '';
+  } else {
+    headVal  = fmtYears(headroom);
+    headBand = headroom >= 30 ? 'efc-good' : headroom >= 10 ? 'efc-mid' : 'efc-poor';
+  }
+
   const prefund = e.pre_funding_ratio;
   const prefBand = prefund == null ? '' :
     (prefund >= 1.0 ? 'efc-good' : prefund >= 0.5 ? 'efc-mid' : 'efc-poor');
 
   const headlines = [
-    { label: 'Fiscal Stress Score', val: fmtScore(stress), band: stressBand, sub: '0 – 100 · higher = more stress' },
-    { label: 'Fiscal Headroom',     val: fmtYears(headroom), band: headBand, sub: 'years until debt > 100% GDP' },
-    { label: 'Pre-funding Ratio',   val: fmtRatio(prefund), band: prefBand, sub: 'pension assets ÷ liabilities' }
+    {
+      label:    'Fiscal Stress Score',
+      labelTag: '<span class="efc-beta-pill" title="Heuristic composite indicator combining government debt, GDP growth, pension burden and pension buffer. Calibrated 0–100 — higher means more fiscal stress. Treat as a directional signal rather than a precise forecast.">Beta &middot; composite</span>',
+      val: fmtScore(stress),
+      band: stressBand,
+      sub: '0 – 100 · higher = more stress'
+    },
+    { label: 'Fiscal Headroom', val: headVal, band: headBand, sub: 'years until debt > 100% GDP', isText: debtAbove100 },
+    { label: 'Pre-funding Ratio', val: fmtRatio(prefund), band: prefBand, sub: 'pension assets ÷ liabilities' }
   ];
   document.getElementById('efc-headlines').innerHTML = headlines.map(h => {
-    const valHtml = h.val == null
-      ? '<div class="efc-headline-val efc-na">n/a</div>'
-      : '<div class="efc-headline-val ' + h.band + '">' + h.val + '</div>';
+    let valHtml;
+    if (h.val == null) {
+      valHtml = '<div class="efc-headline-val efc-na">n/a</div>';
+    } else if (h.isText) {
+      // Long-form text fits in a smaller line so it doesn't break out of the card
+      valHtml = '<div class="efc-headline-val ' + h.band + '" style="font-size:1.05rem;line-height:1.25">' + h.val + '</div>';
+    } else {
+      valHtml = '<div class="efc-headline-val ' + h.band + '">' + h.val + '</div>';
+    }
+    const labelHtml = '<div class="efc-headline-label">' + h.label + (h.labelTag || '') + '</div>';
     return '<div class="efc-headline ' + h.band + '">' +
-      '<div class="efc-headline-label">' + h.label + '</div>' +
+      labelHtml +
       valHtml +
       '<div class="efc-headline-sub">' + h.sub + '</div>' +
     '</div>';
@@ -660,7 +706,7 @@ function render(iso) {
   const missing = ['gdp_pc_ppp','gdp_growth','gov_debt_pct','gov_primary_balance','gov_revenue_pct',
                    'health_spend_pct','pension_assets_pct','pension_spend_pct','pension_replace_pct']
                   .filter(k => e[k] == null);
-  let txt = 'Sources: IMF World Economic Outlook (April 2026) for fiscal & macro · World Bank Open Data for healthcare · OECD Pensions at a Glance 2025 for pension fields';
+  let txt = 'Demographic data: UN WPP 2024 · Economic data: IMF WEO April 2026 · Pension data: OECD November 2025 · Healthcare: World Bank Open Data';
   if (missing.length) {
     const labels = {gdp_pc_ppp:'GDP per capita',gdp_growth:'GDP growth',gov_debt_pct:'gov debt',
                     gov_primary_balance:'primary balance',gov_revenue_pct:'gov revenue',
