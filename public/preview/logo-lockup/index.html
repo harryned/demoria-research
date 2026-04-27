@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Demoria Research · Lockup Variants</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Cinzel:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:    #0e0d0c;
+    --gold:  #c8a850;
+    --ink:   #f0ebe0;
+    --ink2:  #b9b1a1;
+    --ink3:  #6e685c;
+    --ink4:  #3a352d;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    background: var(--bg);
+    color: var(--ink);
+    min-height: 100vh;
+    padding: 60px 32px 80px;
+    overflow-x: hidden;
+  }
+  .wrap { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
+
+  /* Top utility nav */
+  nav.preview-nav {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-bottom: 22px;
+    border-bottom: 1px solid var(--ink4);
+    margin-bottom: 64px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.66rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--ink3);
+    flex-wrap: wrap; gap: 14px;
+  }
+  nav.preview-nav .links { display: flex; gap: 18px; flex-wrap: wrap; }
+  nav.preview-nav a { color: var(--ink3); text-decoration: none; transition: color .15s; }
+  nav.preview-nav a:hover { color: var(--gold); }
+  nav.preview-nav a.active { color: var(--ink); }
+  nav.preview-nav a.active::before { content: '› '; color: var(--gold); }
+
+  /* Page header */
+  header.page-head { margin-bottom: 72px; max-width: 760px; }
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 18px;
+  }
+  h1.page-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.4rem, 5vw, 3.4rem);
+    font-weight: 500; line-height: 1.1;
+    letter-spacing: -0.005em;
+    color: var(--ink);
+  }
+  p.page-lede {
+    margin-top: 14px;
+    font-size: 1.05rem;
+    color: var(--ink2);
+    line-height: 1.55;
+    font-style: italic;
+    max-width: 600px;
+  }
+
+  /* ── Lockup stage ── */
+  .stage {
+    background: var(--bg);
+    border: 1px solid var(--ink4);
+    border-radius: 4px;
+    margin-bottom: 18px;
+    position: relative;
+    overflow: hidden;
+  }
+  .stage-frame {
+    display: flex; align-items: center; justify-content: center;
+    padding: 64px 48px;
+    min-height: 240px;
+  }
+  .stage-cap {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 12px 20px;
+    border-top: 1px dashed var(--ink4);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--ink3);
+  }
+  .stage-cap .stage-num { color: var(--gold); }
+
+  /* ── The mark (arch + 8-point star) ── */
+  .mark-svg .arch  { fill: none; stroke: var(--gold); }
+  .mark-svg .ray   { stroke: var(--gold); stroke-linecap: round; }
+  .mark-svg .dot   { fill: var(--gold); }
+  .mark-svg .core  { fill: var(--gold); }
+
+  /* ── Wordmark ── */
+  .wm {
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--ink);
+    font-feature-settings: 'liga' 1, 'dlig' 1;
+    line-height: 0.92;
+  }
+  .wm-stack { display: flex; flex-direction: column; }
+  .wm-d { font-weight: 600; letter-spacing: -0.005em; }
+  .wm-r { font-weight: 400; letter-spacing: 0.005em; }
+
+  /* ── Variant 1 — Primary Horizontal ── */
+  .v1 .lockup {
+    display: flex; align-items: center; gap: 38px;
+  }
+  .v1 .mark-svg { width: clamp(96px, 14vw, 160px); height: auto; flex-shrink: 0; }
+  .v1 .wm-d { font-size: clamp(2.4rem, 6.4vw, 4.4rem); }
+  .v1 .wm-r { font-size: clamp(1.6rem, 4.4vw, 3rem); margin-top: -0.04em; }
+
+  /* ── Variant 2 — Stacked Vertical ── */
+  .v2 .lockup {
+    display: flex; flex-direction: column; align-items: center; gap: 22px;
+    text-align: center;
+  }
+  .v2 .mark-svg { width: clamp(96px, 12vw, 140px); height: auto; }
+  .v2 .wm-stacked {
+    font-family: 'Cinzel', 'Cormorant Garamond', serif;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.05;
+  }
+  .v2 .wm-stacked .wm-line-d {
+    font-size: clamp(2.2rem, 5.6vw, 3.6rem);
+    letter-spacing: 0.18em;
+    display: block;
+  }
+  .v2 .wm-stacked .wm-rule {
+    height: 1px;
+    background: var(--gold);
+    width: 78%;
+    margin: 14px auto;
+    opacity: 0.6;
+  }
+  .v2 .wm-stacked .wm-line-r {
+    font-size: clamp(0.78rem, 1.6vw, 1.05rem);
+    letter-spacing: 0.46em;
+    color: var(--ink2);
+    text-indent: 0.46em; /* visually centre with the trailing letter-spacing */
+    display: block;
+  }
+
+  /* ── Variant 3 — Mark Only (square) ── */
+  .v3 .stage-frame { padding: 56px; }
+  .v3 .lockup {
+    width: clamp(180px, 24vw, 260px);
+    aspect-ratio: 1 / 1;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .v3 .mark-svg { width: 75%; height: auto; }
+
+  /* ── Variant 4 — Compact Single-Line ── */
+  .v4 .stage-frame { padding: 28px 36px; min-height: 0; }
+  .v4 .lockup {
+    display: inline-flex; align-items: center; gap: 14px;
+  }
+  .v4 .mark-svg { height: 1.6em; width: auto; flex-shrink: 0; }
+  .v4 .wm-inline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.05rem, 2.2vw, 1.4rem);
+    font-weight: 600;
+    letter-spacing: 0.005em;
+    color: var(--ink);
+    display: inline-flex; align-items: baseline; gap: 0.45em;
+  }
+  .v4 .wm-inline .wm-r-inline {
+    font-weight: 400;
+    color: var(--ink);
+  }
+  .v4 .wm-inline .wm-bullet {
+    color: var(--gold); font-weight: 400;
+    margin: 0 0.05em;
+  }
+
+  /* Section divider */
+  .section-cap {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding-bottom: 12px;
+    margin: 56px 0 18px;
+    border-bottom: 1px solid var(--ink4);
+  }
+  .section-cap-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; font-weight: 600;
+    color: var(--ink);
+    letter-spacing: -0.005em;
+  }
+  .section-cap-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--ink3);
+  }
+
+  /* Spec block */
+  .specs {
+    margin-top: 56px; padding: 24px 28px;
+    background: rgba(200,168,80,0.04);
+    border: 1px solid rgba(200,168,80,0.20);
+    border-radius: 4px;
+  }
+  .specs-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 12px;
+  }
+  .specs-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+  }
+  @media (max-width: 720px) {
+    .specs-grid { grid-template-columns: 1fr 1fr; }
+  }
+  .spec-item {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.66rem; line-height: 1.5;
+    color: var(--ink2);
+  }
+  .spec-item strong {
+    display: block;
+    font-size: 0.56rem; letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink3); font-weight: 500;
+    margin-bottom: 4px;
+  }
+  .spec-swatch {
+    display: inline-block; width: 12px; height: 12px;
+    vertical-align: middle; margin-right: 6px;
+    border-radius: 2px; border: 1px solid var(--ink4);
+  }
+
+  footer.page-foot {
+    margin-top: 72px; padding-top: 22px;
+    border-top: 1px solid var(--ink4);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--ink3);
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<!-- ── Reusable mark (arch + 8-point star) defined once, referenced 4× ── -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="dr-mark" viewBox="0 0 100 200">
+      <!-- Arch silhouette: closed at the floor, semicircular cap on top -->
+      <path class="arch"
+            d="M 10 192 L 10 60 A 40 40 0 0 1 90 60 L 90 192 Z"
+            stroke-width="2.6" stroke-linejoin="miter" />
+
+      <!-- 8-point star with a dot at each ray's tip and a core -->
+      <g transform="translate(50 78)">
+        <!-- 4 cardinal rays -->
+        <line class="ray" x1="0"   y1="0" x2="0"   y2="-15" stroke-width="1.4"/>
+        <line class="ray" x1="0"   y1="0" x2="15"  y2="0"   stroke-width="1.4"/>
+        <line class="ray" x1="0"   y1="0" x2="0"   y2="15"  stroke-width="1.4"/>
+        <line class="ray" x1="0"   y1="0" x2="-15" y2="0"   stroke-width="1.4"/>
+        <!-- 4 diagonal rays (slightly shorter for visual balance) -->
+        <line class="ray" x1="0"   y1="0" x2="9"   y2="-9"  stroke-width="1.2"/>
+        <line class="ray" x1="0"   y1="0" x2="9"   y2="9"   stroke-width="1.2"/>
+        <line class="ray" x1="0"   y1="0" x2="-9"  y2="9"   stroke-width="1.2"/>
+        <line class="ray" x1="0"   y1="0" x2="-9"  y2="-9"  stroke-width="1.2"/>
+        <!-- Tip dots -->
+        <circle class="dot" cx="0"   cy="-15" r="1.8"/>
+        <circle class="dot" cx="15"  cy="0"   r="1.8"/>
+        <circle class="dot" cx="0"   cy="15"  r="1.8"/>
+        <circle class="dot" cx="-15" cy="0"   r="1.8"/>
+        <circle class="dot" cx="9"   cy="-9"  r="1.4"/>
+        <circle class="dot" cx="9"   cy="9"   r="1.4"/>
+        <circle class="dot" cx="-9"  cy="9"   r="1.4"/>
+        <circle class="dot" cx="-9"  cy="-9"  r="1.4"/>
+        <!-- Core dot -->
+        <circle class="core" cx="0" cy="0" r="2.0"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="wrap">
+
+  <nav class="preview-nav">
+    <span>Demoria Research · Logo Lockup System</span>
+    <span class="links">
+      <a href="/preview/logo-italiana/">Italiana</a>
+      <a href="/preview/logo-bodoni/">Bodoni</a>
+      <a href="/preview/logo-cormorant/">Cormorant</a>
+      <a href="/preview/logo-colonnade/">Colonnade</a>
+      <a href="/preview/logo-sigil/">Sigil</a>
+      <a href="/preview/logo-threshold/">Threshold</a>
+      <a href="/preview/logo-lockup/" class="active">Lockup</a>
+    </span>
+  </nav>
+
+  <header class="page-head">
+    <div class="eyebrow">Logo · Lockup System</div>
+    <h1 class="page-title">Demoria Research &mdash; <em>four lockups</em></h1>
+    <p class="page-lede">Arch + eight-point star mark, paired with a Cormorant Garamond / Cinzel wordmark, on a warm-black ground. Four configurations: a primary horizontal, a stacked vertical, the mark on its own, and a compact single-line for headers and footers.</p>
+  </header>
+
+  <!-- ── Variant 1 — Primary Horizontal ── -->
+  <div class="section-cap">
+    <div class="section-cap-title">1 · Primary Horizontal</div>
+    <div class="section-cap-meta">For mastheads · the canonical lockup</div>
+  </div>
+  <div class="stage v1">
+    <div class="stage-frame">
+      <div class="lockup">
+        <svg class="mark-svg" viewBox="0 0 100 200"><use href="#dr-mark"/></svg>
+        <div class="wm wm-stack">
+          <span class="wm-d">Demoria</span>
+          <span class="wm-r">Research</span>
+        </div>
+      </div>
+    </div>
+    <div class="stage-cap">
+      <span><span class="stage-num">01</span> · Primary horizontal</span>
+      <span>Mark + stacked wordmark · ~3 : 1</span>
+    </div>
+  </div>
+
+  <!-- ── Variant 2 — Stacked Vertical ── -->
+  <div class="section-cap">
+    <div class="section-cap-title">2 · Stacked Vertical</div>
+    <div class="section-cap-meta">Centred mark above tracked-caps wordmark</div>
+  </div>
+  <div class="stage v2">
+    <div class="stage-frame">
+      <div class="lockup">
+        <svg class="mark-svg" viewBox="0 0 100 200"><use href="#dr-mark"/></svg>
+        <div class="wm-stacked">
+          <span class="wm-line-d">DEMORIA</span>
+          <span class="wm-rule"></span>
+          <span class="wm-line-r">RESEARCH</span>
+        </div>
+      </div>
+    </div>
+    <div class="stage-cap">
+      <span><span class="stage-num">02</span> · Stacked vertical</span>
+      <span>Cinzel caps · gold rule · centred</span>
+    </div>
+  </div>
+
+  <!-- ── Variant 3 — Mark Only (square) ── -->
+  <div class="section-cap">
+    <div class="section-cap-title">3 · Mark Only · Square</div>
+    <div class="section-cap-meta">Favicon, app icon, social avatar · 1 : 1</div>
+  </div>
+  <div class="stage v3">
+    <div class="stage-frame">
+      <div class="lockup">
+        <svg class="mark-svg" viewBox="0 0 100 200"><use href="#dr-mark"/></svg>
+      </div>
+    </div>
+    <div class="stage-cap">
+      <span><span class="stage-num">03</span> · Mark only · square</span>
+      <span>Glyph-only · standalone identifier</span>
+    </div>
+  </div>
+
+  <!-- ── Variant 4 — Compact Single-Line ── -->
+  <div class="section-cap">
+    <div class="section-cap-title">4 · Compact Single-Line</div>
+    <div class="section-cap-meta">For headers, footers and inline citations</div>
+  </div>
+  <div class="stage v4">
+    <div class="stage-frame">
+      <div class="lockup">
+        <svg class="mark-svg" viewBox="0 0 100 200"><use href="#dr-mark"/></svg>
+        <span class="wm-inline">
+          Demoria
+          <span class="wm-bullet">·</span>
+          <span class="wm-r-inline">Research</span>
+        </span>
+      </div>
+    </div>
+    <div class="stage-cap">
+      <span><span class="stage-num">04</span> · Compact single-line</span>
+      <span>Mark x-height · 1.6em</span>
+    </div>
+  </div>
+
+  <!-- Spec / brand sheet -->
+  <div class="specs">
+    <div class="specs-eyebrow">Brand specifications</div>
+    <div class="specs-grid">
+      <div class="spec-item">
+        <strong>Wordmark</strong>
+        Cormorant Garamond<br>weights 500 / 600
+      </div>
+      <div class="spec-item">
+        <strong>Display caps</strong>
+        Cinzel<br>weights 500 / 600
+      </div>
+      <div class="spec-item">
+        <strong>Mono utility</strong>
+        JetBrains Mono<br>weight 400
+      </div>
+      <div class="spec-item">
+        <strong>Mark</strong>
+        Arch + 8-point star<br>SVG, gold stroke
+      </div>
+    </div>
+    <div class="specs-grid" style="margin-top:18px;padding-top:18px;border-top:1px solid var(--ink4)">
+      <div class="spec-item">
+        <strong>Background</strong>
+        <span class="spec-swatch" style="background:#0e0d0c"></span>#0e0d0c
+      </div>
+      <div class="spec-item">
+        <strong>Mark</strong>
+        <span class="spec-swatch" style="background:#c8a850"></span>#c8a850
+      </div>
+      <div class="spec-item">
+        <strong>Wordmark</strong>
+        <span class="spec-swatch" style="background:#f0ebe0"></span>#f0ebe0
+      </div>
+      <div class="spec-item">
+        <strong>Hairline</strong>
+        <span class="spec-swatch" style="background:#3a352d"></span>#3a352d
+      </div>
+    </div>
+  </div>
+
+  <footer class="page-foot">Demoria Research · logo lockup preview</footer>
+
+</div>
+</body>
+</html>
