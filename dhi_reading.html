@@ -116,6 +116,72 @@ section { position: relative; z-index: 1; }
   margin-top: 6px; letter-spacing: 0.04em;
 }
 
+/* ─── Author block ─────────────────────────────────── */
+.r-author {
+  margin-top: 56px; padding-top: 36px;
+  border-top: 1px solid rgba(255,255,255,0.12);
+  max-width: 880px;
+}
+.r-author-eyebrow {
+  font-family: var(--font-mono); font-size: 0.66rem;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--gold2); margin-bottom: 18px; font-weight: 500;
+}
+.r-author-grid {
+  display: grid;
+  grid-template-columns: 88px 1fr;
+  gap: 24px; align-items: start;
+}
+.r-author-mark {
+  width: 88px; height: 88px;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, rgba(232,184,75,0.18) 0%, rgba(196,154,40,0.10) 100%);
+  border: 1px solid rgba(232,184,75,0.45);
+  border-radius: 50%;
+  font-family: var(--font-display); font-weight: 600;
+  font-size: 1.4rem; letter-spacing: 0.04em;
+  color: var(--gold2);
+}
+.r-author-name {
+  font-family: var(--font-display);
+  font-size: 1.3rem; font-weight: 600; color: #fff;
+  letter-spacing: -0.005em; margin-bottom: 4px;
+}
+.r-author-role {
+  font-family: var(--font-mono); font-size: 0.72rem;
+  letter-spacing: 0.06em; color: rgba(255,255,255,0.55);
+  margin-bottom: 16px;
+}
+.r-author-para {
+  font-family: var(--font-display);
+  font-size: 0.96rem; line-height: 1.65;
+  color: rgba(255,255,255,0.82);
+  margin-bottom: 12px;
+}
+.r-author-para em { font-style: italic; color: var(--gold2); font-weight: 500; }
+.r-author-para strong { color: #fff; font-weight: 600; }
+.r-author-links {
+  list-style: none; padding: 0;
+  margin-top: 14px;
+  display: flex; flex-wrap: wrap; gap: 6px 22px;
+  font-family: var(--font-mono); font-size: 0.78rem;
+}
+.r-author-links li { display: flex; align-items: baseline; gap: 8px; }
+.r-author-link-label {
+  font-size: 0.62rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: rgba(255,255,255,0.42);
+}
+.r-author-links a {
+  color: var(--gold2); text-decoration: none;
+  border-bottom: 1px solid rgba(232,184,75,0.30);
+  transition: border-color .15s, color .15s;
+}
+.r-author-links a:hover { color: #f5cd66; border-bottom-color: var(--gold2); }
+@media (max-width: 600px) {
+  .r-author-grid { grid-template-columns: 1fr; }
+  .r-author-mark { width: 64px; height: 64px; font-size: 1.1rem; }
+}
+
 /* ─── Pull-quote ───────────────────────────────────── */
 .r-pullquote {
   background: rgba(255,255,255,0.05);
@@ -414,6 +480,26 @@ section { position: relative; z-index: 1; }
       <div><div class="r-stat-val">5</div><div class="r-stat-label">Index categories</div></div>
       <div><div class="r-stat-val">1965&ndash;2050</div><div class="r-stat-label">Time coverage</div></div>
       <div><div class="r-stat-val">UN WPP 2024</div><div class="r-stat-label">Primary data source</div></div>
+    </div>
+
+    <!-- Author block ─────────────────────────────────────── -->
+    <div class="r-author" id="r-author">
+      <div class="r-author-eyebrow">About the author</div>
+      <div class="r-author-grid">
+        <div class="r-author-mark" aria-hidden="true">HN</div>
+        <div class="r-author-body">
+          <div class="r-author-name">Harry Nedeljkovic</div>
+          <div class="r-author-role">Founder, Demoria Research &middot; Author of the Demographic Health Index</div>
+          <p class="r-author-para">Harry studied economics and demography at the <strong>University of Bath</strong> (BSc), <strong>Bocconi University</strong> (MSc) and <strong>Tsinghua University</strong> (MSc exchange semester). His personal interest is in fertility collapse and demographic ageing &mdash; what he considers <em>the most significant and furthest-reaching macro-trend in the world today</em>.</p>
+          <p class="r-author-para">Previous work has spanned the start-up space, financial services, and the commodities industry &mdash; most recently at <strong>Onyx Capital Group</strong> and <strong>ArcelorMittal</strong> &mdash; where the demand-side consequences of demographic change are routinely underweighted by the markets and institutions they will eventually reshape.</p>
+          <p class="r-author-para">British. Has studied and worked across the UK, Italy and China.</p>
+          <ul class="r-author-links">
+            <li><span class="r-author-link-label">Email</span> <a href="mailto:harryned@gmail.com">harryned@gmail.com</a></li>
+            <li><span class="r-author-link-label">LinkedIn</span> <a href="https://www.linkedin.com/in/harry-nedeljkovic" target="_blank" rel="noopener">Harry Nedeljkovic</a></li>
+            <li><span class="r-author-link-label">X</span> <a href="https://x.com/harrynedeljkovic" target="_blank" rel="noopener">@harrynedeljkovic</a></li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 </section>
