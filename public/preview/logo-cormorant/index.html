@@ -116,6 +116,17 @@
     opacity: 0.55;
   }
 
+
+  .mark-sigil {
+    display: block;
+    color: var(--gold2);
+    line-height: 0;
+    margin-bottom: 0.20em;
+  }
+  .mark-sigil svg { display: block; height: 0.55em; width: auto; margin: 0 auto; overflow: visible; }
+  .stage.medium .mark-sigil svg { height: 0.55em; }
+  .stage.small .mark-sigil { display: none; }
+
   /* Three sizes */
   .stage.large .mark-line { font-size: clamp(3rem, 11vw, 7rem); }
   .stage.large .mark-sub  { font-size: 0.86rem; letter-spacing: 0.36em; padding-top: 4px; }
@@ -210,14 +221,17 @@
   <div class="stage large">
     <div class="stage-eyebrow">Hero · 7rem cap height</div>
     <span class="mark">
+      <span class="mark-sigil" aria-hidden="true">
+        <svg viewBox="0 0 80 56" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="square" stroke-linejoin="miter">
+          <line x1="14" y1="22" x2="14" y2="50"/>
+          <line x1="66" y1="22" x2="66" y2="50"/>
+          <path d="M 14 22 A 26 26 0 0 1 66 22"/>
+          <line x1="6" y1="50" x2="74" y2="50"/>
+        </svg>
+      </span>
+      
       <span class="mark-line">
-        <span class="mark-d" aria-hidden="true">
-          <svg viewBox="0 -2 70 92" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="6" fill="none" stroke-linecap="square" stroke-linejoin="miter">
-            <path d="M 6 30 A 29 29 0 0 1 64 30"/>
-            <line x1="6" y1="30" x2="6" y2="88"/>
-            <line x1="64" y1="30" x2="64" y2="88"/>
-          </svg>
-        </span><span class="mark-rest">EMORIA</span>
+        <span class="mark-rest">DEMORIA</span>
       </span>
       <span class="mark-sub">RESEARCH</span>
     </span>
@@ -228,14 +242,17 @@
   <div class="stage medium">
     <div class="stage-eyebrow">In context · header bar</div>
     <span class="mark">
+      <span class="mark-sigil" aria-hidden="true">
+        <svg viewBox="0 0 80 56" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="square" stroke-linejoin="miter">
+          <line x1="14" y1="22" x2="14" y2="50"/>
+          <line x1="66" y1="22" x2="66" y2="50"/>
+          <path d="M 14 22 A 26 26 0 0 1 66 22"/>
+          <line x1="6" y1="50" x2="74" y2="50"/>
+        </svg>
+      </span>
+      
       <span class="mark-line">
-        <span class="mark-d" aria-hidden="true">
-          <svg viewBox="0 -2 70 92" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="6" fill="none" stroke-linecap="square" stroke-linejoin="miter">
-            <path d="M 6 30 A 29 29 0 0 1 64 30"/>
-            <line x1="6" y1="30" x2="6" y2="88"/>
-            <line x1="64" y1="30" x2="64" y2="88"/>
-          </svg>
-        </span><span class="mark-rest">EMORIA</span>
+        <span class="mark-rest">DEMORIA</span>
       </span>
       <span class="mark-sub">RESEARCH</span>
     </span>
@@ -247,13 +264,7 @@
     <span class="stage-eyebrow">Inline · footer / one-liner</span>
     <span class="mark" style="flex-direction: row; gap: 16px; align-items: center">
       <span class="mark-line">
-        <span class="mark-d" aria-hidden="true">
-          <svg viewBox="0 -2 70 92" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="6" fill="none" stroke-linecap="square" stroke-linejoin="miter">
-            <path d="M 6 30 A 29 29 0 0 1 64 30"/>
-            <line x1="6" y1="30" x2="6" y2="88"/>
-            <line x1="64" y1="30" x2="64" y2="88"/>
-          </svg>
-        </span><span class="mark-rest">EMORIA</span>
+        <span class="mark-rest">DEMORIA</span>
       </span>
       <span class="mark-sub" style="font-size:0.5rem">RESEARCH</span>
     </span>
