@@ -30,7 +30,7 @@
   --surface: #ffffff;
   --surface2: #f4f5f7;
   --surface3: #eaecf1;
-  --accent: #1a3a6e;
+  --accent: #0f2347;
   --accent2: #2d5fb3;
   --gold: #b8912a;
   --gold2: #f0c04a;
@@ -73,9 +73,7 @@ header {
   gap: 24px;
   height: 56px;
 }
-.logo { font-size: 1.1rem; font-weight: bold; letter-spacing: 0.03em; white-space: nowrap; color: #fff; }
-.logo span { color: var(--gold2); }
-.nav-tabs { display: flex; gap: 2px; margin-left: auto; }
+.nav-tabs { display: flex; gap: 2px; margin: 0 auto; justify-content: center; }
 .nav-tab {
   padding: 6px 16px;
   border-radius: var(--r);
@@ -1862,7 +1860,6 @@ header {
 
 <header>
   <div class="header-inner">
-    <div class="logo">DHI &mdash; <span>Demographic Health Index</span></div>
     <nav class="nav-tabs">
       <button class="nav-tab active" onclick="showPanel('country')">Country</button>
       <button class="nav-tab" onclick="showPanel('region')">Regions</button>
