@@ -119,28 +119,31 @@ body { display: flex; flex-direction: column; }
   line-height: 1;
 }
 .logo:hover, .logo:visited, .logo:active, .logo:focus { text-decoration: none; color: inherit; }
-.logo-mark {
+.logo .logo-mark {
   font-family: 'Manrope', sans-serif;
   font-size: 0.95rem;
   font-weight: 300;
-  letter-spacing: 0.05em;
+  letter-spacing: 0;
   color: #c49a28;
   line-height: 1;
   margin: 0; padding: 0;
   text-indent: 0;
   display: block;
+  align-self: flex-start;
 }
 .logo-rule { display: none; }
-.logo-tagline {
+.logo .logo-tagline {
   font-family: 'Manrope', sans-serif;
   font-size: 1.45rem;
   font-weight: 300;
   letter-spacing: -0.008em;
   color: rgba(255,255,255,0.95);
   line-height: 1;
+  margin: 0; padding: 0;
+  text-indent: 0;
+  display: block;
+  align-self: flex-start;
 }
-/* keep legacy nested span working too */
-.logo span { color: rgba(255,255,255,0.62); font-weight: normal; }
 
 /* ── Tabs (text-style with gold underline) ──────────────────────── */
 .tabs {
