@@ -3839,50 +3839,119 @@ function selectRegion(key, el) {
   requestAnimationFrame(() => {
     const canvas = document.getElementById('chart-reg-trend');
     if (!canvas) return;
+
+    // Convert array data → scatter {x,y} format so we can use a linear x-axis
+    // (gives multiple year labels and matches the dynamic country chart format).
+    const obsRegion    = [];
+    const obsGlobalArr = [];
+    years.forEach((y, i) => {
+      const yi = Number(y);
+      if (yi <= 2024 && histRegion[i] != null) obsRegion.push({ x: yi, y: histRegion[i] });
+      if (yi <= 2024 && histGlobal[i] != null) obsGlobalArr.push({ x: yi, y: histGlobal[i] });
+    });
+    const lastObsR = obsRegion[obsRegion.length - 1];
+    const lastObsG = obsGlobalArr[obsGlobalArr.length - 1];
+
+    const projR = [];
+    if (lastObsR) projR.push({ x: lastObsR.x, y: lastObsR.y, _bridge: true });
+    years.forEach((y, i) => {
+      const yi = Number(y);
+      if (yi > 2024 && projRegion[i] != null) projR.push({ x: yi, y: projRegion[i] });
+    });
+    const projG = [];
+    if (lastObsG) projG.push({ x: lastObsG.x, y: lastObsG.y, _bridge: true });
+    years.forEach((y, i) => {
+      const yi = Number(y);
+      if (yi > 2024 && projGlobal[i] != null) projG.push({ x: yi, y: projGlobal[i] });
+    });
+
+    // Vertical "TODAY" marker at 2024 (matches country chart)
+    const todayLinePlugin = {
+      id: 'todayLineRegion',
+      afterDatasetsDraw(chart) {
+        const { ctx, chartArea: { top, bottom }, scales: { x } } = chart;
+        const px = x.getPixelForValue(2024);
+        if (px == null) return;
+        ctx.save();
+        ctx.setLineDash([3, 3]);
+        ctx.strokeStyle = 'rgba(15,17,23,0.28)';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(px, top); ctx.lineTo(px, bottom); ctx.stroke();
+        ctx.setLineDash([]);
+        ctx.fillStyle = 'rgba(15,17,23,0.55)';
+        ctx.font = '500 9px JetBrains Mono, Menlo, monospace';
+        ctx.textAlign = 'center';
+        ctx.fillText('TODAY', px, top + 9);
+        ctx.restore();
+      }
+    };
+
     chartRegTrend = new Chart(canvas, {
-      type: 'line',
+      type: 'scatter',
       data: {
-        labels: years,
         datasets: [
-          { label: regData.region, data: histRegion,
-            borderColor: '#1a3a6e', borderWidth: 2.5,
-            pointBackgroundColor: '#1a3a6e', pointRadius: 0, tension: 0.3, fill: false, spanGaps: true },
-          { label: regData.region + ' (projected)', data: maskProj(projRegion),
-            borderColor: '#1a3a6e', borderWidth: 2, borderDash: [5,4],
-            pointBackgroundColor: '#c49a28', pointRadius: ctx => {
-              const yr = Number(years[ctx.dataIndex]);
-              return [2025, 2035, 2050].includes(yr) ? 3 : 0;
+          { label: regData.region + ' — observed', data: obsRegion,
+            borderColor: '#1a3a6e', borderWidth: 2.5, pointBackgroundColor: '#1a3a6e',
+            pointRadius: (ctx) => {
+              const yr = ctx.raw?.x;
+              if (yr == null) return 0;
+              return (yr % 10 === 0 || yr === 2024) ? 2.8 : 0;
             },
-            tension: 0.3, fill: false, spanGaps: true },
-          { label: 'Global avg', data: histGlobal,
-            borderColor: '#aab0c0', borderWidth: 1.5, borderDash: [5,3],
-            pointRadius: 0, tension: 0.3, fill: false, spanGaps: true },
-          { label: 'Global avg (projected)', data: maskProj(projGlobal),
-            borderColor: '#aab0c0', borderWidth: 1.2, borderDash: [3,3],
-            pointRadius: 0, tension: 0.3, fill: false, spanGaps: true }
+            pointHoverRadius: 5,
+            showLine: true, tension: 0.25, fill: false },
+          { label: regData.region + ' — projected (Median)', data: projR,
+            borderColor: 'rgba(26,58,110,0.75)', borderWidth: 1.8,
+            pointBackgroundColor: 'rgba(26,58,110,0.75)',
+            pointRadius: (ctx) => ctx.raw?._bridge ? 0 : 3.2,
+            pointHoverRadius: (ctx) => ctx.raw?._bridge ? 0 : 5,
+            showLine: true, tension: 0.25, borderDash: [5,4], fill: false },
+          { label: 'Global average', data: obsGlobalArr,
+            borderColor: '#9aa0b0', borderWidth: 1.4, borderDash: [3,3],
+            pointRadius: 0, showLine: true, tension: 0.25, fill: false },
+          { label: 'Global average — projected', data: projG,
+            borderColor: '#9aa0b0', borderWidth: 1.2, borderDash: [3,3],
+            pointRadius: 0, showLine: true, tension: 0.25, fill: false }
         ]
       },
+      plugins: [todayLinePlugin],
       options: {
         responsive: true, maintainAspectRatio: false,
+        layout: { padding: { top: 14, right: 8, bottom: 4, left: 4 } },
+        interaction: { mode: 'nearest', intersect: false, axis: 'x' },
         plugins: {
-          legend: { display: true, position: 'bottom',
-            labels: { font: { size: 11 }, boxWidth: 14, padding: 10,
+          legend: { display: true, position: 'bottom', align: 'start',
+            labels: { font: { size: 11 }, boxWidth: 16, boxHeight: 2, padding: 14,
               filter: item => !/projected/i.test(item.text) } },
           tooltip: {
-            filter: item => item.parsed.y != null,
-            callbacks: { title: items => items[0].label }
+            backgroundColor: 'rgba(15,17,23,0.92)',
+            titleFont: { family: 'JetBrains Mono, monospace', size: 11 },
+            bodyFont: { size: 12 },
+            padding: 10, cornerRadius: 4,
+            filter: (item) => !item.raw?._bridge,
+            callbacks: {
+              title: (items) => items[0]?.raw?.x != null ? String(Math.round(items[0].raw.x)) : '',
+              label: (item) => item.dataset.label + ': ' + (item.raw?.y?.toFixed(1) ?? '—')
+            }
           }
         },
         scales: {
-          x: { type: 'category', grid: { display: false },
-            ticks: { font: { size: 9 }, maxRotation: 0, autoSkip: false,
-              callback: (val, i) => {
-                const yr = Number(years[i]);
-                return [1965,1980,1995,2010,2024,2035,2050].includes(yr) ? yr : '';
-              }
-            } },
-          y: { min: 20, max: 100, grid: { color: 'rgba(0,0,0,0.05)' },
-            ticks: { font: { size: 10 } } }
+          x: {
+            type: 'linear', min: 1963, max: 2052,
+            grid: { color: 'rgba(0,0,0,0.04)', drawBorder: false },
+            ticks: {
+              font: { size: 10, family: 'JetBrains Mono, monospace' }, color: '#6b7280',
+              callback: (v) => { const yr = Math.round(v); return [1965, 1985, 2005, 2024, 2035, 2050].includes(yr) ? String(yr) : ''; },
+              maxTicksLimit: 20
+            },
+            border: { display: false }
+          },
+          y: {
+            min: 20, max: 100,
+            grid: { color: 'rgba(0,0,0,0.05)' },
+            ticks: { font: { size: 10, family: 'JetBrains Mono, monospace' }, color: '#6b7280', stepSize: 20 },
+            border: { display: false }
+          }
         }
       }
     });
