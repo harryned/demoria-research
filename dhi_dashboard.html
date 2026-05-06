@@ -1663,6 +1663,27 @@ header {
 .ctab.active { color: var(--accent); border-bottom-color: var(--accent); font-weight: bold; }
 .ctab-panel { display: none; }
 .ctab-panel.active { display: block; }
+/* "Back to Index" — sits at the right of the country-tabs row */
+.back-to-index {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 12px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.66rem; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--accent); background: none; border: 1px solid var(--surface3);
+  border-radius: 4px; cursor: pointer;
+  margin-bottom: 0;
+  transition: background 0.13s, border-color 0.13s, color 0.13s;
+}
+.back-to-index:hover {
+  background: var(--accent); color: #fff; border-color: var(--accent);
+}
+.back-to-index .back-arrow {
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.95rem; line-height: 1;
+  letter-spacing: 0;
+  transition: transform 0.13s;
+}
+.back-to-index:hover .back-arrow { transform: translateX(-2px); }
 
 /* Report content */
 .report-section { margin-bottom: 20px; }
@@ -1917,6 +1938,10 @@ header {
             <button class="ctab" onclick="switchCountryTab('report',this)">Report</button>
             <button class="ctab" onclick="switchCountryTab('compare',this)">Compare</button>
           </div>
+          <button class="back-to-index" onclick="clearCountrySelection()" title="Back to Index &amp; Rankings home">
+            <span class="back-arrow" aria-hidden="true">&larr;</span>
+            <span>Back to Index</span>
+          </button>
         </div>
         <!-- Overview panel -->
         <div class="ctab-panel active" id="ctab-overview">
@@ -3104,6 +3129,23 @@ function selectCountry(iso, el) {
   });
   showPanel('country');
   renderCountryProfile(iso);
+}
+
+// Return to the Index & Rankings landing view (placeholder hero + highlights)
+// from a country profile, clearing the active selection.
+function clearCountrySelection() {
+  selectedISO = null;
+  window._currentISO = null;
+  document.querySelectorAll('.country-item').forEach(i => i.classList.remove('selected'));
+  const placeholder = document.getElementById('country-placeholder');
+  const content     = document.getElementById('country-content');
+  if (placeholder) placeholder.classList.remove('hidden');
+  if (content)     content.classList.add('hidden');
+  // Make sure the side-tab also returns to "Country" (the panel that
+  // contains both the placeholder and the country-content)
+  showPanel('country');
+  // Scroll the panel back to the top so the user lands on the hero
+  try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch (e) {}
 }
 
 function renderCountryProfile(iso) {
