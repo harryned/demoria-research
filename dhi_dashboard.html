@@ -2928,11 +2928,11 @@ function renderIndexStructure() {
   if (!wrap) return;
   const weights = (DATA && DATA.cat_weights) || { TFS:32, Momentum:21, WSS:22, FQS:8, MDS:17 };
   const cats = [
-    { key: 'TFS',      name: 'Total Fertility',         desc: 'How far below replacement a country sits.' },
-    { key: 'Momentum', name: 'Population Momentum',     desc: 'Built-in growth or decline from current age structure.' },
-    { key: 'WSS',      name: 'Workforce Sustainability', desc: 'Ability to maintain a productive labour force.' },
-    { key: 'FQS',      name: 'Fertility Quality',       desc: 'Timing, spacing and conditions surrounding births.' },
-    { key: 'MDS',      name: 'Migration Independence',  desc: 'Reliance on inward migration to sustain population.' }
+    { key: 'TFS',      name: 'Total Fertility',          desc: 'How far below replacement a country sits.',                color: '#16a34a' },
+    { key: 'Momentum', name: 'Population Momentum',      desc: 'Built-in growth or decline from current age structure.',   color: '#c49a28' },
+    { key: 'WSS',      name: 'Workforce Sustainability', desc: 'Ability to maintain a productive labour force.',           color: '#2d5fb3' },
+    { key: 'FQS',      name: 'Fertility Quality',        desc: 'Timing, spacing and conditions surrounding births.',       color: '#ea580c' },
+    { key: 'MDS',      name: 'Migration Independence',   desc: 'Reliance on inward migration to sustain population.',      color: '#7c3aed' }
   ];
   const maxW = 32; // TFS is the heaviest — bar widths scale relative to this
   wrap.innerHTML = cats.map(c => {
@@ -2940,12 +2940,12 @@ function renderIndexStructure() {
     const fillPct = (w / maxW) * 100;
     return `
       <div class="hl-cat" onclick="document.getElementById('rank-sort').value='${c.key}';showPanel('rankings');renderRankings();" title="Sort the global rankings by ${c.name}">
-        <div class="hl-cat-key">${c.key}</div>
+        <div class="hl-cat-key" style="color:${c.color}">${c.key}</div>
         <div class="hl-cat-name">${c.name}</div>
         <div class="hl-cat-desc">${c.desc}</div>
         <div class="hl-cat-weight-row">
-          <div class="hl-cat-bar"><div class="hl-cat-bar-fill" style="width:${fillPct}%"></div></div>
-          <div class="hl-cat-w">${w}%</div>
+          <div class="hl-cat-bar"><div class="hl-cat-bar-fill" style="width:${fillPct}%;background:${c.color}"></div></div>
+          <div class="hl-cat-w" style="color:${c.color}">${w}%</div>
         </div>
       </div>`;
   }).join('');
@@ -3354,10 +3354,13 @@ function renderCountryProfile(iso) {
         x: {
           type: 'linear', min: 1963, max: 2103,
           grid: { color: 'rgba(0,0,0,0.04)', drawBorder: false },
+          afterBuildTicks: (axis) => {
+            axis.ticks = [1965, 1985, 2005, 2024, 2035, 2050, 2075, 2100].map(v => ({ value: v }));
+          },
           ticks: {
             font: { size: 10, family: 'JetBrains Mono, monospace' }, color: '#6b7280',
-            callback: (v) => { const yr=Math.round(v); return [1965,1985,2005,2024,2035,2050,2075,2100].includes(yr) ? String(yr) : ''; },
-            maxTicksLimit: 20
+            callback: (v) => String(Math.round(v)),
+            autoSkip: false
           },
           border: { display: false }
         },
@@ -3852,17 +3855,20 @@ function selectRegion(key, el) {
     const lastObsR = obsRegion[obsRegion.length - 1];
     const lastObsG = obsGlobalArr[obsGlobalArr.length - 1];
 
+    // Only include the anchor projection years (2025, 2035, 2050) — matches the
+    // country chart's behaviour and avoids a wall of dots from interpolated points.
+    const PROJ_ANCHORS = [2025, 2035, 2050];
     const projR = [];
     if (lastObsR) projR.push({ x: lastObsR.x, y: lastObsR.y, _bridge: true });
-    years.forEach((y, i) => {
-      const yi = Number(y);
-      if (yi > 2024 && projRegion[i] != null) projR.push({ x: yi, y: projRegion[i] });
+    PROJ_ANCHORS.forEach(yi => {
+      const i = years.indexOf(String(yi));
+      if (i >= 0 && projRegion[i] != null) projR.push({ x: yi, y: projRegion[i] });
     });
     const projG = [];
     if (lastObsG) projG.push({ x: lastObsG.x, y: lastObsG.y, _bridge: true });
-    years.forEach((y, i) => {
-      const yi = Number(y);
-      if (yi > 2024 && projGlobal[i] != null) projG.push({ x: yi, y: projGlobal[i] });
+    PROJ_ANCHORS.forEach(yi => {
+      const i = years.indexOf(String(yi));
+      if (i >= 0 && projGlobal[i] != null) projG.push({ x: yi, y: projGlobal[i] });
     });
 
     // Vertical "TODAY" marker at 2024 (matches country chart)
@@ -3939,10 +3945,13 @@ function selectRegion(key, el) {
           x: {
             type: 'linear', min: 1963, max: 2052,
             grid: { color: 'rgba(0,0,0,0.04)', drawBorder: false },
+            afterBuildTicks: (axis) => {
+              axis.ticks = [1965, 1985, 2005, 2024, 2035, 2050].map(v => ({ value: v }));
+            },
             ticks: {
               font: { size: 10, family: 'JetBrains Mono, monospace' }, color: '#6b7280',
-              callback: (v) => { const yr = Math.round(v); return [1965, 1985, 2005, 2024, 2035, 2050].includes(yr) ? String(yr) : ''; },
-              maxTicksLimit: 20
+              callback: (v) => String(Math.round(v)),
+              autoSkip: false
             },
             border: { display: false }
           },
