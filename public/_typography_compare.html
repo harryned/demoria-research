@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Demoria Research — typography comparison</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Manrope:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #e0b54a;
+    --gold-deep: #c49a28;
+    --navy: #102a4e;
+    --navy-deep: #081530;
+    --paper: #f5f0e6;
+    --ink2: rgba(255,255,255,0.78);
+    --ink3: rgba(255,255,255,0.55);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #050b1c; color: #fff; }
+  body { padding: 50px 40px; font-family: 'Manrope', sans-serif; }
+
+  h1.page { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 6px; }
+  .page-sub { font-family: 'Manrope', sans-serif; font-weight: 300; font-size: 1.05rem; color: rgba(255,255,255,0.78); margin-bottom: 36px; max-width: 820px; line-height: 1.55; }
+
+  .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 36px; }
+  .panel {
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px; overflow: hidden;
+    display: flex; flex-direction: column; min-height: 280px;
+  }
+  .panel-head {
+    padding: 12px 18px;
+    background: rgba(0,0,0,0.30);
+    display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .panel-tag { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.55); }
+  .panel-tag.lora { color: rgba(255,255,255,0.45); }
+  .panel-tag.manrope { color: var(--gold); }
+  .panel-body { flex: 1; padding: 36px; background: linear-gradient(135deg, var(--navy-deep) 0%, #040b1c 100%); }
+
+  .section-title {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.28em;
+    text-transform: uppercase; color: var(--gold); margin: 50px 0 18px 0;
+    padding-bottom: 8px; border-bottom: 1px solid rgba(224,181,74,0.25);
+  }
+
+  /* ─── Section 1: Landing hero ─── */
+  .lora .eyebrow,
+  .manrope .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 24px;
+  }
+  .lora .h1     { font-family: 'Lora', Georgia, serif; font-weight: 600; font-size: 2.8rem; line-height: 1.05; letter-spacing: -0.015em; margin-bottom: 16px; }
+  .lora .h1 em  { font-style: italic; color: var(--gold); }
+  .lora .lede   { font-family: 'Lora', Georgia, serif; font-style: italic; font-size: 1.05rem; color: var(--ink2); line-height: 1.6; }
+  .manrope .h1     { font-family: 'Manrope', sans-serif; font-weight: 300; font-size: 2.8rem; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 16px; }
+  .manrope .h1 em  { font-style: italic; font-weight: 400; color: var(--gold); }
+  .manrope .lede   { font-family: 'Manrope', sans-serif; font-weight: 300; font-size: 1.05rem; color: var(--ink2); line-height: 1.6; }
+
+  /* ─── Section 2: DHI masthead wordmark ─── */
+  .masthead { display: flex; align-items: center; gap: 14px; }
+  .lora .logo-mark   { font-family: 'Lora', Georgia, serif; font-size: 1.4rem; font-weight: 700; letter-spacing: 0.04em; color: var(--gold); }
+  .lora .logo-rule   { width: 1px; height: 36px; background: rgba(196,154,40,0.45); }
+  .lora .logo-tag    { font-family: 'Lora', Georgia, serif; font-size: 1.55rem; font-weight: 600; font-style: italic; color: rgba(255,255,255,0.92); letter-spacing: 0.005em; }
+  .manrope .logo-mark { font-family: 'Manrope', sans-serif; font-size: 1.4rem; font-weight: 600; letter-spacing: 0.02em; color: var(--gold); }
+  .manrope .logo-rule { width: 1px; height: 36px; background: rgba(196,154,40,0.45); }
+  .manrope .logo-tag  { font-family: 'Manrope', sans-serif; font-size: 1.55rem; font-weight: 300; color: rgba(255,255,255,0.92); letter-spacing: -0.005em; }
+  .tabs { margin-top: 24px; display: flex; gap: 22px; }
+  .tab { font-size: 0.92rem; color: rgba(255,255,255,0.55); }
+  .lora .tab { font-family: 'Lora', Georgia, serif; font-weight: 500; }
+  .manrope .tab { font-family: 'Manrope', sans-serif; font-weight: 400; }
+  .tab.active { color: #fff; border-bottom: 2px solid var(--gold); padding-bottom: 4px; }
+
+  /* ─── Section 3: Dashboard hero ─── */
+  .lora .eyebrow-mono,
+  .manrope .eyebrow-mono {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.16em;
+    text-transform: uppercase; color: rgba(255,255,255,0.65); margin-bottom: 14px;
+  }
+  .lora .h2    { font-family: 'Lora', Georgia, serif; font-weight: 600; font-size: 2.2rem; line-height: 1.15; color: #fff; margin-bottom: 14px; }
+  .lora .body  { font-family: 'Lora', Georgia, serif; font-size: 1.0rem; color: var(--ink2); line-height: 1.65; }
+  .lora .body b { color: #fff; font-weight: 600; }
+  .manrope .h2    { font-family: 'Manrope', sans-serif; font-weight: 300; font-size: 2.2rem; line-height: 1.2; letter-spacing: -0.02em; color: #fff; margin-bottom: 14px; }
+  .manrope .body  { font-family: 'Manrope', sans-serif; font-weight: 300; font-size: 1.0rem; color: var(--ink2); line-height: 1.65; }
+  .manrope .body b { color: #fff; font-weight: 500; }
+
+  /* ─── Section 4: Reading mode ─── */
+  .lora .reading-eyebrow, .manrope .reading-eyebrow {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; letter-spacing: 0.28em;
+    text-transform: uppercase; color: var(--gold); margin-bottom: 18px;
+  }
+  .lora .reading-h1     { font-family: 'Lora', Georgia, serif; font-weight: 600; font-size: 2rem; line-height: 1.1; color: #fff; margin-bottom: 18px; }
+  .lora .reading-h1 em  { font-style: italic; color: var(--gold); font-weight: 600; }
+  .lora .reading-body   { font-family: 'Lora', Georgia, serif; font-size: 0.98rem; color: var(--ink2); line-height: 1.7; }
+  .manrope .reading-h1    { font-family: 'Manrope', sans-serif; font-weight: 300; font-size: 2rem; line-height: 1.18; letter-spacing: -0.02em; color: #fff; margin-bottom: 18px; }
+  .manrope .reading-h1 em { font-style: italic; font-weight: 400; color: var(--gold); }
+  .manrope .reading-body  { font-family: 'Manrope', sans-serif; font-weight: 300; font-size: 0.98rem; color: var(--ink2); line-height: 1.7; }
+
+  /* ─── Section 5: Data labels ─── */
+  .stat { display: flex; flex-direction: column; gap: 6px; }
+  .lora .stat-num   { font-family: 'Lora', Georgia, serif; font-weight: 700; font-size: 2.4rem; color: var(--gold); line-height: 1; }
+  .lora .stat-label { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink3); }
+  .manrope .stat-num   { font-family: 'Manrope', sans-serif; font-weight: 300; font-size: 2.4rem; color: var(--gold); line-height: 1; letter-spacing: -0.02em; }
+  .manrope .stat-label { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink3); }
+  .stats-row { display: flex; gap: 48px; }
+</style>
+</head>
+<body>
+
+<h1 class="page">Demoria Research — typography swap preview</h1>
+<p class="page-sub">Same content, side-by-side. Left column: <strong>Lora</strong> (current site font, serif, literary register). Right column: <strong>Manrope</strong> (proposed, geometric sans-serif, Salone register). The wordmark and sigil already use Manrope; this shows what swapping the rest of the site to Manrope would feel like.</p>
+
+<!-- ─────────────────────────────────────────────────────────────── -->
+<div class="section-title">1 · Landing page hero</div>
+
+<div class="pair">
+  <div class="panel">
+    <div class="panel-head"><span class="panel-tag lora">Current · Lora</span></div>
+    <div class="panel-body lora">
+      <div class="eyebrow">Demoria Research</div>
+      <h1 class="h1">Long-run <em>demographic</em> intelligence.</h1>
+      <p class="lede">Independent research on the demographic health of nations — building visible, comparable measures of the trends that shape public finance, geopolitics and the long-term stability of states.</p>
+    </div>
+  </div>
+  <div class="panel">
+    <div class="panel-head"><span class="panel-tag manrope">Proposed · Manrope</span></div>
+    <div class="panel-body manrope">
+      <div class="eyebrow">Demoria Research</div>
+      <h1 class="h1">Long-run <em>demographic</em> intelligence.</h1>
+      <p class="lede">Independent research on the demographic health of nations — building visible, comparable measures of the trends that shape public finance, geopolitics and the long-term stability of states.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────────── -->
+<div class="section-title">2 · DHI masthead — wordmark + tabs</div>
+
+<div class="pair">
+  <div class="panel">
+    <div class="panel-head"><span class="panel-tag lora">Current · Lora</span></div>
+    <div class="panel-body lora">
+      <div class="masthead">
+        <span class="logo-mark">DHI</span>
+        <span class="logo-rule"></span>
+        <span class="logo-tag">Demographic Health Index</span>
+      </div>
+      <div class="tabs">
+        <span class="tab active">World Map</span>
+        <span class="tab">Index &amp; Rankings</span>
+        <span class="tab">Fiscal Health</span>
+        <span class="tab">About</span>
+        <span class="tab">Methodology</span>
+      </div>
+    </div>
+  </div>
+  <div class="panel">
+    <div class="panel-head"><span class="panel-tag manrope">Proposed · Manrope</span></div>
+    <div class="panel-body manrope">
+      <div class="masthead">
+        <span class="logo-mark">DHI</span>
+        <span class="logo-rule"></span>
+        <span class="logo-tag">Demographic Health Index</span>
+      </div>
+      <div class="tabs">
+        <span class="tab active">World Map</span>
+        <span class="tab">Index &amp; Rankings</span>
+        <span class="tab">Fiscal Health</span>
+        <span class="tab">About</span>
+        <span class="tab">Methodology</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────────── -->
+<div class="section-title">3 · Index &amp; Rankings dashboard hero</div>
+
+<div class="pair">
+  <div class="panel">
+    <div class="panel-head"><span class="panel-tag lora">Current · Lora</span></div>
+    <div class="panel-body lora">
+      <div class="eyebrow-mono">Index &amp; Rankings · 2024</div>
+      <h2 class="h2">236 countries &amp; territories, scored.</h2>
+      <p class="body">Pick a country from the list, or browse the highlights below. Switch the side tabs to see <b>Regions</b>, the global <b>Rankings</b> table, or the <b>Cross-Section</b> scatter view.</p>
+    </div>
+  </div>
+  <div class="panel">
+    <div class="panel-head"><span class="panel-tag manrope">Proposed · Manrope</span></div>
+    <div class="panel-body manrope">
+      <div class="eyebrow-mono">Index &amp; Rankings · 2024</div>
+      <h2 class="h2">236 countries &amp; territories, scored.</h2>
+      <p class="body">Pick a country from the list, or browse the highlights below. Switch the side tabs to see <b>Regions</b>, the global <b>Rankings</b> table, or the <b>Cross-Section</b> scatter view.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────────── -->
+<div class="section-title">4 · Methodology / About reading section</div>
+
+<div class="pair">
+  <div class="panel">
+    <div class="panel-head"><span class="panel-tag lora">Current · Lora</span></div>
+    <div class="panel-body lora">
+      <div class="reading-eyebrow">Methodology · Version 1.0</div>
+      <h1 class="reading-h1">Measuring the <em>demographic health</em> of nations</h1>
+      <p class="reading-body">The Demographic Health Index is a composite measure of a country's capacity to sustain its population across generations, incorporating fertility, workforce dynamics, migration dependence, and population momentum into a single comparable score.</p>
+    </div>
+  </div>
+  <div class="panel">
+    <div class="panel-head"><span class="panel-tag manrope">Proposed · Manrope</span></div>
+    <div class="panel-body manrope">
+      <div class="reading-eyebrow">Methodology · Version 1.0</div>
+      <h1 class="reading-h1">Measuring the <em>demographic health</em> of nations</h1>
+      <p class="reading-body">The Demographic Health Index is a composite measure of a country's capacity to sustain its population across generations, incorporating fertility, workforce dynamics, migration dependence, and population momentum into a single comparable score.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────────── -->
+<div class="section-title">5 · Stat tiles · numerical display</div>
+
+<div class="pair">
+  <div class="panel">
+    <div class="panel-head"><span class="panel-tag lora">Current · Lora</span></div>
+    <div class="panel-body lora">
+      <div class="stats-row">
+        <div class="stat">
+          <span class="stat-num">236</span>
+          <span class="stat-label">Countries &amp; territories</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">5</span>
+          <span class="stat-label">Index categories</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">1965–2050</span>
+          <span class="stat-label">Time coverage</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="panel">
+    <div class="panel-head"><span class="panel-tag manrope">Proposed · Manrope</span></div>
+    <div class="panel-body manrope">
+      <div class="stats-row">
+        <div class="stat">
+          <span class="stat-num">236</span>
+          <span class="stat-label">Countries &amp; territories</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">5</span>
+          <span class="stat-label">Index categories</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">1965–2050</span>
+          <span class="stat-label">Time coverage</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
