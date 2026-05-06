@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Demoria Research favicon — simplified (no median dash, bumped strokes for small sizes) -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 500" color="#e0b54a">
+  <g stroke="currentColor" stroke-width="6" fill="none">
+    <rect x="200" y="100" width="50" height="38"/><rect x="178" y="138" width="72" height="38"/>
+    <rect x="156" y="176" width="94" height="38"/><rect x="134" y="214" width="116" height="38"/>
+    <rect x="112" y="252" width="138" height="38"/><rect x="90" y="290" width="160" height="38"/>
+    <rect x="68" y="328" width="182" height="38"/><rect x="46" y="366" width="204" height="38"/>
+    <rect x="350" y="100" width="50" height="38"/><rect x="350" y="138" width="72" height="38"/>
+    <rect x="350" y="176" width="94" height="38"/><rect x="350" y="214" width="116" height="38"/>
+    <rect x="350" y="252" width="138" height="38"/><rect x="350" y="290" width="160" height="38"/>
+    <rect x="350" y="328" width="182" height="38"/><rect x="350" y="366" width="204" height="38"/>
+    <path d="M 250 100 A 50 50 0 0 1 350 100"/>
+  </g>
+  <g stroke="currentColor" stroke-width="5.5" fill="none" stroke-linejoin="miter">
+    <path d="M 270 160 L 330 160 L 300 250 Z"/>
+    <path d="M 270 350 L 330 350 L 300 250 Z"/>
+  </g>
+</svg>
