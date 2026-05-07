@@ -343,7 +343,9 @@ section { position: relative; z-index: 1; }
   border-radius: 50%; display: inline-block;
   margin-right: 10px; vertical-align: middle;
 }
-.r-band-label { font-family: var(--font-display); font-weight: 600; font-size: 0.98rem; }
+.r-band-label { font-family: var(--font-display); font-weight: 600; font-size: 0.98rem; white-space: nowrap; }
+.r-bands td:first-child { min-width: 230px; }
+.r-bands td:nth-child(4) { line-height: 1.55; padding-right: 22px; }
 .r-band-range, .r-band-count {
   font-family: var(--font-mono);
   font-size: 0.78rem;
@@ -616,11 +618,11 @@ section { position: relative; z-index: 1; }
     <table class="r-bands">
       <thead><tr><th>Classification</th><th>Score range</th><th>Countries (2024)</th><th>Interpretation</th></tr></thead>
       <tbody>
-        <tr><td><span class="r-band-swatch" style="background:var(--c-healthy)"></span><span class="r-band-label" style="color:var(--c-healthy)">Demographically Healthy</span></td><td><span class="r-band-range">80&ndash;100</span></td><td><span class="r-band-count">57 (25%)</span></td><td>Broadly self-sustaining fertility, young workforce, low migration dependence.</td></tr>
-        <tr><td><span class="r-band-swatch" style="background:var(--c-pressure)"></span><span class="r-band-label" style="color:var(--c-pressure)">Under Pressure</span></td><td><span class="r-band-range">65&ndash;79</span></td><td><span class="r-band-count">57 (25%)</span></td><td>Fertility declining but manageable. Workforce ageing beginning.</td></tr>
-        <tr><td><span class="r-band-swatch" style="background:var(--c-serious)"></span><span class="r-band-label" style="color:var(--c-serious)">Serious Decline</span></td><td><span class="r-band-range">50&ndash;64</span></td><td><span class="r-band-count">52 (23%)</span></td><td>Sub-replacement fertility established. Migration increasingly compensating.</td></tr>
-        <tr><td><span class="r-band-swatch" style="background:var(--c-critical)"></span><span class="r-band-label" style="color:var(--c-critical)">Critical</span></td><td><span class="r-band-range">35&ndash;49</span></td><td><span class="r-band-count">51 (22%)</span></td><td>Cannot replace population without substantial migration. Most of Europe, North America, East Asia.</td></tr>
-        <tr><td><span class="r-band-swatch" style="background:var(--c-crisis)"></span><span class="r-band-label" style="color:#f87171">Complete Crisis</span></td><td><span class="r-band-range">0&ndash;34</span></td><td><span class="r-band-count">11 (5%)</span></td><td>Structural demographic collapse. Italy, South Korea, Japan, much of Southern and Eastern Europe.</td></tr>
+        <tr><td><span class="r-band-swatch" style="background:var(--c-healthy)"></span><span class="r-band-label" style="color:var(--c-healthy)">Demographically Healthy</span></td><td><span class="r-band-range">80&ndash;100</span></td><td><span class="r-band-count">57 (25%)</span></td><td><b>Self-sustaining.</b> Births replace deaths, the workforce renews itself, and the country can manage its future without depending on inward migration. The default healthy state — fragile if neglected, but the system is working.</td></tr>
+        <tr><td><span class="r-band-swatch" style="background:var(--c-pressure)"></span><span class="r-band-label" style="color:var(--c-pressure)">Under Pressure</span></td><td><span class="r-band-range">65&ndash;79</span></td><td><span class="r-band-count">57 (25%)</span></td><td><b>Manageable but slipping.</b> Fertility has dipped below replacement and the workforce is starting to age. Still recoverable through pro-family policy and modest migration, but every year of inaction narrows the window.</td></tr>
+        <tr><td><span class="r-band-swatch" style="background:var(--c-serious)"></span><span class="r-band-label" style="color:var(--c-serious)">Serious Decline</span></td><td><span class="r-band-range">50&ndash;64</span></td><td><span class="r-band-count">52 (23%)</span></td><td><b>Cannot self-sustain.</b> Sub-replacement fertility is now structural; the country is increasingly reliant on migration to keep working-age numbers stable. Reversible only with sustained policy effort plus continuous inflows.</td></tr>
+        <tr><td><span class="r-band-swatch" style="background:var(--c-critical)"></span><span class="r-band-label" style="color:var(--c-critical)">Critical</span></td><td><span class="r-band-range">35&ndash;49</span></td><td><span class="r-band-count">51 (22%)</span></td><td><b>Structural deficit.</b> The country cannot survive without large, continuous inward migration. Pension, healthcare and labour systems will face funding gaps within a generation. Reversal would require fertility shifts unprecedented in the modern era.</td></tr>
+        <tr><td><span class="r-band-swatch" style="background:var(--c-crisis)"></span><span class="r-band-label" style="color:#f87171">Complete Crisis</span></td><td><span class="r-band-range">0&ndash;34</span></td><td><span class="r-band-count">11 (5%)</span></td><td><b>Collapse underway.</b> The age pyramid has inverted to a degree no realistic policy can reverse. Significant population shrinkage is mathematically locked in; institutions designed for growth must be rebuilt for managed decline.</td></tr>
       </tbody>
     </table>
 

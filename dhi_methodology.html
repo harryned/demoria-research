@@ -329,7 +329,10 @@ section, nav { position: relative; z-index: 1; }
   font-family: var(--font-display);
   font-weight: 600;
   font-size: 0.98rem;
+  white-space: nowrap;
 }
+.m-bands-table td:first-child { min-width: 230px; }
+.m-bands-table td:nth-child(4) { line-height: 1.55; padding-right: 22px; }
 .m-band-range {
   font-family: var(--font-mono);
   font-size: 0.78rem;
@@ -605,7 +608,7 @@ section, nav { position: relative; z-index: 1; }
           </td>
           <td><span class="m-band-range">80 &ndash; 100</span></td>
           <td><span class="m-band-count">57 countries (25%)</span></td>
-          <td>Broadly self-sustaining fertility, young workforce, low migration dependence. Predominantly Central Asia, Sub-Saharan Africa, and Melanesia.</td>
+          <td><b>Self-sustaining.</b> Births replace deaths, the workforce renews itself, and the country can manage its future without depending on inward migration. The default healthy state — fragile if neglected, but the system is working. Predominantly Central Asia, Sub-Saharan Africa, and Melanesia.</td>
         </tr>
         <tr>
           <td>
@@ -614,7 +617,7 @@ section, nav { position: relative; z-index: 1; }
           </td>
           <td><span class="m-band-range">65 &ndash; 79</span></td>
           <td><span class="m-band-count">57 countries (25%)</span></td>
-          <td>Fertility declining but manageable. Workforce ageing beginning. Most of the Middle East, South Asia, and South-East Asia.</td>
+          <td><b>Manageable but slipping.</b> Fertility has dipped below replacement and the workforce is starting to age. Still recoverable through pro-family policy and modest migration, but every year of inaction narrows the window. Most of the Middle East, South Asia, and South-East Asia.</td>
         </tr>
         <tr>
           <td>
@@ -623,7 +626,7 @@ section, nav { position: relative; z-index: 1; }
           </td>
           <td><span class="m-band-range">50 &ndash; 64</span></td>
           <td><span class="m-band-count">52 countries (23%)</span></td>
-          <td>Sub-replacement fertility established. Population momentum fading. Migration increasingly compensating. Latin America, parts of South-East Asia.</td>
+          <td><b>Cannot self-sustain.</b> Sub-replacement fertility is now structural; the country is increasingly reliant on migration to keep working-age numbers stable. Population momentum is fading. Reversible only with sustained policy effort plus continuous inflows. Latin America, parts of South-East Asia.</td>
         </tr>
         <tr>
           <td>
@@ -632,7 +635,7 @@ section, nav { position: relative; z-index: 1; }
           </td>
           <td><span class="m-band-range">35 &ndash; 49</span></td>
           <td><span class="m-band-count">51 countries (22%)</span></td>
-          <td>Cannot replace population without substantial migration. Workforce contraction imminent. Most of Europe, North America, East Asia, including China (49.6) and Denmark (49.5).</td>
+          <td><b>Structural deficit.</b> The country cannot survive without large, continuous inward migration. Pension, healthcare and labour systems will face funding gaps within a generation. Reversal would require fertility shifts unprecedented in the modern era. Most of Europe, North America, East Asia, including China (49.6) and Denmark (49.5).</td>
         </tr>
         <tr>
           <td>
@@ -641,7 +644,7 @@ section, nav { position: relative; z-index: 1; }
           </td>
           <td><span class="m-band-range">0 &ndash; 34</span></td>
           <td><span class="m-band-count">11 countries (5%)</span></td>
-          <td>Structural demographic collapse. TFR well below 1.4. Rapidly ageing societies with no realistic path to replacement without transformative policy. Italy, South Korea, Japan, much of Southern and Eastern Europe.</td>
+          <td><b>Collapse underway.</b> The age pyramid has inverted to a degree no realistic policy can reverse. Total fertility well below 1.4; significant population shrinkage is mathematically locked in; institutions designed for growth must be rebuilt for managed decline. Italy, South Korea, Japan, much of Southern and Eastern Europe.</td>
         </tr>
       </tbody>
     </table>
