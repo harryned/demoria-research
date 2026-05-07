@@ -2953,11 +2953,11 @@ function renderIndexStructure() {
   if (!wrap) return;
   const weights = (DATA && DATA.cat_weights) || { TFS:32, Momentum:21, WSS:22, FQS:8, MDS:17 };
   const cats = [
-    { key: 'TFS',      name: 'Total Fertility',          desc: 'How far below replacement a country sits.',                color: '#16a34a' },
-    { key: 'Momentum', name: 'Population Momentum',      desc: 'Built-in growth or decline from current age structure.',   color: '#c49a28' },
-    { key: 'WSS',      name: 'Workforce Sustainability', desc: 'Ability to maintain a productive labour force.',           color: '#2d5fb3' },
-    { key: 'FQS',      name: 'Fertility Quality',        desc: 'Timing, spacing and conditions surrounding births.',       color: '#ea580c' },
-    { key: 'MDS',      name: 'Migration Independence',   desc: 'Reliance on inward migration to sustain population.',      color: '#7c3aed' }
+    { key: 'TFS',      label: 'TFS', name: 'Total Fertility',          desc: 'How far below replacement a country sits.',                color: '#16a34a' },
+    { key: 'Momentum', label: 'PMS', name: 'Population Momentum',      desc: 'Built-in growth or decline from current age structure.',   color: '#c49a28' },
+    { key: 'WSS',      label: 'WSS', name: 'Workforce Sustainability', desc: 'Ability to maintain a productive labour force.',           color: '#2d5fb3' },
+    { key: 'FQS',      label: 'FQS', name: 'Fertility Quality',        desc: 'Timing, spacing and conditions surrounding births.',       color: '#ea580c' },
+    { key: 'MDS',      label: 'MDS', name: 'Migration Independence',   desc: 'Reliance on inward migration to sustain population.',      color: '#7c3aed' }
   ];
   const maxW = 32; // TFS is the heaviest — bar widths scale relative to this
   wrap.innerHTML = cats.map(c => {
@@ -2965,7 +2965,7 @@ function renderIndexStructure() {
     const fillPct = (w / maxW) * 100;
     return `
       <div class="hl-cat" onclick="document.getElementById('rank-sort').value='${c.key}';showPanel('rankings');renderRankings();" title="Sort the global rankings by ${c.name}">
-        <div class="hl-cat-key" style="color:${c.color}">${c.key}</div>
+        <div class="hl-cat-key" style="color:${c.color}">${c.label}</div>
         <div class="hl-cat-name">${c.name}</div>
         <div class="hl-cat-desc">${c.desc}</div>
         <div class="hl-cat-weight-row">
