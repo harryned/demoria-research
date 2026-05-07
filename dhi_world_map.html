@@ -153,13 +153,13 @@ header::after {
 }
 .mt {
   position: relative;
-  padding: 5px 9px 6px;
+  padding: 6px 10px 7px;
   border: 1px solid transparent;
   border-radius: 5px;
   background: rgba(255,255,255,0.025);
   color: rgba(255,255,255,0.62);
   font-family: 'Manrope', sans-serif;
-  font-size: 0.78rem;
+  font-size: 0.74rem;
   font-weight: 500;
   letter-spacing: 0.005em;
   line-height: 1.05;
@@ -168,18 +168,25 @@ header::after {
   display: inline-flex;
   flex-direction: column;
   align-items: center;
-  gap: 2px;
+  gap: 3px;
   white-space: nowrap;
   transition: color .18s ease, background .18s ease, border-color .18s ease;
   -webkit-appearance: none;
 }
-.mt .mt-name { font-family: 'Manrope', sans-serif; }
+.mt .mt-name {
+  font-family: 'Manrope', sans-serif;
+  display: flex; flex-direction: column; align-items: center;
+  gap: 1px;
+  line-height: 1.05;
+}
+.mt .mt-line { display: block; }
 .mt .mt-w {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.58rem;
+  font-size: 0.6rem;
   letter-spacing: 0.04em;
   color: rgba(255,255,255,0.42);
   font-weight: 500;
+  margin-top: 1px;
 }
 .mt:hover {
   color: #fff;
@@ -211,9 +218,11 @@ header::after {
   background: rgba(255,255,255,0.12);
 }
 .mt.mt-overall .mt-name {
-  font-size: 0.86rem;
+  font-size: 1.05rem;
   font-weight: 600;
   letter-spacing: 0.01em;
+  /* Single word, but padded to match the 2-line height of the other tabs */
+  padding: 4px 0 5px;
 }
 .mt.mt-overall .mt-w {
   color: rgba(245,205,102,0.75);
@@ -838,27 +847,27 @@ header::after {
   <div class="metric-tabs" role="group" aria-label="Index structure — 5 dimensions of the DHI">
     <span class="mt-eyebrow">Index structure</span>
     <button class="mt mt-overall active" data-cat="Overall" onclick="setMetric('Overall',this)" title="Composite of all five dimensions">
-      <span class="mt-name">Overall</span>
+      <span class="mt-name"><span class="mt-line">Overall</span></span>
       <span class="mt-w">100%</span>
     </button>
     <button class="mt" data-cat="TFS" onclick="setMetric('TFS',this)" title="Total Fertility Score — how far below replacement a country sits">
-      <span class="mt-name">Fertility</span>
+      <span class="mt-name"><span class="mt-line">Total</span><span class="mt-line">Fertility</span></span>
       <span class="mt-w">32%</span>
     </button>
     <button class="mt" data-cat="Momentum" onclick="setMetric('Momentum',this)" title="Population Momentum — built-in growth or decline from current age structure">
-      <span class="mt-name">Momentum</span>
+      <span class="mt-name"><span class="mt-line">Population</span><span class="mt-line">Momentum</span></span>
       <span class="mt-w">21%</span>
     </button>
     <button class="mt" data-cat="WSS" onclick="setMetric('WSS',this)" title="Workforce Sustainability — ability to maintain a productive labour force">
-      <span class="mt-name">Workforce</span>
+      <span class="mt-name"><span class="mt-line">Workforce</span><span class="mt-line">Sustainability</span></span>
       <span class="mt-w">22%</span>
     </button>
     <button class="mt" data-cat="FQS" onclick="setMetric('FQS',this)" title="Fertility Quality — timing, spacing and conditions surrounding births">
-      <span class="mt-name">Fertility&nbsp;Quality</span>
+      <span class="mt-name"><span class="mt-line">Fertility</span><span class="mt-line">Quality</span></span>
       <span class="mt-w">8%</span>
     </button>
     <button class="mt" data-cat="MDS" onclick="setMetric('MDS',this)" title="Migration Independence — extent to which a country relies on inward migration to sustain its population">
-      <span class="mt-name">Migration</span>
+      <span class="mt-name"><span class="mt-line">Migration</span><span class="mt-line">Independence</span></span>
       <span class="mt-w">17%</span>
     </button>
   </div>
