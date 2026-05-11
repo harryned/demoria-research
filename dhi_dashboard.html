@@ -1718,6 +1718,36 @@ header {
 .ctab.active { color: var(--accent); border-bottom-color: var(--accent); font-weight: bold; }
 .ctab-panel { display: none; }
 .ctab-panel.active { display: block; }
+/* "Population Pyramid" tab — gold-tinted to call attention to the new view */
+.ctab.ctab-pyramid {
+  color: var(--gold);
+  font-weight: 600;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.ctab.ctab-pyramid:hover { color: var(--gold2); }
+.ctab.ctab-pyramid.active {
+  color: var(--gold);
+  border-bottom-color: var(--gold);
+  background: rgba(184,145,42,0.06);
+}
+.ctab-pyramid-icon {
+  font-size: 0.75rem;
+  line-height: 1;
+  display: inline-block;
+  transform: translateY(-1px);
+  color: var(--gold);
+}
+/* Gentle pulse to draw the eye on first view; pauses on hover/active */
+@keyframes ctab-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(184,145,42,0.0); }
+  50%      { box-shadow: 0 0 0 4px rgba(184,145,42,0.10); }
+}
+.ctab.ctab-pyramid:not(.active):not(:hover) {
+  animation: ctab-pulse 2.6s ease-in-out 2;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ctab.ctab-pyramid { animation: none !important; }
+}
 /* "Back to Index" — sits at the right of the country-tabs row */
 .back-to-index {
   display: inline-flex; align-items: center; gap: 8px;
@@ -1990,6 +2020,7 @@ header {
         <div class="country-tabs" style="justify-content:space-between;align-items:center">
           <div style="display:flex;gap:1px">
             <button class="ctab active" onclick="switchCountryTab('overview',this)">Overview</button>
+            <button class="ctab ctab-pyramid" onclick="switchCountryTab('pyramid',this)"><span class="ctab-pyramid-icon" aria-hidden="true">▴</span>Population Pyramid</button>
             <button class="ctab" onclick="switchCountryTab('report',this)">Report</button>
             <button class="ctab" onclick="switchCountryTab('compare',this)">Compare</button>
           </div>
@@ -2061,16 +2092,6 @@ header {
           <div class="pop-track" id="pop-track"></div>
         </section>
 
-        <!-- Section 5b: Age structure (population pyramid) ─────────────── -->
-        <section class="pyramid-section section-gap">
-          <div class="pyramid-head">
-            <div class="section-eyebrow">Age structure &middot; 2023</div>
-            <div class="section-heading">Population pyramid</div>
-            <p class="pyramid-sub" id="pyramid-sub">5-year age bands, split by sex. Source: World Bank (UN WPP-derived).</p>
-          </div>
-          <div class="pyramid-wrap" id="pyramid-wrap"></div>
-        </section>
-
         <!-- Section 6: Peer comparison ───────────────────────────────── -->
         <section class="peers-section section-gap">
           <div class="section-eyebrow">Peer comparison · same region</div>
@@ -2120,6 +2141,18 @@ header {
         </footer>
         <!-- Population & Migration Panel -->
         </div><!-- end ctab-panel overview -->
+
+        <!-- Population Pyramid panel -->
+        <div class="ctab-panel" id="ctab-pyramid">
+          <section class="pyramid-section section-gap">
+            <div class="pyramid-head">
+              <div class="section-eyebrow">Age structure &middot; 2023</div>
+              <div class="section-heading">Population pyramid</div>
+              <p class="pyramid-sub" id="pyramid-sub">5-year age bands, split by sex. Source: World Bank (UN WPP-derived).</p>
+            </div>
+            <div class="pyramid-wrap" id="pyramid-wrap"></div>
+          </section>
+        </div>
 
         <!-- Report panel -->
         <div class="ctab-panel" id="ctab-report">
@@ -3341,8 +3374,7 @@ function renderCountryProfile(iso) {
   // ── Section 5: Population trajectory (compact) ────────────────────────
   renderPopulationTrajectory(iso);
 
-  // ── Section 5b: Age structure (population pyramid) ─────────────────────
-  renderAgePyramid(iso);
+  // (Population pyramid moved to its own ctab — rendered via switchCountryTab)
 
   // ── Section 6: Peer comparison ────────────────────────────────────────
   renderPeerComparison(c, iso);
@@ -4525,6 +4557,7 @@ function switchCountryTab(tab, btn) {
   const panel = document.getElementById('ctab-' + tab);
   if (panel) panel.classList.add('active');
   const iso = window._currentISO;
+  if (tab === 'pyramid'  && iso) renderAgePyramid(iso);
   if (tab === 'report'   && iso) renderReport(iso);
   if (tab === 'compare'  && iso) renderCompare(iso);
 }
