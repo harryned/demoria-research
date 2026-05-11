@@ -2876,11 +2876,21 @@ function renderAgePyramid(iso) {
     svg += `<text class="pyr-band-label" x="${cxM + labelW/2}" y="${y + barH/2 + 3.5}" text-anchor="middle">${PYRAMID_BANDS[dataIdx]}</text>`;
   }
 
-  // x-axis: % of total population at 0 / max% on each side
-  const maxPctTxt = (maxPct * 100).toFixed(1) + '%';
-  svg += `<text class="pyr-foot" x="${cxM}"          y="${H - 8}" text-anchor="middle">0</text>`;
-  svg += `<text class="pyr-foot" x="${cxM - half}"   y="${H - 8}" text-anchor="middle">${maxPctTxt}</text>`;
-  svg += `<text class="pyr-foot" x="${cxF + half}"   y="${H - 8}" text-anchor="middle">${maxPctTxt}</text>`;
+  // x-axis: absolute headcount at end of bars, 0 at the true centre of the chart
+  // (the previous "0" sat at cxM which is the right edge of male bars, off-centre
+  // by labelW/2 relative to the SVG midpoint).
+  const centreX = cxM + labelW / 2;
+  const maxCount = maxPct * total;
+  const halfMax  = maxCount / 2;
+  const maxTxt   = fmtPopShort(maxCount);
+  const midTxt   = fmtPopShort(halfMax);
+  svg += `<text class="pyr-foot" x="${centreX}"        y="${H - 8}" text-anchor="middle">0</text>`;
+  // Outer ticks: max headcount on each side
+  svg += `<text class="pyr-foot" x="${cxM - half}"     y="${H - 8}" text-anchor="middle">${maxTxt}</text>`;
+  svg += `<text class="pyr-foot" x="${cxF + half}"     y="${H - 8}" text-anchor="middle">${maxTxt}</text>`;
+  // Mid ticks: half the max on each side (matches the 50% guideline)
+  svg += `<text class="pyr-foot" x="${cxM - half/2}"   y="${H - 8}" text-anchor="middle" style="opacity:0.6">${midTxt}</text>`;
+  svg += `<text class="pyr-foot" x="${cxF + half/2}"   y="${H - 8}" text-anchor="middle" style="opacity:0.6">${midTxt}</text>`;
 
   svg += '</svg>';
   wrap.innerHTML = svg;
