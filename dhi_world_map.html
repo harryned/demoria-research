@@ -1354,8 +1354,14 @@ function renderRankingsAside() {
   }
   // Build the items list — variant-aware on projection years, historical otherwise.
   // Ranks are recomputed dynamically (don't reuse the 2024 baseline rank field).
+  //
+  // PROJ_VARIANTS only stores Low & High (Median lives in DATA.byNumByYear for
+  // every year, including projection years). So the logic is:
+  //   - historical year, or projection year + Median  → use DATA.byNumByYear
+  //   - projection year + Low/High                     → use PROJ_VARIANTS
   let items = [];
-  if (isProj && typeof PROJ_VARIANTS !== 'undefined') {
+  const useVariantLookup = isProj && currentVariant !== 'Median' && typeof PROJ_VARIANTS !== 'undefined';
+  if (useVariantLookup) {
     const baseline = DATA.byNumByYear['2024'] || {};
     Object.values(baseline).forEach(base => {
       if (!base || !base.iso) return;
