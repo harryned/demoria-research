@@ -806,7 +806,7 @@ header::after {
 
 /* ── Side panel ── (slides in from the rankings sidebar's left edge) */
 #side-panel {
-  position: absolute; right: 280px; top: 64px; bottom: 0; width: 380px; z-index: 30;
+  position: absolute; right: 280px; top: 116px; bottom: 0; width: 380px; z-index: 30;
   background: var(--surface); border-left: 1px solid var(--border);
   transform: translateX(calc(100% + 280px)); transition: transform 0.25s ease;
   display: flex; flex-direction: column;
@@ -1345,13 +1345,35 @@ function setYear(yr, btn) {
 function renderRankingsAside() {
   const list = document.getElementById('ra-list');
   if (!list) return;
-  const yearData = DATA.byNumByYear[currentYear] || DATA.byNumByYear['2024'] || {};
-  // Keep the eyebrow in sync with whatever year the slider is showing
+  const isProj = PROJ_YEARS.includes(currentYear);
+  // Keep the eyebrow in sync with year + variant (projection only)
   const eb = document.getElementById('ra-eyebrow');
-  if (eb) eb.innerHTML = 'Index · ' + currentYear;
-  const items = Object.values(yearData)
-    .filter(d => d && d.overall != null && d.rank != null)
-    .sort((a, b) => a.rank - b.rank);
+  if (eb) {
+    const vTxt = isProj ? (' &middot; ' + currentVariant.toLowerCase() + ' variant') : '';
+    eb.innerHTML = 'Index &middot; ' + currentYear + vTxt;
+  }
+  // Build the items list — variant-aware on projection years, historical otherwise.
+  // Ranks are recomputed dynamically (don't reuse the 2024 baseline rank field).
+  let items = [];
+  if (isProj && typeof PROJ_VARIANTS !== 'undefined') {
+    const baseline = DATA.byNumByYear['2024'] || {};
+    Object.values(baseline).forEach(base => {
+      if (!base || !base.iso) return;
+      const v = PROJ_VARIANTS[base.iso]?.[currentYear]?.[currentVariant];
+      if (v && v.Overall != null) {
+        items.push({ iso: base.iso, name: base.name, overall: v.Overall });
+      }
+    });
+  } else {
+    const yearData = DATA.byNumByYear[currentYear] || DATA.byNumByYear['2024'] || {};
+    Object.values(yearData).forEach(d => {
+      if (d && d.overall != null && d.iso) {
+        items.push({ iso: d.iso, name: d.name, overall: d.overall });
+      }
+    });
+  }
+  items.sort((a, b) => b.overall - a.overall);
+  items.forEach((it, i) => it.rank = i + 1);
   const sel = (typeof selectedIso !== 'undefined' && selectedIso) || null;
   list.innerHTML = items.map(d => {
     const sc = d.overall;
