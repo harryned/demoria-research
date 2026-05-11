@@ -591,7 +591,94 @@ header::after {
 .zbtn:hover { background: var(--surface3); color: #fff; }
 
 /* ── Map ── */
-#map-wrap { position: absolute; inset: 116px 0 0 0; overflow: hidden; cursor: grab; }
+#map-wrap { position: absolute; inset: 116px 280px 0 0; overflow: hidden; cursor: grab; }
+@media (max-width: 1100px) { #map-wrap { right: 240px; } }
+@media (max-width: 800px)  { #map-wrap { right: 0; } }
+
+/* ── Rankings sidebar (right of the map) ── */
+#rankings-aside {
+  position: absolute;
+  right: 0; top: 116px; bottom: 0; width: 280px;
+  background: linear-gradient(180deg, rgba(8,21,48,0.96) 0%, rgba(4,11,28,0.96) 100%);
+  border-left: 1px solid rgba(196,154,40,0.20);
+  display: flex; flex-direction: column;
+  z-index: 22;
+  -webkit-backdrop-filter: blur(8px);
+          backdrop-filter: blur(8px);
+}
+@media (max-width: 1100px) { #rankings-aside { width: 240px; } }
+@media (max-width: 800px)  { #rankings-aside { display: none; } }
+.ra-head {
+  padding: 14px 18px 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.ra-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.55rem; letter-spacing: 0.22em;
+  text-transform: uppercase; color: rgba(255,255,255,0.55);
+  margin-bottom: 4px;
+}
+.ra-title {
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.95rem; font-weight: 500;
+  color: #fff; line-height: 1;
+  letter-spacing: -0.005em;
+}
+.ra-search { padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.ra-search input {
+  width: 100%; padding: 6px 10px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 4px;
+  color: #fff;
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.78rem;
+  outline: none;
+  transition: border-color 0.12s;
+}
+.ra-search input:focus { border-color: rgba(232,184,75,0.55); background: rgba(255,255,255,0.06); }
+.ra-search input::placeholder { color: rgba(255,255,255,0.4); }
+.ra-list {
+  flex: 1; overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.18) transparent;
+  overscroll-behavior: contain;
+}
+.ra-list::-webkit-scrollbar { width: 6px; }
+.ra-list::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.18); border-radius: 3px; }
+.ra-list::-webkit-scrollbar-track { background: transparent; }
+.ra-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 7px 18px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  cursor: pointer;
+  font-family: 'Manrope', sans-serif;
+  border-left: 2px solid transparent;
+  transition: background 0.12s, border-color 0.12s;
+}
+.ra-item:hover { background: rgba(232,184,75,0.06); }
+.ra-item.selected {
+  background: rgba(232,184,75,0.14);
+  border-left-color: var(--gold);
+}
+.ra-rank {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem; font-weight: 500;
+  color: rgba(255,255,255,0.42);
+  min-width: 26px; text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.ra-name {
+  font-size: 0.82rem; font-weight: 400;
+  color: rgba(255,255,255,0.88);
+  flex: 1;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.ra-score {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem; font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
 #map-wrap.grabbing { cursor: grabbing; }
 #map-svg { width: 100%; height: 100%; }
 #map-svg path { stroke: rgba(255,255,255,0.12); stroke-width: 0.4; transition: filter 0.1s; }
@@ -717,12 +804,18 @@ header::after {
 }
 
 
-/* ── Side panel ── */
+/* ── Side panel ── (slides in from the rankings sidebar's left edge) */
 #side-panel {
-  position: absolute; right: 0; top: 64px; bottom: 0; width: 380px; z-index: 30;
+  position: absolute; right: 280px; top: 64px; bottom: 0; width: 380px; z-index: 30;
   background: var(--surface); border-left: 1px solid var(--border);
-  transform: translateX(100%); transition: transform 0.25s ease;
+  transform: translateX(calc(100% + 280px)); transition: transform 0.25s ease;
   display: flex; flex-direction: column;
+}
+@media (max-width: 1100px) {
+  #side-panel { right: 240px; transform: translateX(calc(100% + 240px)); }
+}
+@media (max-width: 800px) {
+  #side-panel { right: 0; transform: translateX(100%); }
 }
 #panel-body { flex: 1 1 0; min-height: 0; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 16px 20px; overscroll-behavior: contain; }
 #side-panel.open { transform: translateX(0); }
@@ -922,6 +1015,17 @@ header::after {
   <button class="mi-close" type="button" aria-label="Dismiss"
           onclick="document.getElementById('map-intro').classList.add('mi-hidden')">&times;</button>
 </div>
+<aside id="rankings-aside" aria-label="Country rankings — sortable, clickable">
+  <div class="ra-head">
+    <div class="ra-eyebrow">Index · 2024</div>
+    <div class="ra-title">Global Rankings</div>
+  </div>
+  <div class="ra-search">
+    <input type="text" id="ra-search-input" placeholder="Search country…" oninput="filterRankings(this.value)" />
+  </div>
+  <div class="ra-list" id="ra-list"></div>
+</aside>
+
 <div id="map-wrap">
   <svg id="map-svg" viewBox="0 0 960 500" preserveAspectRatio="xMidYMid meet">
     <g id="map-g"></g>
@@ -1237,6 +1341,51 @@ function setYear(yr, btn) {
   if (selectedIso) openPanel(selectedIso);
 }
 
+// ── Rankings sidebar ──
+function renderRankingsAside() {
+  const list = document.getElementById('ra-list');
+  if (!list) return;
+  const yearData = DATA.byNumByYear[currentYear] || DATA.byNumByYear['2024'] || {};
+  const items = Object.values(yearData)
+    .filter(d => d && d.overall != null && d.rank != null)
+    .sort((a, b) => a.rank - b.rank);
+  const sel = (typeof selectedIso !== 'undefined' && selectedIso) || null;
+  list.innerHTML = items.map(d => {
+    const sc = d.overall;
+    const scoreColor =
+      sc >= 80 ? '#22c55e' :
+      sc >= 65 ? '#eab308' :
+      sc >= 50 ? '#f97316' :
+      sc >= 35 ? '#ef4444' : '#7f1d1d';
+    const isSel = sel === d.iso ? ' selected' : '';
+    return `<div class="ra-item${isSel}" data-iso="${d.iso}" onclick="openPanel('${d.iso}')">
+      <span class="ra-rank">${d.rank}</span>
+      <span class="ra-name">${d.name}</span>
+      <span class="ra-score" style="color:${scoreColor}">${sc.toFixed(1)}</span>
+    </div>`;
+  }).join('');
+  // Re-apply current search filter
+  const q = document.getElementById('ra-search-input')?.value || '';
+  if (q) filterRankings(q);
+}
+function filterRankings(q) {
+  q = (q || '').toLowerCase().trim();
+  document.querySelectorAll('#ra-list .ra-item').forEach(item => {
+    const name = (item.querySelector('.ra-name')?.textContent || '').toLowerCase();
+    item.style.display = name.includes(q) ? '' : 'none';
+  });
+}
+function highlightRankingItem(iso, scrollTo) {
+  document.querySelectorAll('#ra-list .ra-item').forEach(item => {
+    if (item.dataset.iso === iso) {
+      item.classList.add('selected');
+      if (scrollTo) item.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } else {
+      item.classList.remove('selected');
+    }
+  });
+}
+
 function repaintMap() {
   // Update projection disclaimer visibility (shown only on projection years)
   const pn = document.getElementById('sp-proj-note');
@@ -1289,6 +1438,8 @@ function repaintMap() {
     const val = entry?.[CAT_SCORE_KEY[currentMetric]];
     return getColor(val, currentMetric);
   });
+  // Rankings sidebar — refresh whenever year/metric changes
+  try { renderRankingsAside(); } catch (e) {}
 }
 
 // ── Tooltip ───────────────────────────────────────────────────────────────────
@@ -1369,6 +1520,10 @@ function openPanel(iso) {
   if (!entry) return;
   const ts = DATA.timeSeries[iso] || {};
   const raw = DATA.raw[iso] || {};
+  // Sync the rankings sidebar: highlight this country's row + scroll into view
+  try { highlightRankingItem(iso, true); } catch (e) {}
+  // Mark map polygon as selected too
+  try { selectedIso = iso; g.selectAll('path').classed('selected', d => d && d.id === DATA.iso3ToNum[iso]); } catch (e) {}
   const panel = document.getElementById('side-panel');
   panel.classList.add('open');
   document.getElementById('sp-name').textContent = entry.name;
@@ -1561,6 +1716,8 @@ function closePanel() {
   // Clear selection so year/metric changes (e.g. autoplay advancing) don't auto-reopen
   selectedIso = null;
   g.selectAll('path').classed('selected', false);
+  // Also clear the highlighted row in the rankings sidebar
+  try { highlightRankingItem(null, false); } catch (e) {}
 }
 
 // ── Zoom to country ───────────────────────────────────────────────────────────
