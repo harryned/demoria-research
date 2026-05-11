@@ -1017,7 +1017,7 @@ header::after {
 </div>
 <aside id="rankings-aside" aria-label="Country rankings — sortable, clickable">
   <div class="ra-head">
-    <div class="ra-eyebrow">Index · 2024</div>
+    <div class="ra-eyebrow" id="ra-eyebrow">Index &middot; 2024</div>
     <div class="ra-title">Global Rankings</div>
   </div>
   <div class="ra-search">
@@ -1346,6 +1346,9 @@ function renderRankingsAside() {
   const list = document.getElementById('ra-list');
   if (!list) return;
   const yearData = DATA.byNumByYear[currentYear] || DATA.byNumByYear['2024'] || {};
+  // Keep the eyebrow in sync with whatever year the slider is showing
+  const eb = document.getElementById('ra-eyebrow');
+  if (eb) eb.innerHTML = 'Index · ' + currentYear;
   const items = Object.values(yearData)
     .filter(d => d && d.overall != null && d.rank != null)
     .sort((a, b) => a.rank - b.rank);
