@@ -561,6 +561,21 @@ header::after {
   margin-left: auto;
 }
 .proj-note strong { color: var(--gold); font-weight: 600; font-style: normal; letter-spacing: 0.01em; }
+/* Inline hint that explains the variant selector — only visible when no
+   projection year is active (i.e. variant-tabs are hidden). */
+.proj-hint {
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.78rem;
+  font-style: italic;
+  color: rgba(255,255,255,0.5);
+  margin-left: auto;
+  display: none;
+}
+.proj-hint b { color: var(--gold); font-style: normal; font-weight: 600; letter-spacing: 0.01em; }
+/* Show the hint only when variant-tabs are hidden (= no projection year selected) */
+#variant-tabs.is-hidden ~ .proj-hint { display: inline; }
+#variant-tabs.is-hidden ~ .proj-note { display: none; }
+@media (max-width: 900px) { .proj-hint { display: none !important; } }
 .yr-btn.active { color: var(--gold); }
 
 @media (max-width: 1280px) {
@@ -655,6 +670,23 @@ header::after {
   font-family: 'Manrope', sans-serif;
   border-left: 2px solid transparent;
   transition: background 0.12s, border-color 0.12s;
+}
+.ra-item { position: relative; padding-right: 24px; }
+.ra-item::after {
+  content: '→';
+  position: absolute;
+  right: 12px; top: 50%;
+  transform: translateY(-50%) translateX(-4px);
+  color: var(--gold);
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.85rem; line-height: 1;
+  opacity: 0;
+  transition: opacity 0.15s, transform 0.15s;
+  pointer-events: none;
+}
+.ra-item:hover::after, .ra-item.selected::after {
+  opacity: 0.85;
+  transform: translateY(-50%) translateX(0);
 }
 .ra-item:hover { background: rgba(232,184,75,0.06); }
 .ra-item.selected {
@@ -986,6 +1018,7 @@ header::after {
       <button class="zbtn" onclick="zoomBy(1.4)" title="Zoom in">+</button>
       <button class="zbtn" onclick="zoomBy(0.714)" title="Zoom out">&minus;</button>
       <button class="zbtn" onclick="resetZoom()" title="Reset" style="font-size:0.7rem">&#8635;</button>
+      <button class="zbtn" id="help-btn" onclick="showIntro()" title="Show help — how to navigate the map" style="font-size:0.78rem; font-weight: 700;">?</button>
     </div>
   </div>
   </div>
@@ -1003,6 +1036,7 @@ header::after {
     <button class="vbtn active" data-v="Median" onclick="setVariant('Median',this)">Median</button>
     <button class="vbtn" data-v="High" onclick="setVariant('High',this)">High</button>
   </span>
+  <span class="proj-hint" id="proj-hint">Pick a projection year to compare <b>Low / Median / High</b> fertility scenarios</span>
   <span class="proj-note">UN WPP 2024 &middot; <span id="proj-note-variant"><strong>median variant</strong></span></span>
 </div>
 <div id="map-intro" role="region" aria-label="Map quick guide">
@@ -1405,6 +1439,11 @@ function filterRankings(q) {
     const name = (item.querySelector('.ra-name')?.textContent || '').toLowerCase();
     item.style.display = name.includes(q) ? '' : 'none';
   });
+}
+// Re-open the intro banner from the ? help button in the header.
+function showIntro() {
+  const el = document.getElementById('map-intro');
+  if (el) el.classList.remove('mi-hidden');
 }
 function highlightRankingItem(iso, scrollTo) {
   document.querySelectorAll('#ra-list .ra-item').forEach(item => {
