@@ -897,11 +897,15 @@ header {
 }
 .pyr-stat-dot-m { background: #2d5fb3; }
 .pyr-stat-dot-f { background: #c49a28; }
-/* ── Prominent year display + slider ── */
+/* ── Prominent year display + slider ──
+   Centred under the heading, gold-accented to match the pyramid tab and the
+   female bars (the rest of the pyramid theme is blue + gold; the slider is
+   the interactive control so the warmer accent reads as "active"). */
 .pyramid-year-bigwrap {
   display: flex; flex-direction: column; align-items: center;
-  margin: 8px auto 4px;
-  max-width: 480px;
+  margin: 10px auto 6px;
+  max-width: 560px;
+  width: 100%;
 }
 .pyramid-year-bigeyebrow {
   font-family: 'JetBrains Mono', monospace;
@@ -930,7 +934,8 @@ header {
 .pyramid-year-slider {
   display: flex; align-items: center; gap: 12px;
   width: 100%;
-  margin-top: 4px;
+  margin: 6px auto 0;
+  justify-content: center;
 }
 .pyr-yr-end {
   font-family: 'JetBrains Mono', monospace;
@@ -938,46 +943,51 @@ header {
   color: var(--ink3);
   font-variant-numeric: tabular-nums;
   min-width: 36px;
+  flex-shrink: 0;
 }
 .pyr-yr-end:last-of-type { text-align: right; }
-#pyramid-year-input {
+/* Class-based selector so BOTH the country (#pyramid-year-input) and region
+   (#reg-pyramid-year-input) sliders pick up the styling. Track + thumb both
+   use the gold pyramid accent; selected (filled) portion is the gold deep
+   shade, unselected is a muted surface tone. */
+.pyramid-year-slider input[type="range"] {
   -webkit-appearance: none; appearance: none;
   flex: 1;
   height: 4px;
   border-radius: 2px;
   background: linear-gradient(to right,
-    var(--accent) 0%, var(--accent) var(--fill, 100%),
+    var(--gold) 0%, var(--gold) var(--fill, 100%),
     var(--surface3) var(--fill, 100%), var(--surface3) 100%);
   outline: none;
   cursor: pointer;
 }
-#pyramid-year-input::-webkit-slider-thumb {
+.pyramid-year-slider input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   width: 16px; height: 16px;
-  background: #fff;
-  border: 2px solid var(--accent);
+  background: var(--gold);
+  border: 2px solid #fff;
   border-radius: 50%;
   cursor: pointer;
-  box-shadow: 0 0 0 1px rgba(0,0,0,0.05), 0 1px 3px rgba(0,0,0,0.15);
+  box-shadow: 0 0 0 1px rgba(184,145,42,0.45), 0 1px 3px rgba(0,0,0,0.18);
 }
-#pyramid-year-input::-moz-range-thumb {
+.pyramid-year-slider input[type="range"]::-moz-range-thumb {
   width: 16px; height: 16px;
-  background: #fff;
-  border: 2px solid var(--accent);
+  background: var(--gold);
+  border: 2px solid #fff;
   border-radius: 50%;
   cursor: pointer;
+  box-shadow: 0 0 0 1px rgba(184,145,42,0.45), 0 1px 3px rgba(0,0,0,0.18);
 }
 .pyramid-wrap {
   width: 100%;
   background: transparent;
-  /* Use aspect-ratio + max-height to bound the chart to the iframe viewport
-     so the panel never needs scrolling. Fixed chrome inside the panel
-     (ctab tabs ~40, section padding ~26, heading ~50, year display ~110,
-     subtitle ~20) ≈ 246 px; +24 px buffer. */
-  max-width: 720px;
+  /* Sized as large as the trajectory + peers cards on the same panel. The
+     aspect-ratio keeps the SVG honest at any width; max-height stops it from
+     overflowing the viewport on tall windows. */
+  max-width: 960px;
   margin: 0 auto;
   aspect-ratio: 640 / 330;
-  max-height: calc(100vh - 270px);
+  max-height: calc(100vh - 250px);
 }
 .pyramid-wrap .pyr-svg {
   width: 100%;
