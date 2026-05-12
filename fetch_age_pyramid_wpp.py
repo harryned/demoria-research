@@ -25,13 +25,15 @@ DEST     = Path(__file__).parent / "public" / "age_pyramid.json"
 
 YEARS = list(range(1965, 2101, 5))  # 1965, 1970, ..., 2100 = 28 years
 
-# Display bands (must match the dashboard's PYRAMID_BANDS order: 0-4 first → 80+ last)
+# Display bands (must match the dashboard's PYRAMID_BANDS order: 0-4 first → 100+ last)
+# Now keeps every 5-year band WPP publishes — including the very-elderly bands
+# 80-84, 85-89, 90-94, 95-99 and 100+ that are essential for visualising the
+# top of an ageing-population pyramid.
 DISPLAY_BANDS = [
     "0-4", "5-9", "10-14", "15-19", "20-24", "25-29", "30-34", "35-39",
-    "40-44", "45-49", "50-54", "55-59", "60-64", "65-69", "70-74", "75-79", "80+",
+    "40-44", "45-49", "50-54", "55-59", "60-64", "65-69", "70-74", "75-79",
+    "80-84", "85-89", "90-94", "95-99", "100+",
 ]
-# WPP source bands that get collapsed into "80+"
-COLLAPSE_INTO_80PLUS = {"80-84", "85-89", "90-94", "95-99", "100+"}
 
 
 def ensure_csv():
@@ -62,12 +64,8 @@ def main():
                 continue
             if yr not in target_years:
                 continue
-            band = row.get("AgeGrp", "").strip()
-            if not band:
-                continue
-            # Map source band → display band
-            disp = "80+" if band in COLLAPSE_INTO_80PLUS else band
-            if disp not in DISPLAY_BANDS:
+            disp = row.get("AgeGrp", "").strip()
+            if not disp or disp not in DISPLAY_BANDS:
                 continue
             try:
                 pm = float(row.get("PopMale", "") or 0)
