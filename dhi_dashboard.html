@@ -897,10 +897,40 @@ header {
 }
 .pyr-stat-dot-m { background: #2d5fb3; }
 .pyr-stat-dot-f { background: #c49a28; }
+/* ── Prominent year display + slider ── */
+.pyramid-year-bigwrap {
+  display: flex; flex-direction: column; align-items: center;
+  margin: 18px auto 8px;
+  max-width: 520px;
+}
+.pyramid-year-bigeyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--ink3);
+  margin-bottom: 2px;
+}
+.pyramid-year-bignum {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 700;
+  font-size: 2.6rem;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+  margin-bottom: 4px;
+}
+.pyramid-year-scenario {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--ink3);
+  margin-top: 4px;
+}
+.pyramid-year-scenario.is-projection { color: var(--gold); }
 /* ── Year slider ── */
 .pyramid-year-slider {
   display: flex; align-items: center; gap: 12px;
-  margin: 14px 0 4px;
+  width: 100%;
+  margin-top: 8px;
 }
 .pyr-yr-end {
   font-family: 'JetBrains Mono', monospace;
@@ -2229,7 +2259,7 @@ header {
             <div class="pyramid-head">
               <div class="pyramid-head-row">
                 <div>
-                  <div class="section-eyebrow">Age structure &middot; <span id="pyramid-year-label">—</span></div>
+                  <div class="section-eyebrow">Age structure</div>
                   <div class="section-heading">Population pyramid</div>
                 </div>
                 <!-- Prominent population stat block -->
@@ -2244,11 +2274,16 @@ header {
               </div>
               <!-- Year scrubber: slider over the full available year range
                    (5-year steps spanning 1965 → 2100, source: UN WPP 2024) -->
-              <div class="pyramid-year-slider">
-                <span class="pyr-yr-end" id="pyr-yr-min">1965</span>
-                <input type="range" id="pyramid-year-input" min="1965" max="2100" step="5" value="2025"
-                       oninput="onPyramidYearInput(this.value)" aria-label="Year">
-                <span class="pyr-yr-end" id="pyr-yr-max">2100</span>
+              <div class="pyramid-year-bigwrap">
+                <div class="pyramid-year-bigeyebrow">Year displayed</div>
+                <div class="pyramid-year-bignum" id="pyramid-year-label">—</div>
+                <div class="pyramid-year-slider">
+                  <span class="pyr-yr-end" id="pyr-yr-min">1965</span>
+                  <input type="range" id="pyramid-year-input" min="1965" max="2100" step="5" value="2025"
+                         oninput="onPyramidYearInput(this.value)" aria-label="Year">
+                  <span class="pyr-yr-end" id="pyr-yr-max">2100</span>
+                </div>
+                <div class="pyramid-year-scenario" id="pyramid-year-scenario">Historical observation</div>
               </div>
               <p class="pyramid-sub" id="pyramid-sub">5-year age bands, split by sex. Source: UN WPP 2024 (Medium variant for projections).</p>
             </div>
@@ -3026,6 +3061,13 @@ function renderAgePyramid(iso, year) {
   if (yrMinEl) yrMinEl.textContent = yMin;
   if (yrMaxEl) yrMaxEl.textContent = yMax;
   if (yearLabel) yearLabel.textContent = yr;
+  // Historical vs projection caption beneath the big year
+  const scenarioEl = document.getElementById('pyramid-year-scenario');
+  if (scenarioEl) {
+    const isProjection = yr > 2024;
+    scenarioEl.textContent = isProjection ? 'Projection · UN WPP Medium' : 'Historical observation';
+    scenarioEl.classList.toggle('is-projection', isProjection);
+  }
 
   const d = pyramidYearSlice(iso, yr);
   if (!d) {
