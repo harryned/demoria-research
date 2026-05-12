@@ -846,29 +846,29 @@ header {
   border-radius: var(--r);
   border: 1px solid var(--border);
   box-shadow: var(--shadow);
-  padding: 16px 22px 18px;
+  padding: 12px 18px 14px;
   margin-bottom: 0;
 }
-.pyramid-head { margin-bottom: 10px; }
+.pyramid-head { margin-bottom: 6px; }
 .pyramid-head-row {
   display: flex; align-items: flex-start; justify-content: space-between;
   gap: 16px; flex-wrap: wrap;
 }
 .pyramid-sub {
-  margin-top: 6px;
+  margin-top: 4px;
   font-family: 'Manrope', sans-serif;
-  font-size: 0.78rem; color: var(--ink3);
-  line-height: 1.45;
+  font-size: 0.72rem; color: var(--ink3);
+  line-height: 1.4;
 }
 /* ── Prominent total-population stat block (top-right of pyramid header) ── */
 .pyramid-stats {
   display: flex; flex-direction: column; align-items: flex-end;
-  gap: 2px;
+  gap: 1px;
   min-width: 200px;
 }
 .pyr-stat-num {
   font-family: 'Manrope', sans-serif;
-  font-size: 2.0rem; font-weight: 700;
+  font-size: 1.7rem; font-weight: 700;
   color: var(--accent);
   line-height: 1;
   letter-spacing: -0.02em;
@@ -876,15 +876,15 @@ header {
 }
 .pyr-stat-label {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase;
+  font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase;
   color: var(--ink3);
   margin-top: 2px;
 }
 .pyr-stat-sub {
-  display: flex; align-items: center; gap: 14px;
-  margin-top: 8px;
+  display: flex; align-items: center; gap: 12px;
+  margin-top: 4px;
   font-family: 'Manrope', sans-serif;
-  font-size: 0.78rem;
+  font-size: 0.74rem;
   color: var(--ink2);
 }
 .pyr-stat-pair { display: inline-flex; align-items: center; gap: 5px; }
@@ -900,37 +900,37 @@ header {
 /* ── Prominent year display + slider ── */
 .pyramid-year-bigwrap {
   display: flex; flex-direction: column; align-items: center;
-  margin: 18px auto 8px;
-  max-width: 520px;
+  margin: 8px auto 4px;
+  max-width: 480px;
 }
 .pyramid-year-bigeyebrow {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase;
+  font-size: 0.58rem; letter-spacing: 0.22em; text-transform: uppercase;
   color: var(--ink3);
-  margin-bottom: 2px;
+  margin-bottom: 1px;
 }
 .pyramid-year-bignum {
   font-family: 'Manrope', sans-serif;
   font-weight: 700;
-  font-size: 2.6rem;
+  font-size: 1.9rem;
   letter-spacing: -0.02em;
   line-height: 1;
   color: var(--accent);
   font-variant-numeric: tabular-nums;
-  margin-bottom: 4px;
+  margin-bottom: 2px;
 }
 .pyramid-year-scenario {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase;
+  font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase;
   color: var(--ink3);
-  margin-top: 4px;
+  margin-top: 2px;
 }
 .pyramid-year-scenario.is-projection { color: var(--gold); }
 /* ── Year slider ── */
 .pyramid-year-slider {
   display: flex; align-items: center; gap: 12px;
   width: 100%;
-  margin-top: 8px;
+  margin-top: 4px;
 }
 .pyr-yr-end {
   font-family: 'JetBrains Mono', monospace;
@@ -971,7 +971,13 @@ header {
   width: 100%;
   background: transparent;
 }
-.pyramid-wrap .pyr-svg { width: 100%; height: auto; display: block; }
+.pyramid-wrap .pyr-svg {
+  width: 100%;
+  max-width: 620px;  /* cap so the chart doesn't grow tall on wide viewports */
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
 /* Bars are split into "shared" (parity, muted) + "surplus" (the side that
    outnumbers the other, fully saturated) segments. The visual contrast
    makes male/female imbalance jump out at every age band. */
@@ -3107,10 +3113,11 @@ function renderAgePyramid(iso, year) {
     window._pyrCountryMax[iso] = countryMaxBand;
   }
 
-  // SVG geometry — sized to fit all 21 bands (0-4 through 100+) without
-  // crowding. Height grows proportionally so row heights stay readable.
-  const W = 640, H = 360;
-  const padL = 60, padR = 60, padT = 26, padB = 26;
+  // SVG geometry — sized to fit all 21 bands without crowding while keeping
+  // the panel inside the viewport. SVG also capped at max-width 620px so it
+  // doesn't grow tall on wide screens.
+  const W = 640, H = 330;
+  const padL = 60, padR = 60, padT = 22, padB = 22;
   const labelW = 56;     // central column for age-band labels
   const half  = (W - padL - padR - labelW) / 2;
   const rowH = (H - padT - padB) / PYRAMID_BANDS.length;
