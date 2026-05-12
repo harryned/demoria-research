@@ -4368,18 +4368,19 @@ function selectRegion(key, el) {
       </div>`;
   }).join('');
 
-  // Top countries — peer-table style
+  // Top countries — peer-table style. Score uses the canonical 5-band
+  // classifyScore palette (Healthy/Pressure/Decline/Critical/Crisis) so the
+  // colour matches the rest of the dashboard exactly. Trajectory uses the
+  // same pill component as the country peers table.
   const countriesHtml = topCountries.map((c, i) => {
-    const fullC = DATA.countries[c.iso];
-    const s2050 = fullC?.scores?.['2050']?.Overall;
-    const d50c = (s2050 != null) ? s2050 - c.score : null;
-    const trajCls = c.traj === 'Improving' ? 'tcap-delta-up' : c.traj === 'Declining' ? 'tcap-delta-down' : '';
+    const sCls = classifyScore(c.score);
+    const trajKey = (c.traj === 'Improving' || c.traj === 'Declining') ? c.traj : 'Stable';
     return `
       <tr class="is-clickable" onclick="showPanel('country');selectCountry('${c.iso}',null)">
         <td class="reg-peers-rank">${i+1}</td>
         <td><strong>${c.name}</strong></td>
-        <td class="num">${c.score.toFixed(1)}</td>
-        <td class="num"><span class="${trajCls}">${c.traj || '—'}</span></td>
+        <td class="num" style="color:${sCls.color}">${c.score.toFixed(1)}</td>
+        <td class="num"><span class="peer-traj peer-traj-${trajKey}">${c.traj || '—'}</span></td>
       </tr>`;
   }).join('');
 
