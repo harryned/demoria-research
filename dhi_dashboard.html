@@ -1668,24 +1668,37 @@ header {
   .stat-row { grid-template-columns: 1fr 1fr; }
 }
 
-/* ── Regions panel ── */
-.reg-shell { display: grid; grid-template-columns: 240px 1fr; gap: 20px; align-items: start; }
-.reg-list { display: flex; flex-direction: column; gap: 4px; }
+/* ── Regions panel ──
+   The region LIST now lives in the left sidebar (mirroring the country UX),
+   not inside the region panel itself. The .reg-shell two-column grid is no
+   longer used — the panel is now just the .reg-detail column. */
+.sidebar-card { transition: opacity 0.12s; }
+.sidebar-card.is-hidden { display: none; }
+/* Region list inside sidebar — same row style as .country-item so the two
+   sidebars feel identical. Borders separate rows; subtle hover; selected row
+   gets the same blue tinted left-border treatment. */
+#reg-list { max-height: 480px; overflow-y: auto; }
 .reg-item {
-  display: flex; align-items: center; gap: 10px;
-  padding: 10px 12px; border-radius: var(--r);
-  cursor: pointer; border: 1px solid var(--border);
-  transition: all 0.13s; background: var(--surface);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  padding: 10px 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid var(--surface3);
+  transition: background 0.1s;
+  background: transparent;       /* override prior card-style background */
+  border-radius: 0;
+  box-shadow: none;
+  border-left: none; border-right: none; border-top: none;
 }
-.reg-item:hover { border-color: var(--accent2); }
-.reg-item.active { border-color: var(--accent); background: #eef3ff; box-shadow: 0 0 0 2px rgba(26,58,110,0.1); }
-.reg-rank { font-family: var(--font-mono); font-size: 0.66rem; color: var(--ink3); min-width: 18px; letter-spacing: 0.05em; }
+.reg-item:hover { background: var(--surface2); border-color: var(--surface3); }
+.reg-item.active { background: #edf2ff; border-left: 3px solid var(--accent2); padding-left: 13px; box-shadow: none; }
+.reg-rank { font-family: var(--font-mono); font-size: 0.72rem; color: var(--ink3); min-width: 22px; text-align: right; letter-spacing: 0.05em; }
 .reg-item-info { flex: 1; min-width: 0; }
-.reg-item-name { font-family: 'Manrope', sans-serif; font-size: 0.92rem; font-weight: 600; color: var(--ink); line-height: 1.2; }
-.reg-item-cont { font-family: var(--font-mono); font-size: 0.62rem; color: var(--ink3); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 2px; }
-.reg-item-score { font-family: 'Manrope', sans-serif; font-size: 1.05rem; font-weight: 700; min-width: 38px; text-align: right; color: var(--accent); }
-.reg-item-bar { width: 3px; height: 32px; border-radius: 2px; flex-shrink: 0; }
+.reg-item-name { font-family: 'Manrope', sans-serif; font-size: 0.87rem; font-weight: 600; color: var(--ink); line-height: 1.2; }
+.reg-item-cont { font-family: var(--font-mono); font-size: 0.60rem; color: var(--ink3); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 2px; }
+.reg-item-score { font-family: 'Manrope', sans-serif; font-size: 0.92rem; font-weight: 700; min-width: 36px; text-align: right; }
+.reg-item-bar { width: 3px; height: 28px; border-radius: 2px; flex-shrink: 0; }
 
 /* Detail panel — harmonised with country profile */
 .reg-detail { display: flex; flex-direction: column; gap: 22px; min-height: 500px; }
@@ -2146,8 +2159,12 @@ header {
 
 <div class="shell">
   <!-- ── Sidebar ── -->
+  <!-- Two stacked sidebar cards; only the one matching the current view-mode is
+       visible (toggled by showPanel via .sidebar-card.is-hidden). The Country
+       and Region tabs each get a properly-scoped selector — the rest of the UX
+       (search, continent filter, ranked list) is identical between them. -->
   <aside class="sidebar">
-    <div class="card">
+    <div class="card sidebar-card" id="sidebar-country">
       <div class="card-head">Select country</div>
       <div class="search-wrap">
         <input type="text" id="search" placeholder="Search country..." oninput="filterList()">
@@ -2156,6 +2173,16 @@ header {
         <button class="filter-btn active" onclick="filterContinent('all',this)">All</button>
       </div>
       <div id="country-list"></div>
+    </div>
+    <div class="card sidebar-card is-hidden" id="sidebar-region">
+      <div class="card-head">Select region</div>
+      <div class="search-wrap">
+        <input type="text" id="reg-search" placeholder="Search region..." oninput="filterRegionList()">
+      </div>
+      <div class="filters" id="reg-continent-filters">
+        <button class="filter-btn active" onclick="filterRegionContinent('all',this)">All</button>
+      </div>
+      <div id="reg-list"></div>
     </div>
   </aside>
 
@@ -2353,17 +2380,12 @@ header {
       </div>
     </div>
 
-    <!-- Region panel -->
+    <!-- Region panel — list moved to sidebar (mirrors Country UX). -->
     <div id="panel-region">
-  <div class="reg-shell">
-    <!-- Left: ranked list -->
-    <div class="reg-list" id="reg-list"></div>
-    <!-- Right: detail view -->
-    <div class="reg-detail" id="reg-detail">
-      <div class="reg-detail-placeholder">Select a region to explore</div>
+      <div class="reg-detail" id="reg-detail">
+        <div class="reg-detail-placeholder">Select a region to explore</div>
+      </div>
     </div>
-  </div>
-</div>
 
     <!-- Cross-Section Scatter panel -->
     <div id="panel-scatter">
@@ -3483,10 +3505,12 @@ function renderRisks(c, iso) {
 
 function init() {
   buildContinentFilters();
+  buildRegionContinentFilters();
   renderCountryList();
   renderRegionGrid();
-  // Auto-select first region
-  const firstReg = document.querySelector('.reg-item');
+  // Auto-select first region so the panel isn't blank when the user first
+  // switches to it (the click() also marks the row as active in the sidebar).
+  const firstReg = document.querySelector('#reg-list .reg-item');
   if (firstReg) firstReg.click();
   renderRankings();
   renderHighlights();
@@ -4211,6 +4235,8 @@ function renderRegionGrid() {
     const div = document.createElement('div');
     div.className = 'reg-item' + (selectedRegionKey === r.key ? ' active' : '');
     div.dataset.key = r.key;
+    div.dataset.name = r.region;       // used by filterRegionList()
+    div.dataset.continent = r.continent;
     div.innerHTML = `
       <div class="reg-rank">${i+1}</div>
       <div class="reg-item-bar" style="background:${barColor}"></div>
@@ -4221,6 +4247,42 @@ function renderRegionGrid() {
       <div class="reg-item-score" style="color:${barColor}">${s24.toFixed(1)}</div>`;
     div.onclick = () => selectRegion(r.key, div);
     list.appendChild(div);
+  });
+}
+
+// Build the per-continent filter buttons for the region sidebar. Same UX as
+// the country sidebar: buttons appear after the static "All" button. Built
+// once at startup (alongside buildContinentFilters).
+function buildRegionContinentFilters() {
+  const wrap = document.getElementById('reg-continent-filters');
+  if (!wrap) return;
+  const continents = [...new Set((DATA.region_list || []).map(r => r.continent))].sort();
+  continents.forEach(con => {
+    const btn = document.createElement('button');
+    btn.className = 'filter-btn';
+    btn.textContent = con;
+    btn.onclick = () => filterRegionContinent(con, btn);
+    wrap.appendChild(btn);
+  });
+}
+
+let activeRegionContinent = 'all';
+function filterRegionContinent(con, btn) {
+  activeRegionContinent = con;
+  document.querySelectorAll('#reg-continent-filters .filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  filterRegionList();
+}
+
+function filterRegionList() {
+  const inp = document.getElementById('reg-search');
+  const q = (inp ? inp.value : '').toLowerCase();
+  const items = document.querySelectorAll('#reg-list .reg-item');
+  items.forEach(item => {
+    const name = (item.dataset.name || '').toLowerCase();
+    const con  = item.dataset.continent || '';
+    const show = name.includes(q) && (activeRegionContinent === 'all' || con === activeRegionContinent);
+    item.style.display = show ? '' : 'none';
   });
 }
 
@@ -4776,6 +4838,16 @@ function showPanel(name) {
   document.querySelectorAll('.nav-tab').forEach((t,i) => {
     t.classList.toggle('active', ['country','region','rankings','scatter'][i] === name);
   });
+  // Sidebar swap: Country/Rankings/Scatter use the country selector;
+  // Regions uses the region selector. Each card is just shown/hidden — the
+  // sidebar container itself stays sticky.
+  const sbCountry = document.getElementById('sidebar-country');
+  const sbRegion  = document.getElementById('sidebar-region');
+  if (sbCountry && sbRegion) {
+    const showRegionSidebar = (name === 'region');
+    sbCountry.classList.toggle('is-hidden', showRegionSidebar);
+    sbRegion .classList.toggle('is-hidden', !showRegionSidebar);
+  }
   if (name === 'scatter') renderScatter();
 }
 
