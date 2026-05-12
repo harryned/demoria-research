@@ -970,13 +970,19 @@ header {
 .pyramid-wrap {
   width: 100%;
   background: transparent;
+  /* Use aspect-ratio + max-height to bound the chart to the iframe viewport
+     so the panel never needs scrolling. Fixed chrome inside the panel
+     (ctab tabs ~40, section padding ~26, heading ~50, year display ~110,
+     subtitle ~20) ≈ 246 px; +24 px buffer. */
+  max-width: 720px;
+  margin: 0 auto;
+  aspect-ratio: 640 / 330;
+  max-height: calc(100vh - 270px);
 }
 .pyramid-wrap .pyr-svg {
   width: 100%;
-  max-width: 720px;  /* cap so the chart doesn't grow tall on wide viewports */
-  height: auto;
+  height: 100%;
   display: block;
-  margin: 0 auto;
 }
 /* Bars are split into "shared" (parity, muted) + "surplus" (the side that
    outnumbers the other, fully saturated) segments. The visual contrast
