@@ -846,10 +846,10 @@ header {
   border-radius: var(--r);
   border: 1px solid var(--border);
   box-shadow: var(--shadow);
-  padding: 12px 18px 14px;
+  padding: 10px 18px 10px;
   margin-bottom: 0;
 }
-.pyramid-head { margin-bottom: 6px; }
+.pyramid-head { margin-bottom: 2px; }
 .pyramid-head-row {
   display: flex; align-items: flex-start; justify-content: space-between;
   gap: 16px; flex-wrap: wrap;
@@ -916,7 +916,7 @@ header {
 .pyramid-year-bignum {
   font-family: 'Manrope', sans-serif;
   font-weight: 700;
-  font-size: 1.9rem;
+  font-size: 1.5rem;
   letter-spacing: -0.02em;
   line-height: 1;
   color: var(--accent);
@@ -981,13 +981,16 @@ header {
 .pyramid-wrap {
   width: 100%;
   background: transparent;
-  /* Sized as large as the trajectory + peers cards on the same panel. The
-     aspect-ratio keeps the SVG honest at any width; max-height stops it from
-     overflowing the viewport on tall windows. */
-  max-width: 960px;
+  /* The pyramid panel has substantial chrome above it (tab bar, section
+     heading, stat block, year-display + slider, subtitle) — roughly 330 px.
+     On a typical 800–900 px laptop viewport the chart needs to fit in the
+     remaining ~500 px. Cap max-width so the aspect-ratio-derived height stays
+     under that budget even on wide screens, and cap max-height with a tighter
+     calc so we don't spill below the fold. */
+  max-width: 820px;
   margin: 0 auto;
   aspect-ratio: 640 / 330;
-  max-height: calc(100vh - 250px);
+  max-height: calc(100vh - 320px);
 }
 .pyramid-wrap .pyr-svg {
   width: 100%;
@@ -3337,7 +3340,7 @@ function renderAgePyramid(iso, year, prefix) {
 
   // Subtitle (totals are now in the prominent stat block above the chart)
   if (sub) {
-    sub.innerHTML = `5-year age bands, split by sex. Source: World Bank (UN WPP 2024 release). Headcounts rounded to the nearest thousand.`;
+    sub.innerHTML = `5-year age bands, split by sex. Source: UN WPP 2024 (Medium variant for projections). Headcounts at 1k precision for countries ≥1M pop, 0.1k precision below.`;
   }
 }
 
