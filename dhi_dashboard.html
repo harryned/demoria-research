@@ -3859,13 +3859,19 @@ function selectCountry(iso, el) {
   else document.querySelectorAll('.country-item').forEach(i => {
     if (i.dataset.iso === iso) i.classList.add('selected');
   });
-  showPanel('country');
+  // Keep the user on the tab they clicked from. Without this, clicking a
+  // micro-territory in the Micro-territories tab would silently bounce them
+  // back to Countries (because we used to hard-code showPanel('country')).
+  // Both tabs share the same panel-country DOM under the hood; only the
+  // sidebar list + active-tab styling differs.
+  showPanel(isMicroTerritory(iso) ? 'microterr' : 'country');
   renderCountryProfile(iso);
 }
 
 // Return to the Index & Rankings landing view (placeholder hero + highlights)
 // from a country profile, clearing the active selection.
 function clearCountrySelection() {
+  const wasMicro = selectedISO && isMicroTerritory(selectedISO);
   selectedISO = null;
   window._currentISO = null;
   document.querySelectorAll('.country-item').forEach(i => i.classList.remove('selected'));
@@ -3873,10 +3879,10 @@ function clearCountrySelection() {
   const content     = document.getElementById('country-content');
   if (placeholder) placeholder.classList.remove('hidden');
   if (content)     content.classList.add('hidden');
-  // Make sure the side-tab also returns to "Country" (the panel that
-  // contains both the placeholder and the country-content)
-  showPanel('country');
-  // Scroll the panel back to the top so the user lands on the hero
+  // Return to whichever tab the user was on (Countries or Micro-territories).
+  // Both share panel-country under the hood; only the sidebar + nav-tab
+  // styling differs.
+  showPanel(wasMicro ? 'microterr' : 'country');
   try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch (e) {}
 }
 
@@ -4539,7 +4545,7 @@ function selectRegion(key, el) {
     const sCls = classifyScore(c.score);
     const trajKey = (c.traj === 'Improving' || c.traj === 'Declining') ? c.traj : 'Stable';
     return `
-      <tr class="is-clickable" onclick="showPanel('country');selectCountry('${c.iso}',null)">
+      <tr class="is-clickable" onclick="selectCountry('${c.iso}',null)">
         <td class="reg-peers-rank">${i+1}</td>
         <td><strong>${c.name}</strong></td>
         <td class="num" style="color:${sCls.color}">${c.score.toFixed(1)}</td>
@@ -4986,7 +4992,7 @@ function renderScatter() {
         const ds = chartScatter.data.datasets[el.datasetIndex];
         const p = ds.data[el.index];
         if (p && p.iso) {
-          showPanel('country');
+          // selectCountry now decides Countries vs Micro-territories itself
           selectCountry(p.iso, null);
         }
       },
