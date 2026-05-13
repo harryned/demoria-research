@@ -1057,6 +1057,10 @@ header::after {
   <div class="ra-search">
     <input type="text" id="ra-search-input" placeholder="Search country…" oninput="filterRankings(this.value)" />
   </div>
+  <label class="ra-toggle" style="display:flex;align-items:center;gap:6px;padding:4px 12px 8px;font-size:0.7rem;color:rgba(255,255,255,0.65);cursor:pointer">
+    <input type="checkbox" id="ra-include-microterr" onchange="renderRankingsAside()" style="margin:0">
+    <span>include micro-territories (&lt;100k)</span>
+  </label>
   <div class="ra-list" id="ra-list"></div>
 </aside>
 
@@ -1376,23 +1380,58 @@ function setYear(yr, btn) {
 }
 
 // ── Rankings sidebar ──
+// ── Country / micro-territory classification ────────────────────────────────
+// Mirrors the dashboard's classification. The map itself still colours every
+// territory, but the Global Rankings sidebar filters to "Countries &
+// territories ≥100k" by default (200 entries), with a toggle to include the
+// 37 micro-territories. This keeps the headline ranking comparable to peer
+// indices (HDI, Bloomberg, etc.) rather than letting a 2,000-population
+// territory occupy a top-10 slot.
+const MICRO_TERRITORY_ISOS = new Set([
+  "AIA","AND","ASM","ATG","BES","BLM","BMU","COK","CYM","DMA","FLK","FRO",
+  "GGY","GIB","GRL","IMN","KNA","LIE","MAF","MCO","MHL","MNP","MSR","NIU",
+  "NRU","PLW","SHN","SMR","SPM","SXM","TCA","TKL","TUV","VAT","VGB","VIR","WLF",
+]);
+function isMicroTerritory(iso) { return MICRO_TERRITORY_ISOS.has(iso); }
+function groupOf(iso) { return isMicroTerritory(iso) ? 'microterr' : 'country'; }
+
+// Group-aware rank for hover/tooltip + side-panel: "Rank 23 of 200 countries
+// & territories" (or "of 37 micro-territories"). Recomputed against the 2024
+// baseline so the ranking universe is the same as the published headline.
+let _GROUP_RANK_CACHE = null;
+function _ensureMapGroupRanks() {
+  if (_GROUP_RANK_CACHE) return _GROUP_RANK_CACHE;
+  _GROUP_RANK_CACHE = { country: {}, microterr: {} };
+  const baseline = DATA.byNumByYear['2024'] || {};
+  const buckets = { country: [], microterr: [] };
+  Object.values(baseline).forEach(d => {
+    if (!d || !d.iso || d.overall == null) return;
+    buckets[groupOf(d.iso)].push({ iso: d.iso, overall: d.overall });
+  });
+  ['country','microterr'].forEach(g => {
+    buckets[g].sort((a,b) => b.overall - a.overall);
+    buckets[g].forEach((c,i) => { _GROUP_RANK_CACHE[g][c.iso] = i + 1; });
+    _GROUP_RANK_CACHE[g]._size = buckets[g].length;
+  });
+  return _GROUP_RANK_CACHE;
+}
+function mapGroupRank(iso) { const g = _ensureMapGroupRanks(); return g[groupOf(iso)][iso]; }
+function mapGroupSize(iso) { const g = _ensureMapGroupRanks(); return g[groupOf(iso)]._size; }
+function mapGroupLabel(iso) { return isMicroTerritory(iso) ? 'micro-territories' : 'countries & territories'; }
+
 function renderRankingsAside() {
   const list = document.getElementById('ra-list');
   if (!list) return;
   const isProj = PROJ_YEARS.includes(currentYear);
-  // Keep the eyebrow in sync with year + variant (projection only)
+  const includeMicro = !!document.getElementById('ra-include-microterr')?.checked;
+  // Keep the eyebrow in sync with year + variant + scope
   const eb = document.getElementById('ra-eyebrow');
   if (eb) {
     const vTxt = isProj ? (' &middot; ' + currentVariant.toLowerCase() + ' variant') : '';
-    eb.innerHTML = 'Index &middot; ' + currentYear + vTxt;
+    const scopeTxt = includeMicro ? ' &middot; 237 total' : ' &middot; 200 countries &amp; territories';
+    eb.innerHTML = 'Index &middot; ' + currentYear + vTxt + scopeTxt;
   }
   // Build the items list — variant-aware on projection years, historical otherwise.
-  // Ranks are recomputed dynamically (don't reuse the 2024 baseline rank field).
-  //
-  // PROJ_VARIANTS only stores Low & High (Median lives in DATA.byNumByYear for
-  // every year, including projection years). So the logic is:
-  //   - historical year, or projection year + Median  → use DATA.byNumByYear
-  //   - projection year + Low/High                     → use PROJ_VARIANTS
   let items = [];
   const useVariantLookup = isProj && currentVariant !== 'Median' && typeof PROJ_VARIANTS !== 'undefined';
   if (useVariantLookup) {
@@ -1411,6 +1450,10 @@ function renderRankingsAside() {
         items.push({ iso: d.iso, name: d.name, overall: d.overall });
       }
     });
+  }
+  // Headline filter: drop micro-territories unless the user opted in
+  if (!includeMicro) {
+    items = items.filter(it => !isMicroTerritory(it.iso));
   }
   items.sort((a, b) => b.overall - a.overall);
   items.forEach((it, i) => it.rank = i + 1);
@@ -1541,7 +1584,11 @@ function showTooltip(event, d) {
   const val = entry[CAT_SCORE_KEY[currentMetric]];
   document.getElementById('tt-score').textContent = val != null ? val.toFixed(1) : '—';
   document.getElementById('tt-score').style.color = getColor(val, currentMetric);
-  document.getElementById('tt-rank').textContent = `Rank ${entry.rank}/${entry.total || DATA.countryList.length}`;
+  // Group-aware hover-tooltip rank
+  const _ttR = mapGroupRank(entry.iso), _ttS = mapGroupSize(entry.iso);
+  document.getElementById('tt-rank').textContent = (_ttR && _ttS)
+    ? `Rank ${_ttR} of ${_ttS} ${mapGroupLabel(entry.iso)}`
+    : `Rank ${entry.rank}/${entry.total || DATA.countryList.length}`;
   // Cat breakdown — readable labels (no acronyms)
   const cats = [
     ['Fertility',     'tfs','#3B82F6'],
@@ -1624,7 +1671,11 @@ function openPanel(iso) {
   } catch(e) {}
   const scoreCurYear = ts[currentYear]?.Overall ?? val24;
   document.getElementById('sp-score').textContent = scoreCurYear?.toFixed(1) ?? '—';
-  document.getElementById('sp-rank').textContent = `Global rank ${entry.rank} of ${entry.total || DATA.countryList.length}`;
+  // Group-aware side-panel rank
+  const _spR = mapGroupRank(entry.iso), _spS = mapGroupSize(entry.iso);
+  document.getElementById('sp-rank').textContent = (_spR && _spS)
+    ? `Rank ${_spR} of ${_spS} ${mapGroupLabel(entry.iso)}`
+    : `Global rank ${entry.rank} of ${entry.total || DATA.countryList.length}`;
 
   // Category bars \u2014 readable labels with full-name tooltips on hover
   const cats = [
@@ -1744,7 +1795,10 @@ function openPanel(iso) {
   const deltaLabel = isProjection ? `Change since 1999 (to ${currentYear})` : 'Change since 1999';
   const dCls = delta == null ? '' : delta > 1 ? 'is-up' : delta < -1 ? 'is-down' : 'is-flat';
   const tCls = traj === 'Improving' ? 'is-up' : traj === 'Declining' ? 'is-down' : 'is-flat';
-  const totalC = entry.total || DATA.countryList.length;
+  // Group-aware rank pill — shows e.g. "23 / 200" or "12 / 37"
+  const _spmR = mapGroupRank(entry.iso), _spmS = mapGroupSize(entry.iso);
+  const spmRank = _spmR || entry.rank;
+  const totalC  = _spmS || entry.total || DATA.countryList.length;
   document.getElementById('sp-meta').innerHTML = `
     <div class="ps-pill ${dCls}">
       <div class="ps-val">${dStr}</div>
@@ -1755,7 +1809,7 @@ function openPanel(iso) {
       <div class="ps-lbl">Trend</div>
     </div>
     <div class="ps-pill">
-      <div class="ps-val">${entry.rank}<span class="ps-of">/${totalC}</span></div>
+      <div class="ps-val">${spmRank}<span class="ps-of">/${totalC}</span></div>
       <div class="ps-lbl">Global rank</div>
     </div>`;
 

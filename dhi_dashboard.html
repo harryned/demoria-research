@@ -148,7 +148,7 @@ header {
 }
 .filter-btn:hover { border-color: var(--accent2); color: var(--accent2); }
 .filter-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
-#country-list, #territory-list { max-height: 480px; overflow-y: auto; }
+#country-list, #microterr-list { max-height: 480px; overflow-y: auto; }
 .country-item {
   padding: 10px 16px;
   cursor: pointer;
@@ -2160,7 +2160,7 @@ header {
   <div class="header-inner">
     <nav class="nav-tabs">
       <button class="nav-tab active" onclick="showPanel('country')">Countries</button>
-      <button class="nav-tab" onclick="showPanel('territory')">Territories</button>
+      <button class="nav-tab" onclick="showPanel('microterr')">Micro-territories</button>
       <button class="nav-tab" onclick="showPanel('region')">Regions</button>
       <button class="nav-tab" onclick="showPanel('rankings')">Rankings</button>
       <button class="nav-tab" onclick="showPanel('scatter')">Cross-Section</button>
@@ -2185,15 +2185,15 @@ header {
       </div>
       <div id="country-list"></div>
     </div>
-    <div class="card sidebar-card is-hidden" id="sidebar-territory">
-      <div class="card-head">Select territory</div>
+    <div class="card sidebar-card is-hidden" id="sidebar-microterr">
+      <div class="card-head">Select micro-territory</div>
       <div class="search-wrap">
-        <input type="text" id="terr-search" placeholder="Search territory..." oninput="filterTerritoryList()">
+        <input type="text" id="microterr-search" placeholder="Search micro-territory…" oninput="filterMicroTerritoryList()">
       </div>
-      <div class="filters" id="terr-continent-filters">
-        <button class="filter-btn active" onclick="filterTerritoryContinent('all',this)">All</button>
+      <div class="filters" id="microterr-continent-filters">
+        <button class="filter-btn active" onclick="filterMicroTerritoryContinent('all',this)">All</button>
       </div>
-      <div id="territory-list"></div>
+      <div id="microterr-list"></div>
     </div>
     <div class="card sidebar-card is-hidden" id="sidebar-region">
       <div class="card-head">Select region</div>
@@ -2215,8 +2215,8 @@ header {
       <div id="country-placeholder">
         <div class="hl-hero">
           <div class="hl-eyebrow">Index &amp; Rankings &middot; 2024</div>
-          <h2 class="hl-title">185 countries scored. 52 territories tracked separately.</h2>
-          <p class="hl-lede">Pick a country from the list, or browse the highlights below. The headline index covers sovereign states with population &ge; 100,000. Smaller territories and non-sovereign dependencies live in the <b>Territories</b> tab. Switch to <b>Regions</b>, the global <b>Rankings</b> table, or the <b>Cross-Section</b> scatter view from the top nav.</p>
+          <h2 class="hl-title">200 countries &amp; territories scored. 37 micro-territories tracked separately.</h2>
+          <p class="hl-lede">Pick a country from the list, or browse the highlights below. The headline index covers <b>200 countries &amp; territories</b> with population &ge; 100,000 &mdash; 185 sovereign states plus 15 non-sovereign territories such as Hong Kong SAR, Puerto Rico and Mayotte. 37 entities below the 100k threshold are tracked in the <b>Micro-territories</b> tab. Switch to <b>Regions</b>, <b>Rankings</b> or <b>Cross-Section</b> from the top nav.</p>
         </div>
         <div class="hl-structure">
           <div class="hl-card-head" style="border-bottom-color:var(--surface3)">
@@ -2283,9 +2283,9 @@ header {
           <div class="section-heading">How the score breaks down</div>
           <div class="cat-rows" id="cat-rows"></div>
           <div class="cat-legend">
-            <span class="cat-legend-dot cl-good"></span> Top 30% globally
+            <span class="cat-legend-dot cl-good"></span> Top 30% of index countries &amp; territories
             <span class="cat-legend-dot cl-mid"></span> Middle band
-            <span class="cat-legend-dot cl-poor"></span> Bottom 30% globally
+            <span class="cat-legend-dot cl-poor"></span> Bottom 30% of index countries &amp; territories
           </div>
         </section>
 
@@ -2433,7 +2433,7 @@ header {
           <div class="scatter-legend-item"><span class="scatter-legend-dot" style="background:#dc2626"></span> Declining</div>
           <div class="scatter-legend-item" style="margin-left:auto"><em>Bubble size = population (2024). Click any country to open its profile.</em></div>
         </div>
-        <div class="scatter-note">236 countries · y-axis: DHI 2024 score · click bubble to navigate</div>
+        <div class="scatter-note">200 countries &amp; territories in the index · y-axis: DHI 2024 score · click bubble to navigate</div>
       </div>
     </div>
 
@@ -2442,6 +2442,7 @@ header {
       <div class="card">
         <div class="card-head" style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
           <span>Global rankings &mdash; 2024</span>
+          <span id="rank-count" style="font-size:0.72rem;color:var(--ink3);font-weight:normal;text-transform:none;letter-spacing:normal">&middot; 200 countries &amp; territories</span>
           <select id="rank-sort" onchange="renderRankings()" style="font-size:0.78rem;border:1px solid var(--border);border-radius:4px;padding:2px 6px;font-family:inherit;">
             <option value="Overall">Overall DHI Score</option>
             <option value="TFS">Total Fertility Score (TFS)</option>
@@ -2451,8 +2452,8 @@ header {
             <option value="MDS">Migration Independence Score (MDS)</option>
           </select>
           <label style="font-size:0.72rem;font-weight:normal;text-transform:none;letter-spacing:normal;color:var(--ink3);display:inline-flex;align-items:center;gap:5px;cursor:pointer">
-            <input type="checkbox" id="rank-include-terr" onchange="renderRankings()" style="margin:0">
-            include territories
+            <input type="checkbox" id="rank-include-microterr" onchange="renderRankings()" style="margin:0">
+            include micro-territories
           </label>
         </div>
         <div style="overflow-x:auto">
@@ -2813,8 +2814,13 @@ function renderPeerComparison(c, iso) {
   const noteEl  = document.getElementById('peers-note');
   if (!tbody) return;
 
+  // Peer comparison stays inside the same classification group AND the same
+  // region — a country compares to other countries in its region; a micro-
+  // territory compares to other micro-territories in its region. Mixing them
+  // is methodologically wrong (population-scale + sovereignty heterogeneity).
+  const selfIsMicro = isMicroTerritory(iso);
   const peers = (DATA.country_list || [])
-    .filter(p => p.region === c.region)
+    .filter(p => p.region === c.region && isMicroTerritory(p.iso) === selfIsMicro)
     .slice()
     .sort((a, b) => b.score - a.score);
 
@@ -3531,9 +3537,9 @@ function renderRisks(c, iso) {
 function init() {
   buildContinentFilters();
   buildRegionContinentFilters();
-  buildTerritoryContinentFilters();
+  buildMicroTerritoryContinentFilters();
   renderCountryList();
-  renderTerritoryList();
+  renderMicroTerritoryList();
   renderRegionGrid();
   // Auto-select first region so the panel isn't blank when the user first
   // switches to it (the click() also marks the row as active in the sidebar).
@@ -3580,7 +3586,7 @@ function renderHighlights() {
   // Index landing cards (Top/Bottom of the index, Improvers, Decliners) use
   // COUNTRIES ONLY — territories have their own view via the Territories tab.
   const list = DATA.country_list.filter(c =>
-    c.score != null && !isNaN(c.score) && !isTerritory(c.iso)
+    c.score != null && !isNaN(c.score) && !isMicroTerritory(c.iso)
   );
 
   function go(iso) { return `onclick="selectCountry('${iso}',null)"`; }
@@ -3705,16 +3711,47 @@ function yoyIcon(iso) {
 // "Countries"; everything else (non-sovereign dependencies + tiny sovereign
 // micro-states) is a "Territory". Used to split the Index & Rankings home
 // into a headline Countries view and a separate Territories view.
-const TERRITORY_ISOS = new Set([
-  "ABW", "AIA", "AND", "ASM", "ATG", "BES", "BLM", "BMU",
-  "COK", "CUW", "CYM", "DMA", "ESH", "FLK", "FRO", "GGY",
-  "GIB", "GLP", "GRL", "GUF", "GUM", "HKG", "IMN", "JEY",
-  "KNA", "LIE", "MAC", "MAF", "MCO", "MHL", "MNP", "MSR",
-  "MTQ", "MYT", "NCL", "NIU", "NRU", "PLW", "PRI", "PYF",
-  "REU", "SHN", "SMR", "SPM", "SXM", "TCA", "TKL", "TUV",
-  "VAT", "VGB", "VIR", "WLF",
+const MICRO_TERRITORY_ISOS = new Set([
+  "AIA", "AND", "ASM", "ATG", "BES", "BLM", "BMU", "COK",
+  "CYM", "DMA", "FLK", "FRO", "GGY", "GIB", "GRL", "IMN",
+  "KNA", "LIE", "MAF", "MCO", "MHL", "MNP", "MSR", "NIU",
+  "NRU", "PLW", "SHN", "SMR", "SPM", "SXM", "TCA", "TKL",
+  "TUV", "VAT", "VGB", "VIR", "WLF",
 ]);
-function isTerritory(iso) { return TERRITORY_ISOS.has(iso); }
+function isMicroTerritory(iso) { return MICRO_TERRITORY_ISOS.has(iso); }
+function groupOf(iso) { return isMicroTerritory(iso) ? 'microterr' : 'country'; }
+
+// ── Group-aware ranks ───────────────────────────────────────────────────────
+// The data layer stores `c.rank` and `c.total` from the legacy 236-country
+// universe. For v1.1 we re-rank dynamically inside each group (countries vs
+// micro-territories) so every UI surface that shows "rank X of Y" speaks
+// honestly about the relevant peer set.
+let _GROUP_RANKS = null;
+function _ensureGroupRanks() {
+  if (_GROUP_RANKS) return _GROUP_RANKS;
+  _GROUP_RANKS = { country: {}, microterr: {} };
+  const buckets = { country: [], microterr: [] };
+  (DATA.country_list || []).forEach(c => {
+    if (c.score == null || isNaN(c.score)) return;
+    buckets[groupOf(c.iso)].push(c);
+  });
+  Object.keys(buckets).forEach(grp => {
+    buckets[grp].sort((a,b) => (b.score || 0) - (a.score || 0));
+    buckets[grp].forEach((c, i) => { _GROUP_RANKS[grp][c.iso] = i + 1; });
+    _GROUP_RANKS[grp]._size = buckets[grp].length;
+  });
+  return _GROUP_RANKS;
+}
+function getGroupRank(iso)  { const g = _ensureGroupRanks(); return g[groupOf(iso)][iso]; }
+function getGroupSize(iso)  { const g = _ensureGroupRanks(); return g[groupOf(iso)]._size; }
+function getGroupLabel(iso) { return isMicroTerritory(iso) ? 'micro-territories' : 'countries & territories'; }
+// Group-aware percentile: 0 = worst in group, 100 = best in group.
+function getGroupPercentile(iso) {
+  const rank = getGroupRank(iso);
+  const size = getGroupSize(iso);
+  if (!rank || !size || size <= 1) return null;
+  return ((size - rank) / (size - 1)) * 100;
+}
 
 // Re-rank the filtered list 1..N so the sidebar shows contiguous numbers
 // rather than the global rank with gaps where the other class lives.
@@ -3743,52 +3780,52 @@ function _renderListInto(targetId, items, dataIsTerritory) {
   });
 }
 
-function renderTerritoryList() {
+function renderMicroTerritoryList() {
   const items = (DATA.country_list || [])
-    .filter(c => isTerritory(c.iso))
+    .filter(c => isMicroTerritory(c.iso))
     .sort((a, b) => (b.score || 0) - (a.score || 0));
-  _renderListInto('territory-list', items, true);
+  _renderListInto('microterr-list', items, true);
 }
 
 // Territory search/filter — mirrors filterList()/filterContinent() but
-// scoped to #territory-list and #terr-continent-filters.
-let activeTerritoryContinent = 'all';
-function filterTerritoryList() {
-  const inp = document.getElementById('terr-search');
+// scoped to #microterr-list and #microterr-continent-filters.
+let activeMicroTerritoryContinent = 'all';
+function filterMicroTerritoryList() {
+  const inp = document.getElementById('microterr-search');
   const q = (inp ? inp.value : '').toLowerCase();
-  document.querySelectorAll('#territory-list .country-item').forEach(item => {
+  document.querySelectorAll('#microterr-list .country-item').forEach(item => {
     const name = (item.dataset.name || '').toLowerCase();
     const con  = item.dataset.continent || '';
-    const show = name.includes(q) && (activeTerritoryContinent === 'all' || con === activeTerritoryContinent);
+    const show = name.includes(q) && (activeMicroTerritoryContinent === 'all' || con === activeMicroTerritoryContinent);
     item.style.display = show ? '' : 'none';
   });
 }
-function filterTerritoryContinent(con, btn) {
-  activeTerritoryContinent = con;
-  document.querySelectorAll('#terr-continent-filters .filter-btn').forEach(b => b.classList.remove('active'));
+function filterMicroTerritoryContinent(con, btn) {
+  activeMicroTerritoryContinent = con;
+  document.querySelectorAll('#microterr-continent-filters .filter-btn').forEach(b => b.classList.remove('active'));
   if (btn) btn.classList.add('active');
-  filterTerritoryList();
+  filterMicroTerritoryList();
 }
-function buildTerritoryContinentFilters() {
-  const wrap = document.getElementById('terr-continent-filters');
+function buildMicroTerritoryContinentFilters() {
+  const wrap = document.getElementById('microterr-continent-filters');
   if (!wrap) return;
   const continents = [...new Set(
-    (DATA.country_list || []).filter(c => isTerritory(c.iso)).map(c => c.continent)
+    (DATA.country_list || []).filter(c => isMicroTerritory(c.iso)).map(c => c.continent)
   )].sort();
   continents.forEach(con => {
     const btn = document.createElement('button');
     btn.className = 'filter-btn';
     btn.textContent = con;
-    btn.onclick = () => filterTerritoryContinent(con, btn);
+    btn.onclick = () => filterMicroTerritoryContinent(con, btn);
     wrap.appendChild(btn);
   });
 }
 
-// Original country list — now filters to ISO codes NOT in TERRITORY_ISOS.
+// Original country list — now filters to ISO codes NOT in MICRO_TERRITORY_ISOS.
 // Ranks are renumbered 1..185 so the sidebar reads cleanly as "the index".
 function renderCountryList() {
   const items = (DATA.country_list || [])
-    .filter(c => !isTerritory(c.iso))
+    .filter(c => !isMicroTerritory(c.iso))
     .sort((a, b) => (b.score || 0) - (a.score || 0));
   _renderListInto('country-list', items, false);
 }
@@ -3871,9 +3908,18 @@ function renderCountryProfile(iso) {
   }
   const popEl = document.getElementById('h-pop');
   if (popEl) popEl.textContent = fmtPopHero(popThousands);
-  // Inline rank
+  // Inline rank — group-aware. For a country, "RANK 17 OF 200 (countries &
+  // territories)". For a micro-territory, "RANK 12 OF 37 (micro-territories)".
+  // Honest peer-set framing matters for the divergence narrative.
   const rankInlineEl = document.getElementById('h-rank-inline');
-  if (rankInlineEl) rankInlineEl.textContent = `RANK ${c.rank} OF ${c.total || DATA.country_list.length}`;
+  if (rankInlineEl) {
+    const localRank = getGroupRank(iso);
+    const localSize = getGroupSize(iso);
+    const localLbl  = getGroupLabel(iso);
+    rankInlineEl.textContent = (localRank && localSize)
+      ? `RANK ${localRank} OF ${localSize} ${localLbl.toUpperCase()}`
+      : `RANK ${c.rank} OF ${c.total || DATA.country_list.length}`;
+  }
   // ── Section 5: Population trajectory (compact) ────────────────────────
   renderPopulationTrajectory(iso);
 
@@ -3897,17 +3943,19 @@ function renderCountryProfile(iso) {
   // Show projection badge if country has projected data
   const pb = document.getElementById('proj-badge');
   if (pb) pb.style.display = c.scores['2050']?.Overall ? 'inline' : 'none';
-  // Global percentile context (under the score)
-  const autoSum = GLOBAL_STATS.summaries[iso];
+  // Group-aware percentile under the score. Computed in-group: a top-decile
+  // country is compared only against other countries, a top-decile
+  // micro-territory only against other micro-territories.
   const pctEl = document.getElementById('h-percentile');
   if (pctEl) {
-    const pct    = autoSum?.percentile ?? null;
+    const pct = getGroupPercentile(iso);
     if (pct != null) {
       const isTop  = pct >= 50;
       const dispPct = isTop ? (100 - pct) : pct;
+      const peerWord = isMicroTerritory(iso) ? 'micro-territories' : 'countries';
       const label   = isTop
-        ? `Top ${Math.max(1, Math.round(dispPct))}% globally`
-        : `Bottom ${Math.max(1, Math.round(dispPct))}% globally`;
+        ? `Top ${Math.max(1, Math.round(dispPct))}% of ${peerWord}`
+        : `Bottom ${Math.max(1, Math.round(dispPct))}% of ${peerWord}`;
       const pctColor = pct >= 75 ? '#7ce0a3' : pct >= 50 ? '#ffd56a' : pct >= 25 ? '#ffa066' : '#ff7a7a';
       pctEl.style.color = pctColor;
       pctEl.textContent = label;
@@ -4574,11 +4622,12 @@ function selectRegion(key, el) {
       </div>
 
       <div class="reg-card">
-        <div class="reg-card-eyebrow">Top countries · same region</div>
+        <div class="reg-card-eyebrow">Top countries &amp; territories &middot; same region</div>
         <div class="reg-card-heading">Leaders in ${regData.region}</div>
+        ${regionCountries.some(c => isMicroTerritory(c.iso)) ? '<div style="font-size:0.7rem;color:var(--ink3);margin:-4px 0 8px;font-style:italic">Includes both index countries and micro-territories from this region. Micro-territories shown for context — they\\'re ranked separately in the Micro-territories tab.</div>' : ''}
         <table class="reg-peers-table">
           <thead>
-            <tr><th>Rank</th><th>Country</th><th style="text-align:right">Score</th><th style="text-align:right">Trajectory</th></tr>
+            <tr><th>Rank</th><th>Name</th><th style="text-align:right">Score</th><th style="text-align:right">Trajectory</th></tr>
           </thead>
           <tbody>${countriesHtml}</tbody>
         </table>
@@ -4811,14 +4860,22 @@ function selectRegion(key, el) {
 // meaningful comparison and historically dominated the divergence narrative.
 function renderRankings() {
   const sortCat = document.getElementById('rank-sort').value;
-  const includeTerritories = !!document.getElementById('rank-include-terr')?.checked;
+  const includeTerritories = !!document.getElementById('rank-include-microterr')?.checked;
   const list = [...DATA.country_list]
-    .filter(c => includeTerritories || !isTerritory(c.iso))
+    .filter(c => includeTerritories || !isMicroTerritory(c.iso))
     .sort((a,b) => {
       const va = DATA.countries[a.iso]?.scores?.['2024']?.[sortCat] ?? 0;
       const vb = DATA.countries[b.iso]?.scores?.['2024']?.[sortCat] ?? 0;
       return vb - va;
     });
+  // Update the count badge in the card head so the user sees exactly how many
+  // entries are in the table after the toggle.
+  const countEl = document.getElementById('rank-count');
+  if (countEl) {
+    countEl.innerHTML = includeTerritories
+      ? `&middot; ${list.length} countries, territories &amp; micro-territories`
+      : `&middot; ${list.length} countries &amp; territories`;
+  }
   const tbody = document.getElementById('rank-tbody');
   tbody.innerHTML = '';
   list.forEach((c, i) => {
@@ -4963,31 +5020,26 @@ function renderScatter() {
 }
 
 // ── Panel switching ───────────────────────────────────────────────────────────
-// Note: 'territory' reuses panel-country (same country-profile rendering, just
+// Note: 'microterr' reuses panel-country (same country-profile rendering, just
 // a different sidebar list). The visible <main> panel for both 'country' and
-// 'territory' nav tabs is therefore #panel-country.
+// 'microterr' nav tabs is therefore #panel-country.
 function showPanel(name) {
-  const NAV_ORDER = ['country','territory','region','rankings','scatter'];
+  const NAV_ORDER = ['country','microterr','region','rankings','scatter'];
   ['country','region','rankings','scatter'].forEach(p => {
     document.getElementById(`panel-${p}`).classList.remove('active');
   });
-  // Both 'country' and 'territory' show panel-country (same profile rendering)
-  const mainPanel = (name === 'territory') ? 'country' : name;
+  const mainPanel = (name === 'microterr') ? 'country' : name;
   document.getElementById(`panel-${mainPanel}`).classList.add('active');
   document.querySelectorAll('.nav-tab').forEach((t,i) => {
     t.classList.toggle('active', NAV_ORDER[i] === name);
   });
-  // Sidebar swap (three cards: country / territory / region)
   const sbCountry   = document.getElementById('sidebar-country');
-  const sbTerritory = document.getElementById('sidebar-territory');
+  const sbMicroterr = document.getElementById('sidebar-microterr');
   const sbRegion    = document.getElementById('sidebar-region');
-  if (sbCountry && sbRegion && sbTerritory) {
+  if (sbCountry && sbRegion && sbMicroterr) {
     sbCountry  .classList.toggle('is-hidden', name !== 'country' && name !== 'rankings' && name !== 'scatter');
-    sbTerritory.classList.toggle('is-hidden', name !== 'territory');
+    sbMicroterr.classList.toggle('is-hidden', name !== 'microterr');
     sbRegion   .classList.toggle('is-hidden', name !== 'region');
-    // Rankings/Scatter views keep the country sidebar visible by default
-    // because they're index-of-countries views; user can switch tab if they
-    // want territories.
   }
   if (name === 'scatter') renderScatter();
 }
