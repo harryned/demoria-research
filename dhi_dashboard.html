@@ -148,7 +148,7 @@ header {
 }
 .filter-btn:hover { border-color: var(--accent2); color: var(--accent2); }
 .filter-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
-#country-list { max-height: 480px; overflow-y: auto; }
+#country-list, #territory-list { max-height: 480px; overflow-y: auto; }
 .country-item {
   padding: 10px 16px;
   cursor: pointer;
@@ -2159,7 +2159,8 @@ header {
 <header>
   <div class="header-inner">
     <nav class="nav-tabs">
-      <button class="nav-tab active" onclick="showPanel('country')">Country</button>
+      <button class="nav-tab active" onclick="showPanel('country')">Countries</button>
+      <button class="nav-tab" onclick="showPanel('territory')">Territories</button>
       <button class="nav-tab" onclick="showPanel('region')">Regions</button>
       <button class="nav-tab" onclick="showPanel('rankings')">Rankings</button>
       <button class="nav-tab" onclick="showPanel('scatter')">Cross-Section</button>
@@ -2184,6 +2185,16 @@ header {
       </div>
       <div id="country-list"></div>
     </div>
+    <div class="card sidebar-card is-hidden" id="sidebar-territory">
+      <div class="card-head">Select territory</div>
+      <div class="search-wrap">
+        <input type="text" id="terr-search" placeholder="Search territory..." oninput="filterTerritoryList()">
+      </div>
+      <div class="filters" id="terr-continent-filters">
+        <button class="filter-btn active" onclick="filterTerritoryContinent('all',this)">All</button>
+      </div>
+      <div id="territory-list"></div>
+    </div>
     <div class="card sidebar-card is-hidden" id="sidebar-region">
       <div class="card-head">Select region</div>
       <div class="search-wrap">
@@ -2204,8 +2215,8 @@ header {
       <div id="country-placeholder">
         <div class="hl-hero">
           <div class="hl-eyebrow">Index &amp; Rankings &middot; 2024</div>
-          <h2 class="hl-title">236 countries &amp; territories, scored.</h2>
-          <p class="hl-lede">Pick a country from the list, or browse the highlights below. Switch the side tabs to see <b>Regions</b>, the global <b>Rankings</b> table, or the <b>Cross-Section</b> scatter view.</p>
+          <h2 class="hl-title">185 countries scored. 52 territories tracked separately.</h2>
+          <p class="hl-lede">Pick a country from the list, or browse the highlights below. The headline index covers sovereign states with population &ge; 100,000. Smaller territories and non-sovereign dependencies live in the <b>Territories</b> tab. Switch to <b>Regions</b>, the global <b>Rankings</b> table, or the <b>Cross-Section</b> scatter view from the top nav.</p>
         </div>
         <div class="hl-structure">
           <div class="hl-card-head" style="border-bottom-color:var(--surface3)">
@@ -2429,8 +2440,8 @@ header {
     <!-- Rankings panel -->
     <div id="panel-rankings">
       <div class="card">
-        <div class="card-head">
-          Global rankings — 2024 &nbsp;
+        <div class="card-head" style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+          <span>Global rankings &mdash; 2024</span>
           <select id="rank-sort" onchange="renderRankings()" style="font-size:0.78rem;border:1px solid var(--border);border-radius:4px;padding:2px 6px;font-family:inherit;">
             <option value="Overall">Overall DHI Score</option>
             <option value="TFS">Total Fertility Score (TFS)</option>
@@ -2439,6 +2450,10 @@ header {
             <option value="FQS">Fertility Quality Score (FQS)</option>
             <option value="MDS">Migration Independence Score (MDS)</option>
           </select>
+          <label style="font-size:0.72rem;font-weight:normal;text-transform:none;letter-spacing:normal;color:var(--ink3);display:inline-flex;align-items:center;gap:5px;cursor:pointer">
+            <input type="checkbox" id="rank-include-terr" onchange="renderRankings()" style="margin:0">
+            include territories
+          </label>
         </div>
         <div style="overflow-x:auto">
           <table class="rank-table" id="rank-table">
@@ -3516,7 +3531,9 @@ function renderRisks(c, iso) {
 function init() {
   buildContinentFilters();
   buildRegionContinentFilters();
+  buildTerritoryContinentFilters();
   renderCountryList();
+  renderTerritoryList();
   renderRegionGrid();
   // Auto-select first region so the panel isn't blank when the user first
   // switches to it (the click() also marks the row as active in the sidebar).
@@ -3560,7 +3577,11 @@ function renderIndexStructure() {
 function renderHighlights() {
   const wrap = document.getElementById('hl-grid');
   if (!wrap) return;
-  const list = DATA.country_list.filter(c => c.score != null && !isNaN(c.score));
+  // Index landing cards (Top/Bottom of the index, Improvers, Decliners) use
+  // COUNTRIES ONLY — territories have their own view via the Territories tab.
+  const list = DATA.country_list.filter(c =>
+    c.score != null && !isNaN(c.score) && !isTerritory(c.iso)
+  );
 
   function go(iso) { return `onclick="selectCountry('${iso}',null)"`; }
   function row(c, valStr, valColor) {
@@ -3679,7 +3700,101 @@ function yoyIcon(iso) {
   return `<span class="ci-yoy" title="${title}">${svg}</span>`;
 }
 
+// ── Country vs Territory classification ────────────────────────────────
+// Sovereign UN member/observer states with 2024 population ≥ 100,000 are
+// "Countries"; everything else (non-sovereign dependencies + tiny sovereign
+// micro-states) is a "Territory". Used to split the Index & Rankings home
+// into a headline Countries view and a separate Territories view.
+const TERRITORY_ISOS = new Set([
+  "ABW", "AIA", "AND", "ASM", "ATG", "BES", "BLM", "BMU",
+  "COK", "CUW", "CYM", "DMA", "ESH", "FLK", "FRO", "GGY",
+  "GIB", "GLP", "GRL", "GUF", "GUM", "HKG", "IMN", "JEY",
+  "KNA", "LIE", "MAC", "MAF", "MCO", "MHL", "MNP", "MSR",
+  "MTQ", "MYT", "NCL", "NIU", "NRU", "PLW", "PRI", "PYF",
+  "REU", "SHN", "SMR", "SPM", "SXM", "TCA", "TKL", "TUV",
+  "VAT", "VGB", "VIR", "WLF",
+]);
+function isTerritory(iso) { return TERRITORY_ISOS.has(iso); }
+
+// Re-rank the filtered list 1..N so the sidebar shows contiguous numbers
+// rather than the global rank with gaps where the other class lives.
+function _rerankCountryList(items) {
+  return items.map((c, i) => Object.assign({}, c, { _localRank: i + 1 }));
+}
+
+function _renderListInto(targetId, items, dataIsTerritory) {
+  const list = document.getElementById(targetId);
+  if (!list) return;
+  list.innerHTML = '';
+  _rerankCountryList(items).forEach(c => {
+    const div = document.createElement('div');
+    div.className = 'country-item';
+    div.dataset.name = c.name;
+    div.dataset.continent = c.continent;
+    div.dataset.iso = c.iso;
+    const scoreColor = c.score >= 75 ? '#1a7a4a' : c.score >= 50 ? '#94A3B8' : '#c0392b';
+    div.innerHTML = `
+      <span class="ci-rank">${c._localRank}</span>
+      <span class="ci-name">${c.name}</span>
+      <span class="ci-score" style="color:${scoreColor}">${c.score.toFixed(1)}</span>
+      ${yoyIcon(c.iso)}`;
+    div.onclick = () => selectCountry(c.iso, div);
+    list.appendChild(div);
+  });
+}
+
+function renderTerritoryList() {
+  const items = (DATA.country_list || [])
+    .filter(c => isTerritory(c.iso))
+    .sort((a, b) => (b.score || 0) - (a.score || 0));
+  _renderListInto('territory-list', items, true);
+}
+
+// Territory search/filter — mirrors filterList()/filterContinent() but
+// scoped to #territory-list and #terr-continent-filters.
+let activeTerritoryContinent = 'all';
+function filterTerritoryList() {
+  const inp = document.getElementById('terr-search');
+  const q = (inp ? inp.value : '').toLowerCase();
+  document.querySelectorAll('#territory-list .country-item').forEach(item => {
+    const name = (item.dataset.name || '').toLowerCase();
+    const con  = item.dataset.continent || '';
+    const show = name.includes(q) && (activeTerritoryContinent === 'all' || con === activeTerritoryContinent);
+    item.style.display = show ? '' : 'none';
+  });
+}
+function filterTerritoryContinent(con, btn) {
+  activeTerritoryContinent = con;
+  document.querySelectorAll('#terr-continent-filters .filter-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  filterTerritoryList();
+}
+function buildTerritoryContinentFilters() {
+  const wrap = document.getElementById('terr-continent-filters');
+  if (!wrap) return;
+  const continents = [...new Set(
+    (DATA.country_list || []).filter(c => isTerritory(c.iso)).map(c => c.continent)
+  )].sort();
+  continents.forEach(con => {
+    const btn = document.createElement('button');
+    btn.className = 'filter-btn';
+    btn.textContent = con;
+    btn.onclick = () => filterTerritoryContinent(con, btn);
+    wrap.appendChild(btn);
+  });
+}
+
+// Original country list — now filters to ISO codes NOT in TERRITORY_ISOS.
+// Ranks are renumbered 1..185 so the sidebar reads cleanly as "the index".
 function renderCountryList() {
+  const items = (DATA.country_list || [])
+    .filter(c => !isTerritory(c.iso))
+    .sort((a, b) => (b.score || 0) - (a.score || 0));
+  _renderListInto('country-list', items, false);
+}
+
+// Kept as no-op stub for any old call sites — replaced by _renderListInto.
+function _renderListInto_legacy_unused() {
   const list = document.getElementById('country-list');
   list.innerHTML = '';
   DATA.country_list.forEach(c => {
@@ -4690,13 +4805,20 @@ function selectRegion(key, el) {
 }
 
 // ── Rankings ─────────────────────────────────────────────────────────────────
+// The headline rankings show COUNTRIES ONLY (sovereign + pop>=100k).
+// Territories have their own view via the Territories nav tab; including them
+// here would put 10k-population micro-states alongside Japan, which isn't a
+// meaningful comparison and historically dominated the divergence narrative.
 function renderRankings() {
   const sortCat = document.getElementById('rank-sort').value;
-  const list = [...DATA.country_list].sort((a,b) => {
-    const va = DATA.countries[a.iso]?.scores?.['2024']?.[sortCat] ?? 0;
-    const vb = DATA.countries[b.iso]?.scores?.['2024']?.[sortCat] ?? 0;
-    return vb - va;
-  });
+  const includeTerritories = !!document.getElementById('rank-include-terr')?.checked;
+  const list = [...DATA.country_list]
+    .filter(c => includeTerritories || !isTerritory(c.iso))
+    .sort((a,b) => {
+      const va = DATA.countries[a.iso]?.scores?.['2024']?.[sortCat] ?? 0;
+      const vb = DATA.countries[b.iso]?.scores?.['2024']?.[sortCat] ?? 0;
+      return vb - va;
+    });
   const tbody = document.getElementById('rank-tbody');
   tbody.innerHTML = '';
   list.forEach((c, i) => {
@@ -4841,23 +4963,31 @@ function renderScatter() {
 }
 
 // ── Panel switching ───────────────────────────────────────────────────────────
+// Note: 'territory' reuses panel-country (same country-profile rendering, just
+// a different sidebar list). The visible <main> panel for both 'country' and
+// 'territory' nav tabs is therefore #panel-country.
 function showPanel(name) {
+  const NAV_ORDER = ['country','territory','region','rankings','scatter'];
   ['country','region','rankings','scatter'].forEach(p => {
     document.getElementById(`panel-${p}`).classList.remove('active');
   });
-  document.getElementById(`panel-${name}`).classList.add('active');
+  // Both 'country' and 'territory' show panel-country (same profile rendering)
+  const mainPanel = (name === 'territory') ? 'country' : name;
+  document.getElementById(`panel-${mainPanel}`).classList.add('active');
   document.querySelectorAll('.nav-tab').forEach((t,i) => {
-    t.classList.toggle('active', ['country','region','rankings','scatter'][i] === name);
+    t.classList.toggle('active', NAV_ORDER[i] === name);
   });
-  // Sidebar swap: Country/Rankings/Scatter use the country selector;
-  // Regions uses the region selector. Each card is just shown/hidden — the
-  // sidebar container itself stays sticky.
-  const sbCountry = document.getElementById('sidebar-country');
-  const sbRegion  = document.getElementById('sidebar-region');
-  if (sbCountry && sbRegion) {
-    const showRegionSidebar = (name === 'region');
-    sbCountry.classList.toggle('is-hidden', showRegionSidebar);
-    sbRegion .classList.toggle('is-hidden', !showRegionSidebar);
+  // Sidebar swap (three cards: country / territory / region)
+  const sbCountry   = document.getElementById('sidebar-country');
+  const sbTerritory = document.getElementById('sidebar-territory');
+  const sbRegion    = document.getElementById('sidebar-region');
+  if (sbCountry && sbRegion && sbTerritory) {
+    sbCountry  .classList.toggle('is-hidden', name !== 'country' && name !== 'rankings' && name !== 'scatter');
+    sbTerritory.classList.toggle('is-hidden', name !== 'territory');
+    sbRegion   .classList.toggle('is-hidden', name !== 'region');
+    // Rankings/Scatter views keep the country sidebar visible by default
+    // because they're index-of-countries views; user can switch tab if they
+    // want territories.
   }
   if (name === 'scatter') renderScatter();
 }
