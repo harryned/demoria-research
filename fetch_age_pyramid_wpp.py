@@ -81,12 +81,30 @@ def main():
     print(f"Done parsing. Total rows processed: {rows_processed:,}, kept: {rows_kept:,}")
     print(f"Countries with data: {len(by_iso)}")
 
-    # Build column-oriented compact output
-    def K(n):
-        return int(round(n))  # WPP values already in thousands
+    # Build column-oriented compact output.
+    # Precision: full integers for countries large enough that 1k-resolution
+    # is fine (≥1M total pop ≈ ≥50k per band on average), but 1-decimal for
+    # smaller countries. At 0.1k resolution a Tuvalu-sized band of 480 people
+    # rounds to 0.5 instead of 0 (or 1), so the bar widths actually differ
+    # across bands instead of all collapsing to "1×1k = same bar".
+    def make_K(total_pop_k):
+        if total_pop_k >= 1_000:  # ≥1M total
+            return lambda n: int(round(n))
+        else:
+            return lambda n: round(n, 1)
     out = {}
     for iso in sorted(by_iso):
         years_present = sorted(by_iso[iso].keys())
+        # Decide precision based on the country's MAXIMUM total population
+        # across the observed/projected window — so the precision is stable
+        # across the year slider (no flicker between integer and decimal as
+        # the slider moves).
+        max_total_k = 0.0
+        for yr in years_present:
+            bands_d = by_iso[iso][yr]
+            yr_total = sum((pair[0] + pair[1]) for pair in bands_d.values())
+            if yr_total > max_total_k: max_total_k = yr_total
+        K = make_K(max_total_k)
         ys = []; m = []; f = []; tm_arr = []; tf_arr = []
         for yr in years_present:
             bands_d = by_iso[iso][yr]
@@ -102,8 +120,8 @@ def main():
                 ys.append(yr)
                 m.append(popM)
                 f.append(popF)
-                tm_arr.append(sum(popM))
-                tf_arr.append(sum(popF))
+                tm_arr.append(round(sum(popM), 1))
+                tf_arr.append(round(sum(popF), 1))
         if ys:
             out[iso] = {"y": ys, "m": m, "f": f, "tm": tm_arr, "tf": tf_arr}
 
