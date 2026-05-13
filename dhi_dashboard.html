@@ -2215,8 +2215,8 @@ header {
       <div id="country-placeholder">
         <div class="hl-hero">
           <div class="hl-eyebrow">Index &amp; Rankings &middot; 2024</div>
-          <h2 class="hl-title">200 countries &amp; territories scored. 37 micro-territories tracked separately.</h2>
-          <p class="hl-lede">Pick a country from the list, or browse the highlights below. The headline index covers <b>200 countries &amp; territories</b> with population &ge; 100,000 &mdash; 185 sovereign states plus 15 non-sovereign territories such as Hong Kong SAR, Puerto Rico and Mayotte. 37 entities below the 100k threshold are tracked in the <b>Micro-territories</b> tab. Switch to <b>Regions</b>, <b>Rankings</b> or <b>Cross-Section</b> from the top nav.</p>
+          <h2 class="hl-title">200 countries &amp; territories scored. 36 micro-territories tracked separately.</h2>
+          <p class="hl-lede">Pick a country from the list, or browse the highlights below. The headline index covers <b>200 countries &amp; territories</b> with population &ge; 100,000 &mdash; 185 sovereign states plus 15 non-sovereign territories such as Hong Kong SAR, Puerto Rico and Mayotte. 36 entities below the 100k threshold are tracked in the <b>Micro-territories</b> tab. Switch to <b>Regions</b>, <b>Rankings</b> or <b>Cross-Section</b> from the top nav.</p>
         </div>
         <div class="hl-structure">
           <div class="hl-card-head" style="border-bottom-color:var(--surface3)">
@@ -3716,7 +3716,7 @@ const MICRO_TERRITORY_ISOS = new Set([
   "CYM", "DMA", "FLK", "FRO", "GGY", "GIB", "GRL", "IMN",
   "KNA", "LIE", "MAF", "MCO", "MHL", "MNP", "MSR", "NIU",
   "NRU", "PLW", "SHN", "SMR", "SPM", "SXM", "TCA", "TKL",
-  "TUV", "VAT", "VGB", "VIR", "WLF",
+  "TUV", "VGB", "VIR", "WLF",
 ]);
 function isMicroTerritory(iso) { return MICRO_TERRITORY_ISOS.has(iso); }
 function groupOf(iso) { return isMicroTerritory(iso) ? 'microterr' : 'country'; }
