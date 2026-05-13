@@ -4624,7 +4624,7 @@ function selectRegion(key, el) {
       <div class="reg-card">
         <div class="reg-card-eyebrow">Top countries &amp; territories &middot; same region</div>
         <div class="reg-card-heading">Leaders in ${regData.region}</div>
-        ${regionCountries.some(c => isMicroTerritory(c.iso)) ? '<div style="font-size:0.7rem;color:var(--ink3);margin:-4px 0 8px;font-style:italic">Includes both index countries and micro-territories from this region. Micro-territories shown for context — they\\'re ranked separately in the Micro-territories tab.</div>' : ''}
+        ${regionCountries.some(c => isMicroTerritory(c.iso)) ? '<div style="font-size:0.7rem;color:var(--ink3);margin:-4px 0 8px;font-style:italic">Includes both index countries and micro-territories from this region. Micro-territories are shown here for regional context but rank separately in the Micro-territories tab.</div>' : ''}
         <table class="reg-peers-table">
           <thead>
             <tr><th>Rank</th><th>Name</th><th style="text-align:right">Score</th><th style="text-align:right">Trajectory</th></tr>

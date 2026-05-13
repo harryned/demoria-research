@@ -3,305 +3,379 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Demographic Health Index</title>
+<title>Demoria Research</title>
+<meta name="description" content="Demoria Research — independent research on demographic health and long-run population dynamics.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root {
-  --accent: #1a3a6e;
-  --accent-deep: #0f2347;
-  --gold:   #c49a28;
-  --gold2:  #e0b54a;
-  --font-display: 'Lora', Georgia, serif;
-  --font-mono:    'JetBrains Mono', monospace;
-}
+  :root {
+    --accent: #081530;
+    --accent-deep: #040b1c;
+    --gold: #c49a28;
+    --gold2: #e0b54a;
+    --ink2: rgba(255,255,255,0.78);
+    --ink3: rgba(255,255,255,0.55);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    font-family: 'Manrope', sans-serif;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-deep) 100%);
+    color: #fff;
+    line-height: 1.6;
+    display: flex; align-items: center; justify-content: center;
+    padding: 32px;
+    position: relative; overflow: hidden;
+    min-height: 100vh;
+  }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+  /* ─── Animated background layers ───────────────────────────────── */
+  .bg-layer {
+    position: fixed; inset: 0;
+    pointer-events: none; user-select: none;
+    z-index: 0;
+  }
+  /* World map: borders draw on, then fill fades in */
+  #bg-map { opacity: 1; }
+  #bg-map .country {
+    fill: rgba(255,255,255,0);
+    stroke: rgba(255,255,255,0.32);
+    stroke-width: 0.45;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+    --len: 100;
+    stroke-dasharray: var(--len);
+    stroke-dashoffset: var(--len);
+    animation: countryDraw 6s ease-out forwards, countryFill 4s ease-out forwards;
+    animation-delay: var(--d, 0s), calc(var(--d, 0s) + 4s);
+  }
+  @keyframes countryDraw {
+    to { stroke-dashoffset: 0; }
+  }
+  @keyframes countryFill {
+    to { fill: rgba(255,255,255,0.045); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #bg-map .country {
+      animation: none;
+      stroke-dashoffset: 0;
+      fill: rgba(255,255,255,0.045);
+    }
+  }
+  /* Trend line */
+  #bg-trend { opacity: 0.32; }
+  #bg-trend .axis-line { stroke: rgba(255,255,255,0.08); stroke-width: 1; }
+  #bg-trend .axis-tick { fill: rgba(255,255,255,0.22); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.06em; }
+  #bg-trend .trend-line {
+    fill: none; stroke: var(--gold2); stroke-width: 1.2;
+    stroke-linecap: round; stroke-linejoin: round;
+    filter: drop-shadow(0 0 3px rgba(224,181,74,0.18));
+  }
+  #bg-trend .trend-area { fill: url(#area-grad); }
+  #bg-trend .trend-head { fill: var(--gold2); filter: drop-shadow(0 0 4px rgba(224,181,74,0.35)); }
+  #bg-trend.is-drawing .trend-line {
+    stroke-dasharray: var(--len);
+    stroke-dashoffset: var(--len);
+    animation: draw 28s ease-in-out infinite;
+  }
+  #bg-trend.is-drawing .trend-area {
+    opacity: 0;
+    animation: areaFade 28s ease-in-out infinite;
+  }
+  #bg-trend.is-drawing .trend-head {
+    opacity: 0;
+    animation: headFade 28s ease-in-out infinite;
+  }
+  @keyframes draw {
+    0%   { stroke-dashoffset: var(--len); }
+    65%  { stroke-dashoffset: 0; }
+    85%  { stroke-dashoffset: 0; opacity: 1; }
+    100% { stroke-dashoffset: 0; opacity: 0; }
+  }
+  @keyframes areaFade {
+    0%, 10%  { opacity: 0; }
+    65%      { opacity: 0.20; }
+    85%      { opacity: 0.20; }
+    100%     { opacity: 0; }
+  }
+  @keyframes headFade {
+    0%, 5%   { opacity: 0; }
+    65%      { opacity: 1; }
+    85%      { opacity: 1; }
+    100%     { opacity: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #bg-trend.is-drawing .trend-line,
+    #bg-trend.is-drawing .trend-area,
+    #bg-trend.is-drawing .trend-head { animation: none; opacity: 1; }
+    #bg-trend.is-drawing .trend-line { stroke-dashoffset: 0; }
+  }
 
-html, body { height: 100%; overflow: hidden; }
-
-body {
-  font-family: var(--font-display);
-  background:
-    radial-gradient(ellipse at 50% 35%, #2a4d8a 0%, var(--accent) 45%, var(--accent-deep) 100%);
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 40px 24px;
-  position: relative;
-  overflow: hidden;
-}
-
-/* Subtle grid backdrop */
-body::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
-  background-size: 60px 60px;
-  pointer-events: none;
-  mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
-  -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
-}
-
-/* Decorative oversized "DHI" watermark */
-body::after {
-  content: 'DHI';
-  position: absolute;
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 38vw;
-  color: rgba(255,255,255,0.025);
-  letter-spacing: -0.04em;
-  bottom: -8vw;
-  right: -2vw;
-  line-height: 1;
-  pointer-events: none;
-  user-select: none;
-}
-
-.eyebrow {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.32em;
-  text-transform: uppercase;
-  color: var(--gold2);
-  margin-bottom: 24px;
-  position: relative;
-  z-index: 2;
-}
-
-.title {
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: clamp(2.6rem, 6vw, 5rem);
-  line-height: 1.05;
-  letter-spacing: -0.015em;
-  margin-bottom: 6px;
-  position: relative;
-  z-index: 2;
-}
-.title em { font-style: italic; color: var(--gold2); font-weight: 600; }
-
-.subtitle {
-  font-size: clamp(0.95rem, 1.4vw, 1.15rem);
-  color: rgba(255,255,255,0.65);
-  font-style: italic;
-  margin-bottom: 36px;
-  max-width: 560px;
-  line-height: 1.5;
-  position: relative;
-  z-index: 2;
-}
-
-/* ── SVG graphic ─────────────────────────────────────── */
-.graphic-wrap {
-  position: relative;
-  width: clamp(280px, 36vmin, 420px);
-  aspect-ratio: 1 / 1;
-  margin-bottom: 40px;
-  z-index: 2;
-}
-.graphic-wrap svg { width: 100%; height: 100%; display: block; overflow: visible; }
-
-/* Outer slow rotation */
-.ring-rotate { transform-origin: 50% 50%; animation: spin 80s linear infinite; }
-@keyframes spin { to { transform: rotate(360deg); } }
-
-/* Pulsing rings */
-.pulse-ring {
-  fill: none;
-  stroke: var(--gold2);
-  stroke-width: 1;
-  opacity: 0;
-  transform-origin: 50% 50%;
-  animation: pulse 4s cubic-bezier(0.22, 1, 0.36, 1) infinite;
-}
-.pulse-ring.r2 { animation-delay: 1.3s; }
-.pulse-ring.r3 { animation-delay: 2.6s; }
-@keyframes pulse {
-  0%   { transform: scale(0.55); opacity: 0; }
-  20%  { opacity: 0.55; }
-  100% { transform: scale(1.15); opacity: 0; }
-}
-
-/* Small human silhouettes — gentle breathing */
-.person {
-  animation: dotBreath 3.6s ease-in-out infinite;
-  transform-box: fill-box;
-  transform-origin: center;
-}
-@keyframes dotBreath {
-  0%, 100% { opacity: 0.45; }
-  50%      { opacity: 1; }
-}
-
-/* Central family pair — slow heartbeat scale */
-.center-family {
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: heartbeat 2.8s ease-in-out infinite;
-}
-@keyframes heartbeat {
-  0%, 100% { transform: scale(1); }
-  50%      { transform: scale(1.05); }
-}
-
-/* ── Button ──────────────────────────────────────────── */
-.cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 14px;
-  padding: 16px 38px;
-  background: var(--gold);
-  color: var(--accent-deep);
-  border: none;
-  border-radius: 999px;
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 1.08rem;
-  letter-spacing: 0.02em;
-  cursor: pointer;
-  text-decoration: none;
-  box-shadow:
-    0 0 0 1px rgba(196,154,40,0.4),
-    0 8px 24px rgba(196,154,40,0.25),
-    0 16px 60px rgba(0,0,0,0.35);
-  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
-  position: relative;
-  z-index: 2;
-}
-.cta:hover {
-  background: var(--gold2);
-  transform: translateY(-2px);
-  box-shadow:
-    0 0 0 1px rgba(224,181,74,0.5),
-    0 12px 32px rgba(224,181,74,0.35),
-    0 20px 70px rgba(0,0,0,0.4);
-}
-.cta:active { transform: translateY(0); }
-.cta-arrow {
-  display: inline-block;
-  font-size: 1.1rem;
-  transition: transform 0.18s ease;
-}
-.cta:hover .cta-arrow { transform: translateX(4px); }
-
-.footnote {
-  position: absolute;
-  bottom: 22px;
-  left: 0; right: 0;
-  font-family: var(--font-mono);
-  font-size: 0.66rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.35);
-  z-index: 2;
-}
+  /* ─── Foreground content ───────────────────────────────────────── */
+  .wrap { max-width: 640px; position: relative; z-index: 1; }
+  .brand-lockup {
+    display: inline-flex; align-items: center; gap: 14px;
+    margin-bottom: 28px;
+  }
+  .brand-lockup svg { width: 38px; height: auto; color: var(--gold2); flex-shrink: 0; }
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--gold2);
+  }
+  h1 {
+    font-family: 'Manrope', sans-serif;
+    font-size: clamp(2.8rem, 6vw, 4.4rem);
+    font-weight: 600; line-height: 1.05;
+    letter-spacing: -0.015em; margin-bottom: 18px;
+  }
+  h1 em { color: var(--gold2); font-style: italic; font-weight: 600; }
+  .lede {
+    font-size: 1.15rem; font-style: italic;
+    color: var(--ink2); margin-bottom: 40px;
+    max-width: 560px;
+  }
+  .links { display: flex; flex-direction: column; gap: 14px; max-width: 460px; }
+  .link {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 22px;
+    background: rgba(15,35,71,0.55);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 8px;
+    color: #fff; text-decoration: none;
+    transition: background 0.16s, border-color 0.16s, transform 0.16s;
+  }
+  .link:hover {
+    background: rgba(15,35,71,0.75);
+    border-color: var(--gold2);
+    transform: translateY(-1px);
+  }
+  .link-text { display: flex; flex-direction: column; gap: 3px; }
+  .link-name {
+    font-family: 'Manrope', sans-serif;
+    font-size: 1.05rem; font-weight: 600;
+  }
+  .link-desc {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem; letter-spacing: 0.08em;
+    color: var(--ink3);
+  }
+  .link-arrow {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--gold2); font-size: 1.1rem;
+  }
+  footer {
+    position: fixed; bottom: 24px; left: 32px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem; letter-spacing: 0.18em;
+    text-transform: uppercase; color: rgba(255,255,255,0.35);
+    z-index: 1;
+  }
 </style>
 </head>
 <body>
 
-<div class="eyebrow">200 countries &amp; territories · 1965 — 2050</div>
+<!-- Background: world-map borders (drawn-on, then filled) -->
+<svg id="bg-map" class="bg-layer" preserveAspectRatio="xMidYMid slice"></svg>
 
-<h1 class="title">Demographic <em>Health</em> Index</h1>
-<p class="subtitle">A unified measure of population sustainability.</p>
+<!-- Background: slow-drawing global population trend line -->
+<svg id="bg-trend" class="bg-layer" preserveAspectRatio="none">
+  <defs>
+    <linearGradient id="area-grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#e0b54a" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#e0b54a" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+</svg>
 
-<div class="graphic-wrap">
-  <svg viewBox="-100 -100 200 200" aria-hidden="true">
-    <!-- expanding pulse rings (life radiating outward) -->
-    <circle class="pulse-ring"     cx="0" cy="0" r="55"/>
-    <circle class="pulse-ring r2"  cx="0" cy="0" r="55"/>
-    <circle class="pulse-ring r3"  cx="0" cy="0" r="55"/>
-
-    <!-- faint outer concentric rings -->
-    <circle cx="0" cy="0" r="80" fill="none" stroke="rgba(255,255,255,0.10)" stroke-width="0.5"/>
-    <circle cx="0" cy="0" r="62" fill="none" stroke="rgba(255,255,255,0.14)" stroke-width="0.5"/>
-    <circle cx="0" cy="0" r="42" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="0.4" stroke-dasharray="2 3"/>
-
-    <!-- Surrounding population — small human silhouettes coloured by DHI band -->
-    <g>
-      <!-- Demographically Healthy (green) -->
-      <g class="person" fill="#22c55e" transform="translate(-58,-30)" style="animation-delay:0s">
-        <circle cx="0" cy="-4" r="1.9"/>
-        <path d="M-2.6,-2 a2.6,2.6 0 0 1 5.2,0 v4 a2.4,2.4 0 0 1 -1.4,2.2 v3.5 h-2.4 v-3.5 a2.4,2.4 0 0 1 -1.4,-2.2 z"/>
+<!-- Foreground content -->
+<div class="wrap">
+  <div class="brand-lockup">
+    <svg viewBox="0 0 600 500" aria-hidden="true">
+      <g stroke="currentColor" stroke-width="3" fill="none">
+        <rect x="200" y="100" width="50" height="38"/><rect x="178" y="138" width="72" height="38"/>
+        <rect x="156" y="176" width="94" height="38"/><rect x="134" y="214" width="116" height="38"/>
+        <rect x="112" y="252" width="138" height="38"/><rect x="90" y="290" width="160" height="38"/>
+        <rect x="68" y="328" width="182" height="38"/><rect x="46" y="366" width="204" height="38"/>
+        <rect x="350" y="100" width="50" height="38"/><rect x="350" y="138" width="72" height="38"/>
+        <rect x="350" y="176" width="94" height="38"/><rect x="350" y="214" width="116" height="38"/>
+        <rect x="350" y="252" width="138" height="38"/><rect x="350" y="290" width="160" height="38"/>
+        <rect x="350" y="328" width="182" height="38"/><rect x="350" y="366" width="204" height="38"/>
+        <path d="M 250 100 A 50 50 0 0 1 350 100"/>
       </g>
-      <g class="person" fill="#22c55e" transform="translate(-20,-66)" style="animation-delay:0.4s">
-        <circle cx="0" cy="-4" r="1.9"/>
-        <path d="M-2.6,-2 a2.6,2.6 0 0 1 5.2,0 v4 a2.4,2.4 0 0 1 -1.4,2.2 v3.5 h-2.4 v-3.5 a2.4,2.4 0 0 1 -1.4,-2.2 z"/>
+      <g stroke="currentColor" stroke-width="3" fill="none" stroke-linejoin="miter">
+        <path d="M 270 160 L 330 160 L 300 250 Z"/>
+        <path d="M 270 350 L 330 350 L 300 250 Z"/>
       </g>
-      <g class="person" fill="#22c55e" transform="translate(46,-50)" style="animation-delay:0.8s">
-        <circle cx="0" cy="-4" r="1.9"/>
-        <path d="M-2.6,-2 a2.6,2.6 0 0 1 5.2,0 v4 a2.4,2.4 0 0 1 -1.4,2.2 v3.5 h-2.4 v-3.5 a2.4,2.4 0 0 1 -1.4,-2.2 z"/>
-      </g>
-
-      <!-- Under Pressure (yellow) -->
-      <g class="person" fill="#eab308" transform="translate(-72,8)" style="animation-delay:1.2s">
-        <circle cx="0" cy="-4" r="1.9"/>
-        <path d="M-2.6,-2 a2.6,2.6 0 0 1 5.2,0 v4 a2.4,2.4 0 0 1 -1.4,2.2 v3.5 h-2.4 v-3.5 a2.4,2.4 0 0 1 -1.4,-2.2 z"/>
-      </g>
-      <g class="person" fill="#eab308" transform="translate(70,-12)" style="animation-delay:1.6s">
-        <circle cx="0" cy="-4" r="1.9"/>
-        <path d="M-2.6,-2 a2.6,2.6 0 0 1 5.2,0 v4 a2.4,2.4 0 0 1 -1.4,2.2 v3.5 h-2.4 v-3.5 a2.4,2.4 0 0 1 -1.4,-2.2 z"/>
-      </g>
-      <g class="person" fill="#eab308" transform="translate(-32,38)" style="animation-delay:2.0s">
-        <circle cx="0" cy="-4" r="1.9"/>
-        <path d="M-2.6,-2 a2.6,2.6 0 0 1 5.2,0 v4 a2.4,2.4 0 0 1 -1.4,2.2 v3.5 h-2.4 v-3.5 a2.4,2.4 0 0 1 -1.4,-2.2 z"/>
-      </g>
-
-      <!-- Serious Decline (orange) -->
-      <g class="person" fill="#f97316" transform="translate(34,40)" style="animation-delay:2.4s">
-        <circle cx="0" cy="-4" r="1.9"/>
-        <path d="M-2.6,-2 a2.6,2.6 0 0 1 5.2,0 v4 a2.4,2.4 0 0 1 -1.4,2.2 v3.5 h-2.4 v-3.5 a2.4,2.4 0 0 1 -1.4,-2.2 z"/>
-      </g>
-      <g class="person" fill="#f97316" transform="translate(60,28)" style="animation-delay:2.8s">
-        <circle cx="0" cy="-4" r="1.9"/>
-        <path d="M-2.6,-2 a2.6,2.6 0 0 1 5.2,0 v4 a2.4,2.4 0 0 1 -1.4,2.2 v3.5 h-2.4 v-3.5 a2.4,2.4 0 0 1 -1.4,-2.2 z"/>
-      </g>
-
-      <!-- Critical (red) -->
-      <g class="person" fill="#ef4444" transform="translate(-58,52)" style="animation-delay:3.2s">
-        <circle cx="0" cy="-4" r="1.9"/>
-        <path d="M-2.6,-2 a2.6,2.6 0 0 1 5.2,0 v4 a2.4,2.4 0 0 1 -1.4,2.2 v3.5 h-2.4 v-3.5 a2.4,2.4 0 0 1 -1.4,-2.2 z"/>
-      </g>
-
-      <!-- Complete Crisis (dark red) -->
-      <g class="person" fill="#7f1d1d" transform="translate(8,68)" style="animation-delay:3.6s">
-        <circle cx="0" cy="-4" r="1.9"/>
-        <path d="M-2.6,-2 a2.6,2.6 0 0 1 5.2,0 v4 a2.4,2.4 0 0 1 -1.4,2.2 v3.5 h-2.4 v-3.5 a2.4,2.4 0 0 1 -1.4,-2.2 z"/>
-      </g>
-    </g>
-
-    <!-- Central family — parent + child (the source of new generations) -->
-    <g class="center-family" fill="#e0b54a">
-      <!-- Parent -->
-      <g transform="translate(-7,-2)">
-        <circle cx="0" cy="-13" r="4.2"/>
-        <path d="M-5.2,-9 a5.2,5.2 0 0 1 10.4,0 v8 a4.6,4.6 0 0 1 -2.6,4.2 v6.8 h-4.6 v-6.8 a4.6,4.6 0 0 1 -2.6,-4.2 z"/>
-      </g>
-      <!-- Child (held in front-side, slightly raised) -->
-      <g transform="translate(7,4)">
-        <circle cx="0" cy="-9" r="2.8"/>
-        <path d="M-3.5,-6 a3.5,3.5 0 0 1 7,0 v5.5 a3.1,3.1 0 0 1 -1.6,2.8 v4.5 h-3.1 v-4.5 a3.1,3.1 0 0 1 -1.6,-2.8 z"/>
-      </g>
-      <!-- Tiny heart between them -->
-      <path d="M0,-8 c -1.4,-2.2 -4.2,-2.2 -4.2,0.4 c 0,1.6 2.1,3.4 4.2,5 c 2.1,-1.6 4.2,-3.4 4.2,-5 c 0,-2.6 -2.8,-2.6 -4.2,-0.4 z"
-            fill="#e0b54a" opacity="0.85" transform="translate(0,-12) scale(0.55)">
-        <animate attributeName="opacity" values="0.4;1;0.4" dur="2.2s" repeatCount="indefinite"/>
-      </path>
-    </g>
-  </svg>
+    </svg>
+    <span class="eyebrow">Demoria Research</span>
+  </div>
+  <h1>Long-run <em>demographic</em> intelligence.</h1>
+  <p class="lede">Independent research on the demographic health of nations &mdash; building visible, comparable measures of the trends that shape public finance, geopolitics and the long-term stability of states.</p>
+  <div class="links">
+    <a class="link" href="/dhi/">
+      <span class="link-text">
+        <span class="link-name">Demographic Health Index</span>
+        <span class="link-desc">236 countries &amp; territories &middot; 1965 &ndash; 2100</span>
+      </span>
+      <span class="link-arrow">&rarr;</span>
+    </a>
+  </div>
 </div>
+<footer>&copy; Demoria Research</footer>
 
-<a href="dhi_combined.html" class="cta">
-  Enter the Index
-  <span class="cta-arrow">→</span>
-</a>
+<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
+<script>
+(function () {
+  // ───── World map: borders draw on, then countries quietly fill ─────
+  const NS = 'http://www.w3.org/2000/svg';
+  let mapCountries = null;
+
+  async function loadMap() {
+    if (mapCountries) return mapCountries;
+    try {
+      const res = await fetch('https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-110m.json');
+      const world = await res.json();
+      mapCountries = topojson.feature(world, world.objects.countries);
+      return mapCountries;
+    } catch (e) { return null; }
+  }
+
+  async function renderMap() {
+    const countries = await loadMap();
+    if (!countries) return;
+    const svg = document.getElementById('bg-map');
+    const w = window.innerWidth, h = window.innerHeight;
+    svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
+    const projection = d3.geoNaturalEarth1()
+      .fitSize([w * 1.05, h * 1.1], countries)
+      .translate([w / 2, h / 2 + h * 0.04]);
+    const path = d3.geoPath(projection);
+
+    // Stagger over ~22 seconds (more countries → tighter spacing)
+    const totalStagger = 22;
+    const n = countries.features.length;
+
+    const g = document.createElementNS(NS, 'g');
+    countries.features.forEach((f, i) => {
+      const dStr = path(f);
+      if (!dStr) return;
+      const p = document.createElementNS(NS, 'path');
+      p.setAttribute('d', dStr);
+      p.setAttribute('class', 'country');
+      // Approximate path length using a temporary element so CSS knows the dasharray
+      g.appendChild(p);
+    });
+    svg.innerHTML = '';
+    svg.appendChild(g);
+
+    // Now measure each path length and apply per-country CSS vars
+    requestAnimationFrame(() => {
+      const paths = g.querySelectorAll('.country');
+      // Sort by area (size) so larger countries draw earlier — feels more natural
+      const lengths = [];
+      paths.forEach((p, i) => {
+        let len;
+        try { len = p.getTotalLength(); } catch { len = 200; }
+        lengths.push({ p, len, i });
+      });
+      // Sort largest path-length first
+      lengths.sort((a, b) => b.len - a.len);
+      lengths.forEach((entry, rank) => {
+        const delay = (rank / Math.max(1, lengths.length - 1)) * totalStagger;
+        entry.p.style.setProperty('--len', entry.len);
+        entry.p.style.setProperty('--d', delay.toFixed(2) + 's');
+      });
+    });
+  }
+
+  // ───── Trend line: world population, 1965 → 2100 (UN WPP 2024 low variant, billions) ─────
+  function renderTrend() {
+    const data = [
+      [1965, 3.34], [1970, 3.70], [1975, 4.08], [1980, 4.46], [1985, 4.87],
+      [1990, 5.33], [1995, 5.76], [2000, 6.17], [2005, 6.59], [2010, 7.02],
+      [2015, 7.47], [2020, 7.84], [2024, 8.16], [2030, 8.42], [2040, 8.79],
+      [2050, 8.93], [2055, 8.95], [2060, 8.87], [2070, 8.62], [2080, 8.22],
+      [2090, 7.69], [2100, 7.10]
+    ];
+    const svg = document.getElementById('bg-trend');
+    const w = window.innerWidth, h = window.innerHeight;
+    svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
+
+    // Plot area: shift upward so the crest sits noticeably above the text
+    const padX = Math.max(40, w * 0.05);
+    const padTop = Math.max(40, h * 0.05);
+    const padBottom = Math.max(140, h * 0.30);
+    const plotTop = padTop;
+    const plotH = h - padTop - padBottom;
+    const baseY = plotTop + plotH;
+
+    const xMin = 1965, xMax = 2100;
+    const yMin = 3, yMax = 9.5;
+    const xScale = yr => padX + (yr - xMin) / (xMax - xMin) * (w - padX * 2);
+    const yScale = v  => plotTop + (1 - (v - yMin) / (yMax - yMin)) * plotH;
+
+    // Smooth curve via cubic Bézier between consecutive points
+    const pts = data.map(([x, y]) => [xScale(x), yScale(y)]);
+    let d = `M ${pts[0][0]} ${pts[0][1]}`;
+    for (let i = 0; i < pts.length - 1; i++) {
+      const [x0, y0] = pts[Math.max(0, i - 1)];
+      const [x1, y1] = pts[i];
+      const [x2, y2] = pts[i + 1];
+      const [x3, y3] = pts[Math.min(pts.length - 1, i + 2)];
+      const cp1x = x1 + (x2 - x0) / 6;
+      const cp1y = y1 + (y2 - y0) / 6;
+      const cp2x = x2 - (x3 - x1) / 6;
+      const cp2y = y2 - (y3 - y1) / 6;
+      d += ` C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${x2} ${y2}`;
+    }
+    const areaD = d + ` L ${pts[pts.length - 1][0]} ${baseY} L ${pts[0][0]} ${baseY} Z`;
+
+    // Axis ticks
+    const tickYears = [1965, 1995, 2024, 2050, 2075, 2100];
+    let axisHtml = `<line class="axis-line" x1="${padX}" y1="${baseY}" x2="${w - padX}" y2="${baseY}"/>`;
+    tickYears.forEach(yr => {
+      const x = xScale(yr);
+      axisHtml += `<line class="axis-line" x1="${x}" y1="${baseY}" x2="${x}" y2="${baseY + 4}"/>`;
+      axisHtml += `<text class="axis-tick" x="${x}" y="${baseY + 18}" text-anchor="middle">${yr}</text>`;
+    });
+
+    const defs = svg.querySelector('defs').outerHTML;
+    svg.innerHTML = defs + `
+      <g id="bg-trend-axis">${axisHtml}</g>
+      <path class="trend-area" d="${areaD}"/>
+      <path class="trend-line" id="trend-line-path" d="${d}"/>
+      <circle class="trend-head" cx="${pts[pts.length - 1][0]}" cy="${pts[pts.length - 1][1]}" r="3.8"/>
+    `;
+
+    const pathEl = svg.querySelector('#trend-line-path');
+    const len = pathEl.getTotalLength();
+    svg.style.setProperty('--len', len);
+    svg.classList.add('is-drawing');
+  }
+
+  // Init
+  renderTrend();
+  renderMap();
+
+  // Resize handling (debounced)
+  let rt;
+  window.addEventListener('resize', () => {
+    clearTimeout(rt);
+    rt = setTimeout(() => {
+      renderTrend();
+      renderMap();
+    }, 250);
+  });
+})();
+</script>
 
 </body>
 </html>
