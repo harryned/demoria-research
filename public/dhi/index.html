@@ -449,6 +449,9 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
 .btn.on{background:var(--gold);color:var(--navy);border-color:var(--gold);font-weight:600}
 .tip{position:fixed;pointer-events:none;background:rgba(15,35,71,.97);border:1px solid rgba(232,184,75,.32);border-radius:8px;padding:9px 13px;font-size:.84rem;z-index:100;box-shadow:0 12px 32px rgba(0,0,0,.55);text-align:left;line-height:1.35;min-width:120px;display:none}
 .tip.show{display:block}
+.tip .ts{font-family:'Manrope',sans-serif;font-size:.86rem;font-weight:500;color:var(--ink2);font-variant-numeric:tabular-nums;margin-top:3px;display:flex;align-items:center;gap:8px}
+.tip .ts b{font-weight:700;color:#fff;margin-left:auto;font-variant-numeric:tabular-nums}
+
 .tip .tn{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:3px}
 .tip .ts{font-family:'Manrope',sans-serif;font-size:.95rem;font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums}
 .tip .tn{font-weight:600;margin-bottom:2px}.tip .ts{font-family:'JetBrains Mono',monospace;font-size:.76rem;color:var(--ink2)}
@@ -2771,7 +2774,10 @@ window.__pos_d6=1;
   }
 
   // ---- trajectory overlay ----
-  function drawTrajOverlay(){
+  // Cached data for the hover tooltip: rebuilt each time drawTrajOverlay runs.
+  let _cmpHoverData = null;
+
+  function _paintCmpOverlay(hoverYear){
     const cv=document.getElementById('cmpTraj'); if(!cv) return;
     const W=cv.clientWidth||800, H=280;
     cv.width=W*DPR; cv.height=H*DPR;
@@ -2780,10 +2786,10 @@ window.__pos_d6=1;
     const padL=46, padR=28, padT=22, padB=34;
     const x0=padL, x1=W-padR, y0=padT, y1=H-padB;
     const xMin=1965, xMax=2100;
-    // y-range — pin to 0..100 always so the bands are comparable
     const yMin=0, yMax=100;
     const X=yr=>x0+(yr-xMin)/(xMax-xMin)*(x1-x0);
     const Y=v=>y0+(1-(v-yMin)/(yMax-yMin))*(y1-y0);
+    cv._cmpGeom = {x0, x1, y0, y1, X, Y, padL, padR, padT, padB};
     // gridlines
     x.strokeStyle='rgba(255,255,255,.08)'; x.lineWidth=1;
     [0,25,50,75,100].forEach(g=>{x.beginPath(); x.moveTo(x0,Y(g)); x.lineTo(x1,Y(g)); x.stroke();
@@ -2795,14 +2801,16 @@ window.__pos_d6=1;
     [1965,1995,2025,2050,2075,2100].forEach(yr=>x.fillText(yr,X(yr),y1+15));
     // Draw lines + 2025 dot for each country (no inline labels — legend below).
     const legend=[];
+    const hoverData=[];
     SLOTS.forEach((iso,i)=>{
       if(!iso) return;
       const c=byIso[iso];
       const col=COLORS[i];
       const obs=[];
+      const seriesAll=[];
       for(let yr=1965;yr<=2025;yr++){
         const s=c.scores && c.scores[String(yr)];
-        if(s!=null) obs.push([yr,s]);
+        if(s!=null){ obs.push([yr,s]); seriesAll.push({yr, v:s}); }
       }
       x.strokeStyle=col; x.lineWidth=1.8;
       x.beginPath();
@@ -2811,7 +2819,7 @@ window.__pos_d6=1;
       const proj=[];
       if(c.proj){
         for(let yr=2026;yr<=2100;yr++){
-          const p=c.proj[String(yr)]; if(p && p.med!=null) proj.push([yr,p.med]);
+          const p=c.proj[String(yr)]; if(p && p.med!=null){ proj.push([yr,p.med]); seriesAll.push({yr, v:p.med}); }
         }
       }
       if(proj.length){
@@ -2827,11 +2835,11 @@ window.__pos_d6=1;
         x.fillStyle=col;
         x.beginPath(); x.arc(X(last[0]),Y(last[1]),3.5,0,6.28); x.fill();
         legend.push({col, name:c.name, val:last[1]});
+        hoverData.push({col, name:c.name, series:seriesAll});
       }
     });
 
-    // Render the legend as a DOM element below the canvas so labels can't
-    // collide with each other or with the lines.
+    // Build the legend below the chart
     const legendEl=document.getElementById('cmpTrajLegend');
     if(legendEl){
       legendEl.innerHTML=legend.map(L =>
@@ -2842,6 +2850,66 @@ window.__pos_d6=1;
         +'</span>'
       ).join('');
     }
+
+    // Hover guide: vertical line + dot per country at the hovered year
+    if(hoverYear!=null && hoverData.length){
+      const hx = X(hoverYear);
+      x.strokeStyle='rgba(255,255,255,.30)';
+      x.setLineDash([2,3]); x.lineWidth=1;
+      x.beginPath(); x.moveTo(hx,y0); x.lineTo(hx,y1); x.stroke(); x.setLineDash([]);
+      hoverData.forEach(hd=>{
+        // snap to the nearest available year in this series
+        let best=null, bd=1e9;
+        hd.series.forEach(p=>{const d=Math.abs(p.yr-hoverYear); if(d<bd){bd=d; best=p;}});
+        if(!best) return;
+        x.fillStyle = hd.col;
+        x.beginPath(); x.arc(X(best.yr), Y(best.v), 4, 0, 6.28); x.fill();
+        x.strokeStyle='#fff'; x.lineWidth=1.5;
+        x.beginPath(); x.arc(X(best.yr), Y(best.v), 4, 0, 6.28); x.stroke();
+      });
+    }
+
+    _cmpHoverData = { hoverData, X, Y, x0, x1, padL, padR };
+  }
+
+  function drawTrajOverlay(){ _paintCmpOverlay(null); wireCmpHover(); }
+
+  function wireCmpHover(){
+    const cv=document.getElementById('cmpTraj'); if(!cv) return;
+    const tip=document.getElementById('tip'); if(!tip) return;
+    cv.onmousemove=function(ev){
+      if(!_cmpHoverData) return;
+      const {hoverData, x0, x1} = _cmpHoverData;
+      const r = cv.getBoundingClientRect();
+      const mx = ev.clientX - r.left;
+      if(mx < x0 - 4 || mx > x1 + 4){ cv.onmouseleave(); return; }
+      const yr = Math.round(1965 + (mx - x0) / (x1 - x0) * (2100 - 1965));
+      const yrC = Math.max(1965, Math.min(2100, yr));
+      _paintCmpOverlay(yrC);
+      // Tooltip content: snap each country to nearest available year
+      let html = '<div class="tn">'+yrC+(yrC>2025?' &middot; projection':'')+'</div>';
+      hoverData.forEach(hd=>{
+        let best=null, bd=1e9;
+        hd.series.forEach(p=>{const d=Math.abs(p.yr-yrC); if(d<bd){bd=d; best=p;}});
+        const v = best? best.v.toFixed(1) : '—';
+        html += '<div class="ts" style="color:'+hd.col+'">'+hd.name+' <b style="color:#fff">'+v+'</b></div>';
+      });
+      tip.innerHTML = html;
+      tip.classList.add('show');
+      const vw=window.innerWidth, vh=window.innerHeight;
+      const tipW=Math.max(tip.offsetWidth||0, 200);
+      const tipH=Math.max(tip.offsetHeight||0, 60);
+      let lx=ev.clientX+15;
+      if(lx+tipW > vw-8) lx=ev.clientX-15-tipW;
+      lx=Math.max(8, Math.min(lx, vw-tipW-8));
+      let ty=ev.clientY-12;
+      ty=Math.max(8, Math.min(ty, vh-tipH-8));
+      tip.style.left=lx+'px'; tip.style.top=ty+'px';
+    };
+    cv.onmouseleave=function(){
+      tip.classList.remove('show');
+      _paintCmpOverlay(null);
+    };
   }
 
   // Re-init on tab activation
