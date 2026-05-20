@@ -47,7 +47,7 @@ h1 em{font-style:normal;color:var(--gold)}
 .cmp-wrap h2{font-size:clamp(1.8rem,3.4vw,2.6rem);font-weight:600;letter-spacing:-.015em;margin:6px 0 14px;color:var(--ink)}
 .cmp-wrap h2 em{font-style:normal;color:var(--gold)}
 .cmp-wrap .lead{color:var(--ink2);font-size:1rem;line-height:1.62;max-width:62ch;margin-bottom:32px}
-.cmp-pickers{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:30px}
+.cmp-pickers{display:grid;grid-template-columns:repeat(var(--cmp-cols,3),minmax(0,1fr));gap:14px;margin-bottom:30px}
 @media(max-width:760px){.cmp-pickers{grid-template-columns:1fr}}
 .cmp-picker{position:relative}
 .cmp-picker-btn{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;padding:14px 18px;background:rgba(255,255,255,.03);border:1px solid rgba(232,184,75,.30);border-radius:10px;color:var(--ink);font-family:'Manrope';font-size:.96rem;font-weight:600;cursor:pointer;text-align:left;transition:background .15s,border-color .15s}
@@ -55,7 +55,7 @@ h1 em{font-style:normal;color:var(--gold)}
 .cmp-picker-btn.empty{color:var(--ink3);font-weight:400;font-style:italic}
 .cmp-picker-btn .cmp-pk-flag{flex:none;display:inline-flex;align-items:center}
 .cmp-picker-btn .cmp-pk-flag img.flg{height:14px;width:auto;border-radius:2px;box-shadow:0 1px 3px rgba(0,0,0,.5)}
-.cmp-picker-btn .cmp-pk-name{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cmp-picker-btn .cmp-pk-name{flex:1;white-space:normal;word-break:break-word;line-height:1.25}
 .cmp-picker-btn .cmp-pk-arr{color:var(--gold);font-size:1rem;font-family:'JetBrains Mono',monospace}
 .cmp-picker-dd{position:absolute;top:calc(100% + 6px);left:0;right:0;background:rgba(15,28,56,.98);border:1px solid var(--line);border-radius:10px;max-height:340px;overflow-y:auto;display:none;z-index:30;box-shadow:0 18px 48px rgba(0,0,0,.55)}
 .cmp-picker.open .cmp-picker-dd{display:block}
@@ -65,14 +65,20 @@ h1 em{font-style:normal;color:var(--gold)}
 .cmp-picker-dd .cmp-dd-row:hover,.cmp-picker-dd .cmp-dd-row.kbd{background:rgba(232,184,75,.10);color:var(--ink)}
 .cmp-picker-dd .cmp-dd-row img.flg{height:11px;width:auto;border-radius:2px;flex:none}
 .cmp-picker-dd .cmp-dd-row .cmp-dd-name{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.cmp-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:38px}
+
+.cmp-picker .cmp-clear{position:absolute;top:8px;right:36px;width:22px;height:22px;border-radius:50%;border:1px solid rgba(255,255,255,.18);background:transparent;color:rgba(255,255,255,.55);cursor:pointer;font-family:'Manrope';font-size:.9rem;line-height:1;display:flex;align-items:center;justify-content:center;padding:0;transition:color .15s,border-color .15s,background .15s}
+.cmp-picker .cmp-clear:hover{color:#fff;border-color:rgba(232,184,75,.6);background:rgba(232,184,75,.10)}
+.cmp-add-slot{background:rgba(232,184,75,.05);border:1px dashed rgba(232,184,75,.36);border-radius:10px;padding:14px 18px;display:flex;align-items:center;justify-content:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);cursor:pointer;transition:background .15s,border-color .15s}
+.cmp-add-slot:hover{background:rgba(232,184,75,.12);border-color:rgba(232,184,75,.6)}
+.cmp-add-slot .cmp-add-plus{font-family:'Manrope';font-size:1.1rem;line-height:1;font-weight:300}
+.cmp-cards{display:grid;grid-template-columns:repeat(var(--cmp-cols,3),minmax(0,1fr));gap:14px;margin-bottom:38px}
 @media(max-width:760px){.cmp-cards{grid-template-columns:1fr}}
 .cmp-card{background:rgba(255,255,255,.025);border:1px solid var(--line);border-radius:12px;padding:22px 22px 20px;display:flex;flex-direction:column;gap:10px;min-height:200px;position:relative}
 .cmp-card.empty{align-items:center;justify-content:center;color:var(--ink3);font-style:italic;font-size:.92rem;min-height:200px}
-.cmp-card .cc-head{display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--line);padding-bottom:10px}
+.cmp-card .cc-head{display:flex;align-items:flex-start;gap:10px;border-bottom:1px solid var(--line);padding-bottom:10px;flex-wrap:nowrap}
 .cmp-card .cc-head img.flg{height:18px;width:auto;border-radius:2px;flex:none;box-shadow:0 1px 3px rgba(0,0,0,.5)}
-.cmp-card .cc-name{font-family:'Manrope';font-size:1.05rem;font-weight:600;letter-spacing:-.005em;color:var(--ink);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.cmp-card .cc-rank{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink3)}
+.cmp-card .cc-name{font-family:'Manrope';font-size:1.05rem;font-weight:600;letter-spacing:-.005em;color:var(--ink);flex:1;white-space:normal;word-break:break-word;line-height:1.25;min-width:0}
+.cmp-card .cc-rank{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink3);flex:none;padding-top:3px;white-space:nowrap}
 .cmp-card .cc-score-row{display:flex;align-items:baseline;gap:12px;margin-top:6px}
 .cmp-card .cc-score{font-family:'Manrope';font-size:2.4rem;font-weight:200;line-height:1;letter-spacing:-.025em;font-variant-numeric:tabular-nums}
 .cmp-card .cc-of{font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--ink3);letter-spacing:.06em;align-self:flex-end;padding-bottom:6px}
@@ -886,7 +892,7 @@ table.rank tbody tr{cursor:pointer}
   <div class="hf-l">Sources &middot; UN World Population Prospects 2024 &middot; national-statistical-office overrides &middot; Wittgenstein Centre Human Capital v3 &middot; Natural Earth 1:50m geometry</div>
   <div class="hf-r">Updated 2026 &middot; Demoria Research</div>
 </div>
-</div></section><section class="view" id="view-world"><div class="stagewrap"><aside class="wm-side" id="wmSide"><div class="wm-shead"><span id="wmSheadLbl">Rankings &middot; 2025</span><button id="wmCollapse" title="Hide">&#10094;</button></div><input class="wm-search" id="wmSearch" placeholder="Search a country&hellip;"><div class="wm-filt" id="wmFilt"><button data-f="all" class="on">All</button><button data-f="sov">Countries</button><button data-f="terr">Territories</button></div><div class="wm-list" id="wmList"></div></aside><button class="wm-show" id="wmShow">&#10095;&nbsp;Rankings</button><div class="stage"><div class="stage-subtitle"><span class="stage-st-l">Demographic Health Index</span><span class="stage-st-r">populations most able to renew themselves through their own births &middot; 0&ndash;100</span></div><div class="stage-hint" id="stageHint"><div class="sh-eye">How to read this map</div><div class="sh-rows"><div class="sh-row"><span class="sh-bullet">01</span><span class="sh-txt"><b>Click any country</b> to open its DHI profile, pillar breakdown and trajectory.</span></div><div class="sh-row"><span class="sh-bullet">02</span><span class="sh-txt">Drag the <b>year slider</b> to follow the world from 1965 to 2100.</span></div><div class="sh-row"><span class="sh-bullet">03</span><span class="sh-txt">Switch <b>Colour map by</b> on the right rail to recolour by any single pillar.</span></div></div><button class="sh-close" id="stageHintClose" aria-label="Dismiss"><span>&times;</span></button></div><canvas id="bg"></canvas><canvas id="cv"></canvas></div><aside class="rail"><button class="rail-collapse" id="railCollapse" title="Hide controls">&#10095;</button><button class="rail-help" id="railMapHelp" type="button"><span class="rh-i">?</span><span>How to read this map</span></button><div class="rgrp"><div class="rlbl">View</div><div class="seg"><button id="vGlobe" class="on">Globe</button><button id="vMap">Flat map</button></div></div><div class="rgrp"><div class="rlbl">Year &mdash; observed</div><div class="yr"><span id="yrlab">2025</span><small id="yrkind">OBSERVED</small></div><input type="range" id="slider" min="0" value="0"><div class="playrow"><button class="btn" id="rew" title="Rewind to 1965">&#9198;</button><button class="btn play" id="play">&#9654;&nbsp;Autoplay</button></div><button class="btn on" id="spin">&#10227; Auto-rotate</button></div><div class="rgrp projbox"><div class="projbox-head"><span class="projbox-h1">Projections 2026&ndash;2100</span><span class="projbox-h2">Source &middot; UN WPP 2024</span></div><div class="seg projyrs" title="Projection waypoints"><button id="p2035" title="Projection: 2035">2035</button><button id="p2050" title="Projection: 2050">2050</button><button id="p2075" title="Projection: 2075">2075</button><button id="p2100" title="Projection: 2100">2100</button></div><div class="seg vseg" id="varSeg" title="UN WPP fertility scenarios — Low assumes faster TFR decline, High slower, Medium the central estimate."><button id="vLow" title="Low — UN WPP optimistic fertility-decline scenario">Low</button><button id="vMed" class="on" title="Medium — UN WPP central scenario">Medium</button><button id="vHigh" title="High — UN WPP pessimistic fertility-decline scenario">High</button></div></div><div class="rgrp"><div class="rlbl">Colour map by</div><div class="scoreseg" id="scoreSeg"><button data-m="dhi" class="ss-main on"><span class="ss-main-l">Demographic Health Index</span><span class="ss-main-s">composite of all four pillars</span></button><div class="ss-or">or by individual pillar</div><div class="ss-pills"><button data-m="F" title="Fertility Strength (FSS)">Fert.</button><button data-m="R" title="Population Momentum (PMS)">Pop.</button><button data-m="A" title="Workforce Sustainability (WSS)">Work.</button><button data-m="M" title="Migration Reliance (MRS)">Mig.</button></div><button class="ss-pillars-help" id="ssPillarsHelp" type="button"><span class="ss-pillars-help-i">i</span><span>What are the pillars?</span></button></div></div><div class="rgrp"><div class="rlbl" id="lgHead">DHI score</div><div class="legend" id="legend"></div><div class="pillar-blurb" id="pillarBlurb" style="display:none"></div></div><div class="foot">DHI v2.0 &middot; WPP 2024 baseline with NSO overrides &middot; geometry Natural Earth 1:50m</div></aside><button class="rail-show" id="railShow">&#10094;&nbsp;Controls</button></div></section><section class="view" id="view-rankings"><div class="rk-sub"><div class="rk-subtabs"><button data-st="all" class="on">All 236</button><button data-st="countries">Countries</button><button data-st="territories">Territories</button><button data-st="regions">Regions</button></div><div class="rk-subnote" id="rk-subnote"></div></div><div class="rk-body"><aside class="rk-rail"><div class="rk-rlbl">Select <span id="rk-railkind">country</span></div><input class="rk-search" id="rk-search" placeholder="Search&hellip;"><div class="rk-conts" id="rk-conts"><button data-c="all" class="on">All</button><button data-c="Africa">Africa</button><button data-c="Americas">Americas</button><button data-c="Asia">Asia</button><button data-c="Europe">Europe</button><button data-c="Oceania">Oceania</button></div><div class="rk-list" id="rk-list"></div></aside><div class="rk-main" id="rk-main"></div></div></section><section class="view doc" id="view-compare"><div class="cmp-wrap"><div class="eyebrow2">Demoria Research &middot; DHI v2.0</div><h2><em>Compare</em> countries side by side</h2><p class="lead">Pick up to three countries to see their 2025 DHI scores, pillar contributions, projection trajectories and key demographics on a single page. Click any slot to switch the country.</p><div class="cmp-pickers" id="cmpPickers"></div><div class="cmp-cards" id="cmpCards"></div><div class="cmp-section"><div class="cmp-h">DHI trajectory &middot; 1965&ndash;2100</div><canvas id="cmpTraj" class="cmp-traj-cv"></canvas><div class="cmp-traj-cap">Each country&rsquo;s composite DHI from 1965 to 2025 (observed) and the UN WPP 2024 medium projection to 2100. Click a legend swatch to toggle visibility.</div></div><div class="cmp-section"><div class="cmp-h">Pillar contributions &middot; 2025</div><div class="cmp-pillars" id="cmpPillars"></div></div><div class="cmp-section"><div class="cmp-h">Key statistics &middot; 2025</div><div class="cmp-stats" id="cmpStats"></div></div></div></section><section class="view doc" id="view-about"><div class="essay-progress"><div class="essay-progress-fill"></div></div><div class="essay">
+</div></section><section class="view" id="view-world"><div class="stagewrap"><aside class="wm-side" id="wmSide"><div class="wm-shead"><span id="wmSheadLbl">Rankings &middot; 2025</span><button id="wmCollapse" title="Hide">&#10094;</button></div><input class="wm-search" id="wmSearch" placeholder="Search a country&hellip;"><div class="wm-filt" id="wmFilt"><button data-f="all" class="on">All</button><button data-f="sov">Countries</button><button data-f="terr">Territories</button></div><div class="wm-list" id="wmList"></div></aside><button class="wm-show" id="wmShow">&#10095;&nbsp;Rankings</button><div class="stage"><div class="stage-subtitle"><span class="stage-st-l">Demographic Health Index</span><span class="stage-st-r">populations most able to renew themselves through their own births &middot; 0&ndash;100</span></div><div class="stage-hint" id="stageHint"><div class="sh-eye">How to read this map</div><div class="sh-rows"><div class="sh-row"><span class="sh-bullet">01</span><span class="sh-txt"><b>Click any country</b> to open its DHI profile, pillar breakdown and trajectory.</span></div><div class="sh-row"><span class="sh-bullet">02</span><span class="sh-txt">Drag the <b>year slider</b> to follow the world from 1965 to 2100.</span></div><div class="sh-row"><span class="sh-bullet">03</span><span class="sh-txt">Switch <b>Colour map by</b> on the right rail to recolour by any single pillar.</span></div></div><button class="sh-close" id="stageHintClose" aria-label="Dismiss"><span>&times;</span></button></div><canvas id="bg"></canvas><canvas id="cv"></canvas></div><aside class="rail"><button class="rail-collapse" id="railCollapse" title="Hide controls">&#10095;</button><button class="rail-help" id="railMapHelp" type="button"><span class="rh-i">?</span><span>How to read this map</span></button><div class="rgrp"><div class="rlbl">View</div><div class="seg"><button id="vGlobe" class="on">Globe</button><button id="vMap">Flat map</button></div></div><div class="rgrp"><div class="rlbl">Year &mdash; observed</div><div class="yr"><span id="yrlab">2025</span><small id="yrkind">OBSERVED</small></div><input type="range" id="slider" min="0" value="0"><div class="playrow"><button class="btn" id="rew" title="Rewind to 1965">&#9198;</button><button class="btn play" id="play">&#9654;&nbsp;Autoplay</button></div><button class="btn on" id="spin">&#10227; Auto-rotate</button></div><div class="rgrp projbox"><div class="projbox-head"><span class="projbox-h1">Projections 2026&ndash;2100</span><span class="projbox-h2">Source &middot; UN WPP 2024</span></div><div class="seg projyrs" title="Projection waypoints"><button id="p2035" title="Projection: 2035">2035</button><button id="p2050" title="Projection: 2050">2050</button><button id="p2075" title="Projection: 2075">2075</button><button id="p2100" title="Projection: 2100">2100</button></div><div class="seg vseg" id="varSeg" title="UN WPP fertility scenarios — Low assumes faster TFR decline, High slower, Medium the central estimate."><button id="vLow" title="Low — UN WPP optimistic fertility-decline scenario">Low</button><button id="vMed" class="on" title="Medium — UN WPP central scenario">Medium</button><button id="vHigh" title="High — UN WPP pessimistic fertility-decline scenario">High</button></div></div><div class="rgrp"><div class="rlbl">Colour map by</div><div class="scoreseg" id="scoreSeg"><button data-m="dhi" class="ss-main on"><span class="ss-main-l">Demographic Health Index</span><span class="ss-main-s">composite of all four pillars</span></button><div class="ss-or">or by individual pillar</div><div class="ss-pills"><button data-m="F" title="Fertility Strength (FSS)">Fert.</button><button data-m="R" title="Population Momentum (PMS)">Pop.</button><button data-m="A" title="Workforce Sustainability (WSS)">Work.</button><button data-m="M" title="Migration Reliance (MRS)">Mig.</button></div><button class="ss-pillars-help" id="ssPillarsHelp" type="button"><span class="ss-pillars-help-i">i</span><span>What are the pillars?</span></button></div></div><div class="rgrp"><div class="rlbl" id="lgHead">DHI score</div><div class="legend" id="legend"></div><div class="pillar-blurb" id="pillarBlurb" style="display:none"></div></div><div class="foot">DHI v2.0 &middot; WPP 2024 baseline with NSO overrides &middot; geometry Natural Earth 1:50m</div></aside><button class="rail-show" id="railShow">&#10094;&nbsp;Controls</button></div></section><section class="view" id="view-rankings"><div class="rk-sub"><div class="rk-subtabs"><button data-st="all" class="on">All 236</button><button data-st="countries">Countries</button><button data-st="territories">Territories</button><button data-st="regions">Regions</button></div><div class="rk-subnote" id="rk-subnote"></div></div><div class="rk-body"><aside class="rk-rail"><div class="rk-rlbl">Select <span id="rk-railkind">country</span></div><input class="rk-search" id="rk-search" placeholder="Search&hellip;"><div class="rk-conts" id="rk-conts"><button data-c="all" class="on">All</button><button data-c="Africa">Africa</button><button data-c="Americas">Americas</button><button data-c="Asia">Asia</button><button data-c="Europe">Europe</button><button data-c="Oceania">Oceania</button></div><div class="rk-list" id="rk-list"></div></aside><div class="rk-main" id="rk-main"></div></div></section><section class="view doc" id="view-compare"><div class="cmp-wrap"><div class="eyebrow2">Demoria Research &middot; DHI v2.0</div><h2><em>Compare</em> countries side by side</h2><p class="lead">Pick one to three countries to see their 2025 DHI scores, pillar contributions, projection trajectories and key demographics on a single page. Click a slot to switch country, &times; to remove, or + to add another.</p><div class="cmp-pickers" id="cmpPickers"></div><div class="cmp-cards" id="cmpCards"></div><div class="cmp-section"><div class="cmp-h">DHI trajectory &middot; 1965&ndash;2100</div><canvas id="cmpTraj" class="cmp-traj-cv"></canvas><div class="cmp-traj-cap">Each country&rsquo;s composite DHI from 1965 to 2025 (observed) and the UN WPP 2024 medium projection to 2100. Click a legend swatch to toggle visibility.</div></div><div class="cmp-section"><div class="cmp-h">Pillar contributions &middot; 2025</div><div class="cmp-pillars" id="cmpPillars"></div></div><div class="cmp-section"><div class="cmp-h">Key statistics &middot; 2025</div><div class="cmp-stats" id="cmpStats"></div></div></div></section><section class="view doc" id="view-about"><div class="essay-progress"><div class="essay-progress-fill"></div></div><div class="essay">
 <div class="essay-hero" id="e-about">
 <div class="ek">Demoria Research &middot; Demographic Health Index v2.0</div>
 <h1>Can a population <em>carry itself forward?</em></h1>
@@ -2538,32 +2544,55 @@ window.__pos_d6=1;
 (function(){
   const view=document.getElementById('view-compare');
   if(!view) return;
-  // Three default countries to start with
+  // Default to three countries; users can remove (down to 1) or add (up to 3).
   const DEFAULT_ISOS=['UZB','DEU','KOR'];
-  const SLOTS=[null,null,null];
+  let SLOTS=[];
   const COLORS=['#46b98a','#e8b84b','#dd6f3e']; // green, gold, orange
+  const MAX_SLOTS=3, MIN_SLOTS=1;
 
   function init(){
+    SLOTS=[];
     for(let i=0;i<3;i++){
-      if(byIso[DEFAULT_ISOS[i]]) SLOTS[i]=DEFAULT_ISOS[i];
+      if(byIso[DEFAULT_ISOS[i]]) SLOTS.push(DEFAULT_ISOS[i]);
     }
+    if(SLOTS.length===0) SLOTS=[null];
     renderPickers();
     renderAll();
   }
 
+  function setColCount(){
+    const cols=Math.max(1, SLOTS.length);
+    const pickers=document.getElementById('cmpPickers');
+    const cards=document.getElementById('cmpCards');
+    // include the "+ add slot" picker only when there's room
+    const pickerCols = cols + (SLOTS.length < MAX_SLOTS ? 1 : 0);
+    if(pickers) pickers.style.setProperty('--cmp-cols', pickerCols);
+    if(cards) cards.style.setProperty('--cmp-cols', cols);
+  }
+
   function renderPickers(){
     const wrap=document.getElementById('cmpPickers'); if(!wrap) return;
-    wrap.innerHTML=SLOTS.map((iso,i)=>{
+    setColCount();
+    let html = SLOTS.map((iso,i)=>{
       const c=iso?byIso[iso]:null;
       const inner = c
         ? '<span class="cmp-pk-flag">'+flag(iso)+'</span><span class="cmp-pk-name">'+c.name+'</span><span class="cmp-pk-arr" style="color:'+COLORS[i]+'">&#9660;</span>'
-        : '<span class="cmp-pk-name">+ Add country slot '+(i+1)+'</span><span class="cmp-pk-arr">&#9660;</span>';
+        : '<span class="cmp-pk-name">Choose a country&hellip;</span><span class="cmp-pk-arr">&#9660;</span>';
       const cls = c?'cmp-picker-btn':'cmp-picker-btn empty';
+      // Only show clear button when there's more than one slot
+      const clearBtn = (c && SLOTS.length>MIN_SLOTS)
+        ? '<button class="cmp-clear" data-clear="'+i+'" type="button" title="Remove this country">&times;</button>'
+        : '';
       return '<div class="cmp-picker" data-slot="'+i+'">'
         +'<button class="'+cls+'">'+inner+'</button>'
+        +clearBtn
         +'<div class="cmp-picker-dd"><input type="text" placeholder="Search&hellip;" autocomplete="off"><div class="cmp-picker-list"></div></div>'
         +'</div>';
     }).join('');
+    if(SLOTS.length < MAX_SLOTS){
+      html += '<button class="cmp-add-slot" id="cmpAddSlot" type="button"><span class="cmp-add-plus">+</span><span>Add country</span></button>';
+    }
+    wrap.innerHTML = html;
     // wire each picker
     wrap.querySelectorAll('.cmp-picker').forEach(p=>{
       const btn=p.querySelector('.cmp-picker-btn');
@@ -2592,6 +2621,26 @@ window.__pos_d6=1;
         renderAll();
       });
     });
+    // Clear-slot buttons
+    wrap.querySelectorAll('.cmp-clear').forEach(b=>{
+      b.addEventListener('click',function(e){
+        e.stopPropagation();
+        const i=+b.dataset.clear;
+        if(SLOTS.length>MIN_SLOTS){ SLOTS.splice(i,1); renderPickers(); renderAll(); }
+      });
+    });
+    // Add-slot button
+    const add=document.getElementById('cmpAddSlot');
+    if(add){
+      add.addEventListener('click',function(){
+        if(SLOTS.length<MAX_SLOTS){
+          SLOTS.push(null); renderPickers(); renderAll();
+          // Auto-open the freshly-added picker
+          const last=wrap.querySelector('.cmp-picker[data-slot="'+(SLOTS.length-1)+'"]');
+          if(last){ last.classList.add('open'); const inp=last.querySelector('input'); if(inp) setTimeout(()=>inp.focus(),20); }
+        }
+      });
+    }
     document.addEventListener('click',function(e){
       if(!e.target.closest('.cmp-picker')) wrap.querySelectorAll('.cmp-picker.open').forEach(x=>x.classList.remove('open'));
     });
@@ -2606,6 +2655,7 @@ window.__pos_d6=1;
 
   function renderCards(){
     const wrap=document.getElementById('cmpCards'); if(!wrap) return;
+    setColCount();
     wrap.innerHTML=SLOTS.map((iso,i)=>{
       if(!iso) return '<div class="cmp-card empty">Pick a country above</div>';
       const c=byIso[iso]; const s=c.scores['2025']; const b=band(s);
