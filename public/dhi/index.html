@@ -40,6 +40,68 @@ h1 em{font-style:normal;color:var(--gold)}
 .dt-badge-nso{background:rgba(232,184,75,.14);color:var(--gold);border:1px solid rgba(232,184,75,.36)}
 .dt-note{color:var(--ink3);font-size:.78rem;margin:8px 2px 0;line-height:1.55}
 
+
+/* ===== Compare view ===== */
+#view-compare{overflow-y:auto}
+.cmp-wrap{max-width:1180px;margin:0 auto;padding:46px clamp(28px,4vw,52px) 100px}
+.cmp-wrap h2{font-size:clamp(1.8rem,3.4vw,2.6rem);font-weight:600;letter-spacing:-.015em;margin:6px 0 14px;color:var(--ink)}
+.cmp-wrap h2 em{font-style:normal;color:var(--gold)}
+.cmp-wrap .lead{color:var(--ink2);font-size:1rem;line-height:1.62;max-width:62ch;margin-bottom:32px}
+.cmp-pickers{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:30px}
+@media(max-width:760px){.cmp-pickers{grid-template-columns:1fr}}
+.cmp-picker{position:relative}
+.cmp-picker-btn{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;padding:14px 18px;background:rgba(255,255,255,.03);border:1px solid rgba(232,184,75,.30);border-radius:10px;color:var(--ink);font-family:'Manrope';font-size:.96rem;font-weight:600;cursor:pointer;text-align:left;transition:background .15s,border-color .15s}
+.cmp-picker-btn:hover{background:rgba(232,184,75,.08);border-color:rgba(232,184,75,.5)}
+.cmp-picker-btn.empty{color:var(--ink3);font-weight:400;font-style:italic}
+.cmp-picker-btn .cmp-pk-flag{flex:none;display:inline-flex;align-items:center}
+.cmp-picker-btn .cmp-pk-flag img.flg{height:14px;width:auto;border-radius:2px;box-shadow:0 1px 3px rgba(0,0,0,.5)}
+.cmp-picker-btn .cmp-pk-name{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cmp-picker-btn .cmp-pk-arr{color:var(--gold);font-size:1rem;font-family:'JetBrains Mono',monospace}
+.cmp-picker-dd{position:absolute;top:calc(100% + 6px);left:0;right:0;background:rgba(15,28,56,.98);border:1px solid var(--line);border-radius:10px;max-height:340px;overflow-y:auto;display:none;z-index:30;box-shadow:0 18px 48px rgba(0,0,0,.55)}
+.cmp-picker.open .cmp-picker-dd{display:block}
+.cmp-picker-dd input{width:100%;background:transparent;border:0;border-bottom:1px solid var(--line);padding:11px 14px;color:var(--ink);font-family:'Manrope';font-size:.86rem;outline:none}
+.cmp-picker-dd input:focus{border-bottom-color:rgba(232,184,75,.5)}
+.cmp-picker-dd .cmp-dd-row{display:flex;align-items:center;gap:10px;padding:9px 14px;cursor:pointer;font-size:.86rem;color:var(--ink2)}
+.cmp-picker-dd .cmp-dd-row:hover,.cmp-picker-dd .cmp-dd-row.kbd{background:rgba(232,184,75,.10);color:var(--ink)}
+.cmp-picker-dd .cmp-dd-row img.flg{height:11px;width:auto;border-radius:2px;flex:none}
+.cmp-picker-dd .cmp-dd-row .cmp-dd-name{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cmp-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:38px}
+@media(max-width:760px){.cmp-cards{grid-template-columns:1fr}}
+.cmp-card{background:rgba(255,255,255,.025);border:1px solid var(--line);border-radius:12px;padding:22px 22px 20px;display:flex;flex-direction:column;gap:10px;min-height:200px;position:relative}
+.cmp-card.empty{align-items:center;justify-content:center;color:var(--ink3);font-style:italic;font-size:.92rem;min-height:200px}
+.cmp-card .cc-head{display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--line);padding-bottom:10px}
+.cmp-card .cc-head img.flg{height:18px;width:auto;border-radius:2px;flex:none;box-shadow:0 1px 3px rgba(0,0,0,.5)}
+.cmp-card .cc-name{font-family:'Manrope';font-size:1.05rem;font-weight:600;letter-spacing:-.005em;color:var(--ink);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cmp-card .cc-rank{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink3)}
+.cmp-card .cc-score-row{display:flex;align-items:baseline;gap:12px;margin-top:6px}
+.cmp-card .cc-score{font-family:'Manrope';font-size:2.4rem;font-weight:200;line-height:1;letter-spacing:-.025em;font-variant-numeric:tabular-nums}
+.cmp-card .cc-of{font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--ink3);letter-spacing:.06em;align-self:flex-end;padding-bottom:6px}
+.cmp-card .cc-band{font-family:'Manrope';font-size:.85rem;font-weight:500;letter-spacing:-.005em}
+.cmp-card .cc-typo{display:inline-block;padding:3px 11px;border-radius:11px;font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;align-self:flex-start;margin-top:4px}
+.cmp-card .cc-pop{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--ink3);letter-spacing:.06em;margin-top:auto;padding-top:8px}
+.cmp-card .cc-pop b{color:var(--ink2);font-weight:500}
+.cmp-section{margin:22px 0}
+.cmp-h{font-family:'Manrope';font-size:.94rem;font-weight:600;color:var(--gold);letter-spacing:-.005em;margin:0 0 14px;padding-bottom:6px;border-bottom:1px solid rgba(232,184,75,.18)}
+.cmp-traj-cv{width:100%;height:280px;display:block;background:rgba(0,0,0,.15);border-radius:10px;border:1px solid var(--line)}
+.cmp-traj-cap{margin-top:8px;color:var(--ink3);font-size:.78rem;line-height:1.55}
+.cmp-pillars{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+@media(max-width:760px){.cmp-pillars{grid-template-columns:1fr}}
+.cmp-pil{background:rgba(255,255,255,.02);border:1px solid var(--line);border-radius:8px;padding:14px 16px}
+.cmp-pil .cp-name{font-family:'Manrope';font-size:.78rem;font-weight:600;color:var(--ink);letter-spacing:-.005em;margin-bottom:10px}
+.cmp-pil .cp-rows{display:flex;flex-direction:column;gap:7px}
+.cmp-pil .cp-row{display:grid;grid-template-columns:18px 1fr auto;gap:9px;align-items:center;font-size:.78rem}
+.cmp-pil .cp-row .cp-sw{width:8px;height:8px;border-radius:2px}
+.cmp-pil .cp-row .cp-cname{color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:.76rem}
+.cmp-pil .cp-row .cp-cval{font-family:'JetBrains Mono',monospace;font-size:.76rem;font-weight:600;font-variant-numeric:tabular-nums}
+.cmp-pil .cp-row .cp-cval .cp-cof{font-size:.62rem;color:var(--ink3);font-weight:500;margin-left:.12em}
+.cmp-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}
+.cmp-stat{background:rgba(255,255,255,.02);border:1px solid var(--line);border-radius:8px;padding:13px 16px}
+.cmp-stat .cs-l{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink3);margin-bottom:10px}
+.cmp-stat .cs-rows{display:flex;flex-direction:column;gap:5px}
+.cmp-stat .cs-row{display:flex;align-items:center;gap:8px;font-size:.82rem}
+.cmp-stat .cs-row .cs-fl img.flg{height:9px;width:auto;border-radius:2px;flex:none;display:block}
+.cmp-stat .cs-row .cs-nm{flex:1;color:var(--ink2);font-size:.74rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cmp-stat .cs-row .cs-v{font-family:'JetBrains Mono',monospace;font-weight:600;font-variant-numeric:tabular-nums;color:var(--ink)}
 /* ====== demoriaresearch.com landing (entry page) ====== */
 /* Personalised landing — visitor's own country */
 #view-landing .dr-h1-flag{display:inline-block;margin-right:.42em;vertical-align:.05em}
@@ -740,7 +802,7 @@ table.rank tbody tr{cursor:pointer}
 .dt-note{font-size:.82rem;color:var(--ink3);margin:10px 0 0;line-height:1.55}
 @media(max-width:720px){.rk-body{flex-direction:column}.rk-rail{width:auto;border-right:0;border-bottom:1px solid var(--line);max-height:300px}.rk-main{padding:24px 20px 70px}}
 @media(max-width:720px){.topbar{height:auto;flex-wrap:wrap;padding:8px 12px;gap:4px}.tbspace{flex-basis:100%;height:0}}
-</style></head><body><div class="page"><div class="topbar"><a class="dr-lockup" href="https://demoriaresearch.com" aria-label="Demoria Research — home"><svg class="dr-mark-svg" viewBox="0 0 600 500" aria-hidden="true"><g stroke="currentColor" stroke-width="4.5" fill="none"><rect x="200" y="100" width="50" height="38"/><rect x="178" y="138" width="72" height="38"/><rect x="156" y="176" width="94" height="38"/><rect x="134" y="214" width="116" height="38"/><rect x="112" y="252" width="138" height="38"/><rect x="90" y="290" width="160" height="38"/><rect x="68" y="328" width="182" height="38"/><rect x="46" y="366" width="204" height="38"/><rect x="350" y="100" width="50" height="38"/><rect x="350" y="138" width="72" height="38"/><rect x="350" y="176" width="94" height="38"/><rect x="350" y="214" width="116" height="38"/><rect x="350" y="252" width="138" height="38"/><rect x="350" y="290" width="160" height="38"/><rect x="350" y="328" width="182" height="38"/><rect x="350" y="366" width="204" height="38"/><path d="M 250 100 A 50 50 0 0 1 350 100"/></g><g stroke="currentColor" stroke-width="4.5" fill="none" stroke-linejoin="miter"><path d="M 270 160 L 330 160 L 300 250 Z"/><path d="M 270 350 L 330 350 L 300 250 Z"/></g></svg><span class="dr-wm"><span class="dr-wm-d">Demoria</span><span class="dr-wm-r">Research</span></span></a><span class="bl"></span><a class="brand" href="#" onclick="show('home');return false;" title="Demographic Health Index — home"><span class="mk">DHI</span><span class="bt"><em>v2.0</em></span></a><nav class="tabs"><button class="tab on" data-v="home">Home</button><span class="tab-sep"></span><button class="tab" data-v="world">World</button><span class="tab-sep"></span><button class="tab" data-v="rankings">Index &amp; Rankings</button><span class="tab-sep"></span><button class="tab" data-v="about">About</button><button class="tab sowhat" data-v="sowhat">So What?</button><button class="tab" data-v="method">Methodology</button><button class="tab" data-v="author">Author</button><span class="tab-sep"></span><button class="tab" data-v="research">Research</button><span class="tab-sep"></span><button class="tab" data-v="data">Data</button></nav><span class="tbspace"></span><button class="immerse" id="immerse">&#11034;&nbsp;Full immersion</button></div><main id="views"><section class="view on" id="view-landing"><svg id="bg-map" class="bg-layer" preserveAspectRatio="xMidYMid slice" aria-hidden="true"></svg><svg id="bg-trend" class="bg-layer" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="area-grad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#e0b54a" stop-opacity="0.45"/><stop offset="100%" stop-color="#e0b54a" stop-opacity="0"/></linearGradient></defs></svg><div class="dr-wrap"><div class="dr-brand-lockup"><svg viewBox="0 0 600 500" aria-hidden="true"><g stroke="currentColor" stroke-width="4.2" fill="none"><rect x="200" y="100" width="50" height="38"/><rect x="178" y="138" width="72" height="38"/><rect x="156" y="176" width="94" height="38"/><rect x="134" y="214" width="116" height="38"/><rect x="112" y="252" width="138" height="38"/><rect x="90" y="290" width="160" height="38"/><rect x="68" y="328" width="182" height="38"/><rect x="46" y="366" width="204" height="38"/><rect x="350" y="100" width="50" height="38"/><rect x="350" y="138" width="72" height="38"/><rect x="350" y="176" width="94" height="38"/><rect x="350" y="214" width="116" height="38"/><rect x="350" y="252" width="138" height="38"/><rect x="350" y="290" width="160" height="38"/><rect x="350" y="328" width="182" height="38"/><rect x="350" y="366" width="204" height="38"/><path d="M 250 100 A 50 50 0 0 1 350 100"/></g><g stroke="currentColor" stroke-width="4.2" fill="none" stroke-linejoin="miter"><path d="M 270 160 L 330 160 L 300 250 Z"/><path d="M 270 350 L 330 350 L 300 250 Z"/></g></svg><span class="dr-eyebrow">Demoria Research</span></div><div class="dr-personal-strip" id="drPersonal" style="display:none"></div><h1 class="dr-h1" id="drHeadline">Long-run <em>demographic</em> intelligence.</h1><p class="dr-lede" id="drLede">Independent research on the demographic health of nations &mdash; building visible, comparable measures of the trends that shape public finance, geopolitics and the long-term stability of states.</p><div class="dr-trajectory" id="drTrajectory" style="display:none"></div><div class="dr-links"><button class="dr-link" id="landingCta"><span class="dr-link-text"><span class="dr-link-name">Demographic Health Index</span><span class="dr-link-desc">236 countries &amp; territories &middot; 1965 &ndash; 2100</span></span><span class="dr-link-arrow">&rarr;</span></button></div></div><footer class="dr-footer">&copy; Demoria Research</footer></section><section class="view" id="view-home"><div class="home-wrap">
+</style></head><body><div class="page"><div class="topbar"><a class="dr-lockup" href="https://demoriaresearch.com" aria-label="Demoria Research — home"><svg class="dr-mark-svg" viewBox="0 0 600 500" aria-hidden="true"><g stroke="currentColor" stroke-width="4.5" fill="none"><rect x="200" y="100" width="50" height="38"/><rect x="178" y="138" width="72" height="38"/><rect x="156" y="176" width="94" height="38"/><rect x="134" y="214" width="116" height="38"/><rect x="112" y="252" width="138" height="38"/><rect x="90" y="290" width="160" height="38"/><rect x="68" y="328" width="182" height="38"/><rect x="46" y="366" width="204" height="38"/><rect x="350" y="100" width="50" height="38"/><rect x="350" y="138" width="72" height="38"/><rect x="350" y="176" width="94" height="38"/><rect x="350" y="214" width="116" height="38"/><rect x="350" y="252" width="138" height="38"/><rect x="350" y="290" width="160" height="38"/><rect x="350" y="328" width="182" height="38"/><rect x="350" y="366" width="204" height="38"/><path d="M 250 100 A 50 50 0 0 1 350 100"/></g><g stroke="currentColor" stroke-width="4.5" fill="none" stroke-linejoin="miter"><path d="M 270 160 L 330 160 L 300 250 Z"/><path d="M 270 350 L 330 350 L 300 250 Z"/></g></svg><span class="dr-wm"><span class="dr-wm-d">Demoria</span><span class="dr-wm-r">Research</span></span></a><span class="bl"></span><a class="brand" href="#" onclick="show('home');return false;" title="Demographic Health Index — home"><span class="mk">DHI</span><span class="bt"><em>v2.0</em></span></a><nav class="tabs"><button class="tab on" data-v="home">Home</button><span class="tab-sep"></span><button class="tab" data-v="world">World</button><span class="tab-sep"></span><button class="tab" data-v="rankings">Index &amp; Rankings</button><span class="tab-sep"></span><button class="tab" data-v="compare">Compare</button><span class="tab-sep"></span><button class="tab" data-v="about">About</button><button class="tab sowhat" data-v="sowhat">So What?</button><button class="tab" data-v="method">Methodology</button><button class="tab" data-v="author">Author</button><span class="tab-sep"></span><button class="tab" data-v="research">Research</button><span class="tab-sep"></span><button class="tab" data-v="data">Data</button></nav><span class="tbspace"></span><button class="immerse" id="immerse">&#11034;&nbsp;Full immersion</button></div><main id="views"><section class="view on" id="view-landing"><svg id="bg-map" class="bg-layer" preserveAspectRatio="xMidYMid slice" aria-hidden="true"></svg><svg id="bg-trend" class="bg-layer" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="area-grad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#e0b54a" stop-opacity="0.45"/><stop offset="100%" stop-color="#e0b54a" stop-opacity="0"/></linearGradient></defs></svg><div class="dr-wrap"><div class="dr-brand-lockup"><svg viewBox="0 0 600 500" aria-hidden="true"><g stroke="currentColor" stroke-width="4.2" fill="none"><rect x="200" y="100" width="50" height="38"/><rect x="178" y="138" width="72" height="38"/><rect x="156" y="176" width="94" height="38"/><rect x="134" y="214" width="116" height="38"/><rect x="112" y="252" width="138" height="38"/><rect x="90" y="290" width="160" height="38"/><rect x="68" y="328" width="182" height="38"/><rect x="46" y="366" width="204" height="38"/><rect x="350" y="100" width="50" height="38"/><rect x="350" y="138" width="72" height="38"/><rect x="350" y="176" width="94" height="38"/><rect x="350" y="214" width="116" height="38"/><rect x="350" y="252" width="138" height="38"/><rect x="350" y="290" width="160" height="38"/><rect x="350" y="328" width="182" height="38"/><rect x="350" y="366" width="204" height="38"/><path d="M 250 100 A 50 50 0 0 1 350 100"/></g><g stroke="currentColor" stroke-width="4.2" fill="none" stroke-linejoin="miter"><path d="M 270 160 L 330 160 L 300 250 Z"/><path d="M 270 350 L 330 350 L 300 250 Z"/></g></svg><span class="dr-eyebrow">Demoria Research</span></div><div class="dr-personal-strip" id="drPersonal" style="display:none"></div><h1 class="dr-h1" id="drHeadline">Long-run <em>demographic</em> intelligence.</h1><p class="dr-lede" id="drLede">Independent research on the demographic health of nations &mdash; building visible, comparable measures of the trends that shape public finance, geopolitics and the long-term stability of states.</p><div class="dr-trajectory" id="drTrajectory" style="display:none"></div><div class="dr-links"><button class="dr-link" id="landingCta"><span class="dr-link-text"><span class="dr-link-name">Demographic Health Index</span><span class="dr-link-desc">236 countries &amp; territories &middot; 1965 &ndash; 2100</span></span><span class="dr-link-arrow">&rarr;</span></button></div></div><footer class="dr-footer">&copy; Demoria Research</footer></section><section class="view" id="view-home"><div class="home-wrap">
 <div class="home-hero"><div class="home-bg-host"><svg class="home-bg" id="homeBg" aria-hidden="true"></svg></div>
   <div class="hh-eye">Demoria Research &middot; v2.0</div>
   <h1 class="hh-title">Demographic <em>Health</em> Index</h1>
@@ -767,7 +829,7 @@ table.rank tbody tr{cursor:pointer}
   <div class="hf-l">Sources &middot; UN World Population Prospects 2024 &middot; national-statistical-office overrides &middot; Wittgenstein Centre Human Capital v3 &middot; Natural Earth 1:50m geometry</div>
   <div class="hf-r">Updated 2026 &middot; Demoria Research</div>
 </div>
-</div></section><section class="view" id="view-world"><div class="stagewrap"><aside class="wm-side" id="wmSide"><div class="wm-shead"><span id="wmSheadLbl">Rankings &middot; 2025</span><button id="wmCollapse" title="Hide">&#10094;</button></div><input class="wm-search" id="wmSearch" placeholder="Search a country&hellip;"><div class="wm-filt" id="wmFilt"><button data-f="all" class="on">All</button><button data-f="sov">Countries</button><button data-f="terr">Territories</button></div><div class="wm-list" id="wmList"></div></aside><button class="wm-show" id="wmShow">&#10095;&nbsp;Rankings</button><div class="stage"><div class="stage-subtitle"><span class="stage-st-l">Demographic Health Index</span><span class="stage-st-r">populations most able to renew themselves through their own births &middot; 0&ndash;100</span></div><canvas id="bg"></canvas><canvas id="cv"></canvas></div><aside class="rail"><button class="rail-collapse" id="railCollapse" title="Hide controls">&#10095;</button><div class="rgrp"><div class="rlbl">View</div><div class="seg"><button id="vGlobe" class="on">Globe</button><button id="vMap">Flat map</button></div></div><div class="rgrp"><div class="rlbl">Year &mdash; observed</div><div class="yr"><span id="yrlab">2025</span><small id="yrkind">OBSERVED</small></div><input type="range" id="slider" min="0" value="0"><div class="playrow"><button class="btn" id="rew" title="Rewind to 1965">&#9198;</button><button class="btn play" id="play">&#9654;&nbsp;Autoplay</button></div><button class="btn on" id="spin">&#10227; Auto-rotate</button></div><div class="rgrp projbox"><div class="projbox-head"><span class="projbox-h1">Projections 2026&ndash;2100</span><span class="projbox-h2">Source &middot; UN WPP 2024</span></div><div class="seg projyrs" title="Projection waypoints"><button id="p2035" title="Projection: 2035">2035</button><button id="p2050" title="Projection: 2050">2050</button><button id="p2075" title="Projection: 2075">2075</button><button id="p2100" title="Projection: 2100">2100</button></div><div class="seg vseg" id="varSeg" title="UN WPP fertility scenarios — Low assumes faster TFR decline, High slower, Medium the central estimate."><button id="vLow" title="Low — UN WPP optimistic fertility-decline scenario">Low</button><button id="vMed" class="on" title="Medium — UN WPP central scenario">Medium</button><button id="vHigh" title="High — UN WPP pessimistic fertility-decline scenario">High</button></div></div><div class="rgrp"><div class="rlbl">Colour map by</div><div class="scoreseg" id="scoreSeg"><button data-m="dhi" class="ss-main on"><span class="ss-main-l">Demographic Health Index</span><span class="ss-main-s">composite of all four pillars</span></button><div class="ss-or">or by individual pillar</div><div class="ss-pills"><button data-m="F" title="Fertility Strength (FSS)">Fert.</button><button data-m="R" title="Population Momentum (PMS)">Pop.</button><button data-m="A" title="Workforce Sustainability (WSS)">Work.</button><button data-m="M" title="Migration Reliance (MRS)">Mig.</button></div></div></div><div class="rgrp"><div class="rlbl" id="lgHead">DHI score</div><div class="legend" id="legend"></div></div><div class="foot">DHI v2.0 &middot; WPP 2024 baseline with NSO overrides &middot; geometry Natural Earth 1:50m</div></aside><button class="rail-show" id="railShow">&#10094;&nbsp;Controls</button></div></section><section class="view" id="view-rankings"><div class="rk-sub"><div class="rk-subtabs"><button data-st="all" class="on">All 236</button><button data-st="countries">Countries</button><button data-st="territories">Territories</button><button data-st="regions">Regions</button></div><div class="rk-subnote" id="rk-subnote"></div></div><div class="rk-body"><aside class="rk-rail"><div class="rk-rlbl">Select <span id="rk-railkind">country</span></div><input class="rk-search" id="rk-search" placeholder="Search&hellip;"><div class="rk-conts" id="rk-conts"><button data-c="all" class="on">All</button><button data-c="Africa">Africa</button><button data-c="Americas">Americas</button><button data-c="Asia">Asia</button><button data-c="Europe">Europe</button><button data-c="Oceania">Oceania</button></div><div class="rk-list" id="rk-list"></div></aside><div class="rk-main" id="rk-main"></div></div></section><section class="view doc" id="view-about"><div class="essay-progress"><div class="essay-progress-fill"></div></div><div class="essay">
+</div></section><section class="view" id="view-world"><div class="stagewrap"><aside class="wm-side" id="wmSide"><div class="wm-shead"><span id="wmSheadLbl">Rankings &middot; 2025</span><button id="wmCollapse" title="Hide">&#10094;</button></div><input class="wm-search" id="wmSearch" placeholder="Search a country&hellip;"><div class="wm-filt" id="wmFilt"><button data-f="all" class="on">All</button><button data-f="sov">Countries</button><button data-f="terr">Territories</button></div><div class="wm-list" id="wmList"></div></aside><button class="wm-show" id="wmShow">&#10095;&nbsp;Rankings</button><div class="stage"><div class="stage-subtitle"><span class="stage-st-l">Demographic Health Index</span><span class="stage-st-r">populations most able to renew themselves through their own births &middot; 0&ndash;100</span></div><canvas id="bg"></canvas><canvas id="cv"></canvas></div><aside class="rail"><button class="rail-collapse" id="railCollapse" title="Hide controls">&#10095;</button><div class="rgrp"><div class="rlbl">View</div><div class="seg"><button id="vGlobe" class="on">Globe</button><button id="vMap">Flat map</button></div></div><div class="rgrp"><div class="rlbl">Year &mdash; observed</div><div class="yr"><span id="yrlab">2025</span><small id="yrkind">OBSERVED</small></div><input type="range" id="slider" min="0" value="0"><div class="playrow"><button class="btn" id="rew" title="Rewind to 1965">&#9198;</button><button class="btn play" id="play">&#9654;&nbsp;Autoplay</button></div><button class="btn on" id="spin">&#10227; Auto-rotate</button></div><div class="rgrp projbox"><div class="projbox-head"><span class="projbox-h1">Projections 2026&ndash;2100</span><span class="projbox-h2">Source &middot; UN WPP 2024</span></div><div class="seg projyrs" title="Projection waypoints"><button id="p2035" title="Projection: 2035">2035</button><button id="p2050" title="Projection: 2050">2050</button><button id="p2075" title="Projection: 2075">2075</button><button id="p2100" title="Projection: 2100">2100</button></div><div class="seg vseg" id="varSeg" title="UN WPP fertility scenarios — Low assumes faster TFR decline, High slower, Medium the central estimate."><button id="vLow" title="Low — UN WPP optimistic fertility-decline scenario">Low</button><button id="vMed" class="on" title="Medium — UN WPP central scenario">Medium</button><button id="vHigh" title="High — UN WPP pessimistic fertility-decline scenario">High</button></div></div><div class="rgrp"><div class="rlbl">Colour map by</div><div class="scoreseg" id="scoreSeg"><button data-m="dhi" class="ss-main on"><span class="ss-main-l">Demographic Health Index</span><span class="ss-main-s">composite of all four pillars</span></button><div class="ss-or">or by individual pillar</div><div class="ss-pills"><button data-m="F" title="Fertility Strength (FSS)">Fert.</button><button data-m="R" title="Population Momentum (PMS)">Pop.</button><button data-m="A" title="Workforce Sustainability (WSS)">Work.</button><button data-m="M" title="Migration Reliance (MRS)">Mig.</button></div></div></div><div class="rgrp"><div class="rlbl" id="lgHead">DHI score</div><div class="legend" id="legend"></div></div><div class="foot">DHI v2.0 &middot; WPP 2024 baseline with NSO overrides &middot; geometry Natural Earth 1:50m</div></aside><button class="rail-show" id="railShow">&#10094;&nbsp;Controls</button></div></section><section class="view" id="view-rankings"><div class="rk-sub"><div class="rk-subtabs"><button data-st="all" class="on">All 236</button><button data-st="countries">Countries</button><button data-st="territories">Territories</button><button data-st="regions">Regions</button></div><div class="rk-subnote" id="rk-subnote"></div></div><div class="rk-body"><aside class="rk-rail"><div class="rk-rlbl">Select <span id="rk-railkind">country</span></div><input class="rk-search" id="rk-search" placeholder="Search&hellip;"><div class="rk-conts" id="rk-conts"><button data-c="all" class="on">All</button><button data-c="Africa">Africa</button><button data-c="Americas">Americas</button><button data-c="Asia">Asia</button><button data-c="Europe">Europe</button><button data-c="Oceania">Oceania</button></div><div class="rk-list" id="rk-list"></div></aside><div class="rk-main" id="rk-main"></div></div></section><section class="view doc" id="view-compare"><div class="cmp-wrap"><div class="eyebrow2">Demoria Research &middot; DHI v2.0</div><h2><em>Compare</em> countries side by side</h2><p class="lead">Pick up to three countries to see their 2025 DHI scores, pillar contributions, projection trajectories and key demographics on a single page. Click any slot to switch the country.</p><div class="cmp-pickers" id="cmpPickers"></div><div class="cmp-cards" id="cmpCards"></div><div class="cmp-section"><div class="cmp-h">DHI trajectory &middot; 1965&ndash;2100</div><canvas id="cmpTraj" class="cmp-traj-cv"></canvas><div class="cmp-traj-cap">Each country&rsquo;s composite DHI from 1965 to 2025 (observed) and the UN WPP 2024 medium projection to 2100. Click a legend swatch to toggle visibility.</div></div><div class="cmp-section"><div class="cmp-h">Pillar contributions &middot; 2025</div><div class="cmp-pillars" id="cmpPillars"></div></div><div class="cmp-section"><div class="cmp-h">Key statistics &middot; 2025</div><div class="cmp-stats" id="cmpStats"></div></div></div></section><section class="view doc" id="view-about"><div class="essay-progress"><div class="essay-progress-fill"></div></div><div class="essay">
 <div class="essay-hero" id="e-about">
 <div class="ek">Demoria Research &middot; Demographic Health Index v2.0</div>
 <h1>Can a population <em>carry itself forward?</em></h1>
@@ -2402,5 +2464,226 @@ window.__pos_d6=1;
 
   setTimeout(()=>{renderTrend(); renderMap();}, 100);
   let rt; window.addEventListener('resize',()=>{clearTimeout(rt); rt=setTimeout(()=>{renderTrend(); renderMap();},250);});
+})();
+
+// ===== Compare view =====
+(function(){
+  const view=document.getElementById('view-compare');
+  if(!view) return;
+  // Three default countries to start with
+  const DEFAULT_ISOS=['UZB','DEU','KOR'];
+  const SLOTS=[null,null,null];
+  const COLORS=['#46b98a','#e8b84b','#dd6f3e']; // green, gold, orange
+
+  function init(){
+    for(let i=0;i<3;i++){
+      if(byIso[DEFAULT_ISOS[i]]) SLOTS[i]=DEFAULT_ISOS[i];
+    }
+    renderPickers();
+    renderAll();
+  }
+
+  function renderPickers(){
+    const wrap=document.getElementById('cmpPickers'); if(!wrap) return;
+    wrap.innerHTML=SLOTS.map((iso,i)=>{
+      const c=iso?byIso[iso]:null;
+      const inner = c
+        ? '<span class="cmp-pk-flag">'+flag(iso)+'</span><span class="cmp-pk-name">'+c.name+'</span><span class="cmp-pk-arr" style="color:'+COLORS[i]+'">&#9660;</span>'
+        : '<span class="cmp-pk-name">+ Add country slot '+(i+1)+'</span><span class="cmp-pk-arr">&#9660;</span>';
+      const cls = c?'cmp-picker-btn':'cmp-picker-btn empty';
+      return '<div class="cmp-picker" data-slot="'+i+'">'
+        +'<button class="'+cls+'">'+inner+'</button>'
+        +'<div class="cmp-picker-dd"><input type="text" placeholder="Search&hellip;" autocomplete="off"><div class="cmp-picker-list"></div></div>'
+        +'</div>';
+    }).join('');
+    // wire each picker
+    wrap.querySelectorAll('.cmp-picker').forEach(p=>{
+      const btn=p.querySelector('.cmp-picker-btn');
+      const dd=p.querySelector('.cmp-picker-dd');
+      const inp=dd.querySelector('input');
+      const list=dd.querySelector('.cmp-picker-list');
+      const slot=+p.dataset.slot;
+      function fill(q){
+        const all=Object.values(byIso).filter(c=>c.scores && c.scores['2025']!=null);
+        all.sort((a,b)=>a.name.localeCompare(b.name));
+        const matches=(q?all.filter(c=>c.name.toLowerCase().includes(q.toLowerCase())):all).slice(0,80);
+        list.innerHTML=matches.map(c=>'<div class="cmp-dd-row" data-iso="'+c.iso+'"><span>'+flag(c.iso)+'</span><span class="cmp-dd-name">'+c.name+'</span></div>').join('');
+      }
+      btn.addEventListener('click',function(e){
+        e.stopPropagation();
+        wrap.querySelectorAll('.cmp-picker.open').forEach(x=>{if(x!==p) x.classList.remove('open');});
+        p.classList.toggle('open');
+        if(p.classList.contains('open')){fill(''); setTimeout(()=>inp.focus(),20);}
+      });
+      inp.addEventListener('input',function(){fill(inp.value);});
+      list.addEventListener('click',function(e){
+        const r=e.target.closest('.cmp-dd-row'); if(!r) return;
+        SLOTS[slot]=r.dataset.iso;
+        p.classList.remove('open');
+        renderPickers();
+        renderAll();
+      });
+    });
+    document.addEventListener('click',function(e){
+      if(!e.target.closest('.cmp-picker')) wrap.querySelectorAll('.cmp-picker.open').forEach(x=>x.classList.remove('open'));
+    });
+  }
+
+  function renderAll(){
+    renderCards();
+    renderPillars();
+    renderStats();
+    drawTrajOverlay();
+  }
+
+  function renderCards(){
+    const wrap=document.getElementById('cmpCards'); if(!wrap) return;
+    wrap.innerHTML=SLOTS.map((iso,i)=>{
+      if(!iso) return '<div class="cmp-card empty">Pick a country above</div>';
+      const c=byIso[iso]; const s=c.scores['2025']; const b=band(s);
+      const tyCol=c.catn?TYPCOL[c.catn]:'#888';
+      const popTxt=c.pop!=null?(c.pop.toFixed(c.pop<10?2:1)+'M'):'—';
+      return '<div class="cmp-card" style="border-top:3px solid '+COLORS[i]+'">'
+        +'<div class="cc-head"><img class="flg" src="https://flagcdn.com/w80/'+ISO2[c.iso].toLowerCase()+'.png" alt="">'
+          +'<div class="cc-name">'+c.name+'</div>'
+          +'<div class="cc-rank">Rank '+(c.rank||'—')+'</div></div>'
+        +'<div class="cc-score-row"><span class="cc-score" style="color:'+ramp(s)+'">'+s.toFixed(1)+'</span><span class="cc-of">/100</span></div>'
+        +'<div class="cc-band" style="color:'+b[1]+'">'+b[0]+'</div>'
+        +(c.cat?'<span class="cc-typo" style="color:'+tyCol+';background:'+tyCol+'1f">'+c.cat+'</span>':'')
+        +'<div class="cc-pop">Population <b>'+popTxt+'</b></div>'
+        +'</div>';
+    }).join('');
+  }
+
+  function renderPillars(){
+    const wrap=document.getElementById('cmpPillars'); if(!wrap) return;
+    const pillarDefs=[
+      {idx:'Fertility',  nm:'Fertility Strength',     wt:34},
+      {idx:'Renewal',    nm:'Population Momentum',    wt:28},
+      {idx:'AgeStruct',  nm:'Workforce Sustainability', wt:22},
+      {idx:'Migration',  nm:'Migration Reliance',     wt:16},
+    ];
+    wrap.innerHTML=pillarDefs.map(p=>{
+      let rows='';
+      SLOTS.forEach((iso,i)=>{
+        if(!iso) return;
+        const c=byIso[iso]; const pil=c.pillars && c.pillars['2025'];
+        // pillar arrays in order [F, A, R, M]
+        const orderMap={Fertility:0, AgeStruct:1, Renewal:2, Migration:3};
+        const v = pil ? pil[orderMap[p.idx]] : null;
+        const contrib = (v!=null)?(v*p.wt/100):null;
+        rows += '<div class="cp-row">'
+          +'<span class="cp-sw" style="background:'+COLORS[i]+'"></span>'
+          +'<span class="cp-cname">'+c.name+'</span>'
+          +'<span class="cp-cval" style="color:'+(contrib!=null?ramp(v):'var(--ink3)')+'">'+(contrib!=null?contrib.toFixed(1):'—')+'<span class="cp-cof">/'+p.wt+'</span></span>'
+          +'</div>';
+      });
+      return '<div class="cmp-pil"><div class="cp-name">'+p.nm+'</div><div class="cp-rows">'+rows+'</div></div>';
+    }).join('');
+  }
+
+  function renderStats(){
+    const wrap=document.getElementById('cmpStats'); if(!wrap) return;
+    const stats=[
+      {k:'tfr',     l:'TFR',                   fmt:v=>v.toFixed(2)},
+      {k:'medage',  l:'Median age',            fmt:v=>v.toFixed(1)+' yrs'},
+      {k:'oadr',    l:'Old-age dep. ratio',    fmt:v=>v.toFixed(0)},
+      {k:'lfpr',    l:'Labour-force part.',    fmt:v=>(v*100).toFixed(1)+'%'},
+      {k:'cbr',     l:'Crude birth rate',      fmt:v=>v.toFixed(1)+'/1000'},
+      {k:'cdr',     l:'Crude death rate',      fmt:v=>v.toFixed(1)+'/1000'},
+      {k:'netmig',  l:'Net migration',         fmt:v=>(v>=0?'+':'')+v.toFixed(1)+'/1000'},
+      {k:'pop_u20', l:'Population aged 0–19',fmt:v=>(v/1e6).toFixed(1)+'M'},
+    ];
+    wrap.innerHTML=stats.map(s=>{
+      let rows='';
+      SLOTS.forEach((iso,i)=>{
+        if(!iso) return;
+        const c=byIso[iso];
+        const d=DATA[iso]; const idx=d?d.yrs.indexOf(2025):-1;
+        const v = (d && idx>=0 && d.ind[s.k]) ? d.ind[s.k][idx] : null;
+        rows += '<div class="cs-row">'
+          +'<span class="cs-fl">'+flag(iso)+'</span>'
+          +'<span class="cs-nm">'+c.name+'</span>'
+          +'<span class="cs-v" style="color:'+COLORS[i]+'">'+(v!=null?s.fmt(v):'—')+'</span>'
+          +'</div>';
+      });
+      return '<div class="cmp-stat"><div class="cs-l">'+s.l+'</div><div class="cs-rows">'+rows+'</div></div>';
+    }).join('');
+  }
+
+  // ---- trajectory overlay ----
+  function drawTrajOverlay(){
+    const cv=document.getElementById('cmpTraj'); if(!cv) return;
+    const W=cv.clientWidth||800, H=280;
+    cv.width=W*DPR; cv.height=H*DPR;
+    const x=cv.getContext('2d'); x.setTransform(DPR,0,0,DPR,0,0);
+    x.clearRect(0,0,W,H);
+    const padL=46, padR=28, padT=22, padB=34;
+    const x0=padL, x1=W-padR, y0=padT, y1=H-padB;
+    const xMin=1965, xMax=2100;
+    // y-range — pin to 0..100 always so the bands are comparable
+    const yMin=0, yMax=100;
+    const X=yr=>x0+(yr-xMin)/(xMax-xMin)*(x1-x0);
+    const Y=v=>y0+(1-(v-yMin)/(yMax-yMin))*(y1-y0);
+    // gridlines
+    x.strokeStyle='rgba(255,255,255,.08)'; x.lineWidth=1;
+    [0,25,50,75,100].forEach(g=>{x.beginPath(); x.moveTo(x0,Y(g)); x.lineTo(x1,Y(g)); x.stroke();
+      x.fillStyle='rgba(255,255,255,.42)'; x.font='9px JetBrains Mono'; x.textAlign='right'; x.fillText(g,x0-5,Y(g)+3);});
+    // 2025 vertical
+    x.strokeStyle='rgba(232,184,75,.20)'; x.setLineDash([2,3]); x.beginPath(); x.moveTo(X(2025),y0); x.lineTo(X(2025),y1); x.stroke(); x.setLineDash([]);
+    // axis years
+    x.fillStyle='rgba(255,255,255,.55)'; x.font='9px JetBrains Mono'; x.textAlign='center';
+    [1965,1995,2025,2050,2075,2100].forEach(yr=>x.fillText(yr,X(yr),y1+15));
+    // each country
+    SLOTS.forEach((iso,i)=>{
+      if(!iso) return;
+      const c=byIso[iso];
+      const col=COLORS[i];
+      // observed 1965-2025
+      const obs=[];
+      for(let yr=1965;yr<=2025;yr++){
+        const s=c.scores && c.scores[String(yr)];
+        if(s!=null) obs.push([yr,s]);
+      }
+      x.strokeStyle=col; x.lineWidth=1.8;
+      x.beginPath();
+      obs.forEach((p,k)=>{ if(k===0) x.moveTo(X(p[0]),Y(p[1])); else x.lineTo(X(p[0]),Y(p[1])); });
+      x.stroke();
+      // projection medium 2026-2100
+      const proj=[];
+      if(c.proj){
+        for(let yr=2026;yr<=2100;yr++){
+          const p=c.proj[String(yr)]; if(p && p.med!=null) proj.push([yr,p.med]);
+        }
+      }
+      if(proj.length){
+        x.setLineDash([4,3]);
+        x.beginPath();
+        x.moveTo(X(obs[obs.length-1][0]),Y(obs[obs.length-1][1]));
+        proj.forEach(p=>x.lineTo(X(p[0]),Y(p[1])));
+        x.stroke();
+        x.setLineDash([]);
+      }
+      // 2025 dot
+      const last=obs[obs.length-1];
+      if(last){
+        x.fillStyle=col; x.beginPath(); x.arc(X(last[0]),Y(last[1]),3.5,0,6.28); x.fill();
+        // country label next to the line at 2025
+        x.fillStyle='#fff'; x.font='600 10px Manrope'; x.textAlign='left';
+        x.fillText(c.name+' '+last[1].toFixed(1), X(last[0])+8, Y(last[1])+3);
+      }
+    });
+  }
+
+  // Re-init on tab activation
+  document.addEventListener('click',function(e){
+    const t=e.target.closest('.tab[data-v="compare"]');
+    if(t){ setTimeout(()=>{ init(); }, 60); }
+  });
+  // Also init if compare is the active tab on first load
+  if(document.getElementById('view-compare').classList.contains('on')) init();
+  window.addEventListener('resize',function(){
+    if(document.getElementById('view-compare').classList.contains('on')) drawTrajOverlay();
+  });
 })();
 </script></body></html>
