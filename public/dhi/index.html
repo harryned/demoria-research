@@ -403,7 +403,10 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;heigh
 input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:var(--gold);cursor:pointer;border:2px solid var(--navy)}
 .btn{background:var(--surface);border:1px solid var(--line);border-radius:7px;color:var(--ink2);font-family:'Manrope';font-size:.76rem;padding:7px 12px;cursor:pointer}
 .btn.on{background:var(--gold);color:var(--navy);border-color:var(--gold);font-weight:600}
-.tip{position:fixed;pointer-events:none;background:rgba(15,35,71,.97);border:1px solid var(--line);border-radius:8px;padding:8px 12px;font-size:.84rem;opacity:0;transition:opacity .08s;z-index:9;box-shadow:0 8px 24px rgba(0,0,0,.5);text-align:left}
+.tip{position:fixed;pointer-events:none;background:rgba(15,35,71,.97);border:1px solid rgba(232,184,75,.32);border-radius:8px;padding:9px 13px;font-size:.84rem;z-index:100;box-shadow:0 12px 32px rgba(0,0,0,.55);text-align:left;line-height:1.35;min-width:120px;display:none}
+.tip.show{display:block}
+.tip .tn{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:3px}
+.tip .ts{font-family:'Manrope',sans-serif;font-size:.95rem;font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums}
 .tip .tn{font-weight:600;margin-bottom:2px}.tip .ts{font-family:'JetBrains Mono',monospace;font-size:.76rem;color:var(--ink2)}
 .foot{font-family:'JetBrains Mono',monospace;font-size:.57rem;line-height:1.6;color:var(--ink3);margin-top:auto}
 @media(max-width:720px){
@@ -1187,11 +1190,11 @@ cv.addEventListener('mousemove',ev=>{
   if(ll&&isFinite(ll[0])){ for(const f of land){ if(GLOBE[String(f.id)]&&d3.geoContains(f,ll)){h=f;break;} } }
   if(h!==hover){hover=h;render();}
   if(h){const c=GLOBE[String(h.id)],s=scoreAt(c);
-    tip.style.opacity=1; tip.style.left=(ev.clientX+16)+'px'; tip.style.top=(ev.clientY-10)+'px';
+    tip.classList.add('show'); tip.style.left=(ev.clientX+16)+'px'; tip.style.top=(ev.clientY-10)+'px';
     tip.innerHTML='<div class=tn>'+c.name+'</div><div class=ts>'+(s==null?'no data':'DHI '+s.toFixed(1)+' &middot; '+band(s)[0])+'</div>';
-  } else tip.style.opacity=0;
+  } else tip.classList.remove('show');
 });
-cv.addEventListener('mouseleave',()=>{tip.style.opacity=0;if(hover){hover=null;render();}});
+cv.addEventListener('mouseleave',()=>{tip.classList.remove('show');if(hover){hover=null;render();}});
 const worldView=document.getElementById('view-world');
 d3.timer((t)=>{
   if(!worldView.classList.contains('on')) return;
@@ -1535,9 +1538,20 @@ function drawTrajChart(cv,tr,H){
     tip.innerHTML = best.obs!=null
       ? '<div class=tn>'+best.yr+'</div><div class=ts>DHI '+best.obs.toFixed(1)+'</div>'
       : '<div class=tn>'+best.yr+' &middot; projection</div><div class=ts>Low '+best.lo.toFixed(1)+' &nbsp;Med '+best.me.toFixed(1)+' &nbsp;High '+best.hi.toFixed(1)+'</div>';
-    tip.style.opacity=1; tip.style.left=(ev.clientX+15)+'px'; tip.style.top=(ev.clientY-12)+'px';
+    tip.classList.add('show');
+    const vw=window.innerWidth, vh=window.innerHeight;
+    const tipW=Math.max(tip.offsetWidth||0, 160);
+    const tipH=Math.max(tip.offsetHeight||0, 48);
+    // Pick whichever side has more room and then clamp inside the viewport.
+    let lx=ev.clientX+15;
+    if(lx+tipW > vw-8) lx=ev.clientX-15-tipW;
+    lx=Math.max(8, Math.min(lx, vw-tipW-8));
+    let ty=ev.clientY-12;
+    ty=Math.max(8, Math.min(ty, vh-tipH-8));
+    tip.style.left=lx+'px';
+    tip.style.top=ty+'px';
   };
-  cv.onmouseleave=function(){ _paintTraj(cv,tr,H,null); tip.style.opacity=0; };
+  cv.onmouseleave=function(){ _paintTraj(cv,tr,H,null); tip.classList.remove('show'); };
 }
 const TRAJ_CAP='Solid line: observed (1965&ndash;2025) and the WPP medium projection. Shaded band: the Low&ndash;High variant range &mdash; effectively a confidence interval on the demographic future.';
 // ---- population pyramid ----
