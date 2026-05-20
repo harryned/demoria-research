@@ -406,7 +406,7 @@ body:has(#view-landing.on) .page{height:100vh}
 .pf-cat.pf-cat-link:hover,.cp-cat[style*=cursor]:hover{filter:brightness(1.15)}
 
 /* score-view segment (compact, fits pillars in two rows on narrow rails) */
-.scoreseg{display:flex;flex-direction:column;gap:8px}
+.scoreseg{display:flex;flex-direction:column;gap:5px}
 .scoreseg .ss-main{display:flex;flex-direction:column;align-items:flex-start;gap:1px;padding:7px 11px;border:1px solid var(--line);background:rgba(255,255,255,.02);border-radius:7px;cursor:pointer;color:var(--ink2);font-family:'Manrope';line-height:1.2;text-align:left;transition:color .12s,background .12s,border-color .12s}
 .scoreseg .ss-main .ss-main-l{font-size:.78rem;font-weight:600;letter-spacing:-.003em}
 .scoreseg .ss-main .ss-main-s{font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3)}
@@ -1865,7 +1865,7 @@ function renderRegionProfile(name,members,isCont){
   }
   m.innerHTML=
    '<div class="pf-eyebrow">Index &amp; Rankings &middot; '+(isCont?'Continental region':'Sub-region')+' &middot; DHI 2025</div>'+
-   '<div class="pf-name"><span class="pf-flag">'+flag(iso)+'</span>'+name+'</div>'+
+   '<div class="pf-name">'+name+'</div>'+
    '<div class="pf-meta"><span><b>'+mem.length+'</b> countries &amp; territories</span><span>&middot;</span><span><b>'+pop.toFixed(0)+'M</b> people</span>'+(isCont||!mem[0]||!mem[0].cont?'':'<span>&middot;</span><span class="pf-xlink" data-go="R:'+mem[0].cont+'">'+mem[0].cont+'</span>')+'<span>&middot;</span><span>population-weighted aggregate</span></div>'+
    pyramidBlock()+
    '<div class="pf-hero"><div class="pf-scoreblk"><div class="pf-score" style="color:'+ramp(s)+'">'+s.toFixed(1)+'</div><div class="pf-band">'+b[0]+'</div><div class="pf-yr">2025 &middot; pop-weighted mean</div></div>'+
