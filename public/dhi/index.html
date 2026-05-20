@@ -166,6 +166,12 @@ h1 em{font-style:normal;color:var(--gold)}
 .dr-footer{position:absolute;bottom:24px;left:32px;font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.35);z-index:1}
 body:has(#view-landing.on) .topbar{display:none}
 body:has(#view-landing.on) .page{height:100vh}
+
+.home-hero .hh-primary{display:inline-flex;align-items:center;gap:14px;background:#e0b54a;color:#0c1a33;border:0;padding:16px 28px;border-radius:8px;font-family:'Manrope',sans-serif;font-size:1rem;font-weight:600;cursor:pointer;letter-spacing:-.005em;box-shadow:0 12px 32px rgba(224,181,74,.22);transition:transform .15s,box-shadow .15s,background .15s;margin-top:6px}
+.home-hero .hh-primary:hover{transform:translateY(-1px);box-shadow:0 16px 38px rgba(224,181,74,.32);background:#ecc35e}
+.home-hero .hh-primary .hhp-r{font-size:1.2rem;line-height:1;transition:transform .18s}
+.home-hero .hh-primary:hover .hhp-r{transform:translateX(4px)}
+.home-hero .hh-or{margin-top:14px;font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.42)}
 /* ====== Home / landing view ====== */
 /* Animated world-map background */
 .home-hero{position:relative}
@@ -901,8 +907,9 @@ table.rank tbody tr{cursor:pointer}
 <div class="home-hero"><div class="home-bg-host"><svg class="home-bg" id="homeBg" aria-hidden="true"></svg></div>
   <div class="hh-eye">Demoria Research &middot; v2.0</div>
   <h1 class="hh-title">Demographic <em>Health</em> Index</h1>
-  <p class="hh-sub">A structural measure of which populations can still replace themselves through their own births &mdash; <b>236 countries, every year 1965 to 2100</b>, scored on a single readable 0&ndash;100 scale.</p>
-  <p class="hh-lead">A high score is not a verdict on a country, an economy, or a place to live. It is a population that is still demographically self-sustaining &mdash; before counting on migration or momentum to keep the lights on.</p>
+  <p class="hh-sub">A 0&ndash;100 score for every country&rsquo;s ability to renew its population through its own births &mdash; <b>236 countries, 1965 to 2100</b>.</p>
+  <button class="hh-primary" id="hhPrimary" type="button"><span class="hhp-l">Open the world map</span><span class="hhp-r">&rarr;</span></button>
+  <p class="hh-or">or browse below</p>
 </div>
 
 <div class="home-stats">
@@ -2449,13 +2456,10 @@ window.__pos_d6=1;
   const cta=document.getElementById('landingCta');
   if(cta){
     cta.addEventListener('click',function(){
-      // Update the URL so the world view is shareable / bookmarkable as /dhi/
-      try { history.pushState({view:'world'}, '', '/dhi/'); } catch(e) {}
-      show('world');
+      try { history.pushState({view:'home'}, '', '/dhi/'); } catch(e) {}
+      show('home');
       const iso=this.dataset.iso;
-      if(iso && typeof byIso!=='undefined' && byIso[iso] && typeof openPanel==='function'){
-        setTimeout(()=>{ try{ openPanel(byIso[iso]); }catch(e){} }, 120);
-      }
+      if(iso) try{ sessionStorage.setItem('dhi_landing_iso', iso); }catch(e){}
     });
   }
 
@@ -2463,7 +2467,7 @@ window.__pos_d6=1;
   function routeFromPath(){
     const p = location.pathname || '/';
     if (p.indexOf('/dhi') === 0) {
-      if (typeof show === 'function') show('world');
+      if (typeof show === 'function') show('home');
     } else {
       if (typeof show === 'function') show('landing');
     }
@@ -2979,6 +2983,20 @@ window.__pos_d6=1;
   if(dmReadMore) dmReadMore.addEventListener('click',function(){
     closeModal('dhiModal');
     show('about');
+  });
+})();
+
+// Home: prominent "Open the world map" CTA + remember landing iso
+(function(){
+  const btn=document.getElementById('hhPrimary');
+  if(!btn) return;
+  btn.addEventListener('click',function(){
+    let iso=null;
+    try{ iso=sessionStorage.getItem('dhi_landing_iso'); }catch(e){}
+    show('world');
+    if(iso && typeof byIso!=='undefined' && byIso[iso] && typeof openPanel==='function'){
+      setTimeout(()=>{ try{ openPanel(byIso[iso]); }catch(e){} }, 120);
+    }
   });
 })();
 </script></body></html>
