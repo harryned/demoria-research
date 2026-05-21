@@ -708,7 +708,7 @@ table.rank tbody tr{cursor:pointer}
 .rk-row .rsc{font-family:'JetBrains Mono',monospace;font-size:.84rem;font-weight:600}
 .rk-row .rtr{width:13px;flex:none;text-align:center;font-size:.7rem}
 .tr-up{color:#34c46b}.tr-dn{color:#ef4444}.tr-fl{color:var(--ink3)}
-.rk-main{flex:1;overflow-y:auto;padding:34px 40px 90px}
+.rk-main{flex:1;overflow-y:auto;padding:0 40px 90px}
 .rk-empty{color:var(--ink3);font-size:.95rem;padding:40px 4px}
 .pf-eyebrow{font-family:'JetBrains Mono',monospace;font-size:.63rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
 .pf-name{font-size:clamp(1.7rem,3.4vw,2.5rem);font-weight:600;letter-spacing:-.015em;margin:7px 0 5px}
@@ -804,7 +804,7 @@ table.rank tbody tr{cursor:pointer}
 .pf-ctx .cp-ctx-dot{width:9px;height:9px}
 .pf-ctx .cp-ctx-pct{font-size:.7rem;min-width:104px}
 /* ===== Cream paper body for country / region / territory profiles ===== */
-.pf-paper{background:#f3ecdc;color:#0c1a33;padding:40px clamp(26px,4vw,54px) 48px;margin:34px 0 32px;border-radius:22px;box-shadow:0 22px 70px rgba(0,0,0,.30),inset 0 1px 0 rgba(255,255,255,.55);position:relative}
+.pf-paper{background:#f3ecdc;color:#0c1a33;padding:40px clamp(26px,4vw,54px) 48px;margin:14px 0 32px;border-radius:22px;box-shadow:0 22px 70px rgba(0,0,0,.30),inset 0 1px 0 rgba(255,255,255,.55);position:relative}
 .pf-paper > .pf-h:first-child,.pf-paper > .pf-grid:first-child .pf-h{margin-top:0}
 .pf-paper .pf-h{color:#5d4524;border-bottom-color:rgba(12,26,51,.12)}
 .pf-paper .pf-cap{color:rgba(12,26,51,.62)}
@@ -1127,6 +1127,40 @@ table.rank tbody tr{cursor:pointer}
 .essay-body{margin:0 0 60px;padding:38px clamp(28px,4vw,54px) 100px;border-radius:0 0 24px 24px}
 
 /* ====================================================================
+   Population Pyramid full page — cream paper card on navy. Re-themes
+   every child element so the text reads on cream; pyramid canvas keeps
+   its dark navy inset since its JS strokes are designed for dark.
+   ==================================================================== */
+#view-pyramid{overflow:hidden}
+#view-pyramid .pyr-page{background:#f3ecdc;color:#0c1a33;border-radius:24px;box-shadow:0 30px 90px rgba(0,0,0,.34);padding:18px clamp(24px,3vw,42px) 22px;margin:14px auto 14px;max-width:1180px;text-align:left;display:flex;flex-direction:column;gap:8px;height:calc(100vh - 76px - 28px - 22px);max-height:760px}
+#view-pyramid .pyr-pg-eyebrow{color:#b58420;margin-top:0}
+#view-pyramid .pyr-pg-name{color:#0c1a33;font-size:clamp(1.5rem,2.6vw,1.95rem);margin:2px 0 0;display:flex;align-items:center;gap:14px}
+#view-pyramid .pyr-pg-name .pyr-pg-flag{display:inline-flex;align-items:center}
+#view-pyramid .pyr-pg-name .pyr-pg-flag .flg{height:.72em;width:auto;border-radius:3px;box-shadow:0 2px 6px rgba(12,26,51,.30),inset 0 0 0 1px rgba(12,26,51,.08);object-fit:cover}
+#view-pyramid .pyr-pg-head{margin:2px 0 6px}
+#view-pyramid .pyr-pg-meta{margin:0 0 6px;padding-bottom:8px}
+#view-pyramid .pyr-pg-meta-v{font-size:clamp(1.6rem,3vw,2.2rem)}
+#view-pyramid .pyr-cv{flex:1;min-height:300px;height:auto!important}
+#view-pyramid .pyr-back{background:#fbf5e6;border:1px solid rgba(12,26,51,.10);color:rgba(12,26,51,.78)}
+#view-pyramid .pyr-back:hover{border-color:rgba(181,132,32,.55);color:#0c1a33}
+#view-pyramid .pyr-pg-search input{background:#fbf5e6;border:1px solid rgba(12,26,51,.10);color:#0c1a33}
+#view-pyramid .pyr-pg-search input::placeholder{color:rgba(12,26,51,.45)}
+#view-pyramid .pyr-pg-search input:focus{border-color:rgba(181,132,32,.55);outline:none}
+#view-pyramid .pyr-pg-search .pyr-pg-dd{background:#fff;border:1px solid rgba(12,26,51,.10);box-shadow:0 18px 48px rgba(12,26,51,.18)}
+#view-pyramid .pyr-pg-search .pyr-dd-row{color:rgba(12,26,51,.78)}
+#view-pyramid .pyr-pg-search .pyr-dd-row:hover,#view-pyramid .pyr-pg-search .pyr-dd-row.kbd{background:rgba(181,132,32,.10);color:#0c1a33}
+#view-pyramid .pyr-pg-search .pyr-dd-row .pyr-dd-name{color:#0c1a33}
+#view-pyramid .pyr-pg-search .pyr-dd-empty{color:rgba(12,26,51,.55)}
+#view-pyramid .pyr-pg-meta{border-bottom-color:rgba(12,26,51,.12)}
+#view-pyramid .pyr-pg-meta-l{color:rgba(12,26,51,.55)}
+#view-pyramid .pyr-pg-meta-v{color:#0c1a33}
+#view-pyramid .pyr-cv{background:#fbf5e6;border-radius:14px;border:1px solid rgba(12,26,51,.10);box-sizing:border-box;width:100%}
+#view-pyramid .pyr-ctl{background:#fbf5e6;border:1px solid rgba(12,26,51,.10);color:#0c1a33}
+#view-pyramid .pyr-lbl{color:rgba(12,26,51,.55)}
+#view-pyramid .pyr-yr{color:#b58420}
+#view-pyramid .pyr-leg{color:rgba(12,26,51,.78)}
+
+/* ====================================================================
    Home page — Spotlight beams dynamic background.
    Three cream/gold radial cone gradients slowly rotating around the
    centre, like searchlights on a stage. Replaces the small in-hero
@@ -1242,6 +1276,74 @@ body::after{content:'Demoria Research \00A0\00B7\00A0 Demographic Health Index 2
 #view-data .dtbl td.dt-na{color:rgba(12,26,51,.30)!important}
 #view-data .dtbl td.dt-nso{background:rgba(181,132,32,.06)!important}
 #view-data .dtbl .dt-unit{color:rgba(12,26,51,.62)}
+
+/* ========== FT-style magazine layout for country profiles ========== */
+.pf-paper.ft-paper{padding:34px clamp(28px,3vw,48px) 48px;margin:14px auto 28px;max-width:1280px}
+.ft-paper .pf-eyebrow,.ft-paper .pf-name-row,.ft-paper .pf-meta,.ft-paper > .pyr-toggle,.ft-paper > .pf-hero,.ft-paper > .pf-grid,.ft-paper > .pf-h,.ft-paper > .facts,.ft-paper > .pf-ctx{display:none}
+.ft-eyebrow{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:#b58420;font-weight:600;margin-bottom:20px;text-align:center;border-bottom:1px solid rgba(181,132,32,.30);padding-bottom:14px}
+.ft-grid{display:grid;grid-template-columns:340px 1fr;gap:48px;align-items:start}
+@media(max-width:920px){.ft-grid{grid-template-columns:1fr;gap:24px}}
+.ft-hero{position:sticky;top:14px;align-self:start}
+.ft-flag-block{margin-bottom:18px;display:inline-block;border:1px solid rgba(12,26,51,.10);padding:4px;border-radius:4px;background:#fbf5e6}
+.ft-flag-block .flg{height:38px;width:auto;border-radius:2px;display:block;box-shadow:0 1px 3px rgba(12,26,51,.20)}
+.ft-name{font-family:'Manrope',sans-serif;font-size:clamp(2.2rem,3.4vw,2.8rem);font-weight:800;letter-spacing:-.025em;line-height:1.04;color:#0c1a33;margin:0 0 6px}
+.ft-meta{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(12,26,51,.55);margin-bottom:24px;line-height:1.6}
+.ft-meta b{color:rgba(12,26,51,.82);font-weight:600}
+.ft-meta a,.ft-meta .ft-xlink{color:rgba(12,26,51,.82);cursor:pointer;border-bottom:1px dotted rgba(12,26,51,.30)}
+.ft-meta a:hover,.ft-meta .ft-xlink:hover{color:#b58420;border-color:#b58420}
+.ft-score-block{display:flex;align-items:baseline;gap:14px;border-top:1px solid rgba(12,26,51,.12);border-bottom:1px solid rgba(12,26,51,.12);padding:18px 0;margin-bottom:18px}
+.ft-score{font-family:'Manrope',sans-serif;font-size:5.2rem;font-weight:200;line-height:.92;letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.ft-of{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.16em;color:rgba(12,26,51,.45);text-transform:uppercase;align-self:flex-end;padding-bottom:14px}
+.ft-band{font-family:'Manrope',sans-serif;font-size:1rem;font-weight:600;margin-top:auto;padding-bottom:14px}
+.ft-band .ft-trend{display:inline-block;font-size:.86rem;margin-left:4px}
+.ft-chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px}
+.ft-chip{display:inline-block;padding:5px 11px;border-radius:14px;font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600}
+.ft-narrative{font-family:'Manrope',sans-serif;font-size:1.02rem;line-height:1.65;color:rgba(12,26,51,.82);margin:0 0 24px}
+.ft-narrative b{color:#0c1a33;font-weight:700}
+.ft-quickstats{display:grid;grid-template-columns:1fr;gap:0;border-top:1px solid rgba(12,26,51,.12)}
+.ft-quickstats > div{display:flex;justify-content:space-between;align-items:baseline;padding:10px 0;border-bottom:1px solid rgba(12,26,51,.08)}
+.ft-quickstats span{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(12,26,51,.55)}
+.ft-quickstats b{font-family:'JetBrains Mono',monospace;font-size:.96rem;font-weight:700;color:#0c1a33;font-variant-numeric:tabular-nums}
+.ft-content{display:flex;flex-direction:column;gap:36px;min-width:0}
+.ft-section{position:relative}
+.ft-section-head{margin:0 0 14px;padding-bottom:10px;border-bottom:1px solid rgba(12,26,51,.18);display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.ft-section-head h2{font-family:'Manrope',sans-serif;font-size:1.45rem;font-weight:700;letter-spacing:-.018em;color:#0c1a33;margin:0}
+.ft-section-head .ft-section-sub{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(12,26,51,.55)}
+.ft-2col{display:grid;grid-template-columns:1.4fr 1fr;gap:36px}
+@media(max-width:900px){.ft-2col{grid-template-columns:1fr}}
+.ft-traj canvas{width:100%;height:240px;background:#fbf5e6;border-radius:12px;border:1px solid rgba(12,26,51,.10);display:block}
+.ft-caption{margin-top:10px;font-size:.78rem;color:rgba(12,26,51,.62);line-height:1.5;max-width:62ch}
+.ft-pillars .pbar2{margin:14px 0}
+.ft-pillars .pbar2 .pl{color:rgba(12,26,51,.78);font-size:.88rem}
+.ft-pillars .pbar2 .pl b{color:#0c1a33}
+.ft-pillars .pbar2 .pl .wt{color:rgba(12,26,51,.50);font-size:.72rem}
+.ft-pillars .pbar2 .pt{background:rgba(12,26,51,.10)}
+/* Pyramid CTA button (replaces inline mini pyramid) */
+.ft-pyr-button{display:flex;align-items:center;gap:18px;width:100%;background:#fbf5e6;border:1px solid rgba(181,132,32,.45);border-radius:14px;padding:18px 22px;color:#0c1a33;cursor:pointer;font-family:'Manrope',sans-serif;text-align:left;transition:background .15s,border-color .15s,transform .12s,box-shadow .15s;box-shadow:0 8px 24px rgba(0,0,0,.10)}
+.ft-pyr-button:hover{background:#fff8ea;border-color:rgba(181,132,32,.85);transform:translateY(-1px);box-shadow:0 14px 32px rgba(0,0,0,.16)}
+.ft-pyr-icon{flex:none;width:64px;height:54px}
+.ft-pyr-text{flex:1;display:flex;flex-direction:column;gap:4px;min-width:0}
+.ft-pyr-t{font-family:'Manrope',sans-serif;font-size:1.05rem;font-weight:700;color:#0c1a33;letter-spacing:-.01em;line-height:1.2}
+.ft-pyr-d{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(12,26,51,.55);font-weight:600}
+.ft-pyr-arr{flex:none;font-size:1.4rem;color:#b58420;font-weight:300}
+.ft-fact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1px;background:rgba(12,26,51,.10);border:1px solid rgba(12,26,51,.10);border-radius:12px;overflow:hidden}
+.ft-fact{background:#fbf5e6;padding:16px 18px}
+.ft-fact .ft-fl{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(12,26,51,.55);font-weight:600;margin-bottom:8px}
+.ft-fact .ft-fv{font-family:'Manrope',sans-serif;font-size:1.6rem;font-weight:700;color:#0c1a33;line-height:1;font-variant-numeric:tabular-nums;letter-spacing:-.015em}
+.ft-fact .ft-fu{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:rgba(12,26,51,.50);font-weight:500;margin-left:4px}
+.ft-fact .ft-fd{font-size:.74rem;color:rgba(12,26,51,.62);margin-top:6px;line-height:1.4}
+.ft-context .cp-ctx-grp{background:#fbf5e6;border:1px solid rgba(12,26,51,.10);border-radius:12px;padding:14px 16px}
+.ft-context .cp-ctx-lbl{color:#b58420}
+.ft-context .cp-ctx-row .top .l{color:rgba(12,26,51,.74)}
+.ft-context .cp-ctx-row .top .v{color:#0c1a33}
+.ft-context .cp-ctx-tk::before{background:rgba(12,26,51,.14)}
+.ft-context .cp-ctx-tk::after,.ft-context .cp-ctx-tke{background:rgba(12,26,51,.22)}
+.ft-context .cp-ctx-dot{box-shadow:0 0 0 3px #fbf5e6}
+.ft-context .cp-ctx-pct .w{color:rgba(12,26,51,.45)}
+.ft-context .cp-ctx-imp{color:rgba(12,26,51,.55)}
+.ft-context .pf-ctx{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:760px){.ft-context .pf-ctx{grid-template-columns:1fr}}
+/* <!-- FT-LAYOUT-APPLIED --> */
 </style></head><body><div class="page"><div class="topbar"><a class="dr-lockup" href="https://demoriaresearch.com" aria-label="Demoria Research — home"><svg class="dr-mark-svg" viewBox="0 0 600 500" aria-hidden="true"><g stroke="currentColor" stroke-width="4.5" fill="none"><rect x="200" y="100" width="50" height="38"/><rect x="178" y="138" width="72" height="38"/><rect x="156" y="176" width="94" height="38"/><rect x="134" y="214" width="116" height="38"/><rect x="112" y="252" width="138" height="38"/><rect x="90" y="290" width="160" height="38"/><rect x="68" y="328" width="182" height="38"/><rect x="46" y="366" width="204" height="38"/><rect x="350" y="100" width="50" height="38"/><rect x="350" y="138" width="72" height="38"/><rect x="350" y="176" width="94" height="38"/><rect x="350" y="214" width="116" height="38"/><rect x="350" y="252" width="138" height="38"/><rect x="350" y="290" width="160" height="38"/><rect x="350" y="328" width="182" height="38"/><rect x="350" y="366" width="204" height="38"/><path d="M 250 100 A 50 50 0 0 1 350 100"/></g><g stroke="currentColor" stroke-width="4.5" fill="none" stroke-linejoin="miter"><path d="M 270 160 L 330 160 L 300 250 Z"/><path d="M 270 350 L 330 350 L 300 250 Z"/></g></svg><span class="dr-wm"><span class="dr-wm-d">Demoria</span><span class="dr-wm-r">Research</span></span></a><span class="bl"></span><a class="brand" href="#" onclick="try{history.pushState({view:'landing'},'','/');}catch(e){}show('landing');return false;" title="Demoria Research — home"><span class="mk">DHI</span><span class="bt"><em>v2.0</em></span></a><nav class="tabs"><button class="tab on" data-v="home">Home</button><span class="tab-sep"></span><button class="tab" data-v="world">World</button><span class="tab-sep"></span><button class="tab" data-v="rankings">Index &amp; Rankings</button><span class="tab-sep"></span><button class="tab" data-v="compare">Compare</button><span class="tab-sep"></span><button class="tab" data-v="about">About</button><button class="tab sowhat" data-v="sowhat">So What?</button><button class="tab" data-v="method">Methodology</button><button class="tab" data-v="author">Author</button><span class="tab-sep"></span><button class="tab" data-v="research">Research</button><span class="tab-sep"></span><button class="tab" data-v="data">Data</button></nav><span class="tbspace"></span><button class="immerse" id="immerse">&#11034;&nbsp;Full immersion</button></div><main id="views"><section class="view on" id="view-landing"><svg id="bg-map" class="bg-layer" preserveAspectRatio="xMidYMid slice" aria-hidden="true"></svg><svg id="bg-trend" class="bg-layer" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="area-grad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#e0b54a" stop-opacity="0.45"/><stop offset="100%" stop-color="#e0b54a" stop-opacity="0"/></linearGradient></defs></svg><div class="dr-wrap"><div class="dr-brand-lockup"><svg viewBox="0 0 600 500" aria-hidden="true"><g stroke="currentColor" stroke-width="4.2" fill="none"><rect x="200" y="100" width="50" height="38"/><rect x="178" y="138" width="72" height="38"/><rect x="156" y="176" width="94" height="38"/><rect x="134" y="214" width="116" height="38"/><rect x="112" y="252" width="138" height="38"/><rect x="90" y="290" width="160" height="38"/><rect x="68" y="328" width="182" height="38"/><rect x="46" y="366" width="204" height="38"/><rect x="350" y="100" width="50" height="38"/><rect x="350" y="138" width="72" height="38"/><rect x="350" y="176" width="94" height="38"/><rect x="350" y="214" width="116" height="38"/><rect x="350" y="252" width="138" height="38"/><rect x="350" y="290" width="160" height="38"/><rect x="350" y="328" width="182" height="38"/><rect x="350" y="366" width="204" height="38"/><path d="M 250 100 A 50 50 0 0 1 350 100"/></g><g stroke="currentColor" stroke-width="4.2" fill="none" stroke-linejoin="miter"><path d="M 270 160 L 330 160 L 300 250 Z"/><path d="M 270 350 L 330 350 L 300 250 Z"/></g></svg><span class="dr-eyebrow">Demoria Research</span></div><h1 class="dr-h1" id="drHeadline">Welcome to Demoria Research&rsquo;s<br><em>Demographic Health Index</em> &nbsp;<span class="dr-h1-acr">(DHI)</span></h1><p class="dr-lede" id="drLede">A single 0&ndash;100 score for every country&rsquo;s ability to renew its population through its own births &mdash; calculated for <b>236 countries</b>, every year from <b>1965 to 2100</b>.</p><div class="dr-personal-strip" id="drPersonal" style="display:none"></div><div class="dr-links"><button class="dr-link" id="landingCta"><span class="dr-link-text"><span class="dr-link-name" id="drLinkName">Open the world map to see your country</span><span class="dr-link-desc" id="drLinkDesc">All 236 countries &middot; 1965&ndash;2100</span></span><span class="dr-link-arrow">&rarr;</span></button></div></div><footer class="dr-footer">&copy; Demoria Research</footer></section><section class="view" id="view-home"><div class="hb-fx" aria-hidden="true"></div><div class="home-wrap">
 <div class="home-hero"><div class="home-bg-host"><svg class="home-bg" id="homeBg" aria-hidden="true"></svg></div>
   <div class="hh-eye">Demoria Research &middot; v2.0</div>
@@ -1981,9 +2083,16 @@ const TRAJ_CAP='Solid line: observed (1965&ndash;2025) and the WPP medium projec
 // ---- population pyramid ----
 function fmtPop(v){return v>=1000?(v/1000).toFixed(v>=10000?0:1)+'M':Math.round(v)+'k';}
 function drawPyramid(cv,mb,fb,fixedMax){
-  const w=cv.clientWidth||600,h=380;
+  const cream = !!cv.closest('.pyr-page');
+  // On the cream full-page pyramid the canvas is flex-sized; respect its
+  // measured height so it fills the available space without scrolling.
+  const w=cv.clientWidth||600;
+  const h = cream ? Math.max(280, cv.clientHeight||360) : 380;
   cv.width=w*DPR;cv.height=h*DPR;const x=cv.getContext('2d');x.setTransform(DPR,0,0,DPR,0,0);
   x.clearRect(0,0,w,h);
+  const P = cream
+    ? {axisLine:'rgba(12,26,51,.20)', axisLabel:'rgba(12,26,51,.62)', ageLabel:'rgba(12,26,51,.62)', ageBand:'rgba(12,26,51,.50)', maleHead:'#2f567c', femaleHead:'#8a5066', maleBar:'#4f7bb0', maleBright:'#6b9ccf', femaleBar:'#bd7e98', femaleBright:'#d099b3'}
+    : {axisLine:'rgba(255,255,255,.14)', axisLabel:'rgba(238,241,246,.55)', ageLabel:'rgba(238,241,246,.6)', ageBand:'rgba(238,241,246,.4)', maleHead:'#86b6e8', femaleHead:'#f3b9d0', maleBar:'#4f7bb0', maleBright:'#9ec8f2', femaleBar:'#bd7e98', femaleBright:'#f7c4d8'};
   const n=mb.length,padT=30,padB=36,cx=w/2,gap=52;
   const bandH=(h-padT-padB)/n;
   let mx=fixedMax||0,tm=0,tf=0;
@@ -1992,30 +2101,30 @@ function drawPyramid(cv,mb,fb,fixedMax){
   const halfW=(w-gap)/2-12;
   const AGES=['0','5','10','15','20','25','30','35','40','45','50','55','60','65','70','75','80','85','90','95','100+'];
   x.font='11px JetBrains Mono';x.textAlign='center';
-  x.fillStyle='#86b6e8';x.fillText('♂  Male  '+fmtPop(tm),cx-gap/2-halfW/2,17);
-  x.fillStyle='#f3b9d0';x.fillText('♀  Female  '+fmtPop(tf),cx+gap/2+halfW/2,17);
+  x.fillStyle=P.maleHead;x.fillText('♂  Male  '+fmtPop(tm),cx-gap/2-halfW/2,17);
+  x.fillStyle=P.femaleHead;x.fillText('♀  Female  '+fmtPop(tf),cx+gap/2+halfW/2,17);
   for(let i=0;i<n;i++){
     const y=padT+(n-1-i)*bandH,bw=Math.max(3,bandH*0.74),by=y+(bandH-bw)/2;
     const m=mb[i]||0,f=fb[i]||0,sh=Math.min(m,f);
     const ml=m/mx*halfW,fl=f/mx*halfW,shW=sh/mx*halfW;
-    x.fillStyle='#4f7bb0';x.fillRect(cx-gap/2-shW,by,shW,bw);
-    if(m>f){x.fillStyle='#9ec8f2';x.fillRect(cx-gap/2-ml,by,ml-shW,bw);}
-    x.fillStyle='#bd7e98';x.fillRect(cx+gap/2,by,shW,bw);
-    if(f>m){x.fillStyle='#f7c4d8';x.fillRect(cx+gap/2+shW,by,fl-shW,bw);}
-    if(i%2===0){x.fillStyle='rgba(238,241,246,.6)';x.font='9px JetBrains Mono';x.textAlign='center';
+    x.fillStyle=P.maleBar;x.fillRect(cx-gap/2-shW,by,shW,bw);
+    if(m>f){x.fillStyle=P.maleBright;x.fillRect(cx-gap/2-ml,by,ml-shW,bw);}
+    x.fillStyle=P.femaleBar;x.fillRect(cx+gap/2,by,shW,bw);
+    if(f>m){x.fillStyle=P.femaleBright;x.fillRect(cx+gap/2+shW,by,fl-shW,bw);}
+    if(i%2===0){x.fillStyle=P.ageLabel;x.font='9px JetBrains Mono';x.textAlign='center';
       x.fillText(AGES[i],cx,y+bandH/2+3);}
   }
   const ay=h-padB+6;
-  x.strokeStyle='rgba(255,255,255,.14)';x.beginPath();
+  x.strokeStyle=P.axisLine;x.beginPath();
   x.moveTo(cx-gap/2-halfW,ay);x.lineTo(cx-gap/2,ay);x.moveTo(cx+gap/2,ay);x.lineTo(cx+gap/2+halfW,ay);x.stroke();
-  x.fillStyle='rgba(238,241,246,.55)';x.font='9px JetBrains Mono';x.textAlign='center';
+  x.fillStyle=P.axisLabel;x.font='9px JetBrains Mono';x.textAlign='center';
   [0,0.5,1].forEach(t=>{
     x.beginPath();x.moveTo(cx-gap/2-halfW*t,ay);x.lineTo(cx-gap/2-halfW*t,ay+3);
-    x.moveTo(cx+gap/2+halfW*t,ay);x.lineTo(cx+gap/2+halfW*t,ay+3);x.strokeStyle='rgba(255,255,255,.14)';x.stroke();
+    x.moveTo(cx+gap/2+halfW*t,ay);x.lineTo(cx+gap/2+halfW*t,ay+3);x.strokeStyle=P.axisLine;x.stroke();
     if(t>0){x.fillText(fmtPop(mx*t),cx-gap/2-halfW*t,ay+15);
     x.fillText(fmtPop(mx*t),cx+gap/2+halfW*t,ay+15);}
   });
-  x.fillStyle='rgba(238,241,246,.4)';x.fillText('age band',cx,ay+15);
+  x.fillStyle=P.ageBand;x.fillText('age band',cx,ay+15);
 }
 function pyramidBlock(){
   return '<button class="pyr-toggle" id="pyrToggle"><span class="pyr-toggle-icon">&#9650;</span><span class="pyr-toggle-lbl">Open population pyramid<span class="pyr-toggle-h">Age structure, 1965&ndash;2100</span></span><span class="pyr-toggle-arrow">&rsaquo;</span></button>';
@@ -2026,7 +2135,9 @@ function wirePyramid(iso,members,title){
   const ref=iso||(members||[]).find(z=>PYR[z]);
   if(!ref||!PYR[ref]){ btn.style.display='none'; return; }
   btn.onclick=function(){
-    document.getElementById('pyr-pg-name').textContent=title||'';
+    const nameEl=document.getElementById('pyr-pg-name');
+    const flagHtml = iso && typeof flag==='function' ? '<span class="pyr-pg-flag">'+flag(iso)+'</span>' : '';
+    nameEl.innerHTML = flagHtml + (title||'');
     show('pyramid');
     setupPyramid(iso,members);
   };
@@ -2717,7 +2828,8 @@ sizeCanvas(); applyYear(); try{drawBg(0);}catch(e){/* canvas not laid out yet wh
   });
   function selectIso(iso){
     const c=byIso[iso]; if(!c) return;
-    document.getElementById('pyr-pg-name').textContent=c.name;
+    const flagHtml = typeof flag==='function' ? '<span class="pyr-pg-flag">'+flag(iso)+'</span>' : '';
+    document.getElementById('pyr-pg-name').innerHTML = flagHtml + c.name;
     setupPyramid(iso,null);
     inp.value=''; wrap.classList.remove('open');
   }
@@ -3591,5 +3703,139 @@ window.__pos_d6=1;
       setTimeout(()=>{ try{ openPanel(byIso[iso]); }catch(e){} }, 120);
     }
   });
+})();
+</script><script>
+/* ===== FT magazine country-profile renderer (overrides rkSelect for ISO ids) ===== */
+(function(){
+  if(window.__ftApplied) return; window.__ftApplied=true;
+  function renderFt(c){
+    const m=document.getElementById('rk-main'); if(!m) return;
+    const s=c.scores['2025'], b=band(s), t=trendOf(c), pil=c.pillars['2025']||[0,0,0,0];
+    const trendMk = t==='up'?'<span class="ft-trend" style="color:#46b98a">▲</span>':t==='dn'?'<span class="ft-trend" style="color:#dd6f3e">▼</span>':'<span class="ft-trend" style="color:#7c8aa7">—</span>';
+    const trendLbl = t==='up'?'Rising':t==='dn'?'Falling':'Stable';
+    const tyCol = c.catn?TYPCOL[c.catn]:'#8a5e16';
+    const popTxt = c.pop!=null?(c.pop>=1000?(c.pop/1000).toFixed(c.pop>=10000?1:2)+'B':c.pop.toFixed(c.pop<10?2:1)+'M'):'—';
+    const pd=[[0,'Fertility Strength','FSS',34],[2,'Population Momentum','PMS',28],[1,'Workforce Sustainability','WSS',22],[3,'Migration Reliance','MRS',16]];
+    const pillarsHTML = pd.map(function(e){
+      const v=pil[e[0]], contrib=v*e[3]/100;
+      return '<div class=pbar2><div class=pl><span>'+e[1]+' <span class=wt>'+e[3]+'% weight</span></span><b>'+contrib.toFixed(1)+'<span class="pb-of">/'+e[3]+'</span></b></div><div class=pt><div class=pf2 style="width:'+Math.max(2,v)+'%;background:'+ramp(v)+'"></div></div></div>';
+    }).join('');
+    function ind(key){
+      try{ const d=DATA[c.iso]; if(!d||!d.ind||!d.ind[key]) return null;
+        const idx=d.yrs.indexOf(2025); if(idx<0) return null;
+        const v=d.ind[key][idx]; return (v==null) ? null : v;
+      }catch(e){ return null; }
+    }
+    function fmt(v,d){ return v==null?'—':(+v).toFixed(d==null?1:d); }
+    const _tfr=ind('tfr'),_nrr=ind('nrr'),_medage=ind('medage'),_oadr=ind('oadr'),_netmig=ind('netmig'),_natch=ind('natch5');
+    const tfr=fmt(_tfr,2),medAge=fmt(_medage,1),oadr=fmt(_oadr,1),netmig=fmt(_netmig,2),nrr=fmt(_nrr,2),natch=fmt(_natch,2);
+    function fact(label,value,unit,desc){
+      return '<div class="ft-fact"><div class="ft-fl">'+label+'</div>'
+        +'<div class="ft-fv">'+value+(unit?'<span class="ft-fu">'+unit+'</span>':'')+'</div>'
+        +(desc?'<div class="ft-fd">'+desc+'</div>':'')+'</div>';
+    }
+    const factGrid =
+      fact('Population', popTxt, '', '2025 estimate')
+     +fact('Total fertility', tfr, '', _tfr!=null ? (_tfr>2.1?'Above replacement':'Below replacement') : '')
+     +fact('Net reproduction rate', nrr, '', _nrr!=null ? (_nrr>1.0?'Population renews':'Below renewal') : '')
+     +fact('Median age', medAge, 'yrs', _medage!=null ? (_medage<30?'Young population':_medage>40?'Ageing':'Mid-stage') : '')
+     +fact('Old-age dependency', oadr, '%', _oadr!=null ? (_oadr<15?'Low burden':_oadr>30?'High burden':'') : '')
+     +fact('Net migration', netmig, '/1000', _netmig!=null ? (_netmig<-1?'Net outflow':_netmig>1?'Net inflow':'Balanced') : '')
+     +fact('Natural change, 5-yr', natch, '/1000', _natch!=null ? (_natch<0?'Shrinking':'Growing') : '')
+     +fact('10-yr DHI trend', trendLbl, '', 'vs 2015');
+    m.scrollTop=0;
+    m.innerHTML =
+      '<div class="pf-paper ft-paper">'+
+        '<div class="ft-eyebrow">Demoria Research · Demographic Health Index 2026 · v2.0</div>'+
+        '<div class="ft-grid">'+
+          '<aside class="ft-hero">'+
+            '<div class="ft-flag-block">'+flag(c.iso,160)+'</div>'+
+            '<h1 class="ft-name">'+c.name+'</h1>'+
+            '<div class="ft-meta">Rank <b>'+(c.rank||'—')+'</b> of 236<br>'+
+              (c.sov?'<b>Sovereign state</b>':'<b>Territory</b>')+
+              (c.cont?' · <span class="ft-xlink" data-go="R:'+c.cont+'"><b>'+c.cont+'</b></span>':'')+
+              (c.reg?' · <span class="ft-xlink" data-go="S:'+c.reg+'">'+c.reg+'</span>':'')+
+            '</div>'+
+            '<div class="ft-score-block">'+
+              '<div class="ft-score" style="color:'+ramp(s)+'">'+s.toFixed(1)+'</div>'+
+              '<div class="ft-of">/ 100</div>'+
+              '<div class="ft-band" style="color:'+b[1]+'">'+b[0]+trendMk+'</div>'+
+            '</div>'+
+            '<div class="ft-chips">'+
+              (c.catn?'<span class="ft-chip" style="color:'+tyCol+';background:'+tyCol+'1f">Class '+c.catn+' · '+(c.cat?c.cat.split(' ·')[0]:'')+'</span>':'')+
+            '</div>'+
+            '<p class="ft-narrative">'+(c.note||'')+'</p>'+
+            '<div class="ft-quickstats">'+
+              '<div><span>Population</span><b>'+popTxt+'</b></div>'+
+              '<div><span>Total fertility</span><b>'+tfr+'</b></div>'+
+              '<div><span>Median age</span><b>'+medAge+'</b></div>'+
+              '<div><span>10-yr trend</span><b>'+trendLbl+'</b></div>'+
+            '</div>'+
+          '</aside>'+
+          '<div class="ft-content">'+
+            '<section class="ft-section ft-traj">'+
+              '<header class="ft-section-head"><h2>DHI trajectory</h2><span class="ft-section-sub">1965–2100 · observed and projected</span></header>'+
+              '<canvas id="pf-traj" class="pf-traj"></canvas>'+
+              '<p class="ft-caption">Solid line: observed (1965–2025) and the UN WPP 2024 medium projection. Shaded band: the Low–High variant range — effectively a confidence interval on the demographic future.</p>'+
+            '</section>'+
+            '<div class="ft-2col">'+
+              '<section class="ft-section ft-pillars">'+
+                '<header class="ft-section-head"><h2>How the score is built</h2><span class="ft-section-sub">Four pillars, weighted</span></header>'+
+                '<div id="pf-pillars">'+pillarsHTML+'</div>'+
+              '</section>'+
+              (PYR[c.iso]
+                ? '<section class="ft-section ft-pyrcta">'
+                  +'<header class="ft-section-head"><h2>Age structure</h2><span class="ft-section-sub">Population pyramid</span></header>'
+                  +'<button class="ft-pyr-button" id="ftPyrBtn">'
+                    +'<svg class="ft-pyr-icon" viewBox="0 0 120 100" aria-hidden="true">'
+                      +'<g fill="#b58420" fill-opacity=".15" stroke="#b58420" stroke-width="1.4">'
+                        +'<rect x="40" y="10" width="40" height="12"/>'
+                        +'<rect x="30" y="22" width="60" height="12"/>'
+                        +'<rect x="20" y="34" width="80" height="12"/>'
+                        +'<rect x="14" y="46" width="92" height="12"/>'
+                        +'<rect x="8" y="58" width="104" height="12"/>'
+                        +'<rect x="2" y="70" width="116" height="12"/>'
+                      +'</g>'
+                    +'</svg>'
+                    +'<div class="ft-pyr-text"><div class="ft-pyr-t">View population pyramid</div><div class="ft-pyr-d">Age structure · 1965 — 2100 · interactive</div></div>'
+                    +'<div class="ft-pyr-arr">→</div>'
+                  +'</button>'
+                +'</section>'
+                : '')+
+            '</div>'+
+            '<section class="ft-section ft-facts">'+
+              '<header class="ft-section-head"><h2>Key indicators</h2><span class="ft-section-sub">2025</span></header>'+
+              '<div class="ft-fact-grid">'+factGrid+'</div>'+
+            '</section>'+
+            '<section class="ft-section ft-context">'+
+              '<header class="ft-section-head"><h2>Beyond the score</h2><span class="ft-section-sub">Indicators not in the DHI composite</span></header>'+
+              '<div class="pf-ctx" id="pf-ctx"></div>'+
+            '</section>'+
+          '</div>'+
+        '</div>'+
+      '</div>';
+    if(typeof drawTrajChart==='function' && typeof buildTrajC==='function'){
+      drawTrajChart(document.getElementById('pf-traj'), buildTrajC(c), 240);
+    }
+    if(typeof renderContext==='function') renderContext('pf-ctx', c.iso);
+    function openPyr(){
+      const nameEl=document.getElementById('pyr-pg-name');
+      nameEl.innerHTML='<span class="pyr-pg-flag">'+flag(c.iso)+'</span>'+c.name;
+      show('pyramid');
+      if(typeof setupPyramid==='function') setupPyramid(c.iso,null);
+    }
+    const pyrBtn=document.getElementById('ftPyrBtn'); if(pyrBtn) pyrBtn.onclick=openPyr;
+    m.querySelectorAll('.ft-xlink').forEach(el=>el.addEventListener('click',()=>gotoRegion(el.dataset.go)));
+  }
+  const origRkSelect = window.rkSelect;
+  window.rkSelect = function(id){
+    if(id && !id.startsWith('R:') && !id.startsWith('S:') && typeof byIso!=='undefined' && byIso[id]){
+      window.rkSel = id;
+      document.querySelectorAll('.rk-row').forEach(r=>r.classList.toggle('on',r.dataset.id===id));
+      try{ renderFt(byIso[id]); }catch(e){ console.error(e); return origRkSelect(id); }
+      return;
+    }
+    return origRkSelect.apply(this, arguments);
+  };
 })();
 </script></body></html>
