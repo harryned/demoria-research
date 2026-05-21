@@ -475,7 +475,7 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
 .tabs{display:flex;gap:1px;flex-wrap:wrap}
 .tab{background:none;border:1px solid transparent;color:var(--ink2);font-family:'Manrope';font-size:.82rem;padding:7px 13px;cursor:pointer;border-radius:7px;line-height:1;transition:color .12s,background .12s,border-color .12s}
 .tab:hover{color:var(--ink);background:rgba(255,255,255,.04)}
-.tab.on{color:var(--gold);font-weight:700;background:rgba(232,184,75,.16);border-color:rgba(232,184,75,.48);box-shadow:inset 0 -2px 0 rgba(232,184,75,.55)}
+.tab.on{color:#0c1a33;font-weight:700;background:#f3ecdc;border-color:rgba(181,132,32,.55);box-shadow:inset 0 -2px 0 rgba(181,132,32,.55)}
 .tab.sowhat{color:var(--gold)}
 .tbspace{flex:1}
 .immerse{background:var(--surface);border:1px solid var(--line);color:var(--ink2);font-family:'Manrope';font-size:.75rem;padding:7px 12px;border-radius:7px;cursor:pointer;white-space:nowrap}
@@ -1106,7 +1106,143 @@ table.rank tbody tr{cursor:pointer}
 .dt-note{font-size:.82rem;color:var(--ink3);margin:10px 0 0;line-height:1.55}
 @media(max-width:720px){.rk-body{flex-direction:column}.rk-rail{width:auto;border-right:0;border-bottom:1px solid var(--line);max-height:300px}.rk-main{padding:24px 20px 70px}}
 @media(max-width:720px){.topbar{height:auto;flex-wrap:wrap;padding:8px 12px;gap:4px}.tbspace{flex-basis:100%;height:0}}
-</style></head><body><div class="page"><div class="topbar"><a class="dr-lockup" href="https://demoriaresearch.com" aria-label="Demoria Research — home"><svg class="dr-mark-svg" viewBox="0 0 600 500" aria-hidden="true"><g stroke="currentColor" stroke-width="4.5" fill="none"><rect x="200" y="100" width="50" height="38"/><rect x="178" y="138" width="72" height="38"/><rect x="156" y="176" width="94" height="38"/><rect x="134" y="214" width="116" height="38"/><rect x="112" y="252" width="138" height="38"/><rect x="90" y="290" width="160" height="38"/><rect x="68" y="328" width="182" height="38"/><rect x="46" y="366" width="204" height="38"/><rect x="350" y="100" width="50" height="38"/><rect x="350" y="138" width="72" height="38"/><rect x="350" y="176" width="94" height="38"/><rect x="350" y="214" width="116" height="38"/><rect x="350" y="252" width="138" height="38"/><rect x="350" y="290" width="160" height="38"/><rect x="350" y="328" width="182" height="38"/><rect x="350" y="366" width="204" height="38"/><path d="M 250 100 A 50 50 0 0 1 350 100"/></g><g stroke="currentColor" stroke-width="4.5" fill="none" stroke-linejoin="miter"><path d="M 270 160 L 330 160 L 300 250 Z"/><path d="M 270 350 L 330 350 L 300 250 Z"/></g></svg><span class="dr-wm"><span class="dr-wm-d">Demoria</span><span class="dr-wm-r">Research</span></span></a><span class="bl"></span><a class="brand" href="#" onclick="try{history.pushState({view:'landing'},'','/');}catch(e){}show('landing');return false;" title="Demoria Research — home"><span class="mk">DHI</span><span class="bt"><em>v2.0</em></span></a><nav class="tabs"><button class="tab on" data-v="home">Home</button><span class="tab-sep"></span><button class="tab" data-v="world">World</button><span class="tab-sep"></span><button class="tab" data-v="rankings">Index &amp; Rankings</button><span class="tab-sep"></span><button class="tab" data-v="compare">Compare</button><span class="tab-sep"></span><button class="tab" data-v="about">About</button><button class="tab sowhat" data-v="sowhat">So What?</button><button class="tab" data-v="method">Methodology</button><button class="tab" data-v="author">Author</button><span class="tab-sep"></span><button class="tab" data-v="research">Research</button><span class="tab-sep"></span><button class="tab" data-v="data">Data</button></nav><span class="tbspace"></span><button class="immerse" id="immerse">&#11034;&nbsp;Full immersion</button></div><main id="views"><section class="view on" id="view-landing"><svg id="bg-map" class="bg-layer" preserveAspectRatio="xMidYMid slice" aria-hidden="true"></svg><svg id="bg-trend" class="bg-layer" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="area-grad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#e0b54a" stop-opacity="0.45"/><stop offset="100%" stop-color="#e0b54a" stop-opacity="0"/></linearGradient></defs></svg><div class="dr-wrap"><div class="dr-brand-lockup"><svg viewBox="0 0 600 500" aria-hidden="true"><g stroke="currentColor" stroke-width="4.2" fill="none"><rect x="200" y="100" width="50" height="38"/><rect x="178" y="138" width="72" height="38"/><rect x="156" y="176" width="94" height="38"/><rect x="134" y="214" width="116" height="38"/><rect x="112" y="252" width="138" height="38"/><rect x="90" y="290" width="160" height="38"/><rect x="68" y="328" width="182" height="38"/><rect x="46" y="366" width="204" height="38"/><rect x="350" y="100" width="50" height="38"/><rect x="350" y="138" width="72" height="38"/><rect x="350" y="176" width="94" height="38"/><rect x="350" y="214" width="116" height="38"/><rect x="350" y="252" width="138" height="38"/><rect x="350" y="290" width="160" height="38"/><rect x="350" y="328" width="182" height="38"/><rect x="350" y="366" width="204" height="38"/><path d="M 250 100 A 50 50 0 0 1 350 100"/></g><g stroke="currentColor" stroke-width="4.2" fill="none" stroke-linejoin="miter"><path d="M 270 160 L 330 160 L 300 250 Z"/><path d="M 270 350 L 330 350 L 300 250 Z"/></g></svg><span class="dr-eyebrow">Demoria Research</span></div><h1 class="dr-h1" id="drHeadline">Welcome to Demoria Research&rsquo;s<br><em>Demographic Health Index</em> &nbsp;<span class="dr-h1-acr">(DHI)</span></h1><p class="dr-lede" id="drLede">A single 0&ndash;100 score for every country&rsquo;s ability to renew its population through its own births &mdash; calculated for <b>236 countries</b>, every year from <b>1965 to 2100</b>.</p><div class="dr-personal-strip" id="drPersonal" style="display:none"></div><div class="dr-links"><button class="dr-link" id="landingCta"><span class="dr-link-text"><span class="dr-link-name" id="drLinkName">Find out how every country compares</span><span class="dr-link-desc" id="drLinkDesc">Open the world map</span></span><span class="dr-link-arrow">&rarr;</span></button></div></div><footer class="dr-footer">&copy; Demoria Research</footer></section><section class="view" id="view-home"><div class="home-wrap">
+
+/* ====================================================================
+   Harmonised cream-card dimensions across Compare / About / Research /
+   Data so navigating between them is seamless (same width, padding,
+   margin). Index & Rankings profile uses the same .pf-paper chassis.
+   ==================================================================== */
+.cmp-wrap > .pf-paper.cmp-paper,
+#view-research .research-wrap,
+#view-data .datawrap{
+  max-width:1180px;
+  margin:34px auto 60px;
+  padding:46px clamp(28px,4vw,54px) 60px;
+  border-radius:24px;
+  box-shadow:0 30px 90px rgba(0,0,0,.34)
+}
+.cmp-wrap{max-width:none;padding:0 clamp(20px,3vw,40px)}
+.essay{max-width:1180px;padding:0 0 130px;margin:0 auto}
+.essay-hero{padding:46px clamp(28px,4vw,54px) 38px;margin:34px 0 0;border-radius:24px 24px 0 0}
+.essay-body{margin:0 0 60px;padding:38px clamp(28px,4vw,54px) 100px;border-radius:0 0 24px 24px}
+
+/* ====================================================================
+   Home page — Spotlight beams dynamic background.
+   Three cream/gold radial cone gradients slowly rotating around the
+   centre, like searchlights on a stage. Replaces the small in-hero
+   static bg map with a full-view atmospheric effect.
+   ==================================================================== */
+/* .view is already position:absolute so the .hb-fx overlay can use absolute positioning directly */
+#view-home > .home-wrap{position:relative;z-index:2}
+#view-home > .hb-fx{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;overflow:hidden;background:
+  radial-gradient(ellipse 18% 80% at 25% 50%, rgba(243,236,220,.22), transparent 70%),
+  radial-gradient(ellipse 14% 70% at 60% 50%, rgba(232,184,75,.18), transparent 75%),
+  radial-gradient(ellipse 16% 90% at 85% 50%, rgba(243,236,220,.18), transparent 70%);
+  transform-origin:center;
+  animation:hbSpotlight 26s linear infinite}
+@keyframes hbSpotlight{
+  0%{transform:rotate(0deg) scale(1.1)}
+  100%{transform:rotate(360deg) scale(1.1)}
+}
+/* Hide the small in-hero static map since spotlight covers the full view */
+#view-home .home-bg-host{display:none}
+
+/* ====================================================================
+   Topbar Q — masthead band + sigil + DHI 2026 + centred tabs +
+   cream/gold racing stripe along the bottom.
+   ==================================================================== */
+/* push topbar down 22px for the masthead band */
+.topbar{margin-top:22px}
+body::before{content:'';position:fixed;top:0;left:0;right:0;height:22px;background:#ece2c8;z-index:21;box-shadow:0 1px 0 rgba(181,132,32,.45)}
+body::after{content:'Demoria Research \00A0\00B7\00A0 Demographic Health Index 2026 \00A0\00B7\00A0 v2.0';position:fixed;top:0;left:0;right:0;height:22px;line-height:22px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.30em;color:rgba(12,26,51,.78);text-transform:uppercase;font-weight:600;z-index:22;pointer-events:none}
+/* Hide Demoria/Research wordmark + the bullet separator before .brand */
+.dr-lockup .dr-wm,.topbar > .bl{display:none!important}
+.dr-lockup{padding:4px 4px;margin-right:14px}
+.dr-lockup svg.dr-mark-svg{width:44px!important;height:auto!important;color:#e0b54a}
+/* Brand block becomes "DHI 2026" with gold "DHI" + white "2026" */
+.brand{margin-right:26px;display:flex;align-items:center;gap:8px}
+.brand .mk{font-family:'JetBrains Mono',monospace;font-size:1.15rem;font-weight:700;color:#e0b54a;letter-spacing:.04em}
+.brand .bl{display:none!important}
+.brand .bt{font-family:'JetBrains Mono',monospace;font-size:1.15rem;font-weight:700;color:rgba(255,255,255,.92);letter-spacing:.04em}
+.brand .bt em{visibility:hidden;position:relative;font-style:normal}
+.brand .bt em::after{content:'2026';visibility:visible;position:absolute;left:0;top:0;color:rgba(255,255,255,.92);font-weight:700;font-style:normal}
+/* Centre the tabs in the remaining space; tighten so they fit one row */
+.tabs{position:absolute;left:50%;transform:translateX(-50%);flex-wrap:nowrap;white-space:nowrap}
+.tab{font-size:.78rem;padding:6px 11px}
+.tab-sep{margin:0 4px}
+.tbspace{display:none}
+/* Cream + gold layered racing stripe along the bottom (replaces the
+   1px navy border-bottom) */
+.topbar{border-bottom:0!important}
+.topbar::before{content:'';position:absolute;left:0;right:0;bottom:1px;height:3px;background:#f3ecdc;pointer-events:none;z-index:25}
+.topbar::after{content:'';position:absolute;left:0;right:0;bottom:0;height:1px;background:#e0b54a;pointer-events:none;z-index:26}
+
+/* ====================================================================
+   Research + Data — single cream paper card wrapper on navy.
+   ==================================================================== */
+#view-research .research-wrap{background:#f3ecdc;color:#0c1a33;border-radius:24px;box-shadow:0 30px 90px rgba(0,0,0,.34);padding:42px clamp(28px,4vw,54px) 60px;margin:34px auto 60px;max-width:1180px;text-align:center}
+#view-research .research-wrap > .lead{max-width:62ch;margin-left:auto;margin-right:auto}
+#view-research .research-list,#view-research .research-note{text-align:left}
+#view-research .research-wrap .eyebrow2{color:#b58420}
+#view-research .research-wrap h2{color:#0c1a33}
+#view-research .research-wrap h2 em{color:#b58420}
+#view-research .research-wrap .lead{color:rgba(12,26,51,.78)}
+#view-research .research-list{background:rgba(12,26,51,.10);border-color:rgba(12,26,51,.10)}
+#view-research .research-card{background:#fbf5e6}
+#view-research .research-card:hover{background:rgba(181,132,32,.08)}
+#view-research .research-card .rc-idx{color:#b58420}
+#view-research .research-card .rc-eye{color:rgba(12,26,51,.62)}
+#view-research .research-card .rc-title{color:#0c1a33}
+#view-research .research-card .rc-sub{color:rgba(12,26,51,.78)}
+#view-research .research-card .rc-arr{color:#b58420}
+#view-research .research-card .rc-bd-pill{background:rgba(181,132,32,.12);color:#b58420;border-color:rgba(181,132,32,.40)}
+#view-research .research-card .rc-bd-pill.lock{background:rgba(12,26,51,.06);color:rgba(12,26,51,.45);border-color:rgba(12,26,51,.18)}
+#view-research .research-note{background:#fbf5e6;border-color:rgba(12,26,51,.10)}
+#view-research .research-note .rn-back{color:#b58420}
+#view-research .research-note .rn-back:hover{color:#0c1a33}
+#view-research .research-note .rn-eye{color:#b58420}
+#view-research .research-note .rn-title{color:#0c1a33}
+#view-research .research-note .rn-sub{color:rgba(12,26,51,.78)}
+#view-research .research-note .rn-body{color:#0c1a33}
+#view-research .research-note .rn-h{color:#b58420}
+#view-research .research-note .rn-source{background:rgba(181,132,32,.05);border-left-color:#b58420}
+#view-research .research-note .rn-source .rs-l{color:#0c1a33}
+#view-research .research-note .rn-source .rs-w{color:rgba(12,26,51,.62)}
+#view-research .research-note .rn-source .rs-c{color:rgba(12,26,51,.78)}
+
+#view-data .datawrap{background:#f3ecdc;color:#0c1a33;border-radius:24px;box-shadow:0 30px 90px rgba(0,0,0,.34);padding:42px clamp(28px,4vw,54px) 60px;margin:34px auto 60px;max-width:1180px;text-align:center}
+#view-data .datawrap > .lead{max-width:74ch;margin-left:auto;margin-right:auto}
+#view-data .datactl,#view-data #dataBody{text-align:left}
+#view-data .datawrap .eyebrow2{color:#b58420}
+#view-data .datawrap h2{color:#0c1a33}
+#view-data .datawrap h2 em{color:#b58420}
+#view-data .datawrap .lead{color:rgba(12,26,51,.78)}
+#view-data .dt-badge-wpp{background:rgba(74,139,194,.10);color:#3a6896;border-color:rgba(74,139,194,.32)}
+#view-data .dt-badge-nso{background:rgba(181,132,32,.14);color:#b58420;border-color:rgba(181,132,32,.42)}
+#view-data .dt-search input{background:#fbf5e6;border-color:rgba(12,26,51,.10);color:#0c1a33}
+#view-data .dt-search input::placeholder{color:rgba(12,26,51,.40)}
+#view-data .dt-search input:focus{border-color:rgba(181,132,32,.55)}
+#view-data .dt-search-dd{background:#fff;border-color:rgba(12,26,51,.10);box-shadow:0 18px 48px rgba(12,26,51,.18)}
+#view-data .dt-search-dd .dd-row{color:#0c1a33}
+#view-data .dt-search-dd .dd-row:hover,#view-data .dt-search-dd .dd-row.kbd{background:rgba(181,132,32,.10)}
+#view-data .dlbtn{background:#fbf5e6;border:1px solid rgba(12,26,51,.10);color:#0c1a33}
+#view-data .dlbtn:hover{border-color:rgba(181,132,32,.50);background:#fff8ea}
+#view-data .dt-country-h{border-bottom-color:rgba(12,26,51,.10)}
+#view-data .dt-country-name{color:#0c1a33}
+#view-data .dt-country-sub{color:rgba(12,26,51,.62)}
+#view-data .dt-country-sub code{color:#b58420;background:rgba(181,132,32,.10)}
+#view-data .dt-group-h{color:#b58420;border-bottom-color:rgba(181,132,32,.30)}
+#view-data .dt-note{color:rgba(12,26,51,.62)}
+#view-data .dt-box{border-color:rgba(12,26,51,.10);background:#fbf5e6}
+#view-data .dtbl{color:#0c1a33}
+#view-data .dtbl thead th,#view-data .dtbl.wide thead th{background:rgba(12,26,51,.06);color:rgba(12,26,51,.62);border-bottom:1px solid rgba(12,26,51,.18);font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;text-align:left;padding:9px 12px;font-weight:600}
+#view-data .dtbl tbody td{color:#0c1a33;border-top:1px solid rgba(12,26,51,.10);padding:7px 12px;background:transparent;font-variant-numeric:tabular-nums}
+#view-data .dtbl tbody tr:hover td{background:#fff8ea}
+#view-data .dtbl td.dt-yr,#view-data .dtbl th.dt-yr{color:rgba(12,26,51,.62)!important}
+#view-data .dtbl td.dt-na{color:rgba(12,26,51,.30)!important}
+#view-data .dtbl td.dt-nso{background:rgba(181,132,32,.06)!important}
+#view-data .dtbl .dt-unit{color:rgba(12,26,51,.62)}
+</style></head><body><div class="page"><div class="topbar"><a class="dr-lockup" href="https://demoriaresearch.com" aria-label="Demoria Research — home"><svg class="dr-mark-svg" viewBox="0 0 600 500" aria-hidden="true"><g stroke="currentColor" stroke-width="4.5" fill="none"><rect x="200" y="100" width="50" height="38"/><rect x="178" y="138" width="72" height="38"/><rect x="156" y="176" width="94" height="38"/><rect x="134" y="214" width="116" height="38"/><rect x="112" y="252" width="138" height="38"/><rect x="90" y="290" width="160" height="38"/><rect x="68" y="328" width="182" height="38"/><rect x="46" y="366" width="204" height="38"/><rect x="350" y="100" width="50" height="38"/><rect x="350" y="138" width="72" height="38"/><rect x="350" y="176" width="94" height="38"/><rect x="350" y="214" width="116" height="38"/><rect x="350" y="252" width="138" height="38"/><rect x="350" y="290" width="160" height="38"/><rect x="350" y="328" width="182" height="38"/><rect x="350" y="366" width="204" height="38"/><path d="M 250 100 A 50 50 0 0 1 350 100"/></g><g stroke="currentColor" stroke-width="4.5" fill="none" stroke-linejoin="miter"><path d="M 270 160 L 330 160 L 300 250 Z"/><path d="M 270 350 L 330 350 L 300 250 Z"/></g></svg><span class="dr-wm"><span class="dr-wm-d">Demoria</span><span class="dr-wm-r">Research</span></span></a><span class="bl"></span><a class="brand" href="#" onclick="try{history.pushState({view:'landing'},'','/');}catch(e){}show('landing');return false;" title="Demoria Research — home"><span class="mk">DHI</span><span class="bt"><em>v2.0</em></span></a><nav class="tabs"><button class="tab on" data-v="home">Home</button><span class="tab-sep"></span><button class="tab" data-v="world">World</button><span class="tab-sep"></span><button class="tab" data-v="rankings">Index &amp; Rankings</button><span class="tab-sep"></span><button class="tab" data-v="compare">Compare</button><span class="tab-sep"></span><button class="tab" data-v="about">About</button><button class="tab sowhat" data-v="sowhat">So What?</button><button class="tab" data-v="method">Methodology</button><button class="tab" data-v="author">Author</button><span class="tab-sep"></span><button class="tab" data-v="research">Research</button><span class="tab-sep"></span><button class="tab" data-v="data">Data</button></nav><span class="tbspace"></span><button class="immerse" id="immerse">&#11034;&nbsp;Full immersion</button></div><main id="views"><section class="view on" id="view-landing"><svg id="bg-map" class="bg-layer" preserveAspectRatio="xMidYMid slice" aria-hidden="true"></svg><svg id="bg-trend" class="bg-layer" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="area-grad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#e0b54a" stop-opacity="0.45"/><stop offset="100%" stop-color="#e0b54a" stop-opacity="0"/></linearGradient></defs></svg><div class="dr-wrap"><div class="dr-brand-lockup"><svg viewBox="0 0 600 500" aria-hidden="true"><g stroke="currentColor" stroke-width="4.2" fill="none"><rect x="200" y="100" width="50" height="38"/><rect x="178" y="138" width="72" height="38"/><rect x="156" y="176" width="94" height="38"/><rect x="134" y="214" width="116" height="38"/><rect x="112" y="252" width="138" height="38"/><rect x="90" y="290" width="160" height="38"/><rect x="68" y="328" width="182" height="38"/><rect x="46" y="366" width="204" height="38"/><rect x="350" y="100" width="50" height="38"/><rect x="350" y="138" width="72" height="38"/><rect x="350" y="176" width="94" height="38"/><rect x="350" y="214" width="116" height="38"/><rect x="350" y="252" width="138" height="38"/><rect x="350" y="290" width="160" height="38"/><rect x="350" y="328" width="182" height="38"/><rect x="350" y="366" width="204" height="38"/><path d="M 250 100 A 50 50 0 0 1 350 100"/></g><g stroke="currentColor" stroke-width="4.2" fill="none" stroke-linejoin="miter"><path d="M 270 160 L 330 160 L 300 250 Z"/><path d="M 270 350 L 330 350 L 300 250 Z"/></g></svg><span class="dr-eyebrow">Demoria Research</span></div><h1 class="dr-h1" id="drHeadline">Welcome to Demoria Research&rsquo;s<br><em>Demographic Health Index</em> &nbsp;<span class="dr-h1-acr">(DHI)</span></h1><p class="dr-lede" id="drLede">A single 0&ndash;100 score for every country&rsquo;s ability to renew its population through its own births &mdash; calculated for <b>236 countries</b>, every year from <b>1965 to 2100</b>.</p><div class="dr-personal-strip" id="drPersonal" style="display:none"></div><div class="dr-links"><button class="dr-link" id="landingCta"><span class="dr-link-text"><span class="dr-link-name" id="drLinkName">Find out how every country compares</span><span class="dr-link-desc" id="drLinkDesc">Open the world map</span></span><span class="dr-link-arrow">&rarr;</span></button></div></div><footer class="dr-footer">&copy; Demoria Research</footer></section><section class="view" id="view-home"><div class="hb-fx" aria-hidden="true"></div><div class="home-wrap">
 <div class="home-hero"><div class="home-bg-host"><svg class="home-bg" id="homeBg" aria-hidden="true"></svg></div>
   <div class="hh-eye">Demoria Research &middot; v2.0</div>
   <h1 class="hh-title">Demographic <em>Health</em> Index <span class="hh-acr">(DHI)</span></h1>
@@ -1536,8 +1672,16 @@ function show(v){
   viewEls.forEach(s=>s.classList.toggle('on',s.id==='view-'+view));
   tabEls.forEach(t=>t.classList.toggle('on',t.dataset.v===v));
   if(ESSAY_PARTS[v]){
-    const a=document.getElementById('e-'+v);
-    if(a) a.scrollIntoView({behavior:v==='about'?'auto':'smooth',block:'start'});
+    // For 'about' (the first essay part), jump to the very top of the
+    // view so the cream card sits flush with the topbar. For deeper
+    // sections, smooth-scroll to their anchor.
+    if(v==='about'){
+      const host=document.getElementById('view-about');
+      if(host) host.scrollTop=0;
+    } else {
+      const a=document.getElementById('e-'+v);
+      if(a) a.scrollIntoView({behavior:'smooth',block:'start'});
+    }
   } else {
     const el=document.getElementById('view-'+view); if(el) el.scrollTop=0;
   }
