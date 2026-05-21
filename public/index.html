@@ -1342,6 +1342,16 @@ body::after{content:'Demoria Research \00A0\00B7\00A0 Demographic Health Index 2
 .ft-context .cp-ctx-pct .w{color:rgba(12,26,51,.45)}
 .ft-context .cp-ctx-imp{color:rgba(12,26,51,.55)}
 .ft-context .pf-ctx{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+/* Region FT layout extras */
+.ft-region-kind{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:#b58420;font-weight:600;margin-bottom:8px}
+.ft-region-map .rg-map{width:100%;height:320px;background:#fbf5e6;border:1px solid rgba(12,26,51,.10);border-radius:12px;display:block;cursor:pointer}
+.ft-paper-region .subtab-tbl{width:100%;border-collapse:collapse;margin-top:6px;font-size:.88rem;color:#0c1a33}
+.ft-paper-region .subtab-tbl td,.ft-paper-region .subtab-tbl th{text-align:left;padding:8px 10px;border-bottom:1px solid rgba(12,26,51,.10)}
+.ft-paper-region .subtab-tbl th{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(12,26,51,.55);font-weight:600}
+.ft-paper-region .subtab-tbl td:last-child,.ft-paper-region .subtab-tbl th:last-child{text-align:right;font-family:'JetBrains Mono',monospace}
+.ft-paper-region .subtab-tbl tr.cl{cursor:pointer}
+.ft-paper-region .subtab-tbl tr.cl:hover td{color:#b58420}
+.ft-paper-region .rg-tb-lbl{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;margin:14px 0 6px}
 @media(max-width:760px){.ft-context .pf-ctx{grid-template-columns:1fr}}
 /* <!-- FT-LAYOUT-APPLIED --> */
 
@@ -3885,12 +3895,117 @@ window.__pos_d6=1;
     const pyrBtn=document.getElementById('ftPyrBtn'); if(pyrBtn) pyrBtn.onclick=openPyr;
     m.querySelectorAll('.ft-xlink').forEach(el=>el.addEventListener('click',()=>gotoRegion(el.dataset.go)));
   }
+  // ===== FT magazine renderer for regions / sub-regions =====
+  function renderFtRegion(name, members, isCont){
+    const m=document.getElementById('rk-main'); if(!m) return;
+    const mem = members.slice().sort((a,b)=>b.scores['2025']-a.scores['2025']);
+    const s = aggScore(mem), b = band(s), pop = aggPop(mem);
+    // Aggregate pillars (pop-weighted)
+    function aggPil(idx){
+      let ws=0,w=0; mem.forEach(c=>{const p=(c.pillars&&c.pillars['2025']);if(!p)return;const pp=c.pop||0.001;ws+=(p[idx]||0)*pp;w+=pp;});return w?ws/w:0;
+    }
+    const pilA=[aggPil(0),aggPil(1),aggPil(2),aggPil(3)];
+    const pd=[[0,'Fertility Strength',34],[2,'Population Momentum',28],[1,'Workforce Sustainability',22],[3,'Migration Reliance',16]];
+    const pillarsHTML = pd.map(function(e){
+      const v=pilA[e[0]], contrib=v*e[2]/100;
+      return '<div class=pbar2><div class=pl><span>'+e[1]+' <span class=wt>'+e[2]+'% weight</span></span><b>'+contrib.toFixed(1)+'<span class="pb-of">/'+e[2]+'</span></b></div><div class=pt><div class=pf2 style="width:'+Math.max(2,v)+'%;background:'+ramp(v)+'"></div></div></div>';
+    }).join('');
+    // Score distribution
+    const scores = mem.map(c=>c.scores['2025']).filter(v=>v!=null);
+    const sMax = Math.max(...scores), sMin = Math.min(...scores);
+    const sMaxC = mem.find(c=>c.scores['2025']===sMax), sMinC = mem.find(c=>c.scores['2025']===sMin);
+    const popTxt = pop>=1000?(pop/1000).toFixed(2)+'B':pop.toFixed(0)+'M';
+    // Top/bottom rows
+    const rowB = c => '<div class="pbar2 cl" data-iso="'+c.iso+'"><div class=pl><span>'+c.name+(c.sov?'':' &middot; terr.')+'</span><b>'+c.scores['2025'].toFixed(1)+'</b></div><div class=pt><div class=pf2 style="width:'+Math.max(2,c.scores['2025'])+'%;background:'+ramp(c.scores['2025'])+'"></div></div></div>';
+    const top = mem.slice(0,3), bot = mem.slice(-3).filter(c=>top.indexOf(c)<0);
+    let exH='<div class="rg-tb-lbl" style="margin-top:0;color:rgba(12,26,51,.55)">Top '+top.length+'</div>'+top.map(rowB).join('');
+    if(bot.length) exH+='<div class="rg-tb-lbl" style="color:rgba(12,26,51,.55)">Bottom '+bot.length+'</div>'+bot.map(rowB).join('');
+    // Sub-regions table (continents only)
+    let subTable='';
+    if(isCont){
+      const subs=[...(CONTSUBS[name]||[])].map(sr=>{const a=SUBREGIONS[sr];return {sr:sr,n:a.length,m:aggScore(a),pop:aggPop(a)};}).sort((x,y)=>y.m-x.m);
+      subTable='<section class="ft-section"><header class="ft-section-head"><h2>Sub-regions</h2><span class="ft-section-sub">UN sub-regions inside '+name+'</span></header>'
+        +'<table class="subtab-tbl"><thead><tr><th>Sub-region</th><th>Members</th><th>Population</th><th>Mean DHI</th></tr></thead><tbody id="rg-subs">'
+        +subs.map(r=>'<tr class=cl data-sub="'+r.sr+'"><td>'+r.sr+'</td><td>'+r.n+'</td><td>'+r.pop.toFixed(0)+'M</td><td style="color:'+ramp(r.m)+'">'+r.m.toFixed(1)+'</td></tr>').join('')
+        +'</tbody></table></section>';
+    }
+    // All members table
+    const memTable='<section class="ft-section"><header class="ft-section-head"><h2>All members &middot; ranked</h2><span class="ft-section-sub">'+mem.length+' countries &amp; territories</span></header>'
+      +'<table class="subtab-tbl"><thead><tr><th>#</th><th>Country / territory</th><th>DHI 2025</th></tr></thead><tbody id="rg-mem">'
+      +mem.map((c,i)=>'<tr class=cl data-iso="'+c.iso+'"><td>'+(i+1)+'</td><td>'+c.name+'</td><td style="color:'+ramp(c.scores['2025'])+'">'+c.scores['2025'].toFixed(1)+'</td></tr>').join('')
+      +'</tbody></table></section>';
+    m.scrollTop=0;
+    m.innerHTML =
+      '<div class="pf-paper ft-paper ft-paper-region">'+
+        '<div class="ft-eyebrow">Demoria Research &middot; Demographic Health Index 2026 &middot; v2.0</div>'+
+        '<div class="ft-grid">'+
+          '<aside class="ft-hero">'+
+            '<div class="ft-region-kind">'+(isCont?'Continental region':'Sub-region')+'</div>'+
+            '<h1 class="ft-name">'+name+'</h1>'+
+            '<div class="ft-meta"><b>'+mem.length+'</b> countries &amp; territories<br><b>'+popTxt+'</b> people</div>'+
+            '<div class="ft-score-block">'+
+              '<div class="ft-score" style="color:'+ramp(s)+'">'+s.toFixed(1)+'</div>'+
+              '<div class="ft-of">/ 100</div>'+
+              '<div class="ft-band" style="color:'+b[1]+'">'+b[0]+'</div>'+
+            '</div>'+
+            '<p class="ft-narrative">'+name+' aggregates <b>'+mem.length+'</b> countries and territories into a single population-weighted DHI of <b>'+s.toFixed(1)+'</b> &mdash; '+b[0].toLowerCase()+' on the v2.0 scale. '+(isCont?'The sub-regions below split it into the levels where the real demographic divergence shows.':'')+'</p>'+
+            '<div class="ft-quickstats">'+
+              '<div><span>Members</span><b>'+mem.length+'</b></div>'+
+              '<div><span>Population</span><b>'+popTxt+'</b></div>'+
+              '<div><span>Mean DHI</span><b>'+s.toFixed(1)+'</b></div>'+
+              '<div><span>Range</span><b>'+sMin.toFixed(1)+' &ndash; '+sMax.toFixed(1)+'</b></div>'+
+            '</div>'+
+          '</aside>'+
+          '<div class="ft-content">'+
+            '<section class="ft-section ft-traj"><header class="ft-section-head"><h2>DHI trajectory</h2><span class="ft-section-sub">1965&ndash;2100 &middot; pop-weighted aggregate</span></header>'+
+              '<canvas id="pf-traj" class="pf-traj"></canvas>'+
+              '<p class="ft-caption">Pop-weighted mean DHI for '+name+', observed 1965&ndash;2025 and projected to 2100. Shaded band: Low&ndash;High variant range across members.</p>'+
+            '</section>'+
+            '<div class="ft-2col">'+
+              '<section class="ft-section ft-pillars"><header class="ft-section-head"><h2>How the score is built</h2><span class="ft-section-sub">Pop-weighted pillar means</span></header>'+
+                '<div id="pf-pillars">'+pillarsHTML+'</div>'+
+              '</section>'+
+              '<section class="ft-section"><header class="ft-section-head"><h2>Top &amp; bottom</h2><span class="ft-section-sub">Extremes in '+name+'</span></header>'+
+                '<div id="rg-extremes">'+exH+'</div>'+
+              '</section>'+
+            '</div>'+
+            '<section class="ft-section ft-region-map">'+
+              '<header class="ft-section-head"><h2>Map of '+name+'</h2><span class="ft-section-sub">Coloured by DHI 2025</span></header>'+
+              '<canvas class="rg-map" id="rg-map"></canvas>'+
+            '</section>'+
+            subTable+
+            memTable+
+          '</div>'+
+        '</div>'+
+      '</div>';
+    if(typeof drawTrajChart==='function' && typeof buildTrajR==='function'){
+      drawTrajChart(document.getElementById('pf-traj'), buildTrajR(mem), 240);
+    }
+    if(typeof drawRegionMap==='function'){
+      drawRegionMap(document.getElementById('rg-map'), mem);
+    }
+    m.querySelectorAll('#rg-extremes .pbar2.cl').forEach(el=>el.addEventListener('click',()=>gotoCountry(el.dataset.iso)));
+    m.querySelectorAll('#rg-subs tr.cl').forEach(tr=>tr.addEventListener('click',()=>rkSelect('S:'+tr.dataset.sub)));
+    m.querySelectorAll('#rg-mem tr.cl').forEach(tr=>tr.addEventListener('click',()=>gotoCountry(tr.dataset.iso)));
+  }
   const origRkSelect = window.rkSelect;
   window.rkSelect = function(id){
     if(id && !id.startsWith('R:') && !id.startsWith('S:') && typeof byIso!=='undefined' && byIso[id]){
       window.rkSel = id;
       document.querySelectorAll('.rk-row').forEach(r=>r.classList.toggle('on',r.dataset.id===id));
       try{ renderFt(byIso[id]); }catch(e){ console.error(e); return origRkSelect(id); }
+      return;
+    }
+    if(id && id.startsWith('R:') && typeof REGIONS!=='undefined' && REGIONS[id.slice(2)]){
+      window.rkSel = id;
+      document.querySelectorAll('.rk-row').forEach(r=>r.classList.toggle('on',r.dataset.id===id));
+      try{ renderFtRegion(id.slice(2), REGIONS[id.slice(2)], true); }catch(e){ console.error(e); return origRkSelect(id); }
+      return;
+    }
+    if(id && id.startsWith('S:') && typeof SUBREGIONS!=='undefined' && SUBREGIONS[id.slice(2)]){
+      window.rkSel = id;
+      document.querySelectorAll('.rk-row').forEach(r=>r.classList.toggle('on',r.dataset.id===id));
+      try{ renderFtRegion(id.slice(2), SUBREGIONS[id.slice(2)], false); }catch(e){ console.error(e); return origRkSelect(id); }
       return;
     }
     return origRkSelect.apply(this, arguments);
