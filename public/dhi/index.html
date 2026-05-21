@@ -798,6 +798,113 @@ table.rank tbody tr{cursor:pointer}
 .pf-ctx .cp-ctx-tk{height:10px}
 .pf-ctx .cp-ctx-dot{width:9px;height:9px}
 .pf-ctx .cp-ctx-pct{font-size:.7rem;min-width:104px}
+/* ===== Cream paper body for country / region / territory profiles ===== */
+.pf-paper{background:#f3ecdc;color:#0c1a33;padding:40px clamp(26px,4vw,54px) 48px;margin:34px 0 32px;border-radius:22px;box-shadow:0 22px 70px rgba(0,0,0,.30),inset 0 1px 0 rgba(255,255,255,.55);position:relative}
+.pf-paper > .pf-h:first-child,.pf-paper > .pf-grid:first-child .pf-h{margin-top:0}
+.pf-paper .pf-h{color:#5d4524;border-bottom-color:rgba(12,26,51,.12)}
+.pf-paper .pf-cap{color:rgba(12,26,51,.62)}
+.pf-paper .cp-h-cap{color:rgba(12,26,51,.45)}
+.pf-paper .pbar2 .pl{color:rgba(12,26,51,.78)}
+.pf-paper .pbar2 .pl b{color:#0c1a33}
+.pf-paper .pbar2 .pl .wt{color:rgba(12,26,51,.50)}
+.pf-paper .pbar2 .pl b .pb-of{color:rgba(12,26,51,.45)}
+.pf-paper .pbar2 .pt{background:rgba(12,26,51,.10)}
+.pf-paper .pbar2.cl:hover{background:rgba(181,132,32,.10)}
+.pf-paper canvas.pf-traj{background:#0c1a33;border-radius:12px;margin-top:6px}
+/* Key facts */
+.pf-paper .facts{background:rgba(12,26,51,.10);border:1px solid rgba(12,26,51,.10)}
+.pf-paper .fact{background:#fbf5e6}
+.pf-paper .fact .fl{color:rgba(12,26,51,.55)}
+.pf-paper .fact .fv{color:#0c1a33}
+.pf-paper .fact .fl-sub{color:rgba(12,26,51,.40)}
+.pf-paper .fact .muted{color:rgba(12,26,51,.40)}
+.pf-paper .trj-pt .d{box-shadow:0 0 0 3px #fbf5e6}
+.pf-paper .trj-ln{background:rgba(12,26,51,.18)}
+.pf-paper .trj-years{color:rgba(12,26,51,.50)}
+/* Context tiles */
+.pf-paper .cp-ctx-grp{background:#fbf5e6;border:1px solid rgba(12,26,51,.10)}
+.pf-paper .cp-ctx-lbl{color:#b58420}
+.pf-paper .cp-ctx-row .top .l{color:rgba(12,26,51,.74)}
+.pf-paper .cp-ctx-row .top .v{color:#0c1a33}
+.pf-paper .cp-ctx-tk::before{background:rgba(12,26,51,.14)}
+.pf-paper .cp-ctx-tk::after,.pf-paper .cp-ctx-tke{background:rgba(12,26,51,.22)}
+.pf-paper .cp-ctx-dot{box-shadow:0 0 0 3px #fbf5e6}
+.pf-paper .cp-ctx-pct .w{color:rgba(12,26,51,.45)}
+.pf-paper .cp-ctx-imp{color:rgba(12,26,51,.55)}
+/* Region-only */
+.pf-paper .rg-map{border-color:rgba(12,26,51,.14);background:#fbf5e6}
+.pf-paper .rg-tb-lbl{color:rgba(12,26,51,.55)}
+.pf-paper .subtab-tbl td,.pf-paper .subtab-tbl th{border-bottom-color:rgba(12,26,51,.10)}
+.pf-paper .subtab-tbl th{color:rgba(12,26,51,.50)}
+.pf-paper .subtab-tbl td{color:#0c1a33}
+.pf-paper .subtab-tbl tr.cl:hover td{color:#b58420}
+/* Centre the Index & Rankings subtab row (subnote hidden — was off-balancing) */
+.rk-sub{justify-content:center}
+.rk-sub .rk-subnote{display:none}
+/* Page layout: when typologies subtab is active, expand rk-main to full width */
+#view-rankings.rk-typologies .rk-rail{display:none}
+#view-rankings.rk-typologies .rk-main{padding:0}
+/* Typology overview page */
+.ty-page{max-width:1180px;margin:0 auto}
+.ty-page .pf-paper{margin:32px clamp(20px,3vw,40px)}
+.ty-eyebrow{font-family:'JetBrains Mono',monospace;font-size:.63rem;letter-spacing:.18em;text-transform:uppercase;color:#b58420}
+.ty-h2{font-size:clamp(1.8rem,3.4vw,2.6rem);font-weight:700;letter-spacing:-.02em;color:#0c1a33;margin:6px 0 14px;line-height:1.12}
+.ty-h2 em{font-style:normal;color:#b58420}
+.ty-lead{color:rgba(12,26,51,.78);font-size:1rem;line-height:1.65;max-width:68ch;margin:0 0 6px}
+.ty-lead a.ty-method-all{color:#b58420;font-weight:600;cursor:pointer;border-bottom:1px solid rgba(181,132,32,.45);transition:color .12s,border-color .12s}
+.ty-lead a.ty-method-all:hover{color:#0c1a33;border-color:#0c1a33}
+.ty-grid{display:flex;flex-direction:column;gap:14px;margin-top:38px}
+.ty-card{position:relative;background:#fbf5e6;border:1px solid rgba(12,26,51,.10);border-left:5px solid var(--ty);border-radius:12px;padding:22px 24px 22px 26px;display:grid;grid-template-columns:80px 1fr 220px;gap:24px;align-items:start;transition:transform .15s,box-shadow .18s,border-color .15s}
+.ty-card:hover{transform:translateY(-1px);box-shadow:0 14px 38px rgba(12,26,51,.10)}
+.ty-no{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:3.4rem;line-height:.95;color:var(--ty);letter-spacing:-.04em;text-align:left}
+.ty-body{min-width:0}
+.ty-name{font-family:'Manrope',sans-serif;font-size:1.45rem;font-weight:700;letter-spacing:-.012em;color:#0c1a33;line-height:1.15;margin:4px 0 8px}
+.ty-desc{font-size:.94rem;line-height:1.62;color:rgba(12,26,51,.78);margin:0 0 14px;max-width:62ch}
+.ty-members{display:flex;flex-wrap:wrap;gap:7px 10px;align-items:center;font-size:.84rem}
+.ty-mem{display:inline-flex;align-items:center;gap:6px;background:rgba(12,26,51,.04);border:1px solid rgba(12,26,51,.08);border-radius:8px;padding:4px 10px 4px 8px;color:#0c1a33;cursor:pointer;transition:background .12s,border-color .12s;font-weight:500}
+.ty-mem:hover{background:rgba(181,132,32,.10);border-color:rgba(181,132,32,.40);color:#0c1a33}
+.ty-mem .flg{height:11px;width:auto;border-radius:2px;box-shadow:0 1px 2px rgba(12,26,51,.30);object-fit:cover}
+.ty-more{color:rgba(12,26,51,.50);font-size:.82rem;font-style:italic;padding:4px 4px;letter-spacing:.01em}
+.ty-meta{display:flex;flex-direction:column;gap:11px;align-items:flex-end;border-left:1px solid rgba(12,26,51,.08);padding-left:22px;min-width:0}
+.ty-stat{text-align:right}
+.ty-stat-l{font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(12,26,51,.50);font-weight:600}
+.ty-stat-v{font-family:'Manrope',sans-serif;font-size:1.6rem;font-weight:700;color:var(--ty);line-height:1;margin-top:3px;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.ty-readmore{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ty);cursor:pointer;margin-top:6px;font-weight:600;border:0;background:none;padding:0;text-align:right;transition:color .12s,letter-spacing .15s}
+.ty-readmore:hover{color:#0c1a33;letter-spacing:.16em}
+@media(max-width:900px){.ty-card{grid-template-columns:60px 1fr;gap:18px;padding:18px 18px 18px 20px}.ty-meta{grid-column:span 2;flex-direction:row;justify-content:space-between;border-left:0;border-top:1px solid rgba(12,26,51,.08);padding-left:0;padding-top:12px;margin-top:4px;align-items:center}.ty-stat{text-align:left}.ty-no{font-size:2.6rem}.ty-name{font-size:1.2rem}}
+/* methodology — when arrived via deep-link, briefly highlight the target card */
+.etypo div.ety-flash{animation:tyFlash 1.6s ease-out}
+@keyframes tyFlash{0%{box-shadow:0 0 0 3px rgba(232,184,75,.55)}100%{box-shadow:0 0 0 3px rgba(232,184,75,0)}}
+
+/* Top-of-profile band + typology chips next to the country name */
+.pf-name-row{display:flex;align-items:baseline;gap:14px 22px;flex-wrap:wrap;margin:7px 0 5px}
+.pf-name-row .pf-name{margin:0}
+.pf-chips{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.pf-chip{display:inline-block;padding:4px 14px;border-radius:14px;font-family:'Manrope',sans-serif;font-size:.96rem;font-weight:700;letter-spacing:-.005em;line-height:1.35;white-space:nowrap}
+
+/* Top-of-paper: eyebrow, name, meta, hero, pyramid toggle on cream */
+.pf-paper{padding-top:34px}
+.pf-paper > .pf-eyebrow{color:#b58420;margin-top:0}
+.pf-paper .pf-name{color:#0c1a33;font-weight:700;letter-spacing:-.02em}
+.pf-paper .pf-meta{color:rgba(12,26,51,.55)}
+.pf-paper .pf-meta b{color:rgba(12,26,51,.82)}
+.pf-paper .pf-flag .flg{box-shadow:0 1px 3px rgba(12,26,51,.30),inset 0 0 0 1px rgba(12,26,51,.10)}
+.pf-paper .pf-hero{background:#fbf5e6;border:1px solid rgba(12,26,51,.10);box-shadow:0 1px 0 rgba(255,255,255,.6) inset}
+.pf-paper .pf-band{color:rgba(12,26,51,.65)}
+.pf-paper .pf-yr{color:rgba(12,26,51,.45)}
+.pf-paper .pf-sent{color:#0c1a33}
+.pf-paper .pf-cat{border-color:rgba(181,132,32,.55);color:#8a5e16;background:rgba(232,184,75,.14)}
+.pf-paper .pf-cat-link{cursor:pointer}
+.pf-paper .pf-xlink{color:rgba(12,26,51,.78);border-bottom-color:rgba(12,26,51,.32)}
+.pf-paper .pf-xlink:hover{color:#b58420;border-color:#b58420}
+/* Pyramid toggle inside paper */
+.pf-paper .pyr-toggle{background:rgba(181,132,32,.10);border-color:rgba(181,132,32,.40);color:#0c1a33}
+.pf-paper .pyr-toggle:hover{background:rgba(181,132,32,.18);border-color:rgba(181,132,32,.65)}
+.pf-paper .pyr-toggle .pyr-toggle-icon{background:rgba(181,132,32,.20);color:#8a5e16}
+.pf-paper .pyr-toggle .pyr-toggle-h{color:rgba(12,26,51,.55)}
+.pf-paper .pyr-toggle .pyr-toggle-arrow{color:#b58420}
+
+
 
 /* ---- Key facts polish: coloured chips + trajectory ---- */
 .fact .fv.chip{display:inline-block;padding:3px 11px;border-radius:11px;font-size:1.02rem;font-weight:700;letter-spacing:-.005em;line-height:1.25}
@@ -934,7 +1041,7 @@ table.rank tbody tr{cursor:pointer}
   <div class="hf-l">Sources &middot; UN World Population Prospects 2024 &middot; national-statistical-office overrides &middot; Wittgenstein Centre Human Capital v3 &middot; Natural Earth 1:50m geometry</div>
   <div class="hf-r">Updated 2026 &middot; Demoria Research</div>
 </div>
-</div></section><section class="view" id="view-world"><div class="stagewrap"><aside class="wm-side" id="wmSide"><div class="wm-shead"><span id="wmSheadLbl">Rankings &middot; 2025</span><button id="wmCollapse" title="Hide">&#10094;</button></div><input class="wm-search" id="wmSearch" placeholder="Search a country&hellip;"><div class="wm-filt" id="wmFilt"><button data-f="all" class="on">All</button><button data-f="sov">Countries</button><button data-f="terr">Territories</button></div><div class="wm-list" id="wmList"></div></aside><button class="wm-show" id="wmShow">&#10095;&nbsp;Rankings</button><div class="stage"><div class="stage-subtitle"><span class="stage-st-l">Demographic Health Index</span><span class="stage-st-r">populations most able to renew themselves through their own births &middot; 0&ndash;100</span></div><div class="stage-hint" id="stageHint"><div class="sh-eye">How to read this map</div><div class="sh-rows"><div class="sh-row"><span class="sh-bullet">01</span><span class="sh-txt"><b>Click any country</b> to open its DHI profile, pillar breakdown and trajectory.</span></div><div class="sh-row"><span class="sh-bullet">02</span><span class="sh-txt">Drag the <b>year slider</b> to follow the world from 1965 to 2100.</span></div><div class="sh-row"><span class="sh-bullet">03</span><span class="sh-txt">Switch <b>Colour map by</b> on the right rail to recolour by any single pillar.</span></div></div><button class="sh-close" id="stageHintClose" aria-label="Dismiss"><span>&times;</span></button></div><canvas id="bg"></canvas><canvas id="cv"></canvas></div><aside class="rail"><button class="rail-collapse" id="railCollapse" title="Hide controls">&#10095;</button><div class="rail-help-group"><button class="rh-btn" id="railWhatIsDHI" type="button"><span class="rh-i">?</span><span>What is the DHI?</span></button><button class="rh-btn" id="railWhatPillars" type="button"><span class="rh-i">?</span><span>What are the pillars?</span></button><button class="rh-btn" id="railMapHelp" type="button"><span class="rh-i">?</span><span>How to read this map</span></button></div><div class="rgrp"><div class="rlbl">View</div><div class="seg"><button id="vGlobe" class="on">Globe</button><button id="vMap">Flat map</button></div></div><div class="rgrp"><div class="rlbl">Year &mdash; observed</div><div class="yr"><span id="yrlab">2025</span><small id="yrkind">OBSERVED</small></div><input type="range" id="slider" min="0" value="0"><div class="playrow"><button class="btn" id="rew" title="Rewind to 1965">&#9198;</button><button class="btn play" id="play">&#9654;&nbsp;Autoplay</button></div><button class="btn on" id="spin">&#10227; Auto-rotate</button></div><div class="rgrp projbox"><div class="projbox-head"><span class="projbox-h1">Projections 2026&ndash;2100</span><span class="projbox-h2">Source &middot; UN WPP 2024</span></div><div class="seg projyrs" title="Projection waypoints"><button id="p2035" title="Projection: 2035">2035</button><button id="p2050" title="Projection: 2050">2050</button><button id="p2075" title="Projection: 2075">2075</button><button id="p2100" title="Projection: 2100">2100</button></div><div class="seg vseg" id="varSeg" title="UN WPP fertility scenarios — Low assumes faster TFR decline, High slower, Medium the central estimate."><button id="vLow" title="Low — UN WPP optimistic fertility-decline scenario">Low</button><button id="vMed" class="on" title="Medium — UN WPP central scenario">Medium</button><button id="vHigh" title="High — UN WPP pessimistic fertility-decline scenario">High</button></div></div><div class="rgrp"><div class="rlbl">Colour map by</div><div class="scoreseg" id="scoreSeg"><button data-m="dhi" class="ss-main on"><span class="ss-main-l">Demographic Health Index</span><span class="ss-main-s">composite of all four pillars</span></button><div class="ss-or">or by individual pillar</div><div class="ss-pills"><button data-m="F" title="Fertility Strength (FSS)">Fert.</button><button data-m="R" title="Population Momentum (PMS)">Pop.</button><button data-m="A" title="Workforce Sustainability (WSS)">Work.</button><button data-m="M" title="Migration Reliance (MRS)">Mig.</button></div></div></div><div class="rgrp"><div class="rlbl" id="lgHead">DHI score</div><div class="legend" id="legend"></div><div class="pillar-blurb" id="pillarBlurb" style="display:none"></div></div><div class="foot">DHI v2.0 &middot; WPP 2024 baseline with NSO overrides &middot; geometry Natural Earth 1:50m</div></aside><button class="rail-show" id="railShow">&#10094;&nbsp;Controls</button></div></section><section class="view" id="view-rankings"><div class="rk-sub"><div class="rk-subtabs"><button data-st="all" class="on">All 236</button><button data-st="countries">Countries</button><button data-st="territories">Territories</button><button data-st="regions">Regions</button></div><div class="rk-subnote" id="rk-subnote"></div></div><div class="rk-body"><aside class="rk-rail"><div class="rk-rlbl">Select <span id="rk-railkind">country</span></div><input class="rk-search" id="rk-search" placeholder="Search&hellip;"><div class="rk-conts" id="rk-conts"><button data-c="all" class="on">All</button><button data-c="Africa">Africa</button><button data-c="Americas">Americas</button><button data-c="Asia">Asia</button><button data-c="Europe">Europe</button><button data-c="Oceania">Oceania</button></div><div class="rk-list" id="rk-list"></div></aside><div class="rk-main" id="rk-main"></div></div></section><section class="view doc" id="view-compare"><div class="cmp-wrap"><div class="eyebrow2">Demoria Research &middot; DHI v2.0</div><h2><em>Compare</em> countries side by side</h2><p class="lead">Pick one to three countries to see their 2025 DHI scores, pillar contributions, projection trajectories and key demographics on a single page. Click a slot to switch country, &times; to remove, or + to add another.</p><div class="cmp-pickers" id="cmpPickers"></div><div class="cmp-cards" id="cmpCards"></div><div class="cmp-section"><div class="cmp-h">DHI trajectory &middot; 1965&ndash;2100</div><canvas id="cmpTraj" class="cmp-traj-cv"></canvas><div class="cmp-traj-legend" id="cmpTrajLegend"></div><div class="cmp-traj-cap">Each country&rsquo;s composite DHI from 1965 to 2025 (observed) and the UN WPP 2024 medium projection to 2100. Solid line = observed, dashed = WPP medium projection.</div></div><div class="cmp-section"><div class="cmp-h">Pillar contributions &middot; 2025</div><div class="cmp-pillars" id="cmpPillars"></div></div><div class="cmp-section"><div class="cmp-h">Key statistics &middot; 2025</div><div class="cmp-stats" id="cmpStats"></div></div></div></section><section class="view doc" id="view-about"><div class="essay-progress"><div class="essay-progress-fill"></div></div><div class="essay">
+</div></section><section class="view" id="view-world"><div class="stagewrap"><aside class="wm-side" id="wmSide"><div class="wm-shead"><span id="wmSheadLbl">Rankings &middot; 2025</span><button id="wmCollapse" title="Hide">&#10094;</button></div><input class="wm-search" id="wmSearch" placeholder="Search a country&hellip;"><div class="wm-filt" id="wmFilt"><button data-f="all" class="on">All</button><button data-f="sov">Countries</button><button data-f="terr">Territories</button></div><div class="wm-list" id="wmList"></div></aside><button class="wm-show" id="wmShow">&#10095;&nbsp;Rankings</button><div class="stage"><div class="stage-subtitle"><span class="stage-st-l">Demographic Health Index</span><span class="stage-st-r">populations most able to renew themselves through their own births &middot; 0&ndash;100</span></div><div class="stage-hint" id="stageHint"><div class="sh-eye">How to read this map</div><div class="sh-rows"><div class="sh-row"><span class="sh-bullet">01</span><span class="sh-txt"><b>Click any country</b> to open its DHI profile, pillar breakdown and trajectory.</span></div><div class="sh-row"><span class="sh-bullet">02</span><span class="sh-txt">Drag the <b>year slider</b> to follow the world from 1965 to 2100.</span></div><div class="sh-row"><span class="sh-bullet">03</span><span class="sh-txt">Switch <b>Colour map by</b> on the right rail to recolour by any single pillar.</span></div></div><button class="sh-close" id="stageHintClose" aria-label="Dismiss"><span>&times;</span></button></div><canvas id="bg"></canvas><canvas id="cv"></canvas></div><aside class="rail"><button class="rail-collapse" id="railCollapse" title="Hide controls">&#10095;</button><div class="rail-help-group"><button class="rh-btn" id="railWhatIsDHI" type="button"><span class="rh-i">?</span><span>What is the DHI?</span></button><button class="rh-btn" id="railWhatPillars" type="button"><span class="rh-i">?</span><span>What are the pillars?</span></button><button class="rh-btn" id="railMapHelp" type="button"><span class="rh-i">?</span><span>How to read this map</span></button></div><div class="rgrp"><div class="rlbl">View</div><div class="seg"><button id="vGlobe" class="on">Globe</button><button id="vMap">Flat map</button></div></div><div class="rgrp"><div class="rlbl">Year &mdash; observed</div><div class="yr"><span id="yrlab">2025</span><small id="yrkind">OBSERVED</small></div><input type="range" id="slider" min="0" value="0"><div class="playrow"><button class="btn" id="rew" title="Rewind to 1965">&#9198;</button><button class="btn play" id="play">&#9654;&nbsp;Autoplay</button></div><button class="btn on" id="spin">&#10227; Auto-rotate</button></div><div class="rgrp projbox"><div class="projbox-head"><span class="projbox-h1">Projections 2026&ndash;2100</span><span class="projbox-h2">Source &middot; UN WPP 2024</span></div><div class="seg projyrs" title="Projection waypoints"><button id="p2035" title="Projection: 2035">2035</button><button id="p2050" title="Projection: 2050">2050</button><button id="p2075" title="Projection: 2075">2075</button><button id="p2100" title="Projection: 2100">2100</button></div><div class="seg vseg" id="varSeg" title="UN WPP fertility scenarios — Low assumes faster TFR decline, High slower, Medium the central estimate."><button id="vLow" title="Low — UN WPP optimistic fertility-decline scenario">Low</button><button id="vMed" class="on" title="Medium — UN WPP central scenario">Medium</button><button id="vHigh" title="High — UN WPP pessimistic fertility-decline scenario">High</button></div></div><div class="rgrp"><div class="rlbl">Colour map by</div><div class="scoreseg" id="scoreSeg"><button data-m="dhi" class="ss-main on"><span class="ss-main-l">Demographic Health Index</span><span class="ss-main-s">composite of all four pillars</span></button><div class="ss-or">or by individual pillar</div><div class="ss-pills"><button data-m="F" title="Fertility Strength (FSS)">Fert.</button><button data-m="R" title="Population Momentum (PMS)">Pop.</button><button data-m="A" title="Workforce Sustainability (WSS)">Work.</button><button data-m="M" title="Migration Reliance (MRS)">Mig.</button></div></div></div><div class="rgrp"><div class="rlbl" id="lgHead">DHI score</div><div class="legend" id="legend"></div><div class="pillar-blurb" id="pillarBlurb" style="display:none"></div></div><div class="foot">DHI v2.0 &middot; WPP 2024 baseline with NSO overrides &middot; geometry Natural Earth 1:50m</div></aside><button class="rail-show" id="railShow">&#10094;&nbsp;Controls</button></div></section><section class="view" id="view-rankings"><div class="rk-sub"><div class="rk-subtabs"><button data-st="all" class="on">All 236</button><button data-st="countries">Countries</button><button data-st="territories">Territories</button><button data-st="regions">Regions</button><button data-st="typologies">Explore Categories</button></div><div class="rk-subnote" id="rk-subnote"></div></div><div class="rk-body"><aside class="rk-rail"><div class="rk-rlbl">Select <span id="rk-railkind">country</span></div><input class="rk-search" id="rk-search" placeholder="Search&hellip;"><div class="rk-conts" id="rk-conts"><button data-c="all" class="on">All</button><button data-c="Africa">Africa</button><button data-c="Americas">Americas</button><button data-c="Asia">Asia</button><button data-c="Europe">Europe</button><button data-c="Oceania">Oceania</button></div><div class="rk-list" id="rk-list"></div></aside><div class="rk-main" id="rk-main"></div></div></section><section class="view doc" id="view-compare"><div class="cmp-wrap"><div class="eyebrow2">Demoria Research &middot; DHI v2.0</div><h2><em>Compare</em> countries side by side</h2><p class="lead">Pick one to three countries to see their 2025 DHI scores, pillar contributions, projection trajectories and key demographics on a single page. Click a slot to switch country, &times; to remove, or + to add another.</p><div class="cmp-pickers" id="cmpPickers"></div><div class="cmp-cards" id="cmpCards"></div><div class="cmp-section"><div class="cmp-h">DHI trajectory &middot; 1965&ndash;2100</div><canvas id="cmpTraj" class="cmp-traj-cv"></canvas><div class="cmp-traj-legend" id="cmpTrajLegend"></div><div class="cmp-traj-cap">Each country&rsquo;s composite DHI from 1965 to 2025 (observed) and the UN WPP 2024 medium projection to 2100. Solid line = observed, dashed = WPP medium projection.</div></div><div class="cmp-section"><div class="cmp-h">Pillar contributions &middot; 2025</div><div class="cmp-pillars" id="cmpPillars"></div></div><div class="cmp-section"><div class="cmp-h">Key statistics &middot; 2025</div><div class="cmp-stats" id="cmpStats"></div></div></div></section><section class="view doc" id="view-about"><div class="essay-progress"><div class="essay-progress-fill"></div></div><div class="essay">
 <div class="essay-hero" id="e-about">
 <div class="ek">Demoria Research &middot; Demographic Health Index v2.0</div>
 <h1>Can a population <em>carry itself forward?</em></h1>
@@ -1009,7 +1116,7 @@ table.rank tbody tr{cursor:pointer}
 </div>
 <div class="eh">Eleven mechanism classes</div>
 <div class="eblock"><p>Two countries can share a score for opposite reasons. Beneath the number, each is assigned one mechanism-based class &mdash; the number tells you how healthy, the typology tells you why.</p></div>
-<div class="etypo"><div style="border-left:4px solid #2da06b"><span class="tn" style="color:#2da06b">01</span><b>Hyper-expansionary</b> &mdash; very high fertility; a fast-growing, youth-heavy base.</div><div style="border-left:4px solid #5ab682"><span class="tn" style="color:#5ab682">02</span><b>Expansionary</b> &mdash; above replacement; sustainable organic growth.</div><div style="border-left:4px solid #c19720"><span class="tn" style="color:#c19720">03</span><b>Dividend window</b> &mdash; fertility easing toward replacement over a favourable working-age bulge.</div><div style="border-left:4px solid #e0a23e"><span class="tn" style="color:#e0a23e">04</span><b>Recent sub-replacement</b> &mdash; just below replacement, still growing on momentum.</div><div style="border-left:4px solid #dd6f3e"><span class="tn" style="color:#dd6f3e">05</span><b>Approaching decline</b> &mdash; momentum thinning; natural increase near zero.</div><div style="border-left:4px solid #4a8bc2"><span class="tn" style="color:#4a8bc2">06</span><b>Migration-sustained</b> &mdash; natural decline offset, in the main, by net migration.</div><div style="border-left:4px solid #6da8d9"><span class="tn" style="color:#6da8d9">07</span><b>Migration-buffered</b> &mdash; declining, with migration softening but not erasing the fall.</div><div style="border-left:4px solid #c75c3e"><span class="tn" style="color:#c75c3e">08</span><b>Organic decline</b> &mdash; sustained natural decline; limited migration offset.</div><div style="border-left:4px solid #a83a3a"><span class="tn" style="color:#a83a3a">09</span><b>Entrenched decline</b> &mdash; two decades or more of natural decline; a deep structural deficit.</div><div style="border-left:4px solid #8a64b0"><span class="tn" style="color:#8a64b0">10</span><b>Arbitrage enclave</b> &mdash; demographics dominated by tax- or residency-driven inflows.</div><div style="border-left:4px solid #5a7ec2"><span class="tn" style="color:#5a7ec2">11</span><b>Guest-worker state</b> &mdash; population shaped by a large, non-settling labour workforce.</div></div>
+<div class="etypo"><div id="ety-1" style="border-left:4px solid #2da06b"><span class="tn" style="color:#2da06b">01</span><b>Hyper-expansionary</b> &mdash; very high fertility; a fast-growing, youth-heavy base.</div><div id="ety-2" style="border-left:4px solid #5ab682"><span class="tn" style="color:#5ab682">02</span><b>Expansionary</b> &mdash; above replacement; sustainable organic growth.</div><div id="ety-3" style="border-left:4px solid #c19720"><span class="tn" style="color:#c19720">03</span><b>Dividend window</b> &mdash; fertility easing toward replacement over a favourable working-age bulge.</div><div id="ety-4" style="border-left:4px solid #e0a23e"><span class="tn" style="color:#e0a23e">04</span><b>Recent sub-replacement</b> &mdash; just below replacement, still growing on momentum.</div><div id="ety-5" style="border-left:4px solid #dd6f3e"><span class="tn" style="color:#dd6f3e">05</span><b>Approaching decline</b> &mdash; momentum thinning; natural increase near zero.</div><div id="ety-6" style="border-left:4px solid #4a8bc2"><span class="tn" style="color:#4a8bc2">06</span><b>Migration-sustained</b> &mdash; natural decline offset, in the main, by net migration.</div><div id="ety-7" style="border-left:4px solid #6da8d9"><span class="tn" style="color:#6da8d9">07</span><b>Migration-buffered</b> &mdash; declining, with migration softening but not erasing the fall.</div><div id="ety-8" style="border-left:4px solid #c75c3e"><span class="tn" style="color:#c75c3e">08</span><b>Organic decline</b> &mdash; sustained natural decline; limited migration offset.</div><div id="ety-9" style="border-left:4px solid #a83a3a"><span class="tn" style="color:#a83a3a">09</span><b>Entrenched decline</b> &mdash; two decades or more of natural decline; a deep structural deficit.</div><div id="ety-10" style="border-left:4px solid #8a64b0"><span class="tn" style="color:#8a64b0">10</span><b>Arbitrage enclave</b> &mdash; demographics dominated by tax- or residency-driven inflows.</div><div id="ety-11" style="border-left:4px solid #5a7ec2"><span class="tn" style="color:#5a7ec2">11</span><b>Guest-worker state</b> &mdash; population shaped by a large, non-settling labour workforce.</div></div>
 
 <div class="eh">Context, displayed alongside</div>
 <div class="eblock">
@@ -1751,8 +1858,15 @@ function renderCountryProfile(c){
   const s=c.scores['2025'],b=band(s),t=trendOf(c),pil=c.pillars['2025']||[0,0,0,0];
   const m=document.getElementById('rk-main'); m.scrollTop=0;
   m.innerHTML=
+   '<div class="pf-paper">'+
    '<div class="pf-eyebrow">Index &amp; Rankings &middot; DHI 2025</div>'+
-   '<div class="pf-name"><span class="pf-flag">'+flag(c.iso)+'</span>'+c.name+'</div>'+
+   '<div class="pf-name-row">'+
+      '<div class="pf-name"><span class="pf-flag">'+flag(c.iso)+'</span>'+c.name+'</div>'+
+      '<div class="pf-chips">'+
+        '<span class="pf-chip" style="color:'+b[1]+';background:'+b[1]+'1f">'+b[0]+'</span>'+
+        (c.catn?'<span class="pf-chip" style="color:'+(TYPCOL[c.catn]||'#8a5e16')+';background:'+(TYPCOL[c.catn]||'#8a5e16')+'1f">Class '+c.catn+'</span>':'')+
+      '</div>'+
+    '</div>'+
    '<div class="pf-meta"><span>Rank <b>'+(c.rank||'&mdash;')+'</b> of 236</span><span>&middot;</span><span><b>'+(c.sov?'Sovereign state':'Territory')+'</b></span>'+(c.cont?'<span>&middot;</span><span class="pf-xlink" data-go="R:'+c.cont+'"><b>'+c.cont+'</b></span>':'')+(c.reg?'<span>&middot;</span><span class="pf-xlink" data-go="S:'+c.reg+'">'+c.reg+'</span>':'')+'</div>'+
    pyramidBlock()+
    '<div class="pf-hero"><div class="pf-scoreblk"><div class="pf-score" style="color:'+ramp(s)+'">'+s.toFixed(1)+'</div><div class="pf-band">'+b[0]+' '+trendMark(t)+'</div><div class="pf-yr">2025 &middot; observed</div></div>'+
@@ -1760,7 +1874,7 @@ function renderCountryProfile(c){
    '<div class="pf-grid"><div><div class="pf-h">How the score is built</div><div id="pf-pillars"></div></div>'+
    '<div><div class="pf-h">DHI trajectory &middot; 1965&ndash;2100</div><canvas class="pf-traj" id="pf-traj"></canvas><div class="pf-cap">'+TRAJ_CAP+'</div></div></div>'+
    '<div class="pf-h">Key facts</div><div class="facts" id="pf-facts"></div>'+
-   '<div class="pf-h">Context <span class="cp-h-cap">not in DHI score</span></div><div class="pf-ctx" id="pf-ctx"></div>';
+   '<div class="pf-h">Context <span class="cp-h-cap">not in DHI score</span></div><div class="pf-ctx" id="pf-ctx"></div></div>';
   const pd=[[0,'Fertility Strength',34],[2,'Population Momentum',28],[1,'Workforce Sustainability',22],[3,'Migration Reliance',16]];
   document.getElementById('pf-pillars').innerHTML=pd.map(function(e){
     const v=pil[e[0]], contrib=v*e[2]/100;
@@ -1867,6 +1981,7 @@ function renderRegionProfile(name,members,isCont){
       '<table class="subtab-tbl"><thead><tr><th>Sub-region</th><th>Members</th><th>Population</th><th>Mean DHI</th></tr></thead><tbody id="rg-subs"></tbody></table>';
   }
   m.innerHTML=
+   '<div class="pf-paper">'+
    '<div class="pf-eyebrow">Index &amp; Rankings &middot; '+(isCont?'Continental region':'Sub-region')+' &middot; DHI 2025</div>'+
    '<div class="pf-name">'+name+'</div>'+
    '<div class="pf-meta"><span><b>'+mem.length+'</b> countries &amp; territories</span><span>&middot;</span><span><b>'+pop.toFixed(0)+'M</b> people</span>'+(isCont||!mem[0]||!mem[0].cont?'':'<span>&middot;</span><span class="pf-xlink" data-go="R:'+mem[0].cont+'">'+mem[0].cont+'</span>')+'<span>&middot;</span><span>population-weighted aggregate</span></div>'+
@@ -1877,7 +1992,7 @@ function renderRegionProfile(name,members,isCont){
    '<div><div class="pf-h">DHI trajectory &middot; 1965&ndash;2100</div><canvas class="pf-traj" id="pf-traj"></canvas><div class="pf-cap">'+TRAJ_CAP+'</div></div></div>'+
    '<div class="pf-h">'+name+' &middot; mapped by DHI 2025</div><canvas class="rg-map" id="rg-map"></canvas>'+
    subTable+
-   '<div class="pf-h">All members &middot; ranked</div><table class="subtab-tbl"><thead><tr><th>#</th><th>Country / territory</th><th>DHI 2025</th></tr></thead><tbody id="rg-mem"></tbody></table>';
+   '<div class="pf-h">All members &middot; ranked</div><table class="subtab-tbl"><thead><tr><th>#</th><th>Country / territory</th><th>DHI 2025</th></tr></thead><tbody id="rg-mem"></tbody></table></div>';
   drawTrajChart(document.getElementById('pf-traj'),buildTrajR(mem),200);
   drawRegionMap(document.getElementById('rg-map'),mem);
   m.querySelectorAll('.pf-xlink').forEach(el=>el.addEventListener('click',()=>gotoRegion(el.dataset.go)));
@@ -1914,16 +2029,116 @@ function rkSelect(id){
 function syncSubtabs(){
   document.querySelectorAll('.rk-subtabs button').forEach(b=>b.classList.toggle('on',b.dataset.st===rkTab));
   document.getElementById('rk-railkind').textContent=rkTab==='regions'?'region':rkTab==='territories'?'territory':rkTab==='countries'?'country':'country or territory';
-  document.getElementById('rk-conts').style.display=rkTab==='regions'?'none':'';
-  const note={all:'All 236 countries and territories, ranked together by 2025 DHI.',countries:'Sovereign states only, ranked by 2025 DHI.',territories:'Non-sovereign territories and dependencies.',regions:'Continents and their UN sub-regions — population-weighted aggregates.'};
+  document.getElementById('rk-conts').style.display=rkTab==='regions'||rkTab==='typologies'?'none':'';
+  const vR=document.getElementById('view-rankings'); if(vR) vR.classList.toggle('rk-typologies', rkTab==='typologies');
+  const note={all:'All 236 countries and territories, ranked together by 2025 DHI.',countries:'Sovereign states only, ranked by 2025 DHI.',territories:'Non-sovereign territories and dependencies.',regions:'Continents and their UN sub-regions — population-weighted aggregates.',typologies:'The eleven mechanism-based categories — how each population sustains, or fails to sustain, itself.'};
   document.getElementById('rk-subnote').textContent=note[rkTab];
 }
 function syncConts(){document.querySelectorAll('#rk-conts button').forEach(b=>b.classList.toggle('on',b.dataset.c===rkCont));}
 function rkAutoSelect(){
+  if(rkTab==='typologies'){ renderTypologyOverview(); return; }
   const first=document.querySelector('.rk-row');
   if(first) rkSelect(first.dataset.id);
   else { rkSel=null; document.getElementById('rk-main').innerHTML='<div class="rk-empty">No matching entries.</div>'; }
 }
+
+
+// ======== Typology overview page =========================================
+const TYPDEFS = [
+  null,
+  {n:'Hyper-expansionary', col:'#2da06b',
+   d:"Very high fertility &mdash; TFR commonly above 4 &mdash; with a young, fast-growing population. Births far exceed replacement, the under-20 share dominates the pyramid, and migration plays little role. Concentrated in sub-Saharan Africa."},
+  {n:'Expansionary', col:'#5ab682',
+   d:"Above replacement (TFR 2.1&ndash;3.5) with sustainable organic growth. Natural increase is positive, the working-age cohort is still expanding, and migration is incidental. Common across South and Central Asia and parts of Latin America."},
+  {n:'Dividend window', col:'#c19720',
+   d:"Fertility easing toward replacement over a favourable working-age bulge. The demographic dividend is being collected &mdash; the moment before momentum tips. Many of these countries will transit to Class 4 or 5 within a generation."},
+  {n:'Recent sub-replacement', col:'#e0a23e',
+   d:"Just below replacement (TFR 1.5&ndash;2.0), still growing on momentum carried over from the previous cohort. The future arithmetic is already negative even if the headline population is still rising."},
+  {n:'Approaching decline', col:'#dd6f3e',
+   d:"Momentum thinning; natural increase near zero. TFR has been below replacement for one or two decades and the working-age cohort has stopped growing. Net migration is roughly neutral. Decline is the next chapter unless something changes."},
+  {n:'Migration-sustained', col:'#4a8bc2',
+   d:"Natural decline is offset, in the main, by net migration. Without inflows the population would already be shrinking. The DHI penalises this &mdash; it scores how a population renews itself through its own births, not through inflows."},
+  {n:'Migration-buffered', col:'#6da8d9',
+   d:"Declining, with migration softening but not erasing the fall. Births undershoot deaths but inflows blunt the natural deficit. Common across central and northern Europe."},
+  {n:'Organic decline', col:'#c75c3e',
+   d:"Sustained natural decline; limited migration offset. The population falls because births undershoot deaths year after year, and inflows cannot fill the gap. China, Taiwan, Cuba and much of East Asia sit here."},
+  {n:'Entrenched decline', col:'#a83a3a',
+   d:"Two decades or more of natural decline &mdash; a deep structural deficit. The working-age cohort is visibly contracting, old-age dependency is rising sharply, and migration cannot meaningfully reverse the trend. Mostly Eastern Europe."},
+  {n:'Arbitrage enclave', col:'#8a64b0',
+   d:"Demographics dominated by tax- or residency-driven inflows. Small jurisdictions whose population is shaped by external pull factors &mdash; financial centres, wealth havens, lifestyle destinations &mdash; rather than by their own demographic engine."},
+  {n:'Guest-worker state', col:'#5a7ec2',
+   d:"Population shaped by a large, non-settling labour workforce. The Gulf states and similar economies where the resident population is many multiples of the citizen population, and the age-structure reflects guest workers, not citizens."}
+];
+
+function renderTypologyOverview(){
+  const m=document.getElementById('rk-main'); if(!m) return;
+  m.scrollTop=0;
+  // bucket countries by typology class
+  const buckets={};
+  Object.values(GLOBE).forEach(c=>{ if(c.catn){ (buckets[c.catn]=buckets[c.catn]||[]).push(c); } });
+  // sort members within each bucket by 2025 DHI desc
+  Object.values(buckets).forEach(arr=>arr.sort((a,b)=>(b.scores['2025']||0)-(a.scores['2025']||0)));
+  function meanDhi(arr){ if(!arr.length) return null; let s=0,n=0; arr.forEach(c=>{const v=c.scores['2025']; if(v!=null){s+=v;n++;}}); return n?s/n:null; }
+  function sampleHtml(arr,N){
+    const top=arr.slice(0,N);
+    return top.map(c=>'<span class="ty-mem" data-iso="'+c.iso+'">'+flag(c.iso)+'<span class=ty-mem-n>'+c.name+'</span></span>').join('')+
+      (arr.length>N?'<span class="ty-more">+'+(arr.length-N)+' more</span>':'');
+  }
+  let cardsHtml='';
+  for(let cls=1;cls<=11;cls++){
+    const def=TYPDEFS[cls], mem=buckets[cls]||[], mean=meanDhi(mem);
+    cardsHtml += '<article class="ty-card" data-cls="'+cls+'" style="--ty:'+def.col+'">'
+              + '<div class="ty-no">'+String(cls).padStart(2,'0')+'</div>'
+              + '<div class="ty-body">'
+              +   '<div class="ty-name">'+def.n+'</div>'
+              +   '<p class="ty-desc">'+def.d+'</p>'
+              +   '<div class="ty-members">'+sampleHtml(mem,6)+'</div>'
+              + '</div>'
+              + '<div class="ty-meta">'
+              +   '<div class="ty-stat"><div class="ty-stat-l">Countries</div><div class="ty-stat-v">'+mem.length+'</div></div>'
+              +   '<div class="ty-stat"><div class="ty-stat-l">Mean DHI</div><div class="ty-stat-v">'+(mean==null?'&mdash;':mean.toFixed(1))+'</div></div>'
+              +   '<button class="ty-readmore" data-cls="'+cls+'">Read in methodology &rarr;</button>'
+              + '</div>'
+              + '</article>';
+  }
+  m.innerHTML =
+    '<div class="ty-page">'+
+      '<div class="pf-paper">'+
+        '<div class="pf-eyebrow ty-eyebrow">Index &amp; Rankings &middot; Categories</div>'+
+        '<h2 class="ty-h2">The eleven <em>categories</em> of demographic structure</h2>'+
+        '<p class="ty-lead">Two countries can share a DHI score for opposite reasons. The number tells you <i>how healthy</i>; the typology tells you <i>why</i>. Each country sits in one of eleven mechanism-based classes built from fertility, age structure, momentum and migration. <a class="ty-method-all" data-cls="all">Read in methodology &rarr;</a></p>'+
+        '<div class="ty-grid">'+ cardsHtml +'</div>'+
+      '</div>'+
+    '</div>';
+  // wiring
+  m.querySelectorAll('.ty-mem').forEach(el=>el.addEventListener('click',()=>gotoCountry(el.dataset.iso)));
+  m.querySelectorAll('.ty-readmore').forEach(el=>el.addEventListener('click',()=>gotoMethodTypology(+el.dataset.cls)));
+  m.querySelector('.ty-method-all').addEventListener('click',()=>gotoMethodTypology(null));
+}
+
+function gotoMethodTypology(cls){
+  show('method');
+  // Wait long enough for show()'s smooth scroll to settle, then jump to
+  // the specific class card. Smooth scrolls are queued so a second
+  // scrollIntoView called too soon gets dropped.
+  setTimeout(()=>{
+    let target;
+    if(cls) target=document.getElementById('ety-'+cls);
+    if(!target) target=document.querySelector('.etypo');
+    if(!target) return;
+    const host=document.getElementById('view-about');
+    if(host){
+      const hr=host.getBoundingClientRect(), tr=target.getBoundingClientRect();
+      const want=host.scrollTop + tr.top - hr.top - (host.clientHeight - tr.height)/2;
+      host.scrollTo({top:Math.max(0,want),behavior:'smooth'});
+    } else {
+      target.scrollIntoView({behavior:'smooth',block:'center'});
+    }
+    target.classList.add('ety-flash');
+    setTimeout(()=>target.classList.remove('ety-flash'),1700);
+  },500);
+}
+
 document.querySelectorAll('.rk-subtabs button').forEach(b=>b.addEventListener('click',function(){
   rkTab=this.dataset.st; rkCont='all'; rkSel=null;
   syncSubtabs(); syncConts(); rkRenderList(); rkAutoSelect();
