@@ -2961,23 +2961,32 @@ window.__pos_d6=1;
   window.addEventListener('popstate', routeFromPath);
 
   // ----- Geolocation personalisation -----
-  // Fetch the visitor's country from ipapi.co (free, no key needed). Cache the
-  // ISO-2 in localStorage so we don't burn API calls on every reload.
-  async function personalise(){
-    if(typeof byIso==='undefined' || typeof ISO2==='undefined') return;
-    let cc = null;
-    try { cc = localStorage.getItem('dr_cc'); } catch(e) {}
-    if(!cc){
-      try{
-        const r = await fetch('https://ipapi.co/json/', {cache:'no-store'});
-        if(!r.ok) return;
-        const d = await r.json();
-        cc = d && d.country_code;
-        if(cc){ try{ localStorage.setItem('dr_cc', cc); }catch(e){} }
-      }catch(e){ return; }
-    }
-    if(!cc) return;
-    // Find ISO-3 by ISO-2 lookup
+  // Fetch the visitor's country from ipapi.co (free, no key needed).
+  // Cache with a 1-hour TTL and a stale-while-revalidate pattern so a
+  // VPN/IP change is reflected within an hour without per-load API hits.
+  const CC_TTL_MS = 60 * 60 * 1000; // 1 hour
+  function readCC(){
+    try{
+      const raw = localStorage.getItem('dr_cc_v2');
+      if(!raw) return null;
+      const p = JSON.parse(raw);
+      if(!p || !p.cc || !p.t) return null;
+      return p;
+    }catch(e){ return null; }
+  }
+  function writeCC(cc){
+    try{ localStorage.setItem('dr_cc_v2', JSON.stringify({cc, t: Date.now()})); }catch(e){}
+  }
+  async function fetchCC(){
+    try{
+      const r = await fetch('https://ipapi.co/json/', {cache:'no-store'});
+      if(!r.ok) return null;
+      const d = await r.json();
+      return (d && d.country_code) || null;
+    }catch(e){ return null; }
+  }
+  function applyCountryToUI(cc){
+    if(!cc || typeof byIso==='undefined' || typeof ISO2==='undefined') return;
     let iso3=null;
     for(const k in ISO2){ if(ISO2[k]===cc){ iso3=k; break; } }
     if(!iso3 || !byIso[iso3]) return;
@@ -2985,10 +2994,6 @@ window.__pos_d6=1;
     const s=c.scores && c.scores['2025'];
     if(s==null) return;
     const b=band(s);
-    const p2050 = c.proj && c.proj['2050'] && c.proj['2050'].med;
-    const p2100 = c.proj && c.proj['2100'] && c.proj['2100'].med;
-
-    // 1) Reveal the personal strip above the H1
     const strip=document.getElementById('drPersonal');
     if(strip){
       strip.innerHTML = '<span class="dps-flag">'+flag(iso3)+'</span>'
@@ -3000,8 +3005,6 @@ window.__pos_d6=1;
         +'<span class="dps-c" style="color:'+b[1]+'">'+b[0]+'</span>';
       strip.style.display='inline-flex';
     }
-
-    // 3) Repurpose the CTA toward the visitor's country
     const linkName=document.querySelector('.dr-link-name');
     const linkDesc=document.querySelector('.dr-link-desc');
     const link=document.querySelector('.dr-link');
@@ -3009,6 +3012,22 @@ window.__pos_d6=1;
     if(linkDesc) linkDesc.textContent='Open the world map with '+c.name+' highlighted';
     if(link) link.classList.add('personalized');
     if(cta) cta.dataset.iso=iso3;
+  }
+  async function personalise(){
+    if(typeof byIso==='undefined' || typeof ISO2==='undefined') return;
+    const cached = readCC();
+    const isFresh = cached && (Date.now() - cached.t) < CC_TTL_MS;
+    // 1) Apply cached value immediately if any (instant personalisation)
+    if(cached) applyCountryToUI(cached.cc);
+    // 2) If cache is stale or missing, fetch a fresh value
+    if(!isFresh){
+      const fresh = await fetchCC();
+      if(fresh){
+        writeCC(fresh);
+        // Re-apply if the country actually changed (e.g. VPN switch)
+        if(!cached || cached.cc !== fresh) applyCountryToUI(fresh);
+      }
+    }
   }
   // Fire after a short delay so the generic hero shows first and the
   // personal strip slides in.
