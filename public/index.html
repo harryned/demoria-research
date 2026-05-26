@@ -215,10 +215,10 @@ body:has(#view-landing.on) .page{height:100vh}
 .home-stats .hs-tile{padding:30px 24px 26px;border-right:1px solid rgba(255,255,255,.06);position:relative;display:flex;flex-direction:column}
 .home-stats .hs-tile:last-child{border-right:0}
 .home-stats .hs-tile::before{content:"";position:absolute;top:0;left:24px;right:24px;height:2px;background:#b58420;opacity:.78}
-.hs-k{display:flex;align-items:baseline;gap:8px;margin-bottom:18px}
+.hs-k{display:flex;align-items:baseline;gap:8px;margin-bottom:0;min-height:1.1em}
 .hs-ki{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.2em;font-weight:600;color:var(--gold)}
 .hs-kl{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.36)}
-.hs-v{font-family:'Manrope',sans-serif;font-weight:300;font-size:clamp(2.2rem,4.4vw,3.4rem);line-height:.95;letter-spacing:-.035em;color:var(--ink);margin-top:auto}
+.hs-v{font-family:'Manrope',sans-serif;font-weight:300;font-size:clamp(2.1rem,4.2vw,3.2rem);line-height:.98;letter-spacing:-.035em;color:var(--ink);margin-top:20px;min-height:2.05em;display:flex;align-items:flex-end}
 .hs-v .hs-eds{font-weight:200;opacity:.55;margin:0 -.04em}
 .hs-l{color:var(--ink3);font-size:.76rem;line-height:1.42;margin-top:10px;max-width:22ch}
 
@@ -566,10 +566,12 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
 .essay-body .estat{background:transparent;border:0;border-radius:0;border-right:1px solid rgba(12,26,51,.10);padding:34px 26px 30px;text-align:left;position:relative;display:flex;flex-direction:column;min-height:172px}
 .essay-body .estat:last-child{border-right:0}
 .essay-body .estat::before{content:"";position:absolute;top:0;left:26px;right:26px;height:2px;background:#b58420;opacity:.85}
-.essay-body .estat .ek{display:flex;align-items:baseline;gap:9px;margin-bottom:auto}
+.essay-body .estat .ek{display:flex;align-items:baseline;gap:9px;margin-bottom:0;min-height:1.1em}
 .essay-body .estat .eki{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.18em;font-weight:600;color:#b58420}
 .essay-body .estat .ekl{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(12,26,51,.45)}
-.essay-body .estat .ev{color:#0c1a33;font-family:'Manrope',sans-serif;font-weight:300;font-size:clamp(2.4rem,4.8vw,3.6rem);line-height:.95;letter-spacing:-.035em;margin-top:18px}
+/* Fixed-height value box, number bottom-aligned, so single-line and
+   wrapped (e.g. 1965-2100) values all share the same baseline. */
+.essay-body .estat .ev{color:#0c1a33;font-family:'Manrope',sans-serif;font-weight:300;font-size:clamp(2.2rem,4.2vw,3.2rem);line-height:.98;letter-spacing:-.035em;margin-top:20px;min-height:2.05em;display:flex;align-items:flex-end}
 .essay-body .estat .ev .eds{font-weight:200;margin:0 -.04em;opacity:.55}
 .essay-body .estat .el{color:rgba(12,26,51,.62);font-size:.78rem;line-height:1.42;margin-top:12px;max-width:22ch}
 @media(max-width:780px){.essay-body .estats{grid-template-columns:repeat(2,1fr);border-left:1px solid rgba(12,26,51,.10)}.essay-body .estat:nth-child(2){border-right:0}.essay-body .estat:nth-child(-n+2){border-bottom:1px solid rgba(12,26,51,.10)}}
@@ -745,7 +747,7 @@ table.rank td.cn:hover{color:var(--gold)}
 table.rank tbody tr{cursor:pointer}
 .pcell{font-family:'JetBrains Mono',monospace;font-size:.82rem}
 /* country panel */
-.cpanel{position:fixed;top:54px;right:0;height:calc(100% - 54px);width:370px;max-width:92vw;background:rgba(13,28,56,.99);border-left:1px solid var(--line);box-shadow:-16px 0 50px rgba(0,0,0,.5);z-index:40;transform:translateX(105%);transition:transform .26s cubic-bezier(.4,0,.2,1);overflow-y:auto;padding:20px 22px 40px}
+.cpanel{position:fixed;top:76px;right:0;height:calc(100% - 76px);width:370px;max-width:92vw;background:rgba(13,28,56,.99);border-left:1px solid var(--line);box-shadow:-16px 0 50px rgba(0,0,0,.5);z-index:40;transform:translateX(105%);transition:transform .26s cubic-bezier(.4,0,.2,1);overflow-y:auto;padding:20px 22px 40px}
 .page.immersive .cpanel{top:0;height:100%}
 .cpanel.on{transform:translateX(0)}
 .cpanel .pclose{position:absolute;top:14px;right:16px;background:var(--surface);border:1px solid var(--line);color:var(--ink2);width:30px;height:30px;border-radius:7px;cursor:pointer;font-size:.9rem}
@@ -1285,11 +1287,19 @@ body::after{content:'Demoria Research \00A0\00B7\00A0 Demographic Health Index 2
 .brand .bt{font-family:'JetBrains Mono',monospace;font-size:1.15rem;font-weight:700;color:rgba(255,255,255,.92);letter-spacing:.04em}
 .brand .bt em{visibility:hidden;position:relative;font-style:normal}
 .brand .bt em::after{content:'2026';visibility:visible;position:absolute;left:0;top:0;color:rgba(255,255,255,.92);font-weight:700;font-style:normal}
-/* Centre the tabs in the remaining space; tighten so they fit one row */
+/* Centre the tabs in the remaining space; tighten so they fit one row.
+   Only absolute-centre on wide screens — at intermediate widths the
+   centred strip collides with the brand, so fall back to normal flow
+   with horizontal scroll. */
 .tabs{position:absolute;left:50%;transform:translateX(-50%);flex-wrap:nowrap;white-space:nowrap}
 .tab{font-size:.78rem;padding:6px 11px}
 .tab-sep{margin:0 4px}
 .tbspace{display:none}
+@media(max-width:1180px) and (min-width:761px){
+  .tabs{position:static!important;transform:none!important;flex:1 1 auto;justify-content:flex-end;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scrollbar-width:none;margin-left:14px}
+  .tabs::-webkit-scrollbar{display:none}
+  .tbspace{display:block!important;flex:0 0 0}
+}
 /* Cream + gold layered racing stripe along the bottom (replaces the
    1px navy border-bottom) */
 .topbar{border-bottom:0!important}
@@ -1366,8 +1376,10 @@ body::after{content:'Demoria Research \00A0\00B7\00A0 Demographic Health Index 2
 .pf-paper.ft-paper{padding:34px clamp(28px,3vw,48px) 48px;margin:14px auto 28px;max-width:1280px}
 .ft-paper .pf-eyebrow,.ft-paper .pf-name-row,.ft-paper .pf-meta,.ft-paper > .pyr-toggle,.ft-paper > .pf-hero,.ft-paper > .pf-grid,.ft-paper > .pf-h,.ft-paper > .facts,.ft-paper > .pf-ctx{display:none}
 .ft-eyebrow{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:#b58420;font-weight:600;margin-bottom:20px;text-align:center;border-bottom:1px solid rgba(181,132,32,.30);padding-bottom:14px}
-.ft-grid{display:grid;grid-template-columns:340px 1fr;gap:48px;align-items:start}
-@media(max-width:920px){.ft-grid{grid-template-columns:1fr;gap:24px}}
+.ft-grid{display:grid;grid-template-columns:minmax(0,340px) minmax(0,1fr);gap:48px;align-items:start}
+/* Collapse to one column early — the Rankings rail eats ~294px, so the
+   FT grid runs out of room well before the viewport hits 920px. */
+@media(max-width:1180px){.ft-grid{grid-template-columns:1fr;gap:24px}}
 .ft-hero{position:sticky;top:14px;align-self:start}
 .ft-flag-block{margin-bottom:18px;display:inline-block;border:1px solid rgba(12,26,51,.10);padding:4px;border-radius:4px;background:#fbf5e6}
 .ft-flag-block .flg{height:38px;width:auto;border-radius:2px;display:block;box-shadow:0 1px 3px rgba(12,26,51,.20)}
@@ -1394,8 +1406,11 @@ body::after{content:'Demoria Research \00A0\00B7\00A0 Demographic Health Index 2
 .ft-section-head{margin:0 0 14px;padding-bottom:10px;border-bottom:1px solid rgba(12,26,51,.18);display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .ft-section-head h2{font-family:'Manrope',sans-serif;font-size:1.45rem;font-weight:700;letter-spacing:-.018em;color:#0c1a33;margin:0}
 .ft-section-head .ft-section-sub{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(12,26,51,.55)}
-.ft-2col{display:grid;grid-template-columns:1.4fr 1fr;gap:36px}
-@media(max-width:900px){.ft-2col{grid-template-columns:1fr}}
+.ft-2col{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:36px}
+@media(max-width:1180px){.ft-2col{grid-template-columns:1fr}}
+.ft-2col > *{min-width:0}
+.ft-paper,.ft-content{max-width:100%}
+.ft-content canvas,.ft-traj canvas{max-width:100%}
 .ft-traj canvas{width:100%;height:240px;background:#fbf5e6;border-radius:12px;border:1px solid rgba(12,26,51,.10);display:block}
 .ft-caption{margin-top:10px;font-size:.78rem;color:rgba(12,26,51,.62);line-height:1.5;max-width:62ch}
 .ft-pillars .pbar2{margin:14px 0}
@@ -1512,7 +1527,7 @@ body::after{content:'Demoria Research \00A0\00B7\00A0 Demographic Health Index 2
 <div class="estat"><div class="ek"><span class="eki">04</span><span class="ekl">Variants</span></div><div class="ev">3</div><div class="el">Projections &mdash; low, median, high</div></div>
 </div>
 <div class="equote">A high score is not a good place to live. It is <span>a population that can still replace itself.</span></div>
-<div class="enote">v2.0 is published as a clearly-labelled, pre-calibration vintage while its weight-sensitivity analysis is finalised. v1.1 remains the live, citable edition of the index.</div>
+<div class="enote">v2.0 is the current, live edition of the Demographic Health Index &mdash; the fifteen-indicator, four-pillar framework shown throughout this site. It supersedes v1.1.</div>
 </div>
 
 <div class="epart" id="e-sowhat">
@@ -1575,7 +1590,7 @@ the human and developmental context behind a demographic score &mdash; a country
 can have a Crisis-level DHI and a world-class human-capital base at the same
 time, and the two together are more honest than either alone.</p>
 </div>
-<div class="enote">v2.0 is an indicative, pre-calibration vintage. The pillar weights are reasoned, but a formal sensitivity analysis is still pending &mdash; treat cross-country gaps of a point or two as noise.</div>
+<div class="enote">The pillar weights are reasoned and documented rather than statistically optimised &mdash; treat cross-country gaps of a point or two as broadly indicative rather than precise.</div>
 </div>
 
 <div class="epart" id="e-author">
@@ -1947,7 +1962,11 @@ function curScore(c){
   return c.scores?c.scores[y]:null;
 }
 function drawTraj(c){ drawTrajChart(document.getElementById("cp-traj"),buildTrajC(c,2100),132); }
-function openPanel(c){ panelC=c; panelFeat=(typeof featOf==='function')?featOf(c.iso):null; cpanel.classList.add('on'); refreshPanel(); if(window.wmPaintSide)window.wmPaintSide(); render(); }
+function openPanel(c){ panelC=c; panelFeat=(typeof featOf==='function')?featOf(c.iso):null;
+  // Anchor the panel just below the real topbar (its height changes when
+  // the mobile topbar wraps to multiple rows), so it never overlaps it.
+  try{ const tb=document.querySelector('.topbar'); if(tb){ const h=Math.round(tb.getBoundingClientRect().bottom); cpanel.style.top=h+'px'; cpanel.style.height='calc(100% - '+h+'px)'; } }catch(e){}
+  cpanel.classList.add('on'); refreshPanel(); if(window.wmPaintSide)window.wmPaintSide(); render(); }
 function closePanel(){ cpanel.classList.remove('on'); panelC=null; panelFeat=null; if(window.wmPaintSide)window.wmPaintSide(); render(); }
 
 function renderContext(elId, iso){
