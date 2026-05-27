@@ -149,15 +149,15 @@ h1 em{font-style:normal;color:var(--gold)}
 @keyframes lcDrawTrend{0%{stroke-dashoffset:var(--len)}65%{stroke-dashoffset:0}85%{stroke-dashoffset:0;opacity:1}100%{stroke-dashoffset:0;opacity:0}}
 @keyframes lcArea{0%,10%{opacity:0}65%{opacity:.20}85%{opacity:.20}100%{opacity:0}}
 @keyframes lcHead{0%,5%{opacity:0}65%{opacity:1}85%{opacity:1}100%{opacity:0}}
-.dr-wrap{max-width:640px;position:relative;z-index:1;color:#fff;font-family:'Manrope',sans-serif;line-height:1.6}
-.dr-brand-lockup{display:inline-flex;align-items:center;gap:14px;margin-bottom:28px}
-.dr-brand-lockup svg{width:38px;height:auto;color:#e0b54a;flex-shrink:0}
+.dr-wrap{max-width:640px;position:relative;z-index:1;color:#fff;font-family:'Manrope',sans-serif;line-height:1.6;text-align:center}
+.dr-brand-lockup{display:block;margin:0 0 30px;text-align:center}
+.dr-brand-lockup svg{width:clamp(96px,11vw,136px);height:auto;color:#e0b54a;display:block;margin:0 auto;filter:drop-shadow(0 8px 26px rgba(224,181,74,.20))}
 .dr-eyebrow{font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:#e0b54a}
-.dr-h1{font-family:'Manrope',sans-serif;font-size:clamp(2.1rem,4.6vw,3.4rem);font-weight:500;line-height:1.12;letter-spacing:-.012em;margin:0 0 22px;color:#fff;max-width:18ch}
+.dr-h1{font-family:'Manrope',sans-serif;font-size:clamp(2.1rem,4.6vw,3.4rem);font-weight:500;line-height:1.12;letter-spacing:-.012em;margin:0 auto 22px;color:#fff;max-width:18ch}
 .dr-h1 em{color:#e0b54a;font-style:normal;font-weight:600}
 .dr-h1-acr{color:rgba(255,255,255,.4);font-family:'JetBrains Mono',monospace;font-size:.55em;letter-spacing:.04em;font-weight:400;vertical-align:.1em}
-.dr-lede{font-size:1.15rem;font-style:italic;color:rgba(255,255,255,.78);margin:0 0 40px;max-width:560px}
-.dr-links{display:flex;flex-direction:column;gap:14px;max-width:460px}
+.dr-lede{font-size:1.15rem;font-style:italic;color:rgba(255,255,255,.78);margin:0 auto 40px;max-width:560px}
+.dr-links{display:flex;flex-direction:column;gap:14px;max-width:460px;margin:0 auto}
 .dr-link{display:flex;align-items:center;justify-content:space-between;padding:18px 22px;background:rgba(15,35,71,.55);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);border:1px solid rgba(232,184,75,.78);border-radius:8px;color:#fff;text-decoration:none;transition:background .16s,border-color .16s,transform .16s;cursor:pointer;font-family:'Manrope',sans-serif;text-align:left;width:100%;box-shadow:0 18px 44px rgba(0,0,0,.32)}
 .dr-link:hover{background:rgba(15,35,71,.75);border-color:#e0b54a;transform:translateY(-1px);box-shadow:0 22px 52px rgba(0,0,0,.38)}
 .dr-link-text{display:flex;flex-direction:column;gap:3px}
@@ -210,6 +210,16 @@ body:has(#view-landing.on) .page{height:100vh}
 .home-hero .hh-sub{font-family:'Manrope';font-size:clamp(1.05rem,1.6vw,1.28rem);font-weight:400;line-height:1.55;color:var(--ink2);margin:0 auto 18px;max-width:62ch}
 .home-hero .hh-sub b{color:var(--ink);font-weight:600}
 .home-hero .hh-lead{font-family:'Manrope';font-size:.96rem;line-height:1.7;color:rgba(255,255,255,.62);margin:0 auto;max-width:58ch}
+/* Home hero — opaque cream cover card */
+#view-home .home-hero{max-width:1000px;margin:0 auto 56px;padding:54px clamp(28px,5vw,72px) 48px;border-radius:22px;background:#f4ecd3;box-shadow:0 30px 80px rgba(0,0,0,.45),inset 0 0 0 1px rgba(181,132,32,.32)}
+#view-home .home-hero .hh-eye{color:#b58420}
+#view-home .home-hero .hh-title{color:#0c1a33}
+#view-home .home-hero .hh-title em{color:#b58420}
+#view-home .home-hero .hh-title .hh-acr{color:rgba(12,26,51,.40)}
+#view-home .home-hero .hh-sub{color:rgba(12,26,51,.78)}
+#view-home .home-hero .hh-sub b{color:#0c1a33}
+#view-home .home-hero .hh-lead{color:rgba(12,26,51,.62)}
+#view-home .home-hero .hh-or{color:rgba(12,26,51,.45)}
 
 .home-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin:60px auto;max-width:1080px;border-top:1px solid rgba(232,184,75,.22);border-bottom:1px solid rgba(232,184,75,.22)}
 .home-stats .hs-tile{padding:30px 24px 26px;border-right:1px solid rgba(255,255,255,.06);position:relative;display:flex;flex-direction:column}
@@ -475,7 +485,7 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
 .tabs{display:flex;gap:1px;flex-wrap:wrap}
 .tab{background:none;border:1px solid transparent;color:var(--ink2);font-family:'Manrope';font-size:.82rem;padding:7px 13px;cursor:pointer;border-radius:7px;line-height:1;transition:color .12s,background .12s,border-color .12s}
 .tab:hover{color:var(--ink);background:rgba(255,255,255,.04)}
-.tab.on{color:#0c1a33;font-weight:700;background:#f3ecdc;border-color:rgba(181,132,32,.55);box-shadow:inset 0 -2px 0 rgba(181,132,32,.55)}
+.tab.on{color:#0c1a33;font-weight:700;background:#f4ecd3;border-color:rgba(181,132,32,.55);box-shadow:inset 0 -2px 0 rgba(181,132,32,.55)}
 .tab.sowhat{color:var(--gold)}
 .tbspace{flex:1}
 .immerse{background:var(--surface);border:1px solid var(--line);color:var(--ink2);font-family:'Manrope';font-size:.75rem;padding:7px 12px;border-radius:7px;cursor:pointer;white-space:nowrap}
@@ -538,13 +548,13 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
 @media(max-width:760px){.ecols{column-count:1}.essay{padding:0 24px 96px}}
 .essay-progress{position:sticky;top:0;height:3px;background:#0c1a33;z-index:6}
 .essay-progress-fill{height:100%;background:var(--gold);width:0%}
-.essay-hero{text-align:center;background:#f3ecdc;color:#0c1a33;margin:34px 0 0;padding:74px clamp(40px,7vw,90px) 44px;border-radius:24px 24px 0 0;box-shadow:0 -2px 0 0 #f3ecdc,0 30px 90px rgba(0,0,0,.34)}
+.essay-hero{text-align:center;background:#f4ecd3;color:#0c1a33;margin:34px 0 0;padding:74px clamp(40px,7vw,90px) 44px;border-radius:24px 24px 0 0;box-shadow:0 -2px 0 0 #f4ecd3,0 30px 90px rgba(0,0,0,.34)}
 .essay-hero .ek{color:#b58420}
 .essay-hero h1{color:#0c1a33;font-weight:800;margin:20px auto 0}
 .essay-hero h1 em{color:#b58420}
 .essay-hero .htag{color:rgba(12,26,51,.78);margin:22px auto 0}
 .essay-hero .htag b{color:#0c1a33;font-weight:700}
-.essay-body{background:#f3ecdc;color:#0c1a33;margin:0 0 70px;padding:38px clamp(40px,7vw,90px) 110px;border-radius:0 0 24px 24px;text-align:center;box-shadow:0 30px 90px rgba(0,0,0,.34)}
+.essay-body{background:#f4ecd3;color:#0c1a33;margin:0 0 70px;padding:38px clamp(40px,7vw,90px) 110px;border-radius:0 0 24px 24px;text-align:center;box-shadow:0 30px 90px rgba(0,0,0,.34)}
 .essay-body .epart{padding-top:0;scroll-margin-top:6px}
 .essay-body .epart-head{justify-content:center;border-top-color:rgba(12,26,51,.16);padding-top:60px;margin-top:54px}
 .essay-body .epart:first-child .epart-head{border-top:none;padding-top:0;margin-top:0}
@@ -896,7 +906,7 @@ table.rank tbody tr{cursor:pointer}
 .pf-ctx .cp-ctx-dot{width:9px;height:9px}
 .pf-ctx .cp-ctx-pct{font-size:.7rem;min-width:104px}
 /* ===== Cream paper body for country / region / territory profiles ===== */
-.pf-paper{background:#f3ecdc;color:#0c1a33;padding:40px clamp(26px,4vw,54px) 48px;margin:14px 0 32px;border-radius:22px;box-shadow:0 22px 70px rgba(0,0,0,.30),inset 0 1px 0 rgba(255,255,255,.55);position:relative}
+.pf-paper{background:#f4ecd3;color:#0c1a33;padding:40px clamp(26px,4vw,54px) 48px;margin:14px 0 32px;border-radius:22px;box-shadow:0 22px 70px rgba(0,0,0,.30),inset 0 1px 0 rgba(255,255,255,.55);position:relative}
 .pf-paper > .pf-h:first-child,.pf-paper > .pf-grid:first-child .pf-h{margin-top:0}
 .pf-paper .pf-h{color:#5d4524;border-bottom-color:rgba(12,26,51,.12)}
 .pf-paper .pf-cap{color:rgba(12,26,51,.62)}
@@ -907,29 +917,29 @@ table.rank tbody tr{cursor:pointer}
 .pf-paper .pbar2 .pl b .pb-of{color:rgba(12,26,51,.45)}
 .pf-paper .pbar2 .pt{background:rgba(12,26,51,.10)}
 .pf-paper .pbar2.cl:hover{background:rgba(181,132,32,.10)}
-.pf-paper canvas.pf-traj{background:#fbf5e6;border:1px solid rgba(12,26,51,.10);border-radius:12px;margin-top:6px}
+.pf-paper canvas.pf-traj{background:#fcf4dd;border:1px solid rgba(12,26,51,.10);border-radius:12px;margin-top:6px}
 /* Key facts */
 .pf-paper .facts{background:rgba(12,26,51,.10);border:1px solid rgba(12,26,51,.10)}
-.pf-paper .fact{background:#fbf5e6}
+.pf-paper .fact{background:#fcf4dd}
 .pf-paper .fact .fl{color:rgba(12,26,51,.55)}
 .pf-paper .fact .fv{color:#0c1a33}
 .pf-paper .fact .fl-sub{color:rgba(12,26,51,.40)}
 .pf-paper .fact .muted{color:rgba(12,26,51,.40)}
-.pf-paper .trj-pt .d{box-shadow:0 0 0 3px #fbf5e6}
+.pf-paper .trj-pt .d{box-shadow:0 0 0 3px #fcf4dd}
 .pf-paper .trj-ln{background:rgba(12,26,51,.18)}
 .pf-paper .trj-years{color:rgba(12,26,51,.50)}
 /* Context tiles */
-.pf-paper .cp-ctx-grp{background:#fbf5e6;border:1px solid rgba(12,26,51,.10)}
+.pf-paper .cp-ctx-grp{background:#fcf4dd;border:1px solid rgba(12,26,51,.10)}
 .pf-paper .cp-ctx-lbl{color:#b58420}
 .pf-paper .cp-ctx-row .top .l{color:rgba(12,26,51,.74)}
 .pf-paper .cp-ctx-row .top .v{color:#0c1a33}
 .pf-paper .cp-ctx-tk::before{background:rgba(12,26,51,.14)}
 .pf-paper .cp-ctx-tk::after,.pf-paper .cp-ctx-tke{background:rgba(12,26,51,.22)}
-.pf-paper .cp-ctx-dot{box-shadow:0 0 0 3px #fbf5e6}
+.pf-paper .cp-ctx-dot{box-shadow:0 0 0 3px #fcf4dd}
 .pf-paper .cp-ctx-pct .w{color:rgba(12,26,51,.45)}
 .pf-paper .cp-ctx-imp{color:rgba(12,26,51,.55)}
 /* Region-only */
-.pf-paper .rg-map{border-color:rgba(12,26,51,.14);background:#fbf5e6}
+.pf-paper .rg-map{border-color:rgba(12,26,51,.14);background:#fcf4dd}
 .pf-paper .rg-tb-lbl{color:rgba(12,26,51,.55)}
 .pf-paper .subtab-tbl td,.pf-paper .subtab-tbl th{border-bottom-color:rgba(12,26,51,.10)}
 .pf-paper .subtab-tbl th{color:rgba(12,26,51,.50)}
@@ -985,12 +995,12 @@ table.rank tbody tr{cursor:pointer}
 .pf-paper.cmp-paper .lead{color:rgba(12,26,51,.78);margin-left:auto;margin-right:auto}
 /* Children below the header revert to left-align so cards, tables, charts read normally */
 .pf-paper.cmp-paper .cmp-pickers,.pf-paper.cmp-paper .cmp-cards,.pf-paper.cmp-paper .cmp-section{text-align:left}
-.pf-paper .cmp-picker-btn{background:#fbf5e6;border-color:rgba(181,132,32,.45);color:#0c1a33}
+.pf-paper .cmp-picker-btn{background:#fcf4dd;border-color:rgba(181,132,32,.45);color:#0c1a33}
 .pf-paper .cmp-picker-btn:hover{background:rgba(181,132,32,.10);border-color:rgba(181,132,32,.65)}
 .pf-paper .cmp-picker-btn.empty{color:rgba(12,26,51,.50)}
 .pf-paper .cmp-picker-btn .cmp-pk-arr{color:#b58420}
 .pf-paper .cmp-picker-btn .cmp-pk-flag img.flg{box-shadow:0 1px 3px rgba(12,26,51,.30)}
-.pf-paper .cmp-picker-dd{background:#fbf5e6;border-color:rgba(12,26,51,.14)}
+.pf-paper .cmp-picker-dd{background:#fcf4dd;border-color:rgba(12,26,51,.14)}
 .pf-paper .cmp-picker-dd input{color:#0c1a33;border-bottom-color:rgba(12,26,51,.14)}
 .pf-paper .cmp-picker-dd input:focus{border-bottom-color:rgba(181,132,32,.55)}
 .pf-paper .cmp-picker-dd .cmp-dd-row{color:rgba(12,26,51,.78)}
@@ -999,7 +1009,7 @@ table.rank tbody tr{cursor:pointer}
 .pf-paper .cmp-picker .cmp-clear:hover{color:#0c1a33;border-color:rgba(181,132,32,.55);background:rgba(181,132,32,.10)}
 .pf-paper .cmp-add-slot{background:rgba(181,132,32,.06);border-color:rgba(181,132,32,.45);color:#b58420}
 .pf-paper .cmp-add-slot:hover{background:rgba(181,132,32,.14);border-color:rgba(181,132,32,.65)}
-.pf-paper .cmp-card{background:#fbf5e6;border-color:rgba(12,26,51,.10)}
+.pf-paper .cmp-card{background:#fcf4dd;border-color:rgba(12,26,51,.10)}
 .pf-paper .cmp-card.empty{color:rgba(12,26,51,.45)}
 .pf-paper .cmp-card .cc-head{border-bottom-color:rgba(12,26,51,.10)}
 .pf-paper .cmp-card .cc-head img.flg{box-shadow:0 1px 3px rgba(12,26,51,.30)}
@@ -1009,17 +1019,17 @@ table.rank tbody tr{cursor:pointer}
 .pf-paper .cmp-card .cc-pop{color:rgba(12,26,51,.55)}
 .pf-paper .cmp-card .cc-pop b{color:rgba(12,26,51,.82)}
 .pf-paper .cmp-h{font-family:'JetBrains Mono',monospace;font-size:.66rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:#5d4524;border-bottom-color:rgba(12,26,51,.12)}
-.pf-paper .cmp-traj-cv{background:#fbf5e6;border-color:rgba(12,26,51,.10)}
+.pf-paper .cmp-traj-cv{background:#fcf4dd;border-color:rgba(12,26,51,.10)}
 .pf-paper .cmp-traj-legend{background:rgba(12,26,51,.04);border-color:rgba(12,26,51,.10)}
 .pf-paper .cmp-traj-legend .ctl-item{color:rgba(12,26,51,.78)}
 .pf-paper .cmp-traj-legend .ctl-nm{color:rgba(12,26,51,.82)}
 .pf-paper .cmp-traj-cap{color:rgba(12,26,51,.62)}
-.pf-paper .cmp-pil{background:#fbf5e6;border-color:rgba(12,26,51,.10)}
+.pf-paper .cmp-pil{background:#fcf4dd;border-color:rgba(12,26,51,.10)}
 .pf-paper .cmp-pil .cp-name{color:#0c1a33}
 .pf-paper .cmp-pil .cp-row .cp-cname{color:rgba(12,26,51,.72)}
 .pf-paper .cmp-pil .cp-row .cp-cval{color:#0c1a33}
 .pf-paper .cmp-pil .cp-row .cp-cval .cp-cof{color:rgba(12,26,51,.50)}
-.pf-paper .cmp-stat{background:#fbf5e6;border-color:rgba(12,26,51,.10)}
+.pf-paper .cmp-stat{background:#fcf4dd;border-color:rgba(12,26,51,.10)}
 .pf-paper .cmp-stat .cs-l{color:rgba(12,26,51,.55)}
 .pf-paper .cmp-stat .cs-row .cs-nm{color:rgba(12,26,51,.72)}
 .pf-paper .cmp-stat .cs-row .cs-v{color:#0c1a33}
@@ -1039,7 +1049,7 @@ table.rank tbody tr{cursor:pointer}
 .ty-lead a.ty-method-all{color:#b58420;font-weight:600;cursor:pointer;border-bottom:1px solid rgba(181,132,32,.45);transition:color .12s,border-color .12s}
 .ty-lead a.ty-method-all:hover{color:#0c1a33;border-color:#0c1a33}
 .ty-grid{display:flex;flex-direction:column;gap:14px;margin-top:38px}
-.ty-card{position:relative;background:#fbf5e6;border:1px solid rgba(12,26,51,.10);border-left:5px solid var(--ty);border-radius:12px;padding:22px 24px 22px 26px;display:grid;grid-template-columns:80px 1fr 220px;gap:24px;align-items:start;transition:transform .15s,box-shadow .18s,border-color .15s}
+.ty-card{position:relative;background:#fcf4dd;border:1px solid rgba(12,26,51,.10);border-left:5px solid var(--ty);border-radius:12px;padding:22px 24px 22px 26px;display:grid;grid-template-columns:80px 1fr 220px;gap:24px;align-items:start;transition:transform .15s,box-shadow .18s,border-color .15s}
 .ty-card:hover{transform:translateY(-1px);box-shadow:0 14px 38px rgba(12,26,51,.10)}
 .ty-no{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:3.4rem;line-height:.95;color:var(--ty);letter-spacing:-.04em;text-align:left}
 .ty-body{min-width:0}
@@ -1074,7 +1084,7 @@ table.rank tbody tr{cursor:pointer}
 .pf-paper .pf-meta{color:rgba(12,26,51,.55)}
 .pf-paper .pf-meta b{color:rgba(12,26,51,.82)}
 .pf-paper .pf-flag .flg{box-shadow:0 1px 3px rgba(12,26,51,.30),inset 0 0 0 1px rgba(12,26,51,.10)}
-.pf-paper .pf-hero{background:#fbf5e6;border:1px solid rgba(12,26,51,.10);box-shadow:0 1px 0 rgba(255,255,255,.6) inset}
+.pf-paper .pf-hero{background:#fcf4dd;border:1px solid rgba(12,26,51,.10);box-shadow:0 1px 0 rgba(255,255,255,.6) inset}
 .pf-paper .pf-band{color:rgba(12,26,51,.65)}
 .pf-paper .pf-yr{color:rgba(12,26,51,.45)}
 .pf-paper .pf-sent{color:#0c1a33}
@@ -1224,7 +1234,7 @@ table.rank tbody tr{cursor:pointer}
    its dark navy inset since its JS strokes are designed for dark.
    ==================================================================== */
 #view-pyramid{overflow:hidden}
-#view-pyramid .pyr-page{background:#f3ecdc;color:#0c1a33;border-radius:24px;box-shadow:0 30px 90px rgba(0,0,0,.34);padding:18px clamp(24px,3vw,42px) 22px;margin:14px auto 14px;max-width:1180px;text-align:left;display:flex;flex-direction:column;gap:8px;height:calc(100vh - 76px - 28px - 22px);max-height:760px}
+#view-pyramid .pyr-page{background:#f4ecd3;color:#0c1a33;border-radius:24px;box-shadow:0 30px 90px rgba(0,0,0,.34);padding:18px clamp(24px,3vw,42px) 22px;margin:14px auto 14px;max-width:1180px;text-align:left;display:flex;flex-direction:column;gap:8px;height:calc(100vh - 76px - 28px - 22px);max-height:760px}
 #view-pyramid .pyr-pg-eyebrow{color:#b58420;margin-top:0}
 #view-pyramid .pyr-pg-name{color:#0c1a33;font-size:clamp(1.5rem,2.6vw,1.95rem);margin:2px 0 0;display:flex;align-items:center;gap:14px}
 #view-pyramid .pyr-pg-name .pyr-pg-flag{display:inline-flex;align-items:center}
@@ -1233,9 +1243,9 @@ table.rank tbody tr{cursor:pointer}
 #view-pyramid .pyr-pg-meta{margin:0 0 6px;padding-bottom:8px}
 #view-pyramid .pyr-pg-meta-v{font-size:clamp(1.6rem,3vw,2.2rem)}
 #view-pyramid .pyr-cv{flex:1;min-height:300px;height:auto!important}
-#view-pyramid .pyr-back{background:#fbf5e6;border:1px solid rgba(12,26,51,.10);color:rgba(12,26,51,.78)}
+#view-pyramid .pyr-back{background:#fcf4dd;border:1px solid rgba(12,26,51,.10);color:rgba(12,26,51,.78)}
 #view-pyramid .pyr-back:hover{border-color:rgba(181,132,32,.55);color:#0c1a33}
-#view-pyramid .pyr-pg-search input{background:#fbf5e6;border:1px solid rgba(12,26,51,.10);color:#0c1a33}
+#view-pyramid .pyr-pg-search input{background:#fcf4dd;border:1px solid rgba(12,26,51,.10);color:#0c1a33}
 #view-pyramid .pyr-pg-search input::placeholder{color:rgba(12,26,51,.45)}
 #view-pyramid .pyr-pg-search input:focus{border-color:rgba(181,132,32,.55);outline:none}
 #view-pyramid .pyr-pg-search .pyr-pg-dd{background:#fff;border:1px solid rgba(12,26,51,.10);box-shadow:0 18px 48px rgba(12,26,51,.18)}
@@ -1246,8 +1256,8 @@ table.rank tbody tr{cursor:pointer}
 #view-pyramid .pyr-pg-meta{border-bottom-color:rgba(12,26,51,.12)}
 #view-pyramid .pyr-pg-meta-l{color:rgba(12,26,51,.55)}
 #view-pyramid .pyr-pg-meta-v{color:#0c1a33}
-#view-pyramid .pyr-cv{background:#fbf5e6;border-radius:14px;border:1px solid rgba(12,26,51,.10);box-sizing:border-box;width:100%}
-#view-pyramid .pyr-ctl{background:#fbf5e6;border:1px solid rgba(12,26,51,.10);color:#0c1a33}
+#view-pyramid .pyr-cv{background:#fcf4dd;border-radius:14px;border:1px solid rgba(12,26,51,.10);box-sizing:border-box;width:100%}
+#view-pyramid .pyr-ctl{background:#fcf4dd;border:1px solid rgba(12,26,51,.10);color:#0c1a33}
 #view-pyramid .pyr-lbl{color:rgba(12,26,51,.55)}
 #view-pyramid .pyr-yr{color:#b58420}
 #view-pyramid .pyr-leg{color:rgba(12,26,51,.78)}
@@ -1308,13 +1318,13 @@ body::after{content:'Demoria Research \00A0\00B7\00A0 Demographic Health Index 2
 /* Cream + gold layered racing stripe along the bottom (replaces the
    1px navy border-bottom) */
 .topbar{border-bottom:0!important}
-.topbar::before{content:'';position:absolute;left:0;right:0;bottom:1px;height:3px;background:#f3ecdc;pointer-events:none;z-index:25}
+.topbar::before{content:'';position:absolute;left:0;right:0;bottom:1px;height:3px;background:#f4ecd3;pointer-events:none;z-index:25}
 .topbar::after{content:'';position:absolute;left:0;right:0;bottom:0;height:1px;background:#e0b54a;pointer-events:none;z-index:26}
 
 /* ====================================================================
    Research + Data — single cream paper card wrapper on navy.
    ==================================================================== */
-#view-research .research-wrap{background:#f3ecdc;color:#0c1a33;border-radius:24px;box-shadow:0 30px 90px rgba(0,0,0,.34);padding:42px clamp(28px,4vw,54px) 60px;margin:34px auto 60px;max-width:1180px;text-align:center}
+#view-research .research-wrap{background:#f4ecd3;color:#0c1a33;border-radius:24px;box-shadow:0 30px 90px rgba(0,0,0,.34);padding:42px clamp(28px,4vw,54px) 60px;margin:34px auto 60px;max-width:1180px;text-align:center}
 #view-research .research-wrap > .lead{max-width:62ch;margin-left:auto;margin-right:auto}
 #view-research .research-list,#view-research .research-note{text-align:left}
 #view-research .research-wrap .eyebrow2{color:#b58420}
@@ -1322,7 +1332,7 @@ body::after{content:'Demoria Research \00A0\00B7\00A0 Demographic Health Index 2
 #view-research .research-wrap h2 em{color:#b58420}
 #view-research .research-wrap .lead{color:rgba(12,26,51,.78)}
 #view-research .research-list{background:rgba(12,26,51,.10);border-color:rgba(12,26,51,.10)}
-#view-research .research-card{background:#fbf5e6}
+#view-research .research-card{background:#fcf4dd}
 #view-research .research-card:hover{background:rgba(181,132,32,.08)}
 #view-research .research-card .rc-idx{color:#b58420}
 #view-research .research-card .rc-eye{color:rgba(12,26,51,.62)}
@@ -1331,7 +1341,7 @@ body::after{content:'Demoria Research \00A0\00B7\00A0 Demographic Health Index 2
 #view-research .research-card .rc-arr{color:#b58420}
 #view-research .research-card .rc-bd-pill{background:rgba(181,132,32,.12);color:#b58420;border-color:rgba(181,132,32,.40)}
 #view-research .research-card .rc-bd-pill.lock{background:rgba(12,26,51,.06);color:rgba(12,26,51,.45);border-color:rgba(12,26,51,.18)}
-#view-research .research-note{background:#fbf5e6;border-color:rgba(12,26,51,.10)}
+#view-research .research-note{background:#fcf4dd;border-color:rgba(12,26,51,.10)}
 #view-research .research-note .rn-back{color:#b58420}
 #view-research .research-note .rn-back:hover{color:#0c1a33}
 #view-research .research-note .rn-eye{color:#b58420}
@@ -1344,7 +1354,7 @@ body::after{content:'Demoria Research \00A0\00B7\00A0 Demographic Health Index 2
 #view-research .research-note .rn-source .rs-w{color:rgba(12,26,51,.62)}
 #view-research .research-note .rn-source .rs-c{color:rgba(12,26,51,.78)}
 
-#view-data .datawrap{background:#f3ecdc;color:#0c1a33;border-radius:24px;box-shadow:0 30px 90px rgba(0,0,0,.34);padding:42px clamp(28px,4vw,54px) 60px;margin:34px auto 60px;max-width:1180px;text-align:center}
+#view-data .datawrap{background:#f4ecd3;color:#0c1a33;border-radius:24px;box-shadow:0 30px 90px rgba(0,0,0,.34);padding:42px clamp(28px,4vw,54px) 60px;margin:34px auto 60px;max-width:1180px;text-align:center}
 #view-data .datawrap > .lead{max-width:74ch;margin-left:auto;margin-right:auto}
 #view-data .datactl,#view-data #dataBody{text-align:left}
 #view-data .datawrap .eyebrow2{color:#b58420}
@@ -1353,25 +1363,25 @@ body::after{content:'Demoria Research \00A0\00B7\00A0 Demographic Health Index 2
 #view-data .datawrap .lead{color:rgba(12,26,51,.78)}
 #view-data .dt-badge-wpp{background:rgba(74,139,194,.10);color:#3a6896;border-color:rgba(74,139,194,.32)}
 #view-data .dt-badge-nso{background:rgba(181,132,32,.14);color:#b58420;border-color:rgba(181,132,32,.42)}
-#view-data .dt-search input{background:#fbf5e6;border-color:rgba(12,26,51,.10);color:#0c1a33}
+#view-data .dt-search input{background:#fcf4dd;border-color:rgba(12,26,51,.10);color:#0c1a33}
 #view-data .dt-search input::placeholder{color:rgba(12,26,51,.40)}
 #view-data .dt-search input:focus{border-color:rgba(181,132,32,.55)}
 #view-data .dt-search-dd{background:#fff;border-color:rgba(12,26,51,.10);box-shadow:0 18px 48px rgba(12,26,51,.18)}
 #view-data .dt-search-dd .dd-row{color:#0c1a33}
 #view-data .dt-search-dd .dd-row:hover,#view-data .dt-search-dd .dd-row.kbd{background:rgba(181,132,32,.10)}
-#view-data .dlbtn{background:#fbf5e6;border:1px solid rgba(12,26,51,.10);color:#0c1a33}
-#view-data .dlbtn:hover{border-color:rgba(181,132,32,.50);background:#fff8ea}
+#view-data .dlbtn{background:#fcf4dd;border:1px solid rgba(12,26,51,.10);color:#0c1a33}
+#view-data .dlbtn:hover{border-color:rgba(181,132,32,.50);background:#fffaef}
 #view-data .dt-country-h{border-bottom-color:rgba(12,26,51,.10)}
 #view-data .dt-country-name{color:#0c1a33}
 #view-data .dt-country-sub{color:rgba(12,26,51,.62)}
 #view-data .dt-country-sub code{color:#b58420;background:rgba(181,132,32,.10)}
 #view-data .dt-group-h{color:#b58420;border-bottom-color:rgba(181,132,32,.30)}
 #view-data .dt-note{color:rgba(12,26,51,.62)}
-#view-data .dt-box{border-color:rgba(12,26,51,.10);background:#fbf5e6}
+#view-data .dt-box{border-color:rgba(12,26,51,.10);background:#fcf4dd}
 #view-data .dtbl{color:#0c1a33}
 #view-data .dtbl thead th,#view-data .dtbl.wide thead th{background:rgba(12,26,51,.06);color:rgba(12,26,51,.62);border-bottom:1px solid rgba(12,26,51,.18);font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;text-align:left;padding:9px 12px;font-weight:600}
 #view-data .dtbl tbody td{color:#0c1a33;border-top:1px solid rgba(12,26,51,.10);padding:7px 12px;background:transparent;font-variant-numeric:tabular-nums}
-#view-data .dtbl tbody tr:hover td{background:#fff8ea}
+#view-data .dtbl tbody tr:hover td{background:#fffaef}
 #view-data .dtbl td.dt-yr,#view-data .dtbl th.dt-yr{color:rgba(12,26,51,.62)!important}
 #view-data .dtbl td.dt-na{color:rgba(12,26,51,.30)!important}
 #view-data .dtbl td.dt-nso{background:rgba(181,132,32,.06)!important}
@@ -1386,7 +1396,7 @@ body::after{content:'Demoria Research \00A0\00B7\00A0 Demographic Health Index 2
    FT grid runs out of room well before the viewport hits 920px. */
 @media(max-width:1180px){.ft-grid{grid-template-columns:1fr;gap:24px}}
 .ft-hero{position:sticky;top:14px;align-self:start}
-.ft-flag-block{margin-bottom:18px;display:inline-block;border:1px solid rgba(12,26,51,.10);padding:4px;border-radius:4px;background:#fbf5e6}
+.ft-flag-block{margin-bottom:18px;display:inline-block;border:1px solid rgba(12,26,51,.10);padding:4px;border-radius:4px;background:#fcf4dd}
 .ft-flag-block .flg{height:38px;width:auto;border-radius:2px;display:block;box-shadow:0 1px 3px rgba(12,26,51,.20)}
 .ft-name{font-family:'Manrope',sans-serif;font-size:clamp(2.2rem,3.4vw,2.8rem);font-weight:800;letter-spacing:-.025em;line-height:1.04;color:#0c1a33;margin:0 0 6px}
 .ft-meta{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(12,26,51,.55);margin-bottom:24px;line-height:1.6}
@@ -1416,7 +1426,7 @@ body::after{content:'Demoria Research \00A0\00B7\00A0 Demographic Health Index 2
 .ft-2col > *{min-width:0}
 .ft-paper,.ft-content{max-width:100%}
 .ft-content canvas,.ft-traj canvas{max-width:100%}
-.ft-traj canvas{width:100%;height:240px;background:#fbf5e6;border-radius:12px;border:1px solid rgba(12,26,51,.10);display:block}
+.ft-traj canvas{width:100%;height:240px;background:#fcf4dd;border-radius:12px;border:1px solid rgba(12,26,51,.10);display:block}
 .ft-caption{margin-top:10px;font-size:.78rem;color:rgba(12,26,51,.62);line-height:1.5;max-width:62ch}
 .ft-pillars .pbar2{margin:14px 0}
 .ft-pillars .pbar2 .pl{color:rgba(12,26,51,.78);font-size:.88rem}
@@ -1424,32 +1434,32 @@ body::after{content:'Demoria Research \00A0\00B7\00A0 Demographic Health Index 2
 .ft-pillars .pbar2 .pl .wt{color:rgba(12,26,51,.50);font-size:.72rem}
 .ft-pillars .pbar2 .pt{background:rgba(12,26,51,.10)}
 /* Pyramid CTA button (replaces inline mini pyramid) */
-.ft-pyr-button{display:flex;align-items:center;gap:18px;width:100%;background:#fbf5e6;border:1px solid rgba(181,132,32,.45);border-radius:14px;padding:18px 22px;color:#0c1a33;cursor:pointer;font-family:'Manrope',sans-serif;text-align:left;transition:background .15s,border-color .15s,transform .12s,box-shadow .15s;box-shadow:0 8px 24px rgba(0,0,0,.10)}
-.ft-pyr-button:hover{background:#fff8ea;border-color:rgba(181,132,32,.85);transform:translateY(-1px);box-shadow:0 14px 32px rgba(0,0,0,.16)}
+.ft-pyr-button{display:flex;align-items:center;gap:18px;width:100%;background:#fcf4dd;border:1px solid rgba(181,132,32,.45);border-radius:14px;padding:18px 22px;color:#0c1a33;cursor:pointer;font-family:'Manrope',sans-serif;text-align:left;transition:background .15s,border-color .15s,transform .12s,box-shadow .15s;box-shadow:0 8px 24px rgba(0,0,0,.10)}
+.ft-pyr-button:hover{background:#fffaef;border-color:rgba(181,132,32,.85);transform:translateY(-1px);box-shadow:0 14px 32px rgba(0,0,0,.16)}
 .ft-pyr-icon{flex:none;width:64px;height:54px}
 .ft-pyr-text{flex:1;display:flex;flex-direction:column;gap:4px;min-width:0}
 .ft-pyr-t{font-family:'Manrope',sans-serif;font-size:1.05rem;font-weight:700;color:#0c1a33;letter-spacing:-.01em;line-height:1.2}
 .ft-pyr-d{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(12,26,51,.55);font-weight:600}
 .ft-pyr-arr{flex:none;font-size:1.4rem;color:#b58420;font-weight:300}
 .ft-fact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1px;background:rgba(12,26,51,.10);border:1px solid rgba(12,26,51,.10);border-radius:12px;overflow:hidden}
-.ft-fact{background:#fbf5e6;padding:16px 18px}
+.ft-fact{background:#fcf4dd;padding:16px 18px}
 .ft-fact .ft-fl{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(12,26,51,.55);font-weight:600;margin-bottom:8px}
 .ft-fact .ft-fv{font-family:'Manrope',sans-serif;font-size:1.6rem;font-weight:700;color:#0c1a33;line-height:1;font-variant-numeric:tabular-nums;letter-spacing:-.015em}
 .ft-fact .ft-fu{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:rgba(12,26,51,.50);font-weight:500;margin-left:4px}
 .ft-fact .ft-fd{font-size:.74rem;color:rgba(12,26,51,.62);margin-top:6px;line-height:1.4}
-.ft-context .cp-ctx-grp{background:#fbf5e6;border:1px solid rgba(12,26,51,.10);border-radius:12px;padding:14px 16px}
+.ft-context .cp-ctx-grp{background:#fcf4dd;border:1px solid rgba(12,26,51,.10);border-radius:12px;padding:14px 16px}
 .ft-context .cp-ctx-lbl{color:#b58420}
 .ft-context .cp-ctx-row .top .l{color:rgba(12,26,51,.74)}
 .ft-context .cp-ctx-row .top .v{color:#0c1a33}
 .ft-context .cp-ctx-tk::before{background:rgba(12,26,51,.14)}
 .ft-context .cp-ctx-tk::after,.ft-context .cp-ctx-tke{background:rgba(12,26,51,.22)}
-.ft-context .cp-ctx-dot{box-shadow:0 0 0 3px #fbf5e6}
+.ft-context .cp-ctx-dot{box-shadow:0 0 0 3px #fcf4dd}
 .ft-context .cp-ctx-pct .w{color:rgba(12,26,51,.45)}
 .ft-context .cp-ctx-imp{color:rgba(12,26,51,.55)}
 .ft-context .pf-ctx{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 /* Region FT layout extras */
 .ft-region-kind{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:#b58420;font-weight:600;margin-bottom:8px}
-.ft-region-map .rg-map{width:100%;height:320px;background:#fbf5e6;border:1px solid rgba(12,26,51,.10);border-radius:12px;display:block;cursor:pointer}
+.ft-region-map .rg-map{width:100%;height:320px;background:#fcf4dd;border:1px solid rgba(12,26,51,.10);border-radius:12px;display:block;cursor:pointer}
 .ft-paper-region .subtab-tbl{width:100%;border-collapse:collapse;margin-top:6px;font-size:.88rem;color:#0c1a33}
 .ft-paper-region .subtab-tbl td,.ft-paper-region .subtab-tbl th{text-align:left;padding:8px 10px;border-bottom:1px solid rgba(12,26,51,.10)}
 .ft-paper-region .subtab-tbl th{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(12,26,51,.55);font-weight:600}
@@ -1479,7 +1489,100 @@ body::after{content:'Demoria Research \00A0\00B7\00A0 Demographic Health Index 2
 .auth-links a:hover{background:rgba(181,132,32,.12);border-color:rgba(181,132,32,.55)}
 .auth-link-label{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:#b58420;font-weight:600}
 @media(max-width:680px){.auth-mark{width:118px;height:118px;font-size:2rem}}
-</style></head><body><div class="page"><div class="topbar"><a class="dr-lockup" href="https://demoriaresearch.com" aria-label="Demoria Research — home"><svg class="dr-mark-svg" viewBox="0 0 600 500" aria-hidden="true"><g stroke="currentColor" stroke-width="4.5" fill="none"><rect x="200" y="100" width="50" height="38"/><rect x="178" y="138" width="72" height="38"/><rect x="156" y="176" width="94" height="38"/><rect x="134" y="214" width="116" height="38"/><rect x="112" y="252" width="138" height="38"/><rect x="90" y="290" width="160" height="38"/><rect x="68" y="328" width="182" height="38"/><rect x="46" y="366" width="204" height="38"/><rect x="350" y="100" width="50" height="38"/><rect x="350" y="138" width="72" height="38"/><rect x="350" y="176" width="94" height="38"/><rect x="350" y="214" width="116" height="38"/><rect x="350" y="252" width="138" height="38"/><rect x="350" y="290" width="160" height="38"/><rect x="350" y="328" width="182" height="38"/><rect x="350" y="366" width="204" height="38"/><path d="M 250 100 A 50 50 0 0 1 350 100"/></g><g stroke="currentColor" stroke-width="4.5" fill="none" stroke-linejoin="miter"><path d="M 270 160 L 330 160 L 300 250 Z"/><path d="M 270 350 L 330 350 L 300 250 Z"/></g></svg><span class="dr-wm"><span class="dr-wm-d">Demoria</span><span class="dr-wm-r">Research</span></span></a><span class="bl"></span><a class="brand" href="#" onclick="try{history.pushState({view:'landing'},'','/');}catch(e){}show('landing');return false;" title="Demoria Research — home"><span class="mk">DHI</span><span class="bt"><em>v2.0</em></span></a><nav class="tabs"><button class="tab on" data-v="home">Home</button><span class="tab-sep"></span><button class="tab" data-v="world">World</button><span class="tab-sep"></span><button class="tab" data-v="rankings">Index &amp; Rankings</button><span class="tab-sep"></span><button class="tab" data-v="compare">Compare</button><span class="tab-sep"></span><button class="tab" data-v="about">About</button><button class="tab sowhat" data-v="sowhat">So What?</button><button class="tab" data-v="method">Methodology</button><button class="tab" data-v="author">Author</button><span class="tab-sep"></span><button class="tab" data-v="research">Research</button><span class="tab-sep"></span><button class="tab" data-v="data">Data</button></nav><span class="tbspace"></span><button class="immerse" id="immerse">&#11034;&nbsp;Full immersion</button></div><main id="views"><section class="view on" id="view-landing"><svg id="bg-map" class="bg-layer" preserveAspectRatio="xMidYMid slice" aria-hidden="true"></svg><svg id="bg-trend" class="bg-layer" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="area-grad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#e0b54a" stop-opacity="0.45"/><stop offset="100%" stop-color="#e0b54a" stop-opacity="0"/></linearGradient></defs></svg><div class="dr-wrap"><div class="dr-brand-lockup"><svg viewBox="0 0 600 500" aria-hidden="true"><g stroke="currentColor" stroke-width="4.2" fill="none"><rect x="200" y="100" width="50" height="38"/><rect x="178" y="138" width="72" height="38"/><rect x="156" y="176" width="94" height="38"/><rect x="134" y="214" width="116" height="38"/><rect x="112" y="252" width="138" height="38"/><rect x="90" y="290" width="160" height="38"/><rect x="68" y="328" width="182" height="38"/><rect x="46" y="366" width="204" height="38"/><rect x="350" y="100" width="50" height="38"/><rect x="350" y="138" width="72" height="38"/><rect x="350" y="176" width="94" height="38"/><rect x="350" y="214" width="116" height="38"/><rect x="350" y="252" width="138" height="38"/><rect x="350" y="290" width="160" height="38"/><rect x="350" y="328" width="182" height="38"/><rect x="350" y="366" width="204" height="38"/><path d="M 250 100 A 50 50 0 0 1 350 100"/></g><g stroke="currentColor" stroke-width="4.2" fill="none" stroke-linejoin="miter"><path d="M 270 160 L 330 160 L 300 250 Z"/><path d="M 270 350 L 330 350 L 300 250 Z"/></g></svg><span class="dr-eyebrow">Demoria Research</span></div><h1 class="dr-h1" id="drHeadline">Welcome to Demoria Research&rsquo;s<br><em>Demographic Health Index</em> &nbsp;<span class="dr-h1-acr">(DHI)</span></h1><p class="dr-lede" id="drLede">A single 0&ndash;100 score for every country&rsquo;s ability to renew its population through its own births &mdash; calculated for <b>236 countries</b>, every year from <b>1965 to 2100</b>.</p><div class="dr-personal-strip" id="drPersonal" style="display:none"></div><div class="dr-links"><button class="dr-link" id="landingCta"><span class="dr-link-text"><span class="dr-link-name" id="drLinkName">Open the world map to see your country</span><span class="dr-link-desc" id="drLinkDesc">All 236 countries &middot; 1965&ndash;2100</span></span><span class="dr-link-arrow">&rarr;</span></button></div></div><footer class="dr-footer">&copy; Demoria Research</footer></section><section class="view" id="view-home"><div class="hb-fx" aria-hidden="true"></div><div class="home-wrap">
+
+/* WORLD-CREAM-APPLIED */
+/* ===== World tab: deep-space starfield backdrop ===== */
+#view-world{background-color:#05070e;background-image:radial-gradient(1.3px 1.3px at 40px 60px,rgba(255,255,255,.65),transparent),radial-gradient(1px 1px at 130px 30px,rgba(255,255,255,.42),transparent),radial-gradient(1px 1px at 90px 150px,rgba(255,255,255,.5),transparent),radial-gradient(1.4px 1.4px at 210px 195px,rgba(255,255,255,.46),transparent),radial-gradient(1px 1px at 30px 210px,rgba(255,255,255,.35),transparent),radial-gradient(1px 1px at 175px 105px,rgba(255,255,255,.4),transparent),radial-gradient(1.2px 1.2px at 255px 70px,rgba(255,255,255,.5),transparent);background-repeat:repeat;background-size:280px 250px}
+#view-world .stagewrap{position:relative;background:transparent}
+/* ===== RIGHT control rail = cream card (colours, all widths) ===== */
+#view-world .rail{border-left:0;border-radius:20px;background:#f4ecd3;box-shadow:inset 0 0 0 1px rgba(181,132,32,.32),0 18px 50px rgba(0,0,0,.32);color:rgba(12,26,51,.80)}
+#view-world .rlbl{color:rgba(12,26,51,.62)}
+#view-world .rail-collapse{color:rgba(12,26,51,.56)}
+#view-world .rail-collapse:hover{color:#b58420}
+#view-world .rail-help-group .rh-btn{background:rgba(181,132,32,.10);border-color:rgba(181,132,32,.36);color:#9a6f1c}
+#view-world .rail-help-group .rh-btn:hover{background:rgba(181,132,32,.17);border-color:rgba(181,132,32,.60);color:#7d5a14}
+#view-world .seg{border-color:rgba(12,26,51,.16)}
+#view-world .seg button{background:#fcf4dd;color:rgba(12,26,51,.70)}
+#view-world .seg button+button{border-left-color:rgba(12,26,51,.14)}
+#view-world .seg button.on{background:var(--gold);color:#0c1a33;font-weight:600}
+#view-world .seg.dim{opacity:.82}
+#view-world .yr{color:#b58420}
+#view-world .yr small{color:rgba(12,26,51,.60)}
+#view-world input[type=range]{background:rgba(12,26,51,.16)}
+#view-world input[type=range]::-webkit-slider-thumb{border-color:#f4ecd3}
+#view-world input[type=range]::-moz-range-thumb{border-color:#f4ecd3}
+#view-world .btn{background:#fcf4dd;border-color:rgba(12,26,51,.16);color:rgba(12,26,51,.74)}
+#view-world .btn.on,#view-world .btn.play.on{background:var(--gold);border-color:var(--gold);color:#0c1a33}
+#view-world .projbox{border-color:rgba(181,132,32,.34);background:linear-gradient(180deg,rgba(181,132,32,.08),rgba(181,132,32,.02))}
+#view-world .projbox-head{border-bottom-color:rgba(181,132,32,.28)}
+#view-world .projbox-head .projbox-h1{color:#0c1a33}
+#view-world .projbox-head .projbox-h2{color:#b58420}
+#view-world .scoreseg .ss-main{background:#fcf4dd;border-color:rgba(12,26,51,.16);color:rgba(12,26,51,.72)}
+#view-world .scoreseg .ss-main:hover{background:#fffaef;color:#0c1a33}
+#view-world .scoreseg .ss-main .ss-main-s{color:rgba(12,26,51,.60)}
+#view-world .scoreseg .ss-main.on{color:#8a6314;background:rgba(181,132,32,.16);border-color:rgba(181,132,32,.55);box-shadow:inset 0 -2px 0 rgba(181,132,32,.60)}
+#view-world .scoreseg .ss-main.on .ss-main-s{color:rgba(138,99,20,.85)}
+#view-world .scoreseg .ss-or{color:rgba(12,26,51,.56)}
+#view-world .scoreseg .ss-or::before,#view-world .scoreseg .ss-or::after{background:rgba(12,26,51,.13)}
+#view-world .scoreseg .ss-pills button{color:rgba(12,26,51,.70);border-color:rgba(12,26,51,.16)}
+#view-world .scoreseg .ss-pills button:hover{color:#0c1a33;background:rgba(12,26,51,.04)}
+#view-world .scoreseg .ss-pills button.on{color:#8a6314;background:rgba(181,132,32,.15);border-color:rgba(181,132,32,.50)}
+#view-world .lg-bar{box-shadow:inset 0 0 0 1px rgba(12,26,51,.14),0 1px 2px rgba(12,26,51,.18)}
+#view-world .lg-bar .lg-tick{background:rgba(12,26,51,.30)}
+#view-world .lg-scale{color:rgba(12,26,51,.60)}
+#view-world .pillar-blurb{border-top-color:rgba(12,26,51,.10);color:rgba(12,26,51,.60)}
+#view-world .pillar-blurb b{color:rgba(12,26,51,.82)}
+#view-world .pillar-blurb .pb-more{color:#b58420}
+#view-world .foot{color:rgba(12,26,51,.56)}
+#view-world .rail-show{background:#f4ecd3;border-color:rgba(181,132,32,.40);color:rgba(12,26,51,.72)}
+/* ===== LEFT rankings rail = navy card (colours, all widths) ===== */
+#view-world .wm-side{border-right:0;border-radius:20px;background:rgba(16,30,56,.92);box-shadow:inset 0 0 0 1px rgba(232,184,75,.22),0 18px 50px rgba(0,0,0,.45);padding:16px 14px 8px;overflow:hidden}
+/* ===== Country pop-out = cream card (colours, all widths) ===== */
+.cpanel{background:#f4ecd3!important;color:#0c1a33!important;border-left:0!important;box-shadow:0 24px 64px rgba(0,0,0,.42),inset 0 0 0 1px rgba(181,132,32,.30)!important}
+.cpanel .pclose{background:#fcf4dd;border:1px solid rgba(12,26,51,.14);color:rgba(12,26,51,.62)}
+.cpanel .pclose:hover{color:#0c1a33;border-color:rgba(181,132,32,.55)}
+.cpanel .cp-rank{color:rgba(12,26,51,.64)}
+.cpanel .cp-name{color:#0c1a33}
+.cpanel .cp-cat{color:#b58420;border-color:rgba(181,132,32,.42);background:rgba(181,132,32,.10)}
+.cpanel .cp-band{color:rgba(12,26,51,.78)}
+.cpanel .cp-sub{color:rgba(12,26,51,.64)}
+.cpanel .cp-h{color:#5d4524}
+.cpanel .cp-h-cap{color:rgba(12,26,51,.58)}
+.cpanel .cp-note{color:rgba(12,26,51,.78)}
+.cpanel .cp-stats{background:rgba(12,26,51,.10);border-color:rgba(12,26,51,.10)}
+.cpanel .cp-stat{background:#fcf4dd}
+.cpanel .cp-stat .sl{color:rgba(12,26,51,.64)}
+.cpanel .cp-stat .sv{color:#0c1a33}
+.cpanel .cp-stat .sv small{color:rgba(12,26,51,.64)}
+.cpanel canvas#cp-traj{background:#fcf4dd;border:1px solid rgba(12,26,51,.10);border-radius:10px}
+.cpanel .cp-fulllink{background:#fcf4dd;border:1px solid rgba(181,132,32,.40);color:#0c1a33;font-weight:600}
+.cpanel .cp-fulllink:hover{border-color:rgba(181,132,32,.80);background:#fffaef}
+.cpanel .pbar2 .pl,.cpanel .pbar .pl,.cpanel .pbar2 .pl span,.cpanel .pbar .pl span{color:rgba(12,26,51,.78)}
+.cpanel .pbar2 .pl b,.cpanel .pbar .pl b{color:#0c1a33}
+.cpanel .pbar2 .pl b .pb-of,.cpanel .pbar .pl b .pb-of,.cpanel .pbar2 .pl .wt,.cpanel .pbar .pl .wt{color:rgba(12,26,51,.64)}
+.cpanel .pbar2 .pt,.cpanel .pbar .pt{background:rgba(12,26,51,.10)}
+.cpanel .cp-ctx-grp{background:#fcf4dd;border:1px solid rgba(12,26,51,.10)}
+.cpanel .cp-ctx-lbl{color:#b58420}
+.cpanel .cp-ctx-row .top .l{color:rgba(12,26,51,.78)}
+.cpanel .cp-ctx-row .top .v{color:#0c1a33}
+.cpanel .cp-ctx-tk::before{background:rgba(12,26,51,.14)}
+.cpanel .cp-ctx-tk::after,.cpanel .cp-ctx-tke{background:rgba(12,26,51,.22)}
+.cpanel .cp-ctx-dot{box-shadow:0 0 0 3px #fcf4dd}
+.cpanel .cp-ctx-pct .w{color:rgba(12,26,51,.58)}
+.cpanel .cp-ctx-imp{color:rgba(12,26,51,.64)}
+/* ===== DESKTOP layout: full-bleed map + floating cards ===== */
+@media(min-width:761px){
+  #view-world .stage{background:transparent!important;position:absolute;inset:0;width:auto;flex:none}
+  #view-world .wm-side{position:absolute;left:16px;top:16px;bottom:16px;width:244px;z-index:20;margin:0}
+  #view-world .rail{position:absolute;right:16px;top:16px;bottom:16px;width:262px;z-index:20;margin:0}
+  .cpanel{right:16px!important;top:90px!important;height:calc(100% - 106px)!important;border-radius:20px!important}
+  #view-rankings .rk-rail{margin:16px 6px 16px 16px;border-right:0;border-radius:20px;background:rgba(16,30,56,.92);box-shadow:inset 0 0 0 1px rgba(232,184,75,.22),0 18px 50px rgba(0,0,0,.4);padding:18px 14px 8px;overflow:hidden}
+}
+/* ===== MOBILE: keep slide-in but cream control rail ===== */
+@media(max-width:760px){
+  #view-world .rail:not(.hide){background:#f4ecd3!important}
+}
+</style></head><body><div class="page"><div class="topbar"><a class="dr-lockup" href="https://demoriaresearch.com" aria-label="Demoria Research — home"><svg class="dr-mark-svg" viewBox="0 0 600 500" aria-hidden="true"><g stroke="currentColor" stroke-width="4.5" fill="none"><rect x="200" y="100" width="50" height="38"/><rect x="178" y="138" width="72" height="38"/><rect x="156" y="176" width="94" height="38"/><rect x="134" y="214" width="116" height="38"/><rect x="112" y="252" width="138" height="38"/><rect x="90" y="290" width="160" height="38"/><rect x="68" y="328" width="182" height="38"/><rect x="46" y="366" width="204" height="38"/><rect x="350" y="100" width="50" height="38"/><rect x="350" y="138" width="72" height="38"/><rect x="350" y="176" width="94" height="38"/><rect x="350" y="214" width="116" height="38"/><rect x="350" y="252" width="138" height="38"/><rect x="350" y="290" width="160" height="38"/><rect x="350" y="328" width="182" height="38"/><rect x="350" y="366" width="204" height="38"/><path d="M 250 100 A 50 50 0 0 1 350 100"/></g><g stroke="currentColor" stroke-width="4.5" fill="none" stroke-linejoin="miter"><path d="M 270 160 L 330 160 L 300 250 Z"/><path d="M 270 350 L 330 350 L 300 250 Z"/></g></svg><span class="dr-wm"><span class="dr-wm-d">Demoria</span><span class="dr-wm-r">Research</span></span></a><span class="bl"></span><a class="brand" href="#" onclick="try{history.pushState({view:'landing'},'','/');}catch(e){}show('landing');return false;" title="Demoria Research — home"><span class="mk">DHI</span><span class="bt"><em>v2.0</em></span></a><nav class="tabs"><button class="tab on" data-v="home">Home</button><span class="tab-sep"></span><button class="tab" data-v="world">World</button><span class="tab-sep"></span><button class="tab" data-v="rankings">Index &amp; Rankings</button><span class="tab-sep"></span><button class="tab" data-v="compare">Compare</button><span class="tab-sep"></span><button class="tab" data-v="about">About</button><button class="tab sowhat" data-v="sowhat">So What?</button><button class="tab" data-v="method">Methodology</button><button class="tab" data-v="author">Author</button><span class="tab-sep"></span><button class="tab" data-v="research">Research</button><span class="tab-sep"></span><button class="tab" data-v="data">Data</button></nav><span class="tbspace"></span><button class="immerse" id="immerse">&#11034;&nbsp;Full immersion</button></div><main id="views"><section class="view on" id="view-landing"><svg id="bg-map" class="bg-layer" preserveAspectRatio="xMidYMid slice" aria-hidden="true"></svg><svg id="bg-trend" class="bg-layer" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="area-grad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#e0b54a" stop-opacity="0.45"/><stop offset="100%" stop-color="#e0b54a" stop-opacity="0"/></linearGradient></defs></svg><div class="dr-wrap"><div class="dr-brand-lockup"><svg viewBox="0 0 600 500" aria-hidden="true"><g stroke="currentColor" stroke-width="4.2" fill="none"><rect x="200" y="100" width="50" height="38"/><rect x="178" y="138" width="72" height="38"/><rect x="156" y="176" width="94" height="38"/><rect x="134" y="214" width="116" height="38"/><rect x="112" y="252" width="138" height="38"/><rect x="90" y="290" width="160" height="38"/><rect x="68" y="328" width="182" height="38"/><rect x="46" y="366" width="204" height="38"/><rect x="350" y="100" width="50" height="38"/><rect x="350" y="138" width="72" height="38"/><rect x="350" y="176" width="94" height="38"/><rect x="350" y="214" width="116" height="38"/><rect x="350" y="252" width="138" height="38"/><rect x="350" y="290" width="160" height="38"/><rect x="350" y="328" width="182" height="38"/><rect x="350" y="366" width="204" height="38"/><path d="M 250 100 A 50 50 0 0 1 350 100"/></g><g stroke="currentColor" stroke-width="4.2" fill="none" stroke-linejoin="miter"><path d="M 270 160 L 330 160 L 300 250 Z"/><path d="M 270 350 L 330 350 L 300 250 Z"/></g></svg></div><h1 class="dr-h1" id="drHeadline">Welcome to Demoria Research&rsquo;s<br><em>Demographic Health Index</em> &nbsp;<span class="dr-h1-acr">(DHI)</span></h1><p class="dr-lede" id="drLede">A single 0&ndash;100 score for every country&rsquo;s ability to renew its population through its own births &mdash; calculated for <b>236 countries</b>, every year from <b>1965 to 2100</b>.</p><div class="dr-personal-strip" id="drPersonal" style="display:none"></div><div class="dr-links"><button class="dr-link" id="landingCta"><span class="dr-link-text"><span class="dr-link-name" id="drLinkName">Open the world map to see your country</span><span class="dr-link-desc" id="drLinkDesc">All 236 countries &middot; 1965&ndash;2100</span></span><span class="dr-link-arrow">&rarr;</span></button></div></div><footer class="dr-footer">&copy; Demoria Research</footer></section><section class="view" id="view-home"><div class="hb-fx" aria-hidden="true"></div><div class="home-wrap">
 <div class="home-hero"><div class="home-bg-host"><svg class="home-bg" id="homeBg" aria-hidden="true"></svg></div>
   <div class="hh-eye">Demoria Research &middot; v2.0</div>
   <h1 class="hh-title">Demographic <em>Health</em> Index <span class="hh-acr">(DHI)</span></h1>
@@ -1522,7 +1625,7 @@ body::after{content:'Demoria Research \00A0\00B7\00A0 Demographic Health Index 2
 <div class="ecols">
 <p>The DHI is <b>not</b> a measure of wealth, happiness, or the worth of a society. A rich country can score badly; a poor one can score well. The index is deliberately blind to income &mdash; it asks only whether a population can sustain itself.</p>
 <p>The usual shorthand for that question is the headline fertility rate. It flatters and it misleads. A total fertility rate says nothing about the age structure beneath it, nothing about how long a country has already been below replacement, and nothing about the difference between a society carried by its own young cohorts and one carried by a constant inflow of migrants.</p>
-<p>Two countries with an identical TFR can be on opposite trajectories. Version&nbsp;2.0 was rebuilt from the ground up to pull those forces apart &mdash; into four weighted pillars and fourteen indicators.</p>
+<p>Two countries with an identical TFR can be on opposite trajectories. Version&nbsp;2.0 was rebuilt from the ground up to pull those forces apart &mdash; into four weighted pillars and fifteen indicators.</p>
 <p>Every figure rests on the UN World Population Prospects 2024 revision. Where a national statistical office reports materially different fertility, that value is applied as an explicit override &mdash; and every country-year is stamped <b>WPP</b> or <b>NSO</b>, so provenance is never hidden.</p>
 </div>
 <div class="estats">
@@ -1649,6 +1752,30 @@ const land=topojson.feature(WORLD,WORLD.objects.countries).features.filter(f=>St
 const landLow=topojson.feature(WORLD_LOW,WORLD_LOW.objects.countries).features.filter(f=>String(f.id)!=='010');
 // Kosovo carries no numeric id in the topology — map it to its GLOBE key
 [land,landLow].forEach(a=>{const k=a.find(f=>f.properties&&f.properties.name==='Kosovo');if(k)k.id='99001';});
+// De-facto regions are separate polygons that would render as 'no data'
+// grey holes AND leave an internal border line. Merge their geometry into
+// the parent country (topojson.merge dissolves the shared boundary arc) so
+// they become one seamless, parent-coloured, clickable shape.
+(function(){
+  function foldInto(topo, feats, parentId, childName){
+    try{
+      const geoms=topo.objects.countries.geometries;
+      const par=geoms.find(g=>String(g.id)===parentId);
+      const chi=geoms.find(g=>g.properties&&g.properties.name===childName);
+      if(!par||!chi) return;
+      const merged=topojson.merge(topo,[par,chi]);
+      const pf=feats.find(f=>String(f.id)===parentId);
+      if(pf) pf.geometry=merged;
+      const ci=feats.findIndex(f=>f.properties&&f.properties.name===childName);
+      if(ci>=0) feats.splice(ci,1);
+    }catch(e){}
+  }
+  foldInto(WORLD, land, '706', 'Somaliland');  foldInto(WORLD_LOW, landLow, '706', 'Somaliland');
+  foldInto(WORLD, land, '196', 'N. Cyprus');   foldInto(WORLD_LOW, landLow, '196', 'N. Cyprus');
+})();
+// Scored territories too small to have a polygon in the 1:50m geometry —
+// drawn as small marker dots (and made hover/click-able) instead.
+const MARKERS=[]; /* territory dots removed — territories remain in rankings/search/profiles */
 let dragging=false,moving=false,rafPending=false,cacheValid=false,idleT=0,didDrag=false;
 const cv=document.getElementById('cv'), ctx=cv.getContext('2d');
 const cacheCv=document.createElement('canvas'), cacheCtx=cacheCv.getContext('2d');
@@ -1676,7 +1803,7 @@ function sizeBg(){
   bgSx.setTransform(DPR,0,0,DPR,0,0); bgSx.clearRect(0,0,bgW,bgH);
   const cx=bgW/2,cy=bgH/2;
   let g=bgSx.createRadialGradient(cx,cy,bgR*0.25,cx,cy,bgR*2.15);
-  g.addColorStop(0,'rgba(72,122,208,.17)'); g.addColorStop(.45,'rgba(46,86,162,.07)'); g.addColorStop(1,'rgba(0,0,0,0)');
+  g.addColorStop(0,'rgba(86,130,210,.10)'); g.addColorStop(.45,'rgba(40,70,130,.03)'); g.addColorStop(1,'rgba(0,0,0,0)');
   bgSx.fillStyle=g; bgSx.fillRect(0,0,bgW,bgH);
   bgSx.lineWidth=1;
   [1.06,1.19,1.37,1.62,1.95,2.4].forEach((m,i)=>{
@@ -1738,6 +1865,19 @@ function colorFor(f){
   return ramp(scoreAt(c));
 }
 window.__pos_d2=1;
+function markerAt(mx,my){
+  const center = mode==='globe' ? [-proj.rotate()[0], -proj.rotate()[1]] : null;
+  let best=null,bd=11;
+  for(const m of MARKERS){ if(!GLOBE[m.id]) continue; if(center && d3.geoDistance(m.ll,center)>Math.PI/2) continue; const p=proj(m.ll); if(!p||!isFinite(p[0])) continue; const d=Math.hypot(p[0]-mx,p[1]-my); if(d<bd){bd=d;best=m;} }
+  return best;
+}
+function drawMarkers(){
+  const center = mode==='globe' ? [-proj.rotate()[0], -proj.rotate()[1]] : null;
+  const mr = Math.max(2.4, Math.min(4.2, proj.scale()*0.013));
+  for(const m of MARKERS){ const c=GLOBE[m.id]; if(!c) continue; if(center && d3.geoDistance(m.ll,center)>Math.PI/2) continue; const p=proj(m.ll); if(!p||!isFinite(p[0])) continue; const s=scoreAt(c);
+    ctx.beginPath(); ctx.arc(p[0],p[1],mr,0,6.2832); ctx.fillStyle=(s==null)?'#2b3c5c':ramp(s); ctx.fill();
+    ctx.lineWidth=1; ctx.strokeStyle='rgba(255,255,255,.8)'; ctx.stroke(); }
+}
 function drawScene(){
   ctx.setTransform(DPR,0,0,DPR,0,0); ctx.clearRect(0,0,CW,CH);
   if(mode==='globe'){
@@ -1763,6 +1903,7 @@ function drawScene(){
     ctx.strokeStyle='rgba(12,26,51,.85)'; ctx.lineWidth=.35; ctx.stroke();
   }
   if(mode!=='map'){ctx.beginPath(); path({type:'Sphere'}); ctx.strokeStyle='rgba(120,170,240,.45)'; ctx.lineWidth=1; ctx.stroke();}
+  drawMarkers();
   if(cacheCv.width!==cv.width||cacheCv.height!==cv.height){cacheCv.width=cv.width;cacheCv.height=cv.height;}
   cacheCtx.setTransform(1,0,0,1,0,0); cacheCtx.clearRect(0,0,cv.width,cv.height); cacheCtx.drawImage(cv,0,0);
   cacheValid=true;
@@ -1803,6 +1944,7 @@ d3.select(cv).call(d3.drag()
 cv.addEventListener('click',ev=>{
   if(didDrag){didDrag=false;return;}
   const rect=cv.getBoundingClientRect(),mx=ev.clientX-rect.left,my=ev.clientY-rect.top;
+  const hm=markerAt(mx,my); if(hm){ openPanel(GLOBE[hm.id]); return; }
   const ll=proj.invert&&proj.invert([mx,my]);
   if(ll&&isFinite(ll[0])){ for(const f of land){ if(GLOBE[String(f.id)]&&d3.geoContains(f,ll)){openPanel(GLOBE[String(f.id)]);break;} } }
 });
@@ -1814,6 +1956,9 @@ cv.addEventListener('wheel',ev=>{ev.preventDefault();
   moving=true; invalidate(); render(); endInteract();},{passive:false});
 cv.addEventListener('mousemove',ev=>{
   const rect=cv.getBoundingClientRect(),mx=ev.clientX-rect.left,my=ev.clientY-rect.top;
+  const hm=markerAt(mx,my);
+  if(hm){ if(hover){hover=null;render();} const mc=GLOBE[hm.id],ms=scoreAt(mc); tip.classList.add('show'); tip.style.left=(ev.clientX+16)+'px'; tip.style.top=(ev.clientY-10)+'px'; tip.innerHTML='<div class=tn>'+mc.name+'</div><div class=ts>'+(ms==null?'no data':'DHI '+ms.toFixed(1)+' &middot; '+band(ms)[0])+'</div>'; cv.style.cursor='pointer'; return; }
+  cv.style.cursor='';
   const ll=proj.invert&&proj.invert([mx,my]); let h=null;
   if(ll&&isFinite(ll[0])){ for(const f of land){ if(GLOBE[String(f.id)]&&d3.geoContains(f,ll)){h=f;break;} } }
   if(h!==hover){hover=h;render();}
@@ -2137,7 +2282,7 @@ function _paintTraj(cv,tr,H,hov){
   x.clearRect(0,0,w,h);
   // Detect cream-paper context (country/region profile cards) and switch
   // the chart palette so observed line + grid + labels all read on cream.
-  const cream = !!cv.closest('.pf-paper');
+  const cream = !!cv.closest('.pf-paper') || !!cv.closest('.cpanel');
   const P = cream
     ? {grid:'rgba(12,26,51,.09)',axis:'rgba(12,26,51,.58)',
        bandFill:'rgba(181,132,32,.22)',bandStroke:'rgba(181,132,32,.55)',
@@ -3571,7 +3716,7 @@ window.__pos_d6=1;
     // Cream palette when this chart sits inside a cream paper card
     const cream = !!cv.closest('.pf-paper');
     const P = cream
-      ? {grid:'rgba(12,26,51,.09)',axis:'rgba(12,26,51,.62)',sep:'rgba(181,132,32,.40)',year:'rgba(12,26,51,.62)',hov:'rgba(12,26,51,.40)',ring:'#fbf5e6'}
+      ? {grid:'rgba(12,26,51,.09)',axis:'rgba(12,26,51,.62)',sep:'rgba(181,132,32,.40)',year:'rgba(12,26,51,.62)',hov:'rgba(12,26,51,.40)',ring:'#fcf4dd'}
       : {grid:'rgba(255,255,255,.08)',axis:'rgba(255,255,255,.42)',sep:'rgba(232,184,75,.20)',year:'rgba(255,255,255,.55)',hov:'rgba(255,255,255,.30)',ring:'#fff'};
     // Faint band shading on cream so the reader can read the DHI bands behind the lines
     if(cream){
