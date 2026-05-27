@@ -1944,9 +1944,9 @@ d3.select(cv).call(d3.drag()
 cv.addEventListener('click',ev=>{
   if(didDrag){didDrag=false;return;}
   const rect=cv.getBoundingClientRect(),mx=ev.clientX-rect.left,my=ev.clientY-rect.top;
-  const hm=markerAt(mx,my); if(hm){ openPanel(GLOBE[hm.id]); return; }
+  const hm=markerAt(mx,my); if(hm){ var mc=GLOBE[hm.id]; flyTo(mc.iso); openPanel(mc); return; }
   const ll=proj.invert&&proj.invert([mx,my]);
-  if(ll&&isFinite(ll[0])){ for(const f of land){ if(GLOBE[String(f.id)]&&d3.geoContains(f,ll)){openPanel(GLOBE[String(f.id)]);break;} } }
+  if(ll&&isFinite(ll[0])){ for(const f of land){ if(GLOBE[String(f.id)]&&d3.geoContains(f,ll)){var cc=GLOBE[String(f.id)]; flyTo(cc.iso); openPanel(cc); break;} } }
 });
 function minZoom(){ return mode==='globe' ? Math.min(CW,CH)/Math.max(CW,CH)*0.9 : 1; }
 cv.addEventListener('wheel',ev=>{ev.preventDefault();
