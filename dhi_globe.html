@@ -151,7 +151,24 @@ h1 em{font-style:normal;color:var(--gold)}
 @keyframes lcHead{0%,5%{opacity:0}65%{opacity:1}85%{opacity:1}100%{opacity:0}}
 .dr-wrap{max-width:880px;position:relative;z-index:1;color:#fff;font-family:'Manrope',sans-serif;line-height:1.6;text-align:center}
 .dr-brand-lockup{display:block;margin:0 0 30px;text-align:center}
-.dr-brand-lockup svg{width:clamp(96px,11vw,136px);height:auto;color:#e0b54a;display:block;margin:0 auto;filter:drop-shadow(0 8px 26px rgba(224,181,74,.20))}
+.dr-brand-lockup svg{width:clamp(140px,15vw,196px);height:auto;color:#f1c64f;display:block;margin:0 auto;overflow:visible;filter:drop-shadow(0 6px 22px rgba(224,181,74,.30))}
+.dr-brand-lockup svg g{stroke-width:6}
+/* build-up: bars grow from the centre, top-down (population-pyramid assembly) */
+.dr-brand-lockup svg rect{transform-box:fill-box;animation:sgGrow .5s cubic-bezier(.2,.75,.2,1) backwards}
+.dr-brand-lockup svg rect:nth-child(-n+8){transform-origin:right center}
+.dr-brand-lockup svg rect:nth-child(n+9){transform-origin:left center}
+.dr-brand-lockup svg rect:nth-child(1),.dr-brand-lockup svg rect:nth-child(9){animation-delay:0s}
+.dr-brand-lockup svg rect:nth-child(2),.dr-brand-lockup svg rect:nth-child(10){animation-delay:.07s}
+.dr-brand-lockup svg rect:nth-child(3),.dr-brand-lockup svg rect:nth-child(11){animation-delay:.14s}
+.dr-brand-lockup svg rect:nth-child(4),.dr-brand-lockup svg rect:nth-child(12){animation-delay:.21s}
+.dr-brand-lockup svg rect:nth-child(5),.dr-brand-lockup svg rect:nth-child(13){animation-delay:.28s}
+.dr-brand-lockup svg rect:nth-child(6),.dr-brand-lockup svg rect:nth-child(14){animation-delay:.35s}
+.dr-brand-lockup svg rect:nth-child(7),.dr-brand-lockup svg rect:nth-child(15){animation-delay:.42s}
+.dr-brand-lockup svg rect:nth-child(8),.dr-brand-lockup svg rect:nth-child(16){animation-delay:.49s}
+.dr-brand-lockup svg path{animation:sgFade .55s ease-out .6s backwards}
+@keyframes sgGrow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes sgFade{from{opacity:0}to{opacity:1}}
+@media(prefers-reduced-motion:reduce){.dr-brand-lockup svg rect,.dr-brand-lockup svg path{animation:none}}
 .dr-eyebrow{font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:#e0b54a}
 .dr-h1{font-family:'Manrope',sans-serif;font-size:clamp(2.1rem,4.4vw,3.4rem);font-weight:200;line-height:1.1;letter-spacing:-.025em;margin:0 auto 22px;color:#fff;max-width:none}
 .dr-h1 em{color:#e0b54a;font-style:normal;font-weight:300}
