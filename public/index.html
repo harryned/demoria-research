@@ -1607,47 +1607,78 @@ body::after{content:'Demoria Research \00A0\00B7\00A0 Demographic Health Index 2
 }
 
 /* RAWDATA-APPLIED */
-/* Raw Data explorer */
+/* Raw Data explorer — editorial navy chart + cream controls */
 .rd-wrap{max-width:1180px}
-.rd-ctrls{display:flex;flex-wrap:wrap;gap:14px;margin:24px 0 6px;align-items:flex-end}
-.rd-ctl{display:flex;flex-direction:column;gap:6px;min-width:160px}
-.rd-ctl-sm{min-width:96px;max-width:120px}
-.rd-ctl-grow{flex:1 1 240px}
-.rd-ctl label{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(12,26,51,.55);font-weight:600}
-.rd-ctl select,.rd-ctl input[type=number],.rd-search input{background:#fcf4dd;border:1px solid rgba(12,26,51,.16);border-radius:8px;color:#0c1a33;padding:9px 12px;font-family:'Manrope';font-size:.88rem;outline:none;width:100%;box-sizing:border-box}
-.rd-ctl select:focus,.rd-ctl input:focus,.rd-search input:focus{border-color:rgba(181,132,32,.55)}
+
+/* control row */
+.rd-ctrls{display:flex;flex-wrap:wrap;gap:12px;margin:26px 0 4px;align-items:flex-end;padding:14px 16px;background:rgba(12,26,51,.04);border:1px solid rgba(12,26,51,.10);border-radius:12px}
+.rd-ctl{display:flex;flex-direction:column;gap:6px;min-width:170px}
+.rd-ctl-sm{min-width:88px;max-width:108px}
+.rd-ctl-grow{flex:1 1 240px;min-width:200px}
+.rd-ctl label{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.20em;text-transform:uppercase;color:rgba(12,26,51,.55);font-weight:700}
+.rd-ctl select,.rd-ctl input[type=number],.rd-search input{background:#fffaef;border:1px solid rgba(12,26,51,.16);border-radius:7px;color:#0c1a33;padding:9px 11px;font-family:'Manrope';font-size:.88rem;font-weight:500;outline:none;width:100%;box-sizing:border-box;transition:border-color .15s,box-shadow .15s}
+.rd-ctl select{appearance:none;-webkit-appearance:none;background-image:linear-gradient(45deg,transparent 50%,#b58420 50%),linear-gradient(135deg,#b58420 50%,transparent 50%);background-position:calc(100% - 14px) 50%,calc(100% - 9px) 50%;background-size:5px 5px,5px 5px;background-repeat:no-repeat;padding-right:28px;cursor:pointer}
+.rd-ctl select:focus,.rd-ctl input:focus,.rd-search input:focus{border-color:#b58420;box-shadow:0 0 0 3px rgba(181,132,32,.12)}
+.rd-ctl input[type=number]{font-family:'JetBrains Mono',monospace;font-variant-numeric:tabular-nums;text-align:center;font-weight:600;letter-spacing:.04em}
+
+/* search dropdown */
 .rd-search{position:relative}
-.rd-dd{position:absolute;left:0;right:0;top:calc(100% + 4px);background:#fff;border:1px solid rgba(12,26,51,.16);border-radius:8px;box-shadow:0 10px 28px rgba(12,26,51,.18);z-index:20;max-height:260px;overflow-y:auto;display:none}
+.rd-dd{position:absolute;left:0;right:0;top:calc(100% + 6px);background:#fffaef;border:1px solid rgba(12,26,51,.18);border-radius:8px;box-shadow:0 14px 32px rgba(12,26,51,.22);z-index:20;max-height:280px;overflow-y:auto;display:none}
 .rd-dd.on{display:block}
-.rd-dd-row{display:flex;align-items:center;gap:9px;padding:8px 11px;cursor:pointer;color:#0c1a33;font-size:.86rem}
-.rd-dd-row:hover,.rd-dd-row.kbd{background:rgba(181,132,32,.10)}
+.rd-dd-row{display:flex;align-items:center;gap:9px;padding:9px 12px;cursor:pointer;color:#0c1a33;font-size:.86rem;border-bottom:1px solid rgba(12,26,51,.05)}
+.rd-dd-row:last-child{border-bottom:0}
+.rd-dd-row:hover,.rd-dd-row.kbd{background:rgba(181,132,32,.14)}
+.rd-dd-row.inuse{opacity:.45}
 .rd-dd-row .flg{height:12px;width:auto;border-radius:2px;box-shadow:0 1px 2px rgba(0,0,0,.25);object-fit:cover}
-.rd-chips{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 4px;min-height:34px}
-.rd-chip{display:inline-flex;align-items:center;gap:8px;padding:6px 10px 6px 8px;border-radius:999px;background:#fff;border:1px solid rgba(12,26,51,.14);font-family:'Manrope';font-size:.82rem;color:#0c1a33;cursor:default}
-.rd-chip .sw{width:14px;height:4px;border-radius:2px}
-.rd-chip .flg{height:11px;width:auto;border-radius:2px;box-shadow:0 1px 2px rgba(0,0,0,.25);object-fit:cover}
-.rd-chip .x{margin-left:4px;width:18px;height:18px;border-radius:50%;border:0;background:rgba(12,26,51,.08);color:rgba(12,26,51,.60);cursor:pointer;font-family:'Manrope';font-size:.74rem;line-height:1;display:inline-flex;align-items:center;justify-content:center;padding:0}
+
+/* chips — selected countries */
+.rd-chips{display:flex;flex-wrap:wrap;gap:8px;margin:16px 2px 8px;min-height:34px}
+.rd-chip{display:inline-flex;align-items:stretch;border-radius:999px;background:#fffaef;border:1px solid rgba(12,26,51,.14);font-family:'Manrope';font-size:.82rem;font-weight:500;color:#0c1a33;cursor:default;overflow:hidden;box-shadow:0 1px 2px rgba(12,26,51,.05)}
+.rd-chip .sw{width:6px;flex:0 0 6px;display:block}
+.rd-chip > *:not(.sw){padding:6px 4px;display:inline-flex;align-items:center}
+.rd-chip > span:not(.sw){padding-left:10px}
+.rd-chip .flg{height:11px;width:auto;border-radius:2px;box-shadow:0 1px 2px rgba(0,0,0,.20);object-fit:cover;padding:0!important;margin-left:10px;align-self:center}
+.rd-chip .flg + span{padding-left:7px}
+.rd-chip .x{width:20px;height:20px;border-radius:50%;border:0;background:rgba(12,26,51,.08);color:rgba(12,26,51,.60);cursor:pointer;font-family:'Manrope';font-size:.85rem;line-height:1;justify-content:center;padding:0!important;margin:5px 6px 5px 6px;transition:background .15s,color .15s}
 .rd-chip .x:hover{background:#b53e3e;color:#fff}
-.rd-chart-wrap{position:relative;margin:18px 0 8px;background:#fcf4dd;border:1px solid rgba(12,26,51,.10);border-radius:12px;padding:12px}
+
+/* chart card — navy editorial panel */
+.rd-chart-wrap{position:relative;margin:8px 0 8px;background:#0c1a33;border:1px solid rgba(232,184,75,.30);border-radius:12px;padding:18px 18px 14px;box-shadow:0 14px 40px rgba(12,26,51,.22),inset 0 1px 0 rgba(255,255,255,.04)}
+.rd-chart-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin:0 4px 10px;color:#f4ecd3}
+.rd-chart-h1{font-family:'Manrope';font-weight:700;font-size:1.05rem;letter-spacing:-.01em}
+.rd-chart-h1 em{font-style:normal;color:#e8b84b}
+.rd-chart-h2{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(244,236,211,.55);font-weight:600}
 .rd-cv{width:100%;height:440px;display:block}
-.rd-tip{position:absolute;pointer-events:none;background:rgba(12,26,51,.95);color:#fff;font-family:'Manrope';font-size:.78rem;padding:9px 12px;border-radius:8px;box-shadow:0 8px 22px rgba(0,0,0,.30);max-width:260px;z-index:5}
-.rd-tip .tt-y{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:rgba(255,255,255,.55);letter-spacing:.06em;margin-bottom:4px}
-.rd-tip .tt-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:2px 0}
-.rd-tip .tt-row .tt-nm{display:flex;align-items:center;gap:6px}
-.rd-tip .tt-row .tt-sw{width:9px;height:9px;border-radius:2px;display:inline-block}
-.rd-tip .tt-row .tt-v{font-family:'JetBrains Mono',monospace;font-weight:600;font-variant-numeric:tabular-nums}
-.rd-foot{display:flex;justify-content:space-between;align-items:center;gap:14px;margin:8px 2px 0;flex-wrap:wrap}
-.rd-meta{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.10em;text-transform:uppercase;color:rgba(12,26,51,.55)}
-.rd-table-wrap{margin-top:16px}
-.rd-table-wrap > summary{cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:#b58420;font-weight:600;padding:6px 0}
-.rd-table{max-height:340px;overflow:auto;margin-top:8px;border:1px solid rgba(12,26,51,.10);border-radius:10px}
-.rd-table table{width:100%;border-collapse:collapse;font-family:'Manrope';font-size:.82rem;color:#0c1a33}
-.rd-table th,.rd-table td{padding:7px 10px;text-align:right;border-bottom:1px solid rgba(12,26,51,.06)}
-.rd-table th{position:sticky;top:0;background:#0c1a33;color:#fff;font-weight:600;text-align:right;font-size:.74rem;letter-spacing:.06em}
-.rd-table th:first-child,.rd-table td:first-child{text-align:left;background:#fcf4dd}
-.rd-table th:first-child{background:#0c1a33;color:#fff}
-.rd-table td.nv{color:rgba(12,26,51,.30)}
-@media(max-width:760px){.rd-cv{height:320px}.rd-ctl{min-width:140px}.rd-ctl-grow{flex:1 1 100%}}
+
+/* hover tooltip */
+.rd-tip{position:absolute;pointer-events:none;background:#fffaef;color:#0c1a33;font-family:'Manrope';font-size:.80rem;padding:10px 13px;border-radius:8px;border:1px solid rgba(232,184,75,.55);box-shadow:0 10px 28px rgba(0,0,0,.40);max-width:280px;z-index:5}
+.rd-tip .tt-y{font-family:'JetBrains Mono',monospace;font-size:.66rem;color:rgba(12,26,51,.55);letter-spacing:.14em;text-transform:uppercase;font-weight:700;margin-bottom:5px;border-bottom:1px solid rgba(12,26,51,.10);padding-bottom:4px}
+.rd-tip .tt-row{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:3px 0}
+.rd-tip .tt-row .tt-nm{display:flex;align-items:center;gap:7px;font-weight:500}
+.rd-tip .tt-row .tt-sw{width:10px;height:10px;border-radius:2px;display:inline-block;flex:0 0 10px}
+.rd-tip .tt-row .tt-v{font-family:'JetBrains Mono',monospace;font-weight:700;font-variant-numeric:tabular-nums;color:#0c1a33}
+
+/* footer + CSV */
+.rd-foot{display:flex;justify-content:space-between;align-items:center;gap:14px;margin:10px 4px 0;flex-wrap:wrap}
+.rd-meta{font-family:'JetBrains Mono',monospace;font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(12,26,51,.55);font-weight:600}
+
+/* collapsible table */
+.rd-table-wrap{margin-top:20px}
+.rd-table-wrap > summary{cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:#b58420;font-weight:700;padding:8px 0;list-style:none;display:inline-flex;align-items:center;gap:8px}
+.rd-table-wrap > summary::-webkit-details-marker{display:none}
+.rd-table-wrap > summary::before{content:'▸';display:inline-block;transition:transform .2s;color:#b58420;font-size:.7rem}
+.rd-table-wrap[open] > summary::before{transform:rotate(90deg)}
+.rd-table{max-height:360px;overflow:auto;margin-top:8px;border:1px solid rgba(12,26,51,.14);border-radius:10px;background:#fffaef}
+.rd-table table{width:100%;border-collapse:collapse;font-family:'Manrope';font-size:.84rem;color:#0c1a33}
+.rd-table th,.rd-table td{padding:8px 12px;text-align:right;border-bottom:1px solid rgba(12,26,51,.06);font-variant-numeric:tabular-nums}
+.rd-table th{position:sticky;top:0;background:#0c1a33;color:#f4ecd3;font-weight:700;text-align:right;font-size:.70rem;letter-spacing:.08em;text-transform:uppercase;font-family:'JetBrains Mono',monospace;border-bottom:1px solid rgba(232,184,75,.30)}
+.rd-table th:first-child,.rd-table td:first-child{text-align:left;font-weight:600}
+.rd-table td:first-child{background:rgba(12,26,51,.04);color:#b58420;font-family:'JetBrains Mono',monospace;font-size:.78rem;letter-spacing:.04em}
+.rd-table tbody tr:hover td{background:rgba(232,184,75,.08)}
+.rd-table tbody tr:hover td:first-child{background:rgba(232,184,75,.16)}
+.rd-table td.nv{color:rgba(12,26,51,.25)}
+
+@media(max-width:760px){.rd-cv{height:320px}.rd-ctl{min-width:140px}.rd-ctl-grow{flex:1 1 100%}.rd-ctrls{padding:12px}}
 </style></head><body><div class="page"><div class="topbar"><a class="dr-lockup" href="https://demoriaresearch.com" aria-label="Demoria Research — home"><svg class="dr-mark-svg" viewBox="0 0 600 500" aria-hidden="true"><g stroke="currentColor" stroke-width="4.5" fill="none"><rect x="200" y="100" width="50" height="38"/><rect x="178" y="138" width="72" height="38"/><rect x="156" y="176" width="94" height="38"/><rect x="134" y="214" width="116" height="38"/><rect x="112" y="252" width="138" height="38"/><rect x="90" y="290" width="160" height="38"/><rect x="68" y="328" width="182" height="38"/><rect x="46" y="366" width="204" height="38"/><rect x="350" y="100" width="50" height="38"/><rect x="350" y="138" width="72" height="38"/><rect x="350" y="176" width="94" height="38"/><rect x="350" y="214" width="116" height="38"/><rect x="350" y="252" width="138" height="38"/><rect x="350" y="290" width="160" height="38"/><rect x="350" y="328" width="182" height="38"/><rect x="350" y="366" width="204" height="38"/><path d="M 250 100 A 50 50 0 0 1 350 100"/></g><g stroke="currentColor" stroke-width="4.5" fill="none" stroke-linejoin="miter"><path d="M 270 160 L 330 160 L 300 250 Z"/><path d="M 270 350 L 330 350 L 300 250 Z"/></g></svg><span class="dr-wm"><span class="dr-wm-d">Demoria</span><span class="dr-wm-r">Research</span></span></a><span class="bl"></span><a class="brand" href="#" onclick="try{history.pushState({view:'landing'},'','/');}catch(e){}show('landing');return false;" title="Demoria Research — home"><span class="mk">DHI</span><span class="bt"><em>v2.0</em></span></a><nav class="tabs"><button class="tab on" data-v="home">Home</button><span class="tab-sep"></span><button class="tab" data-v="world">World</button><span class="tab-sep"></span><button class="tab" data-v="rankings">Index &amp; Rankings</button><span class="tab-sep"></span><button class="tab" data-v="compare">Compare</button><span class="tab-sep"></span><button class="tab" data-v="about">About</button><button class="tab sowhat" data-v="sowhat">So What?</button><button class="tab" data-v="method">Methodology</button><button class="tab" data-v="author">Author</button><span class="tab-sep"></span><button class="tab" data-v="research">Research</button><span class="tab-sep"></span><button class="tab" data-v="data">Data</button><button class="tab" data-v="rawdata">Raw Data</button></nav><span class="tbspace"></span><button class="immerse" id="immerse">&#11034;&nbsp;Full immersion</button></div><main id="views"><section class="view on" id="view-landing"><svg id="bg-map" class="bg-layer" preserveAspectRatio="xMidYMid slice" aria-hidden="true"></svg><svg id="bg-trend" class="bg-layer" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="area-grad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#e0b54a" stop-opacity="0.45"/><stop offset="100%" stop-color="#e0b54a" stop-opacity="0"/></linearGradient></defs></svg><div class="dr-wrap"><div class="dr-brand-lockup"><svg viewBox="0 0 600 500" aria-hidden="true"><g stroke="currentColor" stroke-width="4.2" fill="none"><rect x="200" y="100" width="50" height="38"/><rect x="178" y="138" width="72" height="38"/><rect x="156" y="176" width="94" height="38"/><rect x="134" y="214" width="116" height="38"/><rect x="112" y="252" width="138" height="38"/><rect x="90" y="290" width="160" height="38"/><rect x="68" y="328" width="182" height="38"/><rect x="46" y="366" width="204" height="38"/><rect x="350" y="100" width="50" height="38"/><rect x="350" y="138" width="72" height="38"/><rect x="350" y="176" width="94" height="38"/><rect x="350" y="214" width="116" height="38"/><rect x="350" y="252" width="138" height="38"/><rect x="350" y="290" width="160" height="38"/><rect x="350" y="328" width="182" height="38"/><rect x="350" y="366" width="204" height="38"/><path d="M 250 100 A 50 50 0 0 1 350 100"/></g><g stroke="currentColor" stroke-width="4.2" fill="none" stroke-linejoin="miter"><path d="M 270 160 L 330 160 L 300 250 Z"/><path d="M 270 350 L 330 350 L 300 250 Z"/></g></svg></div><h1 class="dr-h1" id="drHeadline">Welcome to Demoria Research&rsquo;s<br><em>Demographic Health Index</em> &nbsp;<span class="dr-h1-acr">(DHI)</span></h1><p class="dr-lede" id="drLede">A 0&ndash;100 measure of demographic health &mdash; how well a population can renew, support and carry itself forward <b class="own">on its own</b>. 236 countries and territories. 1965&ndash;2025, projected to 2100.</p><div class="dr-personal-strip" id="drPersonal" style="display:none"></div><div class="dr-links"><button class="dr-link" id="landingCta"><span class="dr-link-text"><span class="dr-link-name" id="drLinkName">Open the world map to see your country</span><span class="dr-link-desc" id="drLinkDesc">All 236 countries &middot; 1965&ndash;2100</span></span><span class="dr-link-arrow">&rarr;</span></button></div></div><footer class="dr-footer">&copy; Demoria Research</footer></section><section class="view" id="view-home"><div class="hb-fx" aria-hidden="true"></div><div class="home-wrap">
 <div class="home-hero"><div class="home-bg-host"><svg class="home-bg" id="homeBg" aria-hidden="true"></svg></div>
   <div class="hh-eye">Demoria Research &middot; v2.0</div>
@@ -1795,7 +1826,7 @@ time, and the two together are more honest than either alone.</p>
   <div class="rd-ctl rd-ctl-grow"><label>Add country</label><div class="rd-search"><input type="text" id="rd-search" placeholder="Search a country&hellip;" autocomplete="off"><div class="rd-dd" id="rd-dd"></div></div></div>
 </div>
 <div class="rd-chips" id="rd-chips"></div>
-<div class="rd-chart-wrap"><canvas class="rd-cv" id="rd-cv"></canvas><div class="rd-tip" id="rd-tip" style="display:none"></div></div>
+<div class="rd-chart-wrap"><div class="rd-chart-head"><div class="rd-chart-h1" id="rd-chart-h1">&mdash;</div><div class="rd-chart-h2" id="rd-chart-h2">&mdash;</div></div><canvas class="rd-cv" id="rd-cv"></canvas><div class="rd-tip" id="rd-tip" style="display:none"></div></div>
 <div class="rd-foot"><div id="rd-meta" class="rd-meta"></div><button class="dlbtn" id="rd-csv">&#8595; This view &middot; CSV</button></div>
 <details class="rd-table-wrap"><summary>Show data table</summary><div id="rd-table" class="rd-table"></div></details>
 </div></section><section class="view" id="view-pyramid"><div class="pyr-page"><button class="pyr-back" id="pyrBack">&#8249;&nbsp;Back</button><div class="pyr-pg-eyebrow">Demoria Research &middot; DHI 2026 &middot; v2.0</div><div class="pyr-pg-head"><div class="pyr-pg-name" id="pyr-pg-name"></div><div class="pyr-pg-search" id="pyrPgSearch"><input type="text" id="pyrPgInput" placeholder="Switch country&hellip;" autocomplete="off"><div class="pyr-pg-dd" id="pyrPgDD"></div></div></div><div class="pyr-pg-meta"><div class="pyr-pg-meta-block"><div class="pyr-pg-meta-l">Total population &middot; <span id="pyrPgYear">2025</span></div><div class="pyr-pg-meta-v" id="pyrPgTotal">&mdash;</div></div></div><canvas class="pyr-cv" id="pyr-cv"></canvas><div class="pyr-ctl"><span class="pyr-lbl">Year</span><input type="range" id="pyr-slider"><span class="pyr-yr" id="pyr-yr"></span></div><div class="pyr-leg"><span><i style="background:#4f7bb0"></i>Male</span><span><i style="background:#bd7e98"></i>Female</span><span><i style="background:#9ec8f2"></i>/<i style="background:#f7c4d8;margin-left:2px"></i> brighter tone = the sex in surplus at that age</span></div></div></section><div class="dhi-modal" id="dhiModal" aria-hidden="true"><div class="dm-backdrop"></div><div class="dm-card" role="dialog" aria-label="What is the Demographic Health Index?"><button class="dm-close" id="dmClose" aria-label="Close">&times;</button><div class="dm-eyebrow">Demoria Research</div><div class="dm-title">What is the <em>Demographic Health Index?</em></div><p class="dm-lead">A 0&ndash;100 measure of demographic health &mdash; how well a population can renew, support and carry itself forward on its own. Calculated for <b>236 countries and territories</b>, 1965&ndash;2025 with projections to 2100.</p><div class="dm-body"><p>The DHI asks one structural question: can a country still <b>sustain itself demographically</b> &mdash; without leaning on migration, without relying on the momentum of a young age structure built decades ago, without props?</p><p>A high score is <i>not</i> a verdict on a country, an economy, or a place to live. It is a population that is still demographically self-sustaining &mdash; one whose births today are enough to replace the people in it.</p><p>Scores are built from four pillars (Fertility Strength, Population Momentum, Workforce Sustainability, Migration Reliance), each itself a weighted mean of 2&ndash;6 indicators. Every figure traces to either the <b>UN World Population Prospects 2024</b> baseline or a national statistical office override; every cell is stamped with its source.</p></div><div class="dm-foot"><button class="dm-readmore" id="dmReadMore">Read the full About &rarr;</button></div></div></div><div class="pillars-modal" id="pillarsModal" aria-hidden="true"><div class="pm-backdrop"></div><div class="pm-card" role="dialog" aria-label="The four pillars of the Demographic Health Index"><button class="pm-close" id="pmClose" aria-label="Close">&times;</button><div class="pm-eyebrow">Demographic Health Index</div><div class="pm-title">The four <em>pillars</em></div><p class="pm-lead">The DHI composite is a weighted mean of four pillars. Each pillar is itself a weighted mean of 2&ndash;6 indicators. Together they answer one question: can this population still renew itself through its own births?</p><div class="pm-grid"><div class="pm-pil pm-pil-1"><div class="pm-pn"><span class="pm-pi">FSS</span><span class="pm-w">34%</span></div><div class="pm-pt">Fertility Strength</div><div class="pm-pd">Births relative to replacement and the direction of travel. <i>NRR, 5-year change in TFR, years already spent below replacement.</i></div></div><div class="pm-pil pm-pil-2"><div class="pm-pn"><span class="pm-pi">PMS</span><span class="pm-w">28%</span></div><div class="pm-pt">Population Momentum</div><div class="pm-pd">Natural increase, cohort structure, the pace of ageing. <i>Six indicators including natural change, &Delta; under-20 share, working-age growth.</i></div></div><div class="pm-pil pm-pil-3"><div class="pm-pn"><span class="pm-pi">WSS</span><span class="pm-w">22%</span></div><div class="pm-pt">Workforce Sustainability</div><div class="pm-pd">Dependency, worker replacement, labour supply. <i>Old-age dependency, worker-replacement ratio, labour-force participation.</i></div></div><div class="pm-pil pm-pil-4"><div class="pm-pn"><span class="pm-pi">MRS</span><span class="pm-w">16%</span></div><div class="pm-pt">Migration Reliance</div><div class="pm-pd">How much stability is rented from net migration. <i>Net-migration engagement, immigrant-stock share.</i></div></div></div><div class="pm-foot"><button class="pm-readmore" id="pmReadMore">Read the full methodology &rarr;</button></div></div></div></main><button class="exit-immerse" id="exitImm">&#10005;&nbsp;Exit immersion</button><aside class="cpanel" id="cpanel"><button class="pclose" id="pclose">&#10005;</button><div class="cp-rank" id="cp-rank"></div><div class="cp-name" id="cp-name"></div><span class="cp-cat" id="cp-cat"></span><div class="cp-scorebox"><span class="cp-score" id="cp-score"></span><div><div class="cp-band" id="cp-band"></div><div class="cp-sub" id="cp-yr"></div></div></div><div class="cp-h">Pillar breakdown</div><div id="cp-pillars"></div><div class="cp-h">DHI trajectory &middot; 1965&ndash;2100</div><canvas id="cp-traj"></canvas><div class="cp-h">Key statistics &middot; <span id="cp-stats-yr">2025</span></div><div class="cp-stats" id="cp-stats"></div><div class="cp-h cp-h-ctx">Context &middot; 2025<span class="cp-h-cap">not in DHI score</span></div><div class="cp-ctx" id="cp-ctx"></div><div class="cp-note" id="cp-note"></div><button class="cp-fulllink" id="cp-full">Open full country profile &#8250;</button></aside></div><div class="tip" id="tip"></div><script>// https://d3js.org v7.9.0 Copyright 2010-2023 Mike Bostock
@@ -4409,8 +4440,8 @@ window.__pos_d6=1;
     // Default countries (only those present in DATA)
     ['JPN','CHN','USA','KOR','DEU'].forEach(function(i){ if(BY_ISO[i]) state.isos.push(i); });
 
-    // Color palette (6) — distinct on cream
-    var COLORS=['#0c1a33','#b58420','#1e7a7a','#c84a3a','#6b3e8a','#2e7d3a','#b53e8a','#4a5a7a'];
+    // Color palette — vivid on the navy chart panel, distinct from each other
+    var COLORS=['#e8b84b','#5cc8a7','#ff8a5b','#7eb8e8','#d77ad0','#f5d76a','#9bd96a','#f4ecd3'];
 
     function colorFor(iso){
       var i=state.isos.indexOf(iso);
@@ -4517,8 +4548,9 @@ window.__pos_d6=1;
       }
       chipsEl.innerHTML=state.isos.map(function(iso){
         var c=BY_ISO[iso]; if(!c) return '';
+        var fg=flag(iso);
         return '<span class="rd-chip"><span class="sw" style="background:'+colorFor(iso)+'"></span>'
-          +flag(iso)+'<span>'+c.name+'</span>'
+          +(fg||'')+'<span>'+c.name+'</span>'
           +'<button class="x" data-iso="'+iso+'" title="Remove">×</button></span>';
       }).join('');
     }
@@ -4553,7 +4585,7 @@ window.__pos_d6=1;
         if(s.length) visible.push({iso:iso, pts:s});
       });
       if(!visible.length){
-        ctx.fillStyle='rgba(12,26,51,.40)';
+        ctx.fillStyle='rgba(244,236,211,.55)';
         ctx.font='14px Manrope';
         ctx.textAlign='center';
         ctx.fillText('No data for the selected countries in this year range.', w/2, h/2);
@@ -4572,49 +4604,64 @@ window.__pos_d6=1;
       if(nonNeg.indexOf(ind.k)>=0 && vmin>0) vmin=0;
 
       // Chart margins (room for axes)
-      var ml=58, mr=14, mt=14, mb=30;
+      var ml=62, mr=16, mt=10, mb=32;
       var pw=w-ml-mr, ph=h-mt-mb;
       function X(yr){ return ml + (yr-y0)/(y1-y0) * pw; }
       function Y(v){ return mt + (1 - (v-vmin)/(vmax-vmin)) * ph; }
 
-      // Grid + Y-axis ticks
-      ctx.strokeStyle='rgba(12,26,51,.08)'; ctx.lineWidth=1;
-      ctx.fillStyle='rgba(12,26,51,.55)'; ctx.font='11px JetBrains Mono'; ctx.textAlign='right'; ctx.textBaseline='middle';
+      // Grid + Y-axis ticks  (cream on navy)
+      ctx.lineWidth=1;
+      ctx.font='600 10.5px "JetBrains Mono",monospace'; ctx.textBaseline='middle';
       var nTicks=5;
       for(var i=0;i<=nTicks;i++){
         var v=vmin + (vmax-vmin)*i/nTicks;
         var y=Y(v);
+        ctx.strokeStyle = (i===0) ? 'rgba(244,236,211,.22)' : 'rgba(244,236,211,.09)';
         ctx.beginPath(); ctx.moveTo(ml, y); ctx.lineTo(w-mr, y); ctx.stroke();
-        ctx.fillText(fmtVal(v/(ind.scale||1), ind), ml-6, y);
+        ctx.fillStyle='rgba(244,236,211,.62)';
+        ctx.textAlign='right';
+        ctx.fillText(fmtVal(v/(ind.scale||1), ind), ml-8, y);
       }
       // X-axis ticks (5 spread)
       ctx.textAlign='center'; ctx.textBaseline='top';
       var span=y1-y0;
       var step=span<=20?5:(span<=60?10:(span<=120?20:25));
       var first=Math.ceil(y0/step)*step;
+      ctx.strokeStyle='rgba(244,236,211,.06)';
       for(var yr=first; yr<=y1; yr+=step){
         var x=X(yr);
-        ctx.beginPath(); ctx.moveTo(x, mt); ctx.lineTo(x, h-mb); ctx.strokeStyle='rgba(12,26,51,.05)'; ctx.stroke();
-        ctx.fillStyle='rgba(12,26,51,.55)';
-        ctx.fillText(String(yr), x, h-mb+4);
+        ctx.beginPath(); ctx.moveTo(x, mt); ctx.lineTo(x, h-mb); ctx.stroke();
+        ctx.fillStyle='rgba(244,236,211,.62)';
+        ctx.fillText(String(yr), x, h-mb+6);
       }
-      // Vertical line at 2025 (observed→projected boundary) if in range
+      // Vertical line at 2025 (observed→projected boundary) — gold dashed
       if(y0<=2025 && y1>=2025){
         var xb=X(2025);
-        ctx.beginPath(); ctx.setLineDash([4,4]); ctx.strokeStyle='rgba(12,26,51,.22)';
-        ctx.moveTo(xb, mt); ctx.lineTo(xb, h-mb); ctx.stroke(); ctx.setLineDash([]);
+        ctx.save();
+        ctx.beginPath(); ctx.setLineDash([5,5]); ctx.strokeStyle='rgba(232,184,75,.55)'; ctx.lineWidth=1.2;
+        ctx.moveTo(xb, mt); ctx.lineTo(xb, h-mb); ctx.stroke();
+        ctx.setLineDash([]);
+        // tiny label
+        ctx.font='600 9.5px "JetBrains Mono",monospace';
+        ctx.fillStyle='rgba(232,184,75,.75)';
+        ctx.textAlign='center'; ctx.textBaseline='top';
+        ctx.fillText('PROJ.', xb, mt+2);
+        ctx.restore();
       }
 
-      // Lines
-      ctx.lineWidth=2; ctx.lineJoin='round'; ctx.lineCap='round';
+      // Lines — slightly thicker, with subtle glow for legibility
+      ctx.lineWidth=2.4; ctx.lineJoin='round'; ctx.lineCap='round';
       visible.forEach(function(s){
+        var col=colorFor(s.iso);
+        ctx.shadowColor=col; ctx.shadowBlur=4;
         ctx.beginPath();
         s.pts.forEach(function(p,i){
           var x=X(p[0]), y=Y(p[1]*(ind.scale||1));
           if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
         });
-        ctx.strokeStyle=colorFor(s.iso); ctx.stroke();
+        ctx.strokeStyle=col; ctx.stroke();
       });
+      ctx.shadowBlur=0; ctx.shadowColor='transparent';
 
       lastGeom={ml:ml,mr:mr,mt:mt,mb:mb,w:w,h:h,y0:y0,y1:y1,vmin:vmin,vmax:vmax,visible:visible,ind:ind,X:X,Y:Y};
     }
@@ -4647,13 +4694,16 @@ window.__pos_d6=1;
 
       // Draw a vertical guide line + dots (overlay redraw with marker)
       draw();
-      ctx.strokeStyle='rgba(12,26,51,.32)'; ctx.lineWidth=1;
+      ctx.strokeStyle='rgba(244,236,211,.40)'; ctx.lineWidth=1;
       var xg=g.X(yr); ctx.beginPath(); ctx.moveTo(xg, g.mt); ctx.lineTo(xg, g.h-g.mb); ctx.stroke();
       rows.forEach(function(r){
         if(r.value==null) return;
         var px=g.X(r.year), py=g.Y(r.value*(g.ind.scale||1));
-        ctx.beginPath(); ctx.arc(px,py,4,0,6.2832); ctx.fillStyle=r.color; ctx.fill();
-        ctx.lineWidth=1.5; ctx.strokeStyle='#fff'; ctx.stroke();
+        // halo
+        ctx.beginPath(); ctx.arc(px,py,6.5,0,6.2832); ctx.fillStyle='#0c1a33'; ctx.fill();
+        // colored dot
+        ctx.beginPath(); ctx.arc(px,py,4.5,0,6.2832); ctx.fillStyle=r.color; ctx.fill();
+        ctx.lineWidth=1.5; ctx.strokeStyle='rgba(244,236,211,.85)'; ctx.stroke();
       });
     });
     cv.addEventListener('mouseleave', function(){ tip.style.display='none'; draw(); });
@@ -4661,9 +4711,13 @@ window.__pos_d6=1;
     // Meta + table + CSV
     var metaEl=document.getElementById('rd-meta');
     var tableEl=document.getElementById('rd-table');
+    var h1El=document.getElementById('rd-chart-h1');
+    var h2El=document.getElementById('rd-chart-h2');
     function renderMeta(){
       var ind=IND_MAP[state.ind];
       metaEl.textContent = state.isos.length+' countries · '+state.y0+'–'+state.y1+' · '+ind.label+' ('+ind.unit+')';
+      if(h1El) h1El.innerHTML = ind.label.replace(/—/g,'<em>—</em>');
+      if(h2El) h2El.textContent = state.y0+' – '+state.y1+' · '+ind.unit;
     }
     function renderTable(){
       var ind=IND_MAP[state.ind];
