@@ -209,7 +209,11 @@ body:has(#view-landing.on) .page{height:100vh}
 .home-hero .hh-dd-row .sc{font-family:'JetBrains Mono',monospace;font-size:.74rem;color:rgba(232,184,75,.78);font-weight:600;font-variant-numeric:tabular-nums}
 .home-hero .hh-dd-empty{padding:18px;color:rgba(255,255,255,.5);font-size:.84rem;text-align:center}
 .home-hero .hh-hint{margin:12px 0 0;font-family:'Manrope',sans-serif;font-size:.82rem;font-style:italic;color:rgba(255,255,255,.55);max-width:520px}
-.home-hero .hh-or{margin-top:14px;font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.42)}
+.home-hero .hh-or{margin:22px 0 0;display:flex;align-items:center;gap:12px;font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.42)}
+.home-hero .hh-or .hh-or-line{flex:1;height:1px;background:rgba(232,184,75,.30)}
+.home-hero .hh-or .hh-or-l{font-weight:700;color:var(--gold)}
+.home-hero .hh-or .hh-or-arr{color:var(--gold);font-size:1rem;letter-spacing:0;animation:hhOrBob 1.8s ease-in-out infinite}
+@keyframes hhOrBob{0%,100%{transform:translateY(0)}50%{transform:translateY(3px)}}
 @media(max-width:560px){.home-hero .hh-pick{flex:1 1 100%}.home-hero .hh-primary{flex:1 1 100%;justify-content:center}}
 /* ====== Home / landing view ====== */
 /* Animated world-map background */
@@ -249,7 +253,7 @@ body:has(#view-landing.on) .page{height:100vh}
 .home-hero .hh-sub b{color:var(--ink);font-weight:600}
 .home-hero .hh-lead{font-family:'Manrope';font-size:.96rem;line-height:1.7;color:rgba(255,255,255,.62);margin:0 auto;max-width:58ch}
 /* Home hero — opaque cream cover card */
-#view-home .home-hero{max-width:1000px;margin:0 auto 56px;padding:54px clamp(28px,5vw,72px) 48px;border-radius:22px;background:#f4ecd3;box-shadow:0 30px 80px rgba(0,0,0,.45),inset 0 0 0 1px rgba(181,132,32,.32)}
+#view-home .home-hero{max-width:1020px;margin:0 auto 18px;padding:54px clamp(28px,5vw,72px) 36px;border-radius:22px;background:#f4ecd3;box-shadow:0 30px 80px rgba(0,0,0,.45),inset 0 0 0 1px rgba(181,132,32,.32)}
 #view-home .home-hero .hh-eye{color:#b58420}
 #view-home .home-hero .hh-title{color:#0c1a33}
 #view-home .home-hero .hh-title em{color:#b58420}
@@ -273,7 +277,7 @@ body:has(#view-landing.on) .page{height:100vh}
 #view-home .home-hero .hh-dd-row .sc{color:#b58420}
 #view-home .home-hero .hh-dd-empty{color:rgba(12,26,51,.45)}
 
-.home-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin:60px auto;max-width:1080px;border-top:1px solid rgba(232,184,75,.22);border-bottom:1px solid rgba(232,184,75,.22)}
+.home-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin:56px auto 28px;max-width:1020px;border-top:1px solid rgba(232,184,75,.22);border-bottom:1px solid rgba(232,184,75,.22)}
 .home-stats .hs-tile{padding:30px 24px 26px;border-right:1px solid rgba(255,255,255,.06);position:relative;display:flex;flex-direction:column}
 .home-stats .hs-tile:last-child{border-right:0}
 .home-stats .hs-tile::before{content:"";position:absolute;top:0;left:24px;right:24px;height:2px;background:#b58420;opacity:.78}
@@ -285,7 +289,7 @@ body:has(#view-landing.on) .page{height:100vh}
 .hs-l{color:var(--ink3);font-size:.76rem;line-height:1.42;margin-top:10px;max-width:22ch}
 
 .home-cta-h{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);text-align:center;margin:60px 0 22px}
-.home-cta-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:0 auto;max-width:1020px}
+.home-cta-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:0 auto;max-width:1020px;padding:0 8px}
 .home-cta-grid{align-items:stretch}
 .hc-card{background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:24px 26px;cursor:pointer;display:grid;grid-template-columns:54px 1fr 30px;align-items:flex-start;gap:18px;text-align:left;color:var(--ink);font-family:'Manrope';transition:background .15s,border-color .15s,transform .12s;min-height:140px}
 .hc-card .hc-body{justify-content:flex-start}
@@ -298,7 +302,7 @@ body:has(#view-landing.on) .page{height:100vh}
 .hc-card:hover .hc-arr{transform:translateX(4px)}
 
 
-.home-cta-h-2{margin-top:40px}
+.home-cta-h-2{margin-top:32px}
 .hc-api{display:flex;align-items:center;justify-content:space-between;gap:32px;width:100%;background:rgba(232,184,75,.05);border:1px solid rgba(232,184,75,.28);border-radius:12px;padding:26px 30px;cursor:pointer;text-align:left;color:var(--ink);font-family:'Manrope';transition:background .15s,border-color .15s,transform .12s;max-width:1020px;margin:0 auto}
 .hc-api:hover{background:rgba(232,184,75,.10);border-color:rgba(232,184,75,.52);transform:translateY(-1px)}
 .hc-api .hc-api-l{display:flex;flex-direction:column;gap:6px;flex:1;min-width:0}
@@ -1735,7 +1739,14 @@ body::after{content:'Demoria Research \00A0\00B7\00A0 Demographic Health Index 2
     </div>
     <p class="hh-hint" id="hhHint">Pick any of the 236 countries &amp; territories &mdash; we&rsquo;ll fly the map to it.</p>
   </div>
-  <p class="hh-or">or browse below</p>
+  <div class="hh-or" aria-hidden="true"><span class="hh-or-line"></span><span class="hh-or-l">or browse the four sections below</span><span class="hh-or-arr">&darr;</span><span class="hh-or-line"></span></div>
+</div>
+
+<div class="home-cta-grid">
+  <button class="hc-card hc-world" data-go="world"><div class="hc-num">01</div><div class="hc-body"><div class="hc-t">World map</div><div class="hc-d">Globe &amp; flat map &middot; colour by composite DHI or any single pillar &middot; scrub through 1965&ndash;2100</div></div><div class="hc-arr">&rsaquo;</div></button>
+  <button class="hc-card hc-rank" data-go="rankings"><div class="hc-num">02</div><div class="hc-body"><div class="hc-t">Index &amp; Rankings</div><div class="hc-d">All 236 countries &amp; territories &middot; ranked, profiled, with pillar contributions and 1965&ndash;2100 trajectory charts</div></div><div class="hc-arr">&rsaquo;</div></button>
+  <button class="hc-card hc-method" data-go="about"><div class="hc-num">03</div><div class="hc-body"><div class="hc-t">Read the index</div><div class="hc-d">About &middot; So What? &middot; Methodology &middot; Author &mdash; the four-pillar framework, why renewal matters, who built this</div></div><div class="hc-arr">&rsaquo;</div></button>
+  <button class="hc-card hc-research" data-go="research"><div class="hc-num">04</div><div class="hc-body"><div class="hc-t">Research notes</div><div class="hc-d">Alternative views of the demographic record &mdash; China under Yi Fuxian, with more notes in preparation</div></div><div class="hc-arr">&rsaquo;</div></button>
 </div>
 
 <div class="home-stats">
@@ -1745,13 +1756,7 @@ body::after{content:'Demoria Research \00A0\00B7\00A0 Demographic Health Index 2
   <div class="hs-tile"><div class="hs-k"><span class="hs-ki">04</span><span class="hs-kl">Variants</span></div><div class="hs-v">3</div><div class="hs-l">Projections &mdash; low, median, high</div></div>
 </div>
 
-<div class="home-ribbon" id="homeRibbon"></div><div class="home-cta-h">Begin exploring</div>
-<div class="home-cta-grid">
-  <button class="hc-card hc-world" data-go="world"><div class="hc-num">01</div><div class="hc-body"><div class="hc-t">World map</div><div class="hc-d">Globe &amp; flat map &middot; colour by composite DHI or any single pillar &middot; scrub through 1965&ndash;2100</div></div><div class="hc-arr">&rsaquo;</div></button>
-  <button class="hc-card hc-rank" data-go="rankings"><div class="hc-num">02</div><div class="hc-body"><div class="hc-t">Index &amp; Rankings</div><div class="hc-d">All 236 countries &amp; territories &middot; ranked, profiled, with pillar contributions and 1965&ndash;2100 trajectory charts</div></div><div class="hc-arr">&rsaquo;</div></button>
-  <button class="hc-card hc-method" data-go="about"><div class="hc-num">03</div><div class="hc-body"><div class="hc-t">Read the index</div><div class="hc-d">About &middot; So What? &middot; Methodology &middot; Author &mdash; the four-pillar framework, why renewal matters, who built this</div></div><div class="hc-arr">&rsaquo;</div></button>
-  <button class="hc-card hc-research" data-go="research"><div class="hc-num">04</div><div class="hc-body"><div class="hc-t">Research notes</div><div class="hc-d">Alternative views of the demographic record &mdash; China under Yi Fuxian, with more notes in preparation</div></div><div class="hc-arr">&rsaquo;</div></button>
-</div>
+<div class="home-ribbon" id="homeRibbon"></div>
 
 <div class="home-cta-h home-cta-h-2">For developers &amp; analysts</div><button class="hc-api" data-go="data"><div class="hc-api-l"><div class="hc-api-eye">Data &middot; API</div><div class="hc-api-t">All indicators, every country, every year</div><div class="hc-api-d">Inspect any country&rsquo;s full series in the browser, or download JSON / CSV with every cell stamped <b>WPP</b> or <b>NSO</b>. All 21 indicators across the 1965&ndash;2025 panel plus UN WPP 2024 projections to 2100.</div></div><div class="hc-api-r"><div class="hc-api-arr">&rsaquo;</div><div class="hc-api-meta">JSON &middot; CSV</div></div></button><div class="home-foot">
   <div class="hf-l">Sources &middot; UN World Population Prospects 2024 &middot; national-statistical-office overrides &middot; Wittgenstein Centre Human Capital v3 &middot; Natural Earth 1:50m geometry</div>
