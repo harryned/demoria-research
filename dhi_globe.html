@@ -1753,20 +1753,37 @@ body::after{content:'Demoria Research \00A0\00B7\00A0 Demographic Health Index 2
 #view-home .home-hero .hh-cta-row{justify-content:center}
 #view-home .home-hero .hh-hint{font-size:.82rem;margin:12px 0 0;color:rgba(12,26,51,.62)}
 
-/* CARDS — 3 wide x 2 tall, fill the remaining height, text never clipped */
-#view-home .home-cta-grid{flex:1;min-height:0;display:grid!important;grid-template-columns:repeat(3,1fr)!important;grid-template-rows:repeat(2,1fr)!important;gap:14px;margin:0;max-width:none;padding:0}
-#view-home .home-cta-grid .hc-card{padding:22px 24px;min-height:0;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:6px}
+/* CARDS — 2 large featured (top row) + 4 minor (bottom row) */
+#view-home .home-cta-grid{flex:1;min-height:0;display:grid!important;grid-template-columns:repeat(4,1fr)!important;grid-template-rows:1.3fr 1fr!important;gap:14px;margin:0;max-width:none;padding:0}
+#view-home .home-cta-grid .hc-card{min-height:0;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:6px;transition:transform .15s,border-color .15s,background .15s,box-shadow .15s}
 #view-home .home-cta-grid .hc-card *{text-align:center}
-#view-home .home-cta-grid .hc-num{font-size:.6rem;letter-spacing:.18em;margin:0 0 2px}
 #view-home .home-cta-grid .hc-body{flex:0 0 auto;min-width:0;display:flex;flex-direction:column;align-items:center;gap:5px}
-#view-home .home-cta-grid .hc-t{font-size:clamp(1.05rem,1.5vw,1.3rem);line-height:1.12;margin:0}
-#view-home .home-cta-grid .hc-d{font-size:clamp(.76rem,.95vw,.88rem);line-height:1.42;margin:0;color:var(--ink2);max-width:30ch}
-#view-home .home-cta-grid .hc-arr{font-size:1.3rem;color:var(--gold);margin-top:4px}
+
+/* --- featured (World map + Index & Rankings) span 2 cols each, top row --- */
+#view-home .home-cta-grid .hc-feat{grid-row:1;padding:26px 30px;background:linear-gradient(160deg,rgba(232,184,75,.10),rgba(232,184,75,.03));border:1px solid rgba(232,184,75,.45);box-shadow:0 14px 40px rgba(0,0,0,.30),inset 0 0 0 1px rgba(232,184,75,.08)}
+#view-home .home-cta-grid .hc-world{grid-column:1 / 3}
+#view-home .home-cta-grid .hc-rank{grid-column:3 / 5}
+#view-home .home-cta-grid .hc-feat:hover{transform:translateY(-3px);border-color:var(--gold);box-shadow:0 20px 52px rgba(0,0,0,.38),inset 0 0 0 1px rgba(232,184,75,.16)}
+#view-home .home-cta-grid .hc-feat .hc-eye{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;font-weight:700;color:var(--gold);margin:0 0 4px}
+#view-home .home-cta-grid .hc-feat .hc-t{font-size:clamp(1.5rem,2.4vw,2.1rem);line-height:1.08;margin:0;color:#fff;font-weight:600;letter-spacing:-.01em}
+#view-home .home-cta-grid .hc-feat .hc-d{font-size:clamp(.86rem,1.05vw,.98rem);line-height:1.45;margin:0;color:rgba(255,255,255,.66);max-width:42ch}
+#view-home .home-cta-grid .hc-feat .hc-go{margin-top:10px;display:inline-flex;align-items:center;gap:8px;font-family:'Manrope',sans-serif;font-size:.92rem;font-weight:700;color:#0c1a33;background:var(--gold);padding:9px 18px;border-radius:999px;transition:gap .15s,background .15s}
+#view-home .home-cta-grid .hc-feat .hc-go span{font-size:1.05rem;line-height:1}
+#view-home .home-cta-grid .hc-feat:hover .hc-go{gap:12px;background:#ecc35e}
+
+/* --- minor (Compare, Read, Research, Data) — bottom row of 4 --- */
+#view-home .home-cta-grid .hc-min{grid-row:2;padding:16px 18px}
+#view-home .home-cta-grid .hc-min .hc-num{font-size:.56rem;letter-spacing:.18em;margin:0 0 2px}
+#view-home .home-cta-grid .hc-min .hc-t{font-size:clamp(.98rem,1.25vw,1.15rem);line-height:1.12;margin:0}
+#view-home .home-cta-grid .hc-min .hc-d{font-size:clamp(.72rem,.9vw,.82rem);line-height:1.35;margin:0;color:var(--ink2);max-width:28ch}
+#view-home .home-cta-grid .hc-min .hc-arr{font-size:1.15rem;color:var(--gold);margin-top:3px}
+#view-home .home-cta-grid .hc-min:hover{transform:translateY(-2px)}
 
 @media (max-width:900px){
   #view-home{height:auto;overflow:auto;display:block}
   #view-home .home-wrap{height:auto}
-  #view-home .home-cta-grid{grid-template-columns:1fr!important;grid-template-rows:auto!important}
+  #view-home .home-cta-grid{grid-template-columns:1fr 1fr!important;grid-template-rows:auto!important}
+  #view-home .home-cta-grid .hc-world,#view-home .home-cta-grid .hc-rank{grid-column:1 / 3}
   #view-home .home-cta-grid .hc-card{min-height:120px}
 }
 </style></head><body><div class="page"><div class="topbar"><a class="dr-lockup" href="https://demoriaresearch.com" aria-label="Demoria Research — home"><svg class="dr-mark-svg" viewBox="0 0 600 500" aria-hidden="true"><g stroke="currentColor" stroke-width="4.5" fill="none"><rect x="200" y="100" width="50" height="38"/><rect x="178" y="138" width="72" height="38"/><rect x="156" y="176" width="94" height="38"/><rect x="134" y="214" width="116" height="38"/><rect x="112" y="252" width="138" height="38"/><rect x="90" y="290" width="160" height="38"/><rect x="68" y="328" width="182" height="38"/><rect x="46" y="366" width="204" height="38"/><rect x="350" y="100" width="50" height="38"/><rect x="350" y="138" width="72" height="38"/><rect x="350" y="176" width="94" height="38"/><rect x="350" y="214" width="116" height="38"/><rect x="350" y="252" width="138" height="38"/><rect x="350" y="290" width="160" height="38"/><rect x="350" y="328" width="182" height="38"/><rect x="350" y="366" width="204" height="38"/><path d="M 250 100 A 50 50 0 0 1 350 100"/></g><g stroke="currentColor" stroke-width="4.5" fill="none" stroke-linejoin="miter"><path d="M 270 160 L 330 160 L 300 250 Z"/><path d="M 270 350 L 330 350 L 300 250 Z"/></g></svg><span class="dr-wm"><span class="dr-wm-d">Demoria</span><span class="dr-wm-r">Research</span></span></a><span class="bl"></span><a class="brand" href="#" onclick="try{history.pushState({view:'landing'},'','/');}catch(e){}show('landing');return false;" title="Demoria Research — home"><span class="mk">DHI</span><span class="bt"><em>v2.0</em></span></a><nav class="tabs"><button class="tab on" data-v="home">Home</button><span class="tab-sep"></span><button class="tab" data-grp="explore" data-v="world">Explore</button><span class="tab-sep"></span><button class="tab" data-grp="read" data-v="about">Read</button><span class="tab-sep"></span><button class="tab" data-v="research">Research</button><span class="tab-sep"></span><button class="tab" data-grp="data" data-v="data">Data</button></nav><span class="tbspace"></span><button class="immerse" id="immerse">&#11034;&nbsp;Full immersion</button></div><nav class="subtabs" id="subtabs" aria-label="Section sub-navigation"></nav><main id="views"><section class="view on" id="view-landing"><svg id="bg-map" class="bg-layer" preserveAspectRatio="xMidYMid slice" aria-hidden="true"></svg><svg id="bg-trend" class="bg-layer" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="area-grad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#e0b54a" stop-opacity="0.45"/><stop offset="100%" stop-color="#e0b54a" stop-opacity="0"/></linearGradient></defs></svg><div class="dr-wrap"><div class="dr-brand-lockup"><svg viewBox="0 0 600 500" aria-hidden="true"><g stroke="currentColor" stroke-width="4.2" fill="none"><rect x="200" y="100" width="50" height="38"/><rect x="178" y="138" width="72" height="38"/><rect x="156" y="176" width="94" height="38"/><rect x="134" y="214" width="116" height="38"/><rect x="112" y="252" width="138" height="38"/><rect x="90" y="290" width="160" height="38"/><rect x="68" y="328" width="182" height="38"/><rect x="46" y="366" width="204" height="38"/><rect x="350" y="100" width="50" height="38"/><rect x="350" y="138" width="72" height="38"/><rect x="350" y="176" width="94" height="38"/><rect x="350" y="214" width="116" height="38"/><rect x="350" y="252" width="138" height="38"/><rect x="350" y="290" width="160" height="38"/><rect x="350" y="328" width="182" height="38"/><rect x="350" y="366" width="204" height="38"/><path d="M 250 100 A 50 50 0 0 1 350 100"/></g><g stroke="currentColor" stroke-width="4.2" fill="none" stroke-linejoin="miter"><path d="M 270 160 L 330 160 L 300 250 Z"/><path d="M 270 350 L 330 350 L 300 250 Z"/></g></svg></div><h1 class="dr-h1" id="drHeadline">Welcome to Demoria Research&rsquo;s<br><em>Demographic Health Index</em> &nbsp;<span class="dr-h1-acr">(DHI)</span></h1><p class="dr-lede" id="drLede">A 0&ndash;100 measure of demographic health &mdash; how well a population can renew, support and carry itself forward <b class="own">on its own</b>. 236 countries and territories. 1965&ndash;2025, projected to 2100.</p><div class="dr-links"><button class="dr-link" id="landingCta"><span class="dr-link-text"><span class="dr-link-name" id="drLinkName">Click to see your country</span></span><span class="dr-link-arrow">&rarr;</span></button></div></div><footer class="dr-footer">&copy; Demoria Research</footer></section><section class="view" id="view-home"><div class="hb-fx" aria-hidden="true"></div><div class="home-wrap">
@@ -1796,12 +1813,12 @@ body::after{content:'Demoria Research \00A0\00B7\00A0 Demographic Health Index 2
 </div>
 
 <div class="home-cta-grid">
-  <button class="hc-card hc-world" data-go="world"><div class="hc-num">01</div><div class="hc-body"><div class="hc-t">World map</div><div class="hc-d">Globe &amp; flat map &middot; recolour by any pillar &middot; scrub 1965&ndash;2100</div></div><div class="hc-arr">&rsaquo;</div></button>
-  <button class="hc-card hc-rank" data-go="rankings"><div class="hc-num">02</div><div class="hc-body"><div class="hc-t">Index &amp; Rankings</div><div class="hc-d">All 236 ranked &middot; pillar contributions &middot; trajectory charts</div></div><div class="hc-arr">&rsaquo;</div></button>
-  <button class="hc-card hc-cmp" data-go="compare"><div class="hc-num">03</div><div class="hc-body"><div class="hc-t">Compare</div><div class="hc-d">Up to three countries side-by-side &mdash; scores, pillars, projections</div></div><div class="hc-arr">&rsaquo;</div></button>
-  <button class="hc-card hc-method" data-go="about"><div class="hc-num">04</div><div class="hc-body"><div class="hc-t">Read the index</div><div class="hc-d">About &middot; So What? &middot; Methodology &middot; Author</div></div><div class="hc-arr">&rsaquo;</div></button>
-  <button class="hc-card hc-research" data-go="research"><div class="hc-num">05</div><div class="hc-body"><div class="hc-t">Research notes</div><div class="hc-d">Alternative views &mdash; China under Yi Fuxian, with more in preparation</div></div><div class="hc-arr">&rsaquo;</div></button>
-  <button class="hc-card hc-data" data-go="data"><div class="hc-num">06</div><div class="hc-body"><div class="hc-t">Data &amp; explorer</div><div class="hc-d">JSON / CSV downloads &middot; raw indicator series &middot; sourcing PDF</div></div><div class="hc-arr">&rsaquo;</div></button>
+  <button class="hc-card hc-feat hc-world" data-go="world"><div class="hc-eye">Start here</div><div class="hc-body"><div class="hc-t">The World Map</div><div class="hc-d">Spin the globe or flatten it &middot; recolour by any pillar &middot; scrub every country from 1965 to 2100</div></div><div class="hc-go">Open the map <span>&rarr;</span></div></button>
+  <button class="hc-card hc-feat hc-rank" data-go="rankings"><div class="hc-eye">The index</div><div class="hc-body"><div class="hc-t">Index &amp; Rankings</div><div class="hc-d">All 236 countries ranked &middot; pillar contributions &middot; 1965&ndash;2100 trajectory charts</div></div><div class="hc-go">See the rankings <span>&rarr;</span></div></button>
+  <button class="hc-card hc-min hc-cmp" data-go="compare"><div class="hc-num">03</div><div class="hc-body"><div class="hc-t">Compare</div><div class="hc-d">Up to three countries, side by side</div></div><div class="hc-arr">&rsaquo;</div></button>
+  <button class="hc-card hc-min hc-method" data-go="about"><div class="hc-num">04</div><div class="hc-body"><div class="hc-t">Read the index</div><div class="hc-d">About &middot; Methodology &middot; Author</div></div><div class="hc-arr">&rsaquo;</div></button>
+  <button class="hc-card hc-min hc-research" data-go="research"><div class="hc-num">05</div><div class="hc-body"><div class="hc-t">Research notes</div><div class="hc-d">Alternative views of the record</div></div><div class="hc-arr">&rsaquo;</div></button>
+  <button class="hc-card hc-min hc-data" data-go="data"><div class="hc-num">06</div><div class="hc-body"><div class="hc-t">Data &amp; explorer</div><div class="hc-d">JSON / CSV &middot; raw series &middot; sources</div></div><div class="hc-arr">&rsaquo;</div></button>
 </div>
 
 <div class="home-stats">
