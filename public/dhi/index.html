@@ -181,11 +181,36 @@ h1 em{font-style:normal;color:var(--gold)}
 body:has(#view-landing.on) .topbar{display:none}
 body:has(#view-landing.on) .page{height:100vh}
 
-.home-hero .hh-primary{display:inline-flex;align-items:center;gap:14px;background:#e0b54a;color:#0c1a33;border:0;padding:16px 28px;border-radius:8px;font-family:'Manrope',sans-serif;font-size:1rem;font-weight:600;cursor:pointer;letter-spacing:-.005em;box-shadow:0 12px 32px rgba(224,181,74,.22);transition:transform .15s,box-shadow .15s,background .15s;margin-top:6px}
+.home-hero .hh-cta{display:inline-block;margin-top:6px;position:relative;text-align:left;max-width:560px;width:100%}
+.home-hero .hh-cta-row{display:flex;gap:10px;align-items:stretch;flex-wrap:wrap}
+.home-hero .hh-pick{flex:1 1 280px;display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.04);border:1px solid rgba(232,184,75,.55);color:#fff;padding:12px 16px 12px 14px;border-radius:8px;font-family:'Manrope',sans-serif;cursor:pointer;text-align:left;transition:border-color .15s,background .15s,transform .15s;min-height:54px;box-sizing:border-box}
+.home-hero .hh-pick:hover,.home-hero .hh-pick:focus-visible{border-color:#e0b54a;background:rgba(232,184,75,.10);outline:none}
+.home-hero .hh-pick .hp-k{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.20em;text-transform:uppercase;color:rgba(232,184,75,.78);font-weight:700;flex:0 0 auto;border-right:1px solid rgba(255,255,255,.14);padding-right:11px}
+.home-hero .hh-pick .hp-body{display:inline-flex;align-items:center;gap:9px;flex:1;min-width:0}
+.home-hero .hh-pick .hp-flag{display:inline-flex;align-items:center;flex:0 0 auto}
+.home-hero .hh-pick .hp-flag img.flg{height:14px;width:auto;border-radius:2px;box-shadow:0 1px 3px rgba(0,0,0,.5);display:block}
+.home-hero .hh-pick .hp-name{font-size:1rem;font-weight:600;color:#fff;letter-spacing:-.005em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.home-hero .hh-pick .hp-chev{flex:0 0 auto;color:rgba(232,184,75,.85);font-size:.85rem;line-height:1;margin-left:2px;transition:transform .18s}
+.home-hero .hh-cta.open .hh-pick .hp-chev{transform:rotate(180deg)}
+.home-hero .hh-primary{flex:0 0 auto;display:inline-flex;align-items:center;gap:14px;background:#e0b54a;color:#0c1a33;border:0;padding:0 26px;border-radius:8px;font-family:'Manrope',sans-serif;font-size:1rem;font-weight:600;cursor:pointer;letter-spacing:-.005em;box-shadow:0 12px 32px rgba(224,181,74,.22);transition:transform .15s,box-shadow .15s,background .15s;min-height:54px}
 .home-hero .hh-primary:hover{transform:translateY(-1px);box-shadow:0 16px 38px rgba(224,181,74,.32);background:#ecc35e}
 .home-hero .hh-primary .hhp-r{font-size:1.2rem;line-height:1;transition:transform .18s}
 .home-hero .hh-primary:hover .hhp-r{transform:translateX(4px)}
+.home-hero .hh-dd{position:absolute;top:calc(100% + 6px);left:0;right:0;background:rgba(15,28,56,.98);border:1px solid rgba(232,184,75,.45);border-radius:10px;box-shadow:0 24px 60px rgba(0,0,0,.55);z-index:30;overflow:hidden;display:none}
+.home-hero .hh-cta.open .hh-dd{display:block}
+.home-hero .hh-dd-in{width:100%;background:transparent;border:0;border-bottom:1px solid rgba(232,184,75,.22);color:#fff;padding:13px 16px;font-family:'Manrope',sans-serif;font-size:.92rem;outline:none;box-sizing:border-box}
+.home-hero .hh-dd-in::placeholder{color:rgba(255,255,255,.42)}
+.home-hero .hh-dd-list{max-height:320px;overflow-y:auto}
+.home-hero .hh-dd-row{display:flex;align-items:center;gap:10px;padding:9px 14px;cursor:pointer;color:rgba(255,255,255,.86);font-family:'Manrope',sans-serif;font-size:.88rem;border-bottom:1px solid rgba(255,255,255,.04)}
+.home-hero .hh-dd-row:last-child{border-bottom:0}
+.home-hero .hh-dd-row:hover,.home-hero .hh-dd-row.kbd{background:rgba(232,184,75,.14);color:#fff}
+.home-hero .hh-dd-row .flg{height:11px;width:auto;border-radius:2px;box-shadow:0 1px 2px rgba(0,0,0,.45);flex:0 0 auto}
+.home-hero .hh-dd-row .nm{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.home-hero .hh-dd-row .sc{font-family:'JetBrains Mono',monospace;font-size:.74rem;color:rgba(232,184,75,.78);font-weight:600;font-variant-numeric:tabular-nums}
+.home-hero .hh-dd-empty{padding:18px;color:rgba(255,255,255,.5);font-size:.84rem;text-align:center}
+.home-hero .hh-hint{margin:12px 0 0;font-family:'Manrope',sans-serif;font-size:.82rem;font-style:italic;color:rgba(255,255,255,.55);max-width:520px}
 .home-hero .hh-or{margin-top:14px;font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.42)}
+@media(max-width:560px){.home-hero .hh-pick{flex:1 1 100%}.home-hero .hh-primary{flex:1 1 100%;justify-content:center}}
 /* ====== Home / landing view ====== */
 /* Animated world-map background */
 .home-hero{position:relative}
@@ -233,6 +258,20 @@ body:has(#view-landing.on) .page{height:100vh}
 #view-home .home-hero .hh-sub b{color:#0c1a33}
 #view-home .home-hero .hh-lead{color:rgba(12,26,51,.62)}
 #view-home .home-hero .hh-or{color:rgba(12,26,51,.45)}
+#view-home .home-hero .hh-pick{background:#fffaef;border:1px solid rgba(181,132,32,.55);color:#0c1a33}
+#view-home .home-hero .hh-pick:hover,#view-home .home-hero .hh-pick:focus-visible{border-color:#b58420;background:#fff}
+#view-home .home-hero .hh-pick .hp-k{color:#b58420;border-right-color:rgba(12,26,51,.14)}
+#view-home .home-hero .hh-pick .hp-name{color:#0c1a33}
+#view-home .home-hero .hh-pick .hp-chev{color:#b58420}
+#view-home .home-hero .hh-hint{color:rgba(12,26,51,.62)}
+#view-home .home-hero .hh-hint b{color:#0c1a33}
+#view-home .home-hero .hh-dd{background:#fffaef;border-color:rgba(181,132,32,.40);box-shadow:0 24px 60px rgba(12,26,51,.28)}
+#view-home .home-hero .hh-dd-in{color:#0c1a33;border-bottom-color:rgba(12,26,51,.10)}
+#view-home .home-hero .hh-dd-in::placeholder{color:rgba(12,26,51,.40)}
+#view-home .home-hero .hh-dd-row{color:rgba(12,26,51,.78);border-bottom-color:rgba(12,26,51,.04)}
+#view-home .home-hero .hh-dd-row:hover,#view-home .home-hero .hh-dd-row.kbd{background:rgba(181,132,32,.12);color:#0c1a33}
+#view-home .home-hero .hh-dd-row .sc{color:#b58420}
+#view-home .home-hero .hh-dd-empty{color:rgba(12,26,51,.45)}
 
 .home-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin:60px auto;max-width:1080px;border-top:1px solid rgba(232,184,75,.22);border-bottom:1px solid rgba(232,184,75,.22)}
 .home-stats .hs-tile{padding:30px 24px 26px;border-right:1px solid rgba(255,255,255,.06);position:relative;display:flex;flex-direction:column}
@@ -1678,7 +1717,24 @@ body::after{content:'Demoria Research \00A0\00B7\00A0 Demographic Health Index 2
   <div class="hh-eye">Demoria Research &middot; v2.0</div>
   <h1 class="hh-title">Demographic <em>Health</em> Index <span class="hh-acr">(DHI)</span></h1>
   <p class="hh-sub">A 0&ndash;100 measure of demographic health &mdash; how well a population can renew, support and carry itself forward <b class="own">on its own</b>. 236 countries and territories. 1965&ndash;2025, projected to 2100.</p>
-  <button class="hh-primary" id="hhPrimary" type="button"><span class="hhp-l">Open the world map to see your country</span><span class="hhp-r">&rarr;</span></button>
+  <div class="hh-cta" id="hhCta">
+    <div class="hh-cta-row">
+      <button class="hh-pick" id="hhPick" type="button" aria-haspopup="listbox" aria-expanded="false">
+        <span class="hp-k">Country</span>
+        <span class="hp-body">
+          <span class="hp-flag" id="hpFlag"></span>
+          <span class="hp-name" id="hpName">Japan</span>
+        </span>
+        <span class="hp-chev" aria-hidden="true">&#9662;</span>
+      </button>
+      <button class="hh-primary" id="hhPrimary" type="button"><span class="hhp-l">Open on world map</span><span class="hhp-r">&rarr;</span></button>
+    </div>
+    <div class="hh-dd" id="hhDD" hidden>
+      <input class="hh-dd-in" id="hhDDIn" placeholder="Search a country&hellip;" autocomplete="off" spellcheck="false">
+      <div class="hh-dd-list" id="hhDDList" role="listbox"></div>
+    </div>
+    <p class="hh-hint" id="hhHint">Pick any of the 236 countries &amp; territories &mdash; we&rsquo;ll fly the map to it.</p>
+  </div>
   <p class="hh-or">or browse below</p>
 </div>
 
@@ -4072,33 +4128,144 @@ window.__pos_d6=1;
   });
 })();
 
-// Home: prominent "Open the world map" CTA + remember landing iso.
-// Personalise the label with the visitor's country if cached.
+// Home: country-picker + "Open on world map" CTA.
+// Picker defaults to the visitor's geo country (cached from landing) so
+// it feels personal, but the dropdown makes it obvious you can pick
+// anyone of the 236.
 (function(){
-  const btn=document.getElementById('hhPrimary');
-  if(!btn) return;
-  function personaliseLabel(){
-    try{
-      const raw=localStorage.getItem('dr_cc_v2');
-      if(!raw) return;
-      const p=JSON.parse(raw); if(!p||!p.cc) return;
-      if(typeof byIso==='undefined' || typeof ISO2==='undefined') return;
-      let iso3=null;
-      for(const k in ISO2){ if(ISO2[k]===p.cc){ iso3=k; break; } }
-      if(!iso3 || !byIso[iso3]) return;
-      const lbl=btn.querySelector('.hhp-l');
-      if(lbl) lbl.textContent='Open the world map to see '+byIso[iso3].name;
-    }catch(e){}
+  const cta=document.getElementById('hhCta');
+  const pick=document.getElementById('hhPick');
+  const dd=document.getElementById('hhDD');
+  const ddIn=document.getElementById('hhDDIn');
+  const ddList=document.getElementById('hhDDList');
+  const flagEl=document.getElementById('hpFlag');
+  const nameEl=document.getElementById('hpName');
+  const hint=document.getElementById('hhHint');
+  const goBtn=document.getElementById('hhPrimary');
+  if(!cta||!pick||!goBtn) return;
+
+  let selectedIso=null;
+  let countryList=[];
+  let kbdIdx=-1;
+  let kbdMatches=[];
+
+  function buildList(){
+    if(typeof byIso==='undefined') return [];
+    const out=[];
+    for(const iso in byIso){
+      const c=byIso[iso];
+      if(!c||!c.name) continue;
+      out.push({iso, name:c.name});
+    }
+    out.sort((a,b)=>a.name.localeCompare(b.name));
+    return out;
   }
-  personaliseLabel();
-  // Re-run after a short delay in case the geolocation fetch hasn't finished
-  setTimeout(personaliseLabel, 1200);
-  btn.addEventListener('click',function(){
+
+  function setSelected(iso){
+    if(typeof byIso==='undefined' || !byIso[iso]) return;
+    selectedIso=iso;
+    if(nameEl) nameEl.textContent=byIso[iso].name;
+    if(flagEl) flagEl.innerHTML=(typeof flag==='function')?flag(iso):'';
+    if(hint){
+      const s=byIso[iso].scores && byIso[iso].scores['2025'];
+      if(s!=null){
+        hint.innerHTML='Showing <b>'+byIso[iso].name+'</b> &middot; DHI '+s.toFixed(1)+' &middot; click <b>Open on world map</b> to fly there, or pick another.';
+      } else {
+        hint.innerHTML='Pick any of the 236 countries &amp; territories &mdash; we&rsquo;ll fly the map to it.';
+      }
+    }
+    try{ sessionStorage.setItem('dhi_landing_iso', iso); }catch(e){}
+  }
+
+  function renderDD(q){
+    q=(q||'').toLowerCase().trim();
+    let list=countryList;
+    if(q) list=countryList.filter(c=>c.name.toLowerCase().includes(q) || c.iso.toLowerCase().includes(q));
+    kbdMatches=list.slice(0,200);
+    if(kbdIdx>=kbdMatches.length) kbdIdx=kbdMatches.length-1;
+    if(!kbdMatches.length){ ddList.innerHTML='<div class="hh-dd-empty">No country matches &ldquo;'+q.replace(/</g,'&lt;')+'&rdquo;</div>'; return; }
+    ddList.innerHTML=kbdMatches.map((c,i)=>{
+      const sel=(c.iso===selectedIso)?' kbd':'';
+      const flagHtml=(typeof flag==='function')?flag(c.iso):'';
+      const sc=byIso[c.iso].scores && byIso[c.iso].scores['2025'];
+      const scHtml=sc!=null?'<span class="sc">'+sc.toFixed(1)+'</span>':'';
+      return '<div class="hh-dd-row'+(i===kbdIdx?' kbd':sel)+'" role="option" data-iso="'+c.iso+'">'+flagHtml+'<span class="nm">'+c.name+'</span>'+scHtml+'</div>';
+    }).join('');
+  }
+
+  function openDD(){
+    cta.classList.add('open');
+    pick.setAttribute('aria-expanded','true');
+    if(dd) dd.removeAttribute('hidden');
+    kbdIdx=-1; ddIn.value=''; renderDD('');
+    setTimeout(()=>{ try{ ddIn.focus(); }catch(e){} },10);
+    // scroll selected into view
+    setTimeout(()=>{
+      const sel=ddList.querySelector('.hh-dd-row.kbd');
+      if(sel && sel.scrollIntoView) sel.scrollIntoView({block:'nearest'});
+    }, 40);
+  }
+  function closeDD(){
+    cta.classList.remove('open');
+    pick.setAttribute('aria-expanded','false');
+    if(dd) dd.setAttribute('hidden','');
+  }
+
+  pick.addEventListener('click',function(){
+    if(cta.classList.contains('open')) closeDD(); else openDD();
+  });
+  ddIn.addEventListener('input',()=>{ kbdIdx=-1; renderDD(ddIn.value); });
+  ddIn.addEventListener('keydown',function(e){
+    if(e.key==='ArrowDown'){ kbdIdx=Math.min(kbdMatches.length-1, kbdIdx+1); renderDD(ddIn.value); const r=ddList.querySelector('.hh-dd-row.kbd'); if(r) r.scrollIntoView({block:'nearest'}); e.preventDefault(); }
+    else if(e.key==='ArrowUp'){ kbdIdx=Math.max(0, kbdIdx-1); renderDD(ddIn.value); const r=ddList.querySelector('.hh-dd-row.kbd'); if(r) r.scrollIntoView({block:'nearest'}); e.preventDefault(); }
+    else if(e.key==='Enter'){ const pickRow=kbdMatches[Math.max(0,kbdIdx)]; if(pickRow){ setSelected(pickRow.iso); closeDD(); } e.preventDefault(); }
+    else if(e.key==='Escape'){ closeDD(); }
+  });
+  ddList.addEventListener('mousedown',function(e){
+    const row=e.target.closest('.hh-dd-row'); if(!row) return;
+    setSelected(row.dataset.iso); closeDD();
+    e.preventDefault();
+  });
+  document.addEventListener('click',function(e){
+    if(!cta.contains(e.target)) closeDD();
+  });
+
+  function initSelection(){
+    countryList=buildList();
+    if(!countryList.length){ setTimeout(initSelection, 200); return; }
+    // 1) sessionStorage (from landing)
     let iso=null;
     try{ iso=sessionStorage.getItem('dhi_landing_iso'); }catch(e){}
+    // 2) localStorage geo cache
+    if(!iso){
+      try{
+        const raw=localStorage.getItem('dr_cc_v2');
+        if(raw){
+          const p=JSON.parse(raw);
+          if(p && p.cc && typeof ISO2!=='undefined'){
+            for(const k in ISO2){ if(ISO2[k]===p.cc){ iso=k; break; } }
+          }
+        }
+      }catch(e){}
+    }
+    // 3) fallback default
+    if(!iso || !byIso[iso]) iso='USA';
+    if(!byIso[iso]) iso=countryList[0].iso;
+    setSelected(iso);
+  }
+  initSelection();
+  // Re-attempt once geolocation fetch is likely settled, in case it
+  // landed after our first read.
+  setTimeout(initSelection, 1500);
+
+  goBtn.addEventListener('click',function(){
+    const iso=selectedIso;
     show('world');
-    if(iso && typeof byIso!=='undefined' && byIso[iso] && typeof openPanel==='function'){
-      setTimeout(()=>{ try{ openPanel(byIso[iso]); }catch(e){} }, 120);
+    if(iso && typeof byIso!=='undefined' && byIso[iso]){
+      try{ sessionStorage.setItem('dhi_landing_iso', iso); }catch(e){}
+      if(typeof openPanel==='function'){
+        setTimeout(()=>{ try{ openPanel(byIso[iso]); }catch(e){} }, 120);
+      }
     }
   });
 })();
