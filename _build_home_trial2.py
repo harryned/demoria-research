@@ -53,15 +53,15 @@ body.hl2-A #view-home .home-cta-grid .hc-d{font-size:.72rem;line-height:1.35;dis
 
 /* ============================================ */
 /* B — CENTRED STACK — single column, title top, picker middle, 6 tiles in a row */
-body.hl2-B #view-home .home-wrap{display:grid!important;grid-template-rows:auto auto 1fr;gap:14px;padding:22px 28px;align-items:center;justify-items:center}
-body.hl2-B #view-home .home-hero{grid-row:1 / span 2;max-width:880px;background:#f4ecd3;border-radius:18px;padding:28px 42px 32px;box-shadow:0 22px 60px rgba(0,0,0,.40),inset 0 0 0 1px rgba(181,132,32,.30);align-self:center}
+body.hl2-B #view-home .home-wrap{display:grid!important;grid-template-columns:1fr!important;grid-template-rows:1fr auto!important;gap:14px;padding:22px 28px;align-items:center;justify-items:center}
+body.hl2-B #view-home .home-hero{grid-column:1!important;grid-row:1!important;max-width:880px;background:#f4ecd3;border-radius:18px;padding:28px 42px 32px;box-shadow:0 22px 60px rgba(0,0,0,.40),inset 0 0 0 1px rgba(181,132,32,.30);align-self:center}
 body.hl2-B #view-home .hh-eye{margin:0 0 6px}
 body.hl2-B #view-home .hh-title{font-size:clamp(1.8rem,3.2vw,2.7rem);line-height:1.05;margin:0 0 12px}
 body.hl2-B #view-home .hh-sub{font-size:1rem;margin:0 0 22px;line-height:1.45;max-width:640px}
 body.hl2-B #view-home .hh-cta{width:100%;max-width:560px;margin:0 auto}
 body.hl2-B #view-home .hh-cta-row{justify-content:center}
 body.hl2-B #view-home .hh-hint{margin:10px 0 0;font-size:.82rem;color:rgba(12,26,51,.62)!important}
-body.hl2-B #view-home .home-cta-grid{grid-row:3;grid-template-columns:repeat(6,1fr)!important;gap:8px;width:100%;max-width:1200px}
+body.hl2-B #view-home .home-cta-grid{grid-column:1!important;grid-row:2!important;grid-template-columns:repeat(6,1fr)!important;gap:8px;width:100%;max-width:1200px}
 body.hl2-B #view-home .home-cta-grid .hc-card{padding:14px 12px;text-align:left;border-radius:12px}
 body.hl2-B #view-home .home-cta-grid .hc-card *{text-align:left}
 body.hl2-B #view-home .home-cta-grid .hc-num{font-size:.55rem;margin-bottom:4px}
@@ -72,8 +72,8 @@ body.hl2-B #view-home .home-cta-grid .hc-arr{font-size:.95rem}
 /* ============================================ */
 /* C — CENTRED BAND TOP — full-width centred hero band, 2x3 cream tiles below */
 body.hl2-C #view-home{background:linear-gradient(180deg,#0a1730 0%,#050b1c 100%)}
-body.hl2-C #view-home .home-wrap{display:grid!important;grid-template-rows:auto 1fr;gap:14px;padding:18px 22px}
-body.hl2-C #view-home .home-hero{background:rgba(244,236,211,.04)!important;border:1px solid rgba(232,184,75,.30)!important;border-radius:14px;padding:22px 42px 22px;align-items:center;justify-content:center}
+body.hl2-C #view-home .home-wrap{display:grid!important;grid-template-columns:1fr!important;grid-template-rows:auto 1fr!important;gap:14px;padding:18px 22px}
+body.hl2-C #view-home .home-hero{grid-column:1!important;grid-row:1!important;background:rgba(244,236,211,.04)!important;border:1px solid rgba(232,184,75,.30)!important;border-radius:14px;padding:22px 42px 22px;align-items:center;justify-content:center}
 body.hl2-C #view-home .hh-eye{margin:0 0 4px;color:var(--gold)}
 body.hl2-C #view-home .hh-title{font-size:clamp(1.5rem,2.6vw,2.1rem);line-height:1.05;margin:0 0 8px;color:#fff}
 body.hl2-C #view-home .hh-title em{color:var(--gold);font-style:normal}
@@ -86,7 +86,7 @@ body.hl2-C #view-home .hh-pick{background:rgba(255,255,255,.06)!important;color:
 body.hl2-C #view-home .hh-pick .hp-name{color:#fff!important}
 body.hl2-C #view-home .hh-hint{margin:8px 0 0;font-size:.78rem;color:rgba(255,255,255,.6)!important}
 body.hl2-C #view-home .hh-hint b{color:#fff!important}
-body.hl2-C #view-home .home-cta-grid{grid-template-columns:repeat(3,1fr)!important;grid-template-rows:repeat(2,1fr);gap:12px}
+body.hl2-C #view-home .home-cta-grid{grid-column:1!important;grid-row:2!important;grid-template-columns:repeat(3,1fr)!important;grid-template-rows:repeat(2,1fr);gap:12px}
 body.hl2-C #view-home .home-cta-grid .hc-card{background:#fffaef!important;border:1px solid rgba(181,132,32,.30)!important;color:#0c1a33!important;padding:18px 22px;border-radius:14px;box-shadow:0 12px 28px rgba(0,0,0,.30);align-items:flex-start}
 body.hl2-C #view-home .home-cta-grid .hc-card *{text-align:left}
 body.hl2-C #view-home .home-cta-grid .hc-num{color:#b58420!important;font-size:.6rem}
@@ -96,15 +96,15 @@ body.hl2-C #view-home .home-cta-grid .hc-arr{color:#b58420!important;font-size:1
 
 /* ============================================ */
 /* D — MAGAZINE COVER — huge centred title + picker, 6 thin row of cards below */
-body.hl2-D #view-home .home-wrap{display:grid!important;grid-template-rows:1fr auto;gap:14px;padding:18px 22px}
-body.hl2-D #view-home .home-hero{background:#f4ecd3!important;border-radius:18px;padding:36px clamp(28px,4vw,60px);box-shadow:0 30px 80px rgba(0,0,0,.45),inset 0 0 0 1px rgba(181,132,32,.32);justify-content:center}
+body.hl2-D #view-home .home-wrap{display:grid!important;grid-template-columns:1fr!important;grid-template-rows:1fr auto!important;gap:14px;padding:18px 22px}
+body.hl2-D #view-home .home-hero{grid-column:1!important;grid-row:1!important;background:#f4ecd3!important;border-radius:18px;padding:36px clamp(28px,4vw,60px);box-shadow:0 30px 80px rgba(0,0,0,.45),inset 0 0 0 1px rgba(181,132,32,.32);justify-content:center}
 body.hl2-D #view-home .hh-eye{margin:0 0 10px;font-size:.62rem;letter-spacing:.26em}
 body.hl2-D #view-home .hh-title{font-size:clamp(2.4rem,4.6vw,4rem);line-height:1.02;margin:0 0 16px;font-weight:700;letter-spacing:-.02em}
 body.hl2-D #view-home .hh-sub{font-size:1.05rem;margin:0 0 26px;line-height:1.45;max-width:760px}
 body.hl2-D #view-home .hh-cta{width:100%;max-width:580px;margin:0 auto}
 body.hl2-D #view-home .hh-cta-row{justify-content:center}
 body.hl2-D #view-home .hh-hint{margin:12px 0 0;font-size:.85rem}
-body.hl2-D #view-home .home-cta-grid{grid-template-columns:repeat(6,1fr)!important;gap:6px;max-width:1240px;margin:0 auto;width:100%}
+body.hl2-D #view-home .home-cta-grid{grid-column:1!important;grid-row:2!important;grid-template-columns:repeat(6,1fr)!important;gap:6px;max-width:1240px;margin:0 auto;width:100%}
 body.hl2-D #view-home .home-cta-grid .hc-card{padding:12px 12px;text-align:left;border-radius:10px;flex-direction:row;align-items:center;justify-content:space-between;min-height:0}
 body.hl2-D #view-home .home-cta-grid .hc-num{display:none}
 body.hl2-D #view-home .home-cta-grid .hc-body{flex:1;text-align:left}
@@ -116,8 +116,8 @@ body.hl2-D #view-home .home-cta-grid .hc-arr{font-size:1.05rem}
 /* ============================================ */
 /* E — HERO TOP + BIG TILES — compact hero band on top, 2x3 big cream tiles */
 body.hl2-E #view-home{background:linear-gradient(180deg,#0a1730 0%,#050b1c 100%)}
-body.hl2-E #view-home .home-wrap{display:grid!important;grid-template-rows:auto 1fr;gap:14px;padding:14px 22px 18px}
-body.hl2-E #view-home .home-hero{background:rgba(244,236,211,.06)!important;border:1px solid rgba(232,184,75,.32)!important;border-radius:12px;padding:14px 22px;display:grid;grid-template-columns:auto 1fr auto;gap:24px;align-items:center;text-align:left}
+body.hl2-E #view-home .home-wrap{display:grid!important;grid-template-columns:1fr!important;grid-template-rows:auto 1fr!important;gap:14px;padding:14px 22px 18px}
+body.hl2-E #view-home .home-hero{grid-column:1!important;grid-row:1!important;background:rgba(244,236,211,.06)!important;border:1px solid rgba(232,184,75,.32)!important;border-radius:12px;padding:14px 22px;display:grid;grid-template-columns:auto 1fr auto;gap:24px;align-items:center;text-align:left}
 body.hl2-E #view-home .hh-eye{display:none}
 body.hl2-E #view-home .hh-title{grid-column:1;color:#fff!important;font-size:1.25rem;margin:0;line-height:1.1;text-align:left;white-space:nowrap}
 body.hl2-E #view-home .hh-title em{color:var(--gold)!important;font-style:normal}
@@ -130,7 +130,7 @@ body.hl2-E #view-home .hh-hint{display:none}
 body.hl2-E #view-home .hh-pick{background:rgba(255,255,255,.06)!important;color:#fff!important;min-height:42px;padding:6px 14px}
 body.hl2-E #view-home .hh-pick .hp-name{color:#fff!important}
 body.hl2-E #view-home .hh-primary{min-height:42px}
-body.hl2-E #view-home .home-cta-grid{grid-template-columns:repeat(3,1fr)!important;grid-template-rows:repeat(2,1fr);gap:12px}
+body.hl2-E #view-home .home-cta-grid{grid-column:1!important;grid-row:2!important;grid-template-columns:repeat(3,1fr)!important;grid-template-rows:repeat(2,1fr);gap:12px}
 body.hl2-E #view-home .home-cta-grid .hc-card{background:#fffaef!important;border:1px solid rgba(181,132,32,.30)!important;color:#0c1a33!important;padding:22px 26px;border-radius:14px;box-shadow:0 12px 30px rgba(0,0,0,.35);align-items:center;justify-content:center;text-align:center}
 body.hl2-E #view-home .home-cta-grid .hc-card *{text-align:center}
 body.hl2-E #view-home .home-cta-grid .hc-num{color:#b58420!important;font-size:.62rem;margin-bottom:8px}
