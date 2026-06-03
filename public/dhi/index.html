@@ -834,7 +834,7 @@ table.rank tbody tr{cursor:pointer}
 .cp-rank{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.13em;text-transform:uppercase;color:var(--ink3)}
 .cp-name{font-size:1.5rem;font-weight:600;letter-spacing:-.01em;margin:4px 0 9px}
 .cp-cat{display:inline-block;font-size:.74rem;color:var(--gold);border:1px solid rgba(232,184,75,.4);border-radius:20px;padding:3px 11px}
-.cp-scorebox{display:flex;align-items:baseline;gap:11px;margin:20px 0 4px}
+.cp-scorebox{display:flex;align-items:center;gap:14px;margin:14px 0 4px}
 .cp-score{font-family:'JetBrains Mono',monospace;font-size:2.7rem;font-weight:700;line-height:1}
 .cp-band{font-size:.86rem;color:var(--ink2)}
 .cp-sub{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);font-family:'JetBrains Mono',monospace}
@@ -1606,11 +1606,16 @@ body::after{content:'Demoria Research \00A0\00B7\00A0 Demographic Health Index 2
 .cpanel{background:#f4ecd3!important;color:#0c1a33!important;border-left:0!important;box-shadow:0 24px 64px rgba(0,0,0,.42),inset 0 0 0 1px rgba(181,132,32,.30)!important}
 .cpanel .pclose{background:#fcf4dd;border:1px solid rgba(12,26,51,.14);color:rgba(12,26,51,.62)}
 .cpanel .pclose:hover{color:#0c1a33;border-color:rgba(181,132,32,.55)}
-.cpanel .cp-rank{color:rgba(12,26,51,.64)}
-.cpanel .cp-name{color:#0c1a33}
-.cpanel .cp-cat{color:#b58420;border-color:rgba(181,132,32,.42);background:rgba(181,132,32,.10)}
-.cpanel .cp-band{color:rgba(12,26,51,.78)}
-.cpanel .cp-sub{color:rgba(12,26,51,.64)}
+
+/* header section — natural, tight grouping */
+.cpanel .cp-rank{color:rgba(12,26,51,.50);font-size:.6rem;letter-spacing:.14em;margin-bottom:3px}
+.cpanel .cp-name{color:#0c1a33;font-size:1.34rem;font-weight:700;margin:0 0 7px;padding-right:38px;/* room for close btn */line-height:1.1}
+.cpanel .cp-cat{display:inline-block;color:#b58420;border-color:rgba(181,132,32,.42);background:rgba(181,132,32,.10);font-size:.72rem;padding:3px 12px;border-radius:999px;font-weight:600;margin-bottom:0}
+.cpanel .cp-scorebox{margin:10px 0 4px;gap:14px;align-items:center}
+.cpanel .cp-score{font-size:2.1rem;line-height:1}
+.cpanel .cp-score-of{font-size:.35em;vertical-align:.5em;color:rgba(12,26,51,.35)}
+.cpanel .cp-band{color:#0c1a33;font-size:.9rem;font-weight:600;line-height:1.2}
+.cpanel .cp-sub{color:rgba(12,26,51,.55);font-size:.66rem;letter-spacing:.08em;margin-top:2px}
 .cpanel .cp-h{color:#5d4524}
 .cpanel .cp-h-cap{color:rgba(12,26,51,.58)}
 .cpanel .cp-note{color:rgba(12,26,51,.78)}
@@ -1635,6 +1640,27 @@ body::after{content:'Demoria Research \00A0\00B7\00A0 Demographic Health Index 2
 .cpanel .cp-ctx-dot{box-shadow:0 0 0 3px #fcf4dd}
 .cpanel .cp-ctx-pct .w{color:rgba(12,26,51,.58)}
 .cpanel .cp-ctx-imp{color:rgba(12,26,51,.64)}
+
+/* ===== cpanel "Complete" layout: CTA at the top, fits with no scroll ===== */
+/* Flex column so we can pull the full-profile button up under the score. */
+#cpanel{display:flex;flex-direction:column;padding:18px 20px 18px}
+#cpanel > .cp-rank{order:1}
+#cpanel > .cp-name{order:2}
+#cpanel > .cp-cat{order:3}
+#cpanel > .cp-scorebox{order:4}
+#cpanel > #cp-full{order:5}
+#cpanel > *{order:6}
+/* prominent gold CTA bar, right under the score */
+.cpanel #cp-full{margin:12px 0 2px;background:#e0b54a;border:0;color:#0c1a33;font-weight:700;font-size:.9rem;padding:11px;border-radius:10px;box-shadow:0 8px 22px rgba(181,132,32,.26);text-align:center;letter-spacing:-.005em}
+.cpanel #cp-full:hover{background:#ecc35e;border:0}
+/* compact section rhythm so all six stats + the chart fit */
+.cpanel .cp-h{margin:11px 0 6px}
+.cpanel .pbar{margin:4px 0}
+#cpanel #cp-traj{height:92px}
+.cpanel .cp-stat{padding:7px 12px}
+/* the "Complete" panel drops the secondary Context block + note */
+.cpanel .cp-h-ctx,.cpanel #cp-ctx,.cpanel #cp-note{display:none}
+
 /* ===== DESKTOP layout: full-bleed map + floating cards ===== */
 @media(min-width:761px){
   #view-world .stage{background:transparent!important;position:absolute;inset:0;width:auto;flex:none}
