@@ -2426,9 +2426,7 @@ function refreshPanel(){
       cs('Under 15',pc(u15))+
       cs('Working age 15&ndash;64',pc(wa))+
       cs('Aged 65 +',pc(e65))+
-      cs('Old-age dependency',oadr!=null?oadr.toFixed(0):'&mdash;')+
-      cs('Population',pop!=null?pop.toFixed(pop<10?2:1)+'<small>M</small>':'&mdash;')+
-      cs('Typology',c.catn?'Class '+c.catn:'&mdash;');
+      cs('Population',pop!=null?pop.toFixed(pop<10?2:1)+'<small>M</small>':'&mdash;');
   })();
   renderContext('cp-ctx', c.iso);
 }

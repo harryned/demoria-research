@@ -1799,19 +1799,19 @@ body.cp2 .cp-h-ctx, body.cp2 #cp-ctx, body.cp2 #cp-note{display:none!important}
 body.cp2 .cp-h{margin:16px 0 9px!important}
 body.cp2 #cp-traj{height:150px!important}
 
-/* 3 — Complete: pillars + small chart + key stats, drop context/note */
+/* 3 — Complete: pillars + tall chart + 6 key stats, drop context/note */
 body.cp3 #cpanel{padding:14px 16px 14px!important}
 body.cp3 .cp-name{font-size:1.3rem!important;margin:3px 0 6px!important}
 body.cp3 .cp-scorebox{margin:9px 0 2px!important}
 body.cp3 .cp-score{font-size:2rem!important}
-body.cp3 .cp-h{margin:11px 0 6px!important}
-body.cp3 .pbar{margin:3px 0!important}
-body.cp3 .pbar .pt{height:5px!important}
-body.cp3 #cp-traj{height:80px!important}
-body.cp3 .cp-stat{padding:5px 10px!important}
-body.cp3 .cp-stat .sv{font-size:.85rem!important}
+body.cp3 .cp-h{margin:13px 0 7px!important}
+body.cp3 .pbar{margin:4px 0!important}
+body.cp3 .pbar .pt{height:6px!important}
+body.cp3 #cp-traj{flex:1 1 0!important;min-height:100px!important;height:auto!important;align-self:stretch}
+body.cp3 .cp-stat{padding:7px 11px!important}
+body.cp3 .cp-stat .sv{font-size:.92rem!important}
 body.cp3 .cp-h-ctx, body.cp3 #cp-ctx, body.cp3 #cp-note{display:none!important}
-body.cp3 #cp-full{margin:12px 0 4px!important;padding:10px!important;font-size:.84rem!important}
+body.cp3 #cp-full{margin:12px 0 4px!important;padding:11px!important;font-size:.86rem!important}
 
 /* 4 — Context too: keep everything, compacted (will scroll a little) */
 body.cp4 #cpanel{padding:14px 16px 16px!important}
@@ -2475,9 +2475,7 @@ function refreshPanel(){
       cs('Under 15',pc(u15))+
       cs('Working age 15&ndash;64',pc(wa))+
       cs('Aged 65 +',pc(e65))+
-      cs('Old-age dependency',oadr!=null?oadr.toFixed(0):'&mdash;')+
-      cs('Population',pop!=null?pop.toFixed(pop<10?2:1)+'<small>M</small>':'&mdash;')+
-      cs('Typology',c.catn?'Class '+c.catn:'&mdash;');
+      cs('Population',pop!=null?pop.toFixed(pop<10?2:1)+'<small>M</small>':'&mdash;');
   })();
   renderContext('cp-ctx', c.iso);
 }
