@@ -2384,7 +2384,7 @@ function curScore(c){
   if(variant!=='med'&&c.proj&&c.proj[y]&&c.proj[y][variant]!=null) return c.proj[y][variant];
   return c.scores?c.scores[y]:null;
 }
-function drawTraj(c){ drawTrajChart(document.getElementById("cp-traj"),buildTrajC(c,2100),132); }
+function drawTraj(c){ var cv=document.getElementById("cp-traj"); var H=Math.round(cv.clientHeight)||132; drawTrajChart(cv,buildTrajC(c,2100),H); }
 function openPanel(c){ panelC=c; panelFeat=(typeof featOf==='function')?featOf(c.iso):null;
   // Anchor the panel just below the real topbar (its height changes when
   // the mobile topbar wraps to multiple rows), so it never overlaps it.
