@@ -1486,6 +1486,9 @@ body::after{content:'Demoria Research \00A0\00B7\00A0 Demographic Health Index 2
 .ft-section-head{margin:0 0 14px;padding-bottom:10px;border-bottom:1px solid rgba(12,26,51,.18);display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .ft-section-head h2{font-family:'Manrope',sans-serif;font-size:1.45rem;font-weight:700;letter-spacing:-.018em;color:#0c1a33;margin:0}
 .ft-section-head .ft-section-sub{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(12,26,51,.55)}
+.ft-section-head .ft-head-r{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.ft-rawlink{font-family:'Manrope',sans-serif;font-size:.8rem;font-weight:600;color:#b58420;text-decoration:none;border-bottom:1px solid rgba(181,132,32,.45);white-space:nowrap;cursor:pointer;transition:color .12s,border-color .12s}
+.ft-rawlink:hover{color:#0c1a33;border-bottom-color:#0c1a33}
 .ft-2col{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:36px}
 @media(max-width:1180px){.ft-2col{grid-template-columns:1fr}}
 .ft-2col > *{min-width:0}
@@ -4507,7 +4510,7 @@ window.__pos_d6=1;
                 : '')+
             '</div>'+
             '<section class="ft-section ft-facts">'+
-              '<header class="ft-section-head"><h2>Key indicators</h2><span class="ft-section-sub">2025</span></header>'+
+              '<header class="ft-section-head"><h2>Key indicators</h2><div class="ft-head-r"><span class="ft-section-sub">2025</span><a class="ft-rawlink" id="ftRawLink" href="#" title="Open these indicators in the Raw Data explorer — compare countries and download CSV">Compare &amp; extract in Raw Data &rarr;</a></div></header>'+
               '<div class="ft-fact-grid">'+factGrid+'</div>'+
             '</section>'+
             '<section class="ft-section ft-context">'+
@@ -4529,6 +4532,8 @@ window.__pos_d6=1;
     }
     const pyrBtn=document.getElementById('ftPyrBtn'); if(pyrBtn) pyrBtn.onclick=openPyr;
     m.querySelectorAll('.ft-xlink').forEach(el=>el.addEventListener('click',()=>gotoRegion(el.dataset.go)));
+    var _rl=document.getElementById('ftRawLink');
+    if(_rl) _rl.addEventListener('click',function(e){ e.preventDefault(); show('rawdata'); setTimeout(function(){ if(window.rdFocus) window.rdFocus(c.iso); }, 160); });
   }
   // ===== FT magazine renderer for regions / sub-regions =====
   function renderFtRegion(name, members, isCont){
@@ -5052,6 +5057,14 @@ window.__pos_d6=1;
     // Also try on first show
     setTimeout(tryFirstRender, 400);
     renderChips();   // chips show immediately
+    // Allow other parts of the app (e.g. a country profile) to jump here
+    // with a given country added to the comparison.
+    window.rdFocus=function(iso){
+      if(!BY_ISO[iso]) return;
+      if(state.isos.indexOf(iso)<0){ if(state.isos.length>=8) state.isos.shift(); state.isos.push(iso); }
+      rendered=true;
+      setTimeout(function(){ try{ renderChips(); redraw(); }catch(e){} }, 100);
+    };
   }
   if(document.readyState==='complete' || document.readyState==='interactive') setTimeout(init, 50);
   else document.addEventListener('DOMContentLoaded', function(){ setTimeout(init, 50); });
