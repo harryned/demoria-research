@@ -144,7 +144,7 @@ h1 em{font-style:normal;color:var(--gold)}
 @keyframes lcDrawTrend{0%{stroke-dashoffset:var(--len)}65%{stroke-dashoffset:0}85%{stroke-dashoffset:0;opacity:1}100%{stroke-dashoffset:0;opacity:0}}
 @keyframes lcArea{0%,10%{opacity:0}65%{opacity:.20}85%{opacity:.20}100%{opacity:0}}
 @keyframes lcHead{0%,5%{opacity:0}65%{opacity:1}85%{opacity:1}100%{opacity:0}}
-.dr-wrap{max-width:880px;position:relative;z-index:1;color:#fff;font-family:'Manrope',sans-serif;line-height:1.6;text-align:center}
+.dr-wrap{max-width:1180px;position:relative;z-index:1;color:#fff;font-family:'Manrope',sans-serif;line-height:1.6;text-align:center}
 .dr-brand-lockup{display:block;margin:0 0 18px;text-align:center}
 .dr-brand-lockup svg{width:clamp(140px,15vw,196px);height:auto;color:#f1c64f;display:block;margin:0 auto;overflow:visible;filter:drop-shadow(0 6px 22px rgba(224,181,74,.30))}
 .dr-brand-lockup svg g{stroke-width:6}
@@ -165,13 +165,13 @@ h1 em{font-style:normal;color:var(--gold)}
 @keyframes sgFade{from{opacity:0}to{opacity:1}}
 @media(prefers-reduced-motion:reduce){.dr-brand-lockup svg rect,.dr-brand-lockup svg path,.dr-sq,.dr-links{animation:none}}
 /* hero narrative: each line fades in + slides DOWN, one by one */
-.dr-sq,.dr-links{animation:drFadeDown 1s cubic-bezier(.2,.75,.2,1) backwards}
-.dr-sq{animation-delay:calc(.1s + var(--i) * .5s)}
-.dr-links{animation-delay:calc(.1s + 5 * .5s)}
+.dr-sq,.dr-links{animation:drFadeDown 1.2s cubic-bezier(.2,.75,.2,1) backwards}
+.dr-sq{animation-delay:calc(.1s + var(--i) * .8s)}
+.dr-links{animation-delay:calc(.1s + 5 * .8s)}
 @keyframes drFadeDown{from{opacity:0;transform:translateY(-28px)}to{opacity:1;transform:translateY(0)}}
-.dr-seq{max-width:740px;margin:0 auto 30px}
-.dr-sq{font-size:clamp(1.2rem,2.5vw,1.74rem);font-weight:300;line-height:1.32;color:#fff;margin:0 auto .62em;letter-spacing:-.01em}
-.dr-sq-dhi{font-size:clamp(.98rem,1.5vw,1.08rem);font-weight:400;color:rgba(255,255,255,.7);max-width:600px;margin:1.1em auto 0;line-height:1.5;letter-spacing:0}
+.dr-seq{max-width:1120px;margin:0 auto 30px}
+.dr-sq{font-size:clamp(1.12rem,1.95vw,1.58rem);font-weight:300;line-height:1.3;color:#fff;margin:0 auto .66em;letter-spacing:-.01em}
+.dr-sq-dhi{font-size:clamp(.98rem,1.5vw,1.08rem);font-weight:400;color:rgba(255,255,255,.7);max-width:780px;margin:1.1em auto 0;line-height:1.5;letter-spacing:0}
 .dr-sq-dhi b{color:#e0b54a;font-weight:600}
 .dr-eyebrow{font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:#e0b54a}
 .dr-h1{font-family:'Manrope',sans-serif;font-size:clamp(2.1rem,4.4vw,3.4rem);font-weight:200;line-height:1.1;letter-spacing:-.025em;margin:0 auto 22px;color:#fff;max-width:none}
