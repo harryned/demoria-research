@@ -163,7 +163,12 @@ h1 em{font-style:normal;color:var(--gold)}
 .dr-brand-lockup svg path{animation:sgFade .8s ease-out 3s backwards}
 @keyframes sgGrow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
 @keyframes sgFade{from{opacity:0}to{opacity:1}}
-@media(prefers-reduced-motion:reduce){.dr-brand-lockup svg rect,.dr-brand-lockup svg path{animation:none}}
+@media(prefers-reduced-motion:reduce){.dr-brand-lockup svg rect,.dr-brand-lockup svg path,.dr-h1,.dr-lede,.dr-links{animation:none}}
+/* hero text: fade in + slide DOWN, starting with the sigil build */
+.dr-h1,.dr-lede,.dr-links{animation:drFadeDown 1s cubic-bezier(.2,.75,.2,1) backwards}
+.dr-lede{animation-delay:.16s}
+.dr-links{animation-delay:.32s}
+@keyframes drFadeDown{from{opacity:0;transform:translateY(-28px)}to{opacity:1;transform:translateY(0)}}
 .dr-eyebrow{font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:#e0b54a}
 .dr-h1{font-family:'Manrope',sans-serif;font-size:clamp(2.1rem,4.4vw,3.4rem);font-weight:200;line-height:1.1;letter-spacing:-.025em;margin:0 auto 22px;color:#fff;max-width:none}
 .dr-h1 em{color:#e0b54a;font-style:normal;font-weight:300}
