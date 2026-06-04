@@ -1791,6 +1791,8 @@ body::after{content:'Demoria Research \00A0\00B7\00A0 Demographic Health Index 2
    an unscoped #view-home{display:flex} beats .view:not(.on){display:none}
    on ID specificity and leaks the home view behind every other tab. */
 #view-home.on{height:calc(100vh - 90px);overflow:hidden;display:flex}
+/* one-screen home: drop leftover sections that collapsed the card grid */
+#view-home .home-stats,#view-home .home-ribbon,#view-home .hc-api,#view-home .home-foot,#view-home .home-cta-h-2{display:none!important}
 #view-home .home-wrap{flex:1;min-height:0;display:flex;flex-direction:column;gap:16px;padding:22px clamp(22px,4vw,56px);box-sizing:border-box}
 #view-home .home-ribbon,
 #view-home .home-cta-h,
