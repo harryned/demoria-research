@@ -4692,19 +4692,19 @@ window.__pos_d6=1;
       {k:'tfr',     label:'Total fertility rate (TFR)', unit:'children/woman', fmt:'2', scale:1, grp:'Fertility & births'},
       {k:'nrr',     label:'Net reproduction rate (NRR)', unit:'daughters/woman', fmt:'2', scale:1, grp:'Fertility & births'},
       {k:'cbr',     label:'Crude birth rate (CBR)',     unit:'per 1,000',     fmt:'1', scale:1, grp:'Fertility & births'},
-      {k:'births',  label:'Live births',                unit:'thousand',      fmt:'1', scale:1, grp:'Fertility & births'},
+      {k:'births',  label:'Live births',                unit:'births / year', fmt:'big', scale:1000, grp:'Fertility & births'},
       {k:'cdr',     label:'Crude death rate (CDR)',     unit:'per 1,000',     fmt:'1', scale:1, grp:'Mortality & natural change'},
-      {k:'deaths',  label:'Deaths',                     unit:'thousand',      fmt:'1', scale:0.001, grp:'Mortality & natural change'},
+      {k:'deaths',  label:'Deaths',                     unit:'deaths / year', fmt:'big', scale:1, grp:'Mortality & natural change'},
       {k:'natch5',  label:'5-year natural change',      unit:'%',             fmt:'1', scale:1, grp:'Mortality & natural change'},
-      {k:'pop',     label:'Total population',           unit:'people',        fmt:'big', scale:1, grp:'Population & age structure'},
+      {k:'pop',     label:'Total population',           unit:'people',        fmt:'big', scale:1000, grp:'Population & age structure'},
       {k:'medage',  label:'Median age',                 unit:'years',         fmt:'1', scale:1, grp:'Population & age structure'},
       {k:'workage', label:'Working-age share (15–64)', unit:'%',          fmt:'1', scale:1, grp:'Population & age structure'},
       {k:'pop_u20', label:'Under-20 share',             unit:'%',             fmt:'1', scale:1, grp:'Population & age structure'},
       {k:'oadr',    label:'Old-age dependency (OADR)',  unit:'%',             fmt:'1', scale:1, grp:'Population & age structure'},
       {k:'wrr',     label:'Worker replacement (WRR)',   unit:'%',             fmt:'1', scale:1, grp:'Workforce & labour'},
       {k:'lfpr',    label:'Labour force participation', unit:'%',             fmt:'1', scale:1, grp:'Workforce & labour'},
-      {k:'netmig',  label:'Net migration',              unit:'people',        fmt:'big', scale:1, grp:'Migration'},
-      {k:'migstk',  label:'Migrant stock share',        unit:'%',             fmt:'1', scale:1, grp:'Migration'},
+      {k:'netmig',  label:'Net migration rate',         unit:'per 1,000',     fmt:'2', scale:1, grp:'Migration'},
+      {k:'migstk',  label:'Migrant stock',              unit:'people',        fmt:'big', scale:1, grp:'Migration'},
       {k:'dhi',     label:'DHI composite',              unit:'0–100',    fmt:'1', scale:1, grp:'DHI composite & pillars'},
       {k:'p_fss',   label:'Pillar — Fertility Strength',   unit:'0–100', fmt:'1', scale:1, grp:'DHI composite & pillars'},
       {k:'p_pms',   label:'Pillar — Population Momentum',  unit:'0–100', fmt:'1', scale:1, grp:'DHI composite & pillars'},
@@ -4763,6 +4763,25 @@ window.__pos_d6=1;
       }
       return String(v);
     }
+
+    // ---------- "nice" round-number axis ----------
+    // Snap an arbitrary value to the nearest 1 / 2 / 5 × 10^n so axis ticks
+    // land on clean round numbers instead of arbitrary fractions of the range.
+    function niceNum(x, round){
+      if(x<=0 || !isFinite(x)) return 1;
+      var exp=Math.floor(Math.log10(x)), f=x/Math.pow(10,exp), nf;
+      if(round){ nf = f<1.5?1 : f<3?2 : f<7?5 : 10; }
+      else     { nf = f<=1?1 : f<=2?2 : f<=5?5 : 10; }
+      return nf*Math.pow(10,exp);
+    }
+    // Return rounded {lo,hi,step} covering [lo,hi] with ~maxTicks intervals.
+    function niceAxis(lo, hi, maxTicks){
+      if(!isFinite(lo)||!isFinite(hi)) return {lo:0,hi:1,step:1};
+      if(lo===hi){ lo-=1; hi+=1; }
+      var step=niceNum((hi-lo)/Math.max(1,(maxTicks-1)), true);
+      return { lo:Math.floor(lo/step)*step, hi:Math.ceil(hi/step)*step, step:step };
+    }
+    function stripZeros(s){ return s.indexOf('.')<0 ? s : s.replace(/\.?0+$/,''); }
 
     // ---------- get series for a country ----------
     function seriesFor(iso, indKey){
@@ -4914,34 +4933,59 @@ window.__pos_d6=1;
         return;
       }
 
-      // Y range
+      // Y range (display units)
       var vmin=Infinity, vmax=-Infinity;
       visible.forEach(function(s){ s.pts.forEach(function(p){ var v=p[1]*(ind.scale||1); if(v<vmin)vmin=v; if(v>vmax)vmax=v; }); });
       if(!isFinite(vmin)) { vmin=0; vmax=1; }
       if(vmin===vmax){ vmin-=0.5; vmax+=0.5; }
-      var pad=(vmax-vmin)*0.08; vmin-=pad; vmax+=pad;
-      // Force 0 floor for non-negative indicators
-      var nonNeg=['pop','births','deaths','tfr','nrr','medage','workage','pop_u20','oadr','wrr','lfpr','migstk','dhi','p_fss','p_pms','p_wss','p_mrs','cbr','cdr'];
-      if(nonNeg.indexOf(ind.k)>=0 && vmin>0) vmin=0;
+      // Always keep 0 in view: anchor to 0 when the data is all-positive or
+      // all-negative; when it straddles 0 (e.g. net migration) keep both sides
+      // so the zero line sits naturally inside the chart.
+      if(vmin>0) vmin=0; else if(vmax<0) vmax=0;
+      // Snap to a clean round-number axis (1 / 2 / 5 × 10ⁿ ticks)
+      var yax=niceAxis(vmin, vmax, 6);
+      vmin=yax.lo; vmax=yax.hi; var yStep=yax.step;
+      // Tick label formatter — round numbers, K/M/B for large counts
+      var axAbs=Math.max(Math.abs(vmin),Math.abs(vmax));
+      var bigD = axAbs>=1e9?1e9 : axAbs>=1e6?1e6 : axAbs>=1e3?1e3 : 1;
+      var bigSuf = bigD===1e9?'B':bigD===1e6?'M':bigD===1e3?'K':'';
+      function tickLabel(v){
+        if(Math.abs(v) < yStep*1e-9) return '0';
+        if(ind.fmt==='big'){
+          var sd=yStep/bigD, dec=sd>=1?0:(sd>=0.1?1:2);
+          return stripZeros((v/bigD).toFixed(dec))+bigSuf;
+        }
+        var d2=Math.max(0, -Math.floor(Math.log10(yStep)+1e-9)); if(d2>4) d2=4;
+        return stripZeros(v.toFixed(d2));
+      }
 
-      // Chart margins (room for axes)
-      var ml=62, mr=16, mt=10, mb=32;
+      // Chart margins (room for axes + y-axis unit caption)
+      var ml=64, mr=18, mt=26, mb=32;
       var pw=w-ml-mr, ph=h-mt-mb;
       function X(yr){ return ml + (yr-y0)/(y1-y0) * pw; }
       function Y(v){ return mt + (1 - (v-vmin)/(vmax-vmin)) * ph; }
 
-      // Grid + Y-axis ticks  (cream on navy)
-      ctx.lineWidth=1;
+      // Grid + Y-axis ticks (cream on navy) — round numbers, bold zero line
       ctx.font='600 10.5px "JetBrains Mono",monospace'; ctx.textBaseline='middle';
-      var nTicks=5;
-      for(var i=0;i<=nTicks;i++){
-        var v=vmin + (vmax-vmin)*i/nTicks;
+      var nT=Math.round((vmax-vmin)/yStep);
+      for(var i=0;i<=nT;i++){
+        var v=vmin + yStep*i;
+        var isZero=Math.abs(v) < yStep*1e-9;
         var y=Y(v);
-        ctx.strokeStyle = (i===0) ? 'rgba(244,236,211,.22)' : 'rgba(244,236,211,.09)';
+        ctx.strokeStyle = isZero ? 'rgba(244,236,211,.42)' : 'rgba(244,236,211,.09)';
+        ctx.lineWidth = isZero ? 1.6 : 1;
         ctx.beginPath(); ctx.moveTo(ml, y); ctx.lineTo(w-mr, y); ctx.stroke();
-        ctx.fillStyle='rgba(244,236,211,.62)';
+        ctx.fillStyle = isZero ? 'rgba(244,236,211,.92)' : 'rgba(244,236,211,.60)';
         ctx.textAlign='right';
-        ctx.fillText(fmtVal(v/(ind.scale||1), ind), ml-8, y);
+        ctx.fillText(tickLabel(v), ml-8, y);
+      }
+      ctx.lineWidth=1;
+      // Y-axis unit caption (top-left) so the scale is self-explanatory
+      if(ind.unit){
+        ctx.font='700 9.5px "JetBrains Mono",monospace';
+        ctx.textAlign='left'; ctx.textBaseline='alphabetic';
+        ctx.fillStyle='rgba(232,184,75,.88)';
+        ctx.fillText(ind.unit.toUpperCase(), 6, mt-12);
       }
       // X-axis ticks (5 spread)
       ctx.textAlign='center'; ctx.textBaseline='top';
