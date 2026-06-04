@@ -165,9 +165,9 @@ h1 em{font-style:normal;color:var(--gold)}
 @keyframes sgFade{from{opacity:0}to{opacity:1}}
 @media(prefers-reduced-motion:reduce){.dr-brand-lockup svg rect,.dr-brand-lockup svg path,.dr-sq,.dr-links{animation:none}}
 /* hero narrative: each line fades in + slides DOWN, one by one */
-.dr-sq,.dr-links{animation:drFadeDown 1.2s cubic-bezier(.2,.75,.2,1) backwards}
-.dr-sq{animation-delay:calc(.1s + var(--i) * .8s)}
-.dr-links{animation-delay:calc(.1s + 5 * .8s)}
+.dr-sq,.dr-links{animation:drFadeDown 1.8s cubic-bezier(.2,.75,.2,1) backwards}
+.dr-sq{animation-delay:calc(.1s + var(--i) * 1s)}
+.dr-links{animation-delay:calc(.1s + 5 * 1s)}
 @keyframes drFadeDown{from{opacity:0;transform:translateY(-28px)}to{opacity:1;transform:translateY(0)}}
 .dr-seq{max-width:1120px;margin:0 auto 30px}
 .dr-sq{font-size:clamp(1.12rem,1.95vw,1.58rem);font-weight:300;line-height:1.3;color:#fff;margin:0 auto .66em;letter-spacing:-.01em}
