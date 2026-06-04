@@ -5068,18 +5068,28 @@ window.__pos_d6=1;
     window.addEventListener('resize', function(){ if(root.classList.contains('on')) draw(); });
     // Initial render once the view is shown
     var rendered=false;
-    function tryFirstRender(){
-      if(rendered) return;
-      if(root.classList.contains('on') && root.offsetWidth>0){
-        renderChips(); redraw(); rendered=true;
+    // Render whenever the view becomes active — robust to the topbar, the
+    // dynamically-built "Raw data explorer" sub-tab, programmatic
+    // show('rawdata') and the profile "Compare & extract" link. (The tab
+    // restructure turned the old static [data-v="rawdata"] button into a
+    // dynamic sub-tab, so the original click hook stopped firing — leaving
+    // the chart and data table blank on direct navigation.)
+    function ensureRendered(tries){
+      tries=tries||0; if(rendered) return;
+      if(root.classList.contains('on')){
+        if(root.offsetWidth>0){ renderChips(); redraw(); rendered=true; return; }
+        if(tries<12) setTimeout(function(){ ensureRendered(tries+1); }, 60);
       }
     }
-    // Hook into tab switching
-    document.querySelectorAll('[data-v="rawdata"]').forEach(function(b){
-      b.addEventListener('click', function(){ setTimeout(tryFirstRender, 60); });
+    try{
+      var _rdObs=new MutationObserver(function(){ if(root.classList.contains('on')) ensureRendered(0); });
+      _rdObs.observe(root,{attributes:true,attributeFilter:['class']});
+    }catch(e){ /* fall back to the delegated click + timeout below */ }
+    document.addEventListener('click', function(e){
+      var t=e.target.closest && e.target.closest('[data-v="rawdata"]');
+      if(t) setTimeout(function(){ ensureRendered(0); }, 60);
     });
-    // Also try on first show
-    setTimeout(tryFirstRender, 400);
+    setTimeout(function(){ ensureRendered(0); }, 400);
     renderChips();   // chips show immediately
     // Allow other parts of the app (e.g. a country profile) to jump here
     // with a given country added to the comparison.
