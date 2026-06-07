@@ -3,98 +3,109 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Birth Tracker — Demoria Research</title>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<title>Birth Tracker 2026 — Demoria Research</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{--navy:#0c1a33;--navy2:#0a1426;--gold:#e8b84b;--cream:#f4ecd3;--ink:#eef1f6;--ink2:rgba(238,241,246,.75);--ink3:rgba(238,241,246,.38);--bdr:rgba(232,184,75,.12);--row:rgba(255,255,255,.022)}
+:root{--navy:#0c1a33;--bg:#080f1e;--gold:#e8b84b;--gold2:rgba(232,184,75,.5);--cream:#f4ecd3;--ink:#d8dde8;--ink2:rgba(216,221,232,.6);--ink3:rgba(216,221,232,.3);--bdr:rgba(232,184,75,.1);--row:rgba(255,255,255,.018)}
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{min-height:100vh;background:var(--navy2);color:var(--ink);font-family:'Manrope',sans-serif;font-size:13px}
-.topbar{background:var(--cream);height:54px;display:flex;align-items:center;padding:0 24px;gap:14px;border-bottom:2px solid rgba(12,26,51,.11)}
-.tb-back{font-size:.65rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(12,26,51,.5);text-decoration:none;transition:color .15s}
-.tb-back:hover{color:var(--navy)}.tb-back::before{content:'← '}
-.tb-div{width:1px;height:22px;background:rgba(12,26,51,.15)}
-.tb-title{font-size:1rem;font-weight:700;color:var(--navy)}
-.tb-badge{font-family:'JetBrains Mono',monospace;font-size:.65rem;background:var(--navy);color:var(--gold);padding:3px 9px;border-radius:4px;letter-spacing:.06em}
-.tb-src{margin-left:auto;font-size:.68rem;color:rgba(12,26,51,.45)}
-.hero{padding:26px 24px 14px;max-width:960px}
-.hero h1{font-size:clamp(1.4rem,2.8vw,2rem);font-weight:300;color:var(--ink);margin-bottom:5px}
-.hero h1 em{color:var(--gold);font-style:normal;font-weight:700}
-.hero p{font-size:.85rem;color:var(--ink3);line-height:1.64;max-width:68ch}
-.hero-stats{display:flex;gap:18px;flex-wrap:wrap;margin-top:14px}
-.hs{border-left:2px solid var(--gold);padding-left:10px}
-.hs-n{font-size:1.12rem;font-weight:700;color:var(--ink);line-height:1}
-.hs-l{font-size:.66rem;color:var(--ink3);margin-top:2px}
-.meth{margin:10px 24px 0;background:rgba(232,184,75,.05);border:1px solid rgba(232,184,75,.13);border-radius:7px;padding:11px 15px;font-size:.77rem;line-height:1.68;color:var(--ink2)}
-.meth strong{color:var(--gold)}
-.nat-badge{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:.64rem;background:rgba(232,184,75,.15);color:var(--gold);border:1px solid rgba(232,184,75,.35);padding:1px 5px;border-radius:3px;margin:0 2px;vertical-align:.06em}
-.ctrl{padding:9px 24px;display:flex;align-items:center;gap:9px;flex-wrap:wrap;border-bottom:1px solid var(--bdr);position:sticky;top:0;z-index:50;background:var(--navy2)}
-.srch{position:relative;min-width:170px;max-width:250px;flex:1}
-.srch svg{position:absolute;left:8px;top:50%;transform:translateY(-50%);width:13px;height:13px;opacity:.38;pointer-events:none}
-.srch input{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:5px;color:var(--ink);padding:6px 10px 6px 27px;font-family:inherit;font-size:.82rem;outline:none}
+html,body{background:var(--bg);color:var(--ink);font-family:'Manrope',sans-serif;font-size:12px;line-height:1}
+/* ── masthead ── */
+.mast{background:#0c1a33;border-bottom:1px solid rgba(232,184,75,.2);padding:0 16px;height:38px;display:flex;align-items:center;gap:0;flex-shrink:0}
+.mast-back{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:rgba(232,184,75,.5);text-decoration:none;letter-spacing:.06em;padding-right:12px;border-right:1px solid rgba(232,184,75,.15);margin-right:12px;transition:color .12s}
+.mast-back:hover{color:var(--gold)}
+.mast-title{font-size:.78rem;font-weight:600;color:var(--cream);letter-spacing:.01em}
+.mast-badge{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--gold);background:rgba(232,184,75,.12);border:1px solid rgba(232,184,75,.25);padding:1px 6px;border-radius:3px;margin-left:8px;letter-spacing:.05em}
+.mast-stats{margin-left:20px;display:flex;gap:16px;align-items:center}
+.mast-stat{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--ink3);white-space:nowrap}
+.mast-stat b{color:var(--ink2);font-weight:500}
+.mast-upd{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:.58rem;color:rgba(232,184,75,.35);white-space:nowrap}
+/* ── controls ── */
+.ctrl{padding:5px 12px;display:flex;align-items:center;gap:7px;border-bottom:1px solid rgba(255,255,255,.05);background:var(--bg);position:sticky;top:0;z-index:100}
+.srch{position:relative;min-width:140px;max-width:200px}
+.srch svg{position:absolute;left:7px;top:50%;transform:translateY(-50%);width:11px;height:11px;opacity:.3;pointer-events:none}
+.srch input{width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:3px;color:var(--ink);padding:4px 8px 4px 24px;font-family:'JetBrains Mono',monospace;font-size:.65rem;outline:none}
 .srch input::placeholder{color:var(--ink3)}
-.srch input:focus{border-color:rgba(232,184,75,.4)}
-.fb{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:5px;color:var(--ink2);padding:5px 10px;font-family:inherit;font-size:.77rem;cursor:pointer;transition:all .15s;white-space:nowrap}
-.fb:hover,.fb.on{border-color:var(--gold);color:var(--gold)}
-.cnt{margin-left:auto;font-size:.7rem;color:var(--ink3);white-space:nowrap}
-.tbl-wrap{overflow-x:auto;padding:0 24px 20px}
-table{width:100%;min-width:980px;border-collapse:collapse}
-thead th{font-family:'JetBrains Mono',monospace;font-size:.57rem;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:var(--ink3);padding:8px 6px 6px;border-bottom:1px solid var(--bdr);text-align:right;white-space:nowrap;cursor:pointer;user-select:none;position:sticky;top:39px;background:var(--navy2);z-index:9}
-thead th:first-child{text-align:left;min-width:190px;padding-left:2px}
-thead .th-grp{font-size:.54rem;letter-spacing:.1em;text-align:center;border-bottom:none;padding-bottom:1px;color:rgba(232,184,75,.4)}
-thead th.sl{border-left:1px solid var(--bdr)}
-tr.gh td{padding:14px 0 4px;font-size:.62rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);border-bottom:1px solid rgba(232,184,75,.14)}
-tbody tr.dr{border-bottom:1px solid rgba(255,255,255,.028)}
-tbody tr.dr:nth-child(odd){background:var(--row)}
-tbody tr.dr:hover{background:rgba(232,184,75,.05)}
-td{padding:4px 6px;text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums;font-size:.81rem}
-td:first-child{text-align:left;padding-left:2px}
-.nm{display:flex;align-items:center;gap:5px;min-width:190px}
-.flag{font-size:.9rem;line-height:1}.cn{font-weight:500;font-size:.83rem}.fn{font-size:.6rem;color:var(--ink3)}
-.nat-pill{font-family:'JetBrains Mono',monospace;font-size:.57rem;background:rgba(232,184,75,.12);color:var(--gold);border:1px solid rgba(232,184,75,.3);padding:1px 4px;border-radius:3px;cursor:default;margin-left:2px}
-.dash{color:rgba(238,241,246,.15)}.sl{border-left:1px solid var(--bdr)}
-.tfr{font-family:'JetBrains Mono',monospace;font-size:.76rem;padding:3px 6px;border-radius:3px;text-align:right}
-.tfr.old{color:var(--ink3)}.tfr.est{font-style:italic;opacity:.88}
-.cr3{background:rgba(170,25,20,.75);color:#ffccc8!important}
-.cr2{background:rgba(185,65,15,.65);color:#ffd8b8!important}
-.cr1{background:rgba(160,100,10,.5);color:#ffe4a0!important}
-.cg1{background:rgba(25,105,25,.4);color:#b8ecb8!important}
-.cg2{background:rgba(15,135,15,.55);color:#90e890!important}
-td.sp{padding:3px 8px}svg.spark{display:block;overflow:visible}
-.lgd{padding:10px 24px 4px;display:flex;gap:12px;flex-wrap:wrap;align-items:center;border-top:1px solid rgba(232,184,75,.09)}
-.lgd-ttl{font-size:.63rem;color:var(--ink3);letter-spacing:.08em;text-transform:uppercase;margin-right:2px}
-.ls{display:flex;align-items:center;gap:4px;font-size:.69rem;color:var(--ink2)}
-.sw{width:24px;height:10px;border-radius:2px}
-.foot{padding:14px 24px 48px;border-top:1px solid var(--bdr);font-size:.72rem;color:var(--ink3);line-height:1.78;max-width:900px}
-.foot strong{color:var(--ink2)}.foot a{color:var(--gold);text-decoration:none}
-.foot a:hover{text-decoration:underline}
+.srch input:focus{border-color:rgba(232,184,75,.35)}
+.sep{width:1px;height:16px;background:rgba(255,255,255,.07);flex-shrink:0}
+.fb{background:transparent;border:1px solid rgba(255,255,255,.07);border-radius:3px;color:var(--ink3);padding:3px 8px;font-family:'JetBrains Mono',monospace;font-size:.62rem;cursor:pointer;transition:all .12s;white-space:nowrap;letter-spacing:.03em}
+.fb:hover{border-color:rgba(232,184,75,.3);color:var(--ink2)}
+.fb.on{border-color:rgba(232,184,75,.45);color:var(--gold);background:rgba(232,184,75,.06)}
+.cnt{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--ink3);white-space:nowrap}
+.meth-line{padding:3px 12px 4px;font-size:.64rem;color:rgba(216,221,232,.28);border-bottom:1px solid rgba(255,255,255,.04);font-family:'JetBrains Mono',monospace;letter-spacing:.02em}
+.nat-b{display:inline;color:rgba(232,184,75,.7)}
+/* ── table ── */
+.tbl-wrap{overflow-x:auto}
+table{width:100%;min-width:920px;border-collapse:collapse}
+thead{position:sticky;top:41px;z-index:10;background:var(--bg)}
+thead tr:first-child th{padding:4px 5px 0;font-family:'JetBrains Mono',monospace;font-size:.52rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(232,184,75,.35);text-align:center;border-bottom:none;white-space:nowrap}
+thead tr:first-child th:first-child{text-align:left}
+thead tr:last-child th{padding:2px 5px 5px;font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3);text-align:right;border-bottom:1px solid rgba(232,184,75,.15);white-space:nowrap;cursor:pointer;user-select:none}
+thead tr:last-child th:first-child{text-align:left;min-width:170px}
+thead tr:last-child th:hover{color:var(--ink2)}
+thead th.sl{border-left:1px solid rgba(255,255,255,.05)}
+/* group header */
+tr.gh{background:var(--bg)!important}
+tr.gh td{padding:8px 5px 2px;font-family:'JetBrains Mono',monospace;font-size:.57rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:rgba(232,184,75,.45);border-top:1px solid rgba(232,184,75,.08)}
+tr.gh:first-child td{border-top:none;padding-top:4px}
+/* data rows */
+tbody tr.dr{border-bottom:1px solid rgba(255,255,255,.025)}
+tbody tr.dr:nth-child(even){background:var(--row)}
+tbody tr.dr:hover{background:rgba(232,184,75,.04)!important}
+td{padding:2px 5px;text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+td:first-child{text-align:left;padding-left:4px}
+/* country name cell */
+.nm{display:flex;align-items:center;gap:4px}
+.fl{font-size:.82rem;line-height:1;flex-shrink:0}
+.cn{font-size:.72rem;font-weight:500;color:var(--ink);letter-spacing:-.005em}
+.fn{font-size:.56rem;color:var(--ink3);margin-left:1px}
+.np{font-family:'JetBrains Mono',monospace;font-size:.53rem;color:var(--gold);background:rgba(232,184,75,.1);border:1px solid rgba(232,184,75,.25);padding:0 3px;border-radius:2px;margin-left:2px;cursor:default;line-height:1.4}
+/* number cells */
+.tfr{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--ink2)}
+.tfr.dim{color:var(--ink3)}
+.tfr.est{font-style:italic}
+/* TFR colour — text only, minimal; background only for extremes */
+.c-lo3{color:#ff6b5b!important;font-weight:600}
+.c-lo2{color:#e8845a!important}
+.c-lo1{color:#c4954a!important}
+.c-hi1{color:#7cb87c!important}
+.c-hi2{color:#5ea65e!important;font-weight:500}
+/* birth change col */
+.chg{font-family:'JetBrains Mono',monospace;font-size:.68rem}
+.chg.neg-h{color:#ff6b5b!important;font-weight:600}
+.chg.neg{color:#d47050!important}
+.chg.pos{color:#7cb87c!important}
+.chg.pos-h{color:#5ea65e!important;font-weight:600}
+.dash{color:rgba(216,221,232,.15)}
+td.sl{border-left:1px solid rgba(255,255,255,.05)}
+/* sparkline */
+td.sp{padding:1px 6px;vertical-align:middle}
+svg.spark{display:block;overflow:visible}
+/* ── footer ── */
+.foot{padding:10px 12px 32px;border-top:1px solid rgba(255,255,255,.05);font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--ink3);line-height:1.7}
+.foot a{color:rgba(232,184,75,.5);text-decoration:none}
+.foot a:hover{color:var(--gold)}
 </style>
 </head>
 <body>
-<div class="topbar">
-  <a class="tb-back" href="https://demoriaresearch.com">Demoria Research</a>
-  <div class="tb-div"></div>
-  <span class="tb-title">Birth Tracker</span>
-  <span class="tb-badge">2026</span>
-  <span class="tb-src">WPP 2024 + NSO data</span>
+
+<!-- ── masthead ── -->
+<div class="mast">
+  <a class="mast-back" href="https://demoriaresearch.com">← DHI</a>
+  <span class="mast-title">Birth Tracker</span>
+  <span class="mast-badge">2026</span>
+  <div class="mast-stats" id="mastStats">
+    <span class="mast-stat">Loading…</span>
+  </div>
+  <span class="mast-upd" id="mastUpd"></span>
 </div>
-<div class="hero">
-  <h1>Global <em>fertility</em> tracker</h1>
-  <p>TFR from 1965 to present, with live 2026 birth counts as statistical offices release them. Gulf states show <strong>nationals-only</strong> figures — the only demographically meaningful measure where large expat majorities otherwise distort the picture.</p>
-  <div class="hero-stats" id="heroStats"></div>
-</div>
-<div class="meth">
-  <strong>Sources &amp; methodology.</strong>
-  TFR 1965–2025: WPP 2024 baseline (Demoria Research DHI).
-  Gulf <span class="nat-badge">nationals</span>: NSO series from FCSC (UAE), GASTAT (Saudi Arabia), NCSI (Oman) — confirmed anchor years, extended to 1965 via expat-share correction ramp.
-  <span class="nat-badge">est~</span> = nationals series estimated beyond confirmed anchor (Kuwait post-2018, Qatar post-2019).
-  <span class="nat-badge">calc~</span> = back-calculated from total TFR, census nationals-share, and assumed expat TFR 1.20 (Bahrain).
-  Birth counts 2026: partial-year NSO provisional releases.
-</div>
+
+<!-- ── controls ── -->
 <div class="ctrl">
   <div class="srch">
     <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="5"/><line x1="13" y1="13" x2="18" y2="18"/></svg>
-    <input id="srchInp" type="text" placeholder="Search country…" autocomplete="off">
+    <input id="srch" type="text" placeholder="country…" autocomplete="off">
   </div>
+  <div class="sep"></div>
   <button class="fb on" onclick="flt('all',this)">All</button>
   <button class="fb" onclick="flt('Europe',this)">Europe</button>
   <button class="fb" onclick="flt('Americas',this)">Americas</button>
@@ -103,41 +114,48 @@ td.sp{padding:3px 8px}svg.spark{display:block;overflow:visible}
   <button class="fb" onclick="flt('Oceania',this)">Oceania</button>
   <span class="cnt" id="cnt"></span>
 </div>
+<div class="meth-line">
+  TFR 1965–2025: WPP 2024 · Gulf shows <span class="nat-b">nationals only</span>
+  (UAE/SAU/OMN = confirmed NSO · <span class="nat-b">est~</span> = estimated post-anchor · <span class="nat-b">calc~</span> = back-calc from total+nationals-share)
+  · italics = estimated · 2026 birth counts: NSO provisional where available
+</div>
+
+<!-- ── table ── -->
 <div class="tbl-wrap">
 <table>
 <thead>
   <tr>
-    <th rowspan="2" style="vertical-align:bottom" onclick="srt('name')">Country</th>
-    <th class="th-grp" colspan="4">Births (2026 YTD)</th>
-    <th class="th-grp sl" colspan="2">1965–2025</th>
-    <th class="th-grp sl" colspan="6">TFR — Children per woman</th>
+    <th rowspan="2" style="vertical-align:bottom;text-align:left" onclick="srt('name')">Country</th>
+    <th class="sl" colspan="2">1965–2025</th>
+    <th class="sl" colspan="7">TFR — Children per woman</th>
+    <th class="sl" colspan="2">2026 NSO</th>
   </tr>
   <tr>
-    <th onclick="srt('b25')">2025</th><th onclick="srt('b26')">2026</th>
-    <th onclick="srt('chg')">Δ %</th><th>Mon.</th>
-    <th class="sl">Trend</th>
-    <th>1990</th><th onclick="srt('t2000')">2000</th><th onclick="srt('t2010')">2010</th>
-    <th onclick="srt('t2020')">2020</th><th onclick="srt('t2024')">2024</th><th onclick="srt('t2025')">2025</th>
+    <th class="sl" onclick="srt('peak')">Peak</th>
+    <th>Trend</th>
+    <th onclick="srt('t1990')" class="sl">1990</th>
+    <th onclick="srt('t2000')">2000</th>
+    <th onclick="srt('t2010')">2010</th>
+    <th onclick="srt('t2020')">2020</th>
+    <th onclick="srt('t2022')">2022</th>
+    <th onclick="srt('t2024')">2024</th>
+    <th onclick="srt('t2025')">2025</th>
+    <th class="sl" onclick="srt('chg')">Δ %</th>
+    <th>Mon.</th>
   </tr>
 </thead>
 <tbody id="tbody"></tbody>
 </table>
 </div>
-<div class="lgd">
-  <span class="lgd-ttl">TFR</span>
-  <span class="ls"><span class="sw cr3"></span>&lt;1.0</span>
-  <span class="ls"><span class="sw cr2"></span>1.0–1.3</span>
-  <span class="ls"><span class="sw cr1"></span>1.3–1.6</span>
-  <span class="ls"><span class="sw" style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1)"></span>1.6–2.1 sub-replacement</span>
-  <span class="ls"><span class="sw cg1"></span>2.1–2.5</span>
-  <span class="ls"><span class="sw cg2"></span>2.5+</span>
+
+<div class="foot" id="foot">
+  <strong style="color:var(--ink2)">Sources:</strong>
+  TFR 1965–2025: WPP 2024 (UN) via Demoria Research DHI. ·
+  Gulf nationals-only: UAE FCSC/MoHP via GLMM (2015–2022); Saudi Arabia GASTAT Pop. Est. 2024; Oman NCSI (2010/2015/2020 anchors); Kuwait — Shah &amp; Fargues, Kuwait Fertility Survey 2018; Qatar — Fargues &amp; Al-Rakeb 2019 (SESRI/PSA); Bahrain — back-calc from census nationals share (1991/2001/2010/2020) + assumed expat TFR 1.20. ·
+  2026 birth counts: NSO monthly provisional. All data as of <span id="footUpd"></span>. ·
+  <a href="https://demoriaresearch.com">← Demographic Health Index</a>
 </div>
-<div class="foot">
-  <strong>TFR 1965–2025:</strong> WPP 2024 (UN) via Demoria Research DHI dataset.<br>
-  <strong>Gulf nationals-only:</strong> UAE FCSC/MoHP (GLMM 2015–2022); Saudi Arabia GASTAT Population Estimates 2024; Oman NCSI anchor years 2010/2015/2020; Kuwait — Shah &amp; Fargues, Kuwait Fertility Survey 2018; Qatar — Fargues &amp; Al-Rakeb 2019 (Qatar Univ. SESRI/PSA); Bahrain — back-calculated from census nationals share (1991/2001/2010/2020) + total TFR.<br>
-  <strong>2026 birth counts:</strong> NSO monthly provisional releases. Δ% vs same months 2025. Italicised TFR = estimated beyond confirmed anchor year.<br>
-  <a href="https://demoriaresearch.com">← Back to the Demographic Health Index</a>
-</div>
+
 <script>
 var D=null,SRT={k:null,d:1},RGN='all',QQ='';
 var GO=['Anglophone & Oceania','Western & Northern Europe','Central & Eastern Europe',
@@ -145,52 +163,136 @@ var GO=['Anglophone & Oceania','Western & Northern Europe','Central & Eastern Eu
         'Gulf (nationals)','North Africa & MENA','Caucasus & Turkey',
         'Central Asia','South Asia','East Asia','Southeast Asia'];
 
-function tCls(v){if(v==null)return '';if(v<1.0)return 'cr3';if(v<1.3)return 'cr2';if(v<1.6)return 'cr1';if(v<2.1)return '';if(v<2.5)return 'cg1';return 'cg2';}
-function cCls(v){if(v==null)return '';if(v<=-10)return 'cr3';if(v<=-5)return 'cr2';if(v<0)return 'cr1';if(v===0)return '';if(v<5)return 'cg1';return 'cg2';}
-function fN(n){if(n==null)return '<span class="dash">-</span>';return n.toLocaleString('en-US');}
-function fT(v,e){if(v==null)return '<span class="dash">-</span>';var s=v.toFixed(2);return e?('<em>'+s+'</em>'):s;}
-function fC(v){if(v==null)return '<span class="dash">-</span>';return (v>0?'+':'')+v.toFixed(1)+'%';}
+function tCls(v){
+  if(v==null)return '';
+  if(v<1.0)return 'c-lo3';if(v<1.3)return 'c-lo2';if(v<1.6)return 'c-lo1';
+  if(v<2.5)return '';if(v<3.5)return 'c-hi1';return 'c-hi2';
+}
+function cCls(v){
+  if(v==null)return '';
+  if(v<=-10)return 'neg-h';if(v<0)return 'neg';if(v>=10)return 'pos-h';if(v>0)return 'pos';return '';
+}
+function fT(v,e,old){
+  if(v==null)return '<span class="dash">–</span>';
+  var s=v.toFixed(2);
+  return e?('<em>'+s+'</em>'):s;
+}
+function fC(v){if(v==null)return '<span class="dash">–</span>';return (v>0?'+':'')+v.toFixed(1);}
 
 function spark(full){
   var ys=Object.keys(full).map(Number).sort(function(a,b){return a-b;});
-  if(ys.length<5)return '<svg class="spark" viewBox="0 0 100 22" width="100" height="22"></svg>';
+  if(ys.length<5)return '<svg class="spark" viewBox="0 0 88 16" width="88" height="16"></svg>';
   var vs=ys.map(function(y){return full[String(y)];});
   var mn=Math.min.apply(null,vs),mx=Math.max.apply(null,vs),rng=mx-mn||0.5;
-  var x0=ys[0],xN=ys[ys.length-1],xS=xN-x0,P=2,W=100,H=22;
+  var x0=ys[0],xN=ys[ys.length-1],xS=xN-x0,P=1,W=88,H=16;
   var px=function(y){return P+(y-x0)/xS*(W-P*2);};
   var py=function(v){return H-P-(v-mn)/rng*(H-P*2);};
+  // replacement line
   var rl=py(2.1);
-  var rep=(mn<2.2&&mx>2.0)?'<line x1="'+P+'" y1="'+rl.toFixed(1)+'" x2="'+(W-P)+'" y2="'+rl.toFixed(1)+'" stroke="rgba(232,184,75,.18)" stroke-width=".7" stroke-dasharray="2 2"/>':'';
+  var rep=(mn<2.15&&mx>2.05)?'<line x1="'+P+'" y1="'+rl.toFixed(1)+'" x2="'+(W-P)+'" y2="'+rl.toFixed(1)+'" stroke="rgba(232,184,75,.15)" stroke-width=".6" stroke-dasharray="2 2"/>':'';
+  // split: dim history, bright recent 12y
   var cutY=Math.max(x0,xN-12);
   var ri=ys.findIndex(function(y){return y>=cutY;});
+  if(ri<0)ri=0;
   var mP=ys.slice(0,ri+1).map(function(y,i){return (i===0?'M':'L')+px(y).toFixed(1)+','+py(vs[i]).toFixed(1);}).join(' ');
   var rP=ys.slice(ri).map(function(y,i){return (i===0?'M':'L')+px(y).toFixed(1)+','+py(vs[ri+i]).toFixed(1);}).join(' ');
+  // end dot
+  var lx=px(ys[ys.length-1]),ly=py(vs[vs.length-1]);
+  var lastV=vs[vs.length-1];
+  var dotCol=lastV<1.3?'#ff6b5b':lastV<2.1?'#e8b84b':'#5ea65e';
   return '<svg class="spark" viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'">'+rep+
-    '<path d="'+mP+'" stroke="rgba(232,184,75,.28)" stroke-width=".9" fill="none"/>'+
-    '<path d="'+rP+'" stroke="#e8b84b" stroke-width="1.5" fill="none" stroke-linejoin="round" stroke-linecap="round"/>'+
+    '<path d="'+mP+'" stroke="rgba(216,221,232,.2)" stroke-width=".8" fill="none"/>'+
+    '<path d="'+rP+'" stroke="#e8b84b" stroke-width="1.2" fill="none" stroke-linejoin="round" stroke-linecap="round"/>'+
+    '<circle cx="'+lx.toFixed(1)+'" cy="'+ly.toFixed(1)+'" r="1.6" fill="'+dotCol+'"/>'+
     '</svg>';
 }
 
 function rowH(c){
   var t=c.tfr||{},tf=c.tfr_full||t,m=c.tfr_method||'wpp',ef=c.tfr_est_from;
-  function isE(yr){return ef&&yr>=ef;}
-  function tCell(yr,old){
-    var v=t[String(yr)],cl='tfr'+(old?' old':'')+(isE(yr)?' est':'');
-    var col=(!old&&v!=null)?tCls(v):'';
-    return '<td class="'+cl+(col?' '+col:'')+'">'+fT(v,isE(yr))+'</td>';
+  function isE(yr){return ef!=null&&yr>=ef;}
+  function tc(yr,dim){
+    var v=t[String(yr)];
+    var cl='tfr'+(dim?' dim':'')+(isE(yr)?' est':'');
+    var col=!dim?tCls(v):'';
+    if(col)cl+=' '+col;
+    return '<td class="'+cl+'">'+fT(v,isE(yr))+'</td>';
   }
-  var pill=m==='nationals'?'<span class="nat-pill" title="Nationals-only TFR — confirmed NSO data">nat</span>':
-           m==='nationals_est'?'<span class="nat-pill" title="Nationals-only — estimated beyond anchor year">est~</span>':
-           m==='nationals_calc'?'<span class="nat-pill" title="Back-calculated from total TFR + nationals share">calc~</span>':'';
+  var pill=m==='nationals'?'<span class="np" title="Nationals-only — confirmed NSO">nat</span>':
+           m==='nationals_est'?'<span class="np" title="Nationals-only — estimated post-anchor">est~</span>':
+           m==='nationals_calc'?'<span class="np" title="Back-calculated (total TFR + nationals share)">calc~</span>':'';
+
+  // peak TFR
+  var allV=Object.values(tf).filter(function(v){return v!=null;});
+  var peak=allV.length?Math.max.apply(null,allV):null;
+
+  var chgCl='chg '+cCls(c.chg);
+  var mon=c.mon!=null?c.mon:'<span class="dash">–</span>';
   return '<tr class="dr" data-region="'+c.region+'">'+
-    '<td><div class="nm"><span class="flag">'+c.flag+'</span><span class="cn">'+c.name+'</span>'+
+    '<td><div class="nm"><span class="fl">'+c.flag+'</span><span class="cn">'+c.name+'</span>'+
     (c.footnote?'<span class="fn">'+c.footnote+'</span>':'')+pill+'</div></td>'+
-    '<td class="tfr old">'+fN(c.b25)+'</td><td class="tfr old">'+fN(c.b26)+'</td>'+
-    '<td class="tfr '+cCls(c.chg)+'">'+fC(c.chg)+'</td>'+
-    '<td class="tfr old">'+(c.mon!=null?c.mon:'<span class="dash">-</span>')+'</td>'+
-    '<td class="sp sl">'+spark(tf)+'</td>'+
-    tCell(1990,true)+tCell(2000,true)+tCell(2010,true)+
-    tCell(2020,false)+tCell(2024,false)+tCell(2025,false)+
+    '<td class="tfr dim sl">'+(peak!=null?peak.toFixed(1):'<span class="dash">–</span>')+'</td>'+
+    '<td class="sp">'+spark(tf)+'</td>'+
+    tc(1990,true)+'<td class="sl"></td>'+tc(2000,true)+tc(2010,true)+tc(2020,false)+tc(2022,false)+tc(2024,false)+tc(2025,false)+
+    '<td class="'+chgCl+' sl">'+fC(c.chg)+'</td>'+
+    '<td class="tfr dim">'+mon+'</td>'+
+    '</tr>';
+}
+
+// wait — that has an extra empty <td class="sl"> — remove it
+function rowHtml(c){
+  var t=c.tfr||{},tf=c.tfr_full||t,m=c.tfr_method||'wpp',ef=c.tfr_est_from;
+  function isE(yr){return ef!=null&&yr>=ef;}
+  function tc(yr,dim){
+    var v=t[String(yr)];
+    var cl='tfr'+(dim?' dim':'')+(isE(yr)?' est':'');
+    if(!dim&&v!=null){var col=tCls(v);if(col)cl+=' '+col;}
+    return '<td class="'+cl+'">'+fT(v,isE(yr))+'</td>';
+  }
+  var pill=m==='nationals'?'<span class="np" title="Nationals-only — confirmed NSO">nat</span>':
+           m==='nationals_est'?'<span class="np" title="Nationals-only — estimated post-anchor">est~</span>':
+           m==='nationals_calc'?'<span class="np" title="Back-calc: total TFR + nationals share">calc~</span>':'';
+  var allV=Object.values(tf).filter(function(v){return v!=null;});
+  var peak=allV.length?Math.max.apply(null,allV):null;
+  var chgCl='chg '+cCls(c.chg);
+  var mon=c.mon!=null?String(c.mon):'<span class="dash">–</span>';
+  return '<tr class="dr" data-region="'+c.region+'">'+
+    '<td><div class="nm"><span class="fl">'+c.flag+'</span><span class="cn">'+c.name+'</span>'+
+    (c.footnote?'<span class="fn">'+c.footnote+'</span>':'')+pill+'</div></td>'+
+    '<td class="tfr dim sl">'+(peak!=null?peak.toFixed(1):'<span class="dash">–</span>')+'</td>'+
+    '<td class="sp">'+spark(tf)+'</td>'+
+    '<td class="sl">'+tc(1990,true).replace(/^<td[^>]*>/,'').replace(/<\/td>$/,'')+'</td>'+  // fallback replaced
+    tc(2000,true)+tc(2010,true)+tc(2020,false)+tc(2022,false)+tc(2024,false)+tc(2025,false)+
+    '<td class="'+chgCl+' sl">'+fC(c.chg)+'</td>'+
+    '<td class="tfr dim">'+mon+'</td>'+
+    '</tr>';
+}
+
+function makeRow(c){
+  var t=c.tfr||{},tf=c.tfr_full||t,m=c.tfr_method||'wpp',ef=c.tfr_est_from;
+  function isE(yr){return ef!=null&&yr>=ef;}
+  function tc(yr,dim){
+    var v=t[String(yr)];if(v==null)return '<td class="tfr'+(dim?' dim':'')+'"><span class="dash">–</span></td>';
+    var cl='tfr'+(dim?' dim':'')+(isE(yr)?' est':'');
+    if(!dim){var col=tCls(v);if(col)cl+=' '+col;}
+    var s=v.toFixed(2);return '<td class="'+cl+'">'+(isE(yr)?'<em>'+s+'</em>':s)+'</td>';
+  }
+  var pill=m==='nationals'?'<span class="np" title="Nationals-only (confirmed NSO)">nat</span>':
+           m==='nationals_est'?'<span class="np" title="Nationals-only (estimated post-anchor)">est~</span>':
+           m==='nationals_calc'?'<span class="np" title="Back-calc from total TFR + nationals share">calc~</span>':'';
+  var allV=Object.values(tf).filter(function(v){return v!=null;});
+  var peak=allV.length?Math.max.apply(null,allV).toFixed(1):'<span class="dash">–</span>';
+  var chgV=c.chg,chgCl='chg'+(!chgV?'':' '+cCls(chgV));
+  var chgTxt=chgV==null?'<span class="dash">–</span>':((chgV>0?'+':'')+chgV.toFixed(1));
+  var mon=c.mon!=null?String(c.mon):'<span class="dash">–</span>';
+  return '<tr class="dr" data-region="'+c.region+'">'+
+    '<td><div class="nm"><span class="fl">'+c.flag+'</span><span class="cn">'+c.name+'</span>'+
+    (c.footnote?'<span class="fn"> '+c.footnote+'</span>':'')+pill+'</div></td>'+
+    '<td class="tfr dim sl">'+peak+'</td>'+
+    '<td class="sp">'+spark(tf)+'</td>'+
+    tc(1990,true).replace('class="tfr','class="tfr sl ')+ // add sl to 1990 col
+    tc(2000,true)+tc(2010,true)+tc(2020,false)+tc(2022,false)+tc(2024,false)+tc(2025,false)+
+    '<td class="'+chgCl+' sl">'+chgTxt+'</td>'+
+    '<td class="tfr dim">'+mon+'</td>'+
     '</tr>';
 }
 
@@ -202,12 +304,21 @@ function render(){
     return true;
   });
   var SF={name:'name',b25:'b25',b26:'b26',chg:'chg',
-          t2000:['tfr','2000'],t2010:['tfr','2010'],t2020:['tfr','2020'],t2024:['tfr','2024'],t2025:['tfr','2025']};
+          t1990:['tfr','1990'],t2000:['tfr','2000'],t2010:['tfr','2010'],
+          t2020:['tfr','2020'],t2022:['tfr','2022'],t2024:['tfr','2024'],t2025:['tfr','2025'],
+          peak:'_peak'};
   if(SRT.k){
-    var sf=SF[SRT.k];
+    var sk=SRT.k;
     f=f.slice().sort(function(a,b){
-      var av=Array.isArray(sf)?(a[sf[0]]||{})[sf[1]]:a[sf];
-      var bv=Array.isArray(sf)?(b[sf[0]]||{})[sf[1]]:b[sf];
+      var av,bv;
+      if(sk==='peak'){
+        var aVals=Object.values(a.tfr_full||a.tfr||{}).filter(function(v){return v!=null;});
+        var bVals=Object.values(b.tfr_full||b.tfr||{}).filter(function(v){return v!=null;});
+        av=aVals.length?Math.max.apply(null,aVals):null;
+        bv=bVals.length?Math.max.apply(null,bVals):null;
+      } else if(Array.isArray(SF[sk])){
+        var sf=SF[sk];av=(a[sf[0]]||{})[sf[1]];bv=(b[sf[0]]||{})[sf[1]];
+      } else {av=a[sf];bv=b[sf];}
       if(av==null&&bv==null)return 0;if(av==null)return 1;if(bv==null)return -1;
       return SRT.d*(av<bv?-1:av>bv?1:0);
     });
@@ -215,26 +326,37 @@ function render(){
   var html='';
   if(!SRT.k){
     var gm={};f.forEach(function(c){if(!gm[c.group])gm[c.group]=[];gm[c.group].push(c);});
-    GO.forEach(function(g){if(!gm[g])return;html+='<tr class="gh"><td colspan="12">'+g+'</td></tr>';gm[g].forEach(function(c){html+=rowH(c);});});
-    Object.keys(gm).forEach(function(g){if(GO.indexOf(g)<0){html+='<tr class="gh"><td colspan="12">'+g+'</td></tr>';gm[g].forEach(function(c){html+=rowH(c);});}});
-  } else {f.forEach(function(c){html+=rowH(c);});}
+    GO.forEach(function(g){
+      if(!gm[g]||!gm[g].length)return;
+      html+='<tr class="gh"><td colspan="12">'+g+'</td></tr>';
+      gm[g].forEach(function(c){html+=makeRow(c);});
+    });
+    Object.keys(gm).forEach(function(g){
+      if(GO.indexOf(g)<0&&gm[g].length){
+        html+='<tr class="gh"><td colspan="12">'+g+'</td></tr>';
+        gm[g].forEach(function(c){html+=makeRow(c);});
+      }
+    });
+  } else {f.forEach(function(c){html+=makeRow(c);});}
   document.getElementById('tbody').innerHTML=html;
-  document.getElementById('cnt').textContent=f.length+' countries';
+  document.getElementById('cnt').textContent=f.length+' / '+D.countries.length;
   var all=D.countries;
   var b21=all.filter(function(c){var v=c.tfr['2025'];return v!=null&&v<2.1;}).length;
   var b10=all.filter(function(c){var v=c.tfr['2025'];return v!=null&&v<1.0;}).length;
   var wB=all.filter(function(c){return c.b26!=null;}).length;
-  var el=document.getElementById('heroStats');
-  if(el)el.innerHTML='<div class="hs"><div class="hs-n">'+all.length+'</div><div class="hs-l">Countries tracked</div></div>'+
-    '<div class="hs"><div class="hs-n">'+wB+'</div><div class="hs-l">With 2026 birth data</div></div>'+
-    '<div class="hs"><div class="hs-n">'+b21+'</div><div class="hs-l">Below replacement (2025)</div></div>'+
-    '<div class="hs"><div class="hs-n">'+b10+'</div><div class="hs-l">TFR below 1.0 (2025)</div></div>';
+  document.getElementById('mastStats').innerHTML=
+    '<span class="mast-stat"><b>'+all.length+'</b> countries</span>'+
+    '<span class="mast-stat"><b>'+b21+'</b> sub-replacement (2025)</span>'+
+    '<span class="mast-stat"><b>'+b10+'</b> TFR &lt; 1.0</span>'+
+    (wB?'<span class="mast-stat"><b>'+wB+'</b> with 2026 births</span>':'');
+  document.getElementById('mastUpd').textContent='Updated '+D.updated;
+  document.getElementById('footUpd').textContent=D.updated;
 }
 window.srt=function(k){if(SRT.k===k)SRT.d*=-1;else SRT={k:k,d:k==='name'?1:-1};render();};
 window.flt=function(r,b){RGN=r;document.querySelectorAll('.fb').forEach(function(x){x.classList.remove('on');});if(b)b.classList.add('on');render();};
-document.getElementById('srchInp').addEventListener('input',function(e){QQ=e.target.value.trim();render();});
+document.getElementById('srch').addEventListener('input',function(e){QQ=e.target.value.trim();render();});
 fetch('births_data.json').then(function(r){return r.json();}).then(function(d){D=d;render();})
-  .catch(function(e){document.querySelector('.tbl-wrap').innerHTML='<p style="padding:40px 24px;color:rgba(238,241,246,.35)">Failed to load: '+e.message+'</p>';});
+  .catch(function(e){document.getElementById('tbody').innerHTML='<tr><td colspan="12" style="padding:20px 8px;color:rgba(216,221,232,.3);font-family:JetBrains Mono,monospace;font-size:.7rem">Error loading data: '+e.message+'</td></tr>';});
 </script>
 </body>
 </html>
