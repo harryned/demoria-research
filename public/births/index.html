@@ -35,7 +35,7 @@ html,body{background:var(--bg);color:var(--ink);font-family:'Manrope',sans-serif
 .nat-b{display:inline;color:rgba(232,184,75,.7)}
 /* ── table ── */
 .tbl-wrap{overflow-x:auto}
-table{width:100%;min-width:920px;border-collapse:collapse}
+table{border-collapse:collapse;width:max-content;min-width:100%}
 thead{position:sticky;top:41px;z-index:10;background:var(--bg)}
 thead tr:first-child th{padding:4px 5px 0;font-family:'JetBrains Mono',monospace;font-size:.52rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(232,184,75,.35);text-align:center;border-bottom:none;white-space:nowrap}
 thead tr:first-child th:first-child{text-align:left}
@@ -78,7 +78,7 @@ td:first-child{text-align:left;padding-left:4px}
 .dash{color:rgba(216,221,232,.15)}
 td.sl{border-left:1px solid rgba(255,255,255,.05)}
 /* sparkline */
-td.sp{padding:1px 6px;vertical-align:middle}
+td.sp{padding:1px 6px;vertical-align:middle;width:96px}
 svg.spark{display:block;overflow:visible}
 /* ── footer ── */
 .foot{padding:10px 12px 32px;border-top:1px solid rgba(255,255,255,.05);font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--ink3);line-height:1.7}
