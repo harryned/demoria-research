@@ -3,360 +3,218 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Birth Tracker 2026 — Demoria Research</title>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<title>Birth & Fertility Tracker — Demoria Research</title>
+<meta name="description" content="Fertility (TFR) and births for 106 countries, by region. WPP 2024 baseline with nationals-only corrections for the Gulf. Demoria Research.">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--navy:#0c1a33;--bg:#080f1e;--gold:#e8b84b;--gold2:rgba(232,184,75,.5);--cream:#f4ecd3;--ink:#d8dde8;--ink2:rgba(216,221,232,.6);--ink3:rgba(216,221,232,.3);--bdr:rgba(232,184,75,.1);--row:rgba(255,255,255,.018)}
+:root{--navy:#0c1a33;--navy2:#0a1426;--gold:#e8b84b;--cream:#f4ecd3;--ink:#eef1f6;--ink2:rgba(238,241,246,.74);--ink3:rgba(238,241,246,.4)}
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{background:var(--bg);color:var(--ink);font-family:'Manrope',sans-serif;font-size:12px;line-height:1}
-/* ── masthead ── */
-.mast{background:#0c1a33;border-bottom:1px solid rgba(232,184,75,.2);padding:0 16px;height:38px;display:flex;align-items:center;gap:0;flex-shrink:0}
-.mast-back{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:rgba(232,184,75,.5);text-decoration:none;letter-spacing:.06em;padding-right:12px;border-right:1px solid rgba(232,184,75,.15);margin-right:12px;transition:color .12s}
-.mast-back:hover{color:var(--gold)}
-.mast-title{font-size:.78rem;font-weight:600;color:var(--cream);letter-spacing:.01em}
-.mast-badge{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--gold);background:rgba(232,184,75,.12);border:1px solid rgba(232,184,75,.25);padding:1px 6px;border-radius:3px;margin-left:8px;letter-spacing:.05em}
-.mast-stats{margin-left:20px;display:flex;gap:16px;align-items:center}
-.mast-stat{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--ink3);white-space:nowrap}
-.mast-stat b{color:var(--ink2);font-weight:500}
-.mast-upd{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:.58rem;color:rgba(232,184,75,.35);white-space:nowrap}
-/* ── controls ── */
-.ctrl{padding:5px 12px;display:flex;align-items:center;gap:7px;border-bottom:1px solid rgba(255,255,255,.05);background:var(--bg);position:sticky;top:0;z-index:100}
-.srch{position:relative;min-width:140px;max-width:200px}
-.srch svg{position:absolute;left:7px;top:50%;transform:translateY(-50%);width:11px;height:11px;opacity:.3;pointer-events:none}
-.srch input{width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:3px;color:var(--ink);padding:4px 8px 4px 24px;font-family:'JetBrains Mono',monospace;font-size:.65rem;outline:none}
-.srch input::placeholder{color:var(--ink3)}
-.srch input:focus{border-color:rgba(232,184,75,.35)}
-.sep{width:1px;height:16px;background:rgba(255,255,255,.07);flex-shrink:0}
-.fb{background:transparent;border:1px solid rgba(255,255,255,.07);border-radius:3px;color:var(--ink3);padding:3px 8px;font-family:'JetBrains Mono',monospace;font-size:.62rem;cursor:pointer;transition:all .12s;white-space:nowrap;letter-spacing:.03em}
-.fb:hover{border-color:rgba(232,184,75,.3);color:var(--ink2)}
-.fb.on{border-color:rgba(232,184,75,.45);color:var(--gold);background:rgba(232,184,75,.06)}
-.cnt{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--ink3);white-space:nowrap}
-.meth-line{padding:3px 12px 4px;font-size:.64rem;color:rgba(216,221,232,.28);border-bottom:1px solid rgba(255,255,255,.04);font-family:'JetBrains Mono',monospace;letter-spacing:.02em}
-.nat-b{display:inline;color:rgba(232,184,75,.7)}
-/* ── table ── */
-.tbl-wrap{overflow-x:auto}
-table{border-collapse:collapse;width:max-content;min-width:100%}
-thead{position:sticky;top:41px;z-index:10;background:var(--bg)}
-thead tr:first-child th{padding:4px 5px 0;font-family:'JetBrains Mono',monospace;font-size:.52rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(232,184,75,.35);text-align:center;border-bottom:none;white-space:nowrap}
-thead tr:first-child th:first-child{text-align:left}
-thead tr:last-child th{padding:2px 5px 5px;font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3);text-align:right;border-bottom:1px solid rgba(232,184,75,.15);white-space:nowrap;cursor:pointer;user-select:none}
-thead tr:last-child th:first-child{text-align:left;min-width:170px}
-thead tr:last-child th:hover{color:var(--ink2)}
-thead th.sl{border-left:1px solid rgba(255,255,255,.05)}
-/* group header */
-tr.gh{background:var(--bg)!important}
-tr.gh td{padding:8px 5px 2px;font-family:'JetBrains Mono',monospace;font-size:.57rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:rgba(232,184,75,.45);border-top:1px solid rgba(232,184,75,.08)}
-tr.gh:first-child td{border-top:none;padding-top:4px}
-/* data rows */
-tbody tr.dr{border-bottom:1px solid rgba(255,255,255,.025)}
-tbody tr.dr:nth-child(even){background:var(--row)}
-tbody tr.dr:hover{background:rgba(232,184,75,.04)!important}
-td{padding:2px 5px;text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
-td:first-child{text-align:left;padding-left:4px}
-/* country name cell */
-.nm{display:flex;align-items:center;gap:4px}
-.fl{font-size:.82rem;line-height:1;flex-shrink:0}
-.cn{font-size:.72rem;font-weight:500;color:var(--ink);letter-spacing:-.005em}
-.fn{font-size:.56rem;color:var(--ink3);margin-left:1px}
-.np{font-family:'JetBrains Mono',monospace;font-size:.53rem;color:var(--gold);background:rgba(232,184,75,.1);border:1px solid rgba(232,184,75,.25);padding:0 3px;border-radius:2px;margin-left:2px;cursor:default;line-height:1.4}
-/* number cells */
-.tfr{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--ink2)}
-.tfr.dim{color:var(--ink3)}
-.tfr.est{font-style:italic}
-/* TFR colour — text only, minimal; background only for extremes */
-.c-lo3{color:#ff6b5b!important;font-weight:600}
-.c-lo2{color:#e8845a!important}
-.c-lo1{color:#c4954a!important}
-.c-hi1{color:#7cb87c!important}
-.c-hi2{color:#5ea65e!important;font-weight:500}
-/* birth change col */
-.chg{font-family:'JetBrains Mono',monospace;font-size:.68rem}
-.chg.neg-h{color:#ff6b5b!important;font-weight:600}
-.chg.neg{color:#d47050!important}
-.chg.pos{color:#7cb87c!important}
-.chg.pos-h{color:#5ea65e!important;font-weight:600}
-.dash{color:rgba(216,221,232,.15)}
-td.sl{border-left:1px solid rgba(255,255,255,.05)}
-/* sparkline */
-td.sp{padding:1px 6px;vertical-align:middle;width:96px}
-svg.spark{display:block;overflow:visible}
-/* ── footer ── */
-.foot{padding:10px 12px 32px;border-top:1px solid rgba(255,255,255,.05);font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--ink3);line-height:1.7}
-.foot a{color:rgba(232,184,75,.5);text-decoration:none}
-.foot a:hover{color:var(--gold)}
+html,body{min-height:100vh;background:var(--navy2);color:var(--ink);font-family:'Manrope',sans-serif;font-size:13px}
+
+/* topbar */
+.topbar{background:var(--cream);height:50px;display:flex;align-items:center;padding:0 22px;gap:13px;border-bottom:2px solid rgba(12,26,51,.12);position:sticky;top:0;z-index:200}
+.tb-back{display:flex;align-items:center;gap:6px;font-size:.66rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--navy);text-decoration:none;opacity:.72}
+.tb-back:hover{opacity:1}
+.tb-back svg{width:13px;height:13px}
+.tb-div{width:1px;height:20px;background:rgba(12,26,51,.18)}
+.tb-title{font-size:.95rem;font-weight:700;color:var(--navy);flex:1}
+.tb-year{font-family:'JetBrains Mono',monospace;font-size:.62rem;background:var(--navy);color:var(--gold);padding:3px 8px;border-radius:4px;letter-spacing:.05em}
+
+/* hero */
+.hero{padding:24px 24px 6px;max-width:1000px}
+.hero h1{font-size:clamp(1.35rem,2.6vw,1.95rem);font-weight:300;margin-bottom:5px}
+.hero h1 em{color:var(--gold);font-style:normal;font-weight:700}
+.hero p{font-size:.84rem;color:var(--ink3);line-height:1.6;max-width:74ch}
+.hero-stats{display:flex;gap:16px;flex-wrap:wrap;margin-top:14px}
+.hs{border-left:2px solid var(--gold);padding-left:9px}
+.hs-n{font-size:1.12rem;font-weight:700;line-height:1}
+.hs-l{font-size:.65rem;color:var(--ink3);margin-top:2px}
+
+/* region jump nav */
+.jump{position:sticky;top:50px;z-index:150;background:var(--navy2);border-bottom:1px solid rgba(232,184,75,.12);padding:8px 24px;display:flex;gap:6px;overflow-x:auto;-ms-overflow-style:none;scrollbar-width:none}
+.jump::-webkit-scrollbar{display:none}
+.jump a{font-size:.7rem;font-weight:600;color:var(--ink2);text-decoration:none;padding:4px 9px;border:1px solid rgba(255,255,255,.1);border-radius:6px;white-space:nowrap;transition:.15s}
+.jump a:hover{border-color:var(--gold);color:var(--gold)}
+
+.intro-hint{padding:14px 24px 2px;font-size:.76rem;color:var(--ink3);display:flex;align-items:center;gap:7px}
+.intro-hint svg{width:15px;height:15px;opacity:.55}
+
+/* region block */
+.reg{margin:8px 0 6px;scroll-margin-top:104px}
+.reg-h{display:flex;align-items:center;gap:11px;padding:0 24px 9px;margin:16px 0 2px;border-bottom:1px solid rgba(232,184,75,.16)}
+.reg-t{font-size:1.06rem;font-weight:700}
+.reg-count{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--gold);border:1px solid rgba(232,184,75,.3);border-radius:20px;padding:2px 9px}
+.reg-nav{margin-left:auto;display:flex;gap:6px}
+.rnav{width:29px;height:29px;border-radius:50%;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.04);color:var(--ink);font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.15s;line-height:1}
+.rnav:hover{border-color:var(--gold);color:var(--gold)}
+.rnav:disabled{opacity:.22;cursor:default}
+.reg-wrap{position:relative}
+.reg-row{display:flex;gap:13px;overflow-x:auto;scroll-snap-type:x proximity;scroll-behavior:smooth;padding:6px 24px 16px;-ms-overflow-style:none;scrollbar-width:none;cursor:grab}
+.reg-row.drag{cursor:grabbing;scroll-behavior:auto}
+.reg-row::-webkit-scrollbar{display:none}
+.reg-row .c{flex:0 0 256px;scroll-snap-align:start}
+.fade{position:absolute;top:0;bottom:16px;width:40px;pointer-events:none;transition:opacity .2s;z-index:2}
+.fade.l{left:0;background:linear-gradient(to right,var(--navy2),transparent)}
+.fade.r{right:0;background:linear-gradient(to left,var(--navy2),transparent)}
+.fade.hide{opacity:0}
+
+/* tile */
+.c{background:var(--cream);border:1px solid rgba(12,26,51,.13);border-radius:14px;position:relative;overflow:hidden;color:var(--navy)}
+.c-band{position:absolute;left:0;top:0;bottom:0;width:4px}
+.c-pad{padding:14px 16px 14px 17px}
+.c-hd{display:flex;align-items:center;gap:9px;margin-bottom:12px}
+.c-fl{height:16px;width:auto;border-radius:2px;box-shadow:0 1px 3px rgba(0,0,0,.28),inset 0 0 0 1px rgba(12,26,51,.12);flex:none}
+.c-nm{font-size:.93rem;font-weight:700;line-height:1.05}
+.c-tag{font-size:.53rem;font-weight:600;color:#8a6512;border:1px solid rgba(138,101,18,.4);border-radius:3px;padding:1px 4px}
+.c-lab{font-family:'JetBrains Mono',monospace;font-size:.53rem;font-weight:600;letter-spacing:.1em;color:rgba(12,26,51,.5);margin-bottom:1px}
+.c-est-row{display:flex;align-items:flex-end;gap:10px;margin-bottom:12px}
+.c-est{font-family:'JetBrains Mono',monospace;font-size:2.45rem;font-weight:700;line-height:.82;letter-spacing:-.01em}
+.c-est.isest{font-style:italic}
+.c-births{background:rgba(12,26,51,.045);border-radius:9px;padding:9px 11px 10px;margin-bottom:12px}
+.c-b-head{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:7px}
+.c-chg{font-family:'JetBrains Mono',monospace;font-size:.93rem;font-weight:700}
+.c-b-cols{display:flex;align-items:flex-end;gap:10px}
+.c-bcol{flex:1;min-width:0}
+.c-byr{font-family:'JetBrains Mono',monospace;font-size:.53rem;font-weight:600;color:rgba(12,26,51,.5);margin-bottom:2px}
+.c-bv{font-family:'JetBrains Mono',monospace;font-size:1.08rem;font-weight:700;line-height:1}
+.c-bcol.prev .c-bv{color:rgba(12,26,51,.55)}
+.c-b-arrow{font-family:'JetBrains Mono',monospace;font-size:.88rem;color:rgba(12,26,51,.35);padding-bottom:1px}
+.c-await{font-family:'JetBrains Mono',monospace;font-size:.76rem;color:rgba(12,26,51,.4);font-style:italic}
+.c-ctx-lab{font-family:'JetBrains Mono',monospace;font-size:.51rem;font-weight:600;letter-spacing:.1em;color:rgba(12,26,51,.42);margin-bottom:5px}
+.c-strip{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}
+.c-cell{text-align:center;padding:5px 0 4px;border-radius:5px;background:rgba(12,26,51,.055)}
+.c-cy{font-family:'JetBrains Mono',monospace;font-size:.5rem;font-weight:600;margin-bottom:2px;color:rgba(12,26,51,.45)}
+.c-cv{font-family:'JetBrains Mono',monospace;font-size:.75rem;font-weight:700;color:#0c1a33}
+.c-cell.estc{outline:1.5px dashed rgba(12,26,51,.3);outline-offset:-1.5px;background:transparent}
+.c-cell.e0{opacity:.45}.c-cell.e1{opacity:.6}.c-cell.e2{opacity:.82}.c-cell.e3{opacity:1}
+
+/* footer */
+.foot{padding:18px 24px 46px;border-top:1px solid rgba(232,184,75,.12);font-size:.71rem;color:var(--ink3);line-height:1.7;max-width:920px;margin-top:14px}
+.foot strong{color:var(--ink2)}.foot a{color:var(--gold);text-decoration:none}
+.loading{padding:60px 24px;text-align:center;color:rgba(238,241,246,.3)}
 </style>
 </head>
 <body>
 
-<!-- ── masthead ── -->
-<div class="mast">
-  <a class="mast-back" href="https://demoriaresearch.com">← DHI</a>
-  <span class="mast-title">Birth Tracker</span>
-  <span class="mast-badge">2026</span>
-  <div class="mast-stats" id="mastStats">
-    <span class="mast-stat">Loading…</span>
-  </div>
-  <span class="mast-upd" id="mastUpd"></span>
+<div class="topbar">
+  <a class="tb-back" href="https://demoriaresearch.com"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><polyline points="13 4 7 10 13 16"/></svg>Demoria Research</a>
+  <div class="tb-div"></div>
+  <span class="tb-title">Birth &amp; Fertility Tracker</span>
+  <span class="tb-year" id="tbYear">2026</span>
 </div>
 
-<!-- ── controls ── -->
-<div class="ctrl">
-  <div class="srch">
-    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="5"/><line x1="13" y1="13" x2="18" y2="18"/></svg>
-    <input id="srch" type="text" placeholder="country…" autocomplete="off">
-  </div>
-  <div class="sep"></div>
-  <button class="fb on" onclick="flt('all',this)">All</button>
-  <button class="fb" onclick="flt('Europe',this)">Europe</button>
-  <button class="fb" onclick="flt('Americas',this)">Americas</button>
-  <button class="fb" onclick="flt('Asia',this)">Asia</button>
-  <button class="fb" onclick="flt('MENA',this)">MENA</button>
-  <button class="fb" onclick="flt('Oceania',this)">Oceania</button>
-  <span class="cnt" id="cnt"></span>
-</div>
-<div class="meth-line">
-  TFR 1965–2025: WPP 2024 · Gulf shows <span class="nat-b">nationals only</span>
-  (UAE/SAU/OMN = confirmed NSO · <span class="nat-b">est~</span> = estimated post-anchor · <span class="nat-b">calc~</span> = back-calc from total+nationals-share)
-  · italics = estimated · 2026 birth counts: NSO provisional where available
+<div class="hero">
+  <h1>Births &amp; <em>fertility</em>, by region</h1>
+  <p>Total Fertility Rate and births for 106 countries and territories, grouped by region — swipe each row. TFR is the UN WPP 2024 series (observed to 2023, projected 2024–25); the Gulf states show <strong style="color:var(--gold)">nationals-only</strong> figures. The 2026 estimate and current-year births populate from national statistical offices as they publish.</p>
+  <div class="hero-stats" id="heroStats"></div>
 </div>
 
-<!-- ── table ── -->
-<div class="tbl-wrap">
-<table>
-<thead>
-  <tr>
-    <th rowspan="2" style="vertical-align:bottom;text-align:left" onclick="srt('name')">Country</th>
-    <th class="sl" colspan="2">1965–2025</th>
-    <th class="sl" colspan="7">TFR — Children per woman</th>
-    <th class="sl" colspan="2">2026 NSO</th>
-  </tr>
-  <tr>
-    <th class="sl" onclick="srt('peak')">Peak</th>
-    <th>Trend</th>
-    <th onclick="srt('t1990')" class="sl">1990</th>
-    <th onclick="srt('t2000')">2000</th>
-    <th onclick="srt('t2010')">2010</th>
-    <th onclick="srt('t2020')">2020</th>
-    <th onclick="srt('t2022')">2022</th>
-    <th onclick="srt('t2024')">2024</th>
-    <th onclick="srt('t2025')">2025</th>
-    <th class="sl" onclick="srt('chg')">Δ %</th>
-    <th>Mon.</th>
-  </tr>
-</thead>
-<tbody id="tbody"></tbody>
-</table>
+<nav class="jump" id="jump"></nav>
+<div class="intro-hint">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 12l4-4M3 12l4 4M21 12l-4-4M21 12l-4 4"/></svg>
+  Swipe or drag each region row · use ‹ › to step through
 </div>
 
-<div class="foot" id="foot">
-  <strong style="color:var(--ink2)">Sources:</strong>
-  TFR 1965–2025: WPP 2024 (UN) via Demoria Research DHI. ·
-  Gulf nationals-only: UAE FCSC/MoHP via GLMM (2015–2022); Saudi Arabia GASTAT Pop. Est. 2024; Oman NCSI (2010/2015/2020 anchors); Kuwait — Shah &amp; Fargues, Kuwait Fertility Survey 2018; Qatar — Fargues &amp; Al-Rakeb 2019 (SESRI/PSA); Bahrain — back-calc from census nationals share (1991/2001/2010/2020) + assumed expat TFR 1.20. ·
-  2026 birth counts: NSO monthly provisional. All data as of <span id="footUpd"></span>. ·
-  <a href="https://demoriaresearch.com">← Demographic Health Index</a>
-</div>
+<div id="regions"><div class="loading">Loading…</div></div>
+
+<div class="foot" id="foot"></div>
 
 <script>
-var D=null,SRT={k:null,d:1},RGN='all',QQ='';
-var GO=['Anglophone & Oceania','Western & Northern Europe','Central & Eastern Europe',
-        'Caribbean','Central America','South America','Africa & Indian Ocean',
-        'Gulf (nationals)','North Africa & MENA','Caucasus & Turkey',
-        'Central Asia','South Asia','East Asia','Southeast Asia'];
+function band(v){if(v==null)return '#888';if(v<1.0)return '#c4221a';if(v<1.3)return '#cf5512';if(v<1.6)return '#b8870f';if(v<2.1)return '#7f8a9e';if(v<2.5)return '#1d8a1d';return '#0c8a0c';}
+function estColor(v){if(v==null)return '#2a3550';if(v<1.0)return '#b81d14';if(v<1.3)return '#bd540f';if(v<1.6)return '#9a7110';if(v<2.1)return '#2a3550';if(v<2.5)return '#1d7d1d';return '#0c7a0c';}
+function fmt(n){return n==null?'':n.toLocaleString('en-US');}
+function dcol(d){return d<0?'#c0392b':d>0?'#1d7d1d':'#666';}
+function fmtChg(d){return (d>0?'+':'')+d.toFixed(1)+'%';}
+function flag(iso2){const c=(iso2||'').toLowerCase();return c?`<img class="c-fl" loading="lazy" src="https://flagcdn.com/w80/${c}.png" srcset="https://flagcdn.com/w160/${c}.png 2x" alt="">`:'';}
 
-function tCls(v){
-  if(v==null)return '';
-  if(v<1.0)return 'c-lo3';if(v<1.3)return 'c-lo2';if(v<1.6)return 'c-lo1';
-  if(v<2.5)return '';if(v<3.5)return 'c-hi1';return 'c-hi2';
+function enrich(c){
+ const t=c.tfr; c.t2025=t['2025']??null;
+ if(c.b25!=null && c.b26!=null){ c.chg=(c.b26-c.b25)/c.b25*100; c.t2026=c.t2025!=null?Math.round(c.t2025*(c.b26/c.b25)*100)/100:null; }
+ else { c.chg=null; c.t2026=null; }
+ if(c.ba){ c.aChg=(c.ba.cur-c.ba.prev)/c.ba.prev*100; }
+ c.cur = c.t2026!=null ? c.t2026 : c.t2025;
+ c.curIsEst = c.t2026!=null;
+ return c;
 }
-function cCls(v){
-  if(v==null)return '';
-  if(v<=-10)return 'neg-h';if(v<0)return 'neg';if(v>=10)return 'pos-h';if(v>0)return 'pos';return '';
+const CTX=[['2010','2010','e0'],['2020','2020','e1'],['2024','2024','e2'],['2025','2025','e3'],['2026e','2026','e3']];
+function spark(c){
+ const t=c.tfr,w=64,h=28,xs=['2010','2020','2024','2025','2026'],vals=[t['2010'],t['2020'],t['2024'],t['2025'],c.t2026];
+ const pts=[];xs.forEach((y,i)=>{if(vals[i]!=null)pts.push({i,v:vals[i]});});
+ if(pts.length<2)return `<svg width="${w}" height="${h}"></svg>`;
+ const n=5,X=w/(n-1),all=pts.map(p=>p.v),mn=Math.min(...all),mx=Math.max(...all),rg=mx-mn||0.3;
+ const ys=pts.map(p=>({x:p.i*X,y:h-2-((p.v-mn)/rg)*(h-4)}));
+ const d=ys.map((p,i)=>(i?'L':'M')+p.x.toFixed(1)+','+p.y.toFixed(1)).join(' ');
+ const last=ys[ys.length-1];
+ return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}"><path d="${d}" stroke="rgba(12,26,51,.3)" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="${last.x.toFixed(1)}" cy="${last.y.toFixed(1)}" r="2" fill="${band(c.cur)}"/></svg>`;
 }
-function fT(v,e,old){
-  if(v==null)return '<span class="dash">–</span>';
-  var s=v.toFixed(2);
-  return e?('<em>'+s+'</em>'):s;
-}
-function fC(v){if(v==null)return '<span class="dash">–</span>';return (v>0?'+':'')+v.toFixed(1);}
-
-function spark(full){
-  var ys=Object.keys(full).map(Number).sort(function(a,b){return a-b;});
-  if(ys.length<5)return '<svg class="spark" viewBox="0 0 88 16" width="88" height="16"></svg>';
-  var vs=ys.map(function(y){return full[String(y)];});
-  var mn=Math.min.apply(null,vs),mx=Math.max.apply(null,vs),rng=mx-mn||0.5;
-  var x0=ys[0],xN=ys[ys.length-1],xS=xN-x0,P=1,W=88,H=16;
-  var px=function(y){return P+(y-x0)/xS*(W-P*2);};
-  var py=function(v){return H-P-(v-mn)/rng*(H-P*2);};
-  // replacement line
-  var rl=py(2.1);
-  var rep=(mn<2.15&&mx>2.05)?'<line x1="'+P+'" y1="'+rl.toFixed(1)+'" x2="'+(W-P)+'" y2="'+rl.toFixed(1)+'" stroke="rgba(232,184,75,.15)" stroke-width=".6" stroke-dasharray="2 2"/>':'';
-  // split: dim history, bright recent 12y
-  var cutY=Math.max(x0,xN-12);
-  var ri=ys.findIndex(function(y){return y>=cutY;});
-  if(ri<0)ri=0;
-  var mP=ys.slice(0,ri+1).map(function(y,i){return (i===0?'M':'L')+px(y).toFixed(1)+','+py(vs[i]).toFixed(1);}).join(' ');
-  var rP=ys.slice(ri).map(function(y,i){return (i===0?'M':'L')+px(y).toFixed(1)+','+py(vs[ri+i]).toFixed(1);}).join(' ');
-  // end dot
-  var lx=px(ys[ys.length-1]),ly=py(vs[vs.length-1]);
-  var lastV=vs[vs.length-1];
-  var dotCol=lastV<1.3?'#ff6b5b':lastV<2.1?'#e8b84b':'#5ea65e';
-  return '<svg class="spark" viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'">'+rep+
-    '<path d="'+mP+'" stroke="rgba(216,221,232,.2)" stroke-width=".8" fill="none"/>'+
-    '<path d="'+rP+'" stroke="#e8b84b" stroke-width="1.2" fill="none" stroke-linejoin="round" stroke-linecap="round"/>'+
-    '<circle cx="'+lx.toFixed(1)+'" cy="'+ly.toFixed(1)+'" r="1.6" fill="'+dotCol+'"/>'+
-    '</svg>';
+function tile(c){
+ const big=c.cur,est=c.curIsEst;const tag=c.source&&c.source.indexOf('Nationals')>=0?'nat':'';
+ let births;
+ if(c.b25!=null&&c.b26!=null){
+   births=`<div class="c-births"><div class="c-b-head"><span class="c-lab">BIRTHS · FIRST ${c.mon} MONTHS</span><span class="c-chg" style="color:${dcol(c.chg)}">${c.chg>0?'▲':c.chg<0?'▼':''} ${fmtChg(c.chg)}</span></div><div class="c-b-cols"><div class="c-bcol prev"><div class="c-byr">2025</div><div class="c-bv">${fmt(c.b25)}</div></div><span class="c-b-arrow">→</span><div class="c-bcol"><div class="c-byr">2026</div><div class="c-bv">${fmt(c.b26)}</div></div></div></div>`;
+ } else if(c.ba){
+   births=`<div class="c-births"><div class="c-b-head"><span class="c-lab">BIRTHS · ${c.ba.year} FULL YEAR</span><span class="c-chg" style="color:${dcol(c.aChg)}">${c.aChg>0?'▲':c.aChg<0?'▼':''} ${fmtChg(c.aChg)}</span></div><div class="c-b-cols"><div class="c-bcol prev"><div class="c-byr">${c.ba.year-1}</div><div class="c-bv">${fmt(c.ba.prev)}</div></div><span class="c-b-arrow">→</span><div class="c-bcol"><div class="c-byr">${c.ba.year}</div><div class="c-bv">${fmt(c.ba.cur)}</div></div></div></div>`;
+ } else {
+   births=`<div class="c-births"><div class="c-lab">BIRTHS 2026</div><div class="c-await">awaiting release</div></div>`;
+ }
+ const strip=CTX.map(([lab,y,cl])=>{const v=(y==='2026')?c.t2026:c.tfr[y];const none=v==null;const e=(y==='2026');return `<div class="c-cell ${cl} ${e?'estc':''}"><div class="c-cy">${lab}</div><div class="c-cv">${none?'—':v.toFixed(2)}</div></div>`;}).join('');
+ return `<div class="c"><div class="c-band" style="background:${band(big)}"></div><div class="c-pad">`+
+  `<div class="c-hd">${flag(c.iso2)}<span class="c-nm">${c.name}</span>${tag?`<span class="c-tag" title="${(c.gulf_note||'').replace(/"/g,'&quot;')}">${tag}</span>`:''}</div>`+
+  `<div class="c-lab">${est?'ESTIMATED 2026 TFR':'LATEST TFR · 2025'}</div>`+
+  `<div class="c-est-row"><span class="c-est ${est?'isest':''}" style="color:${estColor(big)}">${big!=null?big.toFixed(2):'—'}</span>${spark(c)}</div>`+
+  `${births}<div class="c-ctx-lab">TFR · CHILDREN PER WOMAN</div><div class="c-strip">${strip}</div></div></div>`;
 }
 
-function rowH(c){
-  var t=c.tfr||{},tf=c.tfr_full||t,m=c.tfr_method||'wpp',ef=c.tfr_est_from;
-  function isE(yr){return ef!=null&&yr>=ef;}
-  function tc(yr,dim){
-    var v=t[String(yr)];
-    var cl='tfr'+(dim?' dim':'')+(isE(yr)?' est':'');
-    var col=!dim?tCls(v):'';
-    if(col)cl+=' '+col;
-    return '<td class="'+cl+'">'+fT(v,isE(yr))+'</td>';
-  }
-  var pill=m==='nationals'?'<span class="np" title="Nationals-only — confirmed NSO">nat</span>':
-           m==='nationals_est'?'<span class="np" title="Nationals-only — estimated post-anchor">est~</span>':
-           m==='nationals_calc'?'<span class="np" title="Back-calculated (total TFR + nationals share)">calc~</span>':'';
+fetch('/births_data.json').then(r=>r.json()).then(data=>{
+ const C=data.countries.map(enrich);
+ document.getElementById('tbYear').textContent=data.year+' data';
+ // stats
+ const belowR=C.filter(c=>c.cur!=null&&c.cur<2.1).length;
+ const below1=C.filter(c=>c.cur!=null&&c.cur<1.0).length;
+ const gulf=C.filter(c=>c.region==='Gulf (nationals)').length;
+ document.getElementById('heroStats').innerHTML=
+   `<div class="hs"><div class="hs-n">${C.length}</div><div class="hs-l">Countries & territories</div></div>`+
+   `<div class="hs"><div class="hs-n">${belowR}</div><div class="hs-l">Below replacement (2.1)</div></div>`+
+   `<div class="hs"><div class="hs-n">${below1}</div><div class="hs-l">TFR below 1.0</div></div>`+
+   `<div class="hs"><div class="hs-n">${gulf}</div><div class="hs-l">Gulf nationals-only</div></div>`;
+ // group
+ const order=data.subregion_order||[...new Set(C.map(c=>c.region))];
+ const g={};C.forEach(c=>{(g[c.region]=g[c.region]||[]).push(c);});
+ const slug=s=>s.replace(/[^a-z0-9]+/gi,'-').toLowerCase();
+ let jump='',html='';
+ order.forEach((r,ri)=>{if(!g[r])return;const rows=g[r].sort((a,b)=>(a.cur??99)-(b.cur??99));
+   jump+=`<a href="#r-${slug(r)}">${r}</a>`;
+   html+=`<div class="reg" id="r-${slug(r)}"><div class="reg-h"><span class="reg-t">${r}</span><span class="reg-count">${rows.length}</span><div class="reg-nav"><button class="rnav prev" data-r="${ri}">‹</button><button class="rnav next" data-r="${ri}">›</button></div></div>`+
+     `<div class="reg-wrap"><div class="fade l hide" data-f="${ri}"></div><div class="fade r" data-f="${ri}"></div><div class="reg-row" data-row="${ri}">${rows.map(tile).join('')}</div></div></div>`;
+ });
+ document.getElementById('jump').innerHTML=jump;
+ document.getElementById('regions').innerHTML=html;
+ document.getElementById('foot').innerHTML=
+   `<strong>Sources:</strong> UN World Population Prospects 2024 (observed to 2023; medium-variant 2024–25). Gulf nationals-only TFR: FCSC (UAE), GASTAT (Saudi Arabia), NCSI (Oman), Shah &amp; Fargues / KFS 2018 (Kuwait), Fargues / Qatar PSA (Qatar); Bahrain back-calculated. 2026 births &amp; estimates compiled from national statistical offices as released.<br>`+
+   `<strong>2026 TFR estimate</strong> = TFR₂₀₂₅ × (births₂₀₂₆ ÷ births₂₀₂₅ for the same months); shown italic, dashed. Where no current births are published, the latest official TFR (2025) is shown instead.<br>`+
+   `<a href="https://demoriaresearch.com">← Return to the Demographic Health Index</a>`;
+ wireRows();
+});
 
-  // peak TFR
-  var allV=Object.values(tf).filter(function(v){return v!=null;});
-  var peak=allV.length?Math.max.apply(null,allV):null;
-
-  var chgCl='chg '+cCls(c.chg);
-  var mon=c.mon!=null?c.mon:'<span class="dash">–</span>';
-  return '<tr class="dr" data-region="'+c.region+'">'+
-    '<td><div class="nm"><span class="fl">'+c.flag+'</span><span class="cn">'+c.name+'</span>'+
-    (c.footnote?'<span class="fn">'+c.footnote+'</span>':'')+pill+'</div></td>'+
-    '<td class="tfr dim sl">'+(peak!=null?peak.toFixed(1):'<span class="dash">–</span>')+'</td>'+
-    '<td class="sp">'+spark(tf)+'</td>'+
-    tc(1990,true)+'<td class="sl"></td>'+tc(2000,true)+tc(2010,true)+tc(2020,false)+tc(2022,false)+tc(2024,false)+tc(2025,false)+
-    '<td class="'+chgCl+' sl">'+fC(c.chg)+'</td>'+
-    '<td class="tfr dim">'+mon+'</td>'+
-    '</tr>';
+function wireRows(){
+ document.querySelectorAll('.reg-row').forEach(row=>{
+  const ri=row.dataset.row;
+  const step=()=>Math.round(row.clientWidth*0.8);
+  const fL=document.querySelector(`.fade.l[data-f="${ri}"]`),fR=document.querySelector(`.fade.r[data-f="${ri}"]`);
+  const prev=document.querySelector(`.rnav.prev[data-r="${ri}"]`),next=document.querySelector(`.rnav.next[data-r="${ri}"]`);
+  function upd(){const max=row.scrollWidth-row.clientWidth-1,x=row.scrollLeft;fL.classList.toggle('hide',x<=2);fR.classList.toggle('hide',x>=max);prev.disabled=x<=2;next.disabled=x>=max;}
+  prev.onclick=()=>row.scrollBy({left:-step(),behavior:'smooth'});
+  next.onclick=()=>row.scrollBy({left:step(),behavior:'smooth'});
+  row.addEventListener('scroll',upd,{passive:true});
+  let down=false,sx=0,sl=0,moved=false;
+  row.addEventListener('pointerdown',e=>{down=true;moved=false;sx=e.clientX;sl=row.scrollLeft;row.classList.add('drag');try{row.setPointerCapture(e.pointerId);}catch(_){}});
+  row.addEventListener('pointermove',e=>{if(!down)return;const dx=e.clientX-sx;if(Math.abs(dx)>4)moved=true;row.scrollLeft=sl-dx;});
+  const end=()=>{down=false;row.classList.remove('drag');};
+  row.addEventListener('pointerup',end);row.addEventListener('pointercancel',end);
+  row.addEventListener('click',e=>{if(moved){e.preventDefault();e.stopPropagation();}},true);
+  setTimeout(upd,80);
+ });
 }
-
-// wait — that has an extra empty <td class="sl"> — remove it
-function rowHtml(c){
-  var t=c.tfr||{},tf=c.tfr_full||t,m=c.tfr_method||'wpp',ef=c.tfr_est_from;
-  function isE(yr){return ef!=null&&yr>=ef;}
-  function tc(yr,dim){
-    var v=t[String(yr)];
-    var cl='tfr'+(dim?' dim':'')+(isE(yr)?' est':'');
-    if(!dim&&v!=null){var col=tCls(v);if(col)cl+=' '+col;}
-    return '<td class="'+cl+'">'+fT(v,isE(yr))+'</td>';
-  }
-  var pill=m==='nationals'?'<span class="np" title="Nationals-only — confirmed NSO">nat</span>':
-           m==='nationals_est'?'<span class="np" title="Nationals-only — estimated post-anchor">est~</span>':
-           m==='nationals_calc'?'<span class="np" title="Back-calc: total TFR + nationals share">calc~</span>':'';
-  var allV=Object.values(tf).filter(function(v){return v!=null;});
-  var peak=allV.length?Math.max.apply(null,allV):null;
-  var chgCl='chg '+cCls(c.chg);
-  var mon=c.mon!=null?String(c.mon):'<span class="dash">–</span>';
-  return '<tr class="dr" data-region="'+c.region+'">'+
-    '<td><div class="nm"><span class="fl">'+c.flag+'</span><span class="cn">'+c.name+'</span>'+
-    (c.footnote?'<span class="fn">'+c.footnote+'</span>':'')+pill+'</div></td>'+
-    '<td class="tfr dim sl">'+(peak!=null?peak.toFixed(1):'<span class="dash">–</span>')+'</td>'+
-    '<td class="sp">'+spark(tf)+'</td>'+
-    '<td class="sl">'+tc(1990,true).replace(/^<td[^>]*>/,'').replace(/<\/td>$/,'')+'</td>'+  // fallback replaced
-    tc(2000,true)+tc(2010,true)+tc(2020,false)+tc(2022,false)+tc(2024,false)+tc(2025,false)+
-    '<td class="'+chgCl+' sl">'+fC(c.chg)+'</td>'+
-    '<td class="tfr dim">'+mon+'</td>'+
-    '</tr>';
-}
-
-function makeRow(c){
-  var t=c.tfr||{},tf=c.tfr_full||t,m=c.tfr_method||'wpp',ef=c.tfr_est_from;
-  function isE(yr){return ef!=null&&yr>=ef;}
-  function tc(yr,dim){
-    var v=t[String(yr)];if(v==null)return '<td class="tfr'+(dim?' dim':'')+'"><span class="dash">–</span></td>';
-    var cl='tfr'+(dim?' dim':'')+(isE(yr)?' est':'');
-    if(!dim){var col=tCls(v);if(col)cl+=' '+col;}
-    var s=v.toFixed(2);return '<td class="'+cl+'">'+(isE(yr)?'<em>'+s+'</em>':s)+'</td>';
-  }
-  var pill=m==='nationals'?'<span class="np" title="Nationals-only (confirmed NSO)">nat</span>':
-           m==='nationals_est'?'<span class="np" title="Nationals-only (estimated post-anchor)">est~</span>':
-           m==='nationals_calc'?'<span class="np" title="Back-calc from total TFR + nationals share">calc~</span>':'';
-  var allV=Object.values(tf).filter(function(v){return v!=null;});
-  var peak=allV.length?Math.max.apply(null,allV).toFixed(1):'<span class="dash">–</span>';
-  var chgV=c.chg,chgCl='chg'+(!chgV?'':' '+cCls(chgV));
-  var chgTxt=chgV==null?'<span class="dash">–</span>':((chgV>0?'+':'')+chgV.toFixed(1));
-  var mon=c.mon!=null?String(c.mon):'<span class="dash">–</span>';
-  return '<tr class="dr" data-region="'+c.region+'">'+
-    '<td><div class="nm"><span class="fl">'+c.flag+'</span><span class="cn">'+c.name+'</span>'+
-    (c.footnote?'<span class="fn"> '+c.footnote+'</span>':'')+pill+'</div></td>'+
-    '<td class="tfr dim sl">'+peak+'</td>'+
-    '<td class="sp">'+spark(tf)+'</td>'+
-    tc(1990,true).replace('class="tfr','class="tfr sl ')+ // add sl to 1990 col
-    tc(2000,true)+tc(2010,true)+tc(2020,false)+tc(2022,false)+tc(2024,false)+tc(2025,false)+
-    '<td class="'+chgCl+' sl">'+chgTxt+'</td>'+
-    '<td class="tfr dim">'+mon+'</td>'+
-    '</tr>';
-}
-
-function render(){
-  var cs=D.countries,q=QQ.toLowerCase();
-  var f=cs.filter(function(c){
-    if(RGN!=='all'&&c.region!==RGN)return false;
-    if(q&&c.name.toLowerCase().indexOf(q)<0)return false;
-    return true;
-  });
-  var SF={name:'name',b25:'b25',b26:'b26',chg:'chg',
-          t1990:['tfr','1990'],t2000:['tfr','2000'],t2010:['tfr','2010'],
-          t2020:['tfr','2020'],t2022:['tfr','2022'],t2024:['tfr','2024'],t2025:['tfr','2025'],
-          peak:'_peak'};
-  if(SRT.k){
-    var sk=SRT.k;
-    f=f.slice().sort(function(a,b){
-      var av,bv;
-      if(sk==='peak'){
-        var aVals=Object.values(a.tfr_full||a.tfr||{}).filter(function(v){return v!=null;});
-        var bVals=Object.values(b.tfr_full||b.tfr||{}).filter(function(v){return v!=null;});
-        av=aVals.length?Math.max.apply(null,aVals):null;
-        bv=bVals.length?Math.max.apply(null,bVals):null;
-      } else if(Array.isArray(SF[sk])){
-        var sf=SF[sk];av=(a[sf[0]]||{})[sf[1]];bv=(b[sf[0]]||{})[sf[1]];
-      } else {av=a[sf];bv=b[sf];}
-      if(av==null&&bv==null)return 0;if(av==null)return 1;if(bv==null)return -1;
-      return SRT.d*(av<bv?-1:av>bv?1:0);
-    });
-  }
-  var html='';
-  if(!SRT.k){
-    var gm={};f.forEach(function(c){if(!gm[c.group])gm[c.group]=[];gm[c.group].push(c);});
-    GO.forEach(function(g){
-      if(!gm[g]||!gm[g].length)return;
-      html+='<tr class="gh"><td colspan="12">'+g+'</td></tr>';
-      gm[g].forEach(function(c){html+=makeRow(c);});
-    });
-    Object.keys(gm).forEach(function(g){
-      if(GO.indexOf(g)<0&&gm[g].length){
-        html+='<tr class="gh"><td colspan="12">'+g+'</td></tr>';
-        gm[g].forEach(function(c){html+=makeRow(c);});
-      }
-    });
-  } else {f.forEach(function(c){html+=makeRow(c);});}
-  document.getElementById('tbody').innerHTML=html;
-  document.getElementById('cnt').textContent=f.length+' / '+D.countries.length;
-  var all=D.countries;
-  var b21=all.filter(function(c){var v=c.tfr['2025'];return v!=null&&v<2.1;}).length;
-  var b10=all.filter(function(c){var v=c.tfr['2025'];return v!=null&&v<1.0;}).length;
-  var wB=all.filter(function(c){return c.b26!=null;}).length;
-  document.getElementById('mastStats').innerHTML=
-    '<span class="mast-stat"><b>'+all.length+'</b> countries</span>'+
-    '<span class="mast-stat"><b>'+b21+'</b> sub-replacement (2025)</span>'+
-    '<span class="mast-stat"><b>'+b10+'</b> TFR &lt; 1.0</span>'+
-    (wB?'<span class="mast-stat"><b>'+wB+'</b> with 2026 births</span>':'');
-  document.getElementById('mastUpd').textContent='Updated '+D.updated;
-  document.getElementById('footUpd').textContent=D.updated;
-}
-window.srt=function(k){if(SRT.k===k)SRT.d*=-1;else SRT={k:k,d:k==='name'?1:-1};render();};
-window.flt=function(r,b){RGN=r;document.querySelectorAll('.fb').forEach(function(x){x.classList.remove('on');});if(b)b.classList.add('on');render();};
-document.getElementById('srch').addEventListener('input',function(e){QQ=e.target.value.trim();render();});
-fetch('births_data.json').then(function(r){return r.json();}).then(function(d){D=d;render();})
-  .catch(function(e){document.getElementById('tbody').innerHTML='<tr><td colspan="12" style="padding:20px 8px;color:rgba(216,221,232,.3);font-family:JetBrains Mono,monospace;font-size:.7rem">Error loading data: '+e.message+'</td></tr>';});
 </script>
 </body>
 </html>
