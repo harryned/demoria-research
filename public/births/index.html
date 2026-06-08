@@ -19,14 +19,15 @@ body{min-height:100vh;background:var(--navy2);color:var(--ink);font-family:'Manr
 .tb-title{font-size:.95rem;font-weight:700;color:var(--navy);flex:1}
 .tb-year{font-family:'JetBrains Mono',monospace;font-size:.62rem;background:var(--navy);color:var(--gold);padding:3px 8px;border-radius:4px;letter-spacing:.05em}
 
-.hero{padding:24px 26px 8px;max-width:1000px}
-.hero h1{font-size:clamp(1.35rem,2.6vw,1.95rem);font-weight:300;margin-bottom:5px}
+.hero{padding:40px 26px 16px;max-width:780px;margin:0 auto;text-align:center}
+.hero .eyebrow2{font-family:'JetBrains Mono',monospace;font-size:.64rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:13px}
+.hero h1{font-size:clamp(1.95rem,3.8vw,2.8rem);font-weight:600;letter-spacing:-.015em;line-height:1.07;margin-bottom:14px;color:var(--ink)}
 .hero h1 em{color:var(--gold);font-style:normal;font-weight:700}
-.hero p{font-size:.84rem;color:var(--ink3);line-height:1.6;max-width:76ch}
-.hero-stats{display:flex;gap:16px;flex-wrap:wrap;margin-top:14px}
-.hs{border-left:2px solid var(--gold);padding-left:9px}
-.hs-n{font-size:1.12rem;font-weight:700;line-height:1}
-.hs-l{font-size:.65rem;color:var(--ink3);margin-top:2px}
+.hero p{font-size:1rem;color:var(--ink2);line-height:1.62;max-width:66ch;margin:0 auto}
+.hero-stats{display:flex;gap:24px;flex-wrap:wrap;margin-top:24px;justify-content:center}
+.hs{border-left:2px solid var(--gold);padding-left:11px;text-align:left}
+.hs-n{font-size:1.3rem;font-weight:700;line-height:1}
+.hs-l{font-size:.67rem;color:var(--ink3);margin-top:3px}
 
 /* toolbar */
 .toolbar{position:sticky;top:50px;z-index:150;background:var(--navy2);border-bottom:1px solid rgba(232,184,75,.12);padding:10px 26px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
@@ -127,6 +128,7 @@ body{min-height:100vh;background:var(--navy2);color:var(--ink);font-family:'Manr
 </div>
 
 <div class="hero">
+  <div class="eyebrow2">Demoria Research · Birth &amp; Fertility Tracker</div>
   <h1>Births &amp; <em>fertility</em></h1>
   <p>Total Fertility Rate and births for 106 countries and territories. TFR is the UN WPP 2024 series (observed to 2023, projected 2024–25); the Gulf states show <strong style="color:var(--gold)">nationals-only</strong> figures. The 2026 estimate and current-year births populate from national statistical offices as they publish.</p>
   <div class="hero-stats" id="heroStats"></div>
