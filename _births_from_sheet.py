@@ -22,6 +22,7 @@ M25=range(16,28)   # cols P..AA  (2025 Jan..Dec)
 M26=range(28,40)   # cols AB..AM (2026 Jan..Dec)
 FY24=40; FY25=41; FY26=42   # cols AN, AO, AP
 SRC=43             # col AQ
+FORCE_ANNUAL={'MDA'}   # countries whose monthly data is too sparse — use annual FY2024 vs FY2025
 
 def num(v):
     if v is None: return None
@@ -43,6 +44,13 @@ def parse():
         m25=[num(row[c-1].value) for c in M25]
         m26=[num(row[c-1].value) for c in M26]
         src=row[SRC-1].value
+        # Forced-annual reporters: monthly data is too sparse to trust, so use the
+        # latest two FULL annual years (FY2024 vs FY2025) regardless of any monthly cells.
+        if iso in FORCE_ANNUAL:
+            a,b=num(row[FY24-1].value),num(row[FY25-1].value)
+            if a and b and a>0 and b>0:
+                out[iso]={'mode':'annual','prev':a,'cur':b,'year':2025,'src':src}
+            continue
         # leading run of months present in BOTH years
         run=0
         for a,b in zip(m25,m26):
