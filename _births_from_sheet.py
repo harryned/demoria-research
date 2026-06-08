@@ -19,7 +19,7 @@ from openpyxl import load_workbook
 SHEET='Birth_Tracker_Input.xlsx'; DATA='public/births_data.json'
 M25=range(16,28)   # cols P..AA  (2025 Jan..Dec)
 M26=range(28,40)   # cols AB..AM (2026 Jan..Dec)
-FY25=41; FY26=42   # cols AO, AP
+FY24=40; FY25=41; FY26=42   # cols AN, AO, AP
 SRC=43             # col AQ
 
 def num(v):
@@ -49,9 +49,13 @@ def parse():
         if run>0:
             out[iso]={'mode':'monthly','b25':sum(m25[:run]),'b26':sum(m26[:run]),'mon':run,'src':src}
             continue
-        fy25=num(row[FY25-1].value); fy26=num(row[FY26-1].value)
-        if fy25 and fy26 and fy25>0 and fy26>0:
-            out[iso]={'mode':'annual','prev':fy25,'cur':fy26,'year':2026,'src':src}
+        # Annual fallback: use the latest year Y where both FY_Y and FY_{Y-1} are present.
+        # (China only publishes annual, one year behind — its latest is 2025 vs 2024, not 2026.)
+        fy={2024:num(row[FY24-1].value),2025:num(row[FY25-1].value),2026:num(row[FY26-1].value)}
+        for y in (2026,2025):
+            if fy[y] and fy[y-1] and fy[y]>0 and fy[y-1]>0:
+                out[iso]={'mode':'annual','prev':fy[y-1],'cur':fy[y],'year':y,'src':src}
+                break
     return out
 
 def merge(parsed, write=False):
