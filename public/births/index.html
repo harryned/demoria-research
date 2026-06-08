@@ -79,6 +79,29 @@ body{min-height:100vh;background:var(--navy2);color:var(--ink);font-family:'Manr
 .gridview{padding:14px 26px 10px}
 .gridview .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
 .gv-empty{padding:50px 26px;text-align:center;color:var(--ink3);font-size:.9rem}
+.vmseg{margin-left:6px}
+.listview{padding:14px 26px 10px;overflow-x:auto}
+.ltbl{width:100%;border-collapse:collapse;font-size:.82rem;min-width:760px}
+.ltbl thead th{position:sticky;top:50px;background:var(--navy2);z-index:5;text-align:right;padding:9px 11px;font-size:.62rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--ink3);border-bottom:1px solid rgba(255,255,255,.14);white-space:nowrap;cursor:pointer;user-select:none;transition:color .15s}
+.ltbl thead th:hover{color:var(--ink)}
+.ltbl thead th.lh-l{text-align:left}
+.ltbl thead th.on{color:var(--gold)}
+.ltbl thead th .lar{font-size:.66rem;opacity:.85;margin-left:2px}
+.ltbl tbody td{text-align:right;padding:8px 11px;border-bottom:1px solid rgba(255,255,255,.055);white-space:nowrap;font-variant-numeric:tabular-nums}
+.ltbl tbody tr:hover td{background:rgba(255,255,255,.035)}
+.ltbl .lc-rk{color:var(--ink3);font-weight:700;width:38px}
+.ltbl .lc-nm{text-align:left;width:auto}
+.ltbl .lnm-w{display:flex;align-items:center;gap:8px;font-weight:600;color:var(--ink)}
+.ltbl .l-fl{width:24px;height:16px;object-fit:cover;border-radius:2px;flex:0 0 auto;box-shadow:0 0 0 1px rgba(255,255,255,.1)}
+.ltbl .l-tag{font-size:.54rem;font-weight:700;letter-spacing:.04em;color:var(--navy);background:var(--gold);padding:1px 4px;border-radius:3px;text-transform:uppercase}
+.ltbl .lc-cur{font-weight:800;font-size:.92rem}
+.ltbl .lc-cur.est{font-style:italic}
+.ltbl .lc-cur .estm{font-size:.56rem;font-style:normal;color:var(--ink3);margin-left:3px;font-weight:700;vertical-align:.12em}
+.ltbl .ly{color:var(--ink2)}
+.ltbl .ly.dim{color:var(--ink3)}
+.ltbl .lc-chg{font-weight:700}
+.ltbl .lc-await{color:var(--ink3);font-style:italic;font-size:.74rem}
+.ltbl td.lsorted,.ltbl th.lsorted{background:rgba(232,184,75,.05)}
 .rk-badge{position:absolute;top:10px;right:12px;font-family:'JetBrains Mono',monospace;font-size:.66rem;font-weight:700;color:rgba(12,26,51,.32)}
 
 /* tile */
@@ -147,10 +170,14 @@ body{min-height:100vh;background:var(--navy2);color:var(--ink);font-family:'Manr
   <div class="sortwrap" id="sortwrap" style="display:none">
     <span class="sl">Sort</span>
     <div class="sortseg" id="sortseg">
-      <button data-s="tfrAsc" class="on">Lowest TFR</button>
-      <button data-s="tfrDesc">Highest TFR</button>
-      <button data-s="chg">Biggest birth drop</button>
-      <button data-s="births">Most births</button>
+      <button data-s="cur:asc" class="on">Lowest TFR</button>
+      <button data-s="cur:desc">Highest TFR</button>
+      <button data-s="chg:asc">Biggest birth drop</button>
+      <button data-s="births:desc">Most births</button>
+    </div>
+    <div class="seg vmseg" id="vmSeg">
+      <button data-vm="cards" class="on">Cards</button>
+      <button data-vm="list">List</button>
     </div>
   </div>
 </div>
@@ -163,6 +190,7 @@ body{min-height:100vh;background:var(--navy2);color:var(--ink);font-family:'Manr
 
 <div id="regions"><div class="loading">Loading…</div></div>
 <div id="gridview" class="gridview" style="display:none"><div class="grid" id="grid"></div><div class="gv-empty" id="gvEmpty" style="display:none"></div></div>
+<div id="listview" class="listview" style="display:none"></div>
 
 <div class="foot" id="foot"></div>
 
@@ -212,7 +240,7 @@ function tile(c,rank){
   `${births}<div class="c-ctx-lab">TFR · CHILDREN PER WOMAN</div><div class="c-strip">${strip}</div></div></div>`;
 }
 
-let C=[], ORDER=[], MODE='region', Q='', SORT='tfrAsc';
+let C=[], ORDER=[], MODE='region', Q='', SORT='cur:asc', RVIEW='cards';
 const slug=s=>s.replace(/[^a-z0-9]+/gi,'-').toLowerCase();
 
 fetch('/births_data.json').then(r=>r.json()).then(data=>{
@@ -248,16 +276,36 @@ function buildRegions(){
  wireRows();
 }
 
-function sortFns(){
- return {
-  tfrAsc:(a,b)=>(a.cur??99)-(b.cur??99),
-  tfrDesc:(a,b)=>(b.cur??-1)-(a.cur??-1),
-  chg:(a,b)=>(a.chg??1)- (b.chg??1),         // most negative (biggest drop) first
-  births:(a,b)=>(b.totBirths??-1)-(a.totBirths??-1),
- }[SORT];
+function valFor(c,key){
+ switch(key){
+  case 'name': return c.name.toLowerCase();
+  case 'cur':  return c.cur;
+  case 'y2010':return c.tfr['2010'];
+  case 'y2020':return c.tfr['2020'];
+  case 'y2024':return c.tfr['2024'];
+  case 'y2025':return c.tfr['2025'];
+  case 'y2026':return c.t2026;
+  case 'b25':  return c.b25!=null?c.b25:(c.ba?c.ba.prev:null);
+  case 'b26':  return c.b26!=null?c.b26:(c.ba?c.ba.cur:null);
+  case 'chg':  return c.chg!=null?c.chg:(c.aChg!=null?c.aChg:null);
+  case 'births':return c.totBirths;
+  default: return null;
+ }
+}
+// SORT is "key:dir" (dir = asc|desc). Nulls always sort last.
+function sorter(){
+ const [key,dir]=SORT.split(':'); const d=dir==='desc'?-1:1; const str=(key==='name');
+ return (a,b)=>{
+  let va=valFor(a,key), vb=valFor(b,key);
+  const na=(va==null||(typeof va==='number'&&isNaN(va))), nb=(vb==null||(typeof vb==='number'&&isNaN(vb)));
+  if(na&&nb)return 0; if(na)return 1; if(nb)return -1;
+  if(str)return va<vb?-d:va>vb?d:0;
+  return (va-vb)*d;
+ };
 }
 function render(){
  const regionsEl=document.getElementById('regions'), gv=document.getElementById('gridview'),
+       lv=document.getElementById('listview'),
        jump=document.getElementById('jump'), hint=document.getElementById('hint'),
        sortwrap=document.getElementById('sortwrap');
  const searching=Q.trim().length>0;
@@ -265,22 +313,80 @@ function render(){
  sortwrap.style.display=(MODE==='rankings'&&!searching)?'flex':'none';
  jump.style.display=(MODE==='region'&&!searching)?'flex':'none';
  hint.style.display=(MODE==='region'&&!searching)?'flex':'none';
+ const hideAll=()=>{regionsEl.style.display='none';gv.style.display='none';lv.style.display='none';};
 
  if(searching){
-   regionsEl.style.display='none';gv.style.display='block';
    const q=Q.trim().toLowerCase();
-   const matches=C.filter(c=>c.name.toLowerCase().includes(q)).sort((a,b)=>(a.cur??99)-(b.cur??99));
-   paintGrid(matches,false);
+   const matches=C.filter(c=>c.name.toLowerCase().includes(q)).slice().sort(sorter());
+   if(MODE==='rankings'&&RVIEW==='list'){hideAll();lv.style.display='block';paintList(matches,false);}
+   else{hideAll();gv.style.display='block';paintGrid(matches,false);}
    return;
  }
  if(MODE==='region'){
-   regionsEl.style.display='';gv.style.display='none';
+   hideAll();regionsEl.style.display='';
+ } else if(RVIEW==='list'){
+   hideAll();lv.style.display='block';
+   paintList(C.slice().sort(sorter()),true);
  } else {
-   regionsEl.style.display='none';gv.style.display='block';
-   const rows=C.slice().sort(sortFns());
-   paintGrid(rows,true);
+   hideAll();gv.style.display='block';
+   paintGrid(C.slice().sort(sorter()),true);
  }
 }
+// ---- list / table view ----
+const LCOLS=[
+ {key:'cur',  lab:'Latest TFR',num:true},
+ {key:'chg',  lab:'Births Δ', num:true},
+ {key:'b25',  lab:'Births ’ 25',num:true},
+ {key:'b26',  lab:'Births ’ 26',num:true},
+ {key:'y2010',lab:'2010',num:true},
+ {key:'y2020',lab:'2020',num:true},
+ {key:'y2024',lab:'2024',num:true},
+ {key:'y2025',lab:'2025',num:true},
+ {key:'y2026',lab:'2026e',num:true},
+];
+function lrow(c,rank){
+ const skey=SORT.split(':')[0];
+ const td=(key,inner,cls)=>`<td class="${cls||''}${key===skey?' lsorted':''}">${inner}</td>`;
+ const tag=c.source&&c.source.indexOf('Nationals')>=0?'<span class="l-tag" title="Nationals-only series">nat</span>':'';
+ const cur=c.cur, est=c.curIsEst;
+ const curCell=`<span class="lc-cur${est?' est':''}" style="color:${estColor(cur)}">${cur!=null?cur.toFixed(2):'—'}${est?'<span class="estm">est</span>':''}</span>`;
+ // births period
+ let b25=null,b26=null,plab='';
+ if(c.b25!=null&&c.b26!=null){b25=c.b25;b26=c.b26;plab=`${c.mon}-mo`;}
+ else if(c.ba){b25=c.ba.prev;b26=c.ba.cur;plab='FY';}
+ const chgVal=c.chg!=null?c.chg:(c.aChg!=null?c.aChg:null);
+ const chgCell=chgVal!=null?`<span class="lc-chg" style="color:${dcol(chgVal)}">${chgVal>0?'▲':chgVal<0?'▼':''}${fmtChg(chgVal)}</span>`:'<span class="lc-await">awaiting</span>';
+ const ycell=(v)=>v!=null?`<span class="ly">${v.toFixed(2)}</span>`:'<span class="ly dim">—</span>';
+ const nmInner=`<span class="lnm-w">${flag(c.iso2)}<span class="lnm">${c.name}</span>${tag}</span>`;
+ return '<tr>'+
+   `<td class="lc-rk">${rank!=null?rank:''}</td>`+
+   `<td class="lc-nm${'cur'===skey?'':''}">${nmInner}</td>`+
+   td('cur',curCell,'lc-cur-td')+
+   td('chg',(plab?`<span class="ly dim" style="font-size:.6rem;margin-right:5px">${plab}</span>`:'')+chgCell,'lc-chg-td')+
+   td('b25',b25!=null?fmt(b25):'<span class="ly dim">—</span>')+
+   td('b26',b26!=null?fmt(b26):'<span class="ly dim">—</span>')+
+   td('y2010',ycell(c.tfr['2010']))+
+   td('y2020',ycell(c.tfr['2020']))+
+   td('y2024',ycell(c.tfr['2024']))+
+   td('y2025',ycell(c.tfr['2025']))+
+   td('y2026',ycell(c.t2026))+
+ '</tr>';
+}
+function paintList(rows,ranked){
+ const lv=document.getElementById('listview');
+ if(!rows.length){lv.innerHTML='<div class="gv-empty">No countries match your search.</div>';return;}
+ const [skey,sdir]=SORT.split(':');
+ const ar=sdir==='desc'?'▾':'▴';
+ const th=(key,lab,cls)=>`<th class="${cls||''}${key===skey?' on lsorted':''}" data-k="${key}">${lab}${key===skey?`<span class="lar">${ar}</span>`:''}</th>`;
+ const head='<thead><tr>'+
+   '<th class="lh-l lc-rk">#</th>'+
+   th('name','Country','lh-l')+
+   LCOLS.map(c=>th(c.key,c.lab)).join('')+
+ '</tr></thead>';
+ lv.innerHTML=`<table class="ltbl">${head}<tbody>${rows.map((c,i)=>lrow(c,ranked?i+1:null)).join('')}</tbody></table>`;
+}
+// default sort direction when first clicking a column header
+function defDir(key){return (key==='chg'||key==='name'||key==='cur'||key.charAt(0)==='y')?'asc':'desc';}
 function paintGrid(rows,ranked){
  const grid=document.getElementById('grid'),empty=document.getElementById('gvEmpty');
  if(!rows.length){grid.innerHTML='';empty.style.display='block';empty.textContent='No countries match your search.';return;}
@@ -291,8 +397,16 @@ function paintGrid(rows,ranked){
 // toolbar wiring
 document.getElementById('viewSeg').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
  document.querySelectorAll('#viewSeg button').forEach(x=>x.classList.remove('on'));b.classList.add('on');MODE=b.dataset.v;render();window.scrollTo({top:document.querySelector('.toolbar').offsetTop-50,behavior:'smooth'});});
+function syncSortSeg(){document.querySelectorAll('#sortseg button').forEach(x=>x.classList.toggle('on',x.dataset.s===SORT));}
 document.getElementById('sortseg').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
- document.querySelectorAll('#sortseg button').forEach(x=>x.classList.remove('on'));b.classList.add('on');SORT=b.dataset.s;render();});
+ SORT=b.dataset.s;syncSortSeg();render();});
+document.getElementById('vmSeg').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+ document.querySelectorAll('#vmSeg button').forEach(x=>x.classList.remove('on'));b.classList.add('on');RVIEW=b.dataset.vm;render();});
+// click a column header to sort by it (toggle direction if already active)
+document.getElementById('listview').addEventListener('click',e=>{const th=e.target.closest('th[data-k]');if(!th)return;
+ const key=th.dataset.k,[ck,cd]=SORT.split(':');
+ SORT=(ck===key)?`${key}:${cd==='asc'?'desc':'asc'}`:`${key}:${defDir(key)}`;
+ syncSortSeg();render();});
 const inp=document.getElementById('srchInp');
 inp.addEventListener('input',e=>{Q=e.target.value;document.getElementById('srch').classList.toggle('has',Q.length>0);render();});
 document.getElementById('srchClr').addEventListener('click',()=>{Q='';inp.value='';document.getElementById('srch').classList.remove('has');render();inp.focus();});
