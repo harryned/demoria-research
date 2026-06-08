@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Birth & Fertility Tracker — Demoria Research</title>
-<meta name="description" content="Fertility (TFR) and births for 106 countries, by region or ranked. WPP 2024 baseline with nationals-only corrections for the Gulf. Demoria Research.">
+<meta name="description" content="Total Fertility Rate and current-year births for every country and territory, by region or ranked. 2026 births straight from national statistics offices; WPP 2024 baseline with nationals-only Gulf corrections. Demoria Research.">
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{--navy:#0c1a33;--navy2:#0a1426;--gold:#e8b84b;--cream:#f4ecd3;--ink:#eef1f6;--ink2:rgba(238,241,246,.74);--ink3:rgba(238,241,246,.4)}
@@ -153,7 +153,7 @@ body{min-height:100vh;background:var(--navy2);color:var(--ink);font-family:'Manr
 <div class="hero">
   <div class="eyebrow2">Demoria Research · Birth &amp; Fertility Tracker</div>
   <h1>Births &amp; <em>fertility</em></h1>
-  <p>Total Fertility Rate and births for 106 countries and territories, grouped by region — swipe each row, or switch to <strong style="color:var(--gold)">Rankings</strong> to sort. The Gulf states show <strong style="color:var(--gold)">nationals-only</strong> rates rather than expat-diluted totals.</p>
+  <p>Total Fertility Rate and current-year births for <strong style="color:var(--gold)">every country and territory on Earth</strong>. Where a national statistics office has released 2026 births, they are shown here straight from the source; everywhere else carries the latest official TFR while release is awaited. Browse by region or switch to <strong style="color:var(--gold)">Rankings</strong> to sort. Gulf states are shown <strong style="color:var(--gold)">nationals-only</strong>, not expat-diluted. No other tracker brings all of it together, country by country, in one place.</p>
   <div class="hero-stats" id="heroStats"></div>
 </div>
 
@@ -250,12 +250,15 @@ fetch('/births_data.json').then(r=>r.json()).then(data=>{
  const belowR=C.filter(c=>c.cur!=null&&c.cur<2.1).length;
  const below1=C.filter(c=>c.cur!=null&&c.cur<1.0).length;
  const gulf=C.filter(c=>c.region==='Gulf (nationals)').length;
+ const live=C.filter(c=>c.b26!=null||c.ba!=null).length;
  document.getElementById('heroStats').innerHTML=
    `<div class="hs"><div class="hs-n">${C.length}</div><div class="hs-l">Countries & territories</div></div>`+
+   `<div class="hs"><div class="hs-n">${live}</div><div class="hs-l">Live current-year births</div></div>`+
    `<div class="hs"><div class="hs-n">${belowR}</div><div class="hs-l">Below replacement (2.1)</div></div>`+
    `<div class="hs"><div class="hs-n">${below1}</div><div class="hs-l">TFR below 1.0</div></div>`+
    `<div class="hs"><div class="hs-n">${gulf}</div><div class="hs-l">Gulf nationals-only</div></div>`;
  document.getElementById('foot').innerHTML=
+   `<strong>How this is built:</strong> every current-year birth figure is taken straight from the country's own statistical office, or is the best published estimate where an office reports less frequently; each card links its source. We know of nowhere else that assembles these, country by country, updated as they are released. Countries still awaiting 2026 figures show their latest official TFR in the meantime.<br>`+
    `<strong>Sources:</strong> UN World Population Prospects 2024 (observed to 2023; medium-variant 2024–25). Gulf nationals-only TFR: FCSC (UAE), GASTAT (Saudi Arabia), NCSI (Oman), Shah &amp; Fargues / KFS 2018 (Kuwait), Fargues / Qatar PSA (Qatar); Bahrain back-calculated. 2026 births &amp; estimates compiled from national statistical offices as released.<br>`+
    `<strong>2026 TFR estimate</strong> = TFR₂₀₂₅ × (births₂₀₂₆ ÷ births₂₀₂₅ for the same months); shown italic, dashed. Where no current births are published, the latest official TFR (2025) is shown.<br>`+
    `<a href="https://demoriaresearch.com">← Return to the Demographic Health Index</a>`;
