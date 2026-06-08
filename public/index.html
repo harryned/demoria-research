@@ -3299,9 +3299,9 @@ window.__pos_d4=1;
     {title:'Population', cols:[
       ['pop',     'Total population',           'k',    1],
       ['births',  'Births',                     'k',    1],
-      ['deaths',  'Deaths',                     'k',    1],
+      ['deaths',  'Deaths',                     'k',    1, 1000],
       ['natch5',  'Natural change · 5-yr avg',  '/1000',2],
-      ['pop_u20', 'Population aged 0–19',       'k',    1],
+      ['pop_u20', 'Population aged 0–19',       'k',    1, 1000],
     ]},
     {title:'Fertility', cols:[
       ['tfr',     'Total fertility rate',       '',     3],
@@ -3320,7 +3320,7 @@ window.__pos_d4=1;
     ]},
     {title:'Migration', cols:[
       ['netmig',  'Net migration rate',         '/1000',2],
-      ['migstk',  'Migrant stock',              'k',    0],
+      ['migstk',  'Migrant stock',              'k',    0, 1000],
     ]},
     {title:'DHI score · pillar contributions', cols:[
       ['p_fss',   'Fertility Strength',         '/34',  2],
@@ -3365,7 +3365,7 @@ window.__pos_d4=1;
         const y=d.yrs[i];
         html+='<tr><td class="dt-yr">'+y+'</td>';
         for(const c of grp.cols){
-          const key=c[0], val=d.ind[key]?d.ind[key][i]:null;
+          const key=c[0]; let val=d.ind[key]?d.ind[key][i]:null; if(val!=null && c[4]) val=val/c[4];
           const isNSO=nsoSets[key].has(y);
           const cls=val==null?'dt-na':(isNSO?'dt-nso':'');
           let badge='';
