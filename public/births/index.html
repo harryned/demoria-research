@@ -4,94 +4,117 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Birth & Fertility Tracker — Demoria Research</title>
-<meta name="description" content="Fertility (TFR) and births for 106 countries, by region. WPP 2024 baseline with nationals-only corrections for the Gulf. Demoria Research.">
+<meta name="description" content="Fertility (TFR) and births for 106 countries, by region or ranked. WPP 2024 baseline with nationals-only corrections for the Gulf. Demoria Research.">
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{--navy:#0c1a33;--navy2:#0a1426;--gold:#e8b84b;--cream:#f4ecd3;--ink:#eef1f6;--ink2:rgba(238,241,246,.74);--ink3:rgba(238,241,246,.4)}
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{min-height:100vh;background:var(--navy2);color:var(--ink);font-family:'Manrope',sans-serif;font-size:13px}
+html{scroll-behavior:smooth}
+body{min-height:100vh;background:var(--navy2);color:var(--ink);font-family:'Manrope',sans-serif;font-size:13px}
 
-/* topbar */
 .topbar{background:var(--cream);height:50px;display:flex;align-items:center;padding:0 22px;gap:13px;border-bottom:2px solid rgba(12,26,51,.12);position:sticky;top:0;z-index:200}
 .tb-back{display:flex;align-items:center;gap:6px;font-size:.66rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--navy);text-decoration:none;opacity:.72}
-.tb-back:hover{opacity:1}
-.tb-back svg{width:13px;height:13px}
+.tb-back:hover{opacity:1}.tb-back svg{width:13px;height:13px}
 .tb-div{width:1px;height:20px;background:rgba(12,26,51,.18)}
 .tb-title{font-size:.95rem;font-weight:700;color:var(--navy);flex:1}
 .tb-year{font-family:'JetBrains Mono',monospace;font-size:.62rem;background:var(--navy);color:var(--gold);padding:3px 8px;border-radius:4px;letter-spacing:.05em}
 
-/* hero */
-.hero{padding:24px 24px 6px;max-width:1000px}
+.hero{padding:24px 26px 8px;max-width:1000px}
 .hero h1{font-size:clamp(1.35rem,2.6vw,1.95rem);font-weight:300;margin-bottom:5px}
 .hero h1 em{color:var(--gold);font-style:normal;font-weight:700}
-.hero p{font-size:.84rem;color:var(--ink3);line-height:1.6;max-width:74ch}
+.hero p{font-size:.84rem;color:var(--ink3);line-height:1.6;max-width:76ch}
 .hero-stats{display:flex;gap:16px;flex-wrap:wrap;margin-top:14px}
 .hs{border-left:2px solid var(--gold);padding-left:9px}
 .hs-n{font-size:1.12rem;font-weight:700;line-height:1}
 .hs-l{font-size:.65rem;color:var(--ink3);margin-top:2px}
 
-/* region jump nav */
-.jump{position:sticky;top:50px;z-index:150;background:var(--navy2);border-bottom:1px solid rgba(232,184,75,.12);padding:8px 24px;display:flex;gap:6px;overflow-x:auto;-ms-overflow-style:none;scrollbar-width:none}
+/* toolbar */
+.toolbar{position:sticky;top:50px;z-index:150;background:var(--navy2);border-bottom:1px solid rgba(232,184,75,.12);padding:10px 26px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.srch{position:relative;min-width:200px;max-width:300px;flex:1}
+.srch svg{position:absolute;left:9px;top:50%;transform:translateY(-50%);width:14px;height:14px;opacity:.4;pointer-events:none}
+.srch input{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:7px;color:var(--ink);padding:8px 30px 8px 30px;font-family:inherit;font-size:.85rem;outline:none}
+.srch input::placeholder{color:var(--ink3)}
+.srch input:focus{border-color:rgba(232,184,75,.45)}
+.srch .clr{position:absolute;right:8px;top:50%;transform:translateY(-50%);width:18px;height:18px;border:none;background:rgba(255,255,255,.1);color:var(--ink2);border-radius:50%;cursor:pointer;font-size:.8rem;line-height:1;display:none}
+.srch.has .clr{display:flex;align-items:center;justify-content:center}
+.seg{display:flex;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:2px}
+.seg button{border:none;background:none;color:var(--ink2);font-family:inherit;font-size:.78rem;font-weight:600;padding:6px 14px;border-radius:6px;cursor:pointer;transition:.15s}
+.seg button.on{background:var(--gold);color:var(--navy)}
+.sortwrap{display:flex;align-items:center;gap:7px;margin-left:auto}
+.sortwrap .sl{font-size:.7rem;color:var(--ink3);letter-spacing:.04em}
+.sortseg{display:flex;gap:5px;flex-wrap:wrap}
+.sortseg button{border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);color:var(--ink2);font-family:inherit;font-size:.74rem;font-weight:500;padding:5px 10px;border-radius:6px;cursor:pointer;white-space:nowrap;transition:.15s}
+.sortseg button:hover{border-color:rgba(232,184,75,.4)}
+.sortseg button.on{border-color:var(--gold);color:var(--gold)}
+
+.jump{position:sticky;top:101px;z-index:140;background:var(--navy2);border-bottom:1px solid rgba(232,184,75,.1);padding:8px 26px;display:flex;gap:6px;overflow-x:auto;-ms-overflow-style:none;scrollbar-width:none}
 .jump::-webkit-scrollbar{display:none}
 .jump a{font-size:.7rem;font-weight:600;color:var(--ink2);text-decoration:none;padding:4px 9px;border:1px solid rgba(255,255,255,.1);border-radius:6px;white-space:nowrap;transition:.15s}
 .jump a:hover{border-color:var(--gold);color:var(--gold)}
 
-.intro-hint{padding:14px 24px 2px;font-size:.76rem;color:var(--ink3);display:flex;align-items:center;gap:7px}
+.intro-hint{padding:13px 26px 0;font-size:.75rem;color:var(--ink3);display:flex;align-items:center;gap:7px}
 .intro-hint svg{width:15px;height:15px;opacity:.55}
 
-/* region block */
-.reg{margin:8px 0 6px;scroll-margin-top:104px}
-.reg-h{display:flex;align-items:center;gap:11px;padding:0 24px 9px;margin:16px 0 2px;border-bottom:1px solid rgba(232,184,75,.16)}
-.reg-t{font-size:1.06rem;font-weight:700}
+/* region rolodex */
+.reg{margin:6px 0 4px;scroll-margin-top:150px}
+.reg-h{display:flex;align-items:center;gap:11px;padding:0 26px 9px;margin:18px 0 2px;border-bottom:1px solid rgba(232,184,75,.16)}
+.reg-t{font-size:1.1rem;font-weight:700}
 .reg-count{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--gold);border:1px solid rgba(232,184,75,.3);border-radius:20px;padding:2px 9px}
 .reg-nav{margin-left:auto;display:flex;gap:6px}
-.rnav{width:29px;height:29px;border-radius:50%;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.04);color:var(--ink);font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.15s;line-height:1}
+.rnav{width:30px;height:30px;border-radius:50%;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.04);color:var(--ink);font-size:1.05rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.15s;line-height:1}
 .rnav:hover{border-color:var(--gold);color:var(--gold)}
-.rnav:disabled{opacity:.22;cursor:default}
+.rnav:disabled{opacity:.2;cursor:default}
 .reg-wrap{position:relative}
-.reg-row{display:flex;gap:13px;overflow-x:auto;scroll-snap-type:x proximity;scroll-behavior:smooth;padding:6px 24px 16px;-ms-overflow-style:none;scrollbar-width:none;cursor:grab}
+.reg-row{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:26px;scroll-behavior:smooth;padding:8px 26px 18px;-ms-overflow-style:none;scrollbar-width:none;cursor:grab}
 .reg-row.drag{cursor:grabbing;scroll-behavior:auto}
 .reg-row::-webkit-scrollbar{display:none}
-.reg-row .c{flex:0 0 256px;scroll-snap-align:start}
-.fade{position:absolute;top:0;bottom:16px;width:40px;pointer-events:none;transition:opacity .2s;z-index:2}
+.reg-row .c{flex:0 0 300px;scroll-snap-align:start;scroll-snap-stop:always}
+.fade{position:absolute;top:0;bottom:18px;width:46px;pointer-events:none;transition:opacity .2s;z-index:2}
 .fade.l{left:0;background:linear-gradient(to right,var(--navy2),transparent)}
 .fade.r{right:0;background:linear-gradient(to left,var(--navy2),transparent)}
 .fade.hide{opacity:0}
 
+/* rankings / search grid */
+.gridview{padding:14px 26px 10px}
+.gridview .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.gv-empty{padding:50px 26px;text-align:center;color:var(--ink3);font-size:.9rem}
+.rk-badge{position:absolute;top:10px;right:12px;font-family:'JetBrains Mono',monospace;font-size:.66rem;font-weight:700;color:rgba(12,26,51,.32)}
+
 /* tile */
 .c{background:var(--cream);border:1px solid rgba(12,26,51,.13);border-radius:14px;position:relative;overflow:hidden;color:var(--navy)}
 .c-band{position:absolute;left:0;top:0;bottom:0;width:4px}
-.c-pad{padding:14px 16px 14px 17px}
-.c-hd{display:flex;align-items:center;gap:9px;margin-bottom:12px}
-.c-fl{height:16px;width:auto;border-radius:2px;box-shadow:0 1px 3px rgba(0,0,0,.28),inset 0 0 0 1px rgba(12,26,51,.12);flex:none}
-.c-nm{font-size:.93rem;font-weight:700;line-height:1.05}
-.c-tag{font-size:.53rem;font-weight:600;color:#8a6512;border:1px solid rgba(138,101,18,.4);border-radius:3px;padding:1px 4px}
-.c-lab{font-family:'JetBrains Mono',monospace;font-size:.53rem;font-weight:600;letter-spacing:.1em;color:rgba(12,26,51,.5);margin-bottom:1px}
-.c-est-row{display:flex;align-items:flex-end;gap:10px;margin-bottom:12px}
-.c-est{font-family:'JetBrains Mono',monospace;font-size:2.45rem;font-weight:700;line-height:.82;letter-spacing:-.01em}
+.c-pad{padding:15px 17px 15px 18px}
+.c-hd{display:flex;align-items:center;gap:9px;margin-bottom:13px}
+.c-fl{height:17px;width:auto;border-radius:2px;box-shadow:0 1px 3px rgba(0,0,0,.28),inset 0 0 0 1px rgba(12,26,51,.12);flex:none}
+.c-nm{font-size:.97rem;font-weight:700;line-height:1.05}
+.c-tag{font-size:.54rem;font-weight:600;color:#8a6512;border:1px solid rgba(138,101,18,.4);border-radius:3px;padding:1px 4px}
+.c-lab{font-family:'JetBrains Mono',monospace;font-size:.54rem;font-weight:600;letter-spacing:.1em;color:rgba(12,26,51,.5);margin-bottom:2px}
+.c-est-row{display:flex;align-items:flex-end;gap:10px;margin-bottom:13px}
+.c-est{font-family:'JetBrains Mono',monospace;font-size:2.7rem;font-weight:700;line-height:.82;letter-spacing:-.01em}
 .c-est.isest{font-style:italic}
-.c-births{background:rgba(12,26,51,.045);border-radius:9px;padding:9px 11px 10px;margin-bottom:12px}
+.c-spk{margin-left:auto;margin-bottom:4px}
+.c-births{background:rgba(12,26,51,.045);border-radius:9px;padding:10px 12px 11px;margin-bottom:13px}
 .c-b-head{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:7px}
-.c-chg{font-family:'JetBrains Mono',monospace;font-size:.93rem;font-weight:700}
-.c-b-cols{display:flex;align-items:flex-end;gap:10px}
+.c-chg{font-family:'JetBrains Mono',monospace;font-size:.98rem;font-weight:700}
+.c-b-cols{display:flex;align-items:flex-end;gap:11px}
 .c-bcol{flex:1;min-width:0}
-.c-byr{font-family:'JetBrains Mono',monospace;font-size:.53rem;font-weight:600;color:rgba(12,26,51,.5);margin-bottom:2px}
-.c-bv{font-family:'JetBrains Mono',monospace;font-size:1.08rem;font-weight:700;line-height:1}
+.c-byr{font-family:'JetBrains Mono',monospace;font-size:.54rem;font-weight:600;color:rgba(12,26,51,.5);margin-bottom:2px}
+.c-bv{font-family:'JetBrains Mono',monospace;font-size:1.15rem;font-weight:700;line-height:1}
 .c-bcol.prev .c-bv{color:rgba(12,26,51,.55)}
-.c-b-arrow{font-family:'JetBrains Mono',monospace;font-size:.88rem;color:rgba(12,26,51,.35);padding-bottom:1px}
-.c-await{font-family:'JetBrains Mono',monospace;font-size:.76rem;color:rgba(12,26,51,.4);font-style:italic}
-.c-ctx-lab{font-family:'JetBrains Mono',monospace;font-size:.51rem;font-weight:600;letter-spacing:.1em;color:rgba(12,26,51,.42);margin-bottom:5px}
+.c-b-arrow{font-family:'JetBrains Mono',monospace;font-size:.92rem;color:rgba(12,26,51,.35);padding-bottom:1px}
+.c-await{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:rgba(12,26,51,.4);font-style:italic}
+.c-ctx-lab{font-family:'JetBrains Mono',monospace;font-size:.52rem;font-weight:600;letter-spacing:.1em;color:rgba(12,26,51,.42);margin-bottom:6px}
 .c-strip{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}
 .c-cell{text-align:center;padding:5px 0 4px;border-radius:5px;background:rgba(12,26,51,.055)}
-.c-cy{font-family:'JetBrains Mono',monospace;font-size:.5rem;font-weight:600;margin-bottom:2px;color:rgba(12,26,51,.45)}
-.c-cv{font-family:'JetBrains Mono',monospace;font-size:.75rem;font-weight:700;color:#0c1a33}
+.c-cy{font-family:'JetBrains Mono',monospace;font-size:.51rem;font-weight:600;margin-bottom:2px;color:rgba(12,26,51,.45)}
+.c-cv{font-family:'JetBrains Mono',monospace;font-size:.78rem;font-weight:700;color:#0c1a33}
 .c-cell.estc{outline:1.5px dashed rgba(12,26,51,.3);outline-offset:-1.5px;background:transparent}
 .c-cell.e0{opacity:.45}.c-cell.e1{opacity:.6}.c-cell.e2{opacity:.82}.c-cell.e3{opacity:1}
 
-/* footer */
-.foot{padding:18px 24px 46px;border-top:1px solid rgba(232,184,75,.12);font-size:.71rem;color:var(--ink3);line-height:1.7;max-width:920px;margin-top:14px}
+.foot{padding:18px 26px 46px;border-top:1px solid rgba(232,184,75,.12);font-size:.71rem;color:var(--ink3);line-height:1.7;max-width:920px;margin-top:14px}
 .foot strong{color:var(--ink2)}.foot a{color:var(--gold);text-decoration:none}
-.loading{padding:60px 24px;text-align:center;color:rgba(238,241,246,.3)}
+.loading{padding:60px 26px;text-align:center;color:rgba(238,241,246,.3)}
+@media(max-width:640px){.reg-row .c{flex-basis:84vw}.gridview .grid{grid-template-columns:1fr}.sortwrap{margin-left:0;width:100%}}
 </style>
 </head>
 <body>
@@ -104,18 +127,40 @@ html,body{min-height:100vh;background:var(--navy2);color:var(--ink);font-family:
 </div>
 
 <div class="hero">
-  <h1>Births &amp; <em>fertility</em>, by region</h1>
-  <p>Total Fertility Rate and births for 106 countries and territories, grouped by region — swipe each row. TFR is the UN WPP 2024 series (observed to 2023, projected 2024–25); the Gulf states show <strong style="color:var(--gold)">nationals-only</strong> figures. The 2026 estimate and current-year births populate from national statistical offices as they publish.</p>
+  <h1>Births &amp; <em>fertility</em></h1>
+  <p>Total Fertility Rate and births for 106 countries and territories. TFR is the UN WPP 2024 series (observed to 2023, projected 2024–25); the Gulf states show <strong style="color:var(--gold)">nationals-only</strong> figures. The 2026 estimate and current-year births populate from national statistical offices as they publish.</p>
   <div class="hero-stats" id="heroStats"></div>
 </div>
 
+<div class="toolbar">
+  <div class="srch" id="srch">
+    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="5"/><line x1="13" y1="13" x2="18" y2="18"/></svg>
+    <input id="srchInp" type="text" placeholder="Search any country…" autocomplete="off">
+    <button class="clr" id="srchClr" aria-label="Clear">✕</button>
+  </div>
+  <div class="seg" id="viewSeg">
+    <button data-v="region" class="on">By region</button>
+    <button data-v="rankings">Rankings</button>
+  </div>
+  <div class="sortwrap" id="sortwrap" style="display:none">
+    <span class="sl">Sort</span>
+    <div class="sortseg" id="sortseg">
+      <button data-s="tfrAsc" class="on">Lowest TFR</button>
+      <button data-s="tfrDesc">Highest TFR</button>
+      <button data-s="chg">Biggest birth drop</button>
+      <button data-s="births">Most births</button>
+    </div>
+  </div>
+</div>
+
 <nav class="jump" id="jump"></nav>
-<div class="intro-hint">
+<div class="intro-hint" id="hint">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 12l4-4M3 12l4 4M21 12l-4-4M21 12l-4 4"/></svg>
   Swipe or drag each region row · use ‹ › to step through
 </div>
 
 <div id="regions"><div class="loading">Loading…</div></div>
+<div id="gridview" class="gridview" style="display:none"><div class="grid" id="grid"></div><div class="gv-empty" id="gvEmpty" style="display:none"></div></div>
 
 <div class="foot" id="foot"></div>
 
@@ -126,28 +171,27 @@ function fmt(n){return n==null?'':n.toLocaleString('en-US');}
 function dcol(d){return d<0?'#c0392b':d>0?'#1d7d1d':'#666';}
 function fmtChg(d){return (d>0?'+':'')+d.toFixed(1)+'%';}
 function flag(iso2){const c=(iso2||'').toLowerCase();return c?`<img class="c-fl" loading="lazy" src="https://flagcdn.com/w80/${c}.png" srcset="https://flagcdn.com/w160/${c}.png 2x" alt="">`:'';}
-
 function enrich(c){
- const t=c.tfr; c.t2025=t['2025']??null;
- if(c.b25!=null && c.b26!=null){ c.chg=(c.b26-c.b25)/c.b25*100; c.t2026=c.t2025!=null?Math.round(c.t2025*(c.b26/c.b25)*100)/100:null; }
- else { c.chg=null; c.t2026=null; }
- if(c.ba){ c.aChg=(c.ba.cur-c.ba.prev)/c.ba.prev*100; }
- c.cur = c.t2026!=null ? c.t2026 : c.t2025;
- c.curIsEst = c.t2026!=null;
+ const t=c.tfr;c.t2025=t['2025']??null;
+ if(c.b25!=null&&c.b26!=null){c.chg=(c.b26-c.b25)/c.b25*100;c.t2026=c.t2025!=null?Math.round(c.t2025*(c.b26/c.b25)*100)/100:null;}
+ else{c.chg=null;c.t2026=null;}
+ if(c.ba){c.aChg=(c.ba.cur-c.ba.prev)/c.ba.prev*100;}
+ c.cur=c.t2026!=null?c.t2026:c.t2025;c.curIsEst=c.t2026!=null;
+ c.totBirths=(c.b26!=null)?c.b26:(c.ba?c.ba.cur:null);
  return c;
 }
 const CTX=[['2010','2010','e0'],['2020','2020','e1'],['2024','2024','e2'],['2025','2025','e3'],['2026e','2026','e3']];
 function spark(c){
- const t=c.tfr,w=64,h=28,xs=['2010','2020','2024','2025','2026'],vals=[t['2010'],t['2020'],t['2024'],t['2025'],c.t2026];
+ const t=c.tfr,w=66,h=30,xs=['2010','2020','2024','2025','2026'],vals=[t['2010'],t['2020'],t['2024'],t['2025'],c.t2026];
  const pts=[];xs.forEach((y,i)=>{if(vals[i]!=null)pts.push({i,v:vals[i]});});
- if(pts.length<2)return `<svg width="${w}" height="${h}"></svg>`;
+ if(pts.length<2)return `<svg class="c-spk" width="${w}" height="${h}"></svg>`;
  const n=5,X=w/(n-1),all=pts.map(p=>p.v),mn=Math.min(...all),mx=Math.max(...all),rg=mx-mn||0.3;
  const ys=pts.map(p=>({x:p.i*X,y:h-2-((p.v-mn)/rg)*(h-4)}));
  const d=ys.map((p,i)=>(i?'L':'M')+p.x.toFixed(1)+','+p.y.toFixed(1)).join(' ');
  const last=ys[ys.length-1];
- return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}"><path d="${d}" stroke="rgba(12,26,51,.3)" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="${last.x.toFixed(1)}" cy="${last.y.toFixed(1)}" r="2" fill="${band(c.cur)}"/></svg>`;
+ return `<svg class="c-spk" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}"><path d="${d}" stroke="rgba(12,26,51,.3)" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="${last.x.toFixed(1)}" cy="${last.y.toFixed(1)}" r="2.2" fill="${band(c.cur)}"/></svg>`;
 }
-function tile(c){
+function tile(c,rank){
  const big=c.cur,est=c.curIsEst;const tag=c.source&&c.source.indexOf('Nationals')>=0?'nat':'';
  let births;
  if(c.b25!=null&&c.b26!=null){
@@ -158,17 +202,21 @@ function tile(c){
    births=`<div class="c-births"><div class="c-lab">BIRTHS 2026</div><div class="c-await">awaiting release</div></div>`;
  }
  const strip=CTX.map(([lab,y,cl])=>{const v=(y==='2026')?c.t2026:c.tfr[y];const none=v==null;const e=(y==='2026');return `<div class="c-cell ${cl} ${e?'estc':''}"><div class="c-cy">${lab}</div><div class="c-cv">${none?'—':v.toFixed(2)}</div></div>`;}).join('');
- return `<div class="c"><div class="c-band" style="background:${band(big)}"></div><div class="c-pad">`+
+ const rk=rank!=null?`<span class="rk-badge">#${rank}</span>`:'';
+ return `<div class="c"><div class="c-band" style="background:${band(big)}"></div>${rk}<div class="c-pad">`+
   `<div class="c-hd">${flag(c.iso2)}<span class="c-nm">${c.name}</span>${tag?`<span class="c-tag" title="${(c.gulf_note||'').replace(/"/g,'&quot;')}">${tag}</span>`:''}</div>`+
   `<div class="c-lab">${est?'ESTIMATED 2026 TFR':'LATEST TFR · 2025'}</div>`+
   `<div class="c-est-row"><span class="c-est ${est?'isest':''}" style="color:${estColor(big)}">${big!=null?big.toFixed(2):'—'}</span>${spark(c)}</div>`+
   `${births}<div class="c-ctx-lab">TFR · CHILDREN PER WOMAN</div><div class="c-strip">${strip}</div></div></div>`;
 }
 
+let C=[], ORDER=[], MODE='region', Q='', SORT='tfrAsc';
+const slug=s=>s.replace(/[^a-z0-9]+/gi,'-').toLowerCase();
+
 fetch('/births_data.json').then(r=>r.json()).then(data=>{
- const C=data.countries.map(enrich);
+ C=data.countries.map(enrich);
+ ORDER=data.subregion_order||[...new Set(C.map(c=>c.region))];
  document.getElementById('tbYear').textContent=data.year+' data';
- // stats
  const belowR=C.filter(c=>c.cur!=null&&c.cur<2.1).length;
  const below1=C.filter(c=>c.cur!=null&&c.cur<1.0).length;
  const gulf=C.filter(c=>c.region==='Gulf (nationals)').length;
@@ -177,29 +225,81 @@ fetch('/births_data.json').then(r=>r.json()).then(data=>{
    `<div class="hs"><div class="hs-n">${belowR}</div><div class="hs-l">Below replacement (2.1)</div></div>`+
    `<div class="hs"><div class="hs-n">${below1}</div><div class="hs-l">TFR below 1.0</div></div>`+
    `<div class="hs"><div class="hs-n">${gulf}</div><div class="hs-l">Gulf nationals-only</div></div>`;
- // group
- const order=data.subregion_order||[...new Set(C.map(c=>c.region))];
+ document.getElementById('foot').innerHTML=
+   `<strong>Sources:</strong> UN World Population Prospects 2024 (observed to 2023; medium-variant 2024–25). Gulf nationals-only TFR: FCSC (UAE), GASTAT (Saudi Arabia), NCSI (Oman), Shah &amp; Fargues / KFS 2018 (Kuwait), Fargues / Qatar PSA (Qatar); Bahrain back-calculated. 2026 births &amp; estimates compiled from national statistical offices as released.<br>`+
+   `<strong>2026 TFR estimate</strong> = TFR₂₀₂₅ × (births₂₀₂₆ ÷ births₂₀₂₅ for the same months); shown italic, dashed. Where no current births are published, the latest official TFR (2025) is shown.<br>`+
+   `<a href="https://demoriaresearch.com">← Return to the Demographic Health Index</a>`;
+ buildRegions();
+ render();
+});
+
+function buildRegions(){
  const g={};C.forEach(c=>{(g[c.region]=g[c.region]||[]).push(c);});
- const slug=s=>s.replace(/[^a-z0-9]+/gi,'-').toLowerCase();
  let jump='',html='';
- order.forEach((r,ri)=>{if(!g[r])return;const rows=g[r].sort((a,b)=>(a.cur??99)-(b.cur??99));
+ ORDER.forEach((r,ri)=>{if(!g[r])return;const rows=g[r].sort((a,b)=>(a.cur??99)-(b.cur??99));
    jump+=`<a href="#r-${slug(r)}">${r}</a>`;
    html+=`<div class="reg" id="r-${slug(r)}"><div class="reg-h"><span class="reg-t">${r}</span><span class="reg-count">${rows.length}</span><div class="reg-nav"><button class="rnav prev" data-r="${ri}">‹</button><button class="rnav next" data-r="${ri}">›</button></div></div>`+
-     `<div class="reg-wrap"><div class="fade l hide" data-f="${ri}"></div><div class="fade r" data-f="${ri}"></div><div class="reg-row" data-row="${ri}">${rows.map(tile).join('')}</div></div></div>`;
+     `<div class="reg-wrap"><div class="fade l hide" data-f="${ri}"></div><div class="fade r" data-f="${ri}"></div><div class="reg-row" data-row="${ri}">${rows.map(c=>tile(c)).join('')}</div></div></div>`;
  });
  document.getElementById('jump').innerHTML=jump;
  document.getElementById('regions').innerHTML=html;
- document.getElementById('foot').innerHTML=
-   `<strong>Sources:</strong> UN World Population Prospects 2024 (observed to 2023; medium-variant 2024–25). Gulf nationals-only TFR: FCSC (UAE), GASTAT (Saudi Arabia), NCSI (Oman), Shah &amp; Fargues / KFS 2018 (Kuwait), Fargues / Qatar PSA (Qatar); Bahrain back-calculated. 2026 births &amp; estimates compiled from national statistical offices as released.<br>`+
-   `<strong>2026 TFR estimate</strong> = TFR₂₀₂₅ × (births₂₀₂₆ ÷ births₂₀₂₅ for the same months); shown italic, dashed. Where no current births are published, the latest official TFR (2025) is shown instead.<br>`+
-   `<a href="https://demoriaresearch.com">← Return to the Demographic Health Index</a>`;
  wireRows();
-});
+}
+
+function sortFns(){
+ return {
+  tfrAsc:(a,b)=>(a.cur??99)-(b.cur??99),
+  tfrDesc:(a,b)=>(b.cur??-1)-(a.cur??-1),
+  chg:(a,b)=>(a.chg??1)- (b.chg??1),         // most negative (biggest drop) first
+  births:(a,b)=>(b.totBirths??-1)-(a.totBirths??-1),
+ }[SORT];
+}
+function render(){
+ const regionsEl=document.getElementById('regions'), gv=document.getElementById('gridview'),
+       jump=document.getElementById('jump'), hint=document.getElementById('hint'),
+       sortwrap=document.getElementById('sortwrap');
+ const searching=Q.trim().length>0;
+ // toolbar state
+ sortwrap.style.display=(MODE==='rankings'&&!searching)?'flex':'none';
+ jump.style.display=(MODE==='region'&&!searching)?'flex':'none';
+ hint.style.display=(MODE==='region'&&!searching)?'flex':'none';
+
+ if(searching){
+   regionsEl.style.display='none';gv.style.display='block';
+   const q=Q.trim().toLowerCase();
+   const matches=C.filter(c=>c.name.toLowerCase().includes(q)).sort((a,b)=>(a.cur??99)-(b.cur??99));
+   paintGrid(matches,false);
+   return;
+ }
+ if(MODE==='region'){
+   regionsEl.style.display='';gv.style.display='none';
+ } else {
+   regionsEl.style.display='none';gv.style.display='block';
+   const rows=C.slice().sort(sortFns());
+   paintGrid(rows,true);
+ }
+}
+function paintGrid(rows,ranked){
+ const grid=document.getElementById('grid'),empty=document.getElementById('gvEmpty');
+ if(!rows.length){grid.innerHTML='';empty.style.display='block';empty.textContent='No countries match your search.';return;}
+ empty.style.display='none';
+ grid.innerHTML=rows.map((c,i)=>tile(c,ranked?i+1:null)).join('');
+}
+
+// toolbar wiring
+document.getElementById('viewSeg').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+ document.querySelectorAll('#viewSeg button').forEach(x=>x.classList.remove('on'));b.classList.add('on');MODE=b.dataset.v;render();window.scrollTo({top:document.querySelector('.toolbar').offsetTop-50,behavior:'smooth'});});
+document.getElementById('sortseg').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+ document.querySelectorAll('#sortseg button').forEach(x=>x.classList.remove('on'));b.classList.add('on');SORT=b.dataset.s;render();});
+const inp=document.getElementById('srchInp');
+inp.addEventListener('input',e=>{Q=e.target.value;document.getElementById('srch').classList.toggle('has',Q.length>0);render();});
+document.getElementById('srchClr').addEventListener('click',()=>{Q='';inp.value='';document.getElementById('srch').classList.remove('has');render();inp.focus();});
 
 function wireRows(){
  document.querySelectorAll('.reg-row').forEach(row=>{
   const ri=row.dataset.row;
-  const step=()=>Math.round(row.clientWidth*0.8);
+  const cardW=()=>{const c=row.querySelector('.c');return c?c.getBoundingClientRect().width+14:314;};
+  const step=()=>{const per=Math.max(1,Math.floor((row.clientWidth-26)/cardW()));return per*cardW();};
   const fL=document.querySelector(`.fade.l[data-f="${ri}"]`),fR=document.querySelector(`.fade.r[data-f="${ri}"]`);
   const prev=document.querySelector(`.rnav.prev[data-r="${ri}"]`),next=document.querySelector(`.rnav.next[data-r="${ri}"]`);
   function upd(){const max=row.scrollWidth-row.clientWidth-1,x=row.scrollLeft;fL.classList.toggle('hide',x<=2);fR.classList.toggle('hide',x>=max);prev.disabled=x<=2;next.disabled=x>=max;}
