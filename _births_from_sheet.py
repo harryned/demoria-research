@@ -17,10 +17,10 @@ import json, sys
 from openpyxl import load_workbook
 
 SHEET='Birth_Tracker_Input.xlsx'; DATA='public/births_data.json'
-M25=range(4,16)    # cols D..O   (2025 Jan..Dec)
-M26=range(16,28)   # cols P..AA  (2026 Jan..Dec)
-FY25=28; FY26=29   # cols AB, AC
-SRC=30             # col AD
+M25=range(16,28)   # cols P..AA  (2025 Jan..Dec)
+M26=range(28,40)   # cols AB..AM (2026 Jan..Dec)
+FY25=41; FY26=42   # cols AO, AP
+SRC=43             # col AQ
 
 def num(v):
     if v is None: return None
@@ -50,7 +50,7 @@ def parse():
             out[iso]={'mode':'monthly','b25':sum(m25[:run]),'b26':sum(m26[:run]),'mon':run,'src':src}
             continue
         fy25=num(row[FY25-1].value); fy26=num(row[FY26-1].value)
-        if fy25 is not None and fy26 is not None:
+        if fy25 and fy26 and fy25>0 and fy26>0:
             out[iso]={'mode':'annual','prev':fy25,'cur':fy26,'year':2026,'src':src}
     return out
 
