@@ -1,0 +1,1062 @@
+iso3,year,value,source,source_url,vintage_date,confidence,verified_by,verified_at,notes
+ABW,2016,1.9,Wikipedia: Demographics of [ABW] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.05
+ABW,2017,1.89,Wikipedia: Demographics of [ABW] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.10
+ABW,2018,1.78,Wikipedia: Demographics of [ABW] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.05
+ABW,2019,1.82,Wikipedia: Demographics of [ABW] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.12
+ABW,2020,1.64,Wikipedia: Demographics of [ABW] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.02
+ABW,2022,1.46,Wikipedia: Demographics of [ABW] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.16
+ABW,2023,1.38,Wikipedia: Demographics of [ABW] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.22
+ABW,2024,1.32,Wikipedia: Demographics of [ABW] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.29. Editor certainty: Recheck
+ABW,2025,1.27,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+AFG,2009,6.24,NSIA Afghanistan,https://www.nsia.gov.af/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2009)
+AFG,2010,6.1,NSIA Afghanistan,https://www.nsia.gov.af/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2009)
+AFG,2011,5.96,NSIA Afghanistan,https://www.nsia.gov.af/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2009)
+AFG,2012,5.83,NSIA Afghanistan,https://www.nsia.gov.af/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2009)
+AFG,2013,5.7,NSIA Afghanistan,https://www.nsia.gov.af/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2009)
+AFG,2014,5.56,NSIA Afghanistan,https://www.nsia.gov.af/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2009)
+AFG,2015,5.41,NSIA Afghanistan,https://www.nsia.gov.af/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2009)
+AFG,2016,5.26,NSIA Afghanistan,https://www.nsia.gov.af/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.28. Editor certainty: Materially Lower
+AFG,2017,5.13,NSIA Afghanistan,https://www.nsia.gov.af/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.30. Editor certainty: Materially Lower
+AFG,2018,5,NSIA Afghanistan,https://www.nsia.gov.af/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.33. Editor certainty: Materially Lower
+AFG,2019,4.87,NSIA Afghanistan,https://www.nsia.gov.af/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.37. Editor certainty: Materially Lower
+AFG,2020,4.75,NSIA Afghanistan,https://www.nsia.gov.af/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.40. Editor certainty: Materially Lower
+AFG,2021,4.64,NSIA Afghanistan,https://www.nsia.gov.af/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.40. Editor certainty: Materially Lower
+AFG,2022,4.52,NSIA Afghanistan,https://www.nsia.gov.af/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.41. Editor certainty: Materially Lower
+AFG,2023,4.41,NSIA Afghanistan,https://www.nsia.gov.af/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.43. Editor certainty: Materially Lower
+AFG,2024,4.36,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+AFG,2025,4.31,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+ALB,2013,1.81,INSTAT Albania,https://www.instat.gov.al/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2013)
+ALB,2014,1.87,INSTAT Albania,https://www.instat.gov.al/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2013)
+ALB,2015,1.76,INSTAT Albania,https://www.instat.gov.al/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2013)
+ALB,2016,1.76,INSTAT Albania,https://www.instat.gov.al/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.20. Editor certainty: Materially Higher
+ALB,2017,1.77,INSTAT Albania,https://www.instat.gov.al/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.28. Editor certainty: Materially Higher
+ALB,2018,1.71,INSTAT Albania,https://www.instat.gov.al/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.29. Editor certainty: Materially Higher
+ALB,2019,1.74,INSTAT Albania,https://www.instat.gov.al/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.34. Editor certainty: Materially Higher
+ALB,2020,1.76,INSTAT Albania,https://www.instat.gov.al/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.39. Editor certainty: Materially Higher
+ALB,2021,1.76,INSTAT Albania,https://www.instat.gov.al/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.39. Editor certainty: Materially Higher
+ALB,2022,1.65,INSTAT Albania,https://www.instat.gov.al/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.29. Editor certainty: Materially Higher
+ALB,2023,1.61,INSTAT Albania,https://www.instat.gov.al/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.26. Editor certainty: Materially Higher
+ALB,2024,1.64,INSTAT Albania,https://www.instat.gov.al/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.30. Editor certainty: Materially Higher
+ALB,2025,1.53,"Wikipedia (TFR from observed births × local-window ratio, outlier-filtered)",,2026-05-14,HIGH,CALCNEW_V7_FRESH,2026-05-14,"Calc New v7 (v7_births_5anchor_±5y). R=0.000068, anchors=[(2020, 28075.0, 1.76, 6.269e-05), (2021, 27211.0, 1.76, 6.468e-05), (2022, 24688.0, 1.65, 6.683e-05), (2023, 23617.0, 1.61, 6.817e-05), (2024, 23310.0, 1.64, 7.036e-05)], dropped=[], window=±5y. Wiki-observed births 2025: 22,541."
+AND,2018,1.03,Wikipedia: Demographics of [AND] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.02
+AND,2021,0.97,Wikipedia: Demographics of [AND] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.09
+AND,2022,0.94,Wikipedia: Demographics of [AND] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.13
+AND,2023,0.79,Wikipedia: Demographics of [AND] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.29
+AND,2024,0.84,Wikipedia: Demographics of [AND] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.25. Editor certainty: Recheck
+AND,2025,0.79,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+ARG,2016,2.13,Wikipedia: Demographics of [ARG] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.11
+ARG,2017,2.06,Wikipedia: Demographics of [ARG] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.11
+ARG,2018,2,Wikipedia: Demographics of [ARG] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.07
+ARG,2019,1.81,Wikipedia: Demographics of [ARG] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.07
+ARG,2021,1.48,Wikipedia: Demographics of [ARG] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.11
+ARG,2022,1.39,Wikipedia: Demographics of [ARG] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.09
+ARG,2023,1.33,Wikipedia: Demographics of [ARG] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.17
+ARG,2024,1.23,Wikipedia: Demographics of [ARG] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.27. Editor certainty: Recheck
+ARG,2025,1.18,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+ARM,2016,1.65,Wikipedia: Demographics of [ARM] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.03
+ARM,2020,1.66,Wikipedia: Demographics of [ARM] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.04
+ARM,2023,1.89,Wikipedia: Demographics of [ARM] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.18
+ARM,2025,1.7,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+ATG,2017,1.5,Wikipedia: Demographics of [ATG] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.02
+ATG,2019,1.45,Wikipedia: Demographics of [ATG] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.02
+ATG,2020,1.53,Wikipedia: Demographics of [ATG] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.04
+ATG,2021,1.58,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+ATG,2022,1.63,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+ATG,2023,1.68,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+ATG,2024,1.73,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+ATG,2025,1.78,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+AUS,2021,1.7,Wikipedia: Demographics of [AUS] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.05
+AUS,2023,1.5,Wikipedia: Demographics of [AUS] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.14
+AUS,2024,1.48,Wikipedia: Demographics of [AUS] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.16. Editor certainty: Recheck
+AUS,2025,1.43,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+AZE,2017,1.87,Wikipedia: Demographics of [AZE] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.09
+AZE,2018,1.76,Wikipedia: Demographics of [AZE] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.15
+AZE,2019,1.8,Wikipedia: Demographics of [AZE] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.05
+AZE,2020,1.65,Wikipedia: Demographics of [AZE] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.11
+AZE,2021,1.48,Wikipedia: Demographics of [AZE] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.23
+AZE,2022,1.67,Wikipedia: Demographics of [AZE] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.02
+AZE,2023,1.55,Wikipedia: Demographics of [AZE] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.12
+AZE,2024,1.43,Wikipedia: Demographics of [AZE] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.24. Editor certainty: Recheck
+AZE,2025,1.35,Wikipedia: Demographics of [AZE] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.31. Editor certainty: Recheck
+BEL,2020,1.55,Wikipedia: Demographics of [BEL] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.02
+BEL,2022,1.53,Wikipedia: Demographics of [BEL] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.02
+BEL,2023,1.47,Wikipedia: Demographics of [BEL] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.09
+BEL,2024,1.44,Wikipedia: Demographics of [BEL] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.06. Editor certainty: Recheck
+BEL,2025,1.44,Wikipedia: Demographics of [BEL] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.05. Editor certainty: Recheck
+BGR,2013,1.54,Bulgaria NSI,https://www.nsi.bg/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2013)
+BGR,2014,1.62,Bulgaria NSI,https://www.nsi.bg/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2013)
+BGR,2015,1.64,Bulgaria NSI,https://www.nsi.bg/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2013)
+BGR,2016,1.67,Bulgaria NSI,https://www.nsi.bg/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.13. Editor certainty: Materially Higher
+BGR,2017,1.71,Bulgaria NSI,https://www.nsi.bg/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.15. Editor certainty: Materially Higher
+BGR,2018,1.73,Bulgaria NSI,https://www.nsi.bg/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.17. Editor certainty: Materially Higher
+BGR,2019,1.79,Bulgaria NSI,https://www.nsi.bg/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.21. Editor certainty: Materially Higher
+BGR,2020,1.77,Bulgaria NSI,https://www.nsi.bg/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.21. Editor certainty: Materially Higher
+BGR,2021,1.8,Bulgaria NSI,https://www.nsi.bg/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.21. Editor certainty: Materially Higher
+BGR,2023,1.81,Bulgaria NSI,https://www.nsi.bg/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.06. Editor certainty: Materially Higher
+BGR,2024,1.72,Bulgaria NSI,https://www.nsi.bg/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.03. Editor certainty: Materially Higher
+BGR,2025,1.63,Bulgaria NSI,https://www.nsi.bg/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.11. Editor certainty: Materially Higher
+BHR,2016,1.98,Wikipedia: Demographics of [BHR] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.06
+BHR,2017,1.95,Wikipedia: Demographics of [BHR] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.03
+BHR,2018,1.84,Wikipedia: Demographics of [BHR] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.07
+BHR,2019,1.74,Wikipedia: Demographics of [BHR] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.10
+BHR,2021,1.61,Wikipedia: Demographics of [BHR] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.24
+BHR,2022,1.64,Wikipedia: Demographics of [BHR] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.20
+BHR,2023,1.59,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+BHR,2024,1.54,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+BHR,2025,1.49,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+BLR,2017,1.53,Wikipedia: Demographics of [BLR] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.02
+BLR,2020,1.33,Wikipedia: Demographics of [BLR] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.04
+BLR,2021,1.29,Wikipedia: Demographics of [BLR] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.08
+BLR,2022,1.19,Wikipedia: Demographics of [BLR] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.14
+BLR,2023,1.15,Wikipedia: Demographics of [BLR] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.06
+BLR,2024,1.08,Wikipedia: Demographics of [BLR] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.14. Editor certainty: Recheck
+BLR,2025,1.03,Wikipedia: Demographics of [BLR] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.19. Editor certainty: Recheck
+BLZ,2016,2.23,Wikipedia: Demographics of [BLZ] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.17
+BLZ,2017,2.18,Wikipedia: Demographics of [BLZ] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.19
+BLZ,2018,2.29,Wikipedia: Demographics of [BLZ] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.05
+BLZ,2019,2.12,Wikipedia: Demographics of [BLZ] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.02
+BLZ,2020,2.02,Wikipedia: Demographics of [BLZ] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.02
+BLZ,2021,1.88,Wikipedia: Demographics of [BLZ] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.04
+BLZ,2022,2.04,Wikipedia: Demographics of [BLZ] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.09
+BLZ,2023,1.81,Wikipedia: Demographics of [BLZ] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.20
+BLZ,2024,1.62,Wikipedia: Demographics of [BLZ] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.40. Editor certainty: Recheck
+BLZ,2025,1.57,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+BMU,2017,1.4,Wikipedia: Demographics of [BMU] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.02
+BMU,2018,1.35,Wikipedia: Demographics of [BMU] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.02
+BMU,2019,1.35,Wikipedia: Demographics of [BMU] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.03
+BMU,2020,1.41,Wikipedia: Demographics of [BMU] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.04
+BMU,2021,1.32,Wikipedia: Demographics of [BMU] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.07
+BMU,2022,1.3,Wikipedia: Demographics of [BMU] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.10
+BMU,2023,1.22,Wikipedia: Demographics of [BMU] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.18
+BMU,2024,1.16,"Wikipedia (TFR from observed births × local-window ratio, outlier-filtered)",,2026-05-14,HIGH,CALCNEW_V7_FRESH,2026-05-14,"Calc New v7 (v7_births_5anchor_±5y). R=0.002723, anchors=[(2019, 525.0, 1.348, 0.00256762), (2020, 541.0, 1.413, 0.00261183), (2021, 494.0, 1.321, 0.00267409), (2022, 479.0, 1.3, 0.00271399), (2023, 436.0, 1.222, 0.00280275)], dropped=[], window=±5y. Wiki-observed births 2024: 425."
+BMU,2025,1.12,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+BOL,2016,2.8,Wikipedia: Demographics of [BOL] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.03
+BOL,2017,2.74,Wikipedia: Demographics of [BOL] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.04
+BOL,2018,2.69,Wikipedia: Demographics of [BOL] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.04
+BOL,2019,2.63,Wikipedia: Demographics of [BOL] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.06
+BOL,2020,2.58,Wikipedia: Demographics of [BOL] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.07
+BOL,2021,2.54,Wikipedia: Demographics of [BOL] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.08
+BOL,2022,2.41,Wikipedia: Demographics of [BOL] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.17
+BOL,2023,2.24,Wikipedia: Demographics of [BOL] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.31
+BOL,2024,2.06,Wikipedia: Demographics of [BOL] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.46. Editor certainty: Recheck
+BOL,2025,2.01,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+BRA,2016,1.69,Wikipedia: Demographics of [BRA] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.04
+BRA,2017,1.63,Wikipedia: Demographics of [BRA] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.11
+BRA,2018,1.61,Wikipedia: Demographics of [BRA] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.13
+BRA,2019,1.59,Wikipedia: Demographics of [BRA] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.11
+BRA,2020,1.57,Wikipedia: Demographics of [BRA] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.08
+BRA,2021,1.53,Wikipedia: Demographics of [BRA] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.11
+BRA,2022,1.6,Wikipedia: Demographics of [BRA] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.03
+BRA,2023,1.57,Wikipedia: Demographics of [BRA] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.05
+BRA,2024,1.48,Wikipedia: Demographics of [BRA] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.13. Editor certainty: Recheck
+BRA,2025,1.52,Wikipedia: Demographics of [BRA] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.08. Editor certainty: Recheck
+BRN,2016,1.82,Wikipedia: Demographics of [BRN] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.10
+BRN,2017,1.8,Wikipedia: Demographics of [BRN] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.08
+BRN,2018,1.72,Wikipedia: Demographics of [BRN] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.13
+BRN,2019,1.7,Wikipedia: Demographics of [BRN] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.12
+BRN,2020,1.83,Wikipedia: Demographics of [BRN] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.03
+BRN,2021,1.91,Wikipedia: Demographics of [BRN] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.13
+BRN,2024,1.47,Wikipedia: Demographics of [BRN] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.26. Editor certainty: Recheck
+BRN,2025,1.42,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+CAN,2022,1.33,Wikipedia: Demographics of [CAN] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.04
+CAN,2023,1.27,Wikipedia: Demographics of [CAN] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.08
+CAN,2024,1.27,Wikipedia: Demographics of [CAN] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.07. Editor certainty: Recheck
+CAN,2025,1.34,"Wikipedia (TFR from observed births × local-window ratio, outlier-filtered)",,2026-05-14,HIGH,CALCNEW_V7_FRESH,2026-05-14,"Calc New v7 (v7_births_5anchor_±5y). R=0.000004, anchors=[(2020, 361582.0, 1.41, 3.9e-06), (2021, 372564.0, 1.44, 3.87e-06), (2022, 355134.0, 1.33, 3.75e-06), (2023, 352644.0, 1.27, 3.6e-06), (2024, 365737.0, 1.27, 3.47e-06)], dropped=[], window=±5y. Wiki-observed births 2025: 371,373."
+CHE,2021,1.51,Wikipedia: Demographics of [CHE] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.02
+CHE,2023,1.33,Wikipedia: Demographics of [CHE] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.10
+CHE,2024,1.29,Wikipedia: Demographics of [CHE] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.15. Editor certainty: Recheck
+CHE,2025,1.28,Wikipedia: Demographics of [CHE] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.16. Editor certainty: Recheck
+CHL,2016,1.75,Wikipedia: Demographics of [CHL] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.06
+CHL,2017,1.65,Wikipedia: Demographics of [CHL] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.09
+CHL,2018,1.62,Wikipedia: Demographics of [CHL] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.08
+CHL,2019,1.5,Wikipedia: Demographics of [CHL] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.07
+CHL,2022,1.32,Wikipedia: Demographics of [CHL] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.06
+CHL,2024,1.03,Wikipedia: Demographics of [CHL] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.11. Editor certainty: Recheck
+CHL,2025,0.98,"Wikipedia (TFR from observed births × local-window ratio, outlier-filtered)",,2026-05-14,HIGH,CALCNEW_V7_FRESH,2026-05-14,"Calc New v7 (v7_births_5anchor_±5y). R=0.000007, anchors=[(2020, 194978.0, 1.3, 6.67e-06), (2021, 177273.0, 1.17, 6.6e-06), (2022, 189310.0, 1.32, 6.97e-06), (2023, 173920.0, 1.16, 6.67e-06), (2024, 154441.0, 1.03, 6.67e-06)], dropped=[], window=±5y. Wiki-observed births 2025: 146,172."
+CHN,2016,1.7,Wikipedia: Demographics of [CHN] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.07
+CHN,2017,1.67,Wikipedia: Demographics of [CHN] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.13
+CHN,2020,1.3,Wikipedia: Demographics of [CHN] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.06
+CHN,2021,1.16,Wikipedia: Demographics of [CHN] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.04
+CHN,2022,1.07,Wikipedia: Demographics of [CHN] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.04
+CHN,2023,1.04,Wikipedia: Demographics of [CHN] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.04
+CHN,2024,1.13,Wikipedia: Demographics of [CHN] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.12. Editor certainty: Recheck
+CHN,2025,0.93,Wikipedia: Demographics of [CHN] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.09. Editor certainty: Recheck
+COL,2016,1.69,Wikipedia: Demographics of [COL] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.03
+COL,2017,1.69,Wikipedia: Demographics of [COL] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.03
+COL,2018,1.65,Wikipedia: Demographics of [COL] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.06
+COL,2019,1.59,Wikipedia: Demographics of [COL] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.12
+COL,2020,1.53,Wikipedia: Demographics of [COL] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.16
+COL,2021,1.5,Wikipedia: Demographics of [COL] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.18
+COL,2022,1.38,Wikipedia: Demographics of [COL] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.28
+COL,2023,1.23,Wikipedia: Demographics of [COL] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.42
+COL,2024,1.07,Wikipedia: Demographics of [COL] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.56. Editor certainty: Recheck
+COL,2025,1.01,Wikipedia: Demographics of [COL] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.61. Editor certainty: Recheck
+CPV,2007,2.58,INE Cabo Verde,https://ine.cv/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2007)
+CPV,2008,2.43,INE Cabo Verde,https://ine.cv/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2007)
+CPV,2009,2.33,INE Cabo Verde,https://ine.cv/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2007)
+CPV,2010,2.54,INE Cabo Verde,https://ine.cv/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2007)
+CPV,2011,2.59,INE Cabo Verde,https://ine.cv/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2007)
+CPV,2012,2.42,INE Cabo Verde,https://ine.cv/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2007)
+CPV,2013,2.36,INE Cabo Verde,https://ine.cv/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2007)
+CPV,2014,2.36,INE Cabo Verde,https://ine.cv/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2007)
+CPV,2015,2.33,INE Cabo Verde,https://ine.cv/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2007)
+CPV,2016,2.39,INE Cabo Verde,https://ine.cv/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.42. Editor certainty: Materially Higher
+CPV,2017,2.4,INE Cabo Verde,https://ine.cv/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.47. Editor certainty: Materially Higher
+CPV,2018,2.33,INE Cabo Verde,https://ine.cv/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.53. Editor certainty: Materially Higher
+CPV,2019,2.29,INE Cabo Verde,https://ine.cv/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.59. Editor certainty: Materially Higher
+CPV,2020,2.28,INE Cabo Verde,https://ine.cv/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.69. Editor certainty: Materially Higher
+CPV,2021,2.15,INE Cabo Verde,https://ine.cv/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.60. Editor certainty: Materially Higher
+CPV,2022,2.01,INE Cabo Verde,https://ine.cv/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.48. Editor certainty: Materially Higher
+CPV,2023,1.68,"Wikipedia (TFR from observed births × local-window ratio, outlier-filtered)",,2026-05-14,HIGH,CALCNEW_V7_FRESH,2026-05-14,"Calc New v7 (v7_births_5anchor_±5y). R=0.000249, anchors=[(2018, 9551.0, 2.327, 0.00024364), (2019, 9284.0, 2.286, 0.00024623), (2020, 9211.0, 2.28, 0.00024753), (2021, 8607.0, 2.147, 0.00024945), (2022, 7981.0, 2.008, 0.0002516)], dropped=[], window=±5y. Wiki-observed births 2023: 6,760."
+CPV,2024,1.91,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+CPV,2025,1.86,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+CRI,2016,1.71,Wikipedia: Demographics of [CRI] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.04
+CRI,2017,1.67,Wikipedia: Demographics of [CRI] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.04
+CRI,2018,1.66,Wikipedia: Demographics of [CRI] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.05
+CRI,2019,1.56,Wikipedia: Demographics of [CRI] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.04
+CRI,2020,1.41,Wikipedia: Demographics of [CRI] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.04
+CRI,2021,1.32,Wikipedia: Demographics of [CRI] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.03
+CRI,2022,1.3,Wikipedia: Demographics of [CRI] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.03
+CRI,2023,1.19,Wikipedia: Demographics of [CRI] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.14
+CRI,2024,1.12,Wikipedia: Demographics of [CRI] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.20. Editor certainty: Recheck
+CRI,2025,1.12,Wikipedia: Demographics of [CRI] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.19. Editor certainty: Recheck
+CUB,2016,1.63,Wikipedia: Demographics of [CUB] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.03
+CUB,2017,1.61,Wikipedia: Demographics of [CUB] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.03
+CUB,2018,1.65,Wikipedia: Demographics of [CUB] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.04
+CUB,2019,1.57,Wikipedia: Demographics of [CUB] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.03
+CUB,2020,1.52,Wikipedia: Demographics of [CUB] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.03
+CUB,2021,1.45,Wikipedia: Demographics of [CUB] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.02
+CUB,2023,1.54,Wikipedia: Demographics of [CUB] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.10
+CUB,2024,1.3,Wikipedia: Demographics of [CUB] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.15. Editor certainty: Recheck
+CUB,2025,1.14,"Wikipedia (TFR from observed births × local-window ratio, outlier-filtered)",,2026-05-14,HIGH,CALCNEW_V7_FRESH,2026-05-14,"Calc New v7 (v7_births_5anchor_±5y). R=0.000017, anchors=[(2020, 105038.0, 1.52, 1.447e-05), (2021, 99096.0, 1.45, 1.463e-05), (2022, 95403.0, 1.41, 1.478e-05), (2023, 90392.0, 1.54, 1.704e-05), (2024, 71374.0, 1.3, 1.821e-05)], dropped=[], window=±5y. Wiki-observed births 2025: 68,051."
+CZE,2016,1.63,Wikipedia: Demographics of [CZE] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.02
+CZE,2017,1.69,Wikipedia: Demographics of [CZE] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.02
+CZE,2018,1.71,Wikipedia: Demographics of [CZE] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.03
+CZE,2019,1.71,Wikipedia: Demographics of [CZE] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.04
+CZE,2020,1.71,Wikipedia: Demographics of [CZE] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.05
+CZE,2024,1.37,Wikipedia: Demographics of [CZE] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.09. Editor certainty: Recheck
+CZE,2025,1.32,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+DEU,2022,1.49,Wikipedia: Demographics of [DEU] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.03
+DEU,2024,1.42,Wikipedia: Demographics of [DEU] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.03
+DEU,2025,1.31,Wikipedia: Demographics of [DEU] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.15. Editor certainty: Recheck
+DOM,2001,2.57,ONE Dominican Republic,https://www.one.gob.do/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2001)
+DOM,2002,2.49,ONE Dominican Republic,https://www.one.gob.do/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2001)
+DOM,2003,2.27,ONE Dominican Republic,https://www.one.gob.do/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2001)
+DOM,2004,2.14,ONE Dominican Republic,https://www.one.gob.do/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2001)
+DOM,2005,2.09,ONE Dominican Republic,https://www.one.gob.do/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2001)
+DOM,2006,1.97,ONE Dominican Republic,https://www.one.gob.do/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2001)
+DOM,2007,1.94,ONE Dominican Republic,https://www.one.gob.do/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2001)
+DOM,2008,2.02,ONE Dominican Republic,https://www.one.gob.do/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2001)
+DOM,2009,2.06,ONE Dominican Republic,https://www.one.gob.do/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2001)
+DOM,2010,2.05,ONE Dominican Republic,https://www.one.gob.do/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2001)
+DOM,2011,2.12,ONE Dominican Republic,https://www.one.gob.do/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2001)
+DOM,2012,2.03,ONE Dominican Republic,https://www.one.gob.do/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2001)
+DOM,2013,2.04,ONE Dominican Republic,https://www.one.gob.do/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2001)
+DOM,2014,2.06,ONE Dominican Republic,https://www.one.gob.do/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2001)
+DOM,2015,2.0,ONE Dominican Republic,https://www.one.gob.do/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2001)
+DOM,2016,1.88,ONE Dominican Republic,https://www.one.gob.do/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.53. Editor certainty: Materially Lower
+DOM,2017,1.98,ONE Dominican Republic,https://www.one.gob.do/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.42. Editor certainty: Materially Lower
+DOM,2018,2.06,ONE Dominican Republic,https://www.one.gob.do/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.34. Editor certainty: Materially Lower
+DOM,2019,2.09,ONE Dominican Republic,https://www.one.gob.do/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.28. Editor certainty: Materially Lower
+DOM,2020,1.88,ONE Dominican Republic,https://www.one.gob.do/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.45. Editor certainty: Materially Lower
+DOM,2021,1.97,ONE Dominican Republic,https://www.one.gob.do/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.32. Editor certainty: Materially Lower
+DOM,2022,1.96,ONE Dominican Republic,https://www.one.gob.do/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.31. Editor certainty: Materially Lower
+DOM,2023,1.82,ONE Dominican Republic,https://www.one.gob.do/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.42. Editor certainty: Materially Lower
+DOM,2024,1.61,ONE Dominican Republic,https://www.one.gob.do/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.61. Editor certainty: Materially Lower
+DOM,2025,1.56,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+DZA,2016,3.13,Wikipedia: Demographics of [DZA] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.04
+DZA,2017,3.13,Wikipedia: Demographics of [DZA] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.04
+DZA,2018,2.97,Wikipedia: Demographics of [DZA] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.05
+DZA,2020,2.8,Wikipedia: Demographics of [DZA] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.14
+DZA,2021,2.7,Wikipedia: Demographics of [DZA] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.17
+DZA,2022,2.62,Wikipedia: Demographics of [DZA] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.20
+DZA,2023,2.53,Wikipedia: Demographics of [DZA] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.24
+DZA,2024,2.48,"Wikipedia (TFR from observed births × local-window ratio, outlier-filtered)",,2026-05-14,HIGH,CALCNEW_V7_FRESH,2026-05-14,"Calc New v7 (v7_births_5anchor_±5y). R=0.000003, anchors=[(2019, 1034000.0, 2.99, 2.89e-06), (2020, 988209.0, 2.8, 2.83e-06), (2021, 949799.0, 2.7, 2.84e-06), (2022, 915223.0, 2.62, 2.86e-06), (2023, 895140.0, 2.53, 2.83e-06)], dropped=[], window=±5y. Wiki-observed births 2024: 873,000."
+DZA,2025,2.43,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+EGY,2016,3.25,Wikipedia: Demographics of [EGY] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.10
+EGY,2017,3.12,Wikipedia: Demographics of [EGY] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.19
+EGY,2018,3,Wikipedia: Demographics of [EGY] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.02
+EGY,2019,3.01,Wikipedia: Demographics of [EGY] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.14
+EGY,2020,2.88,Wikipedia: Demographics of [EGY] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.03
+EGY,2021,2.8,Wikipedia: Demographics of [EGY] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.05
+EGY,2023,2.54,Wikipedia: Demographics of [EGY] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.21
+EGY,2024,2.41,Wikipedia: Demographics of [EGY] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.33. Editor certainty: Recheck
+EGY,2025,2.42,"Wikipedia (TFR from observed births × local-window ratio, outlier-filtered)",,2026-05-14,HIGH,CALCNEW_V7_FRESH,2026-05-14,"Calc New v7 (v7_births_5anchor_±5y). R=0.000001, anchors=[(2020, 2235300.0, 2.885, 1.29e-06), (2021, 2184605.0, 2.796, 1.28e-06), (2022, 2193001.0, 2.761, 1.26e-06), (2023, 2044891.0, 2.537, 1.24e-06), (2024, 1968396.0, 2.412, 1.23e-06)], dropped=[], window=±5y. Wiki-observed births 2025: 1,944,700."
+ESP,2022,1.16,Wikipedia: Demographics of [ESP] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.05
+ESP,2023,1.12,Wikipedia: Demographics of [ESP] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.09
+ESP,2024,1.1,Wikipedia: Demographics of [ESP] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.12. Editor certainty: Recheck
+ESP,2025,1.11,Wikipedia: Demographics of [ESP] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.12. Editor certainty: Recheck
+EST,2021,1.61,Wikipedia: Demographics of [EST] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.02
+EST,2023,1.31,Wikipedia: Demographics of [EST] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.04
+EST,2024,1.18,Wikipedia: Demographics of [EST] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.18. Editor certainty: Recheck
+EST,2025,1.16,Wikipedia: Demographics of [EST] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.21. Editor certainty: Recheck
+FIN,2023,1.26,Wikipedia: Demographics of [FIN] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.02
+FIN,2024,1.25,Wikipedia: Demographics of [FIN] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.04
+FJI,2010,3.0,Fiji Bureau of Statistics,https://www.statsfiji.gov.fj/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2010)
+FJI,2011,2.9,Fiji Bureau of Statistics,https://www.statsfiji.gov.fj/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2010)
+FJI,2012,2.84,Fiji Bureau of Statistics,https://www.statsfiji.gov.fj/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2010)
+FJI,2013,2.71,Fiji Bureau of Statistics,https://www.statsfiji.gov.fj/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2010)
+FJI,2014,2.92,Fiji Bureau of Statistics,https://www.statsfiji.gov.fj/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2010)
+FJI,2015,2.91,Fiji Bureau of Statistics,https://www.statsfiji.gov.fj/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2010)
+FJI,2016,2.8,Fiji Bureau of Statistics,https://www.statsfiji.gov.fj/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.28. Editor certainty: Materially Higher
+FJI,2017,2.7,Fiji Bureau of Statistics,https://www.statsfiji.gov.fj/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.24. Editor certainty: Materially Higher
+FJI,2018,2.6,Fiji Bureau of Statistics,https://www.statsfiji.gov.fj/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.18. Editor certainty: Materially Higher
+FJI,2019,2.8,Fiji Bureau of Statistics,https://www.statsfiji.gov.fj/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.41. Editor certainty: Materially Higher
+FRA,2024,1.59,Wikipedia: Demographics of [FRA] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.05. Editor certainty: Recheck
+FRA,2025,1.56,Wikipedia: Demographics of [FRA] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.08. Editor certainty: Recheck
+FRO,2016,2.64,Wikipedia: Demographics of [FRO] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.15
+FRO,2018,2.51,Wikipedia: Demographics of [FRO] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.08
+FRO,2019,2.43,Wikipedia: Demographics of [FRO] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.03
+FRO,2021,2.33,Wikipedia: Demographics of [FRO] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.04
+FRO,2022,2.07,Wikipedia: Demographics of [FRO] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.19
+FRO,2023,1.86,Wikipedia: Demographics of [FRO] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.38
+FRO,2024,1.91,Wikipedia: Demographics of [FRO] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.31. Editor certainty: Recheck
+FRO,2025,2.11,Wikipedia: Demographics of [FRO] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.09. Editor certainty: Recheck
+GBR,2021,1.54,Wikipedia: Demographics of [GBR] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.04
+GBR,2022,1.49,Wikipedia: Demographics of [GBR] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.07
+GBR,2023,1.42,Wikipedia: Demographics of [GBR] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.14
+GBR,2024,1.41,Wikipedia: Demographics of [GBR] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.14. Editor certainty: Recheck
+GBR,2025,1.39,Wikipedia: Demographics of [GBR] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.15. Editor certainty: Recheck
+GEO,2018,2.12,Wikipedia: Demographics of [GEO] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.03
+GEO,2023,1.7,Wikipedia: Demographics of [GEO] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.11
+GEO,2024,1.67,Wikipedia: Demographics of [GEO] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.13. Editor certainty: Recheck
+GEO,2025,1.57,Wikipedia: Demographics of [GEO] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.22. Editor certainty: Recheck
+GLP,2017,1.94,Wikipedia: Demographics of [GLP] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.14
+GLP,2018,2.04,Wikipedia: Demographics of [GLP] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.06
+GLP,2019,2.23,Wikipedia: Demographics of [GLP] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.08
+GLP,2020,2.27,Wikipedia: Demographics of [GLP] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.10
+GLP,2021,2.11,Wikipedia: Demographics of [GLP] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.02
+GLP,2022,2.08,Wikipedia: Demographics of [GLP] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.03
+GLP,2023,2.01,Wikipedia: Demographics of [GLP] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.08
+GLP,2024,1.75,Wikipedia: Demographics of [GLP] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.32. Editor certainty: Recheck
+GLP,2025,1.7,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+GRC,2020,1.41,Wikipedia: Demographics of [GRC] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.02
+GRC,2021,1.45,Wikipedia: Demographics of [GRC] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.02
+GRC,2022,1.33,Wikipedia: Demographics of [GRC] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.02
+GRC,2023,1.28,Wikipedia: Demographics of [GRC] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.05
+GRC,2024,1.26,Wikipedia: Demographics of [GRC] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.08. Editor certainty: Recheck
+GRC,2025,1.23,Wikipedia: Demographics of [GRC] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.11. Editor certainty: Recheck
+GRD,2016,1.79,Wikipedia: Demographics of [GRD] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.17
+GRD,2017,1.71,Wikipedia: Demographics of [GRD] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.27
+GRD,2018,1.69,Wikipedia: Demographics of [GRD] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.16
+GRD,2019,1.8,"Wikipedia (TFR from observed births × local-window ratio, outlier-filtered)",,2026-05-14,HIGH,CALCNEW_V7_FRESH,2026-05-14,"Calc New v7 (v7_births_5anchor_±5y). R=0.001145, anchors=[(2014, 1750.0, 2.003, 0.00114457), (2015, 1694.0, 1.925, 0.00113636), (2016, 1577.0, 1.788, 0.0011338), (2017, 1398.0, 1.705, 0.0012196), (2018, 1520.0, 1.693, 0.00111382)], dropped=[], window=±5y. Wiki-observed births 2019: 1,575."
+GRD,2020,1.77,"Wikipedia (TFR from observed births × local-window ratio, outlier-filtered)",,2026-05-14,HIGH,CALCNEW_V7_FRESH,2026-05-14,"Calc New v7 (v7_births_4anchor_±5y). R=0.001149, anchors=[(2015, 1694.0, 1.925, 0.00113636), (2016, 1577.0, 1.788, 0.0011338), (2017, 1398.0, 1.705, 0.0012196), (2018, 1520.0, 1.693, 0.00111382)], dropped=[], window=±5y. Wiki-observed births 2020: 1,540."
+GRD,2021,1.86,"Wikipedia (TFR from observed births × local-window ratio, outlier-filtered)",,2026-05-14,HIGH,CALCNEW_V7_FRESH,2026-05-14,"Calc New v7 (v7_births_3anchor_±5y). R=0.001153, anchors=[(2016, 1577.0, 1.788, 0.0011338), (2017, 1398.0, 1.705, 0.0012196), (2018, 1520.0, 1.693, 0.00111382)], dropped=[], window=±5y. Wiki-observed births 2021: 1,611."
+GRD,2022,1.71,"Wikipedia (TFR from observed births × local-window ratio, outlier-filtered)",,2026-05-14,HIGH,CALCNEW_V7_FRESH,2026-05-14,"Calc New v7 (v7_births_2anchor_±5y). R=0.001161, anchors=[(2017, 1398.0, 1.705, 0.0012196), (2018, 1520.0, 1.693, 0.00111382)], dropped=[], window=±5y. Wiki-observed births 2022: 1,469."
+GRD,2023,1.6,"Wikipedia (TFR from observed births × local-window ratio, outlier-filtered)",,2026-05-14,HIGH,CALCNEW_V7_FRESH,2026-05-14,"Calc New v7 (v7_births_5anchor_±10y). R=0.001162, anchors=[(2013, 1838.0, 2.129, 0.00115832), (2014, 1750.0, 2.003, 0.00114457), (2015, 1694.0, 1.925, 0.00113636), (2016, 1577.0, 1.788, 0.0011338), (2017, 1398.0, 1.705, 0.0012196)], dropped=[], window=±10y. Wiki-observed births 2023: 1,380."
+GRD,2024,1.39,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+GRD,2025,1.34,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+GRL,2016,2.04,Wikipedia: Demographics of [GRL] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.03
+GRL,2017,2.09,Wikipedia: Demographics of [GRL] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.02
+GRL,2018,1.99,Wikipedia: Demographics of [GRL] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.03
+GRL,2019,2.05,Wikipedia: Demographics of [GRL] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.04
+GRL,2020,2.06,Wikipedia: Demographics of [GRL] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.06
+GRL,2021,1.82,Wikipedia: Demographics of [GRL] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.17
+GRL,2022,1.79,Wikipedia: Demographics of [GRL] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.18
+GRL,2023,1.72,Wikipedia: Demographics of [GRL] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.23
+GRL,2024,1.64,Wikipedia: Demographics of [GRL] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.29. Editor certainty: Recheck
+GRL,2025,1.64,Wikipedia: Demographics of [GRL] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.27. Editor certainty: Recheck
+GTM,2005,3.8,INE Guatemala,https://www.ine.gob.gt/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2005)
+GTM,2006,3.62,INE Guatemala,https://www.ine.gob.gt/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2005)
+GTM,2007,3.46,INE Guatemala,https://www.ine.gob.gt/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2005)
+GTM,2008,3.39,INE Guatemala,https://www.ine.gob.gt/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2005)
+GTM,2009,3.12,INE Guatemala,https://www.ine.gob.gt/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2005)
+GTM,2010,3.1,INE Guatemala,https://www.ine.gob.gt/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2005)
+GTM,2011,3.09,INE Guatemala,https://www.ine.gob.gt/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2005)
+GTM,2012,3.1,INE Guatemala,https://www.ine.gob.gt/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2005)
+GTM,2013,3.05,INE Guatemala,https://www.ine.gob.gt/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2005)
+GTM,2014,3.05,INE Guatemala,https://www.ine.gob.gt/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2005)
+GTM,2015,2.9,INE Guatemala,https://www.ine.gob.gt/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2005)
+GTM,2016,2.8,INE Guatemala,https://www.ine.gob.gt/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.17. Editor certainty: Materially Lower
+GTM,2017,2.66,INE Guatemala,https://www.ine.gob.gt/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.20. Editor certainty: Materially Lower
+GTM,2018,2.62,INE Guatemala,https://www.ine.gob.gt/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.12. Editor certainty: Materially Lower
+GTM,2019,2.46,INE Guatemala,https://www.ine.gob.gt/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.13. Editor certainty: Materially Lower
+GTM,2020,2.27,INE Guatemala,https://www.ine.gob.gt/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.20. Editor certainty: Materially Lower
+GTM,2021,2.26,INE Guatemala,https://www.ine.gob.gt/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.13. Editor certainty: Materially Lower
+GTM,2022,2.24,INE Guatemala,https://www.ine.gob.gt/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.10. Editor certainty: Materially Lower
+GTM,2023,2.21,INE Guatemala,https://www.ine.gob.gt/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.10. Editor certainty: Materially Lower
+GTM,2024,1.91,INE Guatemala,https://www.ine.gob.gt/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.38. Editor certainty: Materially Lower
+GTM,2025,1.86,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+GUF,2016,3.61,Wikipedia: Demographics of [GUF] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.03
+GUF,2017,3.92,Wikipedia: Demographics of [GUF] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.04
+GUF,2018,3.82,Wikipedia: Demographics of [GUF] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.04
+GUF,2019,3.82,Wikipedia: Demographics of [GUF] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.09
+GUF,2020,3.75,Wikipedia: Demographics of [GUF] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.09
+GUF,2021,3.81,Wikipedia: Demographics of [GUF] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.10
+GUF,2022,3.61,Wikipedia: Demographics of [GUF] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.17
+GUF,2023,3.57,Wikipedia: Demographics of [GUF] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.18
+GUF,2024,3.05,Wikipedia: Demographics of [GUF] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.29. Editor certainty: Recheck
+GUF,2025,3.0,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+GUM,2016,3.08,Guam BSP / CDC NCHS,https://bsp.guam.gov/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.09. Editor certainty: Materially Lower
+GUM,2017,2.97,Guam BSP / CDC NCHS,https://bsp.guam.gov/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.12. Editor certainty: Materially Lower
+GUM,2018,2.85,Guam BSP / CDC NCHS,https://bsp.guam.gov/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.14. Editor certainty: Materially Lower
+GUM,2019,2.74,Guam BSP / CDC NCHS,https://bsp.guam.gov/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.20. Editor certainty: Materially Lower
+GUM,2020,2.41,Guam BSP / CDC NCHS,https://bsp.guam.gov/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.49. Editor certainty: Materially Lower
+GUM,2021,2.36,Guam BSP / CDC NCHS,https://bsp.guam.gov/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.50. Editor certainty: Materially Lower
+GUM,2022,2.26,Guam BSP / CDC NCHS,https://bsp.guam.gov/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.56. Editor certainty: Materially Lower
+GUM,2023,2.11,Guam BSP / CDC NCHS,https://bsp.guam.gov/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.67. Editor certainty: Materially Lower
+GUM,2024,2.11,"Wikipedia (TFR from observed births × local-window ratio, outlier-filtered)",,2026-05-14,HIGH,CALCNEW_V7_FRESH,2026-05-14,"Calc New v7 (v7_births_5anchor_±5y). R=0.000889, anchors=[(2019, 3041.0, 2.74, 0.00090102), (2020, 2935.0, 2.41, 0.00082112), (2021, 2623.0, 2.36, 0.00089973), (2022, 2518.0, 2.26, 0.00089754), (2023, 2353.0, 2.11, 0.00089673)], dropped=[], window=±5y. Wiki-observed births 2024: 2,370."
+GUM,2025,2.01,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+HKG,2023,0.75,Wikipedia: Demographics of [HKG] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.03
+HKG,2024,0.84,Wikipedia: Demographics of [HKG] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.11. Editor certainty: Recheck
+HKG,2025,0.69,"Wikipedia (TFR from observed births × local-window ratio, outlier-filtered)",,2026-05-14,HIGH,CALCNEW_V7_FRESH,2026-05-14,"Calc New v7 (v7_births_5anchor_±5y). R=0.000022, anchors=[(2020, 43031.0, 0.883, 2.052e-05), (2021, 36953.0, 0.772, 2.089e-05), (2022, 32512.0, 0.701, 2.156e-05), (2023, 33288.0, 0.751, 2.256e-05), (2024, 36767.0, 0.841, 2.287e-05)], dropped=[], window=±5y. Wiki-observed births 2025: 31,100."
+HND,2013,2.7,INE Honduras,https://www.ine.gob.hn/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2013)
+HND,2014,2.7,INE Honduras,https://www.ine.gob.hn/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2013)
+HND,2015,2.6,INE Honduras,https://www.ine.gob.hn/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2013)
+HND,2016,2.6,INE Honduras,https://www.ine.gob.hn/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.10. Editor certainty: Materially Lower
+HND,2017,2.5,INE Honduras,https://www.ine.gob.hn/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.16. Editor certainty: Materially Lower
+HND,2018,2.5,INE Honduras,https://www.ine.gob.hn/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.15. Editor certainty: Materially Lower
+HND,2019,2.5,INE Honduras,https://www.ine.gob.hn/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.11. Editor certainty: Materially Lower
+HND,2020,2.4,INE Honduras,https://www.ine.gob.hn/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.18. Editor certainty: Materially Lower
+HND,2021,2.17,"Wikipedia (TFR from observed births × local-window ratio, outlier-filtered)",,2026-05-14,HIGH,CALCNEW_V7_FRESH,2026-05-14,"Calc New v7 (v7_births_5anchor_±5y). R=0.000013, anchors=[(2016, 184954.0, 2.6, 1.406e-05), (2017, 182581.0, 2.5, 1.369e-05), (2018, 181165.0, 2.5, 1.38e-05), (2019, 169171.0, 2.5, 1.478e-05), (2022, 157896.0, 1.8406, 1.166e-05)], dropped=[(2020, 2.076e-05)], window=±5y. Wiki-observed births 2021: 165,684."
+HND,2022,1.84,INE Honduras,https://www.ine.gob.hn/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.68. Editor certainty: Materially Lower
+HND,2023,1.83,"Wikipedia (TFR from observed births × local-window ratio, outlier-filtered)",,2026-05-14,HIGH,CALCNEW_V7_FRESH,2026-05-14,"Calc New v7 (v7_births_3anchor_±5y). R=0.000012, anchors=[(2018, 181165.0, 2.5, 1.38e-05), (2019, 169171.0, 2.5, 1.478e-05), (2022, 157896.0, 1.8406, 1.166e-05)], dropped=[(2020, 2.076e-05)], window=±5y. Wiki-observed births 2023: 146,669."
+HND,2024,1.66,"Wikipedia (TFR from observed births × local-window ratio, outlier-filtered)",,2026-05-14,HIGH,CALCNEW_V7_FRESH,2026-05-14,"Calc New v7 (v7_births_2anchor_±5y). R=0.000013, anchors=[(2019, 169171.0, 2.5, 1.478e-05), (2022, 157896.0, 1.8406, 1.166e-05)], dropped=[(2020, 2.076e-05)], window=±5y. Wiki-observed births 2024: 132,284."
+HND,2025,1.69,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+HRV,2016,1.46,Wikipedia: Demographics of [HRV] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.03
+HRV,2017,1.47,Wikipedia: Demographics of [HRV] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.05
+HRV,2018,1.53,Wikipedia: Demographics of [HRV] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.06
+HRV,2019,1.54,Wikipedia: Demographics of [HRV] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.07
+HRV,2020,1.57,Wikipedia: Demographics of [HRV] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.09
+HRV,2025,1.49,Wikipedia: Demographics of [HRV] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.02
+HUN,2018,1.5,Wikipedia: Demographics of [HUN] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.02
+HUN,2019,1.51,Wikipedia: Demographics of [HUN] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.02
+HUN,2023,1.51,Wikipedia: Demographics of [HUN] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.02
+HUN,2024,1.39,Wikipedia: Demographics of [HUN] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.10. Editor certainty: Recheck
+HUN,2025,1.31,Wikipedia: Demographics of [HUN] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.19. Editor certainty: Recheck
+IRL,2020,1.63,Wikipedia: Demographics of [IRL] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.02
+IRL,2021,1.72,Wikipedia: Demographics of [IRL] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.06
+IRL,2022,1.62,Wikipedia: Demographics of [IRL] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.03
+IRL,2023,1.53,Wikipedia: Demographics of [IRL] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.07
+IRL,2024,1.5,Wikipedia: Demographics of [IRL] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.10. Editor certainty: Recheck
+IRL,2025,1.45,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+IRN,2016,2.07,Wikipedia: Demographics of [IRN] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.02
+IRN,2017,2.07,Wikipedia: Demographics of [IRN] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.05
+IRN,2018,1.97,Wikipedia: Demographics of [IRN] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.05
+IRN,2021,1.69,Wikipedia: Demographics of [IRN] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.02
+IRN,2023,1.52,Wikipedia: Demographics of [IRN] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.18
+IRN,2024,1.44,Wikipedia: Demographics of [IRN] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.24. Editor certainty: Recheck
+IRN,2025,1.39,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+ISL,2022,1.67,Wikipedia: Demographics of [ISL] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.08
+ISL,2023,1.65,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+ISL,2024,1.62,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+ISL,2025,1.59,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+ISR,2019,3.01,Wikipedia: Demographics of [ISR] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.02
+ISR,2020,2.9,Wikipedia: Demographics of [ISR] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.04
+ISR,2021,3,Wikipedia: Demographics of [ISR] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.02
+ISR,2022,2.89,Wikipedia: Demographics of [ISR] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.05
+ISR,2023,2.85,Wikipedia: Demographics of [ISR] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.02
+ISR,2024,2.86,Wikipedia: Demographics of [ISR] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.08. Editor certainty: Recheck
+ISR,2025,2.93,"Wikipedia (TFR from observed births × local-window ratio, outlier-filtered)",,2026-05-14,HIGH,CALCNEW_V7_FRESH,2026-05-14,"Calc New v7 (v7_births_5anchor_±5y). R=0.000016, anchors=[(2020, 177307.0, 2.9, 1.636e-05), (2021, 185040.0, 3.0, 1.621e-05), (2022, 181193.0, 2.89, 1.595e-05), (2023, 178724.0, 2.85, 1.595e-05), (2024, 181614.0, 2.86, 1.575e-05)], dropped=[], window=±5y. Wiki-observed births 2025: 183,705."
+ITA,2016,1.36,Wikipedia: Demographics of [ITA] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.02
+ITA,2017,1.34,Wikipedia: Demographics of [ITA] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.02
+ITA,2018,1.31,Wikipedia: Demographics of [ITA] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.02
+ITA,2024,1.18,Wikipedia: Demographics of [ITA] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.03
+ITA,2025,1.14,Wikipedia: Demographics of [ITA] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.07. Editor certainty: Recheck
+JOR,2016,3.38,Wikipedia: Demographics of [JOR] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.31
+JOR,2017,3.14,Wikipedia: Demographics of [JOR] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.15
+JOR,2018,3.19,"Wikipedia (TFR from observed births × local-window ratio, outlier-filtered)",,2026-05-14,HIGH,CALCNEW_V7_FRESH,2026-05-14,"Calc New v7 (v7_births_5anchor_±5y). R=0.000015, anchors=[(2015, 198018.0, 3.38, 1.707e-05), (2016, 197789.0, 3.38, 1.709e-05), (2017, 211441.0, 3.14, 1.485e-05), (2019, 197287.0, 2.9, 1.47e-05), (2020, 176557.0, 2.61, 1.478e-05)], dropped=[(2013, 1.965e-05), (2014, 1.853e-05)], window=±5y. Wiki-observed births 2018: 207,917."
+JOR,2019,2.9,Wikipedia: Demographics of [JOR] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.04
+JOR,2020,2.61,Wikipedia: Demographics of [JOR] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.18
+JOR,2021,2.65,Wikipedia: Demographics of [JOR] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.08
+JOR,2022,2.53,Wikipedia: Demographics of [JOR] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.15
+JOR,2023,2.37,Wikipedia: Demographics of [JOR] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.27
+JOR,2024,2.34,"Wikipedia (TFR from observed births × local-window ratio, outlier-filtered)",,2026-05-14,HIGH,CALCNEW_V7_FRESH,2026-05-14,"Calc New v7 (v7_births_5anchor_±5y). R=0.000014, anchors=[(2019, 197287.0, 2.9, 1.47e-05), (2020, 176557.0, 2.61, 1.478e-05), (2021, 187722.0, 2.65, 1.412e-05), (2022, 181991.0, 2.53, 1.39e-05), (2023, 171980.0, 2.37, 1.378e-05)], dropped=[], window=±5y. Wiki-observed births 2024: 166,405."
+JOR,2025,2.27,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+JPN,2016,1.44,Wikipedia: Demographics of [JPN] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.03
+JPN,2017,1.43,Wikipedia: Demographics of [JPN] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.04
+JPN,2018,1.42,Wikipedia: Demographics of [JPN] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.05
+JPN,2019,1.36,Wikipedia: Demographics of [JPN] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.04
+JPN,2020,1.33,Wikipedia: Demographics of [JPN] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.03
+JPN,2021,1.3,Wikipedia: Demographics of [JPN] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.03
+JPN,2024,1.15,Wikipedia: Demographics of [JPN] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.07. Editor certainty: Recheck
+KAZ,2016,2.77,Wikipedia: Demographics of [KAZ] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.02
+KAZ,2023,2.96,Wikipedia: Demographics of [KAZ] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.05
+KAZ,2024,2.8,Wikipedia: Demographics of [KAZ] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.18. Editor certainty: Recheck
+KAZ,2025,2.57,Wikipedia: Demographics of [KAZ] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.38. Editor certainty: Recheck
+KGZ,2016,3.06,Wikipedia: Demographics of [KGZ] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.04
+KGZ,2017,2.95,Wikipedia: Demographics of [KGZ] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.09
+KGZ,2018,3.3,Wikipedia: Demographics of [KGZ] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.02
+KGZ,2023,2.71,Wikipedia: Demographics of [KGZ] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.09
+KGZ,2024,2.6,Wikipedia: Demographics of [KGZ] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.18. Editor certainty: Recheck
+KGZ,2025,2.55,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+KOR,2016,1.17,Wikipedia: Demographics of [KOR] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.03
+KOR,2018,0.98,Wikipedia: Demographics of [KOR] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.03
+KOR,2019,0.92,Wikipedia: Demographics of [KOR] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.04
+KOR,2020,0.84,Wikipedia: Demographics of [KOR] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.03
+KOR,2021,0.81,Wikipedia: Demographics of [KOR] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.03
+KOR,2024,0.75,Wikipedia: Demographics of [KOR] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.02
+KOR,2025,0.8,Wikipedia: Demographics of [KOR] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.05. Editor certainty: Recheck
+KWT,2018,2.16,Wikipedia: Demographics of [KWT] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.04
+KWT,2020,2.03,Wikipedia: Demographics of [KWT] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.07
+KWT,2021,2.15,Wikipedia: Demographics of [KWT] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.33
+KWT,2024,1.56,Wikipedia: Demographics of [KWT] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.05. Editor certainty: Recheck
+KWT,2025,1.56,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+LAO,2016,2.9,Wikipedia: Demographics of [LAO] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.16
+LAO,2017,2.82,Wikipedia: Demographics of [LAO] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.13
+LAO,2018,2.76,Wikipedia: Demographics of [LAO] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.13
+LAO,2019,2.68,Wikipedia: Demographics of [LAO] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.09
+LAO,2020,2.5,Wikipedia: Demographics of [LAO] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.04
+LAO,2021,2.54,Wikipedia: Demographics of [LAO] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.05
+LAO,2022,2.48,Wikipedia: Demographics of [LAO] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.02
+LAO,2024,2.36,Wikipedia: Demographics of [LAO] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.04
+LAO,2025,2.31,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+LBN,2016,2.18,Wikipedia: Demographics of [LBN] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.21
+LBN,2017,2.17,Wikipedia: Demographics of [LBN] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.20
+LBN,2018,2.15,Wikipedia: Demographics of [LBN] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.20
+LBN,2019,2.13,Wikipedia: Demographics of [LBN] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.20
+LBN,2020,2.1,Wikipedia: Demographics of [LBN] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.21
+LBN,2021,2.09,Wikipedia: Demographics of [LBN] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.19
+LBN,2022,2.07,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+LBN,2023,2.05,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+LBN,2024,2.03,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+LBN,2025,2.01,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+LIE,2016,1.61,Wikipedia: Demographics of [LIE] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.02
+LIE,2017,1.44,Wikipedia: Demographics of [LIE] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.02
+LIE,2018,1.58,Wikipedia: Demographics of [LIE] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.02
+LIE,2022,1.47,Wikipedia: Demographics of [LIE] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.06
+LIE,2023,1.45,Wikipedia: Demographics of [LIE] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.09
+LIE,2024,1.37,Wikipedia: Demographics of [LIE] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.17. Editor certainty: Recheck
+LIE,2025,1.32,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+LKA,2015,2.05,"Department of Census and Statistics, Sri Lanka",http://www.statistics.gov.lk/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2015)
+LKA,2016,1.99,"Department of Census and Statistics, Sri Lanka",http://www.statistics.gov.lk/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.07. Editor certainty: Materially Lower
+LKA,2017,1.94,"Department of Census and Statistics, Sri Lanka",http://www.statistics.gov.lk/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.10. Editor certainty: Materially Lower
+LKA,2018,1.94,"Department of Census and Statistics, Sri Lanka",http://www.statistics.gov.lk/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.09. Editor certainty: Materially Lower
+LKA,2019,1.87,"Department of Census and Statistics, Sri Lanka",http://www.statistics.gov.lk/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.15. Editor certainty: Materially Lower
+LKA,2020,1.76,"Department of Census and Statistics, Sri Lanka",http://www.statistics.gov.lk/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.25. Editor certainty: Materially Lower
+LKA,2021,1.7,"Department of Census and Statistics, Sri Lanka",http://www.statistics.gov.lk/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.30. Editor certainty: Materially Lower
+LKA,2022,1.65,"Department of Census and Statistics, Sri Lanka",http://www.statistics.gov.lk/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.33. Editor certainty: Materially Lower
+LKA,2023,1.49,"Department of Census and Statistics, Sri Lanka",http://www.statistics.gov.lk/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.48. Editor certainty: Materially Lower
+LKA,2024,1.37,"Department of Census and Statistics, Sri Lanka",http://www.statistics.gov.lk/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.58. Editor certainty: Materially Lower
+LKA,2025,1.3,"Wikipedia (TFR from observed births × local-window ratio, outlier-filtered)",,2026-05-14,HIGH,CALCNEW_V7_FRESH,2026-05-14,"Calc New v7 (v7_births_5anchor_±5y). R=0.000006, anchors=[(2020, 301706.0, 1.756, 5.82e-06), (2021, 284848.0, 1.7, 5.97e-06), (2022, 275321.0, 1.65, 5.99e-06), (2023, 247900.0, 1.49, 6.01e-06), (2024, 220761.0, 1.37, 6.21e-06)], dropped=[], window=±5y. Wiki-observed births 2025: 214,570."
+LTU,2019,1.43,Wikipedia: Demographics of [LTU] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.18
+LTU,2020,1.36,Wikipedia: Demographics of [LTU] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.13
+LTU,2021,1.34,Wikipedia: Demographics of [LTU] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.02
+LTU,2023,1.18,Wikipedia: Demographics of [LTU] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.02
+LTU,2024,1.11,Wikipedia: Demographics of [LTU] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.10. Editor certainty: Recheck
+LTU,2025,1.03,Wikipedia: Demographics of [LTU] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.19. Editor certainty: Recheck
+LUX,2022,1.31,Wikipedia: Demographics of [LUX] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.08
+LUX,2023,1.25,Wikipedia: Demographics of [LUX] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.15
+LUX,2024,1.25,Wikipedia: Demographics of [LUX] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.15. Editor certainty: Recheck
+LUX,2025,1.23,Wikipedia: Demographics of [LUX] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.17. Editor certainty: Recheck
+LVA,2024,1.23,Wikipedia: Demographics of [LVA] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.11. Editor certainty: Recheck
+LVA,2025,1.16,Wikipedia: Demographics of [LVA] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.19. Editor certainty: Recheck
+MAC,2019,0.9,Wikipedia: Demographics of [MAC] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.04
+MAC,2020,0.84,Wikipedia: Demographics of [MAC] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.02
+MAC,2022,0.68,Wikipedia: Demographics of [MAC] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.02
+MAC,2023,0.59,Wikipedia: Demographics of [MAC] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.07
+MAC,2024,0.58,Wikipedia: Demographics of [MAC] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.10. Editor certainty: Recheck
+MAC,2025,0.47,Wikipedia: Demographics of [MAC] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.22. Editor certainty: Recheck
+MAR,2022,2.07,Wikipedia: Demographics of [MAR] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.19
+MAR,2023,2.05,Wikipedia: Demographics of [MAR] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.18
+MAR,2024,1.97,Wikipedia: Demographics of [MAR] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.24. Editor certainty: Recheck
+MAR,2025,1.9,Wikipedia: Demographics of [MAR] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.28. Editor certainty: Recheck
+MDA,2023,1.61,Wikipedia: Demographics of [MDA] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.12
+MDA,2024,1.66,Wikipedia: Demographics of [MDA] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.07. Editor certainty: Recheck
+MDA,2025,1.65,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+MDV,2016,1.8,Wikipedia: Demographics of [MDV] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.10
+MDV,2017,1.72,Wikipedia: Demographics of [MDV] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.08
+MDV,2018,1.65,Wikipedia: Demographics of [MDV] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.06
+MDV,2019,1.56,Wikipedia: Demographics of [MDV] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.08
+MDV,2020,1.57,Wikipedia: Demographics of [MDV] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.04
+MDV,2021,1.51,Wikipedia: Demographics of [MDV] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.09
+MDV,2022,1.48,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+MDV,2023,1.46,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+MDV,2024,1.44,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+MDV,2025,1.41,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+MEX,2016,2.19,Wikipedia: Demographics of [MEX] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.10
+MEX,2017,2.17,Wikipedia: Demographics of [MEX] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.13
+MEX,2018,2.07,Wikipedia: Demographics of [MEX] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.04
+MEX,2019,2.09,Wikipedia: Demographics of [MEX] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.07
+MEX,2020,1.63,Wikipedia: Demographics of [MEX] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.36
+MEX,2021,1.91,Wikipedia: Demographics of [MEX] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.06
+MEX,2023,1.6,Wikipedia: Demographics of [MEX] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.31
+MEX,2024,1.38,Wikipedia: Demographics of [MEX] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.51. Editor certainty: Recheck
+MEX,2025,1.33,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+MLT,2022,1.08,Wikipedia: Demographics of [MLT] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.02
+MLT,2023,1.07,Wikipedia: Demographics of [MLT] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.03
+MLT,2024,1,Wikipedia: Demographics of [MLT] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.11. Editor certainty: Recheck
+MLT,2025,1.05,"Wikipedia (TFR from observed births × local-window ratio, outlier-filtered)",,2026-05-14,HIGH,CALCNEW_V7_FRESH,2026-05-14,"Calc New v7 (v7_births_5anchor_±5y). R=0.000240, anchors=[(2020, 4414.0, 1.13, 0.000256), (2021, 4395.0, 1.13, 0.00025711), (2022, 4309.0, 1.08, 0.00025064), (2023, 4462.0, 1.07, 0.0002398), (2024, 4374.0, 1.0, 0.00022862)], dropped=[], window=±5y. Wiki-observed births 2025: 4,381."
+MNE,2016,1.78,Wikipedia: Demographics of [MNE] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.02
+MNE,2017,1.77,Wikipedia: Demographics of [MNE] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.02
+MNE,2018,1.75,Wikipedia: Demographics of [MNE] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.03
+MNE,2019,1.75,Wikipedia: Demographics of [MNE] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.06
+MNE,2020,1.74,Wikipedia: Demographics of [MNE] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.09
+MNE,2021,1.74,Wikipedia: Demographics of [MNE] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.11
+MNE,2022,1.75,Wikipedia: Demographics of [MNE] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.13
+MNE,2023,1.75,Wikipedia: Demographics of [MNE] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.05
+MNE,2024,1.75,Wikipedia: Demographics of [MNE] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.05. Editor certainty: Recheck
+MNE,2025,1.72,"Wikipedia (TFR from observed births × local-window ratio, outlier-filtered)",,2026-05-14,HIGH,CALCNEW_V7_FRESH,2026-05-14,"Calc New v7 (v7_births_5anchor_±5y). R=0.000249, anchors=[(2020, 7097.0, 1.74, 0.00024517), (2021, 7033.0, 1.74, 0.00024741), (2022, 7021.0, 1.75, 0.00024925), (2023, 7008.0, 1.75, 0.00024971), (2024, 6977.0, 1.75, 0.00025082)], dropped=[], window=±5y. Wiki-observed births 2025: 6,910."
+MNG,2017,2.79,Wikipedia: Demographics of [MNG] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.10
+MNG,2021,2.95,Wikipedia: Demographics of [MNG] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.12
+MNG,2022,2.71,Wikipedia: Demographics of [MNG] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.04
+MNG,2023,2.71,Wikipedia: Demographics of [MNG] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.02
+MNG,2024,2.48,Wikipedia: Demographics of [MNG] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.15. Editor certainty: Recheck
+MNG,2025,2.4,Wikipedia: Demographics of [MNG] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.18. Editor certainty: Recheck
+MNP,2001,1.65,CNMI / CDC NCHS,https://commerce.gov.mp/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2001)
+MNP,2002,1.27,CNMI / CDC NCHS,https://commerce.gov.mp/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2001)
+MNP,2003,1.29,CNMI / CDC NCHS,https://commerce.gov.mp/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2001)
+MNP,2004,1.23,CNMI / CDC NCHS,https://commerce.gov.mp/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2001)
+MNP,2005,1.16,CNMI / CDC NCHS,https://commerce.gov.mp/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2001)
+MNP,2006,1.21,CNMI / CDC NCHS,https://commerce.gov.mp/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2001)
+MNP,2007,1.13,CNMI / CDC NCHS,https://commerce.gov.mp/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2001)
+MNP,2008,2.3,CNMI / CDC NCHS,https://commerce.gov.mp/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2001)
+MNP,2009,2.27,CNMI / CDC NCHS,https://commerce.gov.mp/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2001)
+MNP,2010,2.19,CNMI / CDC NCHS,https://commerce.gov.mp/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2001)
+MNP,2011,2.17,CNMI / CDC NCHS,https://commerce.gov.mp/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2001)
+MNP,2012,1.83,CNMI / CDC NCHS,https://commerce.gov.mp/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2001)
+MNP,2013,1.58,CNMI / CDC NCHS,https://commerce.gov.mp/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2001)
+MNP,2014,1.58,CNMI / CDC NCHS,https://commerce.gov.mp/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2001)
+MNP,2015,1.08,CNMI / CDC NCHS,https://commerce.gov.mp/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2001)
+MNP,2016,1.5,CNMI / CDC NCHS,https://commerce.gov.mp/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -1.42. Editor certainty: Materially Lower
+MNP,2017,1.33,CNMI / CDC NCHS,https://commerce.gov.mp/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -1.43. Editor certainty: Materially Lower
+MNP,2018,2.1,CNMI / CDC NCHS,https://commerce.gov.mp/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.54. Editor certainty: Materially Lower
+MNP,2019,2.64,CNMI / CDC NCHS,https://commerce.gov.mp/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.08. Editor certainty: Materially Lower
+MNP,2020,2.41,CNMI / CDC NCHS,https://commerce.gov.mp/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.08. Editor certainty: Materially Lower
+MNP,2021,2.2,CNMI / CDC NCHS,https://commerce.gov.mp/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.24. Editor certainty: Materially Lower
+MNP,2022,1.73,CNMI / CDC NCHS,https://commerce.gov.mp/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.66. Editor certainty: Materially Lower
+MNP,2023,2.13,CNMI / CDC NCHS,https://commerce.gov.mp/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.22. Editor certainty: Materially Lower
+MNP,2024,2.09,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+MNP,2025,2.06,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+MTQ,2016,1.9,Wikipedia: Demographics of [MTQ] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.06
+MTQ,2017,1.87,Wikipedia: Demographics of [MTQ] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.10
+MTQ,2018,1.9,Wikipedia: Demographics of [MTQ] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.09
+MTQ,2019,1.97,Wikipedia: Demographics of [MTQ] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.05
+MTQ,2020,1.85,Wikipedia: Demographics of [MTQ] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.18
+MTQ,2021,1.89,Wikipedia: Demographics of [MTQ] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.15
+MTQ,2022,1.85,Wikipedia: Demographics of [MTQ] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.17
+MTQ,2023,1.79,Wikipedia: Demographics of [MTQ] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.22
+MTQ,2024,1.52,Wikipedia: Demographics of [MTQ] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.47. Editor certainty: Recheck
+MTQ,2025,1.47,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+MUS,2016,1.41,Wikipedia: Demographics of [MUS] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.06
+MUS,2017,1.46,Wikipedia: Demographics of [MUS] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.06
+MUS,2018,1.42,Wikipedia: Demographics of [MUS] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.05
+MUS,2019,1.41,Wikipedia: Demographics of [MUS] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.06
+MUS,2020,1.46,Wikipedia: Demographics of [MUS] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.07
+MUS,2021,1.42,Wikipedia: Demographics of [MUS] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.07
+MUS,2022,1.33,Wikipedia: Demographics of [MUS] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.06
+MUS,2023,1.4,Wikipedia: Demographics of [MUS] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.16
+MUS,2024,1.44,Wikipedia: Demographics of [MUS] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.21. Editor certainty: Recheck
+MUS,2025,1.46,"Wikipedia (TFR from observed births × local-window ratio, outlier-filtered)",,2026-05-14,HIGH,CALCNEW_V7_FRESH,2026-05-14,"Calc New v7 (v7_births_5anchor_±5y). R=0.000110, anchors=[(2020, 13465.0, 1.46, 0.00010843), (2021, 12982.0, 1.42, 0.00010938), (2022, 12096.0, 1.33, 0.00010995), (2023, 12872.0, 1.4, 0.00010876), (2024, 12853.0, 1.44, 0.00011204)], dropped=[], window=±5y. Wiki-observed births 2025: 13,250."
+MYS,2016,1.92,Wikipedia: Demographics of [MYS] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.02
+MYS,2020,1.72,Wikipedia: Demographics of [MYS] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.04
+MYS,2021,1.7,Wikipedia: Demographics of [MYS] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.15
+MYS,2022,1.63,Wikipedia: Demographics of [MYS] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.08
+MYS,2023,1.73,Wikipedia: Demographics of [MYS] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.18
+MYS,2025,1.41,Wikipedia: Demographics of [MYS] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.12. Editor certainty: Recheck
+MYT,2016,4.95,Wikipedia: Demographics of [MYT] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.25
+MYT,2017,4.92,Wikipedia: Demographics of [MYT] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.26
+MYT,2022,4.55,Wikipedia: Demographics of [MYT] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.11
+MYT,2023,4.21,Wikipedia: Demographics of [MYT] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.41
+MYT,2024,3.58,Wikipedia: Demographics of [MYT] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.98. Editor certainty: Recheck
+MYT,2025,3.53,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+NIC,2016,2.43,Wikipedia: Demographics of [NIC] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.02
+NIC,2017,2.42,Wikipedia: Demographics of [NIC] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.04
+NIC,2018,2.42,Wikipedia: Demographics of [NIC] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.07
+NIC,2019,2.28,Wikipedia: Demographics of [NIC] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.04
+NIC,2020,2.16,Wikipedia: Demographics of [NIC] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.14
+NIC,2021,2.09,"Wikipedia (TFR from observed births × local-window ratio, outlier-filtered)",,2026-05-14,HIGH,CALCNEW_V7_FRESH,2026-05-14,"Calc New v7 (v7_births_5anchor_±5y). R=0.000017, anchors=[(2016, 139595.0, 2.43, 1.741e-05), (2017, 139487.0, 2.42, 1.735e-05), (2018, 139126.0, 2.42, 1.739e-05), (2019, 131673.0, 2.28, 1.732e-05), (2020, 124365.0, 2.16, 1.737e-05)], dropped=[], window=±5y. Wiki-observed births 2021: 120,473."
+NIC,2022,2.03,"Wikipedia (TFR from observed births × local-window ratio, outlier-filtered)",,2026-05-14,HIGH,CALCNEW_V7_FRESH,2026-05-14,"Calc New v7 (v7_births_5anchor_±5y). R=0.000017, anchors=[(2017, 139487.0, 2.42, 1.735e-05), (2018, 139126.0, 2.42, 1.739e-05), (2019, 131673.0, 2.28, 1.732e-05), (2020, 124365.0, 2.16, 1.737e-05), (2023, 106439.0, 1.8, 1.691e-05)], dropped=[], window=±5y. Wiki-observed births 2022: 118,118."
+NIC,2023,1.8,Wikipedia: Demographics of [NIC] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.42
+NIC,2024,1.75,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+NIC,2025,1.7,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+NOR,2024,1.44,Wikipedia: Demographics of [NOR] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.03
+NOR,2025,1.48,Wikipedia: Demographics of [NOR] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.06. Editor certainty: Recheck
+NZL,2019,1.75,Wikipedia: Demographics of [NZL] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.03
+NZL,2023,1.57,Wikipedia: Demographics of [NZL] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.10
+NZL,2024,1.57,Wikipedia: Demographics of [NZL] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.09. Editor certainty: Recheck
+NZL,2025,1.55,Wikipedia: Demographics of [NZL] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.10. Editor certainty: Recheck
+OMN,2016,2.89,Wikipedia: Demographics of [OMN] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.06
+OMN,2017,2.9,Wikipedia: Demographics of [OMN] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.02
+OMN,2018,2.86,Wikipedia: Demographics of [OMN] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.05
+OMN,2020,2.66,Wikipedia: Demographics of [OMN] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.02
+OMN,2022,2.31,Wikipedia: Demographics of [OMN] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.14
+OMN,2023,2.01,Wikipedia: Demographics of [OMN] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.52
+OMN,2024,1.91,Wikipedia: Demographics of [OMN] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.60. Editor certainty: Recheck
+OMN,2025,1.86,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+PAN,2016,2.42,Wikipedia: Demographics of [PAN] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.08
+PAN,2017,2.4,Wikipedia: Demographics of [PAN] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.06
+PAN,2019,2.24,Wikipedia: Demographics of [PAN] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.05
+PAN,2020,2.14,Wikipedia: Demographics of [PAN] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.04
+PAN,2021,2.02,Wikipedia: Demographics of [PAN] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.13
+PAN,2022,1.92,Wikipedia: Demographics of [PAN] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.22
+PAN,2023,1.79,Wikipedia: Demographics of [PAN] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.33
+PAN,2024,1.79,Wikipedia: Demographics of [PAN] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.32. Editor certainty: Recheck
+PAN,2025,1.74,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+PER,2016,2.5,Wikipedia: Demographics of [PER] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.31
+PER,2017,2.4,Wikipedia: Demographics of [PER] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.25
+PER,2018,2.2,Wikipedia: Demographics of [PER] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.08
+PER,2019,2,Wikipedia: Demographics of [PER] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.09
+PER,2020,1.9,Wikipedia: Demographics of [PER] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.16
+PER,2021,2.32,Wikipedia: Demographics of [PER] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.29
+PER,2022,2.1,Wikipedia: Demographics of [PER] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.10
+PER,2023,1.8,Wikipedia: Demographics of [PER] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.18
+PER,2024,1.67,Wikipedia: Demographics of [PER] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.29. Editor certainty: Recheck
+PER,2025,2.07,Wikipedia: Demographics of [PER] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.13. Editor certainty: Recheck
+PHL,2016,2.58,"Wikipedia (TFR from observed births × local-window ratio, outlier-filtered)",,2026-05-14,HIGH,CALCNEW_V7_FRESH,2026-05-14,"Calc New v7 (v7_births_4anchor_±10y). R=0.000001, anchors=[(2017, 1700618.0, 2.7, 1.59e-06), (2022, 1455393.0, 1.9, 1.31e-06), (2023, 1448522.0, 1.8, 1.24e-06), (2024, 1358989.0, 1.73, 1.27e-06)], dropped=[(2008, 1.85e-06)], window=±10y. Wiki-observed births 2016: 1,731,289."
+PHL,2017,2.7,Wikipedia: Demographics of [PHL] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.17
+PHL,2018,2.49,"Wikipedia (TFR from observed births × local-window ratio, outlier-filtered)",,2026-05-14,HIGH,CALCNEW_V7_FRESH,2026-05-14,"Calc New v7 (v7_births_3anchor_±5y). R=0.000001, anchors=[(2017, 1700618.0, 2.7, 1.59e-06), (2022, 1455393.0, 1.9, 1.31e-06), (2023, 1448522.0, 1.8, 1.24e-06)], dropped=[], window=±5y. Wiki-observed births 2018: 1,668,120."
+PHL,2019,2.34,"Wikipedia (TFR from observed births × local-window ratio, outlier-filtered)",,2026-05-14,HIGH,CALCNEW_V7_FRESH,2026-05-14,"Calc New v7 (v7_births_4anchor_±5y). R=0.000001, anchors=[(2017, 1700618.0, 2.7, 1.59e-06), (2022, 1455393.0, 1.9, 1.31e-06), (2023, 1448522.0, 1.8, 1.24e-06), (2024, 1358989.0, 1.73, 1.27e-06)], dropped=[], window=±5y. Wiki-observed births 2019: 1,674,302."
+PHL,2020,2.45,Wikipedia: Demographics of [PHL] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.37
+PHL,2021,1.8,"Wikipedia (TFR from observed births × local-window ratio, outlier-filtered)",,2026-05-14,HIGH,CALCNEW_V7_FRESH,2026-05-14,"Calc New v7 (v7_births_4anchor_±5y). R=0.000001, anchors=[(2017, 1700618.0, 2.7, 1.59e-06), (2022, 1455393.0, 1.9, 1.31e-06), (2023, 1448522.0, 1.8, 1.24e-06), (2024, 1358989.0, 1.73, 1.27e-06)], dropped=[], window=±5y. Wiki-observed births 2021: 1,364,739."
+PHL,2022,1.9,Wikipedia: Demographics of [PHL] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.03
+PHL,2023,1.8,Wikipedia: Demographics of [PHL] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.12
+PHL,2024,1.73,Wikipedia: Demographics of [PHL] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.16. Editor certainty: Recheck
+PHL,2025,1.7,Wikipedia: Demographics of [PHL] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.18. Editor certainty: Recheck
+POL,2016,1.36,Wikipedia: Demographics of [POL] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.03
+POL,2017,1.45,Wikipedia: Demographics of [POL] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.02
+POL,2019,1.42,Wikipedia: Demographics of [POL] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.02
+POL,2023,1.16,Wikipedia: Demographics of [POL] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.14
+POL,2024,1.1,Wikipedia: Demographics of [POL] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.20. Editor certainty: Recheck
+POL,2025,1.07,Wikipedia: Demographics of [POL] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.24. Editor certainty: Recheck
+PRI,2016,1.24,Wikipedia: Demographics of [PRI] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.02
+PRI,2017,1.1,Wikipedia: Demographics of [PRI] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.03
+PRI,2021,0.91,Wikipedia: Demographics of [PRI] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.03
+PRI,2022,0.91,Wikipedia: Demographics of [PRI] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.03
+PRI,2023,0.9,Wikipedia: Demographics of [PRI] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.04
+PRI,2024,0.87,"Wikipedia (TFR from observed births × local-window ratio, outlier-filtered)",,2026-05-14,HIGH,CALCNEW_V7_FRESH,2026-05-14,"Calc New v7 (v7_births_5anchor_±5y). R=0.000048, anchors=[(2019, 20409.0, 0.98, 4.802e-05), (2020, 18933.0, 0.92, 4.859e-05), (2021, 18833.0, 0.91, 4.832e-05), (2022, 19112.0, 0.91, 4.761e-05), (2023, 18641.0, 0.9, 4.828e-05)], dropped=[], window=±5y. Wiki-observed births 2024: 18,146."
+PRI,2025,0.87,"Wikipedia (TFR from observed births × local-window ratio, outlier-filtered)",,2026-05-14,HIGH,CALCNEW_V7_FRESH,2026-05-14,"Calc New v7 (v7_births_4anchor_±5y). R=0.000048, anchors=[(2020, 18933.0, 0.92, 4.859e-05), (2021, 18833.0, 0.91, 4.832e-05), (2022, 19112.0, 0.91, 4.761e-05), (2023, 18641.0, 0.9, 4.828e-05)], dropped=[], window=±5y. Wiki-observed births 2025: 18,003."
+PRT,2022,1.42,Wikipedia: Demographics of [PRT] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.03
+PRT,2023,1.44,Wikipedia: Demographics of [PRT] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.07
+PRT,2024,1.4,Wikipedia: Demographics of [PRT] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.11. Editor certainty: Recheck
+PRT,2025,1.46,"Wikipedia (TFR from observed births × local-window ratio, outlier-filtered)",,2026-05-14,HIGH,CALCNEW_V7_FRESH,2026-05-14,"Calc New v7 (v7_births_4anchor_±5y). R=0.000017, anchors=[(2020, 84530.0, 1.4, 1.656e-05), (2021, 79582.0, 1.34, 1.684e-05), (2022, 83671.0, 1.42, 1.697e-05), (2024, 84642.0, 1.4, 1.654e-05)], dropped=[], window=±5y. Wiki-observed births 2025: 87,764."
+PRY,2020,2.41,Wikipedia: Demographics of [PRY] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.09
+PRY,2021,2.76,"Wikipedia (TFR from observed births × local-window ratio, outlier-filtered)",,2026-05-14,HIGH,CALCNEW_V7_FRESH,2026-05-14,"Calc New v7 (v7_births_2anchor_±5y). R=0.000024, anchors=[(2020, 95649.0, 2.41, 2.52e-05), (2024, 88394.0, 1.95, 2.206e-05)], dropped=[], window=±5y. Wiki-observed births 2021: 112,966."
+PRY,2022,2.65,"Wikipedia (TFR from observed births × local-window ratio, outlier-filtered)",,2026-05-14,HIGH,CALCNEW_V7_FRESH,2026-05-14,"Calc New v7 (v7_births_2anchor_±5y). R=0.000024, anchors=[(2020, 95649.0, 2.41, 2.52e-05), (2024, 88394.0, 1.95, 2.206e-05)], dropped=[], window=±5y. Wiki-observed births 2022: 111,992."
+PRY,2023,2.28,"Wikipedia (TFR from observed births × local-window ratio, outlier-filtered)",,2026-05-14,HIGH,CALCNEW_V7_FRESH,2026-05-14,"Calc New v7 (v7_births_2anchor_±5y). R=0.000023, anchors=[(2020, 95649.0, 2.41, 2.52e-05), (2024, 88394.0, 1.95, 2.206e-05)], dropped=[], window=±5y. Wiki-observed births 2023: 99,965."
+PRY,2024,1.95,Wikipedia: Demographics of [PRY] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.47. Editor certainty: Recheck
+PRY,2025,1.9,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+PYF,2016,1.87,ISPF (French Polynesia),https://www.ispf.pf/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.11. Editor certainty: Materially Higher
+PYF,2017,1.81,ISPF (French Polynesia),https://www.ispf.pf/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.14. Editor certainty: Materially Higher
+PYF,2018,1.82,ISPF (French Polynesia),https://www.ispf.pf/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.17. Editor certainty: Materially Higher
+PYF,2019,1.76,ISPF (French Polynesia),https://www.ispf.pf/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.19. Editor certainty: Materially Higher
+PYF,2020,1.81,ISPF (French Polynesia),https://www.ispf.pf/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.24. Editor certainty: Materially Higher
+PYF,2021,1.82,ISPF (French Polynesia),https://www.ispf.pf/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.29. Editor certainty: Materially Higher
+PYF,2022,1.8,ISPF (French Polynesia),https://www.ispf.pf/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.29. Editor certainty: Materially Higher
+PYF,2023,1.76,ISPF (French Polynesia),https://www.ispf.pf/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.26. Editor certainty: Materially Higher
+PYF,2024,1.66,ISPF (French Polynesia),https://www.ispf.pf/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.17. Editor certainty: Materially Higher
+PYF,2025,1.61,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+QAT,2022,1.51,Wikipedia: Demographics of [QAT] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.23
+QAT,2023,1.61,"Wikipedia (TFR from observed births × local-window ratio, outlier-filtered)",,2026-05-14,HIGH,CALCNEW_V7_FRESH,2026-05-14,"Calc New v7 (v7_births_5anchor_±5y). R=0.000059, anchors=[(2018, 28069.0, 1.75, 6.235e-05), (2019, 28412.0, 1.73, 6.089e-05), (2020, 29015.0, 1.67, 5.756e-05), (2021, 26338.0, 1.6, 6.075e-05), (2022, 26316.0, 1.51, 5.738e-05)], dropped=[], window=±5y. Wiki-observed births 2023: 27,322."
+QAT,2024,1.41,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+QAT,2025,1.36,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+REU,2016,2.43,Wikipedia: Demographics of [REU] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.21
+REU,2017,2.44,Wikipedia: Demographics of [REU] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.21
+REU,2018,2.39,Wikipedia: Demographics of [REU] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.23
+REU,2019,2.36,Wikipedia: Demographics of [REU] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.23
+REU,2020,2.36,Wikipedia: Demographics of [REU] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.21
+REU,2021,2.42,Wikipedia: Demographics of [REU] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.23
+REU,2022,2.37,Wikipedia: Demographics of [REU] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.18
+REU,2023,2.32,Wikipedia: Demographics of [REU] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.15
+REU,2024,2.12,Wikipedia: Demographics of [REU] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.03
+REU,2025,2.07,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+ROU,2018,1.81,Wikipedia: Demographics of [ROU] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.06
+ROU,2019,1.86,Wikipedia: Demographics of [ROU] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.15
+ROU,2020,1.8,Wikipedia: Demographics of [ROU] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.07
+ROU,2021,1.81,Wikipedia: Demographics of [ROU] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.09
+ROU,2023,1.54,Wikipedia: Demographics of [ROU] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.17
+ROU,2024,1.39,Wikipedia: Demographics of [ROU] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.32. Editor certainty: Recheck
+ROU,2025,1.35,Wikipedia: Demographics of [ROU] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.36. Editor certainty: Recheck
+RUS,2022,1.42,Wikipedia: Demographics of [RUS] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.03
+RUS,2023,1.41,Wikipedia: Demographics of [RUS] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.04
+RUS,2024,1.4,Wikipedia: Demographics of [RUS] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.06. Editor certainty: Recheck
+RUS,2025,1.37,Wikipedia: Demographics of [RUS] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.09. Editor certainty: Recheck
+SAU,2016,2.67,Wikipedia: Demographics of [SAU] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.02
+SAU,2017,2.69,Wikipedia: Demographics of [SAU] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.02
+SAU,2020,2.29,Wikipedia: Demographics of [SAU] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.02
+SAU,2021,2.19,Wikipedia: Demographics of [SAU] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.02
+SAU,2023,2,Wikipedia: Demographics of [SAU] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.28
+SAU,2024,2,Wikipedia: Demographics of [SAU] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.31. Editor certainty: Recheck
+SAU,2025,1.95,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+SGP,1980,1.82,SingStat (Singapore Department of Statistics),https://www.singstat.gov.sg/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1980)
+SGP,1981,1.78,SingStat (Singapore Department of Statistics),https://www.singstat.gov.sg/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1980)
+SGP,1982,1.74,SingStat (Singapore Department of Statistics),https://www.singstat.gov.sg/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1980)
+SGP,1983,1.61,SingStat (Singapore Department of Statistics),https://www.singstat.gov.sg/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1980)
+SGP,1984,1.62,SingStat (Singapore Department of Statistics),https://www.singstat.gov.sg/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1980)
+SGP,1985,1.61,SingStat (Singapore Department of Statistics),https://www.singstat.gov.sg/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1980)
+SGP,1986,1.43,SingStat (Singapore Department of Statistics),https://www.singstat.gov.sg/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1980)
+SGP,1987,1.62,SingStat (Singapore Department of Statistics),https://www.singstat.gov.sg/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1980)
+SGP,1988,1.96,SingStat (Singapore Department of Statistics),https://www.singstat.gov.sg/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1980)
+SGP,1989,1.75,SingStat (Singapore Department of Statistics),https://www.singstat.gov.sg/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1980)
+SGP,1990,1.83,SingStat (Singapore Department of Statistics),https://www.singstat.gov.sg/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1980)
+SGP,1991,1.73,SingStat (Singapore Department of Statistics),https://www.singstat.gov.sg/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1980)
+SGP,1992,1.72,SingStat (Singapore Department of Statistics),https://www.singstat.gov.sg/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1980)
+SGP,1993,1.74,SingStat (Singapore Department of Statistics),https://www.singstat.gov.sg/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1980)
+SGP,1994,1.71,SingStat (Singapore Department of Statistics),https://www.singstat.gov.sg/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1980)
+SGP,1995,1.67,SingStat (Singapore Department of Statistics),https://www.singstat.gov.sg/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1980)
+SGP,1996,1.66,SingStat (Singapore Department of Statistics),https://www.singstat.gov.sg/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1980)
+SGP,1997,1.61,SingStat (Singapore Department of Statistics),https://www.singstat.gov.sg/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1980)
+SGP,1998,1.48,SingStat (Singapore Department of Statistics),https://www.singstat.gov.sg/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1980)
+SGP,1999,1.47,SingStat (Singapore Department of Statistics),https://www.singstat.gov.sg/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1980)
+SGP,2000,1.6,SingStat (Singapore Department of Statistics),https://www.singstat.gov.sg/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1980)
+SGP,2001,1.41,SingStat (Singapore Department of Statistics),https://www.singstat.gov.sg/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1980)
+SGP,2002,1.37,SingStat (Singapore Department of Statistics),https://www.singstat.gov.sg/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1980)
+SGP,2003,1.27,SingStat (Singapore Department of Statistics),https://www.singstat.gov.sg/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1980)
+SGP,2004,1.26,SingStat (Singapore Department of Statistics),https://www.singstat.gov.sg/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1980)
+SGP,2005,1.26,SingStat (Singapore Department of Statistics),https://www.singstat.gov.sg/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1980)
+SGP,2006,1.28,SingStat (Singapore Department of Statistics),https://www.singstat.gov.sg/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1980)
+SGP,2007,1.29,SingStat (Singapore Department of Statistics),https://www.singstat.gov.sg/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1980)
+SGP,2008,1.28,SingStat (Singapore Department of Statistics),https://www.singstat.gov.sg/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1980)
+SGP,2009,1.22,SingStat (Singapore Department of Statistics),https://www.singstat.gov.sg/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1980)
+SGP,2010,1.15,SingStat (Singapore Department of Statistics),https://www.singstat.gov.sg/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1980)
+SGP,2011,1.2,SingStat (Singapore Department of Statistics),https://www.singstat.gov.sg/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1980)
+SGP,2012,1.29,SingStat (Singapore Department of Statistics),https://www.singstat.gov.sg/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1980)
+SGP,2013,1.19,SingStat (Singapore Department of Statistics),https://www.singstat.gov.sg/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1980)
+SGP,2014,1.25,SingStat (Singapore Department of Statistics),https://www.singstat.gov.sg/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1980)
+SGP,2015,1.24,SingStat (Singapore Department of Statistics),https://www.singstat.gov.sg/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1980)
+SGP,2016,1.2,SingStat (Singapore Department of Statistics),https://www.singstat.gov.sg/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.26. Editor certainty: Materially Higher
+SGP,2017,1.16,SingStat (Singapore Department of Statistics),https://www.singstat.gov.sg/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.22. Editor certainty: Materially Higher
+SGP,2018,1.14,SingStat (Singapore Department of Statistics),https://www.singstat.gov.sg/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.19. Editor certainty: Materially Higher
+SGP,2019,1.14,SingStat (Singapore Department of Statistics),https://www.singstat.gov.sg/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.20. Editor certainty: Materially Higher
+SGP,2020,1.1,SingStat (Singapore Department of Statistics),https://www.singstat.gov.sg/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.16. Editor certainty: Materially Higher
+SGP,2021,1.12,SingStat (Singapore Department of Statistics),https://www.singstat.gov.sg/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.18. Editor certainty: Materially Higher
+SGP,2022,1.04,SingStat (Singapore Department of Statistics),https://www.singstat.gov.sg/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.10
+SGP,2023,0.97,SingStat (Singapore Department of Statistics),https://www.singstat.gov.sg/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.03
+SGP,2024,0.97,SingStat (Singapore Department of Statistics),https://www.singstat.gov.sg/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.02
+SGP,2025,0.87,SingStat (Singapore Department of Statistics),https://www.singstat.gov.sg/,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.09. Editor certainty: Recheck
+SLB,1979,6.78,Solomon Islands National Statistics Office,https://www.statistics.gov.sb/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1979)
+SLB,1980,6.71,Solomon Islands National Statistics Office,https://www.statistics.gov.sb/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1979)
+SLB,1981,6.61,Solomon Islands National Statistics Office,https://www.statistics.gov.sb/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1979)
+SLB,1982,6.52,Solomon Islands National Statistics Office,https://www.statistics.gov.sb/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1979)
+SLB,1983,6.42,Solomon Islands National Statistics Office,https://www.statistics.gov.sb/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1979)
+SLB,1984,6.31,Solomon Islands National Statistics Office,https://www.statistics.gov.sb/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1979)
+SLB,1985,6.22,Solomon Islands National Statistics Office,https://www.statistics.gov.sb/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1979)
+SLB,1986,6.11,Solomon Islands National Statistics Office,https://www.statistics.gov.sb/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1979)
+SLB,1987,5.99,Solomon Islands National Statistics Office,https://www.statistics.gov.sb/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1979)
+SLB,1988,5.88,Solomon Islands National Statistics Office,https://www.statistics.gov.sb/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1979)
+SLB,1989,5.78,Solomon Islands National Statistics Office,https://www.statistics.gov.sb/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1979)
+SLB,1990,5.66,Solomon Islands National Statistics Office,https://www.statistics.gov.sb/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1979)
+SLB,1991,5.55,Solomon Islands National Statistics Office,https://www.statistics.gov.sb/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1979)
+SLB,1992,5.45,Solomon Islands National Statistics Office,https://www.statistics.gov.sb/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1979)
+SLB,1993,5.38,Solomon Islands National Statistics Office,https://www.statistics.gov.sb/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1979)
+SLB,1994,5.31,Solomon Islands National Statistics Office,https://www.statistics.gov.sb/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1979)
+SLB,1995,5.24,Solomon Islands National Statistics Office,https://www.statistics.gov.sb/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1979)
+SLB,1996,5.12,Solomon Islands National Statistics Office,https://www.statistics.gov.sb/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1979)
+SLB,1997,4.99,Solomon Islands National Statistics Office,https://www.statistics.gov.sb/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1979)
+SLB,1998,4.9,Solomon Islands National Statistics Office,https://www.statistics.gov.sb/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1979)
+SLB,1999,4.82,Solomon Islands National Statistics Office,https://www.statistics.gov.sb/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1979)
+SLB,2000,4.76,Solomon Islands National Statistics Office,https://www.statistics.gov.sb/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1979)
+SLB,2001,4.69,Solomon Islands National Statistics Office,https://www.statistics.gov.sb/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1979)
+SLB,2002,4.63,Solomon Islands National Statistics Office,https://www.statistics.gov.sb/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1979)
+SLB,2003,4.57,Solomon Islands National Statistics Office,https://www.statistics.gov.sb/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1979)
+SLB,2004,4.52,Solomon Islands National Statistics Office,https://www.statistics.gov.sb/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1979)
+SLB,2005,4.48,Solomon Islands National Statistics Office,https://www.statistics.gov.sb/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1979)
+SLB,2006,4.48,Solomon Islands National Statistics Office,https://www.statistics.gov.sb/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1979)
+SLB,2007,4.44,Solomon Islands National Statistics Office,https://www.statistics.gov.sb/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1979)
+SLB,2008,4.41,Solomon Islands National Statistics Office,https://www.statistics.gov.sb/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1979)
+SLB,2009,4.39,Solomon Islands National Statistics Office,https://www.statistics.gov.sb/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1979)
+SLB,2010,4.4,Solomon Islands National Statistics Office,https://www.statistics.gov.sb/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1979)
+SLB,2011,4.41,Solomon Islands National Statistics Office,https://www.statistics.gov.sb/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1979)
+SLB,2012,4.41,Solomon Islands National Statistics Office,https://www.statistics.gov.sb/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1979)
+SLB,2013,4.42,Solomon Islands National Statistics Office,https://www.statistics.gov.sb/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1979)
+SLB,2014,4.42,Solomon Islands National Statistics Office,https://www.statistics.gov.sb/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1979)
+SLB,2015,4.36,Solomon Islands National Statistics Office,https://www.statistics.gov.sb/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1979)
+SLB,2016,4.29,Solomon Islands National Statistics Office,https://www.statistics.gov.sb/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.09. Editor certainty: Materially Higher
+SLB,2017,4.22,Solomon Islands National Statistics Office,https://www.statistics.gov.sb/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.16. Editor certainty: Materially Higher
+SLB,2018,4.16,Solomon Islands National Statistics Office,https://www.statistics.gov.sb/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.23. Editor certainty: Materially Higher
+SLB,2019,4.1,Solomon Islands National Statistics Office,https://www.statistics.gov.sb/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.30. Editor certainty: Materially Higher
+SLB,2020,4.04,Solomon Islands National Statistics Office,https://www.statistics.gov.sb/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.29. Editor certainty: Materially Higher
+SLB,2021,3.98,Solomon Islands National Statistics Office,https://www.statistics.gov.sb/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.29. Editor certainty: Materially Higher
+SLB,2022,3.93,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+SLB,2023,3.88,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+SLB,2024,3.83,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+SLB,2025,3.78,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+SMR,2016,1.4,Wikipedia: Demographics of [SMR] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.27
+SMR,2017,1.2,Wikipedia: Demographics of [SMR] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.15
+SMR,2018,1.29,Wikipedia: Demographics of [SMR] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.21
+SMR,2019,1.29,Wikipedia: Demographics of [SMR] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.19
+SMR,2020,1.27,Wikipedia: Demographics of [SMR] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.16
+SMR,2021,1.21,Wikipedia: Demographics of [SMR] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.09
+SMR,2022,1.18,Wikipedia: Demographics of [SMR] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.04
+SMR,2023,1.08,Wikipedia: Demographics of [SMR] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.07
+SMR,2024,0.82,Wikipedia: Demographics of [SMR] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.34. Editor certainty: Recheck
+SMR,2025,0.95,"Wikipedia (TFR from observed births × local-window ratio, outlier-filtered)",,2026-05-14,HIGH,CALCNEW_V7_FRESH,2026-05-14,"Calc New v7 (v7_births_5anchor_±5y). R=0.005702, anchors=[(2020, 224.0, 1.266, 0.00565179), (2021, 212.0, 1.206, 0.00568868), (2022, 205.0, 1.179, 0.00575122), (2023, 191.0, 1.08, 0.00565445), (2024, 144.0, 0.824, 0.00572222)], dropped=[], window=±5y. Wiki-observed births 2025: 166."
+SRB,2016,1.5,Wikipedia: Demographics of [SRB] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.04
+SRB,2017,1.53,Wikipedia: Demographics of [SRB] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.05
+SRB,2018,1.54,Wikipedia: Demographics of [SRB] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.05
+SRB,2019,1.58,Wikipedia: Demographics of [SRB] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.07
+SRB,2020,1.54,Wikipedia: Demographics of [SRB] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.06
+SRB,2021,1.59,Wikipedia: Demographics of [SRB] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.07
+SRB,2022,1.63,Wikipedia: Demographics of [SRB] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.11
+SRB,2023,1.61,Wikipedia: Demographics of [SRB] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.11
+SRB,2024,1.63,Wikipedia: Demographics of [SRB] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.13. Editor certainty: Recheck
+SRB,2025,1.54,"Wikipedia (TFR from observed births × local-window ratio, outlier-filtered)",,2026-05-14,HIGH,CALCNEW_V7_FRESH,2026-05-14,"Calc New v7 (v7_births_5anchor_±5y). R=0.000026, anchors=[(2020, 61692.0, 1.54, 2.496e-05), (2021, 62180.0, 1.59, 2.557e-05), (2022, 62700.0, 1.63, 2.6e-05), (2023, 61052.0, 1.61, 2.637e-05), (2024, 60845.0, 1.63, 2.679e-05)], dropped=[], window=±5y. Wiki-observed births 2025: 58,445."
+SVK,2023,1.49,Wikipedia: Demographics of [SVK] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.07
+SVK,2024,1.46,Wikipedia: Demographics of [SVK] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.10. Editor certainty: Recheck
+SVK,2025,1.37,Wikipedia: Demographics of [SVK] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.20. Editor certainty: Recheck
+SVN,2022,1.55,Wikipedia: Demographics of [SVN] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.02
+SVN,2023,1.51,Wikipedia: Demographics of [SVN] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.07
+SVN,2024,1.52,Wikipedia: Demographics of [SVN] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.06. Editor certainty: Recheck
+SVN,2025,1.5,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+SYC,2016,2.39,Wikipedia: Demographics of [SYC] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.09
+SYC,2017,2.41,Wikipedia: Demographics of [SYC] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.10
+SYC,2018,2.41,Wikipedia: Demographics of [SYC] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.12
+SYC,2019,2.36,Wikipedia: Demographics of [SYC] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.10
+SYC,2020,2.29,Wikipedia: Demographics of [SYC] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.06
+SYC,2021,2.46,Wikipedia: Demographics of [SYC] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.26
+SYC,2022,2.01,Wikipedia: Demographics of [SYC] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.16
+SYC,2023,2.02,Wikipedia: Demographics of [SYC] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.11
+SYC,2024,1.73,Wikipedia: Demographics of [SYC] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.38. Editor certainty: Recheck
+SYC,2025,1.68,Wikipedia: Demographics of [SYC] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.40. Editor certainty: Recheck
+THA,2018,1.36,Wikipedia: Demographics of [THA] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.04
+THA,2019,1.25,Wikipedia: Demographics of [THA] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.04
+THA,2020,1.18,Wikipedia: Demographics of [THA] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.08
+THA,2021,1.16,Wikipedia: Demographics of [THA] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.07
+THA,2022,1.07,Wikipedia: Demographics of [THA] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.15
+THA,2023,1.11,Wikipedia: Demographics of [THA] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.10
+THA,2024,0.98,Wikipedia: Demographics of [THA] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.22. Editor certainty: Recheck
+THA,2025,0.87,Wikipedia: Demographics of [THA] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.32. Editor certainty: Recheck
+TJK,2007,3.5,Tajikistan Agency on Statistics,https://stat.tj/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2007)
+TJK,2008,3.55,Tajikistan Agency on Statistics,https://stat.tj/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2007)
+TJK,2009,3.48,Tajikistan Agency on Statistics,https://stat.tj/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2007)
+TJK,2010,3.58,Tajikistan Agency on Statistics,https://stat.tj/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2007)
+TJK,2011,3.49,Tajikistan Agency on Statistics,https://stat.tj/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2007)
+TJK,2012,3.55,Tajikistan Agency on Statistics,https://stat.tj/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2007)
+TJK,2013,3.54,Tajikistan Agency on Statistics,https://stat.tj/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2007)
+TJK,2014,3.87,Tajikistan Agency on Statistics,https://stat.tj/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2007)
+TJK,2015,4.0,Tajikistan Agency on Statistics,https://stat.tj/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2007)
+TJK,2016,3.87,Tajikistan Agency on Statistics,https://stat.tj/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.49. Editor certainty: Materially Higher
+TJK,2017,3.61,Tajikistan Agency on Statistics,https://stat.tj/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.32. Editor certainty: Materially Higher
+TJK,2018,3.65,Tajikistan Agency on Statistics,https://stat.tj/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.36. Editor certainty: Materially Higher
+TJK,2019,3.69,Tajikistan Agency on Statistics,https://stat.tj/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.41. Editor certainty: Materially Higher
+TJK,2020,3.72,Tajikistan Agency on Statistics,https://stat.tj/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.51. Editor certainty: Materially Higher
+TJK,2021,3.75,Tajikistan Agency on Statistics,https://stat.tj/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.58. Editor certainty: Materially Higher
+TJK,2022,3.78,Tajikistan Agency on Statistics,https://stat.tj/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.65. Editor certainty: Materially Higher
+TJK,2023,3.8,Tajikistan Agency on Statistics,https://stat.tj/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.73. Editor certainty: Materially Higher
+TJK,2024,3.1,Tajikistan Agency on Statistics,https://stat.tj/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.06
+TJK,2025,2.95,Tajikistan Agency on Statistics,https://stat.tj/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.04
+TUN,2016,2.4,Wikipedia: Demographics of [TUN] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.12
+TUN,2017,2.29,Wikipedia: Demographics of [TUN] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.08
+TUN,2018,2.23,Wikipedia: Demographics of [TUN] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.10
+TUN,2019,2.17,Wikipedia: Demographics of [TUN] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.07
+TUN,2020,1.96,Wikipedia: Demographics of [TUN] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.04
+TUN,2021,1.82,Wikipedia: Demographics of [TUN] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.02
+TUN,2022,1.7,Wikipedia: Demographics of [TUN] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.15
+TUN,2023,1.58,Wikipedia: Demographics of [TUN] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.25
+TUN,2024,1.45,Wikipedia: Demographics of [TUN] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.37. Editor certainty: Recheck
+TUN,2025,1.4,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+TUR,2023,1.51,Wikipedia: Demographics of [TUR] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.11
+TUR,2024,1.48,Wikipedia: Demographics of [TUR] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.14. Editor certainty: Recheck
+TUR,2025,1.43,Wikipedia: Demographics of [TUR] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.19. Editor certainty: Recheck
+TWN,2018,1.06,Wikipedia: Demographics of [TWN] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.02
+TWN,2024,0.89,Wikipedia: Demographics of [TWN] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.03
+TWN,2025,0.7,Wikipedia: Demographics of [TWN] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.16. Editor certainty: Recheck
+UKR,2016,1.47,Wikipedia: Demographics of [UKR] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.08
+UKR,2017,1.37,Wikipedia: Demographics of [UKR] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.07
+UKR,2018,1.3,Wikipedia: Demographics of [UKR] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.07
+UKR,2022,0.9,Ukraine wartime override sheet 2026-05-20 (registration + UNHCR + NASU),,2026-05-20,HIGH,EDITOR_OVERRIDE_2026_05,2026-05-20,wartime structural override
+UKR,2023,0.95,Ukraine wartime override sheet 2026-05-20 (registration + UNHCR + NASU),,2026-05-20,HIGH,EDITOR_OVERRIDE_2026_05,2026-05-20,wartime structural override
+UKR,2024,0.92,Ukraine wartime override sheet 2026-05-20 (registration + UNHCR + NASU),,2026-05-20,HIGH,EDITOR_OVERRIDE_2026_05,2026-05-20,wartime structural override
+UKR,2025,0.9,Ukraine wartime override sheet 2026-05-20 (registration + UNHCR + NASU),,2026-05-20,HIGH,EDITOR_OVERRIDE_2026_05,2026-05-20,wartime structural override
+URY,2005,2.16,INE Uruguay,https://www.ine.gub.uy/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2005)
+URY,2006,2.14,INE Uruguay,https://www.ine.gub.uy/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2005)
+URY,2007,2.13,INE Uruguay,https://www.ine.gub.uy/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2005)
+URY,2008,2.11,INE Uruguay,https://www.ine.gub.uy/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2005)
+URY,2009,2.09,INE Uruguay,https://www.ine.gub.uy/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2005)
+URY,2010,2.08,INE Uruguay,https://www.ine.gub.uy/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2005)
+URY,2011,2.06,INE Uruguay,https://www.ine.gub.uy/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2005)
+URY,2012,2.05,INE Uruguay,https://www.ine.gub.uy/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2005)
+URY,2013,2.03,INE Uruguay,https://www.ine.gub.uy/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2005)
+URY,2014,2.02,INE Uruguay,https://www.ine.gub.uy/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2005)
+URY,2015,1.95,INE Uruguay,https://www.ine.gub.uy/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2005)
+URY,2016,1.87,INE Uruguay,https://www.ine.gub.uy/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.10. Editor certainty: Materially Lower
+URY,2017,1.71,INE Uruguay,https://www.ine.gub.uy/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.11. Editor certainty: Materially Lower
+URY,2018,1.6,INE Uruguay,https://www.ine.gub.uy/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.08. Editor certainty: Materially Lower
+URY,2019,1.5,INE Uruguay,https://www.ine.gub.uy/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.07. Editor certainty: Materially Lower
+URY,2020,1.4,INE Uruguay,https://www.ine.gub.uy/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.10. Editor certainty: Materially Lower
+URY,2021,1.34,INE Uruguay,https://www.ine.gub.uy/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.11. Editor certainty: Materially Lower
+URY,2022,1.28,INE Uruguay,https://www.ine.gub.uy/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.14. Editor certainty: Materially Lower
+URY,2023,1.25,INE Uruguay,https://www.ine.gub.uy/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.16. Editor certainty: Materially Lower
+URY,2024,1.19,INE Uruguay,https://www.ine.gub.uy/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.21. Editor certainty: Materially Lower
+URY,2025,1.14,"Wikipedia (TFR from observed births × local-window ratio, outlier-filtered)",,2026-05-14,HIGH,CALCNEW_V7_FRESH,2026-05-14,"Calc New v7 (v7_births_5anchor_±5y). R=0.000040, anchors=[(2020, 35866.0, 1.4, 3.903e-05), (2021, 34597.0, 1.34, 3.873e-05), (2022, 32301.0, 1.28, 3.963e-05), (2023, 31381.0, 1.25, 3.983e-05), (2024, 29899.0, 1.19, 3.98e-05)], dropped=[], window=±5y. Wiki-observed births 2025: 28,903."
+USA,2016,1.82,Wikipedia: Demographics of [USA] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.02
+USA,2018,1.73,Wikipedia: Demographics of [USA] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.02
+USA,2019,1.71,Wikipedia: Demographics of [USA] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.03
+USA,2021,1.66,Wikipedia: Demographics of [USA] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.03
+USA,2024,1.6,Wikipedia: Demographics of [USA] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.02
+USA,2025,1.58,Wikipedia: Demographics of [USA] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.04
+UZB,2009,2.53,Uzbekistan Statistical Agency,https://stat.uz/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2009)
+UZB,2010,2.34,Uzbekistan Statistical Agency,https://stat.uz/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2009)
+UZB,2011,2.24,Uzbekistan Statistical Agency,https://stat.uz/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2009)
+UZB,2012,2.19,Uzbekistan Statistical Agency,https://stat.uz/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2009)
+UZB,2013,2.35,Uzbekistan Statistical Agency,https://stat.uz/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2009)
+UZB,2014,2.46,Uzbekistan Statistical Agency,https://stat.uz/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2009)
+UZB,2015,2.49,Uzbekistan Statistical Agency,https://stat.uz/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 2009)
+UZB,2016,2.46,Uzbekistan Statistical Agency,https://stat.uz/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.10. Editor certainty: Materially Lower
+UZB,2017,2.42,Uzbekistan Statistical Agency,https://stat.uz/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.15. Editor certainty: Materially Lower
+UZB,2018,2.6,Uzbekistan Statistical Agency,https://stat.uz/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.11. Editor certainty: Materially Lower
+UZB,2019,2.79,Uzbekistan Statistical Agency,https://stat.uz/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.08. Editor certainty: Materially Lower
+UZB,2020,2.9,Uzbekistan Statistical Agency,https://stat.uz/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.16. Editor certainty: Materially Lower
+UZB,2021,3.17,Uzbekistan Statistical Agency,https://stat.uz/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.10. Editor certainty: Materially Lower
+UZB,2022,3.31,Uzbekistan Statistical Agency,https://stat.uz/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.09. Editor certainty: Materially Lower
+UZB,2023,3.45,Uzbekistan Statistical Agency,https://stat.uz/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.05. Editor certainty: Materially Lower
+UZB,2024,3.35,Uzbekistan Statistical Agency,https://stat.uz/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.14. Editor certainty: Materially Lower
+UZB,2025,3.15,Uzbekistan Statistical Agency,https://stat.uz/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.30. Editor certainty: Materially Lower
+VCT,2016,2.1,Wikipedia: Demographics of [VCT] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.05
+VCT,2017,1.86,Wikipedia: Demographics of [VCT] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.08
+VCT,2018,1.85,Wikipedia: Demographics of [VCT] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.05
+VCT,2019,1.74,Wikipedia: Demographics of [VCT] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.12
+VCT,2020,1.6,Wikipedia: Demographics of [VCT] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.23
+VCT,2021,1.76,Wikipedia: Demographics of [VCT] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.05
+VCT,2022,1.54,Wikipedia: Demographics of [VCT] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.25
+VCT,2023,1.49,"Wikipedia (TFR from observed births × local-window ratio, outlier-filtered)",,2026-05-14,HIGH,CALCNEW_V7_FRESH,2026-05-14,"Calc New v7 (v7_births_5anchor_±5y). R=0.001231, anchors=[(2018, 1524.0, 1.848, 0.0012126), (2019, 1426.0, 1.739, 0.0012195), (2020, 1320.0, 1.598, 0.00121061), (2021, 1370.0, 1.756, 0.00128175), (2022, 1264.0, 1.542, 0.00121994)], dropped=[], window=±5y. Wiki-observed births 2023: 1,212."
+VCT,2024,1.48,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+VCT,2025,1.45,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+VIR,2016,1.8,USVI / CDC NCHS,,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.40. Editor certainty: Materially Lower
+VIR,2017,1.7,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_interp). 
+VIR,2018,1.59,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_interp). 
+VIR,2019,1.49,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_interp). 
+VIR,2020,1.39,USVI / CDC NCHS,,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.75. Editor certainty: Materially Lower
+VIR,2021,1.46,USVI / CDC NCHS,,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.66. Editor certainty: Materially Lower
+VIR,2022,1.43,USVI / CDC NCHS,,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.67. Editor certainty: Materially Lower
+VIR,2023,1.37,USVI / CDC NCHS,,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.72. Editor certainty: Materially Lower
+VIR,2024,1.33,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+VIR,2025,1.28,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+VNM,2016,2.09,Wikipedia: Demographics of [VNM] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.09
+VNM,2017,2.04,Wikipedia: Demographics of [VNM] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.05
+VNM,2018,2.05,Wikipedia: Demographics of [VNM] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.17
+VNM,2019,2.09,Wikipedia: Demographics of [VNM] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.15
+VNM,2020,1.93,Wikipedia: Demographics of [VNM] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.03
+VNM,2021,2.11,Wikipedia: Demographics of [VNM] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.17
+VNM,2022,2.01,Wikipedia: Demographics of [VNM] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.08
+VNM,2023,1.96,Wikipedia: Demographics of [VNM] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.05
+VNM,2025,1.92,Wikipedia: Demographics of [VNM] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.04
+XKX,1999,2.28,Kosovo Agency of Statistics (ASK),https://ask.rks-gov.net/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1999)
+XKX,2000,2.31,Kosovo Agency of Statistics (ASK),https://ask.rks-gov.net/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1999)
+XKX,2001,2.26,Kosovo Agency of Statistics (ASK),https://ask.rks-gov.net/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1999)
+XKX,2002,2.22,Kosovo Agency of Statistics (ASK),https://ask.rks-gov.net/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1999)
+XKX,2003,2.0,Kosovo Agency of Statistics (ASK),https://ask.rks-gov.net/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1999)
+XKX,2004,2.21,Kosovo Agency of Statistics (ASK),https://ask.rks-gov.net/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1999)
+XKX,2005,2.38,Kosovo Agency of Statistics (ASK),https://ask.rks-gov.net/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1999)
+XKX,2006,2.24,Kosovo Agency of Statistics (ASK),https://ask.rks-gov.net/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1999)
+XKX,2007,2.21,Kosovo Agency of Statistics (ASK),https://ask.rks-gov.net/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1999)
+XKX,2008,2.32,Kosovo Agency of Statistics (ASK),https://ask.rks-gov.net/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1999)
+XKX,2009,2.36,Kosovo Agency of Statistics (ASK),https://ask.rks-gov.net/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1999)
+XKX,2010,2.38,Kosovo Agency of Statistics (ASK),https://ask.rks-gov.net/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1999)
+XKX,2011,1.99,Kosovo Agency of Statistics (ASK),https://ask.rks-gov.net/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1999)
+XKX,2012,2.02,Kosovo Agency of Statistics (ASK),https://ask.rks-gov.net/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1999)
+XKX,2013,2.17,Kosovo Agency of Statistics (ASK),https://ask.rks-gov.net/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1999)
+XKX,2014,1.95,Kosovo Agency of Statistics (ASK),https://ask.rks-gov.net/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1999)
+XKX,2015,1.88,Kosovo Agency of Statistics (ASK),https://ask.rks-gov.net/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Pre-2016 override (editor matrix start year: 1999)
+XKX,2016,1.82,Kosovo Agency of Statistics (ASK),https://ask.rks-gov.net/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.18. Editor certainty: Materially Higher
+XKX,2017,1.86,Kosovo Agency of Statistics (ASK),https://ask.rks-gov.net/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.24. Editor certainty: Materially Higher
+XKX,2018,1.84,Kosovo Agency of Statistics (ASK),https://ask.rks-gov.net/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.26. Editor certainty: Materially Higher
+XKX,2019,1.79,Kosovo Agency of Statistics (ASK),https://ask.rks-gov.net/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.22. Editor certainty: Materially Higher
+XKX,2020,1.85,Kosovo Agency of Statistics (ASK),https://ask.rks-gov.net/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.28. Editor certainty: Materially Higher
+XKX,2021,1.96,Kosovo Agency of Statistics (ASK),https://ask.rks-gov.net/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.40. Editor certainty: Materially Higher
+XKX,2022,1.98,Kosovo Agency of Statistics (ASK),https://ask.rks-gov.net/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.42. Editor certainty: Materially Higher
+XKX,2023,1.93,Kosovo Agency of Statistics (ASK),https://ask.rks-gov.net/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.38. Editor certainty: Materially Higher
+XKX,2024,1.95,Kosovo Agency of Statistics (ASK),https://ask.rks-gov.net/,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.41. Editor certainty: Materially Higher
+XKX,2025,1.95,"Wikipedia (TFR from observed births × local-window ratio, outlier-filtered)",,2026-05-14,HIGH,CALCNEW_V7_FRESH,2026-05-14,"Calc New v7 (v7_births_5anchor_±5y). R=0.000089, anchors=[(2020, 21907.0, 1.85, 8.445e-05), (2021, 22830.0, 1.96, 8.585e-05), (2022, 22632.0, 1.98, 8.749e-05), (2023, 21654.0, 1.93, 8.913e-05), (2024, 21487.0, 1.95, 9.075e-05)], dropped=[], window=±5y. Wiki-observed births 2025: 21,975."
+ZAF,2016,2.33,Wikipedia: Demographics of [ZAF] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.07
+ZAF,2018,2.34,Wikipedia: Demographics of [ZAF] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.07
+ZAF,2019,2.38,Wikipedia: Demographics of [ZAF] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.12
+ZAF,2020,2.42,Wikipedia: Demographics of [ZAF] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.16
+ZAF,2021,2.42,Wikipedia: Demographics of [ZAF] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.17
+ZAF,2022,2.42,Wikipedia: Demographics of [ZAF] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.19
+ZAF,2023,2.42,Wikipedia: Demographics of [ZAF] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.20
+ZAF,2024,2.41,Wikipedia: Demographics of [ZAF] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.20. Editor certainty: Recheck
+ZAF,2025,2.22,Wikipedia: Demographics of [ZAF] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.03
+JPN,2022,1.26,MHLW Vital Statistics (確定数),https://www.mhlw.go.jp/toukei/list/81-1a.html,2026-06-08,HIGH,EDITOR_DECISION_2026_06,2026-06-08,Official final
+JPN,2023,1.20,MHLW Vital Statistics (確定数),https://www.mhlw.go.jp/toukei/list/81-1a.html,2026-06-08,HIGH,EDITOR_DECISION_2026_06,2026-06-08,Official final
+JPN,2025,1.14,"MHLW 概数 R7 (births-by-age; TFR derived, 2024-calibrated)",https://www.mhlw.go.jp/toukei/saikin/hw/jinkou/geppo/,2026-06-08,HIGH,EDITOR_DECISION_2026_06,2026-06-08,"Derived from official 概数 R7 births-by-age (671,236) vs 2024 (686,173); calibrated to official 2024 TFR 1.15"
