@@ -5,8 +5,10 @@ births estimate. Replaces the earlier flat 'wpp' fill.
   src_cat = 'nso'      -> Verified: national statistical office
                          (reported current-year births, OR a TFR override with a
                           real NSO source)
-  src_cat = 'nso_wip'  -> NSO override, exact source still being located
-                         (override present but source is a Wikipedia placeholder)
+  src_cat = 'dre'      -> Demoria Research Estimation: figure synthesised from
+                         national / official sources (interpolations, worked-around
+                         wartime data, etc.). Includes the editor TFR overrides and
+                         any country in DRE_FORCE.
   src_cat = 'wpp'      -> UN WPP 2024 only (no recent national override)
 
 Reported-birth countries keep b25/b26/ba and get NO est block.
@@ -18,6 +20,8 @@ import csv,json
 from collections import defaultdict
 
 GLOBE='dhi_globe.html'; DATA_PATH='public/births_data.json'
+# Reported-birth countries that are really Demoria reconstructions, not clean NSO reports
+DRE_FORCE={'UKR'}
 
 # latest override row per country (year, source, url)
 ov=defaultdict(list)
@@ -45,17 +49,19 @@ def blob(name):
 DATA=blob('const DATA=')
 
 bd=json.load(open(DATA_PATH,encoding='utf-8'))
-tally={'nso':0,'nso_wip':0,'wpp':0}
+tally={'nso':0,'dre':0,'wpp':0}
 for c in bd['countries']:
     iso=c['iso']
     c.pop('wpp',None); c.pop('est',None)                 # clear prior fill
     reported = c.get('b26') is not None or c.get('ba')
     lo=latest_override(iso); recent = lo is not None and lo[0]>=2024
 
-    if reported:
+    if iso in DRE_FORCE:
+        cat='dre'
+    elif reported:
         cat='nso'
     elif recent:
-        cat='nso_wip' if is_placeholder(lo[1]) else 'nso'
+        cat='dre' if is_placeholder(lo[1]) else 'nso'
     else:
         cat='wpp'
     c['src_cat']=cat
@@ -73,7 +79,7 @@ for c in bd['countries']:
             if b24>0 and b25>0: c['est']={'prev':b24,'cur':b25,'year':2025}
     tally[cat]+=1
 
-bd['src_categories']={'nso':'Verified — national statistical office','nso_wip':'National statistical office override — exact source being located','wpp':'UN WPP 2024 medium-variant projection'}
+bd['src_categories']={'nso':'Verified — national statistical office','dre':'Demoria Research Estimation — synthesised from national & official sources','wpp':'UN WPP 2024 medium-variant projection'}
 bd.pop('wpp_note',None)
 json.dump(bd,open(DATA_PATH,'w',encoding='utf-8'),ensure_ascii=False,separators=(',',':'))
 print("categories:",tally,"total",sum(tally.values()))
