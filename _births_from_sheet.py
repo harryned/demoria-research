@@ -59,6 +59,18 @@ def parse():
         if run>0:
             out[iso]={'mode':'monthly','b25':sum(m25[:run]),'b26':sum(m26[:run]),'mon':run,'src':src}
             continue
+        # Complete-year fallback: full 2025 (all 12 months) but no 2026 yet -> show 2025 vs 2024.
+        # Only fires on COMPLETE years, so no partial-vs-full distortion. Auto-upgrades to the
+        # 2026-vs-2025 monthly view as soon as 2026 months are added.
+        n25=sum(1 for x in m25 if x is not None)
+        n26=sum(1 for x in m26 if x is not None)
+        if n25==12 and n26==0:
+            n24=sum(1 for x in m24 if x is not None)
+            fy24=num(row[FY24-1].value)
+            total24=fy24 if (fy24 and fy24>0) else (sum(m24) if n24==12 else None)
+            if total24 and total24>0:
+                out[iso]={'mode':'annual','prev':total24,'cur':sum(m25),'year':2025,'src':src}
+                continue
         # Annual fallback — ONLY for pure-annual reporters (no monthly cells anywhere, e.g. China).
         # Monthly countries' FY columns are auto-sums that may be partial-year, so never compare them.
         if any(x is not None for x in m24+m25+m26): continue
