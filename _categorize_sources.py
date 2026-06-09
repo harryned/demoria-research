@@ -18,10 +18,26 @@ is raw WPP; override countries' est is national-data-derived.
 """
 import csv,json
 from collections import defaultdict
+import openpyxl
 
 GLOBE='dhi_globe.html'; DATA_PATH='public/births_data.json'
+SHEET='Birth_Tracker_Input_EXPANDED.xlsx'   # DESIGNATION column (AS) is authoritative
 # Reported-birth countries that are really Demoria reconstructions, not clean NSO reports
 DRE_FORCE={'UKR'}
+
+# ---- read the manual DESIGNATION column (AS = col 45) — the source of truth ----
+DESIG_MAP={'NSO':'nso','DRE':'dre','UN WPP 2024':'wpp','UN WPP':'wpp','WPP':'wpp'}
+designation={}
+try:
+    dws=openpyxl.load_workbook(SHEET, data_only=True)['Births']
+    for r in range(3, dws.max_row+1):
+        iso=dws.cell(r,1).value; lab=dws.cell(r,45).value
+        if iso and lab:
+            key=str(lab).strip()
+            if key in DESIG_MAP: designation[str(iso).strip()]=DESIG_MAP[key]
+    print(f"DESIGNATION column read: {len(designation)} countries tagged")
+except Exception as e:
+    print("WARN could not read DESIGNATION column, falling back to auto-derivation:",e)
 
 # latest override row per country (year, source, url)
 ov=defaultdict(list)
@@ -56,7 +72,9 @@ for c in bd['countries']:
     reported = c.get('b26') is not None or c.get('ba')
     lo=latest_override(iso); recent = lo is not None and lo[0]>=2024
 
-    if iso in DRE_FORCE:
+    if iso in designation:                 # manual DESIGNATION column wins
+        cat=designation[iso]
+    elif iso in DRE_FORCE:
         cat='dre'
     elif reported:
         cat='nso'
