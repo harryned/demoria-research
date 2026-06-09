@@ -128,6 +128,17 @@ body{min-height:100vh;background:var(--navy2);color:var(--ink);font-family:'Manr
 .c-bcol.prev .c-bv{color:rgba(12,26,51,.55)}
 .c-b-arrow{font-family:'JetBrains Mono',monospace;font-size:.92rem;color:rgba(12,26,51,.35);padding-bottom:1px}
 .c-await{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:rgba(12,26,51,.4);font-style:italic}
+/* UN WPP projection block — visibly a forecast, not hard national data */
+.c-wppblk{background:transparent;border:1px dashed rgba(12,26,51,.22)}
+.c-wppblk .c-lab.wpp{color:rgba(12,26,51,.55)}
+.c-wppblk .c-chg.wpp{font-size:.86rem;opacity:.8}
+.c-wppblk .c-bv{font-weight:600;color:rgba(12,26,51,.62)}
+.c-wppblk .c-bcol.prev .c-bv{color:rgba(12,26,51,.4)}
+.c-wpp-foot{font-family:'JetBrains Mono',monospace;font-size:.5rem;letter-spacing:.07em;text-transform:uppercase;color:rgba(12,26,51,.4);margin-top:7px}
+/* list view WPP markers */
+.ltbl .lwpp{color:var(--ink3);font-style:italic}
+.ltbl .lc-chg.wpp{font-weight:600;opacity:.72}
+.ltbl .lwpptag{color:var(--gold)!important;opacity:.85}
 .c-ctx-lab{font-family:'JetBrains Mono',monospace;font-size:.52rem;font-weight:600;letter-spacing:.1em;color:rgba(12,26,51,.42);margin-bottom:6px}
 .c-strip{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}
 .c-cell{text-align:center;padding:5px 0 4px;border-radius:5px;background:rgba(12,26,51,.055)}
@@ -154,7 +165,7 @@ body{min-height:100vh;background:var(--navy2);color:var(--ink);font-family:'Manr
 <div class="hero">
   <div class="eyebrow2">Demoria Research · Birth &amp; Fertility Tracker</div>
   <h1>Births &amp; <em>fertility</em></h1>
-  <p>Total Fertility Rate and current-year births for <strong style="color:var(--gold)">every country and territory on Earth</strong>. Where a national statistics office has released 2026 births, they are shown here straight from the source; everywhere else carries the latest official TFR while release is awaited. Browse by region or switch to <strong style="color:var(--gold)">Rankings</strong> to sort. Gulf states are shown <strong style="color:var(--gold)">nationals-only</strong>, not expat-diluted. No other tracker brings all of it together, country by country, in one place.</p>
+  <p>Total Fertility Rate and current-year births for <strong style="color:var(--gold)">every country and territory on Earth</strong>. Where a national statistics office has released 2026 births, they are shown here straight from the source; everywhere else falls back to <strong style="color:var(--gold)">UN World Population Prospects 2024</strong> projections, clearly flagged as forecasts rather than national counts. Browse by region or switch to <strong style="color:var(--gold)">Rankings</strong> to sort. Gulf states are shown <strong style="color:var(--gold)">nationals-only</strong>, not expat-diluted. No other tracker brings all of it together, country by country, in one place.</p>
   <div class="hero-stats" id="heroStats"></div>
 </div>
 
@@ -207,6 +218,7 @@ function enrich(c){
  if(c.b25!=null&&c.b26!=null){c.chg=(c.b26-c.b25)/c.b25*100;c.t2026=c.t2025!=null?Math.round(c.t2025*(c.b26/c.b25)*100)/100:null;}
  else{c.chg=null;c.t2026=null;}
  if(c.ba){c.aChg=(c.ba.cur-c.ba.prev)/c.ba.prev*100;}
+ if(c.wpp){c.wppChg=(c.wpp.cur-c.wpp.prev)/c.wpp.prev*100;}
  c.cur=c.t2026!=null?c.t2026:c.t2025;c.curIsEst=c.t2026!=null;
  c.totBirths=(c.b26!=null)?c.b26:(c.ba?c.ba.cur:null);
  return c;
@@ -229,6 +241,8 @@ function tile(c,rank){
    births=`<div class="c-births"><div class="c-b-head"><span class="c-lab">BIRTHS · FIRST ${c.mon} MONTHS</span><span class="c-chg" style="color:${dcol(c.chg)}">${c.chg>0?'▲':c.chg<0?'▼':''} ${fmtChg(c.chg)}</span></div><div class="c-b-cols"><div class="c-bcol prev"><div class="c-byr">2025</div><div class="c-bv">${fmt(c.b25)}</div></div><span class="c-b-arrow">→</span><div class="c-bcol"><div class="c-byr">2026</div><div class="c-bv">${fmt(c.b26)}</div></div></div></div>`;
  } else if(c.ba){
    births=`<div class="c-births"><div class="c-b-head"><span class="c-lab">BIRTHS · ${c.ba.year} FULL YEAR</span><span class="c-chg" style="color:${dcol(c.aChg)}">${c.aChg>0?'▲':c.aChg<0?'▼':''} ${fmtChg(c.aChg)}</span></div><div class="c-b-cols"><div class="c-bcol prev"><div class="c-byr">${c.ba.year-1}</div><div class="c-bv">${fmt(c.ba.prev)}</div></div><span class="c-b-arrow">→</span><div class="c-bcol"><div class="c-byr">${c.ba.year}</div><div class="c-bv">${fmt(c.ba.cur)}</div></div></div></div>`;
+ } else if(c.wpp){
+   births=`<div class="c-births c-wppblk"><div class="c-b-head"><span class="c-lab wpp">UN WPP 2024 · PROJECTED</span><span class="c-chg wpp" style="color:${dcol(c.wppChg)}">${c.wppChg>0?'▲':c.wppChg<0?'▼':''} ${fmtChg(c.wppChg)}</span></div><div class="c-b-cols"><div class="c-bcol prev"><div class="c-byr">${c.wpp.year-1}</div><div class="c-bv">~${fmt(c.wpp.prev)}</div></div><span class="c-b-arrow">→</span><div class="c-bcol"><div class="c-byr">${c.wpp.year}</div><div class="c-bv">~${fmt(c.wpp.cur)}</div></div></div><div class="c-wpp-foot">UN forecast — not a national count</div></div>`;
  } else {
    births=`<div class="c-births"><div class="c-lab">BIRTHS 2026</div><div class="c-await">awaiting release</div></div>`;
  }
@@ -259,7 +273,7 @@ fetch('/births_data.json').then(r=>r.json()).then(data=>{
    `<div class="hs"><div class="hs-n">${below1}</div><div class="hs-l">TFR below 1.0</div></div>`+
    `<div class="hs"><div class="hs-n">${gulf}</div><div class="hs-l">Gulf nationals-only</div></div>`;
  document.getElementById('foot').innerHTML=
-   `<strong>How this is built:</strong> every current-year birth figure is taken straight from the country's own statistical office, or is the best published estimate where an office reports less frequently; each card links its source. We know of nowhere else that assembles these, country by country, updated as they are released. Countries still awaiting 2026 figures show their latest official TFR in the meantime.<br>`+
+   `<strong>How this is built:</strong> every current-year birth figure is taken straight from the country's own statistical office, or is the best published estimate where an office reports less frequently; each card links its source. We know of nowhere else that assembles these, country by country, updated as they are released. Where no national figure is published yet, the card shows the <strong>UN WPP 2024</strong> medium-variant projection in a dashed panel — a forecast, not a national count — alongside the country's latest official TFR.<br>`+
    `<strong>Sources:</strong> UN World Population Prospects 2024 (observed to 2023; medium-variant 2024–25). Gulf nationals-only TFR: FCSC (UAE), GASTAT (Saudi Arabia), NCSI (Oman), Shah &amp; Fargues / KFS 2018 (Kuwait), Fargues / Qatar PSA (Qatar); Bahrain back-calculated. 2026 births &amp; estimates compiled from national statistical offices as released.<br>`+
    `<strong>2026 TFR estimate</strong> = TFR₂₀₂₅ × (births₂₀₂₆ ÷ births₂₀₂₅ for the same months); shown italic, dashed. Where no current births are published, the latest official TFR (2025) is shown.<br>`+
    `<a href="https://demoriaresearch.com">← Return to the Demographic Health Index</a>`;
@@ -358,17 +372,20 @@ function lrow(c,rank){
  let b25=null,b26=null,plab='';
  if(c.b25!=null&&c.b26!=null){b25=c.b25;b26=c.b26;plab=`${c.mon}-mo`;}
  else if(c.ba){b25=c.ba.prev;b26=c.ba.cur;plab='FY';}
- const chgVal=c.chg!=null?c.chg:(c.aChg!=null?c.aChg:null);
- const chgCell=chgVal!=null?`<span class="lc-chg" style="color:${dcol(chgVal)}">${chgVal>0?'▲':chgVal<0?'▼':''}${fmtChg(chgVal)}</span>`:'<span class="lc-await">awaiting</span>';
+ const isWpp=(b25==null && !!c.wpp);
+ if(isWpp){b25=c.wpp.cur;plab='WPP';}
+ const chgVal=c.chg!=null?c.chg:(c.aChg!=null?c.aChg:(isWpp?c.wppChg:null));
+ const chgCell=chgVal!=null?`<span class="lc-chg${isWpp?' wpp':''}" style="color:${dcol(chgVal)}">${chgVal>0?'▲':chgVal<0?'▼':''}${fmtChg(chgVal)}</span>`:'<span class="lc-await">awaiting</span>';
  const ycell=(v)=>v!=null?`<span class="ly">${v.toFixed(2)}</span>`:'<span class="ly dim">—</span>';
+ const bcell=(v,wpp)=>v!=null?`<span class="${wpp?'lwpp':''}">${wpp?'~':''}${fmt(v)}</span>`:'<span class="ly dim">—</span>';
  const nmInner=`<span class="lnm-w">${flag(c.iso2)}<span class="lnm">${c.name}</span>${tag}</span>`;
  return '<tr>'+
    `<td class="lc-rk">${rank!=null?rank:''}</td>`+
    `<td class="lc-nm${'cur'===skey?'':''}">${nmInner}</td>`+
    td('cur',curCell,'lc-cur-td')+
-   td('chg',(plab?`<span class="ly dim" style="font-size:.6rem;margin-right:5px">${plab}</span>`:'')+chgCell,'lc-chg-td')+
-   td('b25',b25!=null?fmt(b25):'<span class="ly dim">—</span>')+
-   td('b26',b26!=null?fmt(b26):'<span class="ly dim">—</span>')+
+   td('chg',(plab?`<span class="ly dim${isWpp?' lwpptag':''}" style="font-size:.6rem;margin-right:5px">${plab}</span>`:'')+chgCell,'lc-chg-td')+
+   td('b25',bcell(b25,isWpp))+
+   td('b26',bcell(b26,false))+
    td('y2010',ycell(c.tfr['2010']))+
    td('y2020',ycell(c.tfr['2020']))+
    td('y2024',ycell(c.tfr['2024']))+
