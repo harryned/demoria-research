@@ -388,7 +388,7 @@ function lrow(c,rank){
  // births period
  let b25=null,b26=null,plab='';
  if(c.b25!=null&&c.b26!=null){b25=c.b25;b26=c.b26;plab=`${c.mon}-mo`;}
- else if(c.ba){b25=c.ba.prev;b26=c.ba.cur;plab='FY';}
+ else if(c.ba){if(c.ba.year>=2026){b25=c.ba.prev;b26=c.ba.cur;}else{b25=c.ba.cur;}plab='FY';}  // annual: put the FY value under its real year column
  const isEst=(b25==null && !!c.est);
  if(isEst){b25=c.est.cur;plab='~';}
  const chgVal=c.chg!=null?c.chg:(c.aChg!=null?c.aChg:(isEst?c.estChg:null));
