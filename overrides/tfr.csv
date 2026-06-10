@@ -553,7 +553,7 @@ MAR,2024,1.97,Wikipedia: Demographics of [MAR] (vital statistics),,2026-05-13,ME
 MAR,2025,1.9,Wikipedia: Demographics of [MAR] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.28. Editor certainty: Recheck
 MDA,2023,1.61,Wikipedia: Demographics of [MDA] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.12
 MDA,2024,1.66,Wikipedia: Demographics of [MDA] (vital statistics),,2026-05-13,MEDIUM,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.07. Editor certainty: Recheck
-MDA,2025,1.65,Wikipedia (bidirectional TFR interpolation),,2026-05-14,MEDIUM,CALCNEW_V7_FRESH,2026-05-14,Calc New v7 (tfr_extrap_fwd). 
+MDA,2025,1.55,NBS Moldova births-ratio estimate (TFR2024 x births2025/births2024),,2026-06-10,MEDIUM,MDA_REHASH_2026_06,2026-06-10,Estimated from actual FY2025 births 22108 vs 23648; usual-resident concept excl. Transnistria
 MDV,2016,1.8,Wikipedia: Demographics of [MDV] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.10
 MDV,2017,1.72,Wikipedia: Demographics of [MDV] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.08
 MDV,2018,1.65,Wikipedia: Demographics of [MDV] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP -0.06
