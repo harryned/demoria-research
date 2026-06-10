@@ -3031,8 +3031,9 @@ function rkSelect(id){
   else if(id&&id.indexOf('S:')===0) renderRegionProfile(id.slice(2),SUBREGIONS[id.slice(2)]||[],false);
   else if(byIso[id]) renderCountryProfile(byIso[id]);
   // Keep the URL shareable: selecting a country writes #country=ISO to the
-  // address bar (skip if already there, e.g. when arriving via a deep link).
-  if(byIso[id] && location.hash!=='#country='+id){
+  // address bar — but only while Rankings is actually visible, so the boot-time
+  // auto-select can't clobber a #view=... deep link before it is read.
+  if(byIso[id] && location.hash!=='#country='+id && document.getElementById('view-rankings')?.classList.contains('on')){
     try{ history.replaceState(null,'','#country='+id); }catch(e){}
   }
 }
@@ -3705,7 +3706,7 @@ window.__pos_d6=1;
 
   // URL routing: / → landing, /dhi/ → world view directly
   function routeFromPath(){
-    if (/country=[A-Za-z]{3}/.test(location.hash)) return; // hash deep-link wins over landing
+    if (/country=[A-Za-z]{3}|^#view=/.test(location.hash)) return; // hash deep-links win over landing
     const p = location.pathname || '/';
     if (p.indexOf('/dhi') === 0) {
       if (typeof show === 'function') show('home');
@@ -4448,12 +4449,32 @@ window.__pos_d6=1;
 // --- URL hash deep-links: /dhi/#country=KOR (and /#country=KOR) opens that profile.
 // Static /country/<slug>/ pages link here, so search/social visitors land on the live view.
 (function(){
+  // Outbound: every section change writes its own URL. Country selections
+  // (#country=ISO, written by rkSelect) take precedence over #view=rankings.
+  var _origShow=show;
+  show=function(v){
+    _origShow(v);
+    try{
+      if(v==='landing'||v==='home'){ history.replaceState(null,'',location.pathname+location.search); }
+      else if(v==='rankings'){ if(!/^#country=/.test(location.hash)) history.replaceState(null,'','#view=rankings'); }
+      else{ history.replaceState(null,'','#view='+v); }
+    }catch(e){}
+  };
+  // Inbound: #country=ISO opens that profile; #view=compare/about/... opens that section.
   function dl(){
     var m=location.hash.match(/country=([A-Za-z]{3})/);
-    if(!m) return;
-    var iso=m[1].toUpperCase();
-    if(typeof byIso==='undefined'||!byIso[iso]) return;
-    try{ show('rankings'); gotoCountry(iso); }catch(e){}
+    if(m){
+      var iso=m[1].toUpperCase();
+      if(typeof byIso==='undefined'||!byIso[iso]) return;
+      try{ show('rankings'); gotoCountry(iso); }catch(e){}
+      return;
+    }
+    var vm=location.hash.match(/^#view=([a-z]+)$/);
+    if(vm){
+      var v=vm[1];
+      var viewId='view-'+((typeof ESSAY_PARTS!=='undefined'&&ESSAY_PARTS[v])?'about':v);
+      if(document.getElementById(viewId)){ try{ show(v); }catch(e){} }
+    }
   }
   window.addEventListener('hashchange',dl);
   setTimeout(dl,180); // after routeFromPath (100ms) and tab wiring
@@ -4694,8 +4715,10 @@ window.__pos_d6=1;
   }
   const origRkSelect = window.rkSelect;
   window.rkSelect = function(id){
-    // Shareable URLs: every country selection mirrors itself into the hash.
-    if(id && typeof byIso!=='undefined' && byIso[id] && location.hash!=='#country='+id){
+    // Shareable URLs: every country selection mirrors itself into the hash —
+    // only while Rankings is visible (boot auto-select must not clobber deep links).
+    if(id && typeof byIso!=='undefined' && byIso[id] && location.hash!=='#country='+id
+       && document.getElementById('view-rankings')?.classList.contains('on')){
       try{ history.replaceState(null,'','#country='+id); }catch(e){}
     }
     if(id && !id.startsWith('R:') && !id.startsWith('S:') && typeof byIso!=='undefined' && byIso[id]){

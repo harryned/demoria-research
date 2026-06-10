@@ -128,6 +128,7 @@ body{min-height:100vh;background:var(--navy2);color:var(--ink);font-family:'Manr
 .c-bcol.prev .c-bv{color:rgba(12,26,51,.55)}
 .c-b-arrow{font-family:'JetBrains Mono',monospace;font-size:.92rem;color:rgba(12,26,51,.35);padding-bottom:1px}
 .c-await{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:rgba(12,26,51,.4);font-style:italic}
+.c[data-iso]{cursor:pointer}
 /* estimate block — three source tiers, each visibly distinct from reported NSO data */
 .c-estblk .c-chg.est{font-size:.86rem;opacity:.85}
 .c-estblk .c-bv{font-weight:600}
@@ -265,7 +266,7 @@ function tile(c,rank){
  }
  const strip=CTX.map(([lab,y,cl])=>{const v=(y==='2026')?c.t2026:c.tfr[y];const none=v==null;const e=(y==='2026');return `<div class="c-cell ${cl} ${e?'estc':''}"><div class="c-cy">${lab}</div><div class="c-cv">${none?'—':v.toFixed(2)}</div></div>`;}).join('');
  const rk=rank!=null?`<span class="rk-badge">#${rank}</span>`:'';
- return `<div class="c"><div class="c-band" style="background:${band(big)}"></div>${rk}<div class="c-pad">`+
+ return `<div class="c" data-iso="${c.iso}"><div class="c-band" style="background:${band(big)}"></div>${rk}<div class="c-pad">`+
   `<div class="c-hd">${flag(c.iso2)}<span class="c-nm">${c.name}</span>${tag?`<span class="c-tag" title="${(c.gulf_note||'').replace(/"/g,'&quot;')}">${tag}</span>`:''}${catChip(c)}</div>`+
   `<div class="c-lab">${est?'ESTIMATED 2026 TFR':'LATEST TFR · 2025'}</div>`+
   `<div class="c-est-row"><span class="c-est ${est?'isest':''}" style="color:${estColor(big)}">${big!=null?big.toFixed(2):'—'}</span>${spark(c)}</div>`+
@@ -298,10 +299,30 @@ function bootBT(data){
  buildRegions();
  render();
 }
+// Shareable per-country URLs: clicking a card writes #country=ISO to the
+// address bar; opening such a link focuses that country via the search box.
+document.addEventListener('click',e=>{
+ const card=e.target.closest('.c[data-iso]');
+ if(!card) return;
+ const iso=card.dataset.iso;
+ if(location.hash!=='#country='+iso){try{history.replaceState(null,'','#country='+iso);}catch(_){}}
+});
+function focusFromHash(){
+ const m=location.hash.match(/country=([A-Za-z]{3})/);
+ if(!m||!C.length) return;
+ const c=C.find(x=>x.iso===m[1].toUpperCase());
+ if(!c) return;
+ Q=c.name;
+ const inp=document.getElementById('srchInp');
+ if(inp){inp.value=Q;document.getElementById('srch').classList.add('has');}
+ render();
+}
+window.addEventListener('hashchange',focusFromHash);
+
 // Data is baked into the page at publish time (window.__BD__) so content renders
 // without a network round-trip; the fetch is only a fallback for stale embeds.
-if(window.__BD__){bootBT(window.__BD__);}
-else{fetch('/births_data.json').then(r=>r.json()).then(bootBT);}
+if(window.__BD__){bootBT(window.__BD__);focusFromHash();}
+else{fetch('/births_data.json').then(r=>r.json()).then(d=>{bootBT(d);focusFromHash();});}
 
 function buildRegions(){
  const g={};C.forEach(c=>{(g[c.region]=g[c.region]||[]).push(c);});
