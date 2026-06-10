@@ -3030,6 +3030,11 @@ function rkSelect(id){
   if(id&&id.indexOf('R:')===0) renderRegionProfile(id.slice(2),REGIONS[id.slice(2)]||[],true);
   else if(id&&id.indexOf('S:')===0) renderRegionProfile(id.slice(2),SUBREGIONS[id.slice(2)]||[],false);
   else if(byIso[id]) renderCountryProfile(byIso[id]);
+  // Keep the URL shareable: selecting a country writes #country=ISO to the
+  // address bar (skip if already there, e.g. when arriving via a deep link).
+  if(byIso[id] && location.hash!=='#country='+id){
+    try{ history.replaceState(null,'','#country='+id); }catch(e){}
+  }
 }
 function syncSubtabs(){
   document.querySelectorAll('.rk-subtabs button').forEach(b=>b.classList.toggle('on',b.dataset.st===rkTab));
@@ -4689,6 +4694,10 @@ window.__pos_d6=1;
   }
   const origRkSelect = window.rkSelect;
   window.rkSelect = function(id){
+    // Shareable URLs: every country selection mirrors itself into the hash.
+    if(id && typeof byIso!=='undefined' && byIso[id] && location.hash!=='#country='+id){
+      try{ history.replaceState(null,'','#country='+id); }catch(e){}
+    }
     if(id && !id.startsWith('R:') && !id.startsWith('S:') && typeof byIso!=='undefined' && byIso[id]){
       window.rkSel = id;
       document.querySelectorAll('.rk-row').forEach(r=>r.classList.toggle('on',r.dataset.id===id));
