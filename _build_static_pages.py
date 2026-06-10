@@ -109,40 +109,43 @@ def t2026e(c):
     return None
 
 CSS="""
-:root{--navy:#0c1a33;--navy2:#0a1426;--gold:#e8b84b;--cream:#f4ecd3;--ink:#eef1f6;--ink2:rgba(238,241,246,.74);--ink3:rgba(238,241,246,.45)}
+:root{--navy:#0c1a33;--navy2:#0a1426;--gold:#e8b84b;--goldd:#b58420;--cream:#f4ecd3;--mut:rgba(12,26,51,.55);--mut2:rgba(12,26,51,.42);--line:rgba(12,26,51,.1)}
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--navy2);color:var(--ink);font-family:'Manrope',sans-serif;font-size:15px;line-height:1.55}
-a{color:var(--gold)}
-.topbar{background:var(--cream);height:50px;display:flex;align-items:center;padding:0 22px;gap:13px}
+body{background:var(--navy2);color:var(--navy);font-family:'Manrope',sans-serif;font-size:15px;line-height:1.55}
+a{color:var(--goldd)}
+.topbar{background:var(--cream);height:50px;display:flex;align-items:center;padding:0 22px;gap:13px;border-bottom:2px solid rgba(12,26,51,.12)}
 .topbar a{font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--navy);text-decoration:none}
 .topbar .t{font-size:.95rem;font-weight:700;color:var(--navy)}
-.wrap{max-width:880px;margin:0 auto;padding:34px 22px 60px}
-.crumb{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
-h1{font-size:clamp(1.9rem,4vw,2.6rem);font-weight:700;letter-spacing:-.01em;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-h1 img{height:30px;border-radius:3px;box-shadow:0 1px 4px rgba(0,0,0,.5)}
-.sub{color:var(--ink3);margin:4px 0 22px;font-size:.92rem}
+.wrap{max-width:940px;margin:32px auto 56px;padding:44px 54px 42px 62px;background:var(--cream);border-radius:24px;position:relative;overflow:hidden;box-shadow:0 18px 60px rgba(0,0,0,.45)}
+.wrap::before{content:"";position:absolute;left:0;top:0;bottom:0;width:14px;background:var(--band,#7f8a9e)}
+@media(max-width:980px){.wrap{margin:0;border-radius:0;padding:34px 22px 36px 30px}}
+.crumb{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--goldd);margin-bottom:14px}
+.crumb a{color:inherit;text-decoration:none}
+h1{font-size:clamp(1.9rem,4vw,2.7rem);font-weight:800;letter-spacing:-.01em;color:var(--navy);display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+h1 img{height:30px;border-radius:3px;box-shadow:0 1px 4px rgba(12,26,51,.35)}
+.sub{color:var(--mut);margin:4px 0 24px;font-size:.92rem}
 .score-row{display:flex;gap:14px;flex-wrap:wrap;margin:18px 0 8px}
-.card{background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.09);border-radius:12px;padding:16px 18px;flex:1;min-width:180px}
-.card .k{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
-.card .v{font-family:'JetBrains Mono',monospace;font-size:1.7rem;font-weight:700;line-height:1}
-.card .s{font-size:.78rem;color:var(--ink2);margin-top:6px}
-.lede{background:var(--cream);color:var(--navy);border-radius:12px;padding:18px 20px;margin:18px 0;font-size:1.02rem;line-height:1.6}
-h2{font-size:1.05rem;font-weight:700;margin:30px 0 10px;letter-spacing:.01em}
+.card{background:rgba(12,26,51,.05);border:1px solid rgba(12,26,51,.07);border-radius:14px;padding:16px 18px;flex:1;min-width:180px}
+.card .k{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--mut2);margin-bottom:6px}
+.card .v{font-family:'JetBrains Mono',monospace;font-size:1.7rem;font-weight:800;line-height:1;color:var(--navy)}
+.card .s{font-size:.78rem;color:var(--mut);margin-top:6px}
+.lede{background:var(--navy);color:var(--cream);border-radius:14px;padding:18px 20px;margin:18px 0;font-size:1.02rem;line-height:1.6}
+h2{font-size:1.05rem;font-weight:800;margin:30px 0 10px;letter-spacing:.01em;color:var(--navy)}
 table{border-collapse:collapse;width:100%;font-size:.9rem}
-th{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);text-align:right;padding:7px 10px;border-bottom:1px solid rgba(255,255,255,.14)}
-td{text-align:right;padding:7px 10px;border-bottom:1px solid rgba(255,255,255,.06);font-variant-numeric:tabular-nums}
+th{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mut2);text-align:right;padding:7px 10px;border-bottom:1px solid rgba(12,26,51,.2)}
+td{text-align:right;padding:8px 10px;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums;font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--navy)}
 th:first-child,td:first-child{text-align:left}
 .pill{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:.62rem;font-weight:700;padding:3px 8px;border-radius:5px;color:#fff;vertical-align:2px}
-.bar{height:9px;background:rgba(255,255,255,.08);border-radius:5px;overflow:hidden;margin-top:5px}
-.bar i{display:block;height:100%;border-radius:5px;background:var(--gold)}
+.bar{height:9px;background:rgba(12,26,51,.1);border-radius:5px;overflow:hidden;margin-top:5px}
+.bar i{display:block;height:100%;border-radius:5px;background:var(--goldd)}
 .pgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
 .cta{display:flex;gap:12px;flex-wrap:wrap;margin:30px 0 8px}
-.cta a{display:inline-block;background:var(--gold);color:var(--navy);font-weight:800;text-decoration:none;padding:12px 20px;border-radius:9px;font-size:.92rem}
-.cta a.ghost{background:transparent;border:1px solid rgba(232,184,75,.5);color:var(--gold)}
-.near a{color:var(--ink2);text-decoration:none;border-bottom:1px dotted rgba(255,255,255,.25)}
-.near a:hover{color:var(--gold)}
-.foot{margin-top:42px;padding-top:18px;border-top:1px solid rgba(255,255,255,.1);font-size:.8rem;color:var(--ink3)}
-.foot a{color:var(--ink2)}
+.cta a{display:inline-block;background:var(--gold);color:var(--navy);font-weight:800;text-decoration:none;padding:12px 20px;border-radius:9px;font-size:.92rem;border:1px solid var(--goldd);box-shadow:0 2px 10px rgba(181,132,32,.25)}
+.cta a.ghost{background:transparent;border:1px solid rgba(12,26,51,.4);color:var(--navy);box-shadow:none}
+.near a{color:rgba(12,26,51,.78);text-decoration:none;border-bottom:1px dotted rgba(12,26,51,.4)}
+.near a:hover{color:var(--goldd)}
+.foot{margin-top:42px;padding-top:18px;border-top:1px solid rgba(12,26,51,.14);font-size:.8rem;color:var(--mut)}
+.foot a{color:rgba(12,26,51,.78)}
 """
 
 HEAD="""<!doctype html>
@@ -167,7 +170,7 @@ HEAD="""<!doctype html>
 </head>
 <body>
 <div class="topbar"><a href="/">&lsaquo; Demoria Research</a><span style="width:1px;height:20px;background:rgba(12,26,51,.18)"></span><span class="t">{topbar}</span></div>
-<div class="wrap">
+<div class="wrap"{wrapstyle}>
 """
 FOOT="""<div class="foot">Data: UN World Population Prospects 2024, national statistical offices, and Demoria Research estimations. See the <a href="/methodology/">methodology</a>, the <a href="/dhi/">interactive index</a> and the <a href="/births/">Birth &amp; Fertility Tracker</a>. &copy; Demoria Research.</div>
 </div></body></html>"""
@@ -244,6 +247,7 @@ def country_page(iso):
  <a class="ghost" href="/births/">Birth &amp; Fertility Tracker</a>
 </div>"""
     page=HEAD.format(title=esc(title),desc=esc(desc),url=url,base=BASE,css=CSS,topbar=esc(name),
+                     wrapstyle=f' style="--band:{tfr_col(e26 or t25)}"',
                      ogimg=f"{url}card.png",twcard="summary_large_image",
                      ld=f'<script type="application/ld+json">{ld}</script>')+body+FOOT
     d=os.path.join(OUT,'country',slug); os.makedirs(d,exist_ok=True)
@@ -265,6 +269,7 @@ for cont in ['Asia','Europe','Africa','Americas','Oceania','Other']:
                  f'<td>{esc(g.get("cat",""))}</td></tr>' for g in sorted(lst,key=lambda x:x['name']))
     secs+=f'<h2>{cont}</h2><table><thead><tr><th>Country</th><th>Rank</th><th>DHI 2025</th><th>Band</th></tr></thead><tbody>{rows}</tbody></table>'
 dir_page=HEAD.format(title="All 236 country profiles — Demographic Health Index | Demoria Research",
+    wrapstyle='',
     ogimg=f"{BASE}/favicon-512.png",twcard="summary",
     desc="Demographic Health Index profiles for all 236 countries and territories: score, rank, fertility, births and projections.",
     url=f"{BASE}/country/",base=BASE,css=CSS,topbar="Countries",ld='')+ \
@@ -293,17 +298,18 @@ def extract_essay():
     return seg
 
 ESSAY_CSS=CSS+"""
-.wrap{max-width:720px}
+.wrap{max-width:760px}
 h1{display:block;font-size:clamp(1.9rem,4vw,2.5rem);line-height:1.15;margin:6px 0 14px}
-h1 em,h2 em{color:var(--gold);font-style:normal}
+h1 em,h2 em{color:var(--goldd);font-style:normal}
 h2{font-size:1.35rem;margin:36px 0 12px}
-p{margin:0 0 14px;color:var(--ink2);font-size:1.0rem;line-height:1.7}
-p b{color:var(--ink)}
+p{margin:0 0 14px;color:rgba(12,26,51,.82);font-size:1.0rem;line-height:1.7}
+p b{color:var(--navy)}
 div{margin-bottom:6px}
-span{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-right:10px}
+span{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--goldd);margin-right:10px}
 """
 meth_url=f"{BASE}/methodology/"
 meth=HEAD.format(title="Methodology — the Demographic Health Index | Demoria Research",
+    wrapstyle='',
     ogimg=f"{BASE}/favicon-512.png",twcard="summary",
     desc="How the Demographic Health Index is built: fertility, age structure, momentum and migration combined into a single score for 236 countries and territories, 1965 to 2100.",
     url=meth_url,base=BASE,css=ESSAY_CSS,topbar="Methodology",ld='')+ \
