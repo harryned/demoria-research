@@ -86,10 +86,12 @@ def parse():
 def merge(parsed, write=False):
     data=json.load(open(DATA,encoding='utf-8'))
     by={c['iso']:c for c in data['countries']}
-    changed=[]
+    changed=[]; real=[]   # real = actual value changes vs what was already published
+    today=__import__('datetime').date.today().isoformat()
     for iso,r in parsed.items():
         c=by.get(iso)
         if not c: print(f"  ! {iso} not in dataset, skipped"); continue
+        before=(c.get('b25'),c.get('b26'),c.get('mon'),json.dumps(c.get('ba'),sort_keys=True))
         if r['mode']=='monthly':
             c['b25']=r['b25']; c['b26']=r['b26']; c['mon']=r['mon']; c['ba']=None
             chg=(r['b26']-r['b25'])/r['b25']*100 if r['b25'] else 0
@@ -99,9 +101,18 @@ def merge(parsed, write=False):
             chg=(r['cur']-r['prev'])/r['prev']*100 if r['prev'] else 0
             changed.append((iso,f"FY {r['cur']:,} vs {r['prev']:,}  {chg:+.1f}%"))
         if r.get('src'): c['births_source']=str(r['src'])
+        after=(c.get('b25'),c.get('b26'),c.get('mon'),json.dumps(c.get('ba'),sort_keys=True))
+        if after!=before:
+            real.append({'iso':iso,'name':c['name'],'kind':r['mode'],
+                         'chg':round(chg,1),'mon':r.get('mon'),
+                         'year':(r.get('year') if r['mode']=='annual' else 2026),'date':today})
     if write and changed:
-        data['updated']=__import__('datetime').date.today().isoformat()
+        # rolling "recent NSO updates" feed for the homepage ticker (newest first, max 10)
+        old=[e for e in data.get('recent',[]) if e['iso'] not in {x['iso'] for x in real}]
+        data['recent']=(real+old)[:10]
+        data['updated']=today
         json.dump(data,open(DATA,'w',encoding='utf-8'),ensure_ascii=False,separators=(',',':'))
+        if real: print(f"recent feed: +{len(real)} real change(s): {[x['iso'] for x in real]}")
     return changed
 
 if __name__=='__main__':

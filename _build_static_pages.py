@@ -139,8 +139,8 @@ HEAD="""<!doctype html>
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
 <meta property="og:url" content="{url}">
-<meta property="og:image" content="{base}/favicon-512.png">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="{ogimg}">
+<meta name="twitter:card" content="{twcard}">
 <link rel="icon" href="/favicon-32.png">
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
 <style>{css}</style>
@@ -225,6 +225,7 @@ def country_page(iso):
  <a class="ghost" href="/births/">Birth &amp; Fertility Tracker</a>
 </div>"""
     page=HEAD.format(title=esc(title),desc=esc(desc),url=url,base=BASE,css=CSS,topbar=esc(name),
+                     ogimg=f"{url}card.png",twcard="summary_large_image",
                      ld=f'<script type="application/ld+json">{ld}</script>')+body+FOOT
     d=os.path.join(OUT,'country',slug); os.makedirs(d,exist_ok=True)
     open(os.path.join(d,'index.html'),'w',encoding='utf-8').write(page)
@@ -245,6 +246,7 @@ for cont in ['Asia','Europe','Africa','Americas','Oceania','Other']:
                  f'<td>{esc(g.get("cat",""))}</td></tr>' for g in sorted(lst,key=lambda x:x['name']))
     secs+=f'<h2>{cont}</h2><table><thead><tr><th>Country</th><th>Rank</th><th>DHI 2025</th><th>Band</th></tr></thead><tbody>{rows}</tbody></table>'
 dir_page=HEAD.format(title="All 236 country profiles — Demographic Health Index | Demoria Research",
+    ogimg=f"{BASE}/favicon-512.png",twcard="summary",
     desc="Demographic Health Index profiles for all 236 countries and territories: score, rank, fertility, births and projections.",
     url=f"{BASE}/country/",base=BASE,css=CSS,topbar="Countries",ld='')+ \
     '<div class="crumb">Demoria Research · Country profiles</div><h1>Every country &amp; territory</h1>'+ \
@@ -283,6 +285,7 @@ span{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.14e
 """
 meth_url=f"{BASE}/methodology/"
 meth=HEAD.format(title="Methodology — the Demographic Health Index | Demoria Research",
+    ogimg=f"{BASE}/favicon-512.png",twcard="summary",
     desc="How the Demographic Health Index is built: fertility, age structure, momentum and migration combined into a single score for 236 countries and territories, 1965 to 2100.",
     url=meth_url,base=BASE,css=ESSAY_CSS,topbar="Methodology",ld='')+ \
     extract_essay()+ \
