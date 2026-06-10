@@ -18,6 +18,12 @@ GLOBE_HTML='dhi_globe.html'
 BIRTHS='public/births_data.json'
 OUT='public'
 TODAY=datetime.date.today().isoformat()
+def _nice(d):
+    try: return datetime.date.fromisoformat(d).strftime('%-d %B %Y')
+    except Exception: return d
+METH_VERSION='2.0'
+METH_PDF='/methodology/DHI-Methodology-v2.0.pdf'
+CONTACT='harryned@gmail.com'
 
 # ---------- load ----------
 h=open(GLOBE_HTML,encoding='utf-8').read()
@@ -33,6 +39,7 @@ def blob(name):
 G={v['iso']:v for v in blob('const GLOBE=').values() if isinstance(v,dict) and v.get('iso')}
 BD=json.load(open(BIRTHS,encoding='utf-8'))
 BC={c['iso']:c for c in BD['countries']}
+INGEST=_nice(BD.get('updated',TODAY))
 
 # Friendly display names for pages/URLs: prefer the tracker's curated names over
 # GLOBE's formal UN names ("Republic of Korea" -> "South Korea"), with a few
@@ -144,7 +151,7 @@ th:first-child,td:first-child{text-align:left}
 .cta a.ghost{background:transparent;border:1px solid rgba(12,26,51,.4);color:var(--navy);box-shadow:none}
 .near a{color:rgba(12,26,51,.78);text-decoration:none;border-bottom:1px dotted rgba(12,26,51,.4)}
 .near a:hover{color:var(--goldd)}
-.foot{margin-top:42px;padding-top:18px;border-top:1px solid rgba(12,26,51,.14);font-size:.8rem;color:var(--mut)}
+.cite{margin:30px 0 0;padding:16px 18px;background:rgba(12,26,51,.05);border:1px solid rgba(12,26,51,.1);border-radius:12px}.cite .ck{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--mut2);margin-bottom:8px;display:flex;align-items:center;justify-content:space-between}.cite .cv{font-size:.84rem;color:rgba(12,26,51,.85);line-height:1.55;font-family:'JetBrains Mono',monospace}.cite button{background:var(--navy);color:var(--cream);border:none;border-radius:6px;padding:5px 11px;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.08em;cursor:pointer}.cite button:hover{background:#1a2c52}.foot{margin-top:42px;padding-top:18px;border-top:1px solid rgba(12,26,51,.14);font-size:.8rem;color:var(--mut)}
 .foot a{color:rgba(12,26,51,.78)}
 """
 
@@ -172,8 +179,14 @@ HEAD="""<!doctype html>
 <div class="topbar"><a href="/">&lsaquo; Demoria Research</a><span style="width:1px;height:20px;background:rgba(12,26,51,.18)"></span><span class="t">{topbar}</span></div>
 <div class="wrap"{wrapstyle}>
 """
-FOOT="""<div class="foot">Data: UN World Population Prospects 2024, national statistical offices, and Demoria Research estimations. See the <a href="/methodology/">methodology</a>, the <a href="/dhi/">interactive index</a> and the <a href="/births/">Birth &amp; Fertility Tracker</a>. &copy; Demoria Research.</div>
+FOOT=f"""<div class="foot">Data: UN World Population Prospects 2024, national statistical offices, and Demoria Research estimations. See the <a href="/methodology/">methodology</a> (<a href="{METH_PDF}">PDF v{METH_VERSION}</a>), the <a href="/dhi/">interactive index</a> and the <a href="/births/">Birth &amp; Fertility Tracker</a>.<br>Free to reuse with attribution for journalism, research and education — see the <a href="/licence/">data licence</a>. Commercial licensing by enquiry. &copy; Demoria Research.</div>
 </div></body></html>"""
+
+def cite_box(title,url):
+    cit=f"Demoria Research ({TODAY[:4]}). {title}. Demographic Health Index v{METH_VERSION}. {url} (accessed {_nice(TODAY)})."
+    return (f'<div class="cite"><div class="ck"><span>Cite this</span>'
+            f'<button onclick="navigator.clipboard&&navigator.clipboard.writeText(this.parentNode.parentNode.querySelector(\'.cv\').textContent).then(()=>{{this.textContent=\'Copied\';setTimeout(()=>this.textContent=\'Copy\',1400)}})">Copy</button></div>'
+            f'<div class="cv">{esc(cit)}</div></div>')
 
 # rank-ordered list for neighbours + directory
 ranked=sorted(G.values(), key=lambda g:g.get('rank') or 999)
@@ -226,7 +239,7 @@ def country_page(iso):
         {"@type":"ListItem","position":3,"name":name,"item":url}]},ensure_ascii=False)
     body=f"""<div class="crumb"><a href="/country/" style="color:inherit;text-decoration:none">Countries</a> · {esc(g.get('cont',''))} · {esc(g.get('reg',''))}</div>
 <h1>{flag}{esc(name)}</h1>
-<div class="sub">Demographic Health Index profile · data through 2025, updated as national offices publish</div>
+<div class="sub">Demographic Health Index profile · data through 2025 · last NSO ingest: {INGEST}</div>
 <div class="score-row">
  <div class="card"><div class="k">DHI score 2025</div><div class="v" style="color:{band_col(score)}">{score:.1f}</div><div class="s">{esc(cat)}</div></div>
  <div class="card"><div class="k">Rank</div><div class="v">#{rank}</div><div class="s">of 236 countries &amp; territories</div></div>
@@ -245,7 +258,8 @@ def country_page(iso):
 <div class="cta">
  <a href="/dhi/#country={iso}">Open the interactive profile</a>
  <a class="ghost" href="/births/">Birth &amp; Fertility Tracker</a>
-</div>"""
+</div>
+{cite_box(f"{name} — Demographic Health Index profile", url)}"""
     page=HEAD.format(title=esc(title),desc=esc(desc),url=url,base=BASE,css=CSS,topbar=esc(name),
                      wrapstyle=f' style="--band:{tfr_col(e26 or t25)}"',
                      ogimg=f"{url}card.png",twcard="summary_large_image",
@@ -274,7 +288,7 @@ dir_page=HEAD.format(title="All 236 country profiles — Demographic Health Inde
     desc="Demographic Health Index profiles for all 236 countries and territories: score, rank, fertility, births and projections.",
     url=f"{BASE}/country/",base=BASE,css=CSS,topbar="Countries",ld='')+ \
     '<div class="crumb">Demoria Research · Country profiles</div><h1>Every country &amp; territory</h1>'+ \
-    '<div class="sub">DHI 2025 scores and ranks; click through for full profiles with fertility and births.</div>'+secs+FOOT
+    '<div class="sub">DHI 2025 scores and ranks · last NSO ingest: '+INGEST+'; click through for full profiles with fertility and births.</div>'+secs+cite_box('The Demographic Health Index','https://demoriaresearch.com/')+FOOT
 open(os.path.join(OUT,'country','index.html'),'w',encoding='utf-8').write(dir_page)
 
 # ---------- methodology (static extract of the SPA essay) ----------
@@ -313,13 +327,34 @@ meth=HEAD.format(title="Methodology — the Demographic Health Index | Demoria R
     ogimg=f"{BASE}/favicon-512.png",twcard="summary",
     desc="How the Demographic Health Index is built: fertility, age structure, momentum and migration combined into a single score for 236 countries and territories, 1965 to 2100.",
     url=meth_url,base=BASE,css=ESSAY_CSS,topbar="Methodology",ld='')+ \
+    '<div class="sub" style="font-family:JetBrains Mono,monospace">Version '+METH_VERSION+' · June 2026 · <a href="'+METH_PDF+'">Download as PDF</a> · DOI: pending (Zenodo)</div>'+ \
     extract_essay()+ \
-    '<div class="cta"><a href="/dhi/">Open the interactive index</a><a class="ghost" href="/births/">Birth &amp; Fertility Tracker</a><a class="ghost" href="/country/">All country profiles</a></div>'+FOOT
+    '<div class="cta"><a href="'+METH_PDF+'">Methodology PDF v'+METH_VERSION+'</a><a class="ghost" href="/dhi/">Open the interactive index</a><a class="ghost" href="/births/">Birth &amp; Fertility Tracker</a><a class="ghost" href="/licence/">Data licence</a></div>'+ \
+    cite_box('The Demographic Health Index: methodology (v'+METH_VERSION+')','https://demoriaresearch.com/methodology/')+FOOT
 os.makedirs(os.path.join(OUT,'methodology'),exist_ok=True)
 open(os.path.join(OUT,'methodology','index.html'),'w',encoding='utf-8').write(meth)
 
+# ---------- data licence ----------
+LIC_BODY=f"""<div class="crumb">Demoria Research · Data licence</div>
+<h1>Data licence</h1>
+<div class="sub">Version 1.0 · applies to the Demographic Health Index and the Birth &amp; Fertility Tracker · last NSO ingest: {INGEST}</div>
+<h2>Free with attribution</h2>
+<p style="margin-bottom:12px">DHI scores, rankings, projections, Demoria Research Estimations (DRE) and the assembled births dataset are free to reuse, quote, chart and republish for <b>journalism, academic research, education and other non-commercial purposes</b>, provided each use is attributed to <b>&ldquo;Demoria Research (demoriaresearch.com)&rdquo;</b> with a link where the medium allows.</p>
+<h2>Commercial use</h2>
+<p style="margin-bottom:12px">Use inside commercial products, paid reports, dashboards or redistributed datasets requires a commercial licence. Enquiries: <a href="mailto:{CONTACT}">{CONTACT}</a>.</p>
+<h2>Underlying sources</h2>
+<p style="margin-bottom:12px">Figures tagged <b>NSO</b> originate from the named national statistical office and remain subject to that office&rsquo;s terms. UN World Population Prospects 2024 inputs are &copy; United Nations, licensed CC BY 3.0 IGO. Demoria Research&rsquo;s scores, estimations and the assembled dataset are &copy; Demoria Research.</p>
+<h2>No warranty</h2>
+<p>Data is provided as-is; estimates are clearly tagged (DRE, UN WPP) and revised as official figures are published. Cite the access date.</p>"""
+lic=HEAD.format(title="Data licence — Demoria Research",
+    wrapstyle='', ogimg=f"{BASE}/favicon-512.png",twcard="summary",
+    desc="Reuse terms for the Demographic Health Index and Birth & Fertility Tracker: free with attribution for journalism, research and education; commercial licensing by enquiry.",
+    url=f"{BASE}/licence/",base=BASE,css=CSS,topbar="Data licence",ld='')+LIC_BODY+FOOT
+os.makedirs(os.path.join(OUT,'licence'),exist_ok=True)
+open(os.path.join(OUT,'licence','index.html'),'w',encoding='utf-8').write(lic)
+
 # ---------- sitemap + robots ----------
-statics=[f"{BASE}/",f"{BASE}/dhi/",f"{BASE}/births/",f"{BASE}/methodology/",f"{BASE}/country/"]
+statics=[f"{BASE}/",f"{BASE}/dhi/",f"{BASE}/births/",f"{BASE}/methodology/",f"{BASE}/country/",f"{BASE}/licence/"]
 sm=['<?xml version="1.0" encoding="UTF-8"?>','<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
 for u in statics+sorted(urls):
     sm.append(f'<url><loc>{u}</loc><lastmod>{TODAY}</lastmod></url>')

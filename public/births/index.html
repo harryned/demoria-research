@@ -281,7 +281,8 @@ const slug=s=>s.replace(/[^a-z0-9]+/gi,'-').toLowerCase();
 function bootBT(data){
  C=data.countries.map(enrich);
  ORDER=data.subregion_order||[...new Set(C.map(c=>c.region))];
- document.getElementById('tbYear').textContent=data.year+' data';
+ const _ing=(function(d){try{const t=new Date(d+'T00:00:00');return t.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});}catch(e){return d;}})(data.updated||'');
+ document.getElementById('tbYear').textContent=_ing?('NSO ingest: '+_ing):(data.year+' data');
  const belowR=C.filter(c=>c.cur!=null&&c.cur<2.1).length;
  const below1=C.filter(c=>c.cur!=null&&c.cur<1.0).length;
  const gulf=C.filter(c=>c.region==='Gulf (nationals)').length;
@@ -295,6 +296,8 @@ function bootBT(data){
  document.getElementById('foot').innerHTML=
    `<strong>How this is built:</strong> every current-year birth figure is taken straight from the country's own statistical office, or is the best published estimate where an office reports less frequently; each card links its source, country by country, updated as they are released.<br>`+
    `<strong>Three source tiers:</strong> <b style="color:#3fa83f">NSO</b> — current-year births reported directly by the national statistics office. <b style="color:#e8b84b">DRE (Demoria Research Estimation)</b> — our own figure synthesised from national statistical offices and official sources: interpolations, back-calculations, and worked-around wartime data (e.g. Ukraine). Shown in an amber dashed panel. <b style="color:rgba(238,241,246,.6)">UN WPP 2024</b> — the UN medium-variant projection, shown only where no national figure exists, as a forecast and not a national count (grey dashed panel). Estimate figures are prefixed "~".<br>`+
+   `<strong>Last NSO ingest:</strong> ${_ing} — the date new national-office figures were last folded in. `+
+   `<strong>Cite:</strong> Demoria Research (${new Date().getFullYear()}). The Birth &amp; Fertility Tracker. https://demoriaresearch.com/births/ (accessed ${new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})}). Free with attribution — <a href="/licence/">data licence</a> · <a href="/methodology/DHI-Methodology-v2.0.pdf">methodology PDF v2.0</a>.<br>`+
    `<strong>Sources:</strong> UN World Population Prospects 2024 (observed to 2023; medium-variant 2024–25). Gulf nationals-only TFR: FCSC (UAE), GASTAT (Saudi Arabia), NCSI (Oman), Shah &amp; Fargues / KFS 2018 (Kuwait), Fargues / Qatar PSA (Qatar); Bahrain back-calculated. 2026 births &amp; estimates compiled from national statistical offices as released.<br>`+
    `<strong>2026 TFR estimate</strong> = TFR₂₀₂₅ × (births₂₀₂₆ ÷ births₂₀₂₅ for the same months); shown italic, dashed. Where no current births are published, the latest official TFR (2025) is shown.<br>`+
    `<a href="https://demoriaresearch.com">← Return to the Demographic Health Index</a> &nbsp;·&nbsp; <a href="/country/">All country profiles</a> &nbsp;·&nbsp; <a href="/methodology/">Methodology</a>`;
