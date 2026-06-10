@@ -3700,6 +3700,7 @@ window.__pos_d6=1;
 
   // URL routing: / → landing, /dhi/ → world view directly
   function routeFromPath(){
+    if (/country=[A-Za-z]{3}/.test(location.hash)) return; // hash deep-link wins over landing
     const p = location.pathname || '/';
     if (p.indexOf('/dhi') === 0) {
       if (typeof show === 'function') show('home');
@@ -4437,6 +4438,20 @@ window.__pos_d6=1;
       }
     }
   });
+})();
+
+// --- URL hash deep-links: /dhi/#country=KOR (and /#country=KOR) opens that profile.
+// Static /country/<slug>/ pages link here, so search/social visitors land on the live view.
+(function(){
+  function dl(){
+    var m=location.hash.match(/country=([A-Za-z]{3})/);
+    if(!m) return;
+    var iso=m[1].toUpperCase();
+    if(typeof byIso==='undefined'||!byIso[iso]) return;
+    try{ show('rankings'); gotoCountry(iso); }catch(e){}
+  }
+  window.addEventListener('hashchange',dl);
+  setTimeout(dl,180); // after routeFromPath (100ms) and tab wiring
 })();
 </script><script>
 /* ===== FT magazine country-profile renderer (overrides rkSelect for ISO ids) ===== */

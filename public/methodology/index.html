@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Methodology — the Demographic Health Index | Demoria Research</title>
+<meta name="description" content="How the Demographic Health Index is built: fertility, age structure, momentum and migration combined into a single score for 236 countries and territories, 1965 to 2100.">
+<link rel="canonical" href="https://demoriaresearch.com/methodology/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Demoria Research">
+<meta property="og:title" content="Methodology — the Demographic Health Index | Demoria Research">
+<meta property="og:description" content="How the Demographic Health Index is built: fertility, age structure, momentum and migration combined into a single score for 236 countries and territories, 1965 to 2100.">
+<meta property="og:url" content="https://demoriaresearch.com/methodology/">
+<meta property="og:image" content="https://demoriaresearch.com/favicon-512.png">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="/favicon-32.png">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0c1a33;--navy2:#0a1426;--gold:#e8b84b;--cream:#f4ecd3;--ink:#eef1f6;--ink2:rgba(238,241,246,.74);--ink3:rgba(238,241,246,.45)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--navy2);color:var(--ink);font-family:'Manrope',sans-serif;font-size:15px;line-height:1.55}
+a{color:var(--gold)}
+.topbar{background:var(--cream);height:50px;display:flex;align-items:center;padding:0 22px;gap:13px}
+.topbar a{font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--navy);text-decoration:none}
+.topbar .t{font-size:.95rem;font-weight:700;color:var(--navy)}
+.wrap{max-width:880px;margin:0 auto;padding:34px 22px 60px}
+.crumb{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+h1{font-size:clamp(1.9rem,4vw,2.6rem);font-weight:700;letter-spacing:-.01em;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+h1 img{height:30px;border-radius:3px;box-shadow:0 1px 4px rgba(0,0,0,.5)}
+.sub{color:var(--ink3);margin:4px 0 22px;font-size:.92rem}
+.score-row{display:flex;gap:14px;flex-wrap:wrap;margin:18px 0 8px}
+.card{background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.09);border-radius:12px;padding:16px 18px;flex:1;min-width:180px}
+.card .k{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+.card .v{font-family:'JetBrains Mono',monospace;font-size:1.7rem;font-weight:700;line-height:1}
+.card .s{font-size:.78rem;color:var(--ink2);margin-top:6px}
+.lede{background:var(--cream);color:var(--navy);border-radius:12px;padding:18px 20px;margin:18px 0;font-size:1.02rem;line-height:1.6}
+h2{font-size:1.05rem;font-weight:700;margin:30px 0 10px;letter-spacing:.01em}
+table{border-collapse:collapse;width:100%;font-size:.9rem}
+th{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);text-align:right;padding:7px 10px;border-bottom:1px solid rgba(255,255,255,.14)}
+td{text-align:right;padding:7px 10px;border-bottom:1px solid rgba(255,255,255,.06);font-variant-numeric:tabular-nums}
+th:first-child,td:first-child{text-align:left}
+.pill{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:.62rem;font-weight:700;padding:3px 8px;border-radius:5px;color:#fff;vertical-align:2px}
+.bar{height:9px;background:rgba(255,255,255,.08);border-radius:5px;overflow:hidden;margin-top:5px}
+.bar i{display:block;height:100%;border-radius:5px;background:var(--gold)}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
+.cta{display:flex;gap:12px;flex-wrap:wrap;margin:30px 0 8px}
+.cta a{display:inline-block;background:var(--gold);color:var(--navy);font-weight:800;text-decoration:none;padding:12px 20px;border-radius:9px;font-size:.92rem}
+.cta a.ghost{background:transparent;border:1px solid rgba(232,184,75,.5);color:var(--gold)}
+.near a{color:var(--ink2);text-decoration:none;border-bottom:1px dotted rgba(255,255,255,.25)}
+.near a:hover{color:var(--gold)}
+.foot{margin-top:42px;padding-top:18px;border-top:1px solid rgba(255,255,255,.1);font-size:.8rem;color:var(--ink3)}
+.foot a{color:var(--ink2)}
+
+.wrap{max-width:720px}
+h1{display:block;font-size:clamp(1.9rem,4vw,2.5rem);line-height:1.15;margin:6px 0 14px}
+h1 em,h2 em{color:var(--gold);font-style:normal}
+h2{font-size:1.35rem;margin:36px 0 12px}
+p{margin:0 0 14px;color:var(--ink2);font-size:1.0rem;line-height:1.7}
+p b{color:var(--ink)}
+div{margin-bottom:6px}
+span{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-right:10px}
+</style>
+
+</head>
+<body>
+<div class="topbar"><a href="/">&lsaquo; Demoria Research</a><span style="width:1px;height:20px;background:rgba(12,26,51,.18)"></span><span class="t">Methodology</span></div>
+<div class="wrap">
+<div>
+<div>
+<div>Demoria Research &middot; DHI 2026 &middot; v2.0</div>
+<h1>Can a population <em>carry itself forward?</em></h1>
+<div>A single score, for 236 countries and territories, 1965 to 2100 &mdash; built from <b>fertility, age structure, momentum and migration</b>. The headline birth rate is one input; the structure beneath it is the index.</div>
+</div>
+<div>
+
+<div>
+<div><span>01</span><span>The index</span></div>
+<h2>What the DHI <em>measures</em></h2>
+<p>It measures one thing: the arithmetic of replacement. Are enough children being born to replace the people already here? Can the age structure carry its dependents? And is stability <b>held by a country&rsquo;s own momentum</b>, or rented from the rest of the world through migration?</p>
+<div>
+<p>The DHI is <b>not</b> a measure of wealth, happiness, or the worth of a society. A rich country can score badly; a poor one can score well. The index is deliberately blind to income &mdash; it asks only whether a population can sustain itself.</p>
+<p>The usual shorthand for that question is the headline fertility rate. It flatters and it misleads. A total fertility rate says nothing about the age structure beneath it, nothing about how long a country has already been below replacement, and nothing about the difference between a society carried by its own young cohorts and one carried by a constant inflow of migrants.</p>
+<p>Two countries with an identical TFR can be on opposite trajectories. Version&nbsp;2.0 was rebuilt from the ground up to pull those forces apart &mdash; into four weighted pillars and fifteen indicators.</p>
+<p>Every figure rests on the UN World Population Prospects 2024 revision. Where a national statistical office reports materially different fertility, that value is applied as an explicit override &mdash; and every country-year is stamped <b>WPP</b> or <b>NSO</b>, so provenance is never hidden.</p>
+</div>
+<div>
+<div><div><span>01</span><span>Scope</span></div><div>236</div><div>Countries &amp; territories scored</div></div>
+<div><div><span>02</span><span>Range</span></div><div>1965<span>&ndash;</span>2100</div><div>Observed to 2025, projected to 2100</div></div>
+<div><div><span>03</span><span>Inputs</span></div><div>15</div><div>Indicators across four pillars</div></div>
+<div><div><span>04</span><span>Variants</span></div><div>3</div><div>Projections &mdash; low, median, high</div></div>
+</div>
+<div>A high score is not a good place to live. It is <span>a population that can still replace itself.</span></div>
+<div>v2.0 is the current, live edition of the Demographic Health Index &mdash; the fifteen-indicator, four-pillar framework shown throughout this site. It supersedes v1.1.</div>
+</div>
+
+<div>
+<div><span>02</span><span>Why it matters</span></div>
+<h2>So <em>what?</em></h2>
+<p>Roughly <b>two-thirds of humanity</b> now lives in a country with below-replacement fertility. The defining demographic story of this century is not growth &mdash; it is the depth, the speed and the reversibility of decline.</p>
+<div>
+<p>These are slow variables with hard consequences. A working-age base that shrinks under a growing retired population reprices pensions, healthcare, housing, defence and the tax take all at once &mdash; and labour-force contraction compounds on itself. By the time the strain is obvious in the headline numbers, the cohorts who would have eased it were never born.</p>
+</div>
+<div>Demography is the part of the future that is <span>already decided.</span> The DHI exists to make that part legible.</div>
+<div>
+<p>The index separates a country that is <b>genuinely self-sustaining</b> from one that is merely being <b>held up</b>. Two props can flatter a headline. <b>Momentum</b> &mdash; a young age structure keeps births high for a generation even after fertility falls below replacement; it buys time, it does not last. <b>Migration</b> &mdash; a contingent prop that depends on the rest of the world continuing to supply people; it can hold a population flat indefinitely, but it is borrowed, not owned.</p>
+<p>So South Korea and Niger sit near opposite ends of the index, and the reasons compound rather than cancel. Several Gulf states post stable working-age numbers built almost entirely on a guest-worker inflow that is neither settling nor reproducing locally. A handful of micro-jurisdictions look buoyant only because tax and residency rules import the very people the headline counts. The DHI is built to name these mechanisms &mdash; not to be flattered by them.</p>
+</div>
+<div>What the index is not</div>
+<div><p>It is not a forecast of national success, a ranking of desirability, or a verdict on migration, family policy or any group of people. It is a structural measurement of one variable &mdash; replacement &mdash; and the uncertainty around it is shown, not hidden: the Low and High variants bracket every projection, and every input traces to a public source.</p></div>
+</div>
+
+<div>
+<div><span>03</span><span>How it is built</span></div>
+<h2>The <em>method</em></h2>
+<p>The DHI is a <b>weighted geometric mean of four pillars</b>, each built from a set of indicators, computed for every country and year and rescaled to a readable 0&ndash;100.</p>
+<div>
+<div><div><span>FSS</span><span>Pillar 01</span></div><div><span>34</span><span>% weight</span></div><div>Fertility Strength</div><div><i></i></div><div>Births relative to replacement, and the direction of travel.</div><div><span>Indicators</span><span>Net reproduction rate &nbsp;/&nbsp; 5-year change in TFR &nbsp;/&nbsp; years already spent below replacement</span></div></div>
+<div><div><span>PMS</span><span>Pillar 02</span></div><div><span>28</span><span>% weight</span></div><div>Population Momentum</div><div><i></i></div><div>Natural increase, cohort structure, the pace of ageing.</div><div><span>Indicators</span><span>Natural increase &nbsp;/&nbsp; change in the under-20 share &nbsp;/&nbsp; working-age growth &nbsp;/&nbsp; stationary-vs-total ratio &nbsp;/&nbsp; young-cohort ratio &nbsp;/&nbsp; median-age pace</span></div></div>
+<div><div><span>WSS</span><span>Pillar 03</span></div><div><span>22</span><span>% weight</span></div><div>Workforce Sustainability</div><div><i></i></div><div>Dependency, worker replacement, labour supply.</div><div><span>Indicators</span><span>Old-age dependency &nbsp;/&nbsp; worker-replacement ratio &nbsp;/&nbsp; labour-force participation</span></div></div>
+<div><div><span>MRS</span><span>Pillar 04</span></div><div><span>16</span><span>% weight</span></div><div>Migration Reliance</div><div><i></i></div><div>How much stability is rented from net migration.</div><div><span>Indicators</span><span>Net-migration engagement &nbsp;/&nbsp; immigrant-stock share</span></div></div>
+</div>
+<div>Why a geometric mean</div>
+<div><p>The pillars are combined geometrically, not averaged. An average lets a strong pillar paper over a collapsed one &mdash; a country could mask failed fertility behind heavy migration. A geometric mean punishes imbalance: if any pillar falls toward zero, the whole score follows it down. For a sustainability measure, the weakest link should govern.</p></div>
+<div>Five bands</div>
+<div>
+<div><div></div><div></div><div></div><div></div><div></div></div>
+<div>
+<div><span>Below 35</span><b>Collapsing</b>Self-replacement has effectively ended.</div>
+<div><span>35&ndash;50</span><b>Declining fast</b>Structural deficit; decline is the baseline.</div>
+<div><span>50&ndash;65</span><b>Declining slowly</b>Renewal is no longer assured.</div>
+<div><span>65&ndash;80</span><b>Steady</b>Sustained, with visible strain.</div>
+<div><span>80&ndash;100</span><b>Thriving</b>The structure renews itself.</div>
+</div>
+</div>
+<div>Baseline, overrides &amp; projections</div>
+<div>
+<p>UN World Population Prospects 2024 is the global baseline. Where a national statistical office reports a materially different total fertility rate, that value flows in through an explicit <b>cascade</b> &mdash; into the net reproduction rate, the birth stream and natural change &mdash; so the override stays consistent across every indicator it touches.</p>
+<p>Scores are observed annually from 1965 to 2025, then projected to 2100 under the UN&rsquo;s Low, Median and High variants. The headline figure uses the Median; the World view exposes all three at four waypoints &mdash; 2035, 2050, 2075 and 2100.</p>
+<p>Because fertility is scored on a curve that also penalises births far above replacement, the High-fertility variant does not always yield the highest score. For an already-high-fertility country it can sit <b>below</b> the Median path. The variant selector shows a scenario, not a simple best-to-worst ladder.</p>
+</div>
+<div>Eleven mechanism classes</div>
+<div><p>Two countries can share a score for opposite reasons. Beneath the number, each is assigned one mechanism-based class &mdash; the number tells you how healthy, the typology tells you why.</p></div>
+<div><div><span>01</span><b>Hyper-expansionary</b> &mdash; very high fertility; a fast-growing, youth-heavy base.</div><div><span>02</span><b>Expansionary</b> &mdash; above replacement; sustainable organic growth.</div><div><span>03</span><b>Dividend window</b> &mdash; fertility easing toward replacement over a favourable working-age bulge.</div><div><span>04</span><b>Recent sub-replacement</b> &mdash; just below replacement, still growing on momentum.</div><div><span>05</span><b>Approaching decline</b> &mdash; momentum thinning; natural increase near zero.</div><div><span>06</span><b>Migration-sustained</b> &mdash; natural decline offset, in the main, by net migration.</div><div><span>07</span><b>Migration-buffered</b> &mdash; declining, with migration softening but not erasing the fall.</div><div><span>08</span><b>Organic decline</b> &mdash; sustained natural decline; limited migration offset.</div><div><span>09</span><b>Entrenched decline</b> &mdash; two decades or more of natural decline; a deep structural deficit.</div><div><span>10</span><b>Arbitrage enclave</b> &mdash; demographics dominated by tax- or residency-driven inflows.</div><div><span>11</span><b>Guest-worker state</b> &mdash; population shaped by a large, non-settling labour workforce.</div></div>
+
+<div>Context, displayed alongside</div>
+<div>
+<p>Two further sets of indicators are surfaced for every country &mdash; not as
+part of the score, but next to it. <b>Fertility Quality</b> covers adolescent
+fertility, infant mortality and the share of births to women 35+. <b>Human
+Capital</b> covers mean years of schooling 20&ndash;39, the share of adults
+with upper-secondary education and the gender gap in schooling. They explain
+the human and developmental context behind a demographic score &mdash; a country
+can have a Crisis-level DHI and a world-class human-capital base at the same
+time, and the two together are more honest than either alone.</p>
+</div>
+<div>The pillar weights are reasoned and documented rather than statistically optimised &mdash; treat cross-country gaps of a point or two as broadly indicative rather than precise.</div>
+</div>
+
+<div>
+<div><span>04</span><span>The author</span></div>
+<h2>About the <em>author</em></h2>
+<div>
+  <div>HN</div>
+  <div>Harry Nedeljkovic</div>
+  <div>Founder, Demoria Research &middot; Author of the DHI</div>
+  <div>
+    <p>Harry studied economics and demography at the <strong>University of Bath</strong> (BSc), <strong>Bocconi University</strong> (MSc) and <strong>Tsinghua University</strong> (MSc exchange semester). His personal interest is in fertility collapse and demographic ageing &mdash; what he considers <em>the most significant and furthest-reaching macro-trend in the world today</em>.</p>
+    <p>Previous work has spanned the start-up space, financial services, and the commodities industry &mdash; most recently at <strong>Onyx Capital Group</strong> and <strong>ArcelorMittal</strong> &mdash; where the demand-side consequences of demographic change are routinely underweighted by the markets and institutions they will eventually reshape.</p>
+    <p>He was born in the UK, but has studied in Italy and China.</p>
+    <ul>
+      <li><a href="mailto:harryned@gmail.com"><span>Email</span><span>harryned@gmail.com</span></a></li>
+      <li><a href="https://www.linkedin.com/in/harrynedeljkovic"><span>LinkedIn</span><span>Harry Nedeljkovic</span></a></li>
+      <li><a href="https://x.com/HNedeljkovic"><span>X</span><span>@HNedeljkovic</span></a></li>
+    </ul>
+  </div>
+</div>
+</div>
+</div>
+</div><div class="cta"><a href="/dhi/">Open the interactive index</a><a class="ghost" href="/births/">Birth &amp; Fertility Tracker</a><a class="ghost" href="/country/">All country profiles</a></div><div class="foot">Data: UN World Population Prospects 2024, national statistical offices, and Demoria Research estimations. See the <a href="/methodology/">methodology</a>, the <a href="/dhi/">interactive index</a> and the <a href="/births/">Birth &amp; Fertility Tracker</a>. &copy; Demoria Research.</div>
+</div></body></html>

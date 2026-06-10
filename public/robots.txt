@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://demoriaresearch.com/sitemap.xml
