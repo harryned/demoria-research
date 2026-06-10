@@ -72,15 +72,18 @@ for c in BD['countries']:
 if _changed:
     json.dump(BD,open(BIRTHS,'w',encoding='utf-8'),ensure_ascii=False,separators=(',',':'))
     print("slugs written into births_data.json")
-# 2) dhi_globe.html: splice CSLUG between markers for the SPA's profile/map links
+# 2) dhi_globe.html: splice CSLUG (slugs) + SRCCAT (source tiers) between markers
 _smap=json.dumps(SLUG,ensure_ascii=False,separators=(',',':'))
+_scat=json.dumps({c['iso']:c.get('src_cat','wpp') for c in BD['countries']},ensure_ascii=False,separators=(',',':'))
 _h2,_n=re.subn(r'/\*__CSLUG__\*/.*?/\*__/CSLUG__\*/',
                lambda m:'/*__CSLUG__*/'+_smap+'/*__/CSLUG__*/', h, count=1, flags=re.S)
-if _n==1:
+_h2,_n2=re.subn(r'/\*__SRCCAT__\*/.*?/\*__/SRCCAT__\*/',
+               lambda m:'/*__SRCCAT__*/'+_scat+'/*__/SRCCAT__*/', _h2, count=1, flags=re.S)
+if _n==1 and _n2==1:
     open(GLOBE_HTML,'w',encoding='utf-8').write(_h2)
-    print("CSLUG map spliced into dhi_globe.html")
+    print("CSLUG + SRCCAT maps spliced into dhi_globe.html")
 else:
-    print("WARN: CSLUG markers not found in dhi_globe.html")
+    print(f"WARN: marker splice incomplete (cslug={_n}, srccat={_n2})")
 
 def esc(s): return html.escape(str(s),quote=True)
 def band_col(s):
