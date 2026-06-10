@@ -20,8 +20,8 @@ SHEET='Birth_Tracker_Input_EXPANDED.xlsx'; DATA='public/births_data.json'
 M24=range(4,16)    # cols D..O   (2024 Jan..Dec)
 M25=range(16,28)   # cols P..AA  (2025 Jan..Dec)
 M26=range(28,40)   # cols AB..AM (2026 Jan..Dec)
-FY24=40; FY25=41; FY26=42   # cols AN, AO, AP
-SRC=43             # col AQ
+FY23=40; FY24=41; FY25=42; FY26=43   # cols AN,AO,AP,AQ (FY2023 inserted at AN on 2026-06-10, shifting the rest +1)
+SRC=44             # col AR
 FORCE_ANNUAL={'MDA'}   # countries whose monthly data is too sparse — use annual FY2024 vs FY2025
 
 def num(v):
@@ -76,8 +76,8 @@ def parse():
         if any(x is not None for x in m24+m25+m26): continue
         # Use the latest year Y where both FY_Y and FY_{Y-1} are present.
         # (China only publishes annual, one year behind — its latest is 2025 vs 2024, not 2026.)
-        fy={2024:num(row[FY24-1].value),2025:num(row[FY25-1].value),2026:num(row[FY26-1].value)}
-        for y in (2026,2025):
+        fy={2023:num(row[FY23-1].value),2024:num(row[FY24-1].value),2025:num(row[FY25-1].value),2026:num(row[FY26-1].value)}
+        for y in (2026,2025,2024):
             if fy[y] and fy[y-1] and fy[y]>0 and fy[y-1]>0:
                 out[iso]={'mode':'annual','prev':fy[y-1],'cur':fy[y],'year':y,'src':src}
                 break

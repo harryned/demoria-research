@@ -31,7 +31,7 @@ designation={}
 try:
     dws=openpyxl.load_workbook(SHEET, data_only=True)['Births']
     for r in range(3, dws.max_row+1):
-        iso=dws.cell(r,1).value; lab=dws.cell(r,45).value
+        iso=dws.cell(r,1).value; lab=dws.cell(r,46).value   # DESIGNATION moved to AT(46) after FY2023 insert
         if iso and lab:
             key=str(lab).strip()
             if key in DESIG_MAP: designation[str(iso).strip()]=DESIG_MAP[key]
