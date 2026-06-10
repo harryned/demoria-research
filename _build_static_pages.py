@@ -56,6 +56,25 @@ def slugify(name):
 SLUG={iso:slugify(g['name']) for iso,g in G.items()}
 assert len(set(SLUG.values()))==len(SLUG), "slug collision"
 
+# ---- publish the slug map so every surface links to /country/<slug>/ ----
+# 1) births_data.json: per-country slug for the tracker tiles
+_changed=False
+for c in BD['countries']:
+    s=SLUG.get(c['iso'])
+    if s and c.get('slug')!=s: c['slug']=s; _changed=True
+if _changed:
+    json.dump(BD,open(BIRTHS,'w',encoding='utf-8'),ensure_ascii=False,separators=(',',':'))
+    print("slugs written into births_data.json")
+# 2) dhi_globe.html: splice CSLUG between markers for the SPA's profile/map links
+_smap=json.dumps(SLUG,ensure_ascii=False,separators=(',',':'))
+_h2,_n=re.subn(r'/\*__CSLUG__\*/.*?/\*__/CSLUG__\*/',
+               lambda m:'/*__CSLUG__*/'+_smap+'/*__/CSLUG__*/', h, count=1, flags=re.S)
+if _n==1:
+    open(GLOBE_HTML,'w',encoding='utf-8').write(_h2)
+    print("CSLUG map spliced into dhi_globe.html")
+else:
+    print("WARN: CSLUG markers not found in dhi_globe.html")
+
 def esc(s): return html.escape(str(s),quote=True)
 def band_col(s):
     if s is None: return '#7f8a9e'
