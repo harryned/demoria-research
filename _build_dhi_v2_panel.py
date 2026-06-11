@@ -21,6 +21,17 @@ overrides={}
 for r in csv.DictReader(open('overrides/tfr.csv')):
     overrides[(r['iso3'],r['year'])]=float(r['value'])
 
+# Structural NSO overrides (e.g. Moldova usual-resident concept): point values
+# replace the WPP-derived cache for the years provided; window functions use
+# them only when EVERY endpoint in the window is overridden, mirroring the
+# endpoint-provenance rule dtfr5_eff documents for TFR.
+try:
+    SOV=json.load(open('overrides/panel_struct.json'))
+except FileNotFoundError:
+    SOV={}
+def sov(iso,yr,k):
+    return SOV.get(iso,{}).get(k,{}).get(str(yr))
+
 # ---- v2.0 scoring curves ----
 def s_F1(x):
     if x is None: return None
@@ -75,6 +86,8 @@ def cohort(iso,yr):
     f=e['f'][e['y'].index(cand)]
     return sum(f[0:3])/sum(f[3:6]) if len(f)>=6 and sum(f[3:6])>0 else None
 def mpace(iso,yr):
+    oa,ob=sov(iso,yr-10,'Median_Age'),sov(iso,yr,'Median_Age')
+    if oa is not None and ob is not None: return (ob-oa)/10
     a=cache.get(iso,{}).get(str(yr-10),{}).get('Median_Age')
     b=cache.get(iso,{}).get(str(yr),{}).get('Median_Age')
     return None if (a is None or b is None) else (b-a)/10
@@ -98,12 +111,19 @@ def dunder20(iso,yr):
     a,b=u20share(iso,yr-5),u20share(iso,yr)
     return (b-a) if (a is not None and b is not None) else None
 def netmig5(iso,yr):
-    """5-yr mean of net migration per 1000."""
+    """5-yr mean of net migration per 1000. NSO-only window when >=3 override
+    points exist (concepts must not mix within a window), else cache-only."""
+    ov=[sov(iso,t,'NetMig') for t in range(yr-4,yr+1)]
+    ov=[x for x in ov if x is not None]
+    if len(ov)>=3: return sum(ov)/len(ov)
     vs=[cval(iso,t,'NetMig') for t in range(yr-4,yr+1)]
     vs=[x for x in vs if x is not None]
     return sum(vs)/len(vs) if len(vs)>=3 else None
 def lfgrowth5(iso,yr):
-    """R3 — 5-yr growth of the working-age (15-64) population."""
+    """R3 — 5-yr growth of the working-age (15-64) population.
+    NSO series only when both endpoints are overridden."""
+    oa,ob=sov(iso,yr-5,'WorkAge_15_64'),sov(iso,yr,'WorkAge_15_64')
+    if oa and ob: return ob/oa-1
     a,b=cval(iso,yr-5,'WorkAge_15_64'),cval(iso,yr,'WorkAge_15_64')
     return (b/a-1) if (a and b) else None
 def eff_tfr(iso,t):
@@ -141,13 +161,19 @@ def extra_b(iso,t):
     b=wv(iso,t,'Births')
     return 0.0 if b is None else b*(k-1)
 def nc5_eff(iso,yr):
-    """5-yr rolling mean of CBR*k_t - CDR — full cascade across the window."""
+    """5-yr rolling mean of CBR*k_t - CDR — full cascade across the window.
+    When every year in the window has an NSO natural-change override, use those."""
+    ov=[sov(iso,t,'NC') for t in range(yr-4,yr+1)]
+    if all(x is not None for x in ov): return sum(ov)/5
     vals=[]
     for t in range(yr-4,yr+1):
         cb=cval(iso,t,'CBR'); cd=cval(iso,t,'CDR')
         if cb is None or cd is None: continue
         vals.append(cb*kfor(iso,t)-cd)
     return sum(vals)/len(vals) if len(vals)==5 else None
+def u20share_nso(iso,yr):
+    u,p=sov(iso,yr,'Pop_under20'),sov(iso,yr,'TPop')
+    return (u/(p*1000)) if (u is not None and p) else None
 def u20share_eff(iso,yr):
     u=cval(iso,yr,'Pop_under20'); p=wv(iso,yr,'TPopulation1July')
     if u is None or p is None: return None
@@ -155,6 +181,8 @@ def u20share_eff(iso,yr):
     ep=sum(extra_b(iso,t) for t in range(1965,yr)) + 0.5*extra_b(iso,yr)
     return (u+eu)/((p+ep)*1000)
 def dunder20_eff(iso,yr):
+    na,nb=u20share_nso(iso,yr-5),u20share_nso(iso,yr)
+    if na is not None and nb is not None: return nb-na
     a,b=u20share_eff(iso,yr-5),u20share_eff(iso,yr)
     return (b-a) if (a is not None and b is not None) else None
 
@@ -177,15 +205,17 @@ for iso in ISOS:
         # NatChange_5y: full rolling cascade (not just current-year k adjustment)
         nc5=nc5_eff(iso,yr)
         if nc5 is None: nc5=d.get('NatChange_5y')
-        births1000=(cbr*k) if cbr is not None else None
+        ocbr=sov(iso,yr,'CBR')
+        births1000=ocbr if ocbr is not None else ((cbr*k) if cbr is not None else None)
         pop=wv(iso,yr,'TPopulation1July')
         immstk=carry(iso,yr,'Mig_Stock')          # 5-yearly series — carry last known
         immf=(immstk/(pop*1000)) if (immstk is not None and pop) else None
-        oadr=c.get('OADR')
+        oadr=sov(iso,yr,'OADR')
+        if oadr is None: oadr=c.get('OADR')
         oadr=(oadr/100) if oadr is not None else None   # cache OADR is per-100; score expects fraction
         S={'F1':s_F1(nrr_eff),'F2':s_F2(dtfr5_eff(iso,yr)),
            'F3':score_Years_Sub_21(ysub_eff(iso,yr)),
-           'A1':score_OADR(oadr),'A2':score_WRR(c.get('WRR')),
+           'A1':score_OADR(oadr),'A2':score_WRR(sov(iso,yr,'WRR') if sov(iso,yr,'WRR') is not None else c.get('WRR')),
            'A3':score_LFPR(carry(iso,yr,'LFPR')),
            'R1':s_R1(nc5),'R2':s_R2(dunder20_eff(iso,yr)),'R3':s_R3(lfgrowth5(iso,yr)),
            'R4':s_R4(statn.get(iso,{}).get(sy)),'R5':s_R5(cohort(iso,yr)),'R6':s_R6(mpace(iso,yr)),
