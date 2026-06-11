@@ -1060,3 +1060,7 @@ ZAF,2025,2.22,Wikipedia: Demographics of [ZAF] (vital statistics),,2026-05-13,HI
 JPN,2022,1.26,MHLW Vital Statistics (確定数),https://www.mhlw.go.jp/toukei/list/81-1a.html,2026-06-08,HIGH,EDITOR_DECISION_2026_06,2026-06-08,Official final
 JPN,2023,1.20,MHLW Vital Statistics (確定数),https://www.mhlw.go.jp/toukei/list/81-1a.html,2026-06-08,HIGH,EDITOR_DECISION_2026_06,2026-06-08,Official final
 JPN,2025,1.14,"MHLW 概数 R7 (births-by-age; TFR derived, 2024-calibrated)",https://www.mhlw.go.jp/toukei/saikin/hw/jinkou/geppo/,2026-06-08,HIGH,EDITOR_DECISION_2026_06,2026-06-08,"Derived from official 概数 R7 births-by-age (671,236) vs 2024 (686,173); calibrated to official 2024 TFR 1.15"
+MDA,1996,1.6,NBS Moldova registered series (Wikipedia vital statistics),,2026-06-10,HIGH,MDA_REHASH_2026_06,2026-06-10,Whole-country registered TFR (pre-secession concept incl. Transnistria); WPP diverges +0.11 to +0.24
+MDA,1997,1.55,NBS Moldova registered series (Wikipedia vital statistics),,2026-06-10,HIGH,MDA_REHASH_2026_06,2026-06-10,Whole-country registered TFR (pre-secession concept incl. Transnistria); WPP diverges +0.11 to +0.24
+MDA,1998,1.48,NBS Moldova registered series (Wikipedia vital statistics),,2026-06-10,HIGH,MDA_REHASH_2026_06,2026-06-10,Whole-country registered TFR (pre-secession concept incl. Transnistria); WPP diverges +0.11 to +0.24
+MDA,1999,1.43,NBS Moldova registered series (Wikipedia vital statistics),,2026-06-10,HIGH,MDA_REHASH_2026_06,2026-06-10,Whole-country registered TFR (pre-secession concept incl. Transnistria); WPP diverges +0.11 to +0.24
