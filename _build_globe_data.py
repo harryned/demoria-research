@@ -30,8 +30,14 @@ for num,e in glb.items():
         e['projPil']={wp:{v:parr(pl) for v,pl in trio.items()}
                       for wp,trio in pc['projPil'].items()}
     # sync 2025 population from WPP (incorporates any committed overrides)
-    p25 = wpp.get(e['iso'],{}).get('2025',{}).get('TPopulation1July')
-    if p25 is not None: e['pop'] = round(p25/1000, 2)
+    # NSO_POP: countries whose display population is re-based to the national
+    # series (e.g. Moldova usual-resident, excl. Transnistria) — never WPP-reset.
+    NSO_POP={'MDA':2.38}
+    if e['iso'] in NSO_POP:
+        e['pop']=NSO_POP[e['iso']]
+    else:
+        p25 = wpp.get(e['iso'],{}).get('2025',{}).get('TPopulation1July')
+        if p25 is not None: e['pop'] = round(p25/1000, 2)
     changed+=1
 
 # recompute the 2025 rank (1 = highest DHI) across all entries
