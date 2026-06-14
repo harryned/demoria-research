@@ -182,7 +182,7 @@ HEAD="""<!doctype html>
 <div class="topbar"><a href="/">&lsaquo; Demoria Research</a><span style="width:1px;height:20px;background:rgba(12,26,51,.18)"></span><span class="t">{topbar}</span></div>
 <div class="wrap"{wrapstyle}>
 """
-FOOT=f"""<div class="foot">Data: UN World Population Prospects 2024, national statistical offices, and Demoria Research estimations. See the <a href="/methodology/">methodology</a> (<a href="{METH_PDF}">PDF v{METH_VERSION}</a>), the <a href="/dhi/">interactive index</a> and the <a href="/births/">Birth &amp; Fertility Tracker</a>.<br>Free to reuse with attribution for journalism, research and education — see the <a href="/licence/">data licence</a>. Commercial licensing by enquiry. &copy; Demoria Research.</div>
+FOOT=f"""<div class="foot">Data: UN World Population Prospects 2024, national statistical offices, and Demoria Research estimations. See the <a href="/methodology/">methodology</a> (<a href="{METH_PDF}">PDF v{METH_VERSION}</a>), the <a href="/dhi/">interactive index</a> and the <a href="/births/">Birth &amp; Fertility Tracker</a> and the <a href="/charts/">charts</a>.<br>Free to reuse with attribution for journalism, research and education — see the <a href="/licence/">data licence</a>. Commercial licensing by enquiry. &copy; Demoria Research.</div>
 </div></body></html>"""
 
 def cite_box(title,url):
@@ -357,7 +357,7 @@ os.makedirs(os.path.join(OUT,'licence'),exist_ok=True)
 open(os.path.join(OUT,'licence','index.html'),'w',encoding='utf-8').write(lic)
 
 # ---------- sitemap + robots ----------
-statics=[f"{BASE}/",f"{BASE}/dhi/",f"{BASE}/births/",f"{BASE}/methodology/",f"{BASE}/country/",f"{BASE}/licence/"]
+statics=[f"{BASE}/",f"{BASE}/dhi/",f"{BASE}/births/",f"{BASE}/charts/",f"{BASE}/methodology/",f"{BASE}/country/",f"{BASE}/licence/"]
 sm=['<?xml version="1.0" encoding="UTF-8"?>','<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
 for u in statics+sorted(urls):
     sm.append(f'<url><loc>{u}</loc><lastmod>{TODAY}</lastmod></url>')
