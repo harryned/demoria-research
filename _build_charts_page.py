@@ -48,6 +48,10 @@ svg.chart{display:block;width:100%;height:auto}
 .btn.gold:hover{background:#f0c45e}
 .more{text-align:center;color:rgba(255,255,255,.5);font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;margin-top:30px}
 @media(max-width:560px){.c-foot{flex-direction:column;align-items:stretch}.btns{justify-content:stretch}.btn{flex:1;text-align:center}}
+#ctip{position:fixed;z-index:100;pointer-events:none;display:none;background:var(--navy);color:var(--cream);font-family:'Manrope',sans-serif;font-size:.82rem;line-height:1.3;padding:8px 11px;border-radius:8px;box-shadow:0 10px 30px rgba(0,0,0,.45);border:1px solid rgba(232,184,75,.45);max-width:230px}
+#ctip b{color:#fff;font-weight:700}
+#ctip .v{font-family:'JetBrains Mono',monospace;color:var(--gold2);font-size:.72rem;margin-top:2px}
+svg.chart circle{transition:r .08s}
 </style></head>
 <body>
 <div class="topbar"><a class="tb-back" href="/">&#8249;&nbsp;Demoria Research</a><span style="color:rgba(12,26,51,.3)">|</span><span class="tb-title">Charts</span></div>
@@ -78,6 +82,7 @@ svg.chart{display:block;width:100%;height:auto}
 
   <div class="more">More charts coming &mdash; fertility collapse &middot; births in free-fall &middot; the ageing race</div>
 </div>
+<div id="ctip"></div>
 <script>
 const TFR=__TFR__;
 const ONS=__ONS__;
@@ -96,7 +101,7 @@ const STYLE=".ax{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:1
   SVG.appendChild(tx(x0-10,yS(8)-16,'TFR','ax',{'text-anchor':'end'}));
   const groups=[{k:'a',cx:(x0+(x0+x1)/2)/2+40,lab:'1965',th:2.4},{k:'b',cx:((x0+x1)/2+x1)/2-10,lab:'2025',th:2.1}];
   const bw=(x1-x0)/2*0.74;
-  groups.forEach(g=>{let below=0;TFR.forEach(r=>{const v=r[g.k],cx=g.cx+jit(r.iso)*bw/2,cy=yS(v),lo=v<g.th;if(lo)below++;SVG.appendChild(el('circle',{cx:cx.toFixed(1),cy:cy.toFixed(1),r:4.3,fill:lo?'#dd6f3e':'#1d9e75','fill-opacity':0.72,stroke:lo?'#993c1d':'#0f6e56','stroke-width':0.5,'stroke-opacity':0.5}));});
+  groups.forEach(g=>{let below=0;TFR.forEach(r=>{const v=r[g.k],cx=g.cx+jit(r.iso)*bw/2,cy=yS(v),lo=v<g.th;if(lo)below++;var _c=el('circle',{cx:cx.toFixed(1),cy:cy.toFixed(1),r:4.3,fill:lo?'#dd6f3e':'#1d9e75','fill-opacity':0.72,stroke:lo?'#993c1d':'#0f6e56','stroke-width':0.5,'stroke-opacity':0.5});_c.__i={nm:r.nm,yr:g.lab,tfr:v};SVG.appendChild(_c);});
     const ry=yS(g.th),ga=g.cx-bw/2-16,gb=g.cx+bw/2+16;
     SVG.appendChild(el('line',{x1:ga,y1:ry,x2:gb,y2:ry,stroke:'#dd6f3e','stroke-width':1.5,'stroke-dasharray':'6 5'}));
     SVG.appendChild(tx(g.cx,ry-8,'Replacement ≈ '+g.th.toFixed(1),'repl',{'text-anchor':'middle'}));
@@ -124,16 +129,37 @@ const STYLE=".ax{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:1
   d+=' L '+xS(2025).toFixed(1)+' '+cS(cum).toFixed(1);
   SVG.appendChild(el('path',{d:d+' L '+xS(2025).toFixed(1)+' '+cS(0)+' Z',fill:'rgba(181,132,32,.10)',stroke:'none'}));
   SVG.appendChild(el('path',{d:d,fill:'none',stroke:'#b58420','stroke-width':2.5,'stroke-linejoin':'round'}));
-  rows.forEach(r=>{const x=xS(r.onset),rr=Math.max(2.5,Math.min(15,Math.sqrt(r.pop||1)*1.25));SVG.appendChild(el('circle',{cx:x.toFixed(1),cy:(y0-6).toFixed(1),r:rr.toFixed(1),fill:'#dd6f3e','fill-opacity':0.55,stroke:'#993c1d','stroke-width':0.5,'stroke-opacity':0.5}));});
+  rows.forEach(r=>{const x=xS(r.onset),rr=Math.max(2.5,Math.min(15,Math.sqrt(r.pop||1)*1.25));var _c=el('circle',{cx:x.toFixed(1),cy:(y0-6).toFixed(1),r:rr.toFixed(1),fill:'#dd6f3e','fill-opacity':0.55,stroke:'#993c1d','stroke-width':0.5,'stroke-opacity':0.5});_c.__i={nm:r.nm,onset:r.onset};SVG.appendChild(_c);});
   const cumAt=y=>rows.filter(r=>r.onset<=y).length;
   const M=[[1972,'Germany'],[1992,'Russia'],[2005,'Japan'],[2015,'Spain'],[2022,'China']];
   M.forEach(m=>{const yy=m[0],nm=m[1],x=xS(yy),y=cS(cumAt(yy));
     SVG.appendChild(el('line',{x1:x,y1:y,x2:x-16,y2:y-20,stroke:'rgba(12,26,51,.45)','stroke-width':1}));
-    SVG.appendChild(el('circle',{cx:x,cy:y,r:4,fill:'#0c1a33'}));
+    var _m=el('circle',{cx:x,cy:y,r:4,fill:'#0c1a33'});_m.__i={nm:nm,onset:yy};SVG.appendChild(_m);
     SVG.appendChild(tx(x-20,y-34,nm,'lab',{'text-anchor':'end'}));
     SVG.appendChild(tx(x-20,y-19,String(yy),'bigl',{'text-anchor':'end','font-size':'11'}));});
   SVG.appendChild(tx(x0+34,y1+30,rows.length+' countries','big',{'font-size':'24'}));
   SVG.appendChild(tx(x0+34,y1+50,'now in natural decline','bigl'));
+})();
+
+/* hover/tap tooltips — which country is this dot? */
+(function(){
+  const tip=document.getElementById('ctip'); let hl=null;
+  function fmt(i){return i.tfr!==undefined?'<b>'+i.nm+'</b><div class="v">'+i.yr+' · TFR '+i.tfr.toFixed(2)+'</div>':'<b>'+i.nm+'</b><div class="v">deaths > births since '+i.onset+'</div>';}
+  function unhl(){if(hl){hl.setAttribute('r',hl.__r);hl=null;}}
+  function hide(){unhl();tip.style.display='none';}
+  function place(cx,cy){let lx=cx+15,ty=cy+15;if(lx+240>window.innerWidth)lx=cx-15-tip.offsetWidth;if(ty+70>window.innerHeight)ty=cy-15-tip.offsetHeight;tip.style.left=lx+'px';tip.style.top=ty+'px';}
+  function wire(svg){
+    svg.addEventListener('mousemove',function(e){
+      const c=(e.target.tagName==='circle'&&e.target.__i)?e.target:null;
+      if(!c){hide();svg.style.cursor='';return;}
+      if(hl!==c){unhl();hl=c;c.__r=c.getAttribute('r');c.setAttribute('r',(parseFloat(c.__r)*1.7).toFixed(1));c.parentNode.appendChild(c);}
+      tip.style.display='block';tip.innerHTML=fmt(c.__i);place(e.clientX,e.clientY);svg.style.cursor='pointer';
+    });
+    svg.addEventListener('mouseleave',hide);
+    svg.addEventListener('click',function(e){const c=(e.target.tagName==='circle'&&e.target.__i)?e.target:null;if(!c){hide();return;}tip.style.display='block';tip.innerHTML=fmt(c.__i);const b=c.getBoundingClientRect();place(b.left+b.width/2,b.bottom);});
+  }
+  wire(document.getElementById('svg1'));wire(document.getElementById('svg2'));
+  document.addEventListener('scroll',hide,true);
 })();
 
 function copyLink(id){const u=location.origin+location.pathname+'#'+id;navigator.clipboard.writeText(u).then(()=>{event.target.textContent='Copied!';setTimeout(()=>event.target.textContent='Copy link',1400);});}
