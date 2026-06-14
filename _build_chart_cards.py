@@ -37,30 +37,32 @@ def dot(d,cx,cy,r,fill,outline):
 # ---------- Chart 1: TFR strip ----------
 def chart1():
     im,d=base('The world fell below replacement','Total fertility rate · every country & territory · 1965 vs 2025')
-    mL,mR,mT,mB=70,40,170,124
+    mL,mR,mT,mB=70,40,170,138
     x0,x1,y0,y1=mL,W-mR,Hh-mB,mT; TMAX=8.6
     yS=lambda t:y0+(y1-y0)*(t/TMAX)
     for t in (0,2,4,6,8):
         y=yS(t); d.line([x0,y,x1,y],fill=(12,26,51,28),width=1)
         d.text((x0-14,y-9),str(t),font=mono(17),fill=(120,126,140),anchor='la')
     d.text((x0-14,yS(8)-30),'TFR',font=mono(16),fill=(120,126,140))
-    yr=yS(2.1);
-    for xx in range(int(x0),int(x1),14): d.line([xx,yr,xx+7,yr],fill=CORAL,width=2)
-    d.text((x1,yr-22),'Replacement — 2.1 children',font=mono(17,'Bold'),fill=CORALD,anchor='ra')
-    groups=[('a',int((x0+(x0+x1)/2)/2)+40,'1965'),('b',int(((x0+x1)/2+x1)/2)-10,'2025')]
-    bw=(x1-x0)/2*0.74
-    for k,cx,lab in groups:
+    groups=[('a',int((x0+(x0+x1)/2)/2)+40,'1965',2.4),('b',int(((x0+x1)/2+x1)/2)-10,'2025',2.1)]
+    bw=(x1-x0)/2*0.74; last=0
+    for k,cx,lab,th in groups:
         below=0
         for r in TFR:
-            v=r[k]; px=cx+jit(r['iso'])*bw/2; py=yS(v); lo=v<2.1
+            v=r[k]; px=cx+jit(r['iso'])*bw/2; py=yS(v); lo=v<th
             if lo: below+=1
             dot(d,px,py,5.2,CORAL if lo else TEAL,CORALD if lo else (15,110,86))
-        d.text((cx,y0+18),lab,font=manrope(30,800),fill=INK,anchor='ma')
-        d.text((cx,y0+56),f'{below} of {len(TFR)} below',font=mono(18),fill=(90,97,114),anchor='ma')
+        ry=yS(th); ga=int(cx-bw/2-16); gb=int(cx+bw/2+16)
+        for xx in range(ga,gb,14): d.line([xx,ry,xx+7,ry],fill=CORAL,width=2)
+        d.text((cx,ry-26),f'Replacement ≈ {th:.1f}',font=mono(16,'Bold'),fill=CORALD,anchor='ma')
+        d.text((cx,y0+14),lab,font=manrope(30,800),fill=INK,anchor='ma')
+        d.text((cx,y0+50),f'{below} of {len(TFR)} below',font=mono(18),fill=(90,97,114),anchor='ma')
+        last=below
     lx,ly=x0+4,mT-34
     dot(d,lx+7,ly,6,TEAL,(15,110,86)); d.text((lx+22,ly-9),'at or above replacement',font=mono(17),fill=(90,97,114))
     dot(d,lx+285,ly,6,CORAL,CORALD); d.text((lx+300,ly-9),'below replacement',font=mono(17),fill=(90,97,114))
-    im.save('public/charts/fertility-1965-2025.png'); return below
+    d.text((W/2,y0+76),'Replacement fertility rises with child mortality — Espenshade, Guzmán & Westoff (2003)',font=mono(13),fill=(120,126,140),anchor='ma')
+    im.save('public/charts/fertility-1965-2025.png'); return last
 
 # ---------- Chart 2: natural-decline onset ----------
 def chart2():
@@ -87,11 +89,12 @@ def chart2():
         x=xS(r['onset']); rr=max(2.5,min(15,math.sqrt(r.get('pop',1) or 1)*1.25))
         dot(d,x,y0-6,rr,CORAL,CORALD)
     cumAt=lambda y:sum(1 for r in ONS if r['onset']<=y)
-    for yy,nm,dr in [(1972,'Germany',1),(1992,'Russia',1),(2005,'Japan',1),(2015,'Spain',1),(2022,'China',-1)]:
-        x=xS(yy); y=cS(cumAt(yy)); d.ellipse([x-5,y-5,x+5,y+5],fill=INK)
-        a='la' if dr>0 else 'ra'; ox=10 if dr>0 else -10
-        d.text((x+ox,y+(-22 if dr>0 else -38)),nm,font=manrope(19,800),fill=INK,anchor=a)
-        d.text((x+ox,y+(0 if dr>0 else -16)),str(yy),font=mono(15),fill=(90,97,114),anchor=a)
+    for yy,nm in [(1972,'Germany'),(1992,'Russia'),(2005,'Japan'),(2015,'Spain'),(2022,'China')]:
+        x=xS(yy); y=cS(cumAt(yy))
+        d.line([x,y,x-18,y-22],fill=(12,26,51,120),width=1)
+        d.ellipse([x-5,y-5,x+5,y+5],fill=INK)
+        d.text((x-22,y-46),nm,font=manrope(20,800),fill=INK,anchor='ra')
+        d.text((x-22,y-24),str(yy),font=mono(15),fill=(90,97,114),anchor='ra')
     d.text((x0+38,y1+18),f'{len(ONS)} countries',font=manrope(34,800),fill=INK)
     d.text((x0+40,y1+62),'now in natural decline',font=mono(18),fill=(90,97,114))
     im.save('public/charts/natural-decline.png')
