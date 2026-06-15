@@ -357,7 +357,7 @@ os.makedirs(os.path.join(OUT,'licence'),exist_ok=True)
 open(os.path.join(OUT,'licence','index.html'),'w',encoding='utf-8').write(lic)
 
 # ---------- sitemap + robots ----------
-statics=[f"{BASE}/",f"{BASE}/dhi/",f"{BASE}/births/",f"{BASE}/charts/",f"{BASE}/methodology/",f"{BASE}/country/",f"{BASE}/licence/"]
+statics=[f"{BASE}/",f"{BASE}/dhi/",f"{BASE}/births/",f"{BASE}/charts/",f"{BASE}/cliffs/",f"{BASE}/methodology/",f"{BASE}/country/",f"{BASE}/licence/"]
 sm=['<?xml version="1.0" encoding="UTF-8"?>','<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
 for u in statics+sorted(urls):
     sm.append(f'<url><loc>{u}</loc><lastmod>{TODAY}</lastmod></url>')
