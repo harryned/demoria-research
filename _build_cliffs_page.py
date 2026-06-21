@@ -112,7 +112,7 @@ svg.chart{display:block;width:100%;height:auto}
 #tip{position:fixed;z-index:100;pointer-events:none;display:none;background:var(--navy);color:var(--cream);font-family:'Manrope',sans-serif;font-size:.8rem;padding:7px 10px;border-radius:8px;box-shadow:0 10px 30px rgba(0,0,0,.5);border:1px solid rgba(232,184,75,.4)}
 #tip b{color:#fff}#tip .v{font-family:'JetBrains Mono',monospace;font-size:.74rem;margin-top:2px}
 </style></head><body>
-<div class="topbar"><a class="tb-back" href="/">&#8249;&nbsp;Demoria Research</a><span style="color:rgba(12,26,51,.3)">|</span><span class="tb-title">Demographic Cliffs</span></div>
+<div class="topbar"><a class="tb-back" href="/dhi/">&#8249;&nbsp;Back to DHI</a><span style="color:rgba(12,26,51,.3)">|</span><span class="tb-title">Demographic Cliffs</span></div>
 <div class="wrap">
 <div class="eyebrow">Demoria Research &middot; Demographic Cliffs</div>
 <h1 class="hd">The cohorts <em>already locked in</em></h1>
