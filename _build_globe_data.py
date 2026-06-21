@@ -32,7 +32,7 @@ for num,e in glb.items():
     # sync 2025 population from WPP (incorporates any committed overrides)
     # NSO_POP: countries whose display population is re-based to the national
     # series (e.g. Moldova usual-resident, excl. Transnistria) — never WPP-reset.
-    NSO_POP={'MDA':2.38}
+    NSO_POP={'MDA':2.38,'UKR':30.0}
     if e['iso'] in NSO_POP:
         e['pop']=NSO_POP[e['iso']]
     else:
