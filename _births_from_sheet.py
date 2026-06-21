@@ -22,8 +22,10 @@ M25=range(16,28)   # cols P..AA  (2025 Jan..Dec)
 M26=range(28,40)   # cols AB..AM (2026 Jan..Dec)
 FY23=40; FY24=41; FY25=42; FY26=43   # cols AN,AO,AP,AQ (FY2023 inserted at AN on 2026-06-10, shifting the rest +1)
 SRC=44             # col AR
-FORCE_ANNUAL={'MDA'}   # countries whose monthly data is too sparse — use annual FY2024 vs FY2025
-EXCLUDE_LIVE={'UKR'}   # wartime registration incomplete (occupied/displaced/lagged) — no live YoY
+FORCE_ANNUAL={'MDA','UKR'}  # monthly too sparse/unreliable — use annual FY2024 vs FY2025
+                            # (UKR: wartime monthly registration is incomplete, so the
+                            #  leading-months YoY is distorted; the annual figure is sound)
+EXCLUDE_LIVE=set()     # countries to show no live figure at all (none currently)
 
 def num(v):
     if v is None: return None
