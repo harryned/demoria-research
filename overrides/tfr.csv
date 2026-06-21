@@ -3085,10 +3085,10 @@ TWN,2025,0.7,Wikipedia: Demographics of [TWN] (vital statistics),,2026-05-13,MED
 UKR,2016,1.47,Wikipedia: Demographics of [UKR] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.08
 UKR,2017,1.37,Wikipedia: Demographics of [UKR] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.07
 UKR,2018,1.3,Wikipedia: Demographics of [UKR] (vital statistics),,2026-05-13,HIGH,EDITOR_DECISION_2026_05_v2,2026-05-13,Δ vs WPP +0.07
-UKR,2022,0.9,Ukraine wartime override sheet 2026-05-20 (registration + UNHCR + NASU),,2026-05-20,HIGH,EDITOR_OVERRIDE_2026_05,2026-05-20,wartime structural override
-UKR,2023,0.95,Ukraine wartime override sheet 2026-05-20 (registration + UNHCR + NASU),,2026-05-20,HIGH,EDITOR_OVERRIDE_2026_05,2026-05-20,wartime structural override
-UKR,2024,0.92,Ukraine wartime override sheet 2026-05-20 (registration + UNHCR + NASU),,2026-05-20,HIGH,EDITOR_OVERRIDE_2026_05,2026-05-20,wartime structural override
-UKR,2025,0.9,Ukraine wartime override sheet 2026-05-20 (registration + UNHCR + NASU),,2026-05-20,HIGH,EDITOR_OVERRIDE_2026_05,2026-05-20,wartime structural override
+UKR,2022,1.13,"MICS Ukraine 2025-26 Statistical Snapshots (TFR 1.1, 3-yr ref ~2023-25)",,2026-06-15,HIGH,MICS_UKR_2026_06,2026-06-15,"transition yr; pre-war 1.15, MICS window starts 2023"
+UKR,2023,1.09,"MICS Ukraine 2025-26 Statistical Snapshots (TFR 1.1, 3-yr ref ~2023-25)",,2026-06-15,HIGH,MICS_UKR_2026_06,2026-06-15,MICS direct survey of present women; supersedes registration est. 0.9
+UKR,2024,1.1,"MICS Ukraine 2025-26 Statistical Snapshots (TFR 1.1, 3-yr ref ~2023-25)",,2026-06-15,HIGH,MICS_UKR_2026_06,2026-06-15,MICS direct survey of present women; supersedes registration est. 0.9
+UKR,2025,1.11,"MICS Ukraine 2025-26 Statistical Snapshots (TFR 1.1, 3-yr ref ~2023-25)",,2026-06-15,HIGH,MICS_UKR_2026_06,2026-06-15,MICS direct survey of present women; supersedes registration est. 0.9
 URY,1965,2.84,NSO published (national vital statistics / Eurostat),,2026-06-15,HIGH,NSO_TFR_RESOURCE_2026_06,2026-06-15,Δ vs WPP -0.00
 URY,1966,2.82,NSO published (national vital statistics / Eurostat),,2026-06-15,HIGH,NSO_TFR_RESOURCE_2026_06,2026-06-15,Δ vs WPP +0.00
 URY,1967,2.78,NSO published (national vital statistics / Eurostat),,2026-06-15,HIGH,NSO_TFR_RESOURCE_2026_06,2026-06-15,Δ vs WPP -0.00
