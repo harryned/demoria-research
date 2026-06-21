@@ -23,6 +23,7 @@ M26=range(28,40)   # cols AB..AM (2026 Jan..Dec)
 FY23=40; FY24=41; FY25=42; FY26=43   # cols AN,AO,AP,AQ (FY2023 inserted at AN on 2026-06-10, shifting the rest +1)
 SRC=44             # col AR
 FORCE_ANNUAL={'MDA'}   # countries whose monthly data is too sparse — use annual FY2024 vs FY2025
+EXCLUDE_LIVE={'UKR'}   # wartime registration incomplete (occupied/displaced/lagged) — no live YoY
 
 def num(v):
     if v is None: return None
@@ -40,6 +41,7 @@ def parse():
         iso=row[0].value
         if not iso or len(str(iso).strip())!=3: continue   # skip region banners / blanks
         iso=str(iso).strip()
+        if iso in EXCLUDE_LIVE: continue   # no live current-year figure for these
         m24=[num(row[c-1].value) for c in M24]
         m25=[num(row[c-1].value) for c in M25]
         m26=[num(row[c-1].value) for c in M26]
