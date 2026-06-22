@@ -68,18 +68,23 @@ for iso,d in DATA.items():
     name=d['name']; pop=G.get(iso,{}).get('pop',0) or 0
     # certainty horizon for an age-a cohort = 2025 + a (last observed birth-year is 2025)
     cliffs={}
+    # Start every window in 1965 (earliest observed birth-year / pyramid year) so the
+    # chart shows the TRUE historical peak, not a false one pinned to the window start.
+    # cohort_from_births auto-clamps to the first fully-computable year for each age band
+    # (5yo->1970, 18yo->1983, 18-25->1990, 28-35->2000), which is as far back as the
+    # 1965 births floor allows.
     # baby economy — annual births
-    cliffs['baby']=metric({y:B[y] for y in B if 1990<=y<=2050}, certain_to=2025)
+    cliffs['baby']=metric({y:B[y] for y in B if 1965<=y<=2050}, certain_to=2025)
     # kindergarten — 5-year-olds
-    cliffs['kindergarten']=metric(cohort_from_births(B,5,5,2010,2040), certain_to=2030)
+    cliffs['kindergarten']=metric(cohort_from_births(B,5,5,1965,2040), certain_to=2030)
     # higher-ed — 18-year-olds
-    cliffs['higher_ed']=metric(cohort_from_births(B,18,18,2010,2055), certain_to=2043)
+    cliffs['higher_ed']=metric(cohort_from_births(B,18,18,1965,2055), certain_to=2043)
     # manpower — 18-25
-    cliffs['manpower']=metric(cohort_from_births(B,18,25,2010,2055), certain_to=2043)
+    cliffs['manpower']=metric(cohort_from_births(B,18,25,1965,2055), certain_to=2043)
     # first-home — 28-35
-    cliffs['first_home']=metric(cohort_from_births(B,28,35,2010,2060), certain_to=2053)
+    cliffs['first_home']=metric(cohort_from_births(B,28,35,1965,2060), certain_to=2053)
     # peak workers — 15-64 (bands 3..12), structural; decline measured to 2050
-    pw={y:v for y,v in pyr_cohort(iso,3,12).items() if 2000<=y<=2060}
+    pw={y:v for y,v in pyr_cohort(iso,3,12).items() if 1965<=y<=2060}
     if pw:
         yrs=sorted(pw); pk=max(yrs,key=lambda y:pw[y]); v50=pw.get(2050,pw[max(yrs)])
         cliffs['peak_workers']={'series':{str(y):round(pw[y]) for y in yrs},'peak':[pk,round(pw[pk])],

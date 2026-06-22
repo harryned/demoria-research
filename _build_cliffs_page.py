@@ -9,25 +9,25 @@ C=json.load(open('public/cliffs_data.json'))
 
 # cliff meta: key, title, eyebrow, narrative, colour, unit, default flagship, who-budgets, stat-kind
 META=[
- ('higher_ed','The enrollment cliff','18-YEAR-OLDS · 2010–2050',
+ ('higher_ed','The enrollment cliff','18-YEAR-OLDS · 1983–2055',
   'The freshman class that was never born. An 18-year-old in 2043 was already born in 2025 — so the applicant pool is fixed long before it arrives.',
   '#4f5bd5','students','USA','Universities · ed-tech · student housing','decline'),
- ('kindergarten','The empty classroom','5-YEAR-OLDS · 2010–2040',
+ ('kindergarten','The empty classroom','5-YEAR-OLDS · 1970–2040',
   'Tomorrow’s first grade is in this year’s maternity wards. Where births fell, classrooms empty five years later — and districts start closing schools.',
   '#2e9e5b','children','KOR','School districts · K-12 · children’s brands','decline'),
- ('baby','The vanishing cradle','ANNUAL BIRTHS',
+ ('baby','The vanishing cradle','ANNUAL BIRTHS · 1965–2050',
   'A market shrinking in real time. Every birth is a future customer for formula, prams and paediatrics — and the cradle is emptying fastest where it once was fullest.',
   '#d6336c','births','CHN','Formula · diapers · maternity care','decline'),
- ('manpower','The thin ranks','MILITARY-AGE 18–25 · 2010–2050',
+ ('manpower','The thin ranks','MILITARY-AGE 18–25 · 1990–2055',
   'Who will hold the line? The pool of young adults a country can recruit, staff and tax is set two decades in advance — and it is narrowing.',
   '#5a6b82','young adults','KOR','Defence recruitment · entry-level labour','decline'),
- ('first_home','The first-home drought','HOUSEHOLD-FORMATION 28–35 · 2010–2055',
+ ('first_home','The first-home drought','HOUSEHOLD-FORMATION 28–35 · 2000–2060',
   'Fewer hands reaching for the keys. The cohort that forms households and buys first homes is already born — and in much of the world it has peaked.',
   '#d98a2b','first-time buyers','KOR','Homebuilders · mortgage lenders · REITs','decline'),
- ('peak_workers','Peak labour','WORKING-AGE 15–64 · 2000–2055',
+ ('peak_workers','Peak labour','WORKING-AGE 15–64 · 1965–2060',
   'The year the engine stops growing. A shrinking working-age population caps output, strains pensions and rewrites the investment case for a country.',
   '#1d9e8f','workers','CHN','Manufacturers · investors · site selection','decline'),
- ('silver','The silver tsunami','POPULATION 80+ · 2000–2055',
+ ('silver','The silver tsunami','POPULATION 80+ · 2000–2060',
   'The wave already on its way. Everyone who will be 80 in 2050 is alive today — and the most care-intensive cohort is multiplying.',
   '#7a4fd0','people 80+','CHN','Senior living · home health · pharma','growth'),
 ]
@@ -160,7 +160,8 @@ function draw(key,iso){
   // marker: peak for declines, the 2025 'today' anchor for growth — label colour inline (CSS classes are global)
   const mk=(kind==='growth')?Math.max(0,yrs.indexOf(2025)):pk;
   svg.appendChild(el('circle',{cx:X(mk),cy:Y(vals[mk]),r:4.5,fill:col}));
-  svg.appendChild(tx(X(mk),Y(vals[mk])-10,(kind==='growth'?('today '+yrs[mk]):('peak '+yrs[pk])),'',{'text-anchor':mk>yrs.length*0.7?'end':'middle','style':'font:700 12px Manrope,system-ui;fill:'+col}));
+  const mkAnchor=mk>yrs.length*0.7?'end':(mk<yrs.length*0.12?'start':'middle');
+  svg.appendChild(tx(X(mk),Y(vals[mk])-10,(kind==='growth'?('today '+yrs[mk]):('peak '+yrs[pk])),'',{'text-anchor':mkAnchor,'style':'font:700 12px Manrope,system-ui;fill:'+col}));
   // hover layer
   vals.forEach((v,i)=>{
     const r=el('rect',{x:X(i)-((x1-x0)/(yrs.length-1))/2,y:y1,width:(x1-x0)/(yrs.length-1),height:y0-y1,fill:'transparent'});
