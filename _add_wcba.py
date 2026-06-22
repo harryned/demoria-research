@@ -38,6 +38,15 @@ def add_series(d):
         cnt_l.append(round(p / 100 * pv, 1) if (p is not None and pv is not None) else None)
     d["ind"]["wcba"] = cnt_l
     d["ind"]["wcba_pct"] = pct_l
+    # Provenance: the female-15-49 split is a Demoria Research Estimation (WPP age
+    # share applied to the national population), so for every year whose `pop`
+    # carries an NSO/DRE override the derived cell is flagged DRE in the data table.
+    pop_ov = sorted(set((d.get("nso_yrs") or {}).get("pop") or [])
+                    | set((d.get("dre_yrs") or {}).get("pop") or []))
+    if pop_ov:
+        dre = d.setdefault("dre_yrs", {})
+        dre["wcba"] = pop_ov
+        dre["wcba_pct"] = pop_ov
 
 
 def patch_export():
