@@ -184,14 +184,17 @@ def list_cliffs(iso: str) -> dict | None:
 
 def search_policies(mechanism: str | None = None, verdict: str | None = None,
                     country: str | None = None) -> list[dict]:
+    want_iso = resolve_country(country) if country else None
     out = []
     for (c, yr, pol, mechs, cost, effect, ev, verd, blurb, src) in POLICIES:
         if mechanism and mechanism.lower() not in [m.lower() for m in mechs]:
             continue
         if verdict and verdict.lower() != verd.lower():
             continue
-        if country and country.lower() not in c.lower():
-            continue
+        if country:
+            # match on ISO (handles "Republic of Korea" vs "South Korea") or substring
+            if not ((want_iso and resolve_country(c) == want_iso) or country.lower() in c.lower()):
+                continue
         out.append({"country": c, "year": yr, "policy": pol, "mechanisms": mechs,
                     "cost": cost, "effect": effect, "evidence": ev, "verdict": verd,
                     "summary": blurb, "source": src})

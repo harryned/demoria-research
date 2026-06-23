@@ -1,0 +1,4 @@
+name = "ask-demoria"
+main = "src/index.js"
+compatibility_date = "2026-01-01"
+# Secret (do NOT put it here): wrangler secret put ANTHROPIC_API_KEY

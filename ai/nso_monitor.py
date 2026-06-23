@@ -33,13 +33,28 @@ import demoria_data as D
 MODEL = "claude-opus-4-8"
 ROOT = Path(__file__).resolve().parent.parent
 
-# iso, country, release-page URL (VERIFY before relying on these)
+# iso, country, release-page URL. Verified June 2026 (re-check periodically;
+# statistical offices move their release pages). Fetchability noted: many gov
+# sites are JS-rendered or bot-blocked, in which case a plain GET will fail and
+# you pair this with a headless browser or a manual paste. The extraction step
+# is the same either way. Ordered best-monthly-granularity first.
 SOURCES = [
-    ("KOR", "South Korea", "https://kostat.go.kr/board.es?mid=a20108000000&bid=11773"),
-    ("JPN", "Japan", "https://www.mhlw.go.jp/english/database/db-hw/populate/index.html"),
-    ("TWN", "Taiwan", "https://www.ris.gov.tw/app/en/3910"),
-    ("SGP", "Singapore", "https://www.singstat.gov.sg/find-data/search-by-theme/population/births-and-fertility/latest-data"),
-    ("USA", "United States", "https://www.cdc.gov/nchs/nvss/births.htm"),
+    ("KOR", "South Korea", "https://mods.go.kr/board.es?mid=a20108100000&bid=11773"),         # KOSTAT, monthly
+    ("NLD", "Netherlands", "https://www.cbs.nl/en-gb/figures/detail/83474ENG"),                # CBS, monthly live births
+    ("FRA", "France", "https://www.insee.fr/fr/statistiques/7944361"),                         # INSEE, monthly (French)
+    ("SWE", "Sweden", "https://www.scb.se/en/finding-statistics/statistics-by-subject-area/population-and-living-conditions/population-composition-and-development/population-statistics/"),  # SCB, monthly
+    ("GBR", "England & Wales", "https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/livebirths"),  # ONS, quarterly
+    ("USA", "United States", "https://www.cdc.gov/nchs/nvss/vsrr/natality-dashboard.htm"),     # CDC NCHS (dashboard is JS; PDFs fetch)
+    ("NOR", "Norway", "https://www.ssb.no/en/befolkning/fodte-og-dode/statistikk/fodte"),      # SSB
+    ("DEU", "Germany", "https://www.destatis.de/EN/Themes/Society-Environment/Population/Births/_node.html"),  # Destatis
+    ("CZE", "Czechia", "https://csu.gov.cz/births"),                                           # CZSO
+    ("ITA", "Italy", "https://www.istat.it/en/statistical-themes/population/population-and-households/"),  # ISTAT
+    ("ESP", "Spain", "https://www.ine.es/dyngs/INEbase/es/operacion.htm?c=Estadistica_C&cid=1254736177007&menu=ultiDatos&idp=1254735573002"),  # INE
+    ("POL", "Poland", "https://stat.gov.pl/en/topics/population/population/"),                  # GUS
+    ("AUS", "Australia", "https://www.abs.gov.au/statistics/people/population/national-state-and-territory-population/latest-release"),  # ABS, quarterly
+    ("JPN", "Japan", "https://www.e-stat.go.jp/en/statistics/00450011"),                        # e-Stat (JS-heavy hub)
+    ("TWN", "Taiwan", "https://statis.moi.gov.tw/micst/webMain.aspx?k=menume"),                 # MOI (JS-heavy)
+    ("SGP", "Singapore", "https://www.singstat.gov.sg/find-data/search-by-theme/population/births-and-fertility/latest-data"),  # SingStat (bot-blocked)
 ]
 
 ANOMALY_PCT = 8.0  # |YoY %| at or above this is flagged for attention
