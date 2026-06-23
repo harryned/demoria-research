@@ -55,10 +55,10 @@ POLICIES = [
 
  ("South Korea", "2006–", "Basic Plan for Low Fertility — cumulative cash, childcare and housing spending exceeding US$280bn",
   ["Cash","Childcare","Housing"], ">US$280bn cumulative",
-  "TFR fell to 0.72 (2023) — the lowest ever recorded for a sovereign state.",
-  "Strong", "Cautionary",
-  "The defining cautionary tale: enormous, sustained spending alongside the world's steepest decline. The lesson is not that policy is useless but that cheques cannot offset crushing education costs, brutal work hours, housing prices and gender-role conflict. Without fixing the structural drivers, the money is poured into a leaking bucket.",
-  "Statistics Korea (KOSTAT)"),
+  "Record-low 0.72 (2023) → 0.75 (2024) → 0.80 (2025); 2026 monthly births are accelerating (+11.7% Jan, +13.6% Feb, ~17 months of consecutive year-on-year gains).",
+  "Strong", "Mixed",
+  "Long the defining cautionary tale — the heaviest sustained spending anywhere alongside the world's steepest decline — Korea is now the single most-watched possible turnaround. Births have risen for well over a year and the 2026 monthly pace is the fastest in decades. But the honest read is that the rebound is largely compositional: a larger “echo-boom” cohort of women now in their 30s plus a post-COVID marriage catch-up, not obviously the cheques. Fertility is still below 1.0, the structural drivers (work culture, cost, gender roles) are unchanged, and the population is still shrinking. Rising fast — but not yet evidence the money worked.",
+  "Statistics Korea (KOSTAT); Gietel-Basten, HKUST (2026)"),
 
  ("Singapore", "1987–", "Baby Bonus cash gift + Child Development Account (matched savings) + Marriage & Parenthood Package",
   ["Cash"], "~S$3bn+/yr across the package",
