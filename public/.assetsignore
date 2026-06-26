@@ -1,0 +1,10 @@
+# Files here are NOT uploaded by `wrangler deploy` (static-asset bundle).
+# wrangler does not honour .gitignore, so OS/editor cruft must be listed again.
+.DS_Store
+**/.DS_Store
+._*
+.AppleDouble
+.LSOverride
+*.bak
+*.bak_*
+*.bak2
