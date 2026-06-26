@@ -29,14 +29,18 @@ def attach_pop(countries):
         if not e: continue
         pop=(e.get('ind') or {}).get('pop'); yrs=e.get('yrs')
         if not pop or not yrs: continue
-        nso=set((e.get('nso_yrs') or {}).get('pop') or [])
-        dre=set((e.get('dre_yrs') or {}).get('pop') or [])
+        adj=set((e.get('nso_yrs') or {}).get('pop') or []) | set((e.get('dre_yrs') or {}).get('pop') or [])
         for i in range(len(yrs)-1,-1,-1):       # latest non-null year
             v=pop[i] if i<len(pop) else None
             if v is None: continue
             yr=yrs[i]
             c['pop']=round(v,2); c['pop_yr']=yr
-            c['pop_src']='nso' if yr in nso else ('dre' if yr in dre else 'wpp')
+            # Total mid-year population is a modelled quantity, never a live
+            # NSO count. Where the pipeline adjusted it off the UN baseline
+            # (its "overrides"), that is a Demoria Research Estimation
+            # synthesised from national/official sources (DRE); otherwise it
+            # is the raw UN WPP 2024 projection (WPP). It is never labelled NSO.
+            c['pop_src']='dre' if yr in adj else 'wpp'
             n+=1; break
     return n
 _np=attach_pop(bd['countries'])
