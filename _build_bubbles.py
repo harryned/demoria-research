@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Build public/bubbles/index.html — an animated bubble chart of annual births
-per country, 1965-2100 (observed national + UN WPP to 2025, UN WPP 2024 medium
-forecast 2026-2100). Bubbles are countries, sized by births, coloured by region,
-force-packed and animated through the years. Self-contained, brand-styled.
+per country. Observed 1965-2025 (annual), then UN WPP 2024 projections at
+5-year steps 2030-2100, with a low/median/high variant toggle. Bubbles are
+countries, sized by births, coloured by region and clustered by continent;
+hover shows the country's flag, code and births for that year.
 
   python3 _build_bubbles.py
 """
@@ -12,8 +13,11 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 exp = json.loads((ROOT / "_data_export.json").read_text())
 bt = json.loads((ROOT / "public" / "births_data.json").read_text())
-fc = json.loads((ROOT / "_wpp_fc_med.json").read_text())
+FCS = {"L": json.loads((ROOT / "_wpp_fc_low.json").read_text()),
+       "M": json.loads((ROOT / "_wpp_fc_med.json").read_text()),
+       "H": json.loads((ROOT / "_wpp_fc_high.json").read_text())}
 reg = {c["iso"]: c["region"] for c in bt["countries"]}
+iso2 = {c["iso"]: (c.get("iso2") or "") for c in bt["countries"]}
 
 CONT = {'East Asia': 'Asia', 'Southeast Asia': 'Asia', 'South Asia': 'Asia', 'Central Asia': 'Asia',
         'Western & Northern Europe': 'Europe', 'Central & Eastern Europe': 'Europe',
@@ -23,36 +27,45 @@ CONT = {'East Asia': 'Asia', 'Southeast Asia': 'Asia', 'South Asia': 'Asia', 'Ce
 CONTS = ['Asia', 'Africa', 'Europe', 'Latin America', 'North America', 'Middle East & N. Africa', 'Oceania']
 COLORS = ['#e8b84b', '#52c17a', '#5b9bd5', '#ec6f9e', '#a68bf0', '#37c2b0', '#f0954e']
 
-YEARS = list(range(1965, 2101))
+OBS = list(range(1965, 2026))          # 1965..2025 annual
+FCY = list(range(2030, 2101, 5))       # 2030,2035,...,2100
+
 countries = []
 for iso, c in exp.items():
     b = c.get("ind", {}).get("births"); yrs = c.get("yrs")
     if not b or not yrs:
         continue
     cont = CONT.get(reg.get(iso), 'Asia')
-    obs = {y: b[i] for i, y in enumerate(yrs) if b[i] is not None}
-    series = []; last = 0
-    for y in YEARS:
-        if y in obs:
-            v = obs[y]
-        else:
-            fv = (fc.get(iso, {}).get(str(y), {}) or {}).get("Births")
-            v = fv if fv is not None else last
+    obs = []; last = 0
+    for y in OBS:
+        v = b[yrs.index(y)] if y in yrs else last
         v = round(v) if v and v > 0 else 0
-        last = v; series.append(v)
-    if max(series) <= 0:
+        last = v; obs.append(v)
+    var = {}
+    for key in ("L", "M", "H"):
+        ser = []; lf = obs[-1]
+        for y in FCY:
+            rec = FCS[key].get(iso, {}).get(str(y), {}) or {}
+            fv = rec.get("Births")
+            if fv is None and rec.get("Pop") and rec.get("CBR") is not None:
+                fv = rec["Pop"] * rec["CBR"] / 1000   # low file omits Births; derive it
+            v = round(fv) if fv is not None and fv > 0 else lf
+            lf = v; ser.append(v)
+        var[key] = ser
+    if max(obs + var["M"]) <= 0:
         continue
-    countries.append({"n": c["name"], "c": CONTS.index(cont), "b": series})
+    countries.append({"n": c["name"], "i": iso, "f": iso2.get(iso, "").lower(),
+                      "c": CONTS.index(cont), "o": obs, "L": var["L"], "M": var["M"], "H": var["H"]})
 
-countries.sort(key=lambda x: -max(x["b"]))
-DATA = {"years": YEARS, "conts": CONTS, "colors": COLORS, "countries": countries}
+countries.sort(key=lambda x: -max(x["o"] + x["H"]))
+DATA = {"obs": OBS, "fcy": FCY, "conts": CONTS, "colors": COLORS, "countries": countries}
 
 HTML = r"""<!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Sixty years of births, then the forecast — Demoria Research</title>
-<meta name="description" content="Every country's annual births as bubbles, 1965 to 2100 — observed, then the UN WPP 2024 projection. Demoria Research.">
+<meta name="description" content="Every country's annual births as bubbles, 1965 to 2100 — observed, then the UN WPP 2024 projection (low/median/high). Demoria Research.">
 <meta property="og:title" content="A century of births — Demoria Research">
 <meta property="og:description" content="Every country's annual births as bubbles, 1965 to 2100. Watch the world's cradle shift from East Asia to Africa.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -70,7 +83,7 @@ html,body{margin:0;background:var(--navy2);color:var(--ink);font-family:'Manrope
 .eyebrow{font-family:'JetBrains Mono',monospace;font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);text-align:center;margin-bottom:10px}
 h1{font-weight:800;font-size:clamp(1.7rem,3.6vw,2.6rem);line-height:1.06;letter-spacing:-.02em;text-align:center;margin:0 0 10px}
 h1 em{color:var(--gold);font-style:normal}
-.sub{max-width:760px;margin:0 auto 20px;text-align:center;color:var(--mut);font-size:.98rem;line-height:1.5}
+.sub{max-width:780px;margin:0 auto 20px;text-align:center;color:var(--mut);font-size:.98rem;line-height:1.5}
 .stage{position:relative;background:radial-gradient(120% 100% at 50% 0,#12213d 0,#0a1529 70%);border:1px solid rgba(232,184,75,.22);border-radius:16px;overflow:hidden}
 canvas{display:block;width:100%}
 .yr{position:absolute;left:22px;top:16px;pointer-events:none}
@@ -84,18 +97,27 @@ canvas{display:block;width:100%}
 .legend{position:absolute;left:22px;bottom:16px;display:flex;flex-wrap:wrap;gap:6px 14px;max-width:60%;pointer-events:none}
 .lg{display:inline-flex;align-items:center;gap:6px;font-size:.72rem;color:var(--mut)}
 .lg i{width:9px;height:9px;border-radius:50%;flex:0 0 auto}
-.ctl{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:16px;padding:12px 16px;background:rgba(255,255,255,.03);border:1px solid rgba(232,184,75,.16);border-radius:11px}
+#tip{position:absolute;display:none;pointer-events:none;z-index:8;background:rgba(9,17,33,.97);border:1px solid rgba(232,184,75,.5);border-radius:9px;padding:9px 12px;min-width:130px;box-shadow:0 8px 24px rgba(0,0,0,.45)}
+#tip img{width:30px;height:auto;border-radius:2px;display:block;margin-bottom:6px;box-shadow:0 0 0 1px rgba(255,255,255,.18)}
+#tip .tt-h{font-size:.95rem;color:#fff;font-weight:700}
+#tip .tt-iso{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--gold);margin-left:5px;font-weight:700}
+#tip .tt-r{display:flex;align-items:center;gap:6px;font-size:.72rem;color:var(--mut);margin-top:3px}
+#tip .tt-r i{width:8px;height:8px;border-radius:50%}
+#tip .tt-b{font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--ink);margin-top:5px}
+#tip .tt-b b{color:var(--gold)}
+.ctl{display:flex;align-items:center;gap:14px 18px;flex-wrap:wrap;margin-top:16px;padding:12px 16px;background:rgba(255,255,255,.03);border:1px solid rgba(232,184,75,.16);border-radius:11px}
 .play{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--gold);color:#0c1a33;border:0;border-radius:8px;padding:10px 18px;font-family:'Manrope';font-weight:700;font-size:.9rem;cursor:pointer;min-width:112px}
 .play:hover{filter:brightness(1.06)}
-.scrub{flex:1 1 260px;display:flex;align-items:center;gap:12px}
+.scrub{flex:1 1 240px;display:flex;align-items:center;gap:12px}
 input[type=range]{flex:1;accent-color:var(--gold);height:5px}
 .rng-yr{font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--ink);min-width:38px;text-align:right}
-.speeds{display:inline-flex;gap:4px}
-.sp{background:transparent;border:1px solid rgba(232,184,75,.35);color:var(--mut);border-radius:6px;padding:6px 9px;font-family:'JetBrains Mono',monospace;font-size:.72rem;cursor:pointer}
-.sp.on{background:rgba(232,184,75,.16);color:var(--gold);border-color:var(--gold)}
+.seg{display:inline-flex;align-items:center;gap:4px}
+.slab{font-family:'JetBrains Mono',monospace;font-size:.64rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);margin-right:4px}
+.sp,.vb{background:transparent;border:1px solid rgba(232,184,75,.35);color:var(--mut);border-radius:6px;padding:6px 9px;font-family:'JetBrains Mono',monospace;font-size:.72rem;cursor:pointer}
+.sp.on,.vb.on{background:rgba(232,184,75,.16);color:var(--gold);border-color:var(--gold)}
 .foot{margin-top:18px;text-align:center;color:var(--mut);font-size:.78rem;line-height:1.6}
 .foot a{color:var(--gold)}
-@media(max-width:640px){.legend{max-width:100%;position:static;margin:10px 0 0;padding:0 4px}.tot{position:static;text-align:left;margin-top:6px}.yr{position:static;margin:8px 0 4px;padding:0 4px}.stage .over{position:static}}
+@media(max-width:640px){.legend{max-width:100%;position:static;margin:10px 0 0;padding:0 4px}.tot,.yr{position:static;text-align:left;margin:6px 0 0;padding:0 4px}}
 </style>
 </head>
 <body>
@@ -106,62 +128,55 @@ input[type=range]{flex:1;accent-color:var(--gold);height:5px}
 <div class="wrap">
   <div class="eyebrow">Demoria Research &middot; The moving picture</div>
   <h1>Sixty years of births, then <em>the forecast</em></h1>
-  <p class="sub">Every bubble is a country; its size is that country&rsquo;s annual births. Sixty years are observed (national statistics and the UN), then the UN&rsquo;s World Population Prospects 2024 carries the picture to 2100. Watch the world&rsquo;s cradle drift from East Asia to Africa.</p>
+  <p class="sub">Every bubble is a country; its size is that country&rsquo;s annual births, grouped by continent. Sixty years are observed (national statistics and the UN), then the UN&rsquo;s World Population Prospects 2024 carries the picture to 2100 in five-year steps &mdash; low, median or high. Hover any bubble for the detail; watch the world&rsquo;s cradle drift from East Asia to Africa.</p>
   <div class="stage" id="stage">
     <canvas id="cv"></canvas>
     <div class="yr"><div class="yr-n" id="yrN">1965</div><span class="yr-badge yr-obs" id="yrB">Observed</span></div>
     <div class="tot"><div class="tot-n" id="totN">0</div><div class="tot-l">births worldwide / year</div></div>
     <div class="legend" id="legend"></div>
+    <div id="tip"></div>
   </div>
   <div class="ctl">
     <button class="play" id="play"><span id="playI">&#9654;</span><span id="playT">Play</span></button>
-    <div class="scrub"><input type="range" id="rng" min="0" max="135" value="0" step="1"><span class="rng-yr" id="rngYr">1965</span></div>
-    <div class="speeds"><button class="sp" data-s="0.06">0.5&times;</button><button class="sp on" data-s="0.12">1&times;</button><button class="sp" data-s="0.24">2&times;</button></div>
+    <div class="scrub"><input type="range" id="rng" min="0" max="1" value="0" step="1"><span class="rng-yr" id="rngYr">1965</span></div>
+    <div class="seg"><span class="slab">Speed</span><button class="sp" data-s="0.05">0.5&times;</button><button class="sp on" data-s="0.10">1&times;</button><button class="sp" data-s="0.20">2&times;</button></div>
+    <div class="seg"><span class="slab">Projection 2030+</span><button class="vb" data-v="L">Low</button><button class="vb on" data-v="M">Median</button><button class="vb" data-v="H">High</button></div>
   </div>
-  <p class="foot">Annual live births. Observed 1965&ndash;2025 (national statistical offices where reported, otherwise UN&nbsp;WPP&nbsp;2024); projected 2026&ndash;2100 (UN&nbsp;WPP&nbsp;2024, medium variant). 220 countries and territories. &middot; <a href="https://demoriaresearch.com/births/">Birth &amp; Fertility Tracker</a></p>
+  <p class="foot">Annual live births. Observed 1965&ndash;2025 (national statistical offices where reported, otherwise UN&nbsp;WPP&nbsp;2024); projected 2030&ndash;2100 at five-year steps (UN&nbsp;WPP&nbsp;2024, low / medium / high variant). 220 countries and territories. &middot; <a href="https://demoriaresearch.com/births/">Birth &amp; Fertility Tracker</a></p>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
 <script>
 const DATA=__DATA__;
-const YEARS=DATA.years, CONTS=DATA.conts, COLS=DATA.colors, CS=DATA.countries;
-const N=YEARS.length;
-let maxB=0; CS.forEach(c=>{c.mx=Math.max(...c.b); if(c.mx>maxB)maxB=c.mx;});
+const OBS=DATA.obs, FCY=DATA.fcy, YEARS=OBS.concat(FCY), NOBS=OBS.length, N=YEARS.length;
+const CONTS=DATA.conts, COLS=DATA.colors, CS=DATA.countries;
+let maxB=0; CS.forEach(c=>{ const m=Math.max(Math.max(...c.o),Math.max(...c.H)); if(m>maxB)maxB=m; });
+let variant='M';
 
-const cv=document.getElementById('cv'), ctx=cv.getContext('2d');
-const stage=document.getElementById('stage');
+const cv=document.getElementById('cv'), ctx=cv.getContext('2d'), stage=document.getElementById('stage'), tip=document.getElementById('tip');
 let W=0,H=0,DPR=Math.min(window.devicePixelRatio||1,2), rScale, nodes, centers=[];
-// continent cluster anchors (fractions of W,H), indexed to CONTS:
-// Asia, Africa, Europe, Latin America, North America, Middle East & N. Africa, Oceania
 const CC=[[0.29,0.56],[0.69,0.55],[0.47,0.17],[0.17,0.80],[0.19,0.24],[0.52,0.86],[0.90,0.82]];
-
 function layout(){
   W=stage.clientWidth; H=Math.max(460,Math.round(Math.min(W*0.66,700)));
   cv.style.height=H+'px'; cv.width=W*DPR; cv.height=H*DPR; ctx.setTransform(DPR,0,0,DPR,0,0);
-  const maxR=Math.min(W,H)*0.115;
-  rScale=d3.scaleSqrt().domain([0,maxB]).range([0,maxR]);
+  rScale=d3.scaleSqrt().domain([0,maxB]).range([0,Math.min(W,H)*0.115]);
   centers=CC.map(p=>({x:p[0]*W,y:p[1]*H}));
 }
 layout();
 
-nodes=CS.map((c,i)=>({i,n:c.n,c:c.c,b:c.b,r:0,x:W/2+(Math.random()-0.5)*W*0.6,y:H/2+(Math.random()-0.5)*H*0.6}));
+nodes=CS.map(c=>({n:c.n,iso:c.i,f:c.f,c:c.c,o:c.o,L:c.L,M:c.M,H:c.H,r:0,bv:0,x:W/2+(Math.random()-0.5)*W*0.6,y:H/2+(Math.random()-0.5)*H*0.6}));
 
-const sim=d3.forceSimulation(nodes)
-  .alphaDecay(0).velocityDecay(0.34)
+const sim=d3.forceSimulation(nodes).alphaDecay(0).velocityDecay(0.34)
   .force('x',d3.forceX(d=>centers[d.c].x).strength(0.14))
   .force('y',d3.forceY(d=>centers[d.c].y).strength(0.16))
-  .force('collide',d3.forceCollide().radius(d=>d.r+0.6).strength(0.88).iterations(2))
-  .stop();
+  .force('collide',d3.forceCollide().radius(d=>d.r+0.6).strength(0.88).iterations(2)).stop();
 
-function births(node,yf){
-  const i=Math.floor(yf), t=yf-i, a=node.b[i], b=node.b[Math.min(i+1,N-1)];
-  return a+(b-a)*t;
-}
-function setR(yf){ nodes.forEach(nd=>{ nd.bv=births(nd,yf); nd.r=rScale(nd.bv); }); }
+function val(nd,i){ return i<NOBS ? nd.o[i] : nd[variant][i-NOBS]; }
+function births(nd,yf){ const i=Math.floor(yf),t=yf-i,a=val(nd,i),b=val(nd,Math.min(i+1,N-1)); return a+(b-a)*t; }
+function setR(yf){ for(const nd of nodes){ nd.bv=births(nd,yf); nd.r=rScale(nd.bv); } }
 
 function draw(yf){
   ctx.clearRect(0,0,W,H);
-  const fc=yf>60; // 2025 is index 60
-  // bubbles
+  const fc=Math.round(yf)>=NOBS;
   for(const nd of nodes){
     if(nd.r<0.6) continue;
     ctx.beginPath(); ctx.arc(nd.x,nd.y,nd.r,0,6.2832);
@@ -169,7 +184,7 @@ function draw(yf){
     ctx.globalAlpha=1; ctx.lineWidth=fc?1:0.8;
     ctx.strokeStyle=fc?'rgba(255,255,255,.28)':'rgba(255,255,255,.16)'; ctx.stroke();
   }
-  // continent group labels, above each cluster
+  // continent group labels
   ctx.textAlign='center'; ctx.textBaseline='alphabetic';
   for(let ci=0;ci<CONTS.length;ci++){
     let sx=0,minY=1e9,cnt=0;
@@ -180,57 +195,75 @@ function draw(yf){
     ctx.lineWidth=3.5; ctx.strokeStyle='rgba(8,17,33,.9)'; ctx.strokeText(CONTS[ci].toUpperCase(),cx,ly);
     ctx.fillStyle=COLS[ci]; ctx.fillText(CONTS[ci].toUpperCase(),cx,ly);
   }
-  // labels on the big ones
+  // ISO3 codes on bubbles where they fit
   ctx.textBaseline='middle';
   for(const nd of nodes){
-    if(nd.r<20) continue;
-    const fs=Math.max(10,Math.min(nd.r*0.42,18));
-    ctx.font='700 '+fs+"px Manrope, sans-serif";
-    ctx.fillStyle='rgba(12,20,38,.9)'; ctx.fillText(nd.n,nd.x,nd.y-(nd.r>34?fs*0.4:0));
-    if(nd.r>34){ ctx.font='700 '+(fs*0.8)+"px 'JetBrains Mono', monospace"; ctx.fillStyle='rgba(12,20,38,.72)';
-      ctx.fillText((nd.bv/1000).toFixed(1)+'M',nd.x,nd.y+fs*0.75); }
+    if(nd.r<11||!nd.iso) continue;
+    ctx.font='700 '+Math.min(nd.r*0.8,21)+"px 'JetBrains Mono', monospace";
+    ctx.fillStyle='rgba(10,18,34,.85)'; ctx.fillText(nd.iso,nd.x,nd.y);
   }
+  if(hover&&hover.r>0.6){ ctx.beginPath(); ctx.arc(hover.x,hover.y,hover.r+2.5,0,6.2832); ctx.lineWidth=2.5; ctx.strokeStyle='#fff'; ctx.stroke(); }
 }
 
-const yrN=document.getElementById('yrN'), yrB=document.getElementById('yrB'),
-      totN=document.getElementById('totN'), rng=document.getElementById('rng'), rngYr=document.getElementById('rngYr');
+const yrN=document.getElementById('yrN'), yrB=document.getElementById('yrB'), totN=document.getElementById('totN'),
+      rng=document.getElementById('rng'), rngYr=document.getElementById('rngYr');
+const VNAME={L:'Low',M:'Median',H:'High'};
 function ui(yf){
-  const yi=Math.round(yf), yr=YEARS[yi];
+  const yi=Math.round(yf), yr=YEARS[yi], fc=yr>2025;
   yrN.textContent=yr;
-  const fc=yr>2025;
-  yrB.textContent=fc?'UN WPP forecast':'Observed';
+  yrB.textContent=fc?('UN WPP · '+VNAME[variant]):'Observed';
   yrB.className='yr-badge '+(fc?'yr-fc':'yr-obs');
   let tot=0; for(const nd of nodes) tot+=nd.bv||0;
-  totN.textContent=(tot/1000).toFixed(0)+'M';
+  totN.textContent=Math.round(tot/1000)+'M';
   rng.value=yi; rngYr.textContent=yr;
 }
+document.getElementById('legend').innerHTML=CONTS.map((c,i)=>'<span class="lg"><i style="background:'+COLS[i]+'"></i>'+c+'</span>').join('');
+rng.max=N-1;
 
-// legend
-document.getElementById('legend').innerHTML=CONTS.map((c,i)=>
-  '<span class="lg"><i style="background:'+COLS[i]+'"></i>'+c+'</span>').join('');
+// hover
+let mouse={x:-1,y:-1}, hover=null;
+cv.addEventListener('mousemove',e=>{ const r=cv.getBoundingClientRect(); mouse.x=e.clientX-r.left; mouse.y=e.clientY-r.top; });
+cv.addEventListener('mouseleave',()=>{ mouse.x=-1; mouse.y=-1; hover=null; tip.style.display='none'; cv.style.cursor='default'; });
+function updateHover(){
+  if(mouse.x<0){ hover=null; return; }
+  let best=null,bd=1e9;
+  for(const nd of nodes){ if(nd.r<3) continue; const dx=nd.x-mouse.x,dy=nd.y-mouse.y,d=Math.sqrt(dx*dx+dy*dy); if(d<nd.r&&d<bd){ bd=d; best=nd; } }
+  hover=best; cv.style.cursor=best?'pointer':'default';
+}
+function updateTip(yf){
+  if(!hover){ tip.style.display='none'; return; }
+  const yr=YEARS[Math.round(yf)], p=Math.round((hover.bv||0)*1000);
+  const bstr=p>=1e6?(p/1e6).toFixed(2)+'M':p.toLocaleString('en');
+  tip.style.display='block';
+  tip.innerHTML=(hover.f?'<img src="https://flagcdn.com/w40/'+hover.f+'.png" alt="">':'')+
+    '<div class="tt-h">'+hover.n+'<span class="tt-iso">'+(hover.iso||'')+'</span></div>'+
+    '<div class="tt-r"><i style="background:'+COLS[hover.c]+'"></i>'+CONTS[hover.c]+'</div>'+
+    '<div class="tt-b"><b>'+bstr+'</b> births &middot; '+yr+'</div>';
+  const sw=stage.clientWidth, tw=tip.offsetWidth||160, th=tip.offsetHeight||70;
+  let tx=mouse.x+16, ty=mouse.y+16;
+  if(tx+tw>sw-6) tx=mouse.x-tw-16;
+  if(ty+th>H-6) ty=mouse.y-th-16;
+  tip.style.left=Math.max(6,tx)+'px'; tip.style.top=Math.max(6,ty)+'px';
+}
 
-let yf=0, playing=false, speed=0.12, raf;
+let yf=0, playing=false, speed=0.10, raf;
 function frame(){
   if(playing){ yf+=speed; if(yf>=N-1){ yf=N-1; playing=false; syncPlay(); } }
   setR(yf);
-  sim.force('collide').radius(d=>d.r+0.6);
-  sim.alpha(0.5); sim.tick();
-  // keep in bounds
+  sim.force('collide').radius(d=>d.r+0.6); sim.alpha(0.5); sim.tick();
   for(const nd of nodes){ nd.x=Math.max(nd.r+2,Math.min(W-nd.r-2,nd.x)); nd.y=Math.max(nd.r+2,Math.min(H-nd.r-2,nd.y)); }
-  draw(yf); ui(yf);
+  updateHover(); draw(yf); ui(yf); updateTip(yf);
   raf=requestAnimationFrame(frame);
 }
 function syncPlay(){ document.getElementById('playI').innerHTML=playing?'&#10073;&#10073;':'&#9654;'; document.getElementById('playT').textContent=playing?'Pause':(yf>=N-1?'Replay':'Play'); }
 document.getElementById('play').onclick=()=>{ if(yf>=N-1&&!playing) yf=0; playing=!playing; syncPlay(); };
 rng.oninput=e=>{ yf=+e.target.value; if(playing){playing=false;syncPlay();} };
 document.querySelectorAll('.sp').forEach(b=>b.onclick=()=>{ speed=+b.dataset.s; document.querySelectorAll('.sp').forEach(x=>x.classList.toggle('on',x===b)); });
+document.querySelectorAll('.vb').forEach(b=>b.onclick=()=>{ variant=b.dataset.v; document.querySelectorAll('.vb').forEach(x=>x.classList.toggle('on',x===b)); });
 window.addEventListener('resize',()=>{ layout(); sim.force('x').initialize(nodes); });
 
-// settle initial packing, then start
-setR(0); for(let k=0;k<120;k++){ sim.force('collide').radius(d=>d.r+0.6); sim.alpha(0.6); sim.tick(); }
-draw(0); ui(0); syncPlay();
-raf=requestAnimationFrame(frame);
-// auto-play shortly after load
+setR(0); for(let k=0;k<130;k++){ sim.force('collide').radius(d=>d.r+0.6); sim.alpha(0.6); sim.tick(); }
+draw(0); ui(0); syncPlay(); raf=requestAnimationFrame(frame);
 setTimeout(()=>{ if(!playing&&yf<1){ playing=true; syncPlay(); } }, 900);
 </script>
 </body></html>"""
