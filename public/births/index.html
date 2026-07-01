@@ -23,7 +23,7 @@ body{min-height:100vh;background:var(--navy2);color:var(--ink);font-family:'Manr
 .hero .eyebrow2{font-family:'JetBrains Mono',monospace;font-size:.64rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:13px}
 .hero h1{font-size:clamp(1.95rem,3.8vw,2.8rem);font-weight:600;letter-spacing:-.015em;line-height:1.07;margin-bottom:14px;color:var(--ink)}
 .hero h1 em{color:var(--gold);font-style:normal;font-weight:700}
-.hero p{font-size:.92rem;color:var(--ink2);line-height:1.5;max-width:none;margin:0 auto}
+.hero p{font-size:.92rem;color:var(--ink2);line-height:1.5;max-width:none;margin:0 auto}.bubbles-cta{display:inline-flex;align-items:center;gap:9px;margin-top:15px;padding:11px 20px;background:rgba(232,184,75,.12);border:1px solid rgba(232,184,75,.55);border-radius:9px;color:var(--gold);text-decoration:none;font-weight:700;font-size:.9rem;transition:.15s}.bubbles-cta:hover{background:rgba(232,184,75,.2)}.bubbles-cta svg{width:15px;height:15px}
 .hero-stats{display:flex;gap:24px;flex-wrap:wrap;margin-top:24px;justify-content:center}
 .hs{border-left:2px solid var(--gold);padding-left:11px;text-align:left}
 .hs-n{font-size:1.3rem;font-weight:700;line-height:1}
@@ -169,7 +169,7 @@ body{min-height:100vh;background:var(--navy2);color:var(--ink);font-family:'Manr
 .loading{padding:60px 26px;text-align:center;color:rgba(238,241,246,.3)}
 @media(max-width:640px){.reg-row .c{flex-basis:84vw}.gridview .grid{grid-template-columns:1fr}.sortwrap{margin-left:0;width:100%}}
 </style>
-<style>html.bt-embed .topbar{display:none}</style><script>(function(){if(location.search.indexOf("embed")<0)return;var d=document.documentElement;d.classList.add("bt-embed");function ph(){try{var h=Math.max(document.body.scrollHeight,d.scrollHeight,document.body.offsetHeight);parent.postMessage({btHeight:h},"*");}catch(e){}}window.addEventListener("load",function(){ph();[250,800,1800,3500].forEach(function(t){setTimeout(ph,t);});});window.addEventListener("resize",ph);if(window.ResizeObserver){try{new ResizeObserver(ph).observe(document.body);}catch(e){}}document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("a[href]");if(!a)return;var href=a.getAttribute("href")||"";if(href.charAt(0)==="#"){var t=document.getElementById(href.slice(1));if(t){e.preventDefault();var y=t.getBoundingClientRect().top+(d.scrollTop||document.body.scrollTop||0)-6;parent.postMessage({btScrollY:Math.max(0,y)},"*");}}else if(href.indexOf("/country/")===0||/^https?:/.test(href)){a.target="_top";}},true);})();</script></head>
+<style>html.bt-embed .topbar{display:none}</style><script>(function(){if(location.search.indexOf("embed")<0)return;var d=document.documentElement;d.classList.add("bt-embed");function ph(){try{var h=Math.max(document.body.scrollHeight,d.scrollHeight,document.body.offsetHeight);parent.postMessage({btHeight:h},"*");}catch(e){}}window.addEventListener("load",function(){ph();[250,800,1800,3500].forEach(function(t){setTimeout(ph,t);});});window.addEventListener("resize",ph);if(window.ResizeObserver){try{new ResizeObserver(ph).observe(document.body);}catch(e){}}document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("a[href]");if(!a)return;var href=a.getAttribute("href")||"";if(href.charAt(0)==="#"){var t=document.getElementById(href.slice(1));if(t){e.preventDefault();var y=t.getBoundingClientRect().top+(d.scrollTop||document.body.scrollTop||0)-6;parent.postMessage({btScrollY:Math.max(0,y)},"*");}}else if(href.charAt(0)==="/"||/^https?:/.test(href)){a.target="_top";}},true);})();</script></head>
 <body>
 
 <div class="topbar">
@@ -183,6 +183,7 @@ body{min-height:100vh;background:var(--navy2);color:var(--ink);font-family:'Manr
   <div class="eyebrow2">Demoria Research · Birth &amp; Fertility Tracker</div>
   <h1>Births &amp; <em>Fertility</em></h1>
   <p>Total Fertility Rate and current-year births for <strong style="color:var(--gold)">every country and territory on Earth</strong> &mdash; each figure tagged with its source and refreshed as national offices publish.</p>
+  <a class="bubbles-cta" href="/bubbles/"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Watch it move &mdash; every country&rsquo;s births, 1965&ndash;2100 &rarr;</a>
   <div class="hero-stats" id="heroStats"></div>
 </div>
 
