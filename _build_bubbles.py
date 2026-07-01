@@ -129,23 +129,27 @@ let maxB=0; CS.forEach(c=>{c.mx=Math.max(...c.b); if(c.mx>maxB)maxB=c.mx;});
 
 const cv=document.getElementById('cv'), ctx=cv.getContext('2d');
 const stage=document.getElementById('stage');
-let W=0,H=0,DPR=Math.min(window.devicePixelRatio||1,2), rScale, nodes;
+let W=0,H=0,DPR=Math.min(window.devicePixelRatio||1,2), rScale, nodes, centers=[];
+// continent cluster anchors (fractions of W,H), indexed to CONTS:
+// Asia, Africa, Europe, Latin America, North America, Middle East & N. Africa, Oceania
+const CC=[[0.29,0.56],[0.69,0.55],[0.47,0.17],[0.17,0.80],[0.19,0.24],[0.52,0.86],[0.90,0.82]];
 
 function layout(){
-  W=stage.clientWidth; H=Math.max(430,Math.round(Math.min(W*0.62,640)));
+  W=stage.clientWidth; H=Math.max(460,Math.round(Math.min(W*0.66,700)));
   cv.style.height=H+'px'; cv.width=W*DPR; cv.height=H*DPR; ctx.setTransform(DPR,0,0,DPR,0,0);
-  const maxR=Math.min(W,H)*0.135;
+  const maxR=Math.min(W,H)*0.115;
   rScale=d3.scaleSqrt().domain([0,maxB]).range([0,maxR]);
+  centers=CC.map(p=>({x:p[0]*W,y:p[1]*H}));
 }
 layout();
 
 nodes=CS.map((c,i)=>({i,n:c.n,c:c.c,b:c.b,r:0,x:W/2+(Math.random()-0.5)*W*0.6,y:H/2+(Math.random()-0.5)*H*0.6}));
 
 const sim=d3.forceSimulation(nodes)
-  .alphaDecay(0).velocityDecay(0.32)
-  .force('x',d3.forceX(()=>W/2).strength(0.028))
-  .force('y',d3.forceY(()=>H/2).strength(0.045))
-  .force('collide',d3.forceCollide().radius(d=>d.r+0.6).strength(0.86).iterations(2))
+  .alphaDecay(0).velocityDecay(0.34)
+  .force('x',d3.forceX(d=>centers[d.c].x).strength(0.14))
+  .force('y',d3.forceY(d=>centers[d.c].y).strength(0.16))
+  .force('collide',d3.forceCollide().radius(d=>d.r+0.6).strength(0.88).iterations(2))
   .stop();
 
 function births(node,yf){
@@ -165,8 +169,19 @@ function draw(yf){
     ctx.globalAlpha=1; ctx.lineWidth=fc?1:0.8;
     ctx.strokeStyle=fc?'rgba(255,255,255,.28)':'rgba(255,255,255,.16)'; ctx.stroke();
   }
+  // continent group labels, above each cluster
+  ctx.textAlign='center'; ctx.textBaseline='alphabetic';
+  for(let ci=0;ci<CONTS.length;ci++){
+    let sx=0,minY=1e9,cnt=0;
+    for(const nd of nodes){ if(nd.c===ci&&nd.r>0.6){ sx+=nd.x; if(nd.y-nd.r<minY)minY=nd.y-nd.r; cnt++; } }
+    if(!cnt) continue;
+    const cx=sx/cnt, ly=Math.max(15,minY-9);
+    ctx.font="700 12.5px 'JetBrains Mono', monospace";
+    ctx.lineWidth=3.5; ctx.strokeStyle='rgba(8,17,33,.9)'; ctx.strokeText(CONTS[ci].toUpperCase(),cx,ly);
+    ctx.fillStyle=COLS[ci]; ctx.fillText(CONTS[ci].toUpperCase(),cx,ly);
+  }
   // labels on the big ones
-  ctx.textAlign='center'; ctx.textBaseline='middle';
+  ctx.textBaseline='middle';
   for(const nd of nodes){
     if(nd.r<20) continue;
     const fs=Math.max(10,Math.min(nd.r*0.42,18));
