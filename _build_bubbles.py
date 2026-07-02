@@ -100,6 +100,7 @@ canvas{display:block;width:100%;touch-action:pan-y}
 .lg{display:inline-flex;align-items:center;gap:6px;font-size:.72rem;color:var(--mut)}
 .lg i{width:9px;height:9px;border-radius:50%;flex:0 0 auto}
 .hint{position:absolute;right:22px;bottom:16px;font-size:.68rem;color:rgba(238,241,246,.4);pointer-events:none}
+.stage.cols .hint{display:none}
 #tip{position:absolute;display:none;pointer-events:none;z-index:8;background:rgba(9,17,33,.97);border:1px solid rgba(232,184,75,.5);border-radius:9px;padding:9px 12px;min-width:130px;box-shadow:0 8px 24px rgba(0,0,0,.45)}
 #tip img{width:30px;height:auto;border-radius:2px;display:block;margin-bottom:6px;box-shadow:0 0 0 1px rgba(255,255,255,.18)}
 #tip .tt-h{font-size:.95rem;color:#fff;font-weight:700}
@@ -117,8 +118,8 @@ input[type=range]{flex:1;accent-color:var(--gold);height:5px}
 .rng-yr{font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--ink);min-width:38px;text-align:right}
 .seg{display:inline-flex;align-items:center;gap:4px}
 .slab{font-family:'JetBrains Mono',monospace;font-size:.64rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);margin-right:4px}
-.sp,.vb{background:transparent;border:1px solid rgba(232,184,75,.35);color:var(--mut);border-radius:6px;padding:6px 9px;font-family:'JetBrains Mono',monospace;font-size:.72rem;cursor:pointer}
-.sp.on,.vb.on{background:rgba(232,184,75,.16);color:var(--gold);border-color:var(--gold)}
+.sp,.vb,.mb{background:transparent;border:1px solid rgba(232,184,75,.35);color:var(--mut);border-radius:6px;padding:6px 9px;font-family:'JetBrains Mono',monospace;font-size:.72rem;cursor:pointer}
+.sp.on,.vb.on,.mb.on{background:rgba(232,184,75,.16);color:var(--gold);border-color:var(--gold)}
 .seg select{background:rgba(255,255,255,.05);color:var(--ink);border:1px solid rgba(232,184,75,.35);border-radius:6px;padding:6px 8px;font-family:'Manrope',sans-serif;font-size:.78rem;max-width:180px;cursor:pointer}
 .foot{margin-top:18px;text-align:center;color:var(--mut);font-size:.78rem;line-height:1.6}
 .foot a{color:var(--gold)}
@@ -147,6 +148,7 @@ input[type=range]{flex:1;accent-color:var(--gold);height:5px}
     <div class="scrub"><input type="range" id="rng" min="0" max="1" value="0" step="1"><span class="rng-yr" id="rngYr">1965</span></div>
     <div class="seg"><span class="slab">Speed</span><button class="sp" data-s="0.05">0.5&times;</button><button class="sp on" data-s="0.10">1&times;</button><button class="sp" data-s="0.20">2&times;</button></div>
     <div class="seg"><span class="slab">Projection 2030+</span><button class="vb" data-v="L">Low</button><button class="vb on" data-v="M">Median</button><button class="vb" data-v="H">High</button></div>
+    <div class="seg"><span class="slab">Layout</span><button class="mb on" data-m="circle">Circle</button><button class="mb" data-m="cols">Columns</button></div>
     <div class="seg"><span class="slab">Track</span><select id="pick"><option value="">&mdash; none &mdash;</option></select></div>
   </div>
   <p class="foot">Annual live births. Observed 1965&ndash;2025 (national statistical offices where reported, otherwise UN&nbsp;WPP&nbsp;2024); projected 2030&ndash;2100 at five-year steps (UN&nbsp;WPP&nbsp;2024, low / medium / high variant). 220 countries and territories. &middot; <a href="https://demoriaresearch.com/births/">Birth &amp; Fertility Tracker</a></p>
@@ -157,7 +159,10 @@ const DATA=__DATA__;
 const OBS=DATA.obs, FCY=DATA.fcy, YEARS=OBS.concat(FCY), NOBS=OBS.length, N=YEARS.length;
 const CONTS=DATA.conts, COLS=DATA.colors, CS=DATA.countries;
 let maxB=0; CS.forEach(c=>{ const m=Math.max(Math.max(...c.o),Math.max(...c.H)); if(m>maxB)maxB=m; });
-let variant='M';
+let variant='M', mode='circle';
+const SHORT=['ASIA','AFRICA','EUROPE','LAT AMERICA','N AMERICA','MENA','OCEANIA'];
+let totC=new Array(7).fill(0);
+const fmtTot=t=>t>=1000?(t/1000).toFixed(1)+'M':Math.round(t)+'k';
 
 const cv=document.getElementById('cv'), ctx=cv.getContext('2d'), stage=document.getElementById('stage'), tip=document.getElementById('tip');
 let W=0,H=0,DPR=Math.min(window.devicePixelRatio||1,2), rScale, nodes, centers=[];
@@ -169,22 +174,31 @@ function layout(){
   const below=16+(ctlEl?ctlEl.offsetHeight:64)+18+(footEl?footEl.offsetHeight:44)+40+8;
   H=Math.max(290,Math.min(820,Math.floor(window.innerHeight-top-below)));
   cv.style.height=H+'px'; cv.width=W*DPR; cv.height=H*DPR; ctx.setTransform(DPR,0,0,DPR,0,0);
-  rScale=d3.scaleSqrt().domain([0,maxB]).range([0,Math.min(W,H)*0.118]);
-  centers=CC.map(p=>({x:p[0]*W,y:p[1]*H}));
+  if(mode==='cols'){
+    rScale=d3.scaleSqrt().domain([0,maxB]).range([0,Math.min(W/7*0.44,Math.min(W,H)*0.115)]);
+    centers=[]; for(let i=0;i<7;i++) centers.push({x:W*(0.13+(i+0.5)*0.87/7),y:H*0.50});
+  } else {
+    rScale=d3.scaleSqrt().domain([0,maxB]).range([0,Math.min(W,H)*0.10]);
+    const cx=W/2, cy=H*0.50, sp=Math.min(W,H)*0.17; centers=[];
+    for(let i=0;i<7;i++){ const th=(i/7)*6.2832-1.5708; centers.push({x:cx+Math.cos(th)*sp,y:cy+Math.sin(th)*sp*0.7}); }
+  }
 }
 layout();
 
 nodes=CS.map(c=>({n:c.n,iso:c.i,f:c.f,c:c.c,o:c.o,L:c.L,M:c.M,H:c.H,r:0,bv:0,x:W/2+(Math.random()-0.5)*W*0.6,y:H/2+(Math.random()-0.5)*H*0.6}));
 
 const sim=d3.forceSimulation(nodes).alphaDecay(0).velocityDecay(0.34)
-  .force('x',d3.forceX(d=>centers[d.c].x).strength(0.14))
-  .force('y',d3.forceY(d=>centers[d.c].y).strength(0.16))
   .force('collide',d3.forceCollide().radius(d=>d.r+0.6).strength(0.88).iterations(2)).stop();
+function applyForces(){
+  sim.force('x',d3.forceX(d=>centers[d.c].x).strength(mode==='cols'?0.30:0.13));
+  sim.force('y',d3.forceY(d=>centers[d.c].y).strength(mode==='cols'?0.06:0.15));
+}
+applyForces();
 
 function valV(nd,i,v){ return i<NOBS ? nd.o[i] : nd[v][i-NOBS]; }
 function birthsV(nd,yf,v){ const i=Math.floor(yf),t=yf-i,a=valV(nd,i,v),b=valV(nd,Math.min(i+1,N-1),v); return a+(b-a)*t; }
 function births(nd,yf){ return birthsV(nd,yf,variant); }
-function setR(yf){ for(const nd of nodes){ nd.bv=births(nd,yf); nd.r=rScale(nd.bv); } }
+function setR(yf){ totC.fill(0); for(const nd of nodes){ nd.bv=births(nd,yf); nd.r=rScale(nd.bv); totC[nd.c]+=nd.bv; } }
 
 function draw(yf){
   ctx.clearRect(0,0,W,H);
@@ -196,16 +210,29 @@ function draw(yf){
     ctx.globalAlpha=1; ctx.lineWidth=fc?1:0.8;
     ctx.strokeStyle=fc?'rgba(255,255,255,.28)':'rgba(255,255,255,.16)'; ctx.stroke();
   }
-  // continent group labels
+  // continent labels + totals (below/outside each group)
   ctx.textAlign='center'; ctx.textBaseline='alphabetic';
-  for(let ci=0;ci<CONTS.length;ci++){
-    let sx=0,minY=1e9,cnt=0;
-    for(const nd of nodes){ if(nd.c===ci&&nd.r>0.6){ sx+=nd.x; if(nd.y-nd.r<minY)minY=nd.y-nd.r; cnt++; } }
-    if(!cnt) continue;
-    const cx=sx/cnt, ly=Math.max(15,minY-9);
-    ctx.font="700 12.5px 'JetBrains Mono', monospace";
-    ctx.lineWidth=3.5; ctx.strokeStyle='rgba(8,17,33,.9)'; ctx.strokeText(CONTS[ci].toUpperCase(),cx,ly);
-    ctx.fillStyle=COLS[ci]; ctx.fillText(CONTS[ci].toUpperCase(),cx,ly);
+  ctx.font="700 12px 'JetBrains Mono', monospace";
+  if(mode==='cols'){
+    for(let ci=0;ci<CONTS.length;ci++){
+      ctx.fillStyle=COLS[ci]; ctx.fillText(SHORT[ci],centers[ci].x,H-22);
+      ctx.fillStyle='#fff'; ctx.fillText(fmtTot(totC[ci]),centers[ci].x,H-8);
+    }
+  } else {
+    const gx=W/2, gy=H*0.50;
+    for(let ci=0;ci<CONTS.length;ci++){
+      let sx=0,sy=0,cnt=0,maxOut=0;
+      for(const nd of nodes){ if(nd.c===ci&&nd.r>0.6){ sx+=nd.x; sy+=nd.y; cnt++;
+        const d=Math.hypot(nd.x-gx,nd.y-gy)+nd.r; if(d>maxOut)maxOut=d; } }
+      if(!cnt) continue;
+      let dx=sx/cnt-gx, dy=sy/cnt-gy, L=Math.hypot(dx,dy);
+      if(L<1){ dx=0; dy=-1; L=1; }
+      const lx=Math.max(48,Math.min(W-48,gx+dx/L*(maxOut+16)));
+      const ly=Math.max(15,Math.min(H-6,gy+dy/L*(maxOut+16)+4));
+      const s=SHORT[ci]+' '+fmtTot(totC[ci]);
+      ctx.lineWidth=3.5; ctx.strokeStyle='rgba(8,17,33,.9)'; ctx.strokeText(s,lx,ly);
+      ctx.fillStyle=COLS[ci]; ctx.fillText(s,lx,ly);
+    }
   }
   // ISO3 codes on bubbles where they fit
   ctx.textBaseline='middle';
@@ -283,7 +310,8 @@ function frame(){
   if(playing){ yf+=speed; if(yf>=N-1){ yf=N-1; playing=false; syncPlay(); } }
   setR(yf);
   sim.force('collide').radius(d=>d.r+0.6); sim.alpha(0.5); sim.tick();
-  for(const nd of nodes){ nd.x=Math.max(nd.r+2,Math.min(W-nd.r-2,nd.x)); nd.y=Math.max(nd.r+2,Math.min(H-nd.r-2,nd.y)); }
+  const bt=mode==='cols'?8:2, bb=mode==='cols'?36:2;
+  for(const nd of nodes){ nd.x=Math.max(nd.r+2,Math.min(W-nd.r-2,nd.x)); nd.y=Math.max(nd.r+bt,Math.min(H-nd.r-bb,nd.y)); }
   updateHover(); draw(yf); ui(yf); updateTip(yf);
   raf=requestAnimationFrame(frame);
 }
@@ -292,7 +320,8 @@ document.getElementById('play').onclick=()=>{ if(yf>=N-1&&!playing) yf=0; playin
 rng.oninput=e=>{ yf=+e.target.value; if(playing){playing=false;syncPlay();} };
 document.querySelectorAll('.sp').forEach(b=>b.onclick=()=>{ speed=+b.dataset.s; document.querySelectorAll('.sp').forEach(x=>x.classList.toggle('on',x===b)); });
 document.querySelectorAll('.vb').forEach(b=>b.onclick=()=>{ variant=b.dataset.v; document.querySelectorAll('.vb').forEach(x=>x.classList.toggle('on',x===b)); });
-function relayout(){ layout(); sim.force('x').initialize(nodes); sim.force('y').initialize(nodes); }
+document.querySelectorAll('.mb').forEach(b=>b.onclick=()=>{ mode=b.dataset.m; document.querySelectorAll('.mb').forEach(x=>x.classList.toggle('on',x===b)); document.getElementById('legend').style.display=(mode==='cols')?'none':''; stage.classList.toggle('cols',mode==='cols'); relayout(); });
+function relayout(){ layout(); applyForces(); }
 window.addEventListener('resize',relayout);
 window.addEventListener('load',relayout);
 if(document.fonts&&document.fonts.ready) document.fonts.ready.then(relayout);
