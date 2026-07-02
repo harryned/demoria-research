@@ -17,11 +17,11 @@ html,body{margin:0;background:var(--navy2);color:var(--ink);font-family:'Manrope
 .tb-back{display:inline-flex;align-items:center;gap:7px;color:#0c1a33;text-decoration:none;font-weight:700;font-size:.82rem}
 .tb-back svg{width:16px;height:16px}
 .tb-title{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(12,26,51,.55)}
-.wrap{max-width:1180px;margin:0 auto;padding:16px 22px 30px}
+.wrap{max-width:1560px;margin:0 auto;padding:10px 18px 18px}
 .eyebrow{font-family:'JetBrains Mono',monospace;font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);text-align:center;margin-bottom:10px}
-h1{font-weight:800;font-size:clamp(1.7rem,3.6vw,2.6rem);line-height:1.06;letter-spacing:-.02em;text-align:center;margin:0 0 10px}
+h1{font-weight:800;font-size:clamp(1.25rem,2.4vw,1.8rem);line-height:1.06;letter-spacing:-.02em;text-align:center;margin:0 0 5px}
 h1 em{color:var(--gold);font-style:normal}
-.sub{max-width:790px;margin:0 auto 12px;text-align:center;color:var(--mut);font-size:.92rem;line-height:1.45}
+.sub{max-width:840px;margin:0 auto 10px;text-align:center;color:var(--mut);font-size:.84rem;line-height:1.4}
 .stage{position:relative;background:radial-gradient(120% 100% at 50% 0,#12213d 0,#0a1529 70%);border:1px solid rgba(232,184,75,.22);border-radius:16px;overflow:hidden}
 canvas{display:block;width:100%;touch-action:pan-y}
 .yr{position:absolute;left:22px;top:16px;pointer-events:none}
@@ -46,7 +46,7 @@ canvas{display:block;width:100%;touch-action:pan-y}
 #tip .tt-b{font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--ink);margin-top:5px}
 #tip .tt-b b{color:var(--gold)}
 #tip .tt-rng{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--mut);margin-top:3px}
-.ctl{display:flex;align-items:center;gap:14px 18px;flex-wrap:wrap;margin-top:16px;padding:12px 16px;background:rgba(255,255,255,.03);border:1px solid rgba(232,184,75,.16);border-radius:11px}
+.ctl{display:flex;align-items:center;gap:12px 16px;flex-wrap:wrap;margin-top:12px;padding:10px 14px;background:rgba(255,255,255,.03);border:1px solid rgba(232,184,75,.16);border-radius:11px}
 .play{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--gold);color:#0c1a33;border:0;border-radius:8px;padding:10px 18px;font-family:'Manrope';font-weight:700;font-size:.9rem;cursor:pointer;min-width:112px}
 .play:hover{filter:brightness(1.06)}
 .scrub{flex:1 1 220px;display:flex;align-items:center;gap:12px}
@@ -57,8 +57,8 @@ input[type=range]{flex:1;accent-color:var(--gold);height:5px}
 .sp,.vb,.mb{background:transparent;border:1px solid rgba(232,184,75,.35);color:var(--mut);border-radius:6px;padding:6px 9px;font-family:'JetBrains Mono',monospace;font-size:.72rem;cursor:pointer}
 .sp.on,.vb.on,.mb.on{background:rgba(232,184,75,.16);color:var(--gold);border-color:var(--gold)}
 .seg select{background:rgba(255,255,255,.05);color:var(--ink);border:1px solid rgba(232,184,75,.35);border-radius:6px;padding:6px 8px;font-family:'Manrope',sans-serif;font-size:.78rem;max-width:180px;cursor:pointer}
-.foot{margin-top:18px;text-align:center;color:var(--mut);font-size:.78rem;line-height:1.6}
-.foot a{color:var(--gold)}
+.src{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:.62rem;color:rgba(238,241,246,.42)}
+.src a{color:rgba(232,184,75,.75);text-decoration:none}
 @media(max-width:640px){.legend{max-width:100%;position:static;margin:10px 0 0;padding:0 4px}.tot,.yr,.hint{position:static;text-align:left;margin:6px 0 0;padding:0 4px}.hint{display:none}}
 </style>
 </head>
@@ -68,9 +68,8 @@ input[type=range]{flex:1;accent-color:var(--gold);height:5px}
   <span class="tb-title">Births &middot; 1965&ndash;2100</span>
 </div>
 <div class="wrap">
-  <div class="eyebrow">Demoria Research &middot; The moving picture</div>
   <h1>Sixty years of births, then <em>the forecast</em></h1>
-  <p class="sub">Every bubble is a country; its size is that country&rsquo;s annual births, grouped by continent. Sixty years are observed, then the UN&rsquo;s World Population Prospects 2024 carries the picture to 2100 in five-year steps &mdash; low, median or high. Hover or tap a bubble for the detail, click one to follow it, and watch the world&rsquo;s cradle drift from East Asia to Africa.</p>
+  <p class="sub">Every bubble is a country, sized by its annual births &mdash; observed to 2025, then UN&nbsp;WPP&nbsp;2024 to 2100. Hover, tap or track a country.</p>
   <div class="stage" id="stage">
     <canvas id="cv"></canvas>
     <div class="yr"><div class="yr-n" id="yrN">1965</div><span class="yr-badge yr-obs" id="yrB">Observed</span></div>
@@ -86,8 +85,8 @@ input[type=range]{flex:1;accent-color:var(--gold);height:5px}
     <div class="seg"><span class="slab">Projection 2030+</span><button class="vb" data-v="L">Low</button><button class="vb on" data-v="M">Median</button><button class="vb" data-v="H">High</button></div>
     <div class="seg"><span class="slab">Layout</span><button class="mb on" data-m="circle">Circle</button><button class="mb" data-m="cols">Columns</button></div>
     <div class="seg"><span class="slab">Track</span><select id="pick"><option value="">&mdash; none &mdash;</option></select></div>
+    <span class="src">NSO + UN WPP 2024 &middot; <a href="/births/">Births Tracker</a></span>
   </div>
-  <p class="foot">Annual live births. Observed 1965&ndash;2025 (national statistical offices where reported, otherwise UN&nbsp;WPP&nbsp;2024); projected 2030&ndash;2100 at five-year steps (UN&nbsp;WPP&nbsp;2024, low / medium / high variant). 220 countries and territories. &middot; <a href="https://demoriaresearch.com/births/">Birth &amp; Fertility Tracker</a></p>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
 <script>
@@ -105,17 +104,17 @@ let W=0,H=0,DPR=Math.min(window.devicePixelRatio||1,2), rScale, nodes, centers=[
 const CC=[[0.29,0.56],[0.69,0.55],[0.47,0.17],[0.17,0.80],[0.19,0.24],[0.52,0.86],[0.90,0.82]];
 function layout(){
   W=stage.clientWidth;
-  const ctlEl=document.querySelector('.ctl'), footEl=document.querySelector('.foot');
+  const ctlEl=document.querySelector('.ctl');
   const top=stage.getBoundingClientRect().top;              // space above the stage (topbar + hero)
-  const below=16+(ctlEl?ctlEl.offsetHeight:64)+18+(footEl?footEl.offsetHeight:44)+40+8;
-  H=Math.max(290,Math.min(820,Math.floor(window.innerHeight-top-below)));
+  const below=12+(ctlEl?ctlEl.offsetHeight:58)+18+6;
+  H=Math.max(300,Math.min(980,Math.floor(window.innerHeight-top-below)));
   cv.style.height=H+'px'; cv.width=W*DPR; cv.height=H*DPR; ctx.setTransform(DPR,0,0,DPR,0,0);
   if(mode==='cols'){
-    rScale=d3.scaleSqrt().domain([0,maxB]).range([0,Math.min(W/7*0.44,Math.min(W,H)*0.115)]);
+    rScale=d3.scaleSqrt().domain([0,maxB]).range([0,Math.min(W/7*0.44,Math.min(W,H)*0.14)]);
     centers=[]; for(let i=0;i<7;i++) centers.push({x:W*(0.13+(i+0.5)*0.87/7),y:H*0.50});
   } else {
-    rScale=d3.scaleSqrt().domain([0,maxB]).range([0,Math.min(W,H)*0.10]);
-    const cx=W/2, cy=H*0.50, sp=Math.min(W,H)*0.17; centers=[];
+    rScale=d3.scaleSqrt().domain([0,maxB]).range([0,Math.min(W,H)*0.125]);
+    const cx=W/2, cy=H*0.50, sp=Math.min(W,H)*0.20; centers=[];
     for(let i=0;i<7;i++){ const th=(i/7)*6.2832-1.5708; centers.push({x:cx+Math.cos(th)*sp,y:cy+Math.sin(th)*sp*0.7}); }
   }
 }
