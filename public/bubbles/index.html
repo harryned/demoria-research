@@ -17,11 +17,11 @@ html,body{margin:0;background:var(--navy2);color:var(--ink);font-family:'Manrope
 .tb-back{display:inline-flex;align-items:center;gap:7px;color:#0c1a33;text-decoration:none;font-weight:700;font-size:.82rem}
 .tb-back svg{width:16px;height:16px}
 .tb-title{font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(12,26,51,.55)}
-.wrap{max-width:1180px;margin:0 auto;padding:26px 22px 40px}
+.wrap{max-width:1180px;margin:0 auto;padding:16px 22px 30px}
 .eyebrow{font-family:'JetBrains Mono',monospace;font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);text-align:center;margin-bottom:10px}
 h1{font-weight:800;font-size:clamp(1.7rem,3.6vw,2.6rem);line-height:1.06;letter-spacing:-.02em;text-align:center;margin:0 0 10px}
 h1 em{color:var(--gold);font-style:normal}
-.sub{max-width:790px;margin:0 auto 20px;text-align:center;color:var(--mut);font-size:.98rem;line-height:1.5}
+.sub{max-width:790px;margin:0 auto 12px;text-align:center;color:var(--mut);font-size:.92rem;line-height:1.45}
 .stage{position:relative;background:radial-gradient(120% 100% at 50% 0,#12213d 0,#0a1529 70%);border:1px solid rgba(232,184,75,.22);border-radius:16px;overflow:hidden}
 canvas{display:block;width:100%;touch-action:pan-y}
 .yr{position:absolute;left:22px;top:16px;pointer-events:none}
@@ -99,9 +99,13 @@ const cv=document.getElementById('cv'), ctx=cv.getContext('2d'), stage=document.
 let W=0,H=0,DPR=Math.min(window.devicePixelRatio||1,2), rScale, nodes, centers=[];
 const CC=[[0.29,0.56],[0.69,0.55],[0.47,0.17],[0.17,0.80],[0.19,0.24],[0.52,0.86],[0.90,0.82]];
 function layout(){
-  W=stage.clientWidth; H=Math.max(460,Math.round(Math.min(W*0.66,700)));
+  W=stage.clientWidth;
+  const ctlEl=document.querySelector('.ctl'), footEl=document.querySelector('.foot');
+  const top=stage.getBoundingClientRect().top;              // space above the stage (topbar + hero)
+  const below=16+(ctlEl?ctlEl.offsetHeight:64)+18+(footEl?footEl.offsetHeight:44)+40+8;
+  H=Math.max(290,Math.min(820,Math.floor(window.innerHeight-top-below)));
   cv.style.height=H+'px'; cv.width=W*DPR; cv.height=H*DPR; ctx.setTransform(DPR,0,0,DPR,0,0);
-  rScale=d3.scaleSqrt().domain([0,maxB]).range([0,Math.min(W,H)*0.115]);
+  rScale=d3.scaleSqrt().domain([0,maxB]).range([0,Math.min(W,H)*0.118]);
   centers=CC.map(p=>({x:p[0]*W,y:p[1]*H}));
 }
 layout();
@@ -224,7 +228,10 @@ document.getElementById('play').onclick=()=>{ if(yf>=N-1&&!playing) yf=0; playin
 rng.oninput=e=>{ yf=+e.target.value; if(playing){playing=false;syncPlay();} };
 document.querySelectorAll('.sp').forEach(b=>b.onclick=()=>{ speed=+b.dataset.s; document.querySelectorAll('.sp').forEach(x=>x.classList.toggle('on',x===b)); });
 document.querySelectorAll('.vb').forEach(b=>b.onclick=()=>{ variant=b.dataset.v; document.querySelectorAll('.vb').forEach(x=>x.classList.toggle('on',x===b)); });
-window.addEventListener('resize',()=>{ layout(); sim.force('x').initialize(nodes); });
+function relayout(){ layout(); sim.force('x').initialize(nodes); sim.force('y').initialize(nodes); }
+window.addEventListener('resize',relayout);
+window.addEventListener('load',relayout);
+if(document.fonts&&document.fonts.ready) document.fonts.ready.then(relayout);
 
 setR(0); for(let k=0;k<130;k++){ sim.force('collide').radius(d=>d.r+0.6); sim.alpha(0.6); sim.tick(); }
 draw(0); ui(0); syncPlay(); raf=requestAnimationFrame(frame);
