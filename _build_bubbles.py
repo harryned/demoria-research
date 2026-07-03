@@ -70,6 +70,11 @@ HTML = r"""<!doctype html>
 <meta name="description" content="Every country's annual births as bubbles, 1965 to 2100 — observed, then the UN WPP 2024 projection (low/median/high). Demoria Research.">
 <meta property="og:title" content="A century of births — Demoria Research">
 <meta property="og:description" content="Every country's annual births as bubbles, 1965 to 2100. Watch the world's cradle shift from East Asia to Africa.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Demoria Research">
+<meta property="og:url" content="https://demoriaresearch.com/bubbles/">
+<meta property="og:image" content="https://demoriaresearch.com/og/bubbles.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
